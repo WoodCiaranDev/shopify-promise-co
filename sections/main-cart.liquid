@@ -167,6 +167,55 @@
   {%- endif -%}
 </div>
 
+{%- comment -%}Google Ads Begin Checkout Tracking{%- endcomment -%}
+{%- if cart.item_count > 0 -%}
+<script>
+  // Track checkout button clicks - only if cart has items
+  document.addEventListener('DOMContentLoaded', function() {
+    const checkoutButton = document.querySelector('button[name="checkout"]');
+    if (checkoutButton) {
+      let isTracking = false; // Prevent double tracking
+      
+      checkoutButton.addEventListener('click', function(e) {
+        if (typeof gtag !== 'undefined' && !isTracking) {
+          isTracking = true;
+          
+          try {
+            // Fire the conversion event for begin checkout with cart data
+            gtag('event', 'ads_conversion_Contact_Information_1', {
+              // TODO: Add conversion parameters from client
+              // 'send_to': 'AW-XXXXXXXXX/XXXXXXXXXXXXXX',
+              'value': {{ cart.total_price | money_without_currency | remove: ',' | default: 0 }},
+              'currency': '{{ shop.currency }}',
+              // Additional ecommerce data
+              'items': [
+                {%- for item in cart.items -%}
+                {
+                  'id': '{{ item.variant_id }}',
+                  'name': {{ item.product.title | json }},
+                  'category': {{ item.product.type | default: '' | json }},
+                  'variant': {{ item.variant.title | json }},
+                  'price': {{ item.price | money_without_currency | remove: ',' | default: 0 }},
+                  'quantity': {{ item.quantity | default: 1 }}
+                }{%- unless forloop.last -%},{%- endunless -%}
+                {%- endfor -%}
+              ]
+            });
+          } catch (error) {
+            console.error('Google Ads tracking error:', error);
+          }
+          
+          // Reset tracking flag after a short delay
+          setTimeout(function() {
+            isTracking = false;
+          }, 1000);
+        }
+      });
+    }
+  });
+</script>
+{%- endif -%}
+
 {% schema %}
 {
   "name": "t:sections.main_cart.name",

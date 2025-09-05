@@ -197,6 +197,47 @@
   </div>
 </div>
 
+{%- comment -%}Google Ads Purchase Tracking{%- endcomment -%}
+{%- if order and order.financial_status != 'pending' -%}
+<script>
+  // Fire Google Ads conversion event for Purchase completion with full order details
+  document.addEventListener('DOMContentLoaded', function() {
+    // Only track once per page load
+    if (typeof gtag !== 'undefined' && !window.googleAdsPurchaseTracked) {
+      window.googleAdsPurchaseTracked = true;
+      
+      try {
+        gtag('event', 'manual_event_PURCHASE', {
+          // TODO: Add conversion parameters from client
+          // 'send_to': 'AW-XXXXXXXXX/XXXXXXXXXXXXXX',
+          'value': {{ order.total_price | money_without_currency | remove: ',' | default: 0 }},
+          'currency': '{{ order.currency | default: shop.currency }}',
+          'transaction_id': '{{ order.order_number }}',
+          // Additional ecommerce data
+          'items': [
+            {%- for line_item in order.line_items -%}
+            {
+              'id': '{{ line_item.variant_id | default: line_item.sku }}',
+              'name': {{ line_item.title | json }},
+              'category': {{ line_item.product.type | default: '' | json }},
+              'variant': {{ line_item.variant.title | default: line_item.variant_title | json }},
+              'price': {{ line_item.price | money_without_currency | remove: ',' | default: 0 }},
+              'quantity': {{ line_item.quantity | default: 1 }}
+            }{%- unless forloop.last -%},{%- endunless -%}
+            {%- endfor -%}
+          ],
+          'tax': {{ order.tax_price | money_without_currency | remove: ',' | default: 0 }},
+          'shipping': {{ order.shipping_price | money_without_currency | remove: ',' | default: 0 }},
+          'discount': {{ order.total_discounts | money_without_currency | remove: ',' | default: 0 }}
+        });
+      } catch (error) {
+        console.error('Google Ads purchase tracking error:', error);
+      }
+    }
+  });
+</script>
+{%- endif -%}
+
 {% schema %}
 {
   "name": "t:sections.main_customers_order.name",

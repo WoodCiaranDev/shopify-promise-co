@@ -1,0 +1,28 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+GOOGLE ADS ABOUT US PAGE TRACKING
+----------------------------------------------------------------------------------------------------------------------
+
+This snippet fires the Google Ads conversion tracking for the About Us page.
+Include this snippet on the About Us page template.
+
+IMPORTANT: Requires conversion parameters from client to function properly.
+{%- endcomment -%}
+
+<script>
+  // Fire Google Ads conversion event for About Us page
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof gtag !== 'undefined') {
+      try {
+        gtag('event', 'ads_conversion_About_Us_1', {
+          // TODO: Add conversion parameters from client
+          // 'send_to': 'AW-XXXXXXXXX/XXXXXXXXXXXXXX',
+          // 'value': 0.00,
+          // 'currency': 'GBP'
+        });
+      } catch (error) {
+        console.error('Google Ads About Us tracking error:', error);
+      }
+    }
+  });
+</script>

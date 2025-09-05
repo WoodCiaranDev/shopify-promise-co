@@ -111,6 +111,85 @@ Supported variables
       </div>
     {%- endform -%}
   </product-form>
+  
+  {%- comment -%}Google Ads Add to Cart Tracking{%- endcomment -%}
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const productForm = document.querySelector('#{{ form_id }}');
+      if (productForm) {
+        // Store product data for dynamic variant selection
+        const productData = {
+          id: '{{ product.id }}',
+          title: {{ product.title | json }},
+          type: {{ product.type | json }},
+          variants: [
+            {%- for variant in product.variants -%}
+            {
+              id: '{{ variant.id }}',
+              title: {{ variant.title | json }},
+              price: {{ variant.price | money_without_currency | remove: ',' }}
+            }{%- unless forloop.last -%},{%- endunless -%}
+            {%- endfor -%}
+          ]
+        };
+        
+        let isTracking = false; // Prevent double submissions
+        
+        productForm.addEventListener('submit', function(e) {
+          // Check if the button is not disabled and we're not already tracking
+          const submitButton = this.querySelector('button[type="submit"]');
+          if (submitButton && !submitButton.disabled && !isTracking) {
+            e.preventDefault();
+            isTracking = true;
+            
+            // Get currently selected variant ID from form
+            const variantIdInput = this.querySelector('input[name="id"]');
+            const selectedVariantId = variantIdInput ? variantIdInput.value : null;
+            
+            // Find the variant data
+            let selectedVariant = productData.variants.find(v => v.id === selectedVariantId);
+            if (!selectedVariant && productData.variants.length > 0) {
+              selectedVariant = productData.variants[0]; // Fallback to first variant
+            }
+            
+            // Fire the Google Ads conversion event with product data
+            if (typeof gtag !== 'undefined' && selectedVariant) {
+              gtag('event', 'ads_conversion_Shopping_Cart_1', {
+                // TODO: Add conversion parameters from client
+                // 'send_to': 'AW-XXXXXXXXX/XXXXXXXXXXXXXX',
+                'value': selectedVariant.price,
+                'currency': '{{ shop.currency }}',
+                // Additional ecommerce data
+                'items': [{
+                  'id': selectedVariantId,
+                  'name': productData.title,
+                  'category': productData.type,
+                  'variant': selectedVariant.title,
+                  'price': selectedVariant.price,
+                  'quantity': 1
+                }],
+                'event_callback': function() {
+                  // Submit the form after tracking
+                  productForm.submit();
+                },
+                'event_timeout': 2000
+              });
+              
+              // Fallback: submit form after timeout
+              setTimeout(function() {
+                if (isTracking) {
+                  productForm.submit();
+                }
+              }, 2100);
+            } else {
+              // If gtag is not available or no variant found, just submit the form
+              productForm.submit();
+            }
+          }
+        });
+      }
+    });
+  </script>
 {%- else -%}
   <buy-buttons class="buy-buttons" template="{{ product.template_suffix | escape }}" form="{{ form_id }}">
     {%- assign button_content = 'product.general.add_to_cart_button' | t -%}

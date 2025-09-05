@@ -1,0 +1,57 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+GOOGLE ADS CONVERSION TRACKING HELPER
+----------------------------------------------------------------------------------------------------------------------
+
+This snippet contains helper functions and tracking code for Google Ads conversions.
+
+IMPORTANT: All conversion events require the following parameters from the client:
+- send_to: 'AW-CONVERSION_ID/CONVERSION_LABEL'
+- value: conversion value (number)
+- currency: currency code (e.g., 'GBP')
+
+Without these parameters, the tracking will not function properly in Google Ads.
+{%- endcomment -%}
+
+<script>
+  // Helper function for Add to Cart tracking with delayed navigation
+  function gtagSendEvent(url) {
+    var callback = function () {
+      if (typeof url === 'string') {
+        window.location = url;
+      }
+    };
+    
+    // Fire the conversion event
+    gtag('event', 'ads_conversion_Shopping_Cart_1', {
+      // TODO: Add conversion parameters from client
+      // 'send_to': 'AW-XXXXXXXXX/XXXXXXXXXXXXXX',
+      // 'value': 0.00,
+      // 'currency': 'GBP',
+      'event_callback': callback,
+      'event_timeout': 2000
+    });
+    
+    return false;
+  }
+  
+  // Helper function to fire page load conversion events
+  function firePageLoadConversion(eventName) {
+    gtag('event', eventName, {
+      // TODO: Add conversion parameters from client
+      // 'send_to': 'AW-XXXXXXXXX/XXXXXXXXXXXXXX',
+      // 'value': 0.00,
+      // 'currency': 'GBP'
+    });
+  }
+  
+  // Helper function for purchase conversion
+  function firePurchaseConversion(orderValue) {
+    gtag('event', 'manual_event_PURCHASE', {
+      // TODO: Add conversion parameters from client
+      // 'send_to': 'AW-XXXXXXXXX/XXXXXXXXXXXXXX',
+      'value': orderValue || 0.00,
+      'currency': 'GBP'
+    });
+  }
+</script>
