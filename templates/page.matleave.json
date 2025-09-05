@@ -1,0 +1,279 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_title": true,
+        "page_width": "xs"
+      }
+    },
+    "images_with_text_scroll_QdQJ67": {
+      "type": "images-with-text-scroll",
+      "blocks": {
+        "image_with_text_RfPgE6": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/1_5e9bcb45-e963-4be9-9fcb-52dd3e8e8fac.png",
+            "subheading": "",
+            "title": "WHY IS PRE-ORDER ON?",
+            "content": "<p>As a small, family-run business, every order means the world to us. </p><p>And we're excited to share with our Promise Family that Raj and I are expecting our first child. This is a special time for our family, but it also means we’ll be adjusting to life with a newborn while continuing to serve you the very best we can.</p><p><strong>Please scroll to learn about Pre-Order and how we will be supporting you in the next few weeks.</strong></p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "solid"
+          }
+        },
+        "image_with_text_bcDrkr": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/4_0240c412-dbab-4bf3-b061-58477b60cd70.png",
+            "subheading": "",
+            "title": "What does this mean for my order?",
+            "content": "<p>During this special period, we’ll be placing some of our products on <strong>preorder</strong> to allow us to manage our time effectively. Here’s what you need to know:</p><p><strong>Preorder Period:</strong> When you place a preorder, you’ll see an estimated shipping date at checkout. We will do our very best to ship your items ahead of this date, but please bear with us if we ship on the stated date. That is our worst-case scenario, and we sincerely appreciate your understanding.</p><p><strong>Why Preorders?:</strong> Managing preorders helps us balance fulfilling your orders while adjusting to life as new parents. It ensures that we can still deliver the quality you expect, just with a little more time.</p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "solid"
+          }
+        },
+        "image_with_text_TcyLcw": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/3_03803d49-55c9-4abc-b3c3-e936fd449ea9.png",
+            "subheading": "",
+            "title": "CUSTOMER SERVICE",
+            "content": "<p>Our response time will remain at 1-2 days but please be patient with us. Rest assured, Raj and I are committed to getting back to you as quickly as possible, but we also want to be realistic in managing expectations during this time of change.</p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "solid"
+          }
+        },
+        "image_with_text_CNwXJx": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/2_ae7c00f5-5622-484a-976f-a7bf4a5509f2.png",
+            "subheading": "",
+            "title": "THANKYOU",
+            "content": "<p>By choosing to shop with us, especially during this time, you’re making a direct impact on our family’s future. We can’t thank you enough for choosing us over larger, mass-market brands. Your support allows us to keep doing what we love, while also building a better future for our growing family.</p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "solid"
+          }
+        }
+      },
+      "block_order": [
+        "image_with_text_RfPgE6",
+        "image_with_text_bcDrkr",
+        "image_with_text_TcyLcw",
+        "image_with_text_CNwXJx"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-1",
+        "image_position": "start",
+        "text_alignment": "center",
+        "heading_tag": "h3",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "image_with_text_7YyP8V": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_twYaQn": {
+          "type": "subheading",
+          "settings": {
+            "text": "PREORDER INFORMATION"
+          }
+        },
+        "heading_B64TPU": {
+          "type": "heading",
+          "settings": {
+            "text": "Why is Pre-order on?",
+            "heading_tag": "h3"
+          }
+        },
+        "richtext_dfxT6n": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>As a small, family-run business, every order means the world to us. </p><p>And we're excited to share with our Promise Family that Raj and I are expecting our first child. This is a special time for our family, but it also means we’ll be adjusting to life with a newborn while continuing to serve you the very best we can.</p><p><strong>Please scroll to learn about Pre-Order and how we will be supporting you in the next few weeks.</strong></p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_twYaQn",
+        "heading_B64TPU",
+        "richtext_dfxT6n"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/1_5e9bcb45-e963-4be9-9fcb-52dd3e8e8fac.png",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "image_with_text_TjkciH": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_ahKAWt": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "text": "preorder information"
+          }
+        },
+        "heading_Pdc7Hh": {
+          "type": "heading",
+          "settings": {
+            "text": "What does this mean for my order?",
+            "heading_tag": "h3"
+          }
+        },
+        "richtext_LeXXbL": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>During this special period, we’ll be placing some of our products on <strong>preorder</strong> to allow us to manage our time effectively. Here’s what you need to know:</p><p><strong>Preorder Period:</strong> When you place a preorder, you’ll see an estimated shipping date at checkout. We will do our very best to ship your items ahead of this date, but please bear with us if we ship on the stated date. That is our worst-case scenario, and we sincerely appreciate your understanding.</p><p><strong>Why Preorders?:</strong> Managing preorders helps us balance fulfilling your orders while adjusting to life as new parents. It ensures that we can still deliver the quality you expect, just with a little more time.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_ahKAWt",
+        "heading_Pdc7Hh",
+        "richtext_LeXXbL"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/3_03803d49-55c9-4abc-b3c3-e936fd449ea9.png",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "image_with_text_H9UBrG": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_XgXLKe": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "text": "preorder information"
+          }
+        },
+        "heading_VmMEr6": {
+          "type": "heading",
+          "settings": {
+            "text": "Customer service",
+            "heading_tag": "h3"
+          }
+        },
+        "richtext_g8PB6e": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Our response time will remain at 1-2 days but please be patient with us. Rest assured, Raj and I are committed to getting back to you as quickly as possible, but we also want to be realistic in managing expectations during this time of change.</p><p>If you need your order urgently, please get in touch referencing your order number, we will make our best endeavour to get it out asap to you. </p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_XgXLKe",
+        "heading_VmMEr6",
+        "richtext_g8PB6e"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/4_0240c412-dbab-4bf3-b061-58477b60cd70.png",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "image_with_text_zNFFrA": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_dJzq3K": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "text": "PREORDER INFORMATION"
+          }
+        },
+        "heading_rRVFCY": {
+          "type": "heading",
+          "settings": {
+            "text": "THANKYOU",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_ckGbJt": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>By choosing to shop with us, especially during this time, you’re making a direct impact on our family’s future. We can’t thank you enough for choosing us over larger, mass-market brands. Your support allows us to keep doing what we love, while also building a better future for our growing family.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_dJzq3K",
+        "heading_rRVFCY",
+        "richtext_ckGbJt"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/2_ae7c00f5-5622-484a-976f-a7bf4a5509f2.png",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "rich_text_YjRHwa": {
+      "type": "rich-text",
+      "blocks": {
+        "button_NhENcE": {
+          "type": "button",
+          "settings": {
+            "style": "solid",
+            "text": "SHOP NOW",
+            "url": "shopify://collections/shop-all",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "button_NhENcE"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "images_with_text_scroll_QdQJ67",
+    "image_with_text_7YyP8V",
+    "image_with_text_TjkciH",
+    "image_with_text_H9UBrG",
+    "image_with_text_zNFFrA",
+    "rich_text_YjRHwa"
+  ]
+}

@@ -1,0 +1,102 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "message_LqAkpn": {
+          "type": "message",
+          "settings": {
+            "text": "<a href=\"/pages/usa-updates\" title=\"USA UPDATES\">USA Ships Domestic & Tariff Free</a>"
+          }
+        },
+        "message-1": {
+          "type": "message",
+          "disabled": true,
+          "settings": {
+            "text": "2-YEAR WARRANTY"
+          }
+        },
+        "message_rFydHg": {
+          "type": "message",
+          "disabled": true,
+          "settings": {
+            "text": "water resistant & anti tarnish coating"
+          }
+        },
+        "message_ptjJkm": {
+          "type": "message",
+          "disabled": true,
+          "settings": {
+            "text": "every stone set by hand"
+          }
+        },
+        "message_gTxh3W": {
+          "type": "message",
+          "disabled": true,
+          "settings": {
+            "text": "Jewellery made with x25 thicker gold"
+          }
+        }
+      },
+      "block_order": [
+        "message_LqAkpn",
+        "message-1",
+        "message_rFydHg",
+        "message_ptjJkm",
+        "message_gTxh3W"
+      ],
+      "settings": {
+        "color_scheme": "scheme-27cf44bf-c8a8-484b-bfb4-2b967cabc2a7",
+        "enable_sticky": false,
+        "autoplay": true,
+        "cycle_speed": 5,
+        "desktop_font_size": 11,
+        "mobile_font_size": 10
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "color_scheme": "",
+        "enable_sticky": true,
+        "hide_on_scroll": false,
+        "show_separation_border": true,
+        "reduce_padding": false,
+        "logo": "{{ shop.brand.logo }}",
+        "logo_max_width": 155,
+        "logo_mobile_max_width": 100,
+        "menu": "main-menu",
+        "sidebar_menu": "",
+        "menu_open_trigger": "hover",
+        "enable_search": true,
+        "sidebar_color_scheme": "",
+        "sidebar_text_font": "heading",
+        "sidebar_show_dividers": true,
+        "sidebar_open_second_level_menus": false,
+        "layout": "logo_left_navigation_inline",
+        "show_icons": true,
+        "show_country_selector": true,
+        "show_country_name": false,
+        "show_country_flag": true,
+        "show_locale_selector": false,
+        "transparent_header_text_color": "#ffffff",
+        "transparent_logo": "shopify://shop_images/Cream_Logo_Transparent_-01.png"
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
+}

@@ -1,0 +1,170 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-1",
+        "show_title": true,
+        "page_width": "xs"
+      }
+    },
+    "multiple_media_with_text_hVMUw9": {
+      "type": "multiple-media-with-text",
+      "blocks": {
+        "image_UB6h94": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_49.png",
+            "rotation": 0
+          }
+        },
+        "video_mhHq7Q": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/copy_669ACD4A-0216-471B-94E3-FD06C5535B6A_VSCO.mov",
+            "rotation": 0
+          }
+        }
+      },
+      "block_order": [
+        "image_UB6h94",
+        "video_mhHq7Q"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "reveal_on_scroll": true,
+        "separate_section_with_border": true,
+        "media_position_desktop": "before_text",
+        "media_position_mobile": "before_text",
+        "media_layout": "overlap",
+        "media_alignment": "center",
+        "media_alignment_offset": 0,
+        "media_mobile_alignment_offset": 0,
+        "text_alignment": "center",
+        "subheading": "our quality promise",
+        "title": "what makes us different",
+        "content": "<p>We understand that these pieces aren’t just jewellery – they’re symbols of love, commitment, and the moments that matter most.</p><p>As proud members of the <strong>National Association of Jewellers</strong>, we hold ourselves to the highest standards of quality and care.</p><p></p>",
+        "button_1_text": "",
+        "button_1_link": "",
+        "button_1_style": "solid",
+        "button_2_text": "",
+        "button_2_link": "",
+        "button_2_style": "solid"
+      }
+    },
+    "multiple_media_with_text_nYXTrr": {
+      "type": "multiple-media-with-text",
+      "blocks": {
+        "image_FFgxQt": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_50.png",
+            "rotation": 0
+          }
+        }
+      },
+      "block_order": [
+        "image_FFgxQt"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "reveal_on_scroll": true,
+        "separate_section_with_border": true,
+        "media_position_desktop": "after_text",
+        "media_position_mobile": "before_text",
+        "media_layout": "overlap",
+        "media_alignment": "center",
+        "media_alignment_offset": 0,
+        "media_mobile_alignment_offset": 0,
+        "text_alignment": "center",
+        "subheading": "conflict-free simulated diamonds",
+        "title": "",
+        "content": "<p>Our pieces feature conflict-free simulated diamonds, <strong>hand-set stones</strong> for a flawless finish.</p><p>Our Promise stones boast a 2.18 refractive index, MOHS rating of 8.5.  </p><p>To compare: Diamonds have a 2.41 refractive index and MOHS rating of 10, Swarovski Crystals sit at around 1.6 refractive index, MOHS 6-7</p><p></p>",
+        "button_1_text": "",
+        "button_1_link": "",
+        "button_1_style": "solid",
+        "button_2_text": "",
+        "button_2_link": "",
+        "button_2_style": "solid"
+      }
+    },
+    "multiple_media_with_text_zxw6ky": {
+      "type": "multiple-media-with-text",
+      "blocks": {
+        "image_3RhBmq": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_48.png",
+            "rotation": 0
+          }
+        }
+      },
+      "block_order": [
+        "image_3RhBmq"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "reveal_on_scroll": true,
+        "separate_section_with_border": true,
+        "media_position_desktop": "before_text",
+        "media_position_mobile": "before_text",
+        "media_layout": "overlap",
+        "media_alignment": "center",
+        "media_alignment_offset": 0,
+        "media_mobile_alignment_offset": 0,
+        "text_alignment": "center",
+        "subheading": "our precious metals",
+        "title": "",
+        "content": "<p>Our silver pieces are plated in rhodium - one of the world’s most precious metals, known for its <strong>mirror-like shine and exceptional resistance to tarnishing. </strong></p><p>Our gold jewellery is crafted using gold vermeil, a technique that requires a thick layer of 18k gold over sterling silver. In fact, our plating is up to 25 times thicker than standard gold-plated jewellery, giving each piece a rich, lasting finish. </p><p>Every design is then sealed with an e-coating, adding an invisible layer of protection to preserve its beauty over time.</p>",
+        "button_1_text": "",
+        "button_1_link": "",
+        "button_1_style": "solid",
+        "button_2_text": "",
+        "button_2_link": "",
+        "button_2_style": "solid"
+      }
+    },
+    "rich_text_VLNJgw": {
+      "type": "rich-text",
+      "blocks": {
+        "button_rHxz8F": {
+          "type": "button",
+          "settings": {
+            "style": "solid",
+            "text": "view our range",
+            "url": "shopify://collections/shop-all",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "button_rHxz8F"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "multiple_media_with_text_hVMUw9",
+    "multiple_media_with_text_nYXTrr",
+    "multiple_media_with_text_zxw6ky",
+    "rich_text_VLNJgw"
+  ]
+}
