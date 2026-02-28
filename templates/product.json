@@ -1,0 +1,485 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h4"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "judge_me_reviews_preview_badge_WQEMyy": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "payment_terms": {
+          "type": "payment_terms",
+          "settings": {}
+        },
+        "separator": {
+          "type": "separator",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "selector_style": "block",
+            "swatch_selector_style": "swatch",
+            "variant_image_options": "",
+            "size_chart_page": ""
+          }
+        },
+        "delivery_countdown_GeGVy3": {
+          "type": "delivery_countdown",
+          "settings": {
+            "cutoff_hour": 13,
+            "suffix_text": "for next day delivery"
+          }
+        },
+        "text_TzkTaX": {
+          "type": "text",
+          "settings": {
+            "text": "<p><a href=\"#size-guide-popup\" title=\"Ring Size Guide\">Unsure on sizing? - Size Guide Here</a></p>"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "",
+            "atc_button_text_color": "",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "text_aUJmQk": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p>For more information on Pre-Order click here </p>"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "collapse_content": true,
+            "show_below_gallery": true
+          }
+        },
+        "accordion_xfbPBi": {
+          "type": "accordion",
+          "settings": {
+            "show_below_gallery": true,
+            "icon": "none",
+            "title": "Materials",
+            "content": "<p><strong>Gold Vermeil </strong>- A thick layer of real 18ct gold bonded to solid sterling silver - up to 25x thicker than standard plating. Designed to last, crafted to shine, made to hold meaning.</p><p><strong>Solid 925 sterling silver</strong> - finished with rhodium - a rare metal from the platinum family. This bright, durable layer protects against tarnish and keeps every piece shining beautifully.</p><p><strong>Protective anti-tarnish coating</strong> that helps preserve shine and colour over time. It adds an invisible shield against daily wear, so your jewelry stays as beautiful as the day you received it. </p><p><strong>Conflict-free simulated diamonds,</strong> hand-set for a flawless finish.</p><p><strong>Sparkle Index (Refractive Index)</strong></p><p>Our stones: <strong>2.18 </strong>| Natural diamonds: <strong>2.41</strong></p><p><strong>Durability (MOHS Hardness) </strong></p><p>Our stones: <strong>8.5 </strong>| Natural diamonds: <strong>10</strong></p>",
+            "liquid": "",
+            "page": ""
+          }
+        },
+        "accordion_yUkiTP": {
+          "type": "accordion",
+          "settings": {
+            "show_below_gallery": true,
+            "icon": "none",
+            "title": "Promise 2 Year Warranty",
+            "content": "<p>Your jewelry is more than an accessory - it’s a symbol of love, commitment, and life’s cherished moments. That’s why every piece comes with a <strong>2-year warranty</strong> for complete peace of mind.</p><p>We’ll <strong>repair</strong> any manufacturing faults free of charge or <strong>replace</strong> your piece if a repair isn’t possible.</p><p>If your warranty has expired, or any accidental damage has occurred please reach out. We’ll still do our best to help with <strong>repairs or replacements at a reduced fee</strong>.</p><p><a href=\"https://thepromiseco.com/pages/2-year-warranty\" title=\"https://thepromiseco.com/pages/2-year-warranty\">View full warranty details here.</a></p>",
+            "liquid": "",
+            "page": ""
+          }
+        },
+        "accordion_jB4gQj": {
+          "type": "accordion",
+          "disabled": true,
+          "settings": {
+            "show_below_gallery": true,
+            "icon": "none",
+            "title": "Shipping",
+            "content": "<p><strong>UK Shipping</strong></p><p>We ship directly from our UK warehouse with care and speed. <strong>Free 24-hour delivery</strong> on all orders over <strong>£130. </strong>Any orders before 1pm UK time are dispatched on the same day </p><p><strong>24 hour & 48 hour delivery Mon-Saturday </strong>available at checkout. Every parcel is fully tracked and beautifully packaged - ready to gift the moment it arrives.</p><p><em>Please note we do not ship on weekends or bank holidays.</em></p><p><strong>US Shipping </strong>All US orders are shipped from our US warehouse for faster, tariff-free delivery. <strong>We are proud to be in the top 1% of USA businesses for speed and reliability. </strong></p><p><strong>Free express shipping</strong> on orders over <strong>$220</strong></p><p>Any orders before 1pm UK time are dispatched on the same day. </p><p>For zones 1-8 our deliver time is 1-3 days No hidden customs fees, no delays.</p><p>Every parcel is fully tracked and beautifully packaged - ready to gift the moment it arrives.</p>",
+            "liquid": "",
+            "page": ""
+          }
+        },
+        "judge_me_reviews_review_snippet_widget_YnLLY8": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_snippet_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {}
+        },
+        "feature_with_icon_FTccY4": {
+          "type": "feature_with_icon",
+          "settings": {
+            "text": "Hand Set Stones",
+            "link": "",
+            "click_action": "none",
+            "popup_id": "shipping-popup",
+            "icon": "picto-jewelry",
+            "custom_icon": "shopify://shop_images/Artboard_4_4x_7f6fe0a5-8edc-477c-a457-9d49de7d7bf5.png",
+            "icon_width": 32,
+            "tooltip_text": ""
+          }
+        },
+        "feature_with_icon_XfGd6d": {
+          "type": "feature_with_icon",
+          "settings": {
+            "text": "Anti-Tarnish Coating",
+            "link": "",
+            "click_action": "none",
+            "popup_id": "shipping-popup",
+            "icon": "picto-star",
+            "custom_icon": "shopify://shop_images/Artboard_3_4x_a895288f-f94d-49c4-88eb-2c58c6033de1.png",
+            "icon_width": 32,
+            "tooltip_text": ""
+          }
+        },
+        "feature_with_icon_tUrRgp": {
+          "type": "feature_with_icon",
+          "settings": {
+            "text": "Ready to Gift Packaging",
+            "link": "",
+            "click_action": "popup",
+            "popup_id": "packaging-popup",
+            "icon": "picto-lock",
+            "custom_icon": "shopify://shop_images/Artboard_7_4x_cf22a564-5ba3-4aa9-82d0-ba684513999d.png",
+            "icon_width": 32,
+            "tooltip_text": "Complimentary luxury packaging included with every order"
+          }
+        },
+        "feature_with_icon_TyH8jB": {
+          "type": "feature_with_icon",
+          "settings": {
+            "text": "Lifetime Sparkle",
+            "link": "",
+            "click_action": "none",
+            "popup_id": "shipping-popup",
+            "icon": "picto-love",
+            "custom_icon": "shopify://shop_images/Artboard_33_4x_a331b0fc-7364-4b91-8dfe-db9ecd4ec7cd.png",
+            "icon_width": 28,
+            "tooltip_text": ""
+          }
+        },
+        "feature_with_icon_tTcWak": {
+          "type": "feature_with_icon",
+          "settings": {
+            "text": "5 Year Warranty",
+            "link": "",
+            "click_action": "none",
+            "popup_id": "shipping-popup",
+            "icon": "none",
+            "custom_icon": "shopify://shop_images/Artboard_5_4x_e6eef91f-e566-498d-9f41-62990245e2e8.png",
+            "icon_width": 32,
+            "tooltip_text": ""
+          }
+        },
+        "feature_with_icon_badge6": {
+          "type": "feature_with_icon",
+          "settings": {
+            "text": "30 Day Returns & Exchanges",
+            "link": "",
+            "click_action": "none",
+            "popup_id": "shipping-popup",
+            "icon": "picto-star",
+            "custom_icon": "shopify://shop_images/Artboard_6_4x_b047aae4-7473-43c3-b03b-7d90205b3bb3.png",
+            "icon_width": 32,
+            "tooltip_text": ""
+          }
+        },
+        "share_buttons_cbEwqV": {
+          "type": "share_buttons",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "judge_me_reviews_preview_badge_WQEMyy",
+        "payment_terms",
+        "separator",
+        "variant_picker",
+        "delivery_countdown_GeGVy3",
+        "text_TzkTaX",
+        "quantity_selector",
+        "buy_buttons",
+        "text_aUJmQk",
+        "description",
+        "accordion_xfbPBi",
+        "accordion_yUkiTP",
+        "accordion_jB4gQj",
+        "judge_me_reviews_review_snippet_widget_YnLLY8",
+        "feature_with_icon_FTccY4",
+        "feature_with_icon_XfGd6d",
+        "feature_with_icon_tUrRgp",
+        "feature_with_icon_TyH8jB",
+        "feature_with_icon_tTcWak",
+        "feature_with_icon_badge6",
+        "share_buttons_cbEwqV"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "container_size": "lg",
+        "product_info_size": 35,
+        "show_sticky_add_to_cart": true,
+        "center_basic_info": true,
+        "desktop_media_layout": "carousel_thumbnails_left",
+        "desktop_media_grid_gap": 30,
+        "mobile_controls": "thumbnails",
+        "enable_media_autoplay": false,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3
+      }
+    },
+    "1718037938f4a04551": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_CAkGJD": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1200,
+            "show_shop_reviews": true,
+            "empty_state": "other_products_reviews"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_CAkGJD"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": true,
+        "hide_product_information": false,
+        "stack_products": false,
+        "recommendations_count": 10,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "subheading": "more promises worth keeping",
+        "title": "customers also loved...",
+        "content": ""
+      }
+    },
+    "rich_text_TiHHaY": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_U9aERV": {
+          "type": "subheading",
+          "settings": {
+            "text": "Discover"
+          }
+        },
+        "heading_EAtXk7": {
+          "type": "heading",
+          "settings": {
+            "text": "A world full of promises",
+            "heading_tag": "h1"
+          }
+        },
+        "image_WpkL9A": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Artboard_3_10x_5437c043-bd9d-4e37-bee7-870bdc08d6c7.png",
+            "width_mode": "custom",
+            "max_width": 690,
+            "mobile_max_width": 400
+          }
+        },
+        "richtext_GTqq6R": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Join our community like-minded promise makers</p>"
+          }
+        },
+        "button_BbmiaU": {
+          "type": "button",
+          "settings": {
+            "style": "solid",
+            "text": "Explore now",
+            "url": "shopify://pages/the-promise-world",
+            "background": "#f2eee7",
+            "text_color": "#1c1c1c"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_U9aERV",
+        "heading_EAtXk7",
+        "image_WpkL9A",
+        "richtext_GTqq6R",
+        "button_BbmiaU"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-b68b61c5-ba0e-4161-a0e3-3d59622e9bf4",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "category_cards_VND4Rf": {
+      "type": "category-cards",
+      "blocks": {
+        "category_image_djBJCT": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/2_080efb18-8960-4515-8029-cb2da2f60254.png",
+            "title": "Best Sellers",
+            "description": "<p>discover</p>",
+            "link": "shopify://collections/best-sellers"
+          }
+        },
+        "category_image_YVPqfb": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/4_18c5bbdd-e181-4b3a-8e3c-2411e576827f.png",
+            "title": "Single Stone Rings",
+            "description": "<p>shop</p>",
+            "link": "shopify://collections/single-stone-promise-rings"
+          }
+        },
+        "category_image_RDrpg4": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/1_22bcb349-9582-4cdc-90a1-76c536b995d1.png",
+            "title": "Pinky Rings",
+            "description": "<p>our current fave</p>",
+            "link": "shopify://collections/pinky-rings"
+          }
+        },
+        "category_image_wgj7Mn": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/3_86b63cb8-1679-4cbb-a63d-f90c8d38b8c5.png",
+            "title": "Bands & Stacking",
+            "description": "<p>promise</p>",
+            "link": "shopify://collections/bands-and-stacking-rings"
+          }
+        }
+      },
+      "block_order": [
+        "category_image_djBJCT",
+        "category_image_YVPqfb",
+        "category_image_RDrpg4",
+        "category_image_wgj7Mn"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "background_color": "#ffffff",
+        "title_color": "#000000",
+        "subtitle_color": "#666666",
+        "section_padding_top": 64,
+        "section_padding_bottom": 64,
+        "mobile_single_column": false
+      }
+    },
+    "multiple_media_with_text_XxetVy": {
+      "type": "multiple-media-with-text",
+      "blocks": {
+        "video_TQ8NLR": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/copy_669ACD4A-0216-471B-94E3-FD06C5535B6A_VSCO.mov",
+            "rotation": 0
+          }
+        },
+        "image_4GkdXn": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Artboard_35_4x_dff76677-1a79-4fa7-b1d6-471cdc1fc207.png",
+            "rotation": 0
+          }
+        }
+      },
+      "block_order": [
+        "video_TQ8NLR",
+        "image_4GkdXn"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "reveal_on_scroll": true,
+        "separate_section_with_border": true,
+        "media_position_desktop": "after_text",
+        "media_position_mobile": "after_text",
+        "media_layout": "overlap",
+        "media_alignment": "center",
+        "media_alignment_offset": 0,
+        "media_mobile_alignment_offset": 0,
+        "text_alignment": "center",
+        "subheading": "quality promise",
+        "title": "what makes us different",
+        "content": "<p>We understand that these pieces aren’t just jewellery – they’re symbols of love, commitment, and the moments that matter most.</p><p>As proud members of the <strong>National Association of Jewellers</strong>, we hold ourselves to the highest standards of quality and care.</p>",
+        "button_1_text": "our quality",
+        "button_1_link": "shopify://pages/our-quality",
+        "button_1_style": "solid",
+        "button_2_text": "",
+        "button_2_link": "",
+        "button_2_style": "solid"
+      }
+    },
+    "174418775193790daa": {
+      "type": "apps",
+      "blocks": {
+        "klaviyo_reviews_product_reviews_AdVdqy": {
+          "type": "shopify://apps/klaviyo-reviews/blocks/product-reviews/db20e365-d984-4ac4-9655-e1588d951ca9",
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "klaviyo_reviews_product_reviews_AdVdqy"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1718037938f4a04551",
+    "related-products",
+    "rich_text_TiHHaY",
+    "category_cards_VND4Rf",
+    "multiple_media_with_text_XxetVy",
+    "174418775193790daa"
+  ]
+}

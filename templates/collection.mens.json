@@ -1,0 +1,150 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "rich_text_wMNiPf": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_weFRwt": {
+          "type": "subheading",
+          "settings": {
+            "text": "What's your Promise?"
+          }
+        },
+        "heading_6kB7dr": {
+          "type": "heading",
+          "settings": {
+            "text": "",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_MnfcG9": {
+          "type": "richtext",
+          "settings": {
+            "content": "<h1>Shop the Collection</h1><p></p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_weFRwt",
+        "heading_6kB7dr",
+        "richtext_MnfcG9"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false
+      }
+    },
+    "collection-banner": {
+      "type": "collection-banner",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "image_size": "auto",
+        "allow_transparent_header": true,
+        "reveal": true,
+        "enable_parallax": true,
+        "show_image": true,
+        "show_collection_title": true,
+        "show_collection_description": true,
+        "show_breadcrumb": true,
+        "content_width": "xs",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "show_usp_tabs": false,
+        "show_stone_type_slider": false
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "hide_product_information": false,
+        "products_per_page": 48,
+        "products_per_row_mobile": "2",
+        "products_size_desktop": "large",
+        "show_grid_mode_selector": true,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "filter_layout": "sidebar",
+        "quick_links_menu": "",
+        "show_sort_by": true,
+        "show_filters": false,
+        "show_results_count": false,
+        "show_filter_group_name": false,
+        "show_filter_values_count": false,
+        "open_filters_by_default": false
+      }
+    },
+    "multi_column_6rLKqy": {
+      "type": "multi-column",
+      "blocks": {
+        "image_with_text_N76bxy": {
+          "type": "image_with_text",
+          "settings": {
+            "title": "interlocking promise rings for couples",
+            "heading_tag": "h5",
+            "content": "<p>Our unique design features interlocking rings so you have a piece of eachother wherever you go.</p><p>These rings represent being together no matter what, even when you're far apart. They're perfect for couples who are far away and want to feel close, or for those ready to show their commitment. Anyone can wear them to show how much they care about each other. With our special rings, you can say \"I promise\" and celebrate your love together.</p>",
+            "link_url": "",
+            "link_text": ""
+          }
+        },
+        "image_with_text_ANbFUr": {
+          "type": "image_with_text",
+          "settings": {
+            "title": "His and hers Promise rings",
+            "heading_tag": "h5",
+            "content": "<p>Celebrate the bond of love with our exquisite collection of his and hers couples rings. Each order includes a keepsake Promise Card, allowing you to capture your unique promise and create a lasting memory together. </p><p>Show your commitment to each other with these meaningful rings, symbolising the unbreakable connection you share. </p><p>Whether it's a promise of a lifetime together or a token of your enduring love, these rings are a timeless expression of your devotion. Perfect for commemorating milestones like anniversaries or engagements, they serve as a beautiful reminder of your journey together. So why not exchange vows of love and fidelity with his and hers couples rings, forging an unbreakable bond that will be treasured for years to come?</p>",
+            "link_url": "",
+            "link_text": ""
+          }
+        },
+        "image_with_text_7mgb7U": {
+          "type": "image_with_text",
+          "settings": {
+            "title": "HAND SET WITH LOVE AND A 2 YEAR WARRANTY",
+            "heading_tag": "h5",
+            "content": "<p>At The Promise Ring Co., our dedication lies in delivering unparalleled service to ensure your ring purchase is nothing short of extraordinary. We recognise that these pieces transcend mere jewellery; they encapsulate love, commitment, and cherished memories.</p><p>That's why we wholeheartedly stand behind our products, offering a comprehensive 2-year guarantee for your peace of mind. Each ring is meticulously hand-set, ensuring it's crafted with the utmost love and care to become your perfect symbol of enduring Promise.</p>",
+            "link_url": "",
+            "link_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_with_text_N76bxy",
+        "image_with_text_ANbFUr",
+        "image_with_text_7mgb7U"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "columns_per_row": 3,
+        "stack_on_mobile": true,
+        "overlap_image": false,
+        "content_alignment": "start",
+        "text_alignment": "start",
+        "spacing": "md",
+        "subheading": "",
+        "title": "",
+        "content": ""
+      }
+    }
+  },
+  "order": [
+    "rich_text_wMNiPf",
+    "collection-banner",
+    "main",
+    "multi_column_6rLKqy"
+  ]
+}

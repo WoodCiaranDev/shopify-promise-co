@@ -1,0 +1,263 @@
+{%- if section.blocks.size > 0 -%}
+  <style>
+    :root {
+      --announcement-bar-is-sticky: {% if section.settings.enable_sticky %}1{% else %}0{% endif %};
+
+      {%- if section.index == 1 and section.settings.enable_sticky == false -%}
+        --header-scroll-tracker-offset: var(--announcement-bar-height);
+      {%- endif -%}
+    }
+
+    {%- if section.settings.enable_sticky -%}
+      #shopify-section-{{ section.id }} {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+      }
+
+      .shopify-section--header ~ #shopify-section-{{ section.id }} {
+        top: calc(var(--header-is-sticky, 0) * var(--header-height, 0px));
+        z-index: 4; /* We have to lower the z-index in case the announcement bar is displayed after the header */
+      }
+    {%- endif -%}
+
+    #shopify-section-{{ section.id }} {
+      --announcement-bar-font-size: {{ section.settings.mobile_font_size | divided_by: 16.0 }}rem;
+    }
+
+    @media screen and (min-width: 999px) {
+      #shopify-section-{{ section.id }} {
+        --announcement-bar-font-size: {{ section.settings.desktop_font_size | divided_by: 16.0 }}rem;
+      }
+    }
+
+    .announcement-marquee {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .announcement-marquee__swiper {
+      width: 100%;
+    }
+
+    .announcement-marquee__swiper .swiper-wrapper {
+      align-items: center;
+      transition-timing-function: linear !important;
+    }
+
+    .announcement-marquee__slide {
+      width: auto !important;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      flex-wrap: nowrap;
+    }
+    
+    /* Ensure inline display of content */
+    .announcement-marquee__slide > * {
+      display: inline-flex;
+      vertical-align: middle;
+    }
+
+    .announcement-marquee__text {
+      font-size: var(--announcement-bar-font-size);
+      font-family: var(--font-body-family);
+      font-weight: var(--font-body-weight);
+      line-height: 1.5;
+      letter-spacing: 0.06rem;
+      padding: 0.75rem 0;
+      color: rgb(var(--color-scheme-text));
+      white-space: nowrap;
+      margin: 0;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .announcement-marquee__separator {
+      width: 20px;
+      height: 20px;
+      margin: 0 1.5rem;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      vertical-align: middle;
+    }
+
+    .announcement-marquee__separator svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .color-scheme .announcement-marquee__separator svg path {
+      fill: currentColor;
+    }
+
+    @media screen and (max-width: 998px) {
+      .announcement-marquee__separator {
+        width: 16px;
+        height: 16px;
+        margin: 0 1rem;
+      }
+      
+      .announcement-marquee__slide {
+        flex-wrap: nowrap !important;
+      }
+      
+      .announcement-marquee__text,
+      .announcement-marquee__separator {
+        display: inline-flex;
+        vertical-align: middle;
+      }
+    }
+  </style>
+
+  <height-observer variable="announcement-bar">
+    <div class="announcement-marquee color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
+      <div class="announcement-marquee__swiper" id="announcement-marquee-{{ section.id }}">
+        <div class="swiper-wrapper">
+          {%- comment -%}
+            We duplicate the slides multiple times to ensure seamless infinite scroll
+            The number of duplicates depends on the content width vs viewport width
+          {%- endcomment -%}
+          {%- for i in (1..10) -%}
+            {%- for block in section.blocks -%}
+              <div class="swiper-slide announcement-marquee__slide">
+                <p class="announcement-marquee__text prose heading">{{- block.settings.text -}}</p>
+                <div class="announcement-marquee__separator">
+                  {%- render 'icon' with 'slider' -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </height-observer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const swiper{{ section.id | replace: '-', '_' }} = new Swiper('#announcement-marquee-{{ section.id }}', {
+        slidesPerView: 'auto',
+        spaceBetween: 0,
+        loop: true,
+        allowTouchMove: false,
+        speed: {{ section.settings.scroll_speed | times: 1000 }},
+        autoplay: {
+          delay: 0,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: {{ section.settings.pause_on_hover }},
+        },
+        breakpoints: {
+          0: {
+            speed: {{ section.settings.scroll_speed | times: 1000 | times: 1.2 }},
+          },
+          999: {
+            speed: {{ section.settings.scroll_speed | times: 1000 }},
+          }
+        }
+      });
+
+      // Set announcement bar height CSS variable
+      document.documentElement.style.setProperty('--announcement-bar-height', `${document.getElementById('shopify-section-{{ section.id }}').clientHeight.toFixed(2)}px`);
+    });
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement marquee",
+  "class": "shopify-section--announcement-bar",
+  "tag": "aside",
+  "max_blocks": 5,
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "Announce something here"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-3"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky",
+      "label": "Enable sticky bar"
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "min": 5,
+      "max": 30,
+      "step": 1,
+      "unit": "sec",
+      "label": "Scroll speed",
+      "info": "Time to complete one full scroll (lower = faster)",
+      "default": 10
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "desktop_font_size",
+      "min": 9,
+      "max": 15,
+      "unit": "px",
+      "label": "Desktop text size",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "mobile_font_size",
+      "min": 9,
+      "max": 15,
+      "unit": "px",
+      "label": "Mobile text size",
+      "default": 10
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement marquee",
+      "blocks": [
+        {
+          "type": "message",
+          "settings": {
+            "text": "Free shipping on orders over $100"
+          }
+        },
+        {
+          "type": "message", 
+          "settings": {
+            "text": "New arrivals are here"
+          }
+        },
+        {
+          "type": "message",
+          "settings": {
+            "text": "Sale ends this weekend"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

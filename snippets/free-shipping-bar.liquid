@@ -1,0 +1,58 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+FREE SHIPPING BAR
+----------------------------------------------------------------------------------------------------------------------
+
+Renders the free shipping bar component. It is used on cart page and cart drawer to render the remaining amount before
+being eligible for free shipping.
+{%- endcomment -%}
+
+{%- liquid
+  assign calculated_total_price = 0
+
+  for line_item in cart.items
+    if line_item.requires_shipping
+      assign calculated_total_price = calculated_total_price | plus: line_item.final_line_price
+    endif
+  endfor
+
+  # We have to remove the cart level discount from the calculated amount
+
+  assign total_cart_discount = 0
+
+  for discount_application in cart.cart_level_discount_applications
+    assign total_cart_discount = total_cart_discount | plus: discount_application.total_allocated_amount
+  endfor
+
+  assign calculated_total_price = calculated_total_price | minus: total_cart_discount
+
+  # Select threshold based on customer's currency
+  # Only show bar for supported currencies (USD, GBP, AUD, EUR, CAD)
+  case localization.country.currency.iso_code
+    when 'USD'
+      assign shipping_threshold = settings.cart_free_shipping_threshold_usd
+    when 'GBP'
+      assign shipping_threshold = settings.cart_free_shipping_threshold_gbp
+    when 'AUD'
+      assign shipping_threshold = settings.cart_free_shipping_threshold_aud
+    when 'EUR'
+      assign shipping_threshold = settings.cart_free_shipping_threshold_eur
+    when 'CAD'
+      assign shipping_threshold = settings.cart_free_shipping_threshold_cad
+    else
+      assign shipping_threshold = nil
+  endcase
+-%}
+
+{%- if cart.requires_shipping and shipping_threshold != blank -%}
+  <free-shipping-bar class="free-shipping-bar" threshold="{{ shipping_threshold }}" total-price="{{ calculated_total_price }}" reached-message="{{ 'cart.free_shipping_bar.limit_reached_html' | t | escape }}" unreached-message="{{ 'cart.free_shipping_bar.limit_unreached_html' | t | escape }}">
+    <div class="free-shipping-bar__message"></div>
+    <div class="free-shipping-bar__labels">
+      <span>{{ 0 | money }}</span>
+      <div class="free-shipping-bar__track">
+        <div class="free-shipping-bar__fill"></div>
+      </div>
+      <span>{{ shipping_threshold | times: 100 | money }}</span>
+    </div>
+  </free-shipping-bar>
+{%- endif -%}

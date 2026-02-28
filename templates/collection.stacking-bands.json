@@ -1,0 +1,187 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "rich_text_wMNiPf": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_weFRwt": {
+          "type": "subheading",
+          "settings": {
+            "text": "What's your Promise?"
+          }
+        },
+        "heading_6kB7dr": {
+          "type": "heading",
+          "settings": {
+            "text": "",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_MnfcG9": {
+          "type": "richtext",
+          "settings": {
+            "content": "<h1>bands & stacking rings</h1>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_weFRwt",
+        "heading_6kB7dr",
+        "richtext_MnfcG9"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "collection-banner": {
+      "type": "collection-banner",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "image_size": "auto",
+        "allow_transparent_header": true,
+        "reveal": true,
+        "enable_parallax": true,
+        "show_image": true,
+        "show_collection_title": true,
+        "show_collection_description": true,
+        "show_breadcrumb": true,
+        "content_width": "xs",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30,
+        "show_usp_tabs": false,
+        "show_stone_type_slider": true
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "hide_product_information": false,
+        "products_per_page": 48,
+        "products_per_row_mobile": "2",
+        "products_size_desktop": "large",
+        "show_grid_mode_selector": true,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "filter_layout": "sidebar",
+        "quick_links_menu": "",
+        "show_sort_by": true,
+        "show_filters": true,
+        "show_results_count": false,
+        "show_filter_group_name": false,
+        "show_filter_values_count": false,
+        "open_filters_by_default": false
+      }
+    },
+    "rich_text_LmGN8f": {
+      "type": "rich-text",
+      "blocks": {
+        "button_HdgXjY": {
+          "type": "button",
+          "settings": {
+            "style": "solid",
+            "text": "shop the whole collection",
+            "url": "shopify://collections/shop-all",
+            "background": "#82add9",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "button_HdgXjY"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "multi_column_6rLKqy": {
+      "type": "multi-column",
+      "blocks": {
+        "image_with_text_N76bxy": {
+          "type": "image_with_text",
+          "settings": {
+            "title": "",
+            "heading_tag": "h5",
+            "content": "<h5>18ct Gold & Sterling silver stacking rings</h5><p>Experience the versatility of stacking rings, a timeless addition to any jewellery collection. Express your unique style effortlessly with an array of breathtaking options.</p><p>Dive into a world of endless possibilities with our stunning selection of stacking rings. From sleek silver to classic gold bands, there's a perfect match for every occasion. Embrace creativity by mixing metals for a modern twist on traditional elegance. With a palette of tones and shades to adore, you're sure to captivate attention and inspire envy with each glance.</p>",
+            "link_url": "",
+            "link_text": ""
+          }
+        },
+        "image_with_text_ANbFUr": {
+          "type": "image_with_text",
+          "settings": {
+            "title": "",
+            "heading_tag": "h5",
+            "content": "<h5>Achieve Maximum Glamour with Stacked Precious Metal & Diamond Dupe Rings</h5><p>Stacking rings, featuring stunning diamond simulants and precious metals, offer a simple yet elegant way to elevate any ensemble. Whether adding a touch of glamour to your everyday attire or completing an evening look, these versatile rings are a must-have accessory.</p><p>For a balanced and well-styled appearance, opt for a thinner band paired with one or two feature pieces when stacking multiple rings on the same finger. Our stackable rings are designed to fit seamlessly side by side, offering endless pairing options from slim bands to larger cocktail rings and single stone designs. Choose from our wide selection for the perfect finishing touch to your look.</p>",
+            "link_url": "",
+            "link_text": ""
+          }
+        },
+        "image_with_text_7mgb7U": {
+          "type": "image_with_text",
+          "settings": {
+            "title": "",
+            "heading_tag": "h5",
+            "content": "<h5>Sentimental Pieces to Keep Loved Ones Close</h5><p>For individuals seeking to wear their cherished rings simultaneously, stacking presents the perfect solution. Adorning your finger with both your promise and eternity rings is a great way to symbolise a romantic journey. These are the tokens of utmost love to you, so keeping them united and near ensures you're always connected to the one who gifted them to you.</p>",
+            "link_url": "",
+            "link_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_with_text_N76bxy",
+        "image_with_text_ANbFUr",
+        "image_with_text_7mgb7U"
+      ],
+      "custom_css": [
+        "h3,h4,h2 {font-size: 20px;}"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": true,
+        "columns_per_row": 3,
+        "stack_on_mobile": true,
+        "overlap_image": false,
+        "content_alignment": "start",
+        "text_alignment": "start",
+        "spacing": "md",
+        "subheading": "",
+        "title": "",
+        "content": ""
+      }
+    }
+  },
+  "order": [
+    "rich_text_wMNiPf",
+    "collection-banner",
+    "main",
+    "rich_text_LmGN8f",
+    "multi_column_6rLKqy"
+  ]
+}

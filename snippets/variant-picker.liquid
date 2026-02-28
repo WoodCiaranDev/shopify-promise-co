@@ -1,0 +1,385 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+VARIANT PICKER
+----------------------------------------------------------------------------------------------------------------------
+
+Render the variant picker option selectors.
+
+********************************************
+Supported variables
+********************************************
+
+* product: the product for which to render the selector (required)
+* form_id: the ID of the form to which the variant picker belongs (required)
+* context: the context of the variant picker. Can be "main_product", "featured_product" or "quick_buy" (required)
+* hide_sold_out_variants: if set to true, the sold out or unavailable variants are hidden
+* selector_style: the selector style to use for the main selectors
+* swatch_selector_style: the selector style to use for the dedicated swatch selectors
+* variant_image_options: a list of option names for which to use the variant image selector mode
+* size_chart_page: the page to use for the size chart
+{%- endcomment -%}
+
+{%- liquid
+  assign color_label_list = 'general.label.color' | t | replace: ', ', ',' | downcase | split: ','
+  assign size_label_list = 'general.label.size' | t | replace: ', ', ',' | downcase | split: ','
+  assign variant_image_options = variant_image_options | replace: ', ', ',' | downcase | split: ','
+
+  if context == 'main_product'
+    assign is_main_product = true
+  endif
+-%}
+
+{%- unless product.has_only_default_variant -%}
+  <variant-picker class="variant-picker v-stack gap-4" section-id="{{ section.id }}" form-id="{{ form_id }}" context="{{ context }}" handle="{{ product.handle }}" {% if context == 'main_product' %}update-url{% endif %}>
+    {%- comment -%}
+    The variant data is outputted as a JSON, which allows the theme to emit an event with the data when the variant changes. This must not be removed.
+    {%- endcomment -%}
+    <script data-variant type="application/json">
+      {{- product.selected_or_first_available_variant | json -}}
+    </script>
+
+    <script data-variants type="application/json">
+      {{- product.variants | json -}}
+    </script>
+
+    {%- for option in product.options_with_values -%}
+      {% liquid
+        assign option_downcase = option.name | downcase
+        assign resolved_option_selector_style = selector_style
+
+        assign swatch_count = option.values | map: 'swatch' | compact | size
+
+        if swatch_count > 0 and swatch_selector_style != 'none'
+          # Use the swatch selector type only if we have at least one swatch and a supported swatch selector type
+          assign resolved_option_selector_style = swatch_selector_style
+        endif
+
+        # Implementation note: if the option value has no native swatch, BUT that the option name matches a hardcoded list of color names,
+        # we fallback to the legacy config-based system. This allows to keep compatibility with stores that were using the config-based, and
+        # allow those merchants to upgrade to the new system at their own pace.
+        if swatch_count == 0 and color_label_list contains option_downcase and swatch_selector_style != 'none'
+          assign resolved_option_selector_style = swatch_selector_style
+        endif
+
+        if variant_image_options contains option_downcase
+          assign resolved_option_selector_style = 'variant_image'
+        endif
+
+        # Force size options to use dropdown style
+        if size_label_list contains option_downcase
+          assign resolved_option_selector_style = 'dropdown'
+        endif
+      %}
+
+      <fieldset class="variant-picker__option v-stack gap-2"{% if is_main_product and size_label_list contains option_downcase %} data-size-option{% endif %}>
+        <div class="variant-picker__option-info h-stack justify-between gap-2">
+          <div class="h-stack gap-1">
+            <legend>{{ option.name }}:</legend>
+
+            {%- if resolved_option_selector_style == 'swatch' or resolved_option_selector_style == 'variant_image' -%}
+              <span>{{ option.selected_value }}</span>
+            {%- endif -%}
+          </div>
+
+          {%- if size_chart_page != blank and size_label_list contains option_downcase -%}
+            {%- capture id -%}size-chart-{{ option.position }}-{{ form_id }}{%- endcapture -%}
+
+            <button type="button" class="link" aria-controls="{{ id | escape }}" aria-expanded="false">
+              {{- 'product.general.size_chart' | t -}}
+            </button>
+
+            <x-modal id="{{ id | escape }}" class="modal modal--lg color-scheme color-scheme--dialog">
+              <span class="h5" slot="header">{{ size_chart_page.title }}</span>
+
+              <div class="prose">
+                {{- size_chart_page.content -}}
+              </div>
+            </x-modal>
+          {%- endif -%}
+        </div>
+
+        {%- assign name = 'option' | append: option.position -%}
+
+        {%- if resolved_option_selector_style == 'dropdown' -%}
+          {%- liquid
+            assign is_size_dropdown = false
+            if size_label_list contains option_downcase
+              assign is_size_dropdown = true
+            endif
+          -%}
+          <div class="relative">
+            {%- assign param_name = form_id | append: '-option' | append: option.position -%}
+
+            {%- if is_size_dropdown and is_main_product -%}
+              {%- comment -%}Native select for size options on main product - syncs with hidden radios for variant picker{%- endcomment -%}
+              <select
+                  class="select"
+                  data-option-position="{{ option.position }}"
+                  data-size-select
+                >
+                  {%- assign has_selected_size = false -%}
+                  {%- for option_value in option.values -%}
+                    {%- if option_value.selected -%}
+                      {%- assign has_selected_size = true -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                  <option value="" disabled {% unless has_selected_size %}selected{% endunless %}>{{ 'product.general.select_size' | t | default: 'Select your size' }}</option>
+                  {%- for option_value in option.values -%}
+                    {%- if hide_sold_out_variants == false or option_value.available or option_value.selected -%}
+                      <option
+                        value="{{ option_value.id }}"
+                        {% if option_value.selected %}selected{% endif %}
+                        {% if option_value.available == false %}disabled{% endif %}
+                        {% if option_value.product_url != blank %}data-product-url="{{ option_value.product_url | escape }}"{% endif %}
+                      >
+                        {{- option_value -}}{% if option_value.available == false %} - {{ 'product.general.sold_out_badge' | t }}{% endif %}
+                      </option>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </select>
+                {%- render 'icon' with 'dropdown-chevron' -%}
+                {%- comment -%}Hidden radio inputs for variant picker to detect changes{%- endcomment -%}
+                <div class="sr-only" data-size-radios>
+                  {%- for option_value in option.values -%}
+                    {%- if hide_sold_out_variants == false or option_value.available or option_value.selected -%}
+                      <input type="radio" form="{{ form_id }}" name="{{ param_name }}" id="{{ param_name }}-{{ option_value.id }}" value="{{ option_value.id }}" data-option-position="{{ option.position }}" {% if option_value.selected %}checked{% endif %} {% if option_value.product_url != blank %}data-product-url="{{ option_value.product_url | escape }}"{% endif %} {% if option_value.available == false %}disabled{% endif %}>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              <span class="variant-picker__validation-message" hidden>Please select your size</span>
+            {%- else -%}
+              {%- comment -%}Popover for non-size dropdowns{%- endcomment -%}
+              {%- capture popover_id -%}popover-variant-dropdown-{{ section.id }}-{{ product.id }}-{{ option.position }}{%- endcapture -%}
+
+              <button type="button" class="select" aria-controls="{{ popover_id }}" aria-expanded="false">
+                <span id="{{ popover_id }}-selected-value">{{- option.selected_value -}}</span>
+                {%- render 'icon' with 'dropdown-chevron' -%}
+              </button>
+
+              <x-popover id="{{ popover_id }}" class="popover popover--bottom-start color-scheme color-scheme--dialog" close-on-listbox-change>
+                <p class="h5" slot="header">{{ option.name }}</p>
+
+                <div class="popover__value-list">
+                  {%- for option_value in option.values -%}
+                    {%- capture option_markup -%}
+                      <span>{{- option_value -}}</span>
+
+                      {%- if option_value.available == false -%}
+                        <span>
+                          {%- if option_value.variant == nil -%}
+                            - {{ 'product.general.unavailable_button' | t -}}
+                          {%- else -%}
+                            - {{ 'product.general.sold_out_badge' | t -}}
+                          {%- endif -%}
+                        </span>
+                      {%- endif -%}
+                    {%- endcapture -%}
+
+                    {%- if hide_sold_out_variants == false or option_value.available or option_value.selected -%}
+                      {%- if is_main_product and option_value.product_url != blank -%}
+                        <div class="popover__value-option {% if option_value.available == false %}popover__value-option--disabled{% endif %}">
+                          {%- if option_value.selected -%}
+                            <input class="sr-only" type="radio" id="{{ param_name }}-{{ option_value.id }}" form="{{ form_id }}" name="{{ param_name }}" data-option-position="{{ option.position }}" value="{{ option_value.id }}" checked>
+                          {%- endif -%}
+
+                          {%- if option_value.available -%}
+                            <a href="{{ option_value.variant.url | default: option_value.product_url }}" class="h-stack justify-between gap-2">
+                              {{- option_markup -}}
+                            </a>
+                          {%- else -%}
+                            <span class="h-stack justify-between gap-2 popover__value-option-disabled-text">
+                              {{- option_markup -}}
+                            </span>
+                          {%- endif -%}
+                        </div>
+                      {%- else -%}
+                        <label class="popover__value-option h-stack justify-between gap-2 {% if option_value.available == false %}popover__value-option--disabled{% endif %}" for="{{ param_name }}-{{ option_value.id }}">
+                          <input class="sr-only" form="{{ form_id }}" type="radio" id="{{ param_name }}-{{ option_value.id }}" name="{{ param_name }}" {% if option_value.product_url != blank %}data-product-url="{{ option_value.product_url | escape }}"{% endif %} data-option-position="{{ option.position }}" value="{{ option_value.id }}" {% if option_value.selected %}checked{% endif %} {% if option_value.available == false %}disabled{% endif %}>
+                          {{- option_markup -}}
+                        </label>
+                      {%- endif -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              </x-popover>
+            {%- endif -%}
+          </div>
+        {%- else -%}
+          {%- liquid
+            case resolved_option_selector_style
+              when 'swatch' or 'variant_image' or 'block' or 'block_swatch'
+                assign list_classes = 'h-stack gap-2.5 wrap'
+
+              else
+                assign list_classes = ''
+            endcase
+          -%}
+
+          <div class="variant-picker__option-values {{ list_classes }}">
+            {% liquid
+              assign name = form_id | append: '-option' | append: option.position
+
+              for option_value in option.values
+                case resolved_option_selector_style
+                  when 'variant_image'
+                    render 'option-value', type: 'thumbnail', form: form_id, option_value: option_value, param_name: name, option_position: option.position, hide_if_disabled: hide_sold_out_variants, reload_page_for_combined_products: is_main_product, id_prefix: forloop.index
+                  when 'swatch'
+                    render 'option-value', type: 'swatch', form: form_id, option_value: option_value, param_name: name, option_position: option.position, hide_if_disabled: hide_sold_out_variants, reload_page_for_combined_products: is_main_product, id_prefix: forloop.index
+                  when 'block'
+                    render 'option-value', type: 'block', form: form_id, option_value: option_value, param_name: name, option_position: option.position, hide_if_disabled: hide_sold_out_variants, reload_page_for_combined_products: is_main_product, id_prefix: forloop.index
+                  when 'block_swatch'
+                    render 'option-value', type: 'block', form: form_id, option_value: option_value, param_name: name, option_position: option.position, show_swatch: true, hide_if_disabled: hide_sold_out_variants, reload_page_for_combined_products: is_main_product, id_prefix: forloop.index
+                endcase
+              endfor
+            %}
+          </div>
+        {%- endif -%}
+      </fieldset>
+    {%- endfor -%}
+
+    {%- unless request.design_mode -%}
+      <noscript>
+        {%- assign input_label = 'product.general.variant' | t -%}
+
+        {%- capture select_options -%}
+          {%- for variant in product.variants -%}
+            <option {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %} {% unless variant.available %}disabled="disabled"{% endunless %} value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+          {%- endfor -%}
+        {%- endcapture -%}
+
+        {%- render 'select', label: input_label, form: form_id, name: 'id', options: select_options -%}
+      </noscript>
+    {%- endunless -%}
+
+    <script>
+      (function() {
+        var variantPicker = document.querySelector('variant-picker[context="main_product"]');
+        if (!variantPicker) return;
+
+        var sizeSelect = variantPicker.querySelector('[data-size-select]');
+        if (!sizeSelect) return;
+
+        var sizeFieldset = sizeSelect.closest('fieldset');
+        var formId = variantPicker.getAttribute('form-id');
+        var productHandle = variantPicker.getAttribute('handle');
+        var sizeSelectedKey = productHandle ? 'sizeSelected_' + productHandle : null;
+
+        function markSizeSelected() {
+          if (sizeFieldset) sizeFieldset.dataset.sizeSelected = 'true';
+          if (sizeSelectedKey) sessionStorage.setItem(sizeSelectedKey, 'true');
+          sizeFieldset.classList.remove('variant-picker__option--shake');
+          var msg = sizeFieldset && sizeFieldset.querySelector('.variant-picker__validation-message');
+          if (msg) msg.hidden = true;
+        }
+
+        function resetToPlaceholder() {
+          if (sizeFieldset) sizeFieldset.dataset.sizeSelected = 'false';
+          if (sizeSelectedKey) sessionStorage.removeItem(sizeSelectedKey);
+          sizeSelect.selectedIndex = 0;
+          // Uncheck any checked size radios
+          var checkedRadio = sizeFieldset.querySelector('[data-size-radios] input:checked');
+          if (checkedRadio) checkedRadio.checked = false;
+          // Update button to show "Add to Cart" (not "Sold Out")
+          updateButtonForNoSize();
+        }
+
+        function updateButtonForNoSize() {
+          var form = document.getElementById(formId);
+          if (!form) return;
+          var button = form.querySelector('.button--add-to-cart');
+          if (!button) return;
+          // Disable the button and set text to "Add to Cart"
+          button.disabled = true;
+          // Find the span inside the button that contains the text
+          var span = button.querySelector('span') || button;
+          span.textContent = '{{ 'product.general.add_to_cart_button' | t }}';
+        }
+
+        // Use window flag to distinguish fresh page load vs section re-render
+        // window._sizePickerInitialized is undefined on fresh load, true after re-render
+        if (!window._sizePickerInitialized) {
+          // Fresh page load - ALWAYS reset to placeholder
+          window._sizePickerInitialized = true;
+          if (sizeSelectedKey) sessionStorage.removeItem(sizeSelectedKey);
+          sizeSelect.selectedIndex = 0;
+          if (sizeFieldset) sizeFieldset.dataset.sizeSelected = 'false';
+          var checkedRadio = sizeFieldset.querySelector('[data-size-radios] input:checked');
+          if (checkedRadio) checkedRadio.checked = false;
+          // Update button to show "Add to Cart" (disabled)
+          updateButtonForNoSize();
+        } else {
+          // Section re-render (e.g., after color change) - check if user selected size in this session
+          var userSelectedSize = sizeSelectedKey && sessionStorage.getItem(sizeSelectedKey);
+          if (userSelectedSize) {
+            markSizeSelected();
+          } else {
+            sizeSelect.selectedIndex = 0;
+            if (sizeFieldset) sizeFieldset.dataset.sizeSelected = 'false';
+            var checkedRadio = sizeFieldset.querySelector('[data-size-radios] input:checked');
+            if (checkedRadio) checkedRadio.checked = false;
+            // Update button to show "Add to Cart" (disabled)
+            updateButtonForNoSize();
+          }
+        }
+
+        // Handle size select change - sync with hidden radio for variant picker
+        var sizeRadiosContainer = sizeFieldset.querySelector('[data-size-radios]');
+        sizeSelect.addEventListener('change', function() {
+          if (sizeSelect.value) {
+            markSizeSelected();
+            // Check the corresponding hidden radio and trigger change event
+            var radio = sizeRadiosContainer && sizeRadiosContainer.querySelector('input[value="' + sizeSelect.value + '"]');
+            if (radio && !radio.checked) {
+              radio.checked = true;
+              radio.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+          }
+        });
+
+        // Handle color changes - reset size (but not when size radio changes)
+        variantPicker.addEventListener('change', function(e) {
+          if (e.target.type === 'radio' && !e.target.closest('[data-size-option]') && !e.target.closest('[data-size-radios]')) {
+            resetToPlaceholder();
+          }
+        });
+
+        // After section re-render completes, fix button if no size selected
+        // The theme replaces the buy-buttons DOM after variant:change, so we need to run after that
+        var form = document.getElementById(formId);
+        if (form) {
+          form.addEventListener('variant:change', function() {
+            // Use setTimeout to ensure this runs after the DOM replacement completes
+            setTimeout(function() {
+              var currentSizeFieldset = document.querySelector('[data-size-option]');
+              if (currentSizeFieldset && currentSizeFieldset.dataset.sizeSelected === 'false') {
+                updateButtonForNoSize();
+              }
+            }, 0);
+          });
+        }
+
+        // Validate on submit - use document delegation to survive re-renders
+        document.addEventListener('submit', function(e) {
+          var form = e.target;
+          if (form.getAttribute('id') !== formId) return;
+
+          // Re-query elements in case DOM was re-rendered
+          var currentSizeSelect = document.querySelector('[data-size-select]');
+          var currentSizeFieldset = document.querySelector('[data-size-option]');
+          if (!currentSizeSelect || !currentSizeFieldset) return;
+
+          if (!currentSizeSelect.value || currentSizeFieldset.dataset.sizeSelected === 'false') {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            currentSizeFieldset.classList.remove('variant-picker__option--shake');
+            void currentSizeFieldset.offsetWidth;
+            currentSizeFieldset.classList.add('variant-picker__option--shake');
+            var msg = currentSizeFieldset.querySelector('.variant-picker__validation-message');
+            if (msg) msg.hidden = false;
+            currentSizeSelect.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, true);
+      })();
+    </script>
+  </variant-picker>
+{%- endunless -%}

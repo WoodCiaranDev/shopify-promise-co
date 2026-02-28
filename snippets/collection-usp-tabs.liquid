@@ -1,0 +1,117 @@
+{%- comment -%}
+  Collection USP Tabs
+  Renders USP tabs from theme settings with market-specific content.
+  Markets: UK (default), USA, EU, Default/ROW
+{%- endcomment -%}
+
+{%- assign current_market = localization.market.handle | downcase -%}
+
+{%- comment -%} Determine market type {%- endcomment -%}
+{%- assign market_type = 'default' -%}
+{%- if current_market == 'gb' or current_market == 'uk' or current_market == 'united-kingdom' -%}
+  {%- assign market_type = 'uk' -%}
+{%- elsif current_market == 'usa' or current_market == 'us' or current_market == 'united-states' -%}
+  {%- assign market_type = 'usa' -%}
+{%- elsif current_market == 'eu' or current_market == 'europe' -%}
+  {%- assign market_type = 'eu' -%}
+{%- endif -%}
+
+<div class="collection-usp-tabs">
+  <div class="collection-usp-tabs__container">
+    {%- comment -%} Tab 1 {%- endcomment -%}
+    {%- assign tab_1_title = settings.usp_tab_1_title -%}
+    {%- assign tab_1_icon = settings.usp_tab_1_icon -%}
+    {%- if market_type == 'usa' -%}
+      {%- if settings.usp_tab_1_title_usa != blank -%}{%- assign tab_1_title = settings.usp_tab_1_title_usa -%}{%- endif -%}
+      {%- if settings.usp_tab_1_icon_usa != blank -%}{%- assign tab_1_icon = settings.usp_tab_1_icon_usa -%}{%- endif -%}
+    {%- elsif market_type == 'eu' -%}
+      {%- if settings.usp_tab_1_title_eu != blank -%}{%- assign tab_1_title = settings.usp_tab_1_title_eu -%}{%- endif -%}
+      {%- if settings.usp_tab_1_icon_eu != blank -%}{%- assign tab_1_icon = settings.usp_tab_1_icon_eu -%}{%- endif -%}
+    {%- elsif market_type == 'default' -%}
+      {%- if settings.usp_tab_1_title_default != blank -%}{%- assign tab_1_title = settings.usp_tab_1_title_default -%}{%- endif -%}
+      {%- if settings.usp_tab_1_icon_default != blank -%}{%- assign tab_1_icon = settings.usp_tab_1_icon_default -%}{%- endif -%}
+    {%- endif -%}
+    {%- if tab_1_title != blank -%}
+      <div class="collection-usp-tab">
+        {%- if tab_1_icon != blank -%}
+          <div class="collection-usp-tab__icon">
+            {{ tab_1_icon | image_url: width: 160 | image_tag: loading: 'lazy' }}
+          </div>
+        {%- endif -%}
+        <span class="collection-usp-tab__title">{{ tab_1_title }}</span>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Tab 2 {%- endcomment -%}
+    {%- assign tab_2_title = settings.usp_tab_2_title -%}
+    {%- assign tab_2_icon = settings.usp_tab_2_icon -%}
+    {%- if market_type == 'usa' -%}
+      {%- if settings.usp_tab_2_title_usa != blank -%}{%- assign tab_2_title = settings.usp_tab_2_title_usa -%}{%- endif -%}
+      {%- if settings.usp_tab_2_icon_usa != blank -%}{%- assign tab_2_icon = settings.usp_tab_2_icon_usa -%}{%- endif -%}
+    {%- elsif market_type == 'eu' -%}
+      {%- if settings.usp_tab_2_title_eu != blank -%}{%- assign tab_2_title = settings.usp_tab_2_title_eu -%}{%- endif -%}
+      {%- if settings.usp_tab_2_icon_eu != blank -%}{%- assign tab_2_icon = settings.usp_tab_2_icon_eu -%}{%- endif -%}
+    {%- elsif market_type == 'default' -%}
+      {%- if settings.usp_tab_2_title_default != blank -%}{%- assign tab_2_title = settings.usp_tab_2_title_default -%}{%- endif -%}
+      {%- if settings.usp_tab_2_icon_default != blank -%}{%- assign tab_2_icon = settings.usp_tab_2_icon_default -%}{%- endif -%}
+    {%- endif -%}
+    {%- if tab_2_title != blank -%}
+      <div class="collection-usp-tab">
+        {%- if tab_2_icon != blank -%}
+          <div class="collection-usp-tab__icon">
+            {{ tab_2_icon | image_url: width: 160 | image_tag: loading: 'lazy' }}
+          </div>
+        {%- endif -%}
+        <span class="collection-usp-tab__title">{{ tab_2_title }}</span>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Tab 3 {%- endcomment -%}
+    {%- assign tab_3_title = settings.usp_tab_3_title -%}
+    {%- assign tab_3_icon = settings.usp_tab_3_icon -%}
+    {%- if market_type == 'usa' -%}
+      {%- if settings.usp_tab_3_title_usa != blank -%}{%- assign tab_3_title = settings.usp_tab_3_title_usa -%}{%- endif -%}
+      {%- if settings.usp_tab_3_icon_usa != blank -%}{%- assign tab_3_icon = settings.usp_tab_3_icon_usa -%}{%- endif -%}
+    {%- elsif market_type == 'eu' -%}
+      {%- if settings.usp_tab_3_title_eu != blank -%}{%- assign tab_3_title = settings.usp_tab_3_title_eu -%}{%- endif -%}
+      {%- if settings.usp_tab_3_icon_eu != blank -%}{%- assign tab_3_icon = settings.usp_tab_3_icon_eu -%}{%- endif -%}
+    {%- elsif market_type == 'default' -%}
+      {%- if settings.usp_tab_3_title_default != blank -%}{%- assign tab_3_title = settings.usp_tab_3_title_default -%}{%- endif -%}
+      {%- if settings.usp_tab_3_icon_default != blank -%}{%- assign tab_3_icon = settings.usp_tab_3_icon_default -%}{%- endif -%}
+    {%- endif -%}
+    {%- if tab_3_title != blank -%}
+      <div class="collection-usp-tab">
+        {%- if tab_3_icon != blank -%}
+          <div class="collection-usp-tab__icon">
+            {{ tab_3_icon | image_url: width: 160 | image_tag: loading: 'lazy' }}
+          </div>
+        {%- endif -%}
+        <span class="collection-usp-tab__title">{{ tab_3_title }}</span>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Tab 4 {%- endcomment -%}
+    {%- assign tab_4_title = settings.usp_tab_4_title -%}
+    {%- assign tab_4_icon = settings.usp_tab_4_icon -%}
+    {%- if market_type == 'usa' -%}
+      {%- if settings.usp_tab_4_title_usa != blank -%}{%- assign tab_4_title = settings.usp_tab_4_title_usa -%}{%- endif -%}
+      {%- if settings.usp_tab_4_icon_usa != blank -%}{%- assign tab_4_icon = settings.usp_tab_4_icon_usa -%}{%- endif -%}
+    {%- elsif market_type == 'eu' -%}
+      {%- if settings.usp_tab_4_title_eu != blank -%}{%- assign tab_4_title = settings.usp_tab_4_title_eu -%}{%- endif -%}
+      {%- if settings.usp_tab_4_icon_eu != blank -%}{%- assign tab_4_icon = settings.usp_tab_4_icon_eu -%}{%- endif -%}
+    {%- elsif market_type == 'default' -%}
+      {%- if settings.usp_tab_4_title_default != blank -%}{%- assign tab_4_title = settings.usp_tab_4_title_default -%}{%- endif -%}
+      {%- if settings.usp_tab_4_icon_default != blank -%}{%- assign tab_4_icon = settings.usp_tab_4_icon_default -%}{%- endif -%}
+    {%- endif -%}
+    {%- if tab_4_title != blank -%}
+      <div class="collection-usp-tab">
+        {%- if tab_4_icon != blank -%}
+          <div class="collection-usp-tab__icon">
+            {{ tab_4_icon | image_url: width: 160 | image_tag: loading: 'lazy' }}
+          </div>
+        {%- endif -%}
+        <span class="collection-usp-tab__title">{{ tab_4_title }}</span>
+      </div>
+    {%- endif -%}
+  </div>
+</div>

@@ -1,0 +1,114 @@
+{%- if section.blocks.size > 0 -%}
+  {%- assign color_scheme_hash = section.settings.color_scheme.settings.background_gradient | default: section.settings.color_scheme.settings.background | md5 -%}
+
+  {%- comment -%} Fallback to first two grid images if mobile images not set {%- endcomment -%}
+  {%- assign mobile_image_1 = section.settings.mobile_image_1 | default: section.blocks[0].settings.image -%}
+  {%- assign mobile_image_2 = section.settings.mobile_image_2 | default: section.blocks[1].settings.image -%}
+
+  <div class="section-spacing color-scheme color-scheme--{{ section.settings.color_scheme.id }} color-scheme--bg-{{ color_scheme_hash }} {% if section.settings.separate_section_with_border %}bordered-section{% endif %}">
+    <div class="container">
+      <div class="image-masonry__grid">
+        {%- for block in section.blocks -%}
+          <div class="image-masonry__item" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              {{- block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'image-masonry__img' -}}
+            {%- else -%}
+              <div class="image-masonry__placeholder">
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div class="image-masonry__mobile">
+        <div class="image-masonry__mobile-item">
+          {%- if mobile_image_1 != blank -%}
+            {{- mobile_image_1 | image_url: width: 800 | image_tag: loading: 'lazy', class: 'image-masonry__img' -}}
+          {%- else -%}
+            <div class="image-masonry__placeholder">
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+          {%- endif -%}
+        </div>
+        <div class="image-masonry__mobile-item">
+          {%- if mobile_image_2 != blank -%}
+            {{- mobile_image_2 | image_url: width: 800 | image_tag: loading: 'lazy', class: 'image-masonry__img' -}}
+          {%- else -%}
+            <div class="image-masonry__placeholder">
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Image Masonry Grid",
+  "class": "shopify-section--image-masonry",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:global.colors.scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "separate_section_with_border",
+      "label": "t:global.section.separate_section_with_border",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Mobile images"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image_1",
+      "label": "Mobile image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image_2",
+      "label": "Mobile image 2"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:global.image.image"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Image Masonry Grid",
+      "blocks": [
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" }
+      ]
+    }
+  ]
+}
+{% endschema %}

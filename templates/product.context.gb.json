@@ -1,0 +1,70 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "parent": "product.json",
+  "context": {
+    "market": "gb"
+  },
+  "sections": {
+    "main": {
+      "settings": {},
+      "blocks": {
+        "delivery_countdown_GeGVy3": {
+          "settings": {
+            "cutoff_hour": 13,
+            "suffix_text": "for next day UK delivery"
+          }
+        },
+        "accordion_xfbPBi": {
+          "settings": {
+            "content": "<p><strong>Gold Vermeil </strong>- A thick layer of real 18ct gold bonded to solid sterling silver - up to 25x thicker than standard plating. Designed to last, crafted to shine, made to hold meaning.</p><p><strong>Solid 925 sterling silver</strong> - finished with rhodium - a rare metal from the platinum family. This bright, durable layer protects against tarnish and keeps every piece shining beautifully.</p><p><strong>Protective anti-tarnish coating</strong> that helps preserve shine and colour over time. It adds an invisible shield against daily wear, so your jewelry stays as beautiful as the day you received it. </p><p><strong>Conflict-free simulated diamonds,</strong> hand-set for a flawless finish.</p>"
+          }
+        },
+        "accordion_6y38TJ": {
+          "type": "accordion",
+          "disabled": false,
+          "settings": {
+            "show_below_gallery": true,
+            "icon": "none",
+            "custom_icon": null,
+            "title": "Shipping",
+            "content": "<p>We ship directly from our UK warehouse with care and speed. </p><p><strong>Free 24-hour delivery</strong> on all orders over <strong>£130. </strong></p><p><strong>Orders placed before 1pm</strong> UK time <em>(Monday-Friday) </em>are <strong>dispatched same day. </strong></p><p><strong>24 hour & 48 hour delivery </strong><em>(Monday-Saturday</em>)<strong> </strong>available at checkout. </p><p>Every parcel is fully tracked and beautifully packaged - ready to gift the moment it arrives.</p><p><em>Please note we do not ship on weekends or bank holidays. </em>Fulfilment<br/>and delivery times may vary due to busy periods and or courier delays. <br/><br/><br/><br/></p>",
+            "liquid": "",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "judge_me_reviews_preview_badge_WQEMyy",
+        "payment_terms",
+        "separator",
+        "variant_picker",
+        "delivery_countdown_GeGVy3",
+        "text_TzkTaX",
+        "quantity_selector",
+        "buy_buttons",
+        "text_aUJmQk",
+        "description",
+        "accordion_yUkiTP",
+        "accordion_xfbPBi",
+        "accordion_6y38TJ",
+        "feature_with_icon_FTccY4",
+        "feature_with_icon_XfGd6d",
+        "feature_with_icon_tUrRgp",
+        "feature_with_icon_TyH8jB",
+        "feature_with_icon_tTcWak",
+        "feature_with_icon_badge6",
+        "share_buttons_cbEwqV"
+      ]
+    }
+  }
+}

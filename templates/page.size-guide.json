@@ -1,0 +1,281 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "ring-size-guide-content",
+      "settings": {
+        "preview_image": "shopify://shop_images/ring-size-guide-preview.jpg"
+      }
+    },
+    "faq_mGqRCd": {
+      "type": "faq",
+      "blocks": {
+        "question_pTtC3c": {
+          "type": "question",
+          "settings": {
+            "question": "How do I work out the right ring size?",
+            "answer": "<p>Need sizing help or advice on keeping it a secret? Email us at <strong>info@thepromiseco.com</strong> and we can help you figure out a ring size.</p><p>We recommend ordering a standard ring sizer from Amazon, they usually look like a key chain with lots of metal rings. Once you've got your size you can use our handy guide below to convert it, or email us for help.</p><p>Use our <a href=\"/pages/ring-size-guide\" target=\"_blank\" title=\"Ring Size Guide\">size guide</a> to find your perfect fit</p><p></p><p></p>"
+          }
+        },
+        "question_39kHFp": {
+          "type": "question",
+          "settings": {
+            "question": "I don't know which ring to pick for a gift?",
+            "answer": "<p>If you need personalised support on picking the perfect ring, email our team at <strong>info@thepromiseco.com</strong> and we will do our best to support.</p><p>Alternatively, shop our <a href=\"https://thepromiseringco.com/products/the-promise-ring-co-e-gift-card\" title=\"The Promise Ring Co. E-Gift Card\">E-Gift cards</a>, for the perfect fit, everytime.</p>"
+          }
+        },
+        "question_k8h6gB": {
+          "type": "question",
+          "settings": {
+            "question": "Is my ring under warranty?",
+            "answer": "<p>At The Promise Ring Co. we are committed to providing you with<br/>exceptional service and ensuring that your purchase of your ring is a truly special and sentimental experience. We understand that these pieces aren't just jewellery; they are symbols of love, commitment, and cherished moments.</p><p>That's why we stand by our products and offer a 2-year guarantee to give you peace of mind.</p><p>For full warranty terms <a href=\"https://thepromiseringco.com/pages/2-year-warranty\" target=\"_blank\" title=\"https://thepromiseringco.com/pages/2-year-warranty\">click here</a></p>"
+          }
+        },
+        "question_VnPF3N": {
+          "type": "question",
+          "settings": {
+            "question": "I've damaged my special ring, what can I do?",
+            "answer": "<p>We understand accidents happen and we know how precious all our pieces are to each customer.</p><p>Email us a picture of the damage to <strong>info@thepromiseco.com </strong>and we will do our best to support you with solutions</p>"
+          }
+        },
+        "question_zibkrY": {
+          "type": "question",
+          "settings": {
+            "question": "I need an urgent gift but your delivery doesn't work for me...",
+            "answer": "<p>Looking for the perfect gift for your last minute woes, shop our <a href=\"https://thepromiseringco.com/products/the-promise-ring-co-e-gift-card\" target=\"_blank\" title=\"The Promise Ring Co. E-Gift Card\">E-gift cards </a>for the perfect fit, everytime.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_pTtC3c",
+        "question_39kHFp",
+        "question_k8h6gB",
+        "question_VnPF3N",
+        "question_zibkrY"
+      ],
+      "settings": {
+        "color_scheme": "scheme-b68b61c5-ba0e-4161-a0e3-3d59622e9bf4",
+        "separate_section_with_border": false,
+        "show_categories": false,
+        "subheading": "",
+        "title": "Sizing & Support",
+        "content": ""
+      }
+    },
+    "rich_text_NNtd4q": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_RzfdB8": {
+          "type": "subheading",
+          "settings": {
+            "text": "Discover"
+          }
+        },
+        "heading_najfgV": {
+          "type": "heading",
+          "settings": {
+            "text": "How to make your promise:",
+            "heading_tag": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_RzfdB8",
+        "heading_najfgV"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": false,
+        "content_width": "lg",
+        "text_position": "center",
+        "remove_vertical_spacing": true,
+        "use_baka_too_font": false,
+        "use_ogg_font": true,
+        "use_compact_spacing": true,
+        "section_id": ""
+      }
+    },
+    "promise_steps_TXdV37": {
+      "type": "promise-steps",
+      "blocks": {
+        "step_ttteiV": {
+          "type": "step",
+          "settings": {
+            "fallback_image": "promise-ring.png",
+            "title": "CHOOSE A RING",
+            "content": "<p>Every order comes with a Promise Card, your space to write down your words and make your promise real</p>"
+          }
+        },
+        "step_3TyHYr": {
+          "type": "step",
+          "settings": {
+            "fallback_image": "promise-cards.png",
+            "title": "WRITE IT DOWN",
+            "content": "<p>Choose a one of our Pieces to signify your Promise. This could be a Promise to yourself, a friend Or loved one.</p>"
+          }
+        },
+        "step_iy8xPd": {
+          "type": "step",
+          "settings": {
+            "fallback_image": "promise-sparkles.png",
+            "title": "MAKE IT OFFICIAL",
+            "content": "<p>Post your promise to Promise World... where your words live alongside others, each one part of something bigger</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_ttteiV",
+        "step_3TyHYr",
+        "step_iy8xPd"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": false,
+        "remove_vertical_spacing": true,
+        "use_compact_spacing": false
+      }
+    },
+    "rich_text_kcmiEY": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_CFcyME": {
+          "type": "subheading",
+          "settings": {
+            "text": ""
+          }
+        },
+        "heading_Ci9CcT": {
+          "type": "heading",
+          "settings": {
+            "text": "",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_hqVTxg": {
+          "type": "richtext",
+          "settings": {
+            "content": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_CFcyME",
+        "heading_Ci9CcT",
+        "richtext_hqVTxg"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "rich_text_Mf8nx4": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_7fjzFk": {
+          "type": "heading",
+          "settings": {
+            "text": "Ready to make your Promise?",
+            "heading_tag": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_7fjzFk"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": true,
+        "use_ogg_font": false,
+        "use_compact_spacing": true,
+        "section_id": ""
+      }
+    },
+    "category_cards_HgBga7": {
+      "type": "category-cards",
+      "blocks": {
+        "category_image_RRWENP": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2025-06-23_at_15.11.59.jpg",
+            "title": "Best Sellers",
+            "description": "<p>DISCOVER</p>",
+            "link": "shopify://collections/best-sellers"
+          }
+        },
+        "category_image_7excq6": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/1_28863cdf-f265-46c6-995f-4add6c739708.png",
+            "title": "Single Stone Rings",
+            "description": "<p>PROMISE RINGS</p>",
+            "link": "shopify://collections/single-stone-promise-rings"
+          }
+        },
+        "category_image_YYgTiY": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2025-06-23_at_15.11.50.jpg",
+            "title": "Bands & Stacking",
+            "description": "<p>EXPLORE</p>",
+            "link": "shopify://collections/bands-and-stacking-rings"
+          }
+        },
+        "category_image_8n88CF": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_74.png",
+            "title": "Pinky Rings",
+            "description": "<p>OUR CURRENT FAVE</p>",
+            "link": "shopify://collections/pinky-rings"
+          }
+        }
+      },
+      "block_order": [
+        "category_image_RRWENP",
+        "category_image_7excq6",
+        "category_image_YYgTiY",
+        "category_image_8n88CF"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "background_color": "#ffffff",
+        "title_color": "#000000",
+        "subtitle_color": "#666666",
+        "section_padding_top": 0,
+        "section_padding_bottom": 64,
+        "mobile_single_column": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "faq_mGqRCd",
+    "rich_text_NNtd4q",
+    "promise_steps_TXdV37",
+    "rich_text_kcmiEY",
+    "rich_text_Mf8nx4",
+    "category_cards_HgBga7"
+  ]
+}

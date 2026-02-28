@@ -1,0 +1,201 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "custom.overlay",
+  "name": "Overlay group",
+  "sections": {
+    "cart-drawer": {
+      "type": "cart-drawer",
+      "settings": {
+        "color_scheme": "",
+        "show_cart_note": true,
+        "show_shipping_text": true,
+        "show_view_cart_button": false,
+        "show_checkout_button": true,
+        "show_price_in_checkout_button": true,
+        "cross_sell_products": [],
+        "cross_sell_title": "Complete the Look",
+        "cross_sell_stack_products": false
+      }
+    },
+    "newsletter-popup": {
+      "type": "newsletter-popup",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "apparition_delay": 5,
+        "show_only_on_index": true,
+        "hide_for_account_holders": true,
+        "show_only_once": true,
+        "show_newsletter_form": true,
+        "title": "Signup for our newsletter",
+        "content": "Describe what your customers will receive when subscribing to your newsletter.",
+        "button_text": "Subscribe"
+      }
+    },
+    "privacy-banner": {
+      "type": "privacy-banner",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "title": "🍪 Cookie policy",
+        "content": "<p>We use cookies and similar technologies to provide the best experience on our website. Refer to our Privacy Policy for more information.</p>"
+      }
+    },
+    "packaging-popup": {
+      "type": "packaging-popup",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "image": "shopify://shop_images/promise-popup-image.png",
+        "title": "Luxury Packaging with <em>Every Order</em>",
+        "content": "<p><strong>Every order arrives beautifully presented with our luxury packaging:</strong></p><p>A <strong>signature velvet pouch</strong> designed to protect your jewellery and be kept forever<br/><br/>A <strong>Promise Card </strong>ready for you to write your own special promise, to a loved one, a friend... yourself!</p><p>Thoughtful. Gift-ready. <strong>Worth paying for but included free.</strong></p>"
+      }
+    },
+    "shipping-popup": {
+      "type": "shipping-popup",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "title": "Delivery & Shipping",
+        "content": "<p><strong>Orders are shipped Monday–Friday.</strong></p><p>Any orders placed after 1pm (local warehouse time) on Friday will not be shipped until Monday.</p><h3>UK Shipping (from our UK warehouse)</h3><p><strong>Royal Mail 48 Hours:</strong> Delivery in 2 working days.</p><p><strong>Royal Mail 24 Hours:</strong> Delivery in 1 working day (order before 1pm GMT to receive your parcel the next working day).</p><h3>USA Shipping (from our USA warehouse)</h3><p>Orders ship via DHL Express Domestic. Delivery takes 1<strong>–4 working days</strong>, depending on your shipping zone.</p><p>All tariffs and import fees are already covered by The Promise Ring Co. LTD, so there are <strong>no additional customs</strong> charges for US customers.</p><h3>International Shipping (all other countries from our UK warehouse)</h3><p>Europe: <strong>2–11 business days.</strong></p><p>Rest of the World (Canada, Australia, etc.): <strong>3–17 business days.</strong></p><p>Please note: Delivery times are estimates and may occasionally be extended due to customs delays, courier disruptions, or UK bank holidays.</p>"
+      }
+    },
+    "size-guide-popup": {
+      "type": "size-guide-popup",
+      "blocks": {
+        "row_1": {
+          "type": "size_row",
+          "settings": {
+            "us_size": "4",
+            "diameter": "14.9",
+            "circumference": "46.8",
+            "uk_size": "H ½",
+            "europe_size": "47"
+          }
+        },
+        "row_2": {
+          "type": "size_row",
+          "settings": {
+            "us_size": "5",
+            "diameter": "15.7",
+            "circumference": "49.3",
+            "uk_size": "J ½",
+            "europe_size": "49.3"
+          }
+        },
+        "row_3": {
+          "type": "size_row",
+          "settings": {
+            "us_size": "6",
+            "diameter": "16.5",
+            "circumference": "51.9",
+            "uk_size": "L ½",
+            "europe_size": "51.9"
+          }
+        },
+        "row_4": {
+          "type": "size_row",
+          "settings": {
+            "us_size": "7",
+            "diameter": "17.3",
+            "circumference": "54.5",
+            "uk_size": "N ½",
+            "europe_size": "54.4"
+          }
+        },
+        "row_5": {
+          "type": "size_row",
+          "settings": {
+            "us_size": "8",
+            "diameter": "18.1",
+            "circumference": "57",
+            "uk_size": "P ½",
+            "europe_size": "57"
+          }
+        },
+        "row_6": {
+          "type": "size_row",
+          "settings": {
+            "us_size": "9",
+            "diameter": "18.9",
+            "circumference": "59.5",
+            "uk_size": "R ½",
+            "europe_size": "59.5"
+          }
+        },
+        "row_7": {
+          "type": "size_row",
+          "settings": {
+            "us_size": "10",
+            "diameter": "19.8",
+            "circumference": "62.1",
+            "uk_size": "T ½",
+            "europe_size": "62.1"
+          }
+        },
+        "row_8": {
+          "type": "size_row",
+          "settings": {
+            "us_size": "11",
+            "diameter": "20.6",
+            "circumference": "64.6",
+            "uk_size": "V ½",
+            "europe_size": "64.6"
+          }
+        },
+        "row_9": {
+          "type": "size_row",
+          "settings": {
+            "us_size": "12",
+            "diameter": "21.4",
+            "circumference": "67.2",
+            "uk_size": "X ½",
+            "europe_size": "67.2"
+          }
+        },
+        "row_10": {
+          "type": "size_row",
+          "settings": {
+            "us_size": "13",
+            "diameter": "22.2",
+            "circumference": "70",
+            "uk_size": "Z ½",
+            "europe_size": "70"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6",
+        "row_7",
+        "row_8",
+        "row_9",
+        "row_10"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "title": "Our Size Guide",
+        "intro_text": "<p>Not sure on your sizing? Need to secretly measure for a loved one? Find our handy printable PDF</p>",
+        "pdf_url": ""
+      }
+    }
+  },
+  "order": [
+    "cart-drawer",
+    "newsletter-popup",
+    "privacy-banner",
+    "packaging-popup",
+    "shipping-popup",
+    "size-guide-popup"
+  ]
+}

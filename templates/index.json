@@ -1,0 +1,1214 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "slideshow_ygKAJC": {
+      "type": "slideshow",
+      "blocks": {
+        "image_jcrmjC": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/There_is_no_greater_gift_24.png",
+            "mobile_image": "shopify://shop_images/There_is_no_greater_gift_23.png",
+            "subheading": "",
+            "title": "",
+            "mobile_text_position": "place-self-end-center text-center",
+            "desktop_text_position": "sm:place-self-end sm:text-end",
+            "content_max_width": 780,
+            "button_1_text": "Shop all",
+            "button_1_link": "shopify://collections/shop-all",
+            "button_1_style": "solid",
+            "button_1_background": "#ffffff",
+            "button_1_text_color": "#000000",
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_style": "outline",
+            "button_2_background": "#ffffff",
+            "button_2_text_color": "#000000",
+            "background": "",
+            "background_opacity": 50,
+            "text_color": "#ffffff",
+            "border_color": "",
+            "gradient_overlay": ""
+          }
+        },
+        "image_wpXLKm": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/edit.png",
+            "mobile_image": "shopify://shop_images/Untitled_design_-_2025-11-05T102837.170.png",
+            "subheading": "",
+            "title": "our new signature necklace",
+            "mobile_text_position": "place-self-start-center text-center",
+            "desktop_text_position": "sm:place-self-center sm:text-center",
+            "content_max_width": 560,
+            "button_1_text": "Shop Now",
+            "button_1_link": "shopify://collections/necklaces",
+            "button_1_style": "link",
+            "button_1_background": "#ffffff",
+            "button_1_text_color": "#313030",
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_style": "outline",
+            "button_2_background": "#ffffff",
+            "button_2_text_color": "#000000",
+            "background": "",
+            "background_opacity": 0,
+            "text_color": "#313030",
+            "border_color": "",
+            "gradient_overlay": ""
+          }
+        },
+        "image_G3TLPH": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/There_is_no_greater_gift_18.png",
+            "mobile_image": "shopify://shop_images/There_is_no_greater_gift_17.png",
+            "subheading": "",
+            "title": "",
+            "mobile_text_position": "place-self-end-center text-center",
+            "desktop_text_position": "sm:place-self-center-start sm:text-start",
+            "content_max_width": 780,
+            "button_1_text": "shop bracelets",
+            "button_1_link": "shopify://collections/promise-threads",
+            "button_1_style": "link",
+            "button_1_background": "#1c1c1c",
+            "button_1_text_color": "#ffffff",
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_style": "outline",
+            "button_2_background": "#82add9",
+            "button_2_text_color": "#000000",
+            "background": "",
+            "background_opacity": 50,
+            "text_color": "#313030",
+            "border_color": "",
+            "gradient_overlay": ""
+          }
+        },
+        "image_ba3teU": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/6_a824f489-e6cd-4756-aad8-545832a0c286.png",
+            "mobile_image": "shopify://shop_images/8_65e2b098-bc4e-4959-9e1d-bc017c410374.png",
+            "subheading": "Your promise, your way",
+            "title": "Create your signature stack.",
+            "mobile_text_position": "place-self-start-center text-center",
+            "desktop_text_position": "sm:place-self-start sm:text-start",
+            "content_max_width": 780,
+            "button_1_text": "Shop all",
+            "button_1_link": "shopify://collections/shop-all",
+            "button_1_style": "link",
+            "button_1_background": "#ffffff",
+            "button_1_text_color": "#000000",
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_style": "outline",
+            "button_2_background": "#ffffff",
+            "button_2_text_color": "#000000",
+            "background": "",
+            "background_opacity": 50,
+            "text_color": "#ffffff",
+            "border_color": "",
+            "gradient_overlay": ""
+          }
+        },
+        "image_jjYcbD": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/7_b976f32d-6999-44ab-8c89-414be2bb94bb.png",
+            "mobile_image": "shopify://shop_images/9_7c9d013a-6a31-454b-9320-7545dffd1455.png",
+            "subheading": "5000+ Global Promises",
+            "title": "What's your Promise?",
+            "mobile_text_position": "place-self-start-end text-end",
+            "desktop_text_position": "sm:place-self-center-end sm:text-end",
+            "content_max_width": 780,
+            "button_1_text": "",
+            "button_1_link": "",
+            "button_1_style": "solid",
+            "button_1_background": "#ffffff",
+            "button_1_text_color": "#000000",
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_style": "outline",
+            "button_2_background": "#ffffff",
+            "button_2_text_color": "#000000",
+            "background": "",
+            "background_opacity": 50,
+            "text_color": "#313030",
+            "border_color": "",
+            "gradient_overlay": ""
+          }
+        },
+        "image_6DJTxh": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/8_f17e8bcd-8728-4bf5-9bed-3309cce823be.png",
+            "mobile_image": "shopify://shop_images/10_cecdd8ce-1838-4f00-9959-67237629a297.png",
+            "subheading": "Wear your promise",
+            "title": "<strong>Timeless pieces, meant to last.</strong>",
+            "mobile_text_position": "place-self-end-center text-center",
+            "desktop_text_position": "sm:place-self-center-end sm:text-end",
+            "content_max_width": 780,
+            "button_1_text": "",
+            "button_1_link": "",
+            "button_1_style": "solid",
+            "button_1_background": "#ffffff",
+            "button_1_text_color": "#000000",
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_style": "outline",
+            "button_2_background": "#ffffff",
+            "button_2_text_color": "#000000",
+            "background": "",
+            "background_opacity": 50,
+            "text_color": "#313030",
+            "border_color": "",
+            "gradient_overlay": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_jcrmjC",
+        "image_wpXLKm",
+        "image_G3TLPH",
+        "image_ba3teU",
+        "image_jjYcbD",
+        "image_6DJTxh"
+      ],
+      "name": "t:sections.slideshow.presets.slideshow.name",
+      "settings": {
+        "allow_transparent_header": false,
+        "show_next_section_button": true,
+        "media_size": "auto",
+        "show_initial_transition": false,
+        "autoplay": true,
+        "autoplay_pause_on_video": true,
+        "cycle_speed": 5,
+        "background": "#000000",
+        "controls_color": "#ffffff"
+      }
+    },
+    "category_cards": {
+      "type": "category-cards",
+      "blocks": {
+        "category_2": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design-21.png",
+            "title": "Single Stone Rings",
+            "description": "<p>Promise</p>",
+            "link": "shopify://collections/single-stone-promise-rings"
+          }
+        },
+        "category_3": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design-22.png",
+            "title": "Gifts for Her",
+            "description": "<p>Perfect</p>",
+            "link": "shopify://collections/for-her"
+          }
+        },
+        "category_1": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/2_96ff70e1-78e3-4694-a187-d7c83355ae21.png",
+            "title": "Best Sellers",
+            "description": "<p>discover</p>",
+            "link": "shopify://collections/best-sellers"
+          }
+        },
+        "category_4": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/5_195b5c25-a815-4223-9533-2905f0ce56cc.png",
+            "title": "necklaces",
+            "description": "<p>our current fave</p>",
+            "link": "shopify://collections/necklaces"
+          }
+        }
+      },
+      "block_order": [
+        "category_2",
+        "category_3",
+        "category_1",
+        "category_4"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "background_color": "#ffffff",
+        "title_color": "#000000",
+        "subtitle_color": "#666666",
+        "section_padding_top": 64,
+        "section_padding_bottom": 64,
+        "mobile_single_column": false
+      }
+    },
+    "rich_text_8gkr8U": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_9mKwtK": {
+          "type": "subheading",
+          "settings": {
+            "text": "jewellery that means more."
+          }
+        },
+        "heading_kXeF8e": {
+          "type": "heading",
+          "settings": {
+            "text": "wearble stories",
+            "heading_tag": "h1"
+          }
+        },
+        "button_qTXfkP": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "style": "outline",
+            "text": "SHOP the full collection",
+            "url": "",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_9mKwtK",
+        "heading_kXeF8e",
+        "button_qTXfkP"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": false,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "text_with_icons_xzbRGG": {
+      "type": "text-with-icons",
+      "blocks": {
+        "item_6XKiN4": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-award-gift",
+            "custom_icon": "shopify://shop_images/Artboard_30_4x_ee4d440e-984d-4655-8137-3d461ad110c5.png",
+            "icon_width": 60,
+            "mobile_icon_width": 60,
+            "title": "Hand Set Diamond Simulants",
+            "content": "<p>Every stone is set by hand, for that extra special finishing touch, held by precious prongs and no cheap and harmful glues</p>"
+          }
+        },
+        "item_6njMBJ": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-award-gift",
+            "custom_icon": "shopify://shop_images/Artboard_30_copy_4x_323837bd-a69a-44f4-9b87-b7db4ee5dc16.png",
+            "icon_width": 64,
+            "mobile_icon_width": 64,
+            "title": "Two-Year Warranty",
+            "content": "<p>We know how special your Promises are, that's why they're built to last</p>"
+          }
+        },
+        "item_yDyQgJ": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-award-gift",
+            "custom_icon": "shopify://shop_images/Artboard_30_copy_2_4x_80cd0fa4-7652-4c4f-b2ed-b45208f623b6.png",
+            "icon_width": 64,
+            "mobile_icon_width": 64,
+            "title": "Personalised Promise Card",
+            "content": "<p>Complimentary keepsake card with every purchase, so you can make record of your Promise</p><p></p>"
+          }
+        },
+        "item_htq3Le": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-award-gift",
+            "custom_icon": "shopify://shop_images/Artboard_33_4x_a331b0fc-7364-4b91-8dfe-db9ecd4ec7cd.png",
+            "icon_width": 48,
+            "mobile_icon_width": 60,
+            "title": "anti tarnish coating",
+            "content": "<p>Our thick gold and rhodium plating is set with a protective E-Coating to prevent tarnish and scratching</p>"
+          }
+        },
+        "item_PLAPb8": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-award-gift",
+            "custom_icon": "shopify://shop_images/Artboard_30_copy_4_4x_70cea366-b527-43ba-b06e-4fcb18fc560a.png",
+            "icon_width": 56,
+            "mobile_icon_width": 56,
+            "title": "Naj members",
+            "content": "<p>We're proud members of the National Association of Jewellers - upholding the highest industry standards</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_6XKiN4",
+        "item_6njMBJ",
+        "item_yDyQgJ",
+        "item_htq3Le",
+        "item_PLAPb8"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": false,
+        "stack_on_mobile": false,
+        "icon_color": "",
+        "text_color": "",
+        "text_alignment": "center"
+      }
+    },
+    "media_grid_EYMCXK": {
+      "type": "media-grid",
+      "name": "t:sections.media_grid.presets.media_grid.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "desktop_row_height": 290,
+        "mobile_row_height": 180,
+        "section_width": "lg",
+        "spacing": "md",
+        "subheading": "",
+        "title": "",
+        "content": ""
+      }
+    },
+    "featured_collections_TtnBrq": {
+      "type": "featured-collections",
+      "blocks": {
+        "collection_jpPkTK": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "collection": "best-sellers",
+            "products_count": 7,
+            "title": "",
+            "link_url": "shopify://collections/shop-all",
+            "link_text": "browse bestsellers"
+          }
+        },
+        "collection_NwQE9K": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "collection": "pinky-rings",
+            "products_count": 8,
+            "title": "pinky rings",
+            "link_url": "shopify://collections/pinky-rings",
+            "link_text": "View all"
+          }
+        }
+      },
+      "block_order": [
+        "collection_jpPkTK",
+        "collection_NwQE9K"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": true,
+        "hide_product_information": true,
+        "stack_products": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "horizontal_spacing_factor": 0.2,
+        "vertical_spacing_factor": 0.2,
+        "subheading": "discover"
+      }
+    },
+    "featured_collections_eJrx7X": {
+      "type": "featured-collections",
+      "blocks": {
+        "collection_g9mfVn": {
+          "type": "collection",
+          "settings": {
+            "collection": "best-sellers",
+            "products_count": 8,
+            "title": "",
+            "link_url": "",
+            "link_text": "View all"
+          }
+        }
+      },
+      "block_order": [
+        "collection_g9mfVn"
+      ],
+      "name": "t:sections.featured_collections.presets.featured_collections.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "hide_product_information": false,
+        "stack_products": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "subheading": "Discover"
+      }
+    },
+    "rich_text_HzUizL": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_fkYkPM": {
+          "type": "subheading",
+          "settings": {
+            "text": "Discover"
+          }
+        },
+        "heading_BByaK3": {
+          "type": "heading",
+          "settings": {
+            "text": "A world full of promises",
+            "heading_tag": "h1"
+          }
+        },
+        "image_MrHrqA": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Artboard_3_10x_5437c043-bd9d-4e37-bee7-870bdc08d6c7.png",
+            "width_mode": "custom",
+            "max_width": 600,
+            "mobile_max_width": 400
+          }
+        },
+        "richtext_HjPa68": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Join our community like-minded promise makers</p>"
+          }
+        },
+        "button_hExhjq": {
+          "type": "button",
+          "settings": {
+            "style": "solid",
+            "text": "Explore",
+            "url": "shopify://pages/the-promise-world",
+            "background": "#ffffff",
+            "text_color": "#1c1c1c"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_fkYkPM",
+        "heading_BByaK3",
+        "image_MrHrqA",
+        "richtext_HjPa68",
+        "button_hExhjq"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-b68b61c5-ba0e-4161-a0e3-3d59622e9bf4",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "scrolling_content_E6KJpw": {
+      "type": "scrolling-content",
+      "blocks": {
+        "text_7HGNVz": {
+          "type": "text",
+          "settings": {
+            "text": "Make your promise offical today"
+          }
+        },
+        "text_hpRU3M": {
+          "type": "text",
+          "settings": {
+            "text": "5000 + Promises made"
+          }
+        }
+      },
+      "block_order": [
+        "text_7HGNVz",
+        "text_hpRU3M"
+      ],
+      "name": "t:sections.scrolling_content.presets.scrolling_content.name",
+      "settings": {
+        "separate_section_with_border": true,
+        "scrolling_speed": 0.1,
+        "scroll_direction": "left",
+        "pause_on_hover": false,
+        "text_font": "heading",
+        "text_font_size_mobile": 14,
+        "text_font_size_desktop": 10,
+        "section_vertical_spacing_mobile": 10,
+        "section_vertical_spacing_desktop": 10,
+        "item_horizontal_spacing_mobile": 35,
+        "item_horizontal_spacing_desktop": 40,
+        "background": "#f2eee7",
+        "text_color": "#1c1c1c"
+      }
+    },
+    "rich_text_iM4XkL": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_LM9NRt": {
+          "type": "subheading",
+          "settings": {
+            "text": "Our community love us"
+          }
+        },
+        "heading_feccrk": {
+          "type": "heading",
+          "settings": {
+            "text": "Don't just take our word for it",
+            "heading_tag": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_LM9NRt",
+        "heading_feccrk"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "17180380464c1a5728": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_featured_carousel_RBriFt": {
+          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "maxwidth": 2000
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_featured_carousel_RBriFt"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "remove_vertical_spacing": true,
+        "remove_horizontal_spacing": false
+      }
+    },
+    "multi-column": {
+      "type": "multi-column",
+      "blocks": {
+        "column-3": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/IMG_7520.png",
+            "title": "",
+            "heading_tag": "h3",
+            "content": "",
+            "link_url": "",
+            "link_text": ""
+          }
+        },
+        "column-1": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/em-13.png",
+            "title": "",
+            "heading_tag": "h3",
+            "content": "",
+            "link_url": "",
+            "link_text": ""
+          }
+        },
+        "column-2": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/ringss-17.png",
+            "title": "",
+            "heading_tag": "h3",
+            "content": "",
+            "link_url": "",
+            "link_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "column-3",
+        "column-1",
+        "column-2"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": true,
+        "columns_per_row": 3,
+        "stack_on_mobile": false,
+        "overlap_image": false,
+        "content_alignment": "center",
+        "text_alignment": "center",
+        "spacing": "lg",
+        "subheading": "",
+        "title": "our favourites",
+        "content": ""
+      }
+    },
+    "shop_the_look_n8bwwG": {
+      "type": "shop-the-look",
+      "blocks": {
+        "look_8iVTDG": {
+          "type": "look",
+          "settings": {
+            "image": "shopify://shop_images/2_c54fc5ab-38f2-451d-b91b-003d6922e521.png",
+            "hot_spots_background": "#ffffff",
+            "product_1": "heart-toi-et-moi-promise-ring",
+            "product_1_horizontal_position": 50,
+            "product_1_vertical_position": 55,
+            "product_2": "mixed-stone-pink-eternity-band",
+            "product_2_horizontal_position": 25,
+            "product_2_vertical_position": 60,
+            "product_3": "promise-sparkle-oval-ring",
+            "product_3_horizontal_position": 24,
+            "product_3_vertical_position": 70,
+            "product_4": "",
+            "product_4_horizontal_position": 42,
+            "product_4_vertical_position": 73
+          }
+        },
+        "look_pEqhE9": {
+          "type": "look",
+          "settings": {
+            "image": "shopify://shop_images/1_9944c7d3-4d44-4e0f-9b60-dac801725443.png",
+            "hot_spots_background": "#f2eee7",
+            "product_1": "promise-sparkle-oval-ring",
+            "product_1_horizontal_position": 45,
+            "product_1_vertical_position": 32,
+            "product_2": "russian-band",
+            "product_2_horizontal_position": 66,
+            "product_2_vertical_position": 47,
+            "product_3": "dainty-promise-band",
+            "product_3_horizontal_position": 68,
+            "product_3_vertical_position": 31,
+            "product_4": "",
+            "product_4_horizontal_position": 85,
+            "product_4_vertical_position": 85
+          }
+        }
+      },
+      "block_order": [
+        "look_8iVTDG",
+        "look_pEqhE9"
+      ],
+      "name": "t:sections.shop_the_look.presets.shop_the_look.name",
+      "settings": {
+        "color_scheme": "scheme-9748e626-bd08-461a-ae84-54d07f2a89b9",
+        "separate_section_with_border": false,
+        "subheading": "",
+        "title": "",
+        "content": "",
+        "popover_title": "Shop the look"
+      }
+    },
+    "rich_text_bPV3kh": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_EM4eUg": {
+          "type": "subheading",
+          "settings": {
+            "text": "Discover"
+          }
+        },
+        "heading_dWYLiK": {
+          "type": "heading",
+          "settings": {
+            "text": "How to make your promise:",
+            "heading_tag": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_EM4eUg",
+        "heading_dWYLiK"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": false,
+        "content_width": "lg",
+        "text_position": "center",
+        "remove_vertical_spacing": true,
+        "use_baka_too_font": false,
+        "use_ogg_font": true,
+        "use_compact_spacing": true,
+        "section_id": ""
+      }
+    },
+    "promise_steps_JzLaMb": {
+      "type": "promise-steps",
+      "blocks": {
+        "step_YfpbyK": {
+          "type": "step",
+          "settings": {
+            "fallback_image": "promise-ring.png",
+            "title": "CHOOSE A RING",
+            "content": "<p>Start with a piece that feels right for your promise - whether it’s to yourself, a friend, or someone you love</p>"
+          }
+        },
+        "step_qYbbTn": {
+          "type": "step",
+          "settings": {
+            "fallback_image": "promise-cards.png",
+            "title": "WRITE IT DOWN",
+            "content": "<p>Every order comes with a Promise Card, your space to write down your words and make your promise real</p>"
+          }
+        },
+        "step_CNJ87c": {
+          "type": "step",
+          "settings": {
+            "fallback_image": "promise-sparkles.png",
+            "title": "MAKE IT OFFICIAL",
+            "content": "<p>Post your promise to Promise World... where your words live alongside others, each one part of something bigger</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_YfpbyK",
+        "step_qYbbTn",
+        "step_CNJ87c"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": false,
+        "remove_vertical_spacing": true,
+        "use_compact_spacing": false
+      }
+    },
+    "images_with_text_scroll_qbEEcy": {
+      "type": "images-with-text-scroll",
+      "blocks": {
+        "image_with_text_qwWzaf": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/Artboard_4_copy_2x_5dad10e5-dfbe-4f89-adb1-01dffe5f9c25.png",
+            "subheading": "",
+            "title": "promise keepsake card",
+            "content": "<p>Every ring purchase comes with a complimentary keepsake card - <strong>a little piece of your journey.</strong></p><p>This card is more than just a token;<strong> </strong>it's a canvas for your most cherished promises.</p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "solid"
+          }
+        },
+        "image_with_text_iwffNy": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/Artboard_30_copy_4x_323837bd-a69a-44f4-9b87-b7db4ee5dc16.png",
+            "subheading": "",
+            "title": "",
+            "content": "<p>Whether it's a love note to your partner, a reminder of self-motivation, a bond of friendship, or a manifestation of your dreams, this keepsake is a tangible way to record and treasure your intentions.</p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "solid"
+          }
+        },
+        "image_with_text_AgqWMc": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/Artboard_4_2x_0b5d1fcb-c012-4a17-8254-81edec1589f6.png",
+            "subheading": "",
+            "title": "",
+            "content": "<p>As you wear your ring, let this card be a constant reminder that symbolises the commitments and goals that matter most to you.</p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "solid"
+          }
+        }
+      },
+      "block_order": [
+        "image_with_text_qwWzaf",
+        "image_with_text_iwffNy",
+        "image_with_text_AgqWMc"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-1",
+        "image_position": "start",
+        "text_alignment": "center",
+        "heading_tag": "h3",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "multiple_media_with_text_7fmm4z": {
+      "type": "multiple-media-with-text",
+      "blocks": {
+        "video_cVYzXw": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/copy_669ACD4A-0216-471B-94E3-FD06C5535B6A_VSCO.mov",
+            "rotation": 0
+          }
+        },
+        "image_CTHAhi": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Artboard_35_4x_dff76677-1a79-4fa7-b1d6-471cdc1fc207.png",
+            "rotation": 0
+          }
+        }
+      },
+      "block_order": [
+        "video_cVYzXw",
+        "image_CTHAhi"
+      ],
+      "settings": {
+        "color_scheme": "scheme-4b89ab38-ef9e-4a8e-9dd4-1364903253e0",
+        "reveal_on_scroll": true,
+        "separate_section_with_border": false,
+        "media_position_desktop": "after_text",
+        "media_position_mobile": "before_text",
+        "media_layout": "overlap",
+        "media_alignment": "center",
+        "media_alignment_offset": 140,
+        "media_mobile_alignment_offset": 0,
+        "text_alignment": "center",
+        "subheading": "quality promise",
+        "title": "what makes us different",
+        "content": "<p>We understand that these pieces aren’t just jewellery, they’re symbols of love, commitment, and the moments that matter most.</p><p>As proud members of the <strong>National Association of Jewellers</strong>, we hold ourselves to the highest standards of quality and care.</p>",
+        "button_1_text": "OUR QUALITY",
+        "button_1_link": "shopify://pages/our-quality",
+        "button_1_style": "outline",
+        "button_2_text": "",
+        "button_2_link": "",
+        "button_2_style": "solid"
+      }
+    },
+    "rich_text_4xbq7F": {
+      "type": "rich-text",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "1718039119bdec93a3": {
+      "type": "apps",
+      "blocks": {
+        "klaviyo_email_marketing_sms_form_embed_block_nLHQkk": {
+          "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
+          "disabled": true,
+          "settings": {
+            "formId": ""
+          }
+        }
+      },
+      "block_order": [
+        "klaviyo_email_marketing_sms_form_embed_block_nLHQkk"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": false,
+        "remove_vertical_spacing": true,
+        "remove_horizontal_spacing": false
+      }
+    },
+    "rich_text_QKJQkX": {
+      "type": "rich-text",
+      "blocks": {
+        "button_LE4m3X": {
+          "type": "button",
+          "settings": {
+            "style": "outline",
+            "text": "the promise wall",
+            "url": "shopify://pages/the-promise-world",
+            "background": "rgba(0,0,0,0)",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "button_LE4m3X"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-4b89ab38-ef9e-4a8e-9dd4-1364903253e0",
+        "separate_section_with_border": false,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": true,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "scrolling_content_mXfTt6": {
+      "type": "scrolling-content",
+      "blocks": {
+        "text_bNYtp4": {
+          "type": "text",
+          "settings": {
+            "text": "Make your promise offical today"
+          }
+        },
+        "text_fnBnPg": {
+          "type": "text",
+          "settings": {
+            "text": "5000 + Promises made"
+          }
+        }
+      },
+      "block_order": [
+        "text_bNYtp4",
+        "text_fnBnPg"
+      ],
+      "name": "t:sections.scrolling_content.presets.scrolling_content.name",
+      "settings": {
+        "separate_section_with_border": false,
+        "scrolling_speed": 0.1,
+        "scroll_direction": "left",
+        "pause_on_hover": false,
+        "text_font": "heading",
+        "text_font_size_mobile": 14,
+        "text_font_size_desktop": 10,
+        "section_vertical_spacing_mobile": 10,
+        "section_vertical_spacing_desktop": 10,
+        "item_horizontal_spacing_mobile": 35,
+        "item_horizontal_spacing_desktop": 40,
+        "background": "#62afe1",
+        "text_color": "#ffffff"
+      }
+    },
+    "image_with_text_LQnacU": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_EQwKiw": {
+          "type": "heading",
+          "settings": {
+            "text": "Wearable stories",
+            "heading_tag": "h1"
+          }
+        },
+        "subheading_Gcmy3H": {
+          "type": "subheading",
+          "disabled": true,
+          "settings": {
+            "text": "meet the founder"
+          }
+        },
+        "richtext_wrDKNt": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p><em>We’re not just building a brand. We’re building a movement – rooted in real stories, personal meaning, and the idea that something small can hold something enormous.</em></p>"
+          }
+        },
+        "button_C448ND": {
+          "type": "button",
+          "settings": {
+            "style": "outline",
+            "text": "Our Story",
+            "url": "shopify://pages/about-us",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_EQwKiw",
+        "subheading_Gcmy3H",
+        "richtext_wrDKNt",
+        "button_C448ND"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "image": "shopify://shop_images/ABOUT_US_1000_x_1000_px.png",
+        "mobile_image": "shopify://shop_images/ABOUT_US_1000_x_1000_px.png",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": false
+      }
+    },
+    "collection_list_rKxxaX": {
+      "type": "collection-list",
+      "blocks": {
+        "collection_Mrc9Tn": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "",
+            "collection": "",
+            "image": "shopify://shop_images/6_c0870f71-f1bf-407c-8156-60aee258c2da.png",
+            "expand_collection": false,
+            "content_position": "place-self-end-start text-start",
+            "subheading": "",
+            "title": "",
+            "button_text": "",
+            "button_link": "https://www.instagram.com/thepromiseco/",
+            "button_style": "link",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "collection_YUjKwe": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "",
+            "collection": "",
+            "image": "shopify://shop_images/5_7191f2f9-91f9-4c61-b38c-a84baf96a764.png",
+            "expand_collection": false,
+            "content_position": "place-self-end-start text-start",
+            "subheading": "",
+            "title": "",
+            "button_text": "",
+            "button_link": "https://www.instagram.com/thepromiseco/",
+            "button_style": "solid",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "collection_y9txf6": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "",
+            "collection": "",
+            "image": "shopify://shop_images/2_c6282013-402f-44b7-9148-8125f1351188.png",
+            "expand_collection": false,
+            "content_position": "place-self-end-start text-start",
+            "subheading": "",
+            "title": "",
+            "button_text": "",
+            "button_link": "https://www.instagram.com/thepromiseco/",
+            "button_style": "solid",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "collection_fFD47g": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "",
+            "collection": "",
+            "image": "shopify://shop_images/4_a5b420c4-fc27-4705-b470-24e480492926.png",
+            "expand_collection": false,
+            "content_position": "place-self-end-start text-start",
+            "subheading": "",
+            "title": "",
+            "button_text": "",
+            "button_link": "https://www.instagram.com/thepromiseco/",
+            "button_style": "solid",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "collection_69kGwk": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "",
+            "collection": "",
+            "image": "shopify://shop_images/3_fc335fff-4b92-40f1-b071-94fab20a65fc.png",
+            "expand_collection": false,
+            "content_position": "place-self-end-start text-start",
+            "subheading": "",
+            "title": "",
+            "button_text": "",
+            "button_link": "https://www.instagram.com/thepromiseco/",
+            "button_style": "solid",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "collection_RxYN8b": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "",
+            "collection": "",
+            "image": "shopify://shop_images/7_e75853bb-cf56-413a-a1d5-da09ceab8730.png",
+            "expand_collection": false,
+            "content_position": "place-self-end-start text-start",
+            "subheading": "",
+            "title": "",
+            "button_text": "",
+            "button_link": "https://www.instagram.com/thepromiseco/",
+            "button_style": "solid",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "collection_Mrc9Tn",
+        "collection_YUjKwe",
+        "collection_y9txf6",
+        "collection_fFD47g",
+        "collection_69kGwk",
+        "collection_RxYN8b"
+      ],
+      "name": "t:sections.collection_list.presets.collection_list.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "image_size": "xs",
+        "show_text_outside": false,
+        "space_items": false,
+        "stack_collections": true,
+        "collections_per_row_mobile": "2",
+        "collections_per_row_desktop": 3,
+        "subheading": "",
+        "title": "",
+        "content": ""
+      }
+    }
+  },
+  "order": [
+    "slideshow_ygKAJC",
+    "category_cards",
+    "rich_text_8gkr8U",
+    "text_with_icons_xzbRGG",
+    "media_grid_EYMCXK",
+    "featured_collections_TtnBrq",
+    "featured_collections_eJrx7X",
+    "rich_text_HzUizL",
+    "scrolling_content_E6KJpw",
+    "rich_text_iM4XkL",
+    "17180380464c1a5728",
+    "multi-column",
+    "shop_the_look_n8bwwG",
+    "rich_text_bPV3kh",
+    "promise_steps_JzLaMb",
+    "images_with_text_scroll_qbEEcy",
+    "multiple_media_with_text_7fmm4z",
+    "rich_text_4xbq7F",
+    "1718039119bdec93a3",
+    "rich_text_QKJQkX",
+    "scrolling_content_mXfTt6",
+    "image_with_text_LQnacU",
+    "collection_list_rKxxaX"
+  ]
+}

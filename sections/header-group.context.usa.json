@@ -1,0 +1,39 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "parent": "header-group.json",
+  "context": {
+    "market": "usa"
+  },
+  "sections": {
+    "announcement_marquee_bQ8aXY": {
+      "settings": {},
+      "blocks": {
+        "message_FYyP3": {
+          "type": "message",
+          "disabled": false,
+          "settings": {
+            "text": "tariff free domestic shipping"
+          }
+        },
+        "message_9JGdFV": {
+          "settings": {
+            "text": "Free Shipping over $220"
+          }
+        }
+      },
+      "block_order": [
+        "message_FYyP3",
+        "message_PwLUb7",
+        "message_9JGdFV"
+      ]
+    }
+  }
+}

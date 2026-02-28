@@ -1,0 +1,61 @@
+{%- assign color_scheme_hash = section.settings.color_scheme.settings.background_gradient | default: section.settings.color_scheme.settings.background | md5 -%}
+
+<div class="section-spacing color-scheme color-scheme--{{ section.settings.color_scheme.id }} color-scheme--bg-{{ color_scheme_hash }} {% if section.settings.separate_section_with_border %}bordered-section{% endif %}">
+  <div class="container">
+    <div class="signature-image" style="--signature-max-width: {{ section.settings.max_width }}px;">
+      {%- if section.settings.image != blank -%}
+        {{- section.settings.image | image_url: width: section.settings.max_width | times: 2 | image_tag: loading: 'lazy', class: 'signature-image__img' -}}
+      {%- else -%}
+        <div class="signature-image__placeholder">
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Signature Image",
+  "class": "shopify-section--signature-image",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:global.colors.scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:global.image.image",
+      "info": "Upload SVG or image for signature"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 100,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 200
+    },
+    {
+      "type": "checkbox",
+      "id": "separate_section_with_border",
+      "label": "t:global.section.separate_section_with_border",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Signature Image"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,462 @@
+{%- comment -%}
+  ------------------------------------------------------------------------------------------------------------------------
+  Promise Slider Section - Grid-based overlapping layout with carousel functionality
+  ------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- if section.blocks.size > 0 -%}
+  {%- assign carousel_id = 'promise-carousel-' | append: section.id -%}
+
+  <style>
+    #shopify-section-{{ section.id }} {
+      --promise-slider-height: {{ section.settings.height }}vh;
+      --promise-slider-gap: 2rem;
+      --grid-columns: 8;
+      --grid-rows: 6;
+    }
+
+    .promise-slider {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .promise-slider__container {
+      position: relative;
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      height: var(--promise-slider-height, 80vh);
+    }
+
+    .promise-slider__slide {
+      min-width: 100%;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .promise-slider__slide-inner {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(var(--grid-columns), 1fr);
+      grid-template-rows: repeat(var(--grid-rows), 1fr);
+      position: relative;
+    }
+
+    /* Alternating slide backgrounds */
+    .promise-slider__slide:nth-child(odd) {
+      background-color: #F2EEE8;
+    }
+
+    .promise-slider__slide:nth-child(even) {
+      background-color: #ffffff;
+    }
+
+    /* Left Image - starts row 2, columns 1-3 */
+    .promise-slider__image-left {
+      grid-column: 1 / 4;
+      grid-row: 2 / 7;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .promise-slider__image-left img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Text Content - starts row 2, columns 3-4 (overlaps left image) */
+    .promise-slider__text {
+      grid-column: 3 / 5;
+      grid-row: 2 / 7;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .promise-slider__text-content {
+      font-family: "ogg", serif;
+      font-size: 3.75rem;
+      font-weight: 300;
+      line-height: 1.2;
+      color: #000000;
+    }
+
+    /* Right Image - starts row 1, columns 5-8 */
+    .promise-slider__image-right {
+      grid-column: 5 / 9;
+      grid-row: 1 / 7;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    /* Navigation Dots */
+    .promise-slider__nav {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.75rem;
+      z-index: 10;
+    }
+
+    .promise-slider__nav-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1px solid #000000;
+      background-color: transparent;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      padding: 0;
+    }
+
+    .promise-slider__nav-dot.is-active {
+      background-color: #000000;
+    }
+
+    .promise-slider__nav-dot:hover {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+
+    /* Mobile Styles */
+    @media screen and (max-width: 767px) {
+      #shopify-section-{{ section.id }} {
+        --promise-slider-height: 100vh;
+      }
+
+      .promise-slider__slide-inner {
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 1rem;
+        max-width: none;
+      }
+
+      .promise-slider__image-left,
+      .promise-slider__image-right {
+        grid-column: unset;
+        grid-row: unset;
+        width: 100%;
+        height: 40vh;
+      }
+
+      .promise-slider__text {
+        grid-column: unset;
+        grid-row: unset;
+        padding: 1.5rem;
+        background-color: transparent;
+      }
+
+      .promise-slider__text-content {
+        font-size: 2rem;
+        font-weight: 300;
+      }
+    }
+
+    /* Tablet adjustments */
+    @media screen and (min-width: 768px) and (max-width: 991px) {
+      .promise-slider__text-content {
+        font-size: 2.5rem;
+        font-weight: 300;
+      }
+
+      .promise-slider__text {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+
+  <div
+    class="promise-slider"
+    id="{{ carousel_id }}"
+    data-autoplay="{{ section.settings.autoplay }}"
+    data-autoplay-speed="{{ section.settings.autoplay_speed }}"
+  >
+    <div class="promise-slider__container" data-slider-container>
+      {%- for block in section.blocks -%}
+        <div
+          class="promise-slider__slide"
+          data-slide-index="{{ forloop.index0 }}"
+          style="{% if block.settings.background_color != blank %}background-color: {{ block.settings.background_color }};{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          <div class="promise-slider__slide-inner">
+            {%- if block.settings.image_left != blank -%}
+              <div class="promise-slider__image-left">
+                {{-
+                  block.settings.image_left
+                  | image_url: width: 800
+                  | image_tag: loading: 'lazy', widths: '400,600,800,1000,1200'
+                -}}
+              </div>
+            {%- endif -%}
+
+            {%- if block.settings.content != blank -%}
+              <div class="promise-slider__text">
+                <div class="promise-slider__text-content">{{ block.settings.content }}</div>
+              </div>
+            {%- endif -%}
+
+            {%- if block.settings.image_right != blank -%}
+              <div class="promise-slider__image-right">
+                {{-
+                  block.settings.image_right
+                  | image_url: width: 1000
+                  | image_tag: loading: 'lazy', widths: '600,800,1000,1200,1400'
+                -}}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.blocks.size > 1 -%}
+      {%- if section.settings.show_dots -%}
+        <div class="promise-slider__nav" data-slider-nav>
+          {%- for block in section.blocks -%}
+            <button
+              class="promise-slider__nav-dot {% if forloop.first %}is-active{% endif %}"
+              data-nav-dot="{{ forloop.index0 }}"
+              aria-label="Go to slide {{ forloop.index }}"
+            ></button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const slider = document.getElementById('{{ carousel_id }}');
+      if (!slider) return;
+
+      const container = slider.querySelector('[data-slider-container]');
+      const slides = container.querySelectorAll('[data-slide-index]');
+      const dots = slider.querySelectorAll('[data-nav-dot]');
+
+      let currentSlide = 0;
+      const totalSlides = slides.length;
+      let autoplayInterval;
+      const autoplay = slider.dataset.autoplay === 'true';
+      const autoplaySpeed = parseInt(slider.dataset.autoplaySpeed) * 1000 || 5000;
+
+      function updateSlider() {
+        container.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+        // Update dots
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('is-active', index === currentSlide);
+        });
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlider();
+      }
+
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateSlider();
+      }
+
+      function goToSlide(index) {
+        currentSlide = index;
+        updateSlider();
+        resetAutoplay();
+      }
+
+      function startAutoplay() {
+        if (autoplay && totalSlides > 1) {
+          autoplayInterval = setInterval(nextSlide, autoplaySpeed);
+        }
+      }
+
+      function stopAutoplay() {
+        if (autoplayInterval) {
+          clearInterval(autoplayInterval);
+        }
+      }
+
+      function resetAutoplay() {
+        stopAutoplay();
+        startAutoplay();
+      }
+
+      // Event listeners
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => goToSlide(index));
+      });
+
+      // Touch/swipe support for mobile
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      container.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      });
+
+      container.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      });
+
+      function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+          if (diff > 0) {
+            nextSlide();
+          } else {
+            prevSlide();
+          }
+          resetAutoplay();
+        }
+      }
+
+      // Pause autoplay on hover
+      slider.addEventListener('mouseenter', stopAutoplay);
+      slider.addEventListener('mouseleave', startAutoplay);
+
+      // Start autoplay if enabled
+      startAutoplay();
+    });
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Promise Slider",
+  "class": "shopify-section--promise-slider",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Section height",
+      "min": 60,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 80
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable autoplay",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "sec",
+      "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots",
+      "label": "Show navigation dots",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Default background color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Images"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_left",
+          "label": "Left image",
+          "info": "Recommended: 800x1000px"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_right",
+          "label": "Right image",
+          "info": "Recommended: 1000x1200px"
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Promise Text",
+          "default": "<p>I promise to support you with everything, always.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Styling"
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Slide background color",
+          "info": "Leave empty to use alternating default colors"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promise Slider",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "content": "<p>I promise to support you with everything, always.</p>"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "content": "<p>We promise to cherish every moment together.</p>"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "content": "<p>I promise to be there through thick and thin.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

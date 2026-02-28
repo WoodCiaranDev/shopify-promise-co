@@ -1,0 +1,33 @@
+{%- comment -%}
+  Diamond Shape Icon Snippet
+  Returns the appropriate PNG icon based on the shape name
+  Usage: {% render 'diamond-shape-icon', shape: 'Oval' %}
+{%- endcomment -%}
+
+{%- assign shape_lower = shape | downcase -%}
+{%- assign icon_file = nil -%}
+
+{%- case shape_lower -%}
+  {%- when 'oval' -%}
+    {%- assign icon_file = 'oval.png' -%}
+  {%- when 'pear' -%}
+    {%- assign icon_file = 'pear.png' -%}
+  {%- when 'radiant' -%}
+    {%- assign icon_file = 'radiant.png' -%}
+  {%- when 'emerald' -%}
+    {%- assign icon_file = 'emerald.png' -%}
+  {%- when 'marquise' -%}
+    {%- assign icon_file = 'marquise.png' -%}
+  {%- when 'cushion' -%}
+    {%- assign icon_file = 'cushion.png' -%}
+  {%- when 'heart' -%}
+    {%- assign icon_file = 'heart.png' -%}
+  {%- when 'toi et moi' -%}
+    {%- assign icon_file = 'toi-et-moi.png' -%}
+  {%- when 'round' -%}
+    {%- assign icon_file = 'round.png' -%}
+{%- endcase -%}
+
+{%- if icon_file != nil -%}
+  <img src="{{ icon_file | asset_url }}" alt="{{ shape }}" class="diamond-shape-icon" width="20" height="20">
+{%- endif -%}

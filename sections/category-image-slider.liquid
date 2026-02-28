@@ -1,0 +1,395 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+CATEGORY IMAGE SLIDER SECTION
+----------------------------------------------------------------------------------------------------------------------
+
+A responsive category slider showcasing image cards with titles, descriptions, and links.
+Perfect for displaying product categories, collections, or promotional content.
+
+{%- endcomment -%}
+
+{%- if section.blocks.size > 0 -%}
+  {%- assign carousel_id = 'category-slider-' | append: section.id -%}
+
+  <style>
+    #shopify-section-{{ section.id }} {
+      --category-slider-gap: 1.5rem;
+      background-color: {{ section.settings.background_color | default: '#ffffff' }};
+    }
+
+    .category-slider {
+      position: relative;
+      width: 100%;
+      padding: {{ section.settings.section_padding_top }}px 0 {{ section.settings.section_padding_bottom }}px;
+    }
+
+    .category-slider__container {
+      width: 100%;
+      margin: 0;
+      padding: 0 2rem;
+    }
+
+    .category-slider__header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .category-slider__title {
+      font-size: 2.5rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      color: {{ section.settings.title_color | default: '#000000' }};
+    }
+
+    .category-slider__subtitle {
+      font-size: 1.125rem;
+      color: {{ section.settings.subtitle_color | default: '#666666' }};
+      margin: 0;
+    }
+
+    .category-swiper {
+      width: 100%;
+      padding: 0;
+    }
+
+
+    .category-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .category-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    .category-card-link {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .category-card__image {
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .category-card__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .category-card:hover .category-card__image img {
+      transform: scale(1.05);
+    }
+
+    .category-card__content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.1);
+      color: white;
+    }
+
+    .category-card__description {
+      font-family: "covik-sans", sans-serif;
+      font-size: 10px;
+      color: white;
+      margin: 0 0 0.5rem 0;
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .category-card__title {
+      font-family: "Ogg", serif;
+      font-size: 25px;
+      font-weight: 400;
+      margin: 0;
+      color: white;
+      line-height: 1.2;
+    }
+
+    .category-card__description p {
+      margin: 0;
+    }
+
+
+    /* Mobile adjustments */
+    @media screen and (max-width: 768px) {
+      .category-slider__container {
+        padding: 0 1rem;
+      }
+
+      .category-slider__title {
+        font-size: 2rem;
+      }
+
+      .category-slider__header {
+        margin-bottom: 2rem;
+      }
+
+      .category-card__image {
+        height: 180px;
+      }
+
+      .category-card__content {
+        padding: 1.25rem;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .category-card__image {
+        height: 150px;
+      }
+
+      .category-card__description {
+        font-size: 8px;
+      }
+
+      .category-card__title {
+        font-size: 20px;
+      }
+    }
+  </style>
+
+  <div class="category-slider">
+    <div class="category-slider__container">
+      {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
+        <div class="category-slider__header">
+          {%- if section.settings.title != blank -%}
+            <h2 class="category-slider__title">{{ section.settings.title }}</h2>
+          {%- endif -%}
+          {%- if section.settings.subtitle != blank -%}
+            <p class="category-slider__subtitle">{{ section.settings.subtitle }}</p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="swiper category-swiper" id="{{ carousel_id }}">
+        <div class="swiper-wrapper">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.image -%}
+              <div class="swiper-slide" {{ block.shopify_attributes }}>
+                {%- capture card_content -%}
+                  <div class="category-card">
+                    <div class="category-card__image">
+                      {{- block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', sizes: '(max-width: 768px) 280px, 400px', widths: '280,400,600,800' -}}
+                    </div>
+                    
+                    {%- if block.settings.title != blank or block.settings.description != blank -%}
+                      <div class="category-card__content">
+                        {%- if block.settings.description != blank -%}
+                          <div class="category-card__description">
+                            {{ block.settings.description }}
+                          </div>
+                        {%- endif -%}
+
+                        {%- if block.settings.title != blank -%}
+                          <h3 class="category-card__title">{{ block.settings.title }}</h3>
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                {%- endcapture -%}
+
+                {%- if block.settings.link != blank -%}
+                  <a href="{{ block.settings.link }}" class="category-card-link">
+                    {{- card_content -}}
+                  </a>
+                {%- else -%}
+                  {{- card_content -}}
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const swiper{{ section.id | replace: '-', '_' }} = new Swiper('#{{ carousel_id }}', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        grabCursor: true,
+        loop: true,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        slidesPerGroup: 1,
+        breakpoints: {
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 24,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 24,
+          },
+        },
+      });
+    });
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Category Image Slider",
+  "class": "shopify-section--category-image-slider",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title",
+      "default": "Shop by Category"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Section subtitle",
+      "default": "Discover our beautiful collection"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category_image",
+      "name": "Category Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Category image",
+          "info": "Recommended: 400x240px or larger"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category title",
+          "default": "Category Name"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Category description",
+          "default": "<p>Brief description of this category</p>"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Category link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Image Slider",
+      "blocks": [
+        {
+          "type": "category_image",
+          "settings": {
+            "title": "Best Sellers",
+            "description": "<p>Our most popular pieces</p>"
+          }
+        },
+        {
+          "type": "category_image",
+          "settings": {
+            "title": "Promise Rings",
+            "description": "<p>Symbolic rings for special moments</p>"
+          }
+        },
+        {
+          "type": "category_image",
+          "settings": {
+            "title": "Engagement",
+            "description": "<p>Beautiful rings for your special day</p>"
+          }
+        },
+        {
+          "type": "category_image",
+          "settings": {
+            "title": "Wedding Bands",
+            "description": "<p>Perfect bands for your union</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

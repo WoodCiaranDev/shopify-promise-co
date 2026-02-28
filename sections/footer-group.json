@@ -1,0 +1,229 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "image_with_text_6BGXLA": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_NzdYq7": {
+          "type": "subheading",
+          "settings": {
+            "text": "we promise to be there for you"
+          }
+        },
+        "heading_trrL4D": {
+          "type": "heading",
+          "settings": {
+            "text": "customer is everything to us.",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_qYaNnH": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Every day, I have to pinch myself to believe it's real. It's an incredible honor that each of you chooses our promise rings to symbolise your special commitments. </p><p>Knowing that our rings are part of your meaningful moments fills me with gratitude. </p><p>Thank you for trusting us with something so personal and important. <strong>It means the world to me. </strong></p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_NzdYq7",
+        "heading_trrL4D",
+        "richtext_qYaNnH"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/customer_banner_2060_x_2060_px.png",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "text-with-icons": {
+      "type": "text-with-icons",
+      "blocks": {
+        "icon-1": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-award-gift",
+            "custom_icon": "shopify://shop_images/1_73cb8dbb-a2ae-435c-87c2-c9f97bb10255.png",
+            "icon_width": 60,
+            "mobile_icon_width": 60,
+            "title": "Hand Set Diamond Simulants",
+            "content": "<p>Every stone is set by hand, for that extra special finishing touch, held by precious prongs and no cheap and harmful glues</p>"
+          }
+        },
+        "icon-3": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-award-gift",
+            "custom_icon": "shopify://shop_images/2_d3f4cbe8-1e9f-49e0-be14-c7017c25a5ca.png",
+            "icon_width": 64,
+            "mobile_icon_width": 64,
+            "title": "Two-Year Warranty",
+            "content": "<p>We know how special your Promises are, that's why they're built to last</p>"
+          }
+        },
+        "item_qXjnzG": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-award-gift",
+            "custom_icon": "shopify://shop_images/nj.png",
+            "icon_width": 56,
+            "mobile_icon_width": 56,
+            "title": "Naj members",
+            "content": "<p>We're proud members of the National Association of Jewellers - upholding the highest industry standards</p>"
+          }
+        },
+        "item_KwTfBm": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-award-gift",
+            "custom_icon": "shopify://shop_images/3_3ea361d9-e22a-410c-97b5-0e1c02f39a89.png",
+            "icon_width": 60,
+            "mobile_icon_width": 60,
+            "title": "anti tarnish coating",
+            "content": "<p>Our thick gold and rhodium plating is set with a protective E-Coating to prevent tarnish and scratching</p>"
+          }
+        },
+        "icon-2": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-award-gift",
+            "custom_icon": "shopify://shop_images/4_2a6e9fa4-be95-4428-8901-16dd0f72c18e.png",
+            "icon_width": 64,
+            "mobile_icon_width": 64,
+            "title": "Personalised Promise Card",
+            "content": "<p>Complimentary keepsake card with every purchase, so you can make record of your Promise</p><p></p>"
+          }
+        }
+      },
+      "block_order": [
+        "icon-1",
+        "icon-3",
+        "item_qXjnzG",
+        "item_KwTfBm",
+        "icon-2"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": true,
+        "stack_on_mobile": false,
+        "icon_color": "",
+        "text_color": "",
+        "text_alignment": "center"
+      }
+    },
+    "1745417974c7db7ced": {
+      "type": "apps",
+      "blocks": {
+        "klaviyo_email_marketing_sms_form_embed_block_Qr79EL": {
+          "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
+          "settings": {
+            "formId": "<div class=\"klaviyo-form-QW9yM3\"></div>"
+          }
+        }
+      },
+      "block_order": [
+        "klaviyo_email_marketing_sms_form_embed_block_Qr79EL"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "image_FQqF69": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Sub_Logo_-_All_White.svg",
+            "image_width": 300,
+            "link": ""
+          }
+        },
+        "links": {
+          "type": "links",
+          "settings": {
+            "menu": "footer",
+            "show_menu_title": true,
+            "menu_title": ""
+          }
+        },
+        "links_GfTpPU": {
+          "type": "links",
+          "settings": {
+            "menu": "policies",
+            "show_menu_title": true,
+            "menu_title": ""
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "title": "@ THE PROMISE RING CO LTD.  Company no. <strong>13982489</strong>",
+            "content": "<p><em>Contact us: </em><a href=\"mailto:info@thepromiseringco.com\" title=\"mailto:info@thepromiseringco.com\">info@thepromiseco.com</a></p>",
+            "enable_follow_on_shop": false
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "title": "The Promise Club.",
+            "content": "<p>Sign up to our newsletter to receive exclusive offers.</p>",
+            "button_background": "#313030",
+            "button_text_color": "#ffffff"
+          }
+        },
+        "image_VcPUGf": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Artboard_35_4x_dff76677-1a79-4fa7-b1d6-471cdc1fc207.png",
+            "image_width": 140,
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_FQqF69",
+        "links",
+        "links_GfTpPU",
+        "text",
+        "newsletter",
+        "image_VcPUGf"
+      ],
+      "settings": {
+        "color_scheme": "scheme-3",
+        "separate_section_with_border": false,
+        "show_social_media": true,
+        "show_payment_icons": false,
+        "show_country_selector": true,
+        "show_country_name": true,
+        "show_country_flag": true,
+        "show_locale_selector": true
+      }
+    }
+  },
+  "order": [
+    "image_with_text_6BGXLA",
+    "text-with-icons",
+    "1745417974c7db7ced",
+    "footer"
+  ]
+}

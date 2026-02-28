@@ -1,0 +1,142 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "slideshow_JXkbU4": {
+      "type": "slideshow",
+      "blocks": {
+        "image_pftUTt": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Artboard_18_2x_b66e84ee-5346-449f-a420-255a6c754fd6.png",
+            "subheading": "",
+            "title": "",
+            "mobile_text_position": "place-self-center text-center",
+            "desktop_text_position": "sm:place-self-center sm:text-center",
+            "content_max_width": 780,
+            "button_1_text": "",
+            "button_1_link": "",
+            "button_1_style": "solid",
+            "button_1_background": "#ffffff",
+            "button_1_text_color": "#000000",
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_style": "outline",
+            "button_2_background": "#ffffff",
+            "button_2_text_color": "#000000",
+            "background": "",
+            "background_opacity": 0,
+            "text_color": "#ffffff",
+            "border_color": "",
+            "gradient_overlay": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_pftUTt"
+      ],
+      "name": "t:sections.slideshow.presets.slideshow.name",
+      "settings": {
+        "allow_transparent_header": true,
+        "show_next_section_button": true,
+        "media_size": "auto",
+        "show_initial_transition": false,
+        "autoplay": true,
+        "autoplay_pause_on_video": true,
+        "cycle_speed": 5,
+        "background": "#000000",
+        "controls_color": "#ffffff"
+      }
+    },
+    "rich_text_cKVycM": {
+      "type": "rich-text",
+      "settings": {
+        "color_scheme": "scheme-3d587ecc-8a0a-4371-99ad-10c9a94e8325",
+        "separate_section_with_border": false,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": true,
+        "use_baka_too_font": true,
+        "use_ogg_font": true,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "newsletter_VMJmiM": {
+      "type": "newsletter",
+      "name": "t:sections.newsletter.presets.newsletter.name",
+      "settings": {
+        "color_scheme": "scheme-3d587ecc-8a0a-4371-99ad-10c9a94e8325",
+        "separate_section_with_border": false,
+        "image_size": "auto",
+        "subheading": "Keep me updated",
+        "title": "Sign up to be the first to know",
+        "content": "",
+        "button_text": "Subscribe",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "rich_text_zWNeTx": {
+      "type": "rich-text",
+      "blocks": {
+        "image_kpQ8tN": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Artboard_38_10x_1eccc768-d36e-4410-9293-be6bc14e95f2.png",
+            "width_mode": "custom",
+            "max_width": 310,
+            "mobile_max_width": 400
+          }
+        },
+        "subheading_7YfGnV": {
+          "type": "subheading",
+          "settings": {
+            "text": "Subheading"
+          }
+        }
+      },
+      "block_order": [
+        "image_kpQ8tN",
+        "subheading_7YfGnV"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-3d587ecc-8a0a-4371-99ad-10c9a94e8325",
+        "separate_section_with_border": false,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "image_with_text_block_9YR7fF": {
+      "type": "image-with-text-block",
+      "name": "t:sections.image_with_text_block.presets.image_with_text_block.name",
+      "settings": {
+        "color_scheme": "",
+        "image_size": "lg",
+        "content_width": "sm",
+        "enable_parallax": true,
+        "remove_vertical_spacing": true
+      }
+    }
+  },
+  "order": [
+    "slideshow_JXkbU4",
+    "rich_text_cKVycM",
+    "newsletter_VMJmiM",
+    "rich_text_zWNeTx",
+    "image_with_text_block_9YR7fF"
+  ]
+}

@@ -1,0 +1,64 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+SHIPPING POPUP
+----------------------------------------------------------------------------------------------------------------------
+
+A centered modal popup showing shipping/delivery information with a truck icon at the top.
+Triggered via aria-controls targeting the modal ID.
+{%- endcomment -%}
+
+<x-modal id="shipping-popup" class="shipping-popup modal color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
+  <p class="h5 sr-only" slot="header">{{ section.settings.title }}</p>
+
+  <div class="shipping-popup__container">
+    <div class="shipping-popup__card">
+    <dialog-close-button class="contents">
+      <button type="button" class="shipping-popup__close-button">
+        <span class="sr-only">{{ 'general.accessibility.close' | t }}</span>
+        {%- render 'icon' with 'close' -%}
+      </button>
+    </dialog-close-button>
+
+    <div class="shipping-popup__icon">
+      <img src="{{ 'icon-delivery.png' | file_url }}" alt="Delivery" width="48" height="48" loading="lazy">
+    </div>
+
+    {%- if section.settings.title != blank -%}
+      <h2 class="shipping-popup__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.content != blank -%}
+      <div class="shipping-popup__content prose">
+        {{ section.settings.content }}
+      </div>
+    {%- endif -%}
+    </div>
+  </div>
+</x-modal>
+
+{% schema %}
+{
+  "name": "Shipping popup",
+  "class": "shopify-section--shipping-popup",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:global.colors.scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "Delivery & Shipping"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content",
+      "default": "<p><strong>Orders are shipped Monday–Friday.</strong></p><p>Any orders placed after 1pm (local warehouse time) on Friday will not be shipped until Monday.</p>"
+    }
+  ]
+}
+{% endschema %}

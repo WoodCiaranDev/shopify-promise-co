@@ -1,0 +1,384 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-1",
+        "show_title": true,
+        "page_width": "xs"
+      }
+    },
+    "video_W7M3Dj": {
+      "type": "video",
+      "blocks": {
+        "play_qH4ijV": {
+          "type": "play",
+          "settings": {
+            "icon_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "play_qH4ijV"
+      ],
+      "name": "t:sections.video.presets.video.name",
+      "settings": {
+        "autoplay": true,
+        "show_controls": false,
+        "video_size": "lg",
+        "video": "shopify://files/videos/copy_EB80F9B6-4F60-4F5B-8E24-182BC7D91161_VSCO.mov",
+        "external_video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "text_color": "#ffffff"
+      }
+    },
+    "tabs_6cKtj8": {
+      "type": "tabs",
+      "blocks": {
+        "tab_84dVFP": {
+          "type": "tab",
+          "settings": {
+            "title": "what makes us different",
+            "content": "<p>We understand that these pieces aren’t just jewellery – they’re symbols of love, commitment, and the moments that matter most. As proud members of the National Association of Jewellers, we hold ourselves to the highest standards of quality and care.</p>",
+            "page": "",
+            "open_on_mobile": false
+          }
+        },
+        "tab_xwFx4K": {
+          "type": "tab",
+          "settings": {
+            "title": "conflict-free simulated diamonds",
+            "content": "<p>Our pieces feature conflict-free simulated diamonds, hand-set stones for a flawless finish. Our Promise stones boast a 2.18 refractive index, MOHS rating of 8.5. To compare: Diamonds have a 2.41 refractive index and MOHS rating of 10, Swarovski Crystals sit at around 1.6 refractive index, MOHS 6-7</p>",
+            "page": "",
+            "open_on_mobile": false
+          }
+        },
+        "tab_Xp6TKY": {
+          "type": "tab",
+          "settings": {
+            "title": "our precious metals",
+            "content": "<p>Our silver pieces are plated in rhodium - one of the world’s most precious metals, known for its mirror-like shine and exceptional resistance to tarnishing.</p><p>Our gold jewellery is crafted using gold vermeil, a technique that requires a thick layer of 18k gold over sterling silver. In fact, our plating is up to 25 times thicker than standard gold-plated jewellery, giving each piece a rich, lasting finish.</p><p>Every design is then sealed with an e-coating, adding an invisible layer of protection to preserve its beauty over time.</p>",
+            "page": "",
+            "open_on_mobile": false
+          }
+        }
+      },
+      "block_order": [
+        "tab_84dVFP",
+        "tab_xwFx4K",
+        "tab_Xp6TKY"
+      ],
+      "name": "t:sections.tabs.presets.tab.name",
+      "settings": {
+        "color_scheme": "scheme-b68b61c5-ba0e-4161-a0e3-3d59622e9bf4",
+        "separate_section_with_border": true,
+        "subheading": "",
+        "title": "our quality promise",
+        "text_alignment": "center"
+      }
+    },
+    "scrolling_content_PFecae": {
+      "type": "scrolling-content",
+      "blocks": {
+        "text_EQLFrM": {
+          "type": "text",
+          "settings": {
+            "text": "Member of The National Association of Jewellers"
+          }
+        },
+        "text_LcD7t6": {
+          "type": "text",
+          "settings": {
+            "text": "Member of The National Association of Jewellers"
+          }
+        }
+      },
+      "block_order": [
+        "text_EQLFrM",
+        "text_LcD7t6"
+      ],
+      "name": "t:sections.scrolling_content.presets.scrolling_content.name",
+      "settings": {
+        "separate_section_with_border": false,
+        "scrolling_speed": 0.1,
+        "scroll_direction": "left",
+        "pause_on_hover": false,
+        "text_font": "heading",
+        "text_font_size_mobile": 16,
+        "text_font_size_desktop": 16,
+        "section_vertical_spacing_mobile": 10,
+        "section_vertical_spacing_desktop": 10,
+        "item_horizontal_spacing_mobile": 30,
+        "item_horizontal_spacing_desktop": 40,
+        "background": "#ffffff",
+        "text_color": ""
+      }
+    },
+    "rich_text_Wj4BMe": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_hdaBUB": {
+          "type": "subheading",
+          "settings": {
+            "text": "Don't just take our word for it"
+          }
+        },
+        "heading_JFUwpC": {
+          "type": "heading",
+          "settings": {
+            "text": "7000+ promises made",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_mABzQX": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Whats your promise?</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_hdaBUB",
+        "heading_JFUwpC",
+        "richtext_mABzQX"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": false,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "1754392069335bf79c": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_featured_carousel_iEixqF": {
+          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "maxwidth": 2000
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_featured_carousel_iEixqF"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": false,
+        "remove_vertical_spacing": true,
+        "remove_horizontal_spacing": false
+      }
+    },
+    "featured_collections_aA86gR": {
+      "type": "featured-collections",
+      "blocks": {
+        "collection_LxWpTW": {
+          "type": "collection",
+          "settings": {
+            "collection": "new-in",
+            "products_count": 8,
+            "title": "",
+            "link_url": "",
+            "link_text": "View all"
+          }
+        }
+      },
+      "block_order": [
+        "collection_LxWpTW"
+      ],
+      "name": "t:sections.featured_collections.presets.featured_collections.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "hide_product_information": false,
+        "stack_products": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 5,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "subheading": "Discover"
+      }
+    },
+    "faq_r34eXF": {
+      "type": "faq",
+      "blocks": {
+        "question_qUVctq": {
+          "type": "question",
+          "settings": {
+            "question": "What precious metals do you use?",
+            "answer": "<p>Promise stones come in sterling silver with rhodium plating OR 2.5 microns of 18ct gold-plating, known as Gold Vermeil</p><p>All pieces are engraved with 925 for metal authenticity and our \"The Promise Co\" engraving for quality assurance</p>"
+          }
+        },
+        "question_Xc3Djz": {
+          "type": "question",
+          "settings": {
+            "question": "What stones do you use?",
+            "answer": "<p>Our pieces feature conflict-free simulated diamonds, hand-set stones for a flawless finish</p><p>Our Promise stones boast a 2.18 refractive index, MOHS rating of 8.5, perfect for everyday wear with care</p><p>To compare: Diamonds have a 2.41 refractive index and MOHS rating of 10, Swarovski Crystals sit at around 1.6 refractive index, MOHS 6-7</p><p>We aim to provide diamond-like sparkle at a fraction of the cost, using our exclusive clear or emerald cut patterns for enhanced clarity</p>"
+          }
+        },
+        "question_mCRrcW": {
+          "type": "question",
+          "settings": {
+            "question": "What is Gold Vermeil?",
+            "answer": "<p><strong>(Pronounced Ver-may!)</strong></p><p>Gold Vermeil is not to be mixed up with normal gold plating… it is a thick layer of solid 18ct Gold on top of Sterling Silver base, meaning you get the look and feel of solid gold at a fraction of the price!</p><p>We use 18ct gold that is a minimum of 2.5 microns thick, as required by the Federal Trade Commission to classify vermeil, layered over sterling silver. </p><p><strong>Did you know?</strong> Plating as thin as 0.1 microns can still be classed as Gold Plated!? Our plating is 25 times thicker than this (crazy right)</p>"
+          }
+        },
+        "question_Yyy8rx": {
+          "type": "question",
+          "settings": {
+            "question": "How do I care for Gold Vermeil?",
+            "answer": "<p>Gold Vermeil is resilient, but for lasting shine:</p><ul><li>Minimise exposure to sweat and water</li><li>Remove before exercising or washing hands</li><li>Avoid perfumes and lotions</li><li>Be gentle when using hand sanitiser</li><li>Clean with a dry cloth</li><li>Store in a dry place when not worn for daily protection</li><li>Do not wear your ring in the pool, harsh chemicals and Chlorine can cause corrosion</li></ul>"
+          }
+        },
+        "question_G6whAK": {
+          "type": "question",
+          "settings": {
+            "question": "What is Sterling Silver?",
+            "answer": "<p>925 Sterling Silver is an alloy made of 92.5% pure silver and 7.5% copper. To make sure your Sterling Silver </p><p>On top of a sterling silver base we plate jewellery in rhodium, which makes your ring extra durable and shiny. Rhodium is one of the costliest precious metals due to its rarity</p>"
+          }
+        },
+        "question_76YTdb": {
+          "type": "question",
+          "settings": {
+            "question": "How do I care for Sterling Silver?",
+            "answer": "<p>Sterling Silver is perfect for everyday wear, but to ensure your ring lasts as long as possible:</p><ul><li>Remove before exercising, washing hands, or showering</li><li>Polish gently with a silver cloth for tarnished jewellery</li><li>Skip perfumes and lotions while wearing</li><li>Be cautious with hand sanitiser</li><li>Store in a dry place when not worn</li><li>Do not wear your ring in the pool, harsh chemicals and Chlorine can cause corrosion</li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "question_qUVctq",
+        "question_Xc3Djz",
+        "question_mCRrcW",
+        "question_Yyy8rx",
+        "question_G6whAK",
+        "question_76YTdb"
+      ],
+      "settings": {
+        "color_scheme": "scheme-b68b61c5-ba0e-4161-a0e3-3d59622e9bf4",
+        "separate_section_with_border": false,
+        "show_categories": false,
+        "subheading": "",
+        "title": "Quality & Materials",
+        "content": ""
+      }
+    },
+    "text_with_icons_PwCw3P": {
+      "type": "text-with-icons",
+      "blocks": {
+        "item_arY9qa": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-delivery-truck",
+            "custom_icon": "shopify://shop_images/Artboard_4_2x_0b5d1fcb-c012-4a17-8254-81edec1589f6.png",
+            "icon_width": 64,
+            "mobile_icon_width": 64,
+            "title": "Hand Set Diamond Simulants",
+            "content": "<p>Every stone is set by hand, for that extra special finishing touch, held by precious - never glued</p>"
+          }
+        },
+        "item_yrTBDM": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-customer-support",
+            "custom_icon": "shopify://shop_images/Artboard_30_copy_4x_323837bd-a69a-44f4-9b87-b7db4ee5dc16.png",
+            "icon_width": 64,
+            "mobile_icon_width": 64,
+            "title": "Two-Year Warranty",
+            "content": "<p>We know how special your Promises are, that's why they're built to last</p>"
+          }
+        },
+        "item_LjiBMr": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-shield",
+            "custom_icon": "shopify://shop_images/Artboard_4_copy_2x_5dad10e5-dfbe-4f89-adb1-01dffe5f9c25.png",
+            "icon_width": 64,
+            "mobile_icon_width": 64,
+            "title": "Personalised Promise Card",
+            "content": "<p>Complimentary keepsake card with every purchase, so you can make record of your Promise</p>"
+          }
+        },
+        "item_G7jBfN": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-shield",
+            "custom_icon": "shopify://shop_images/Artboard_33_4x_a331b0fc-7364-4b91-8dfe-db9ecd4ec7cd.png",
+            "icon_width": 48,
+            "mobile_icon_width": 64,
+            "title": "anti tarnish coating",
+            "content": "<p>Our thick gold and rhodium plating is set with a protective E-Coating to prevent tarnish and scratching</p>"
+          }
+        },
+        "item_eEfgAr": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-shield",
+            "custom_icon": "shopify://shop_images/Artboard_30_copy_4_4x_70cea366-b527-43ba-b06e-4fcb18fc560a.png",
+            "icon_width": 64,
+            "mobile_icon_width": 64,
+            "title": "NAJ Members",
+            "content": "<p>We're proud members of the National Association of Jewellers - upholding the highest industry standards</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_arY9qa",
+        "item_yrTBDM",
+        "item_LjiBMr",
+        "item_G7jBfN",
+        "item_eEfgAr"
+      ],
+      "name": "t:sections.text_with_icons.presets.text_with_icons.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "stack_on_mobile": false,
+        "icon_color": "",
+        "text_color": "",
+        "text_alignment": "center"
+      }
+    },
+    "newsletter_GkUBQA": {
+      "type": "newsletter",
+      "name": "t:sections.newsletter.presets.newsletter.name",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "separate_section_with_border": false,
+        "image_size": "auto",
+        "subheading": "the promise club",
+        "title": "co-lab",
+        "content": "<p>Sign up to our newsletter to be be the first to know about our brand new exclusive member club</p>",
+        "button_text": "Subscribe",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "video_W7M3Dj",
+    "tabs_6cKtj8",
+    "scrolling_content_PFecae",
+    "rich_text_Wj4BMe",
+    "1754392069335bf79c",
+    "featured_collections_aA86gR",
+    "faq_r34eXF",
+    "text_with_icons_PwCw3P",
+    "newsletter_GkUBQA"
+  ]
+}

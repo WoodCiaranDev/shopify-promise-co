@@ -1,0 +1,149 @@
+{%- if section.blocks.size > 0 -%}
+  {%- assign color_scheme_hash = section.settings.color_scheme.settings.background_gradient | default: section.settings.color_scheme.settings.background | md5 -%}
+
+  <div class="color-scheme color-scheme--{{ section.settings.color_scheme.id }} color-scheme--bg-{{ color_scheme_hash }} {% unless section.settings.remove_vertical_spacing %}section-spacing{% endunless %}{% if section.settings.use_compact_spacing %} section-spacing--compact{% endif %} {% if section.settings.separate_section_with_border %}bordered-section{% endif %}">
+    <div class="container">
+      <div class="promise-steps-wrapper">
+        <div class="promise-steps__arrow">
+          <img src="{{ 'down-arrow.png' | asset_url }}" alt="Arrow pointing down" loading="lazy">
+        </div>
+
+        {%- comment -%} Steps Grid {%- endcomment -%}
+        <div class="promise-steps">
+          {%- for block in section.blocks -%}
+            {%- assign step_number = forloop.index -%}
+            <div class="promise-step promise-step--{{ step_number }}" {{ block.shopify_attributes }}>
+              
+              {%- comment -%} Step Number {%- endcomment -%}
+              <div class="promise-step__number">{{ step_number }}</div>
+              
+              {%- comment -%} Step Image {%- endcomment -%}
+              {%- if block.settings.image != blank -%}
+                <div class="promise-step__image">
+                  {%- capture sizes -%}(max-width: 768px) 200px, 300px{%- endcapture -%}
+                  {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', sizes: sizes, widths: '200,300,400,600' }}
+                </div>
+              {%- elsif block.settings.fallback_image != blank -%}
+                <div class="promise-step__image">
+                  <img src="{{ block.settings.fallback_image | asset_url }}" alt="{{ block.settings.title }}" loading="lazy">
+                </div>
+              {%- endif -%}
+              
+              {%- comment -%} Step Content {%- endcomment -%}
+              <div class="promise-step__content">
+                {%- if block.settings.title != blank -%}
+                  <h3 class="promise-step__title">{{ block.settings.title }}</h3>
+                {%- endif -%}
+                
+                {%- if block.settings.content != blank -%}
+                  <div class="promise-step__description prose">
+                    {{ block.settings.content }}
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+
+{% schema %}
+{
+  "name": "Promise Steps",
+  "class": "shopify-section--promise-steps",
+  "tag": "section",
+  "max_blocks": 3,
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "separate_section_with_border",
+      "label": "Separate section with border",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "remove_vertical_spacing",
+      "label": "Remove vertical spacing",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "use_compact_spacing",
+      "label": "Use compact vertical spacing",
+      "default": false
+    },
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Promise Step",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Step image"
+        },
+        {
+          "type": "text",
+          "id": "fallback_image",
+          "label": "Fallback image filename",
+          "info": "Filename from assets folder (e.g. 'promise-ring.png')"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Step title",
+          "default": "Step Title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Step description",
+          "default": "<p>Describe this step in your process.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promise Steps",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "CHOOSE A RING",
+            "content": "<p>Choose a one of our Pieces to signify your Promise. This could be a Promise to yourself, a friend Or loved one.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "WRITE IT DOWN",
+            "content": "<p>Choose a one of our Pieces to signify your Promise. This could be a Promise to yourself, a friend Or loved one.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "MAKE IT OFFICIAL",
+            "content": "<p>Choose a one of our Pieces to signify your Promise. This could be a Promise to yourself, a friend Or loved one.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

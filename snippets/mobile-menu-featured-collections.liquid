@@ -1,0 +1,90 @@
+{%- comment -%}
+Mobile Menu Featured Collections
+Renders featured collections for mobile menu panels.
+
+Variables:
+- featured_block: The block containing featured collection settings
+- show: Whether to display this component
+{%- endcomment -%}
+
+{%- if show and featured_block -%}
+  {%- if featured_block.settings.featured_collection_1 or featured_block.settings.featured_collection_2 -%}
+    <div class="o-mobile-menu__featured-collections">
+      {%- if featured_block.settings.featured_collection_1 -%}
+        {%- assign collection_1 = collections[featured_block.settings.featured_collection_1] -%}
+        {%- if collection_1 -%}
+          <div class="o-mobile-menu__featured-collection">
+            <a href="{{ collection_1.url }}" class="o-mobile-menu__featured-collection-link">
+              <div class="o-mobile-menu__featured-collection-image">
+                {%- if featured_block.settings.featured_collection_1_image -%}
+                  {{ featured_block.settings.featured_collection_1_image | image_url: width: 600 | image_tag:
+                    loading: 'lazy',
+                    widths: '300, 400, 500, 600',
+                    width: 300,
+                    height: 400,
+                    alt: collection_1.title
+                  }}
+                {%- elsif collection_1.featured_image -%}
+                  {{ collection_1.featured_image | image_url: width: 600 | image_tag:
+                    loading: 'lazy',
+                    widths: '300, 400, 500, 600',
+                    width: 300,
+                    height: 400,
+                    alt: collection_1.title
+                  }}
+                {%- else -%}
+                  {{ 'collection-1' | placeholder_svg_tag: 'o-mobile-menu__featured-collection-placeholder' }}
+                {%- endif -%}
+              </div>
+              <span class="o-mobile-menu__featured-collection-title">
+                {%- if featured_block.settings.featured_collection_1_title -%}
+                  {{ featured_block.settings.featured_collection_1_title }}
+                {%- else -%}
+                  {{ collection_1.title }}
+                {%- endif -%}
+              </span>
+            </a>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if featured_block.settings.featured_collection_2 -%}
+        {%- assign collection_2 = collections[featured_block.settings.featured_collection_2] -%}
+        {%- if collection_2 -%}
+          <div class="o-mobile-menu__featured-collection">
+            <a href="{{ collection_2.url }}" class="o-mobile-menu__featured-collection-link">
+              <div class="o-mobile-menu__featured-collection-image">
+                {%- if featured_block.settings.featured_collection_2_image -%}
+                  {{ featured_block.settings.featured_collection_2_image | image_url: width: 600 | image_tag:
+                    loading: 'lazy',
+                    widths: '300, 400, 500, 600',
+                    width: 300,
+                    height: 400,
+                    alt: collection_2.title
+                  }}
+                {%- elsif collection_2.featured_image -%}
+                  {{ collection_2.featured_image | image_url: width: 600 | image_tag:
+                    loading: 'lazy',
+                    widths: '300, 400, 500, 600',
+                    width: 300,
+                    height: 400,
+                    alt: collection_2.title
+                  }}
+                {%- else -%}
+                  {{ 'collection-2' | placeholder_svg_tag: 'o-mobile-menu__featured-collection-placeholder' }}
+                {%- endif -%}
+              </div>
+              <span class="o-mobile-menu__featured-collection-title">
+                {%- if featured_block.settings.featured_collection_2_title -%}
+                  {{ featured_block.settings.featured_collection_2_title }}
+                {%- else -%}
+                  {{ collection_2.title }}
+                {%- endif -%}
+              </span>
+            </a>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+{%- endif -%}

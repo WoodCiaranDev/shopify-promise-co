@@ -1,0 +1,297 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "rich_text_cKVycM": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_PEk8iN": {
+          "type": "subheading",
+          "settings": {
+            "text": "what's your promise?"
+          }
+        },
+        "heading_YgCVdt": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "text": "",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_gCmw3t": {
+          "type": "richtext",
+          "settings": {
+            "content": "<h1>frequently asked questions</h1><p>Have a question? Feel free to check out our FAQs</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_PEk8iN",
+        "heading_YgCVdt",
+        "richtext_gCmw3t"
+      ],
+      "settings": {
+        "color_scheme": "scheme-3",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "question-1": {
+          "type": "question",
+          "settings": {
+            "question": "How long will my order take to ship?",
+            "answer": "<p><strong>Order Fulfilment</strong></p><ul><li>Orders are shipped <strong>Monday–Friday</strong>.</li><li>Any orders placed after <strong>1pm (local warehouse time)</strong> on Friday will not be shipped until Monday.</li></ul><p><strong>UK Shipping (from our UK warehouse)</strong></p><ul><li><strong>Royal Mail 48 Hours</strong>: Delivery in 2 working days.</li><li><strong>Royal Mail 24 Hours</strong>: Delivery in 1 working day (order before 1pm GMT to receive your parcel the next working day).</li></ul><p><strong>USA Shipping (from our USA warehouse)</strong></p><ul><li>Orders ship via <strong>DHL Express Domestic</strong>.</li><li>Delivery takes <strong>1–4 working days</strong>, depending on your shipping zone.</li><li>All tariffs and import fees are already covered by <strong>The Promise Ring Co. LTD</strong>, so there are <strong>no additional customs charges</strong> for US customers.</li></ul><p><strong>International Shipping (all other countries from our UK warehouse)</strong></p><ul><li><strong>Europe</strong>: 2–11 business days.</li><li>Orders under €150 (excluding shipping fees) ship with no import fees</li></ul><p></p><ul><li><strong>Rest of the World (Canada, Australia, etc.)</strong>: 3–17 business days.</li></ul><p><strong>Please note:</strong> Delivery times are estimates and may occasionally be extended due to customs delays, courier disruptions, or UK bank holidays.</p>"
+          }
+        },
+        "question-2": {
+          "type": "question",
+          "settings": {
+            "question": "Can I return my order?",
+            "answer": "<p>Yes! If your ring doesn't fit, or you simply don't like it, you can return it by emailing <strong>info@thepromiseco.com</strong></p><p>We will refund any item you are unhappy with if returned to us in its <strong>original, unaltered condition </strong>within <strong>30 days </strong>from when you received it.</p><p><strong>Please see our refund policy for full details.</strong></p>"
+          }
+        },
+        "question-3": {
+          "type": "question",
+          "settings": {
+            "question": "When will my refund be processed?",
+            "answer": "<p>We will notify you once we’ve received and inspected your return, once your refund is approved please allow up to 10 working days for your bank to have reversed the transaction.</p><p>Please see our refund policy for full details.</p>"
+          }
+        },
+        "question_XkktdC": {
+          "type": "question",
+          "settings": {
+            "question": "Can I exchange my order?",
+            "answer": "<p>We want to make sure your ring fits just right! If it doesn't, you're eligible for an exchange.</p><p>Please email <strong>info@thepromiseco.com </strong>to start the process</p><p>We will exchange any item you are unhappy with if returned to us in its <strong>original, unaltered condition </strong>within <strong>30</strong> <strong>days </strong>from when you received it.</p>"
+          }
+        },
+        "question_cMEztV": {
+          "type": "question",
+          "settings": {
+            "question": "I'm buying as a gift and your return window is not long enough, what can I do?",
+            "answer": "<p>We appreciate that when it comes to unique gifts, you prefer to plan ahead. Before making your purchase, kindly reach out to us at <a>info@thepromiseco.com</a>, and we'll be happy to assist you.</p><p>If a longer timeframe is authorised, we can arrange this on an exchanges only basis (no cash refunds), provided that the ring passes our quality inspection upon return.</p>"
+          }
+        },
+        "question_3eWW9D": {
+          "type": "question",
+          "settings": {
+            "question": "Do you do express delivery?",
+            "answer": "<p><strong>Express Delivery</strong></p><ul><li><strong>UK Customers</strong> – Next Working Day delivery available with Royal Mail (order before 1pm).<br/></li><li><strong>USA Customers</strong> – Express shipping available nationwide, delivered in <strong>2–4 business days</strong>.</li></ul><p>Unfortunately for Rest of World orders we do not offer any express delivery.</p>"
+          }
+        },
+        "question_kmw8nm": {
+          "type": "question",
+          "settings": {
+            "question": "Will you cover the cost of my return?",
+            "answer": "<p>If it is proven that there is a fault with the good once inspected, we will credit you the cost of your return. There otherwise returns are at the cost of the customer.</p><p>Please see the refund policy for details.</p>"
+          }
+        },
+        "question_UmtchC": {
+          "type": "question",
+          "settings": {
+            "question": "International Charges",
+            "answer": "<p><strong>UK Customers</strong> – No duties or fees apply.</p><p><br/><strong>USA Customers</strong> – Thanks to our new US warehouse, there are <strong>no tariffs or additional fees</strong> on your orders.<br/></p><p><strong>EU Customers -</strong> Orders under €150 (excluding shipping fees) ship with no import fees</p><p><br/><strong>Other International Customers</strong> – Deliveries outside of the UK and USA may be subject to customs duties and service fees. These vary by country, and unfortunately we cannot control or predict the charges. For more information, please contact your local customs office. Please note, we are not able to reimburse duties or taxes paid upon delivery.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question-1",
+        "question-2",
+        "question-3",
+        "question_XkktdC",
+        "question_cMEztV",
+        "question_3eWW9D",
+        "question_kmw8nm",
+        "question_UmtchC"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "show_categories": false,
+        "subheading": "",
+        "title": "Delivery & Returns",
+        "content": ""
+      }
+    },
+    "faq_CzJ7Hz": {
+      "type": "faq",
+      "blocks": {
+        "question_LLXMXL": {
+          "type": "question",
+          "settings": {
+            "question": "What precious metals do you use?",
+            "answer": "<p>Promise stones come in sterling silver with rhodium plating OR 2.5 microns of 18ct gold-plating, known as Gold Vermeil</p><p>All pieces are engraved with 925 for metal authenticity and our \"The Promise Co\" engraving for quality assurance</p>"
+          }
+        },
+        "question_ih7yBU": {
+          "type": "question",
+          "settings": {
+            "question": "What stones do you use?",
+            "answer": "<p>Our pieces feature conflict-free simulated diamonds, hand-set stones for a flawless finish</p><p>Our Promise stones boast a 2.18 refractive index, MOHS rating of 8.5, perfect for everyday wear with care</p><p>To compare: Diamonds have a 2.41 refractive index and MOHS rating of 10, Swarovski Crystals sit at around 1.6 refractive index, MOHS 6-7</p><p>We aim to provide diamond-like sparkle at a fraction of the cost, using our exclusive clear or emerald cut patterns for enhanced clarity</p>"
+          }
+        },
+        "question_PzrQPd": {
+          "type": "question",
+          "settings": {
+            "question": "What is Gold Vermeil?",
+            "answer": "<p><strong>(Pronounced Ver-may!)</strong></p><p>Gold Vermeil is not to be mixed up with normal gold plating… it is a thick layer of solid 18ct Gold on top of Sterling Silver base, meaning you get the look and feel of solid gold at a fraction of the price!</p><p>We use 18ct gold that is a minimum of 2.5 microns thick, as required by the Federal Trade Commission to classify vermeil, layered over sterling silver. </p><p><strong>Did you know?</strong> Plating as thin as 0.1 microns can still be classed as Gold Plated!? Our plating is 25 times thicker than this (crazy right)</p>"
+          }
+        },
+        "question_EKFnKD": {
+          "type": "question",
+          "settings": {
+            "question": "How do I care for Gold Vermeil?",
+            "answer": "<p>Gold Vermeil is resilient, but for lasting shine:</p><ul><li>Minimise exposure to sweat and water</li><li>Remove before exercising or washing hands</li><li>Avoid perfumes and lotions</li><li>Be gentle when using hand sanitiser</li><li>Clean with a dry cloth</li><li>Store in a dry place when not worn for daily protection</li><li>Do not wear your ring in the pool, harsh chemicals and Chlorine can cause corrosion</li></ul>"
+          }
+        },
+        "question_QjQKkz": {
+          "type": "question",
+          "settings": {
+            "question": "What is Sterling Silver?",
+            "answer": "<p>925 Sterling Silver is an alloy made of 92.5% pure silver and 7.5% copper. To make sure your Sterling Silver </p><p>On top of a sterling silver base we plate jewellery in rhodium, which makes your ring extra durable and shiny. Rhodium is one of the costliest precious metals due to its rarity</p>"
+          }
+        },
+        "question_VVXzDT": {
+          "type": "question",
+          "settings": {
+            "question": "How do I care for Sterling Silver?",
+            "answer": "<p>Sterling Silver is perfect for everyday wear, but to ensure your ring lasts as long as possible:</p><ul><li>Remove before exercising, washing hands, or showering</li><li>Polish gently with a silver cloth for tarnished jewellery</li><li>Skip perfumes and lotions while wearing</li><li>Be cautious with hand sanitiser</li><li>Store in a dry place when not worn</li><li>Do not wear your ring in the pool, harsh chemicals and Chlorine can cause corrosion</li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "question_LLXMXL",
+        "question_ih7yBU",
+        "question_PzrQPd",
+        "question_EKFnKD",
+        "question_QjQKkz",
+        "question_VVXzDT"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "show_categories": false,
+        "subheading": "",
+        "title": "Quality & Materials",
+        "content": ""
+      }
+    },
+    "faq_agTXqH": {
+      "type": "faq",
+      "blocks": {
+        "question_pyUfij": {
+          "type": "question",
+          "settings": {
+            "question": "How do I work out the right ring size?",
+            "answer": "<p>Need sizing help or advice on keeping it a secret? Email us at <strong>info@thepromiseco.com</strong> and we can help you figure out a ring size.</p><p>We recommend ordering a standard ring sizer from Amazon, they usually look like a key chain with lots of metal rings. Once you've got your size you can use our handy guide below to convert it, or email us for help.</p><p>Use our <a href=\"/pages/ring-size-guide\" target=\"_blank\" title=\"Ring Size Guide\">size guide</a> to find your perfect fit</p><p></p><p></p>"
+          }
+        },
+        "question_pTJXBJ": {
+          "type": "question",
+          "settings": {
+            "question": "I don't know which ring to pick for a gift?",
+            "answer": "<p>If you need personalised support on picking the perfect ring, email our team at <strong>info@thepromiseco.com</strong> and we will do our best to support.</p><p>Alternatively, shop our <a href=\"https://thepromiseringco.com/products/the-promise-ring-co-e-gift-card\" title=\"The Promise Ring Co. E-Gift Card\">E-Gift cards</a>, for the perfect fit, everytime.</p>"
+          }
+        },
+        "question_D7Tbyq": {
+          "type": "question",
+          "settings": {
+            "question": "Is my ring under warranty?",
+            "answer": "<p>At The Promise Ring Co. we are committed to providing you with<br/>exceptional service and ensuring that your purchase of your ring is a truly special and sentimental experience. We understand that these pieces aren't just jewellery; they are symbols of love, commitment, and cherished moments.</p><p>That's why we stand by our products and offer a 2-year guarantee to give you peace of mind.</p><p>For full warranty terms <a href=\"https://thepromiseringco.com/pages/2-year-warranty\" target=\"_blank\" title=\"https://thepromiseringco.com/pages/2-year-warranty\">click here</a></p>"
+          }
+        },
+        "question_gyga4F": {
+          "type": "question",
+          "settings": {
+            "question": "I've damaged my special ring, what can I do?",
+            "answer": "<p>We understand accidents happen and we know how precious all our pieces are to each customer.</p><p>Email us a picture of the damage to <strong>info@thepromiseco.com </strong>and we will do our best to support you with solutions</p>"
+          }
+        },
+        "question_BWTWVH": {
+          "type": "question",
+          "settings": {
+            "question": "I need an urgent gift but your delivery doesn't work for me...",
+            "answer": "<p>Looking for the perfect gift for your last minute woes, shop our <a href=\"https://thepromiseringco.com/products/the-promise-ring-co-e-gift-card\" target=\"_blank\" title=\"The Promise Ring Co. E-Gift Card\">E-gift cards </a>for the perfect fit, everytime.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_pyUfij",
+        "question_pTJXBJ",
+        "question_D7Tbyq",
+        "question_gyga4F",
+        "question_BWTWVH"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "show_categories": false,
+        "subheading": "",
+        "title": "Sizing & Support",
+        "content": ""
+      }
+    },
+    "faq_8efLwW": {
+      "type": "faq",
+      "blocks": {
+        "question_GyHgaz": {
+          "type": "question",
+          "settings": {
+            "question": "What is a Promise Ring?",
+            "answer": "<p>A promise ring is your own wearable story. It’s purpose: a constant reminder of a Promise.</p><p>Traditionally, Promise Rings are given between couples to symbolise their love</p><p>Today, there really are no rules when it comes to the promise ring. It can be a gift for your lover, your bestie, your mum, sister or yourself.</p><p>Promise rings can serve as a powerful reminder of the promises we make to those we care about.</p>"
+          }
+        },
+        "question_pM6NC4": {
+          "type": "question",
+          "settings": {
+            "question": "Is a Promise Ring the same as an engagement ring?",
+            "answer": "<p>A very popular question... is a Promise Ring just another version of an engagement ring in a relationship.</p><p>The short answer, <strong>no.</strong></p><p>Promise rings can be given for a variety of reasons:</p><p><strong>Loyalty in Relationships: </strong>A Promise ring is a brilliant way to show your commitment and seriousness in a relationship, a way to show your partner your love and that your Promise to stay together through thick & thin!</p><p><strong>A celebration of a milestone</strong>: Whether in a relationship or gifting to a loved friend or family member, a birthday, anniversary or milestone event (like graduating!) are great times to buy someone a Promise Ring. It will serve as a little reminder of such a special time and give you the opportunity to make a Promise. </p><p><strong>Long Distance: </strong>Long distance can be tricky, but having something to look at everyday to \"feel\" your partners presence can certainly help. A Promise Ring is a way to feel constantly connected to your partner no matter the miles between you.</p><p><strong>A promise of future engagement or marriage:</strong> you may not be able to get married due to age, finance or geographical location. You may not even want a wedding... but like the idea of that next step in commitment and want something on your ring finger to say to the world you are in a loving relationship! A Promise Ring is your way of showing commitment without the wedding.</p><p><strong>Acknowledging a Significant Change:</strong> Given during times of significant change, like job transitions, relocations, or other life-altering events... We have seen people buy Promise Rings for their partners as \"Push Presents\" as a Promise to be a great dad (Super cute)</p><p>We like to think of a Promise Ring as your own \"Wearable Story\", it can be a Promise or a reminder of anything that is meaningful to you!</p>"
+          }
+        },
+        "question_kRFnWP": {
+          "type": "question",
+          "settings": {
+            "question": "What is the history of a Promise Ring?",
+            "answer": "<p>The promise ring wasn't an \"official concept\" until the 1970s but the idea started in the ancient times...</p><p>Going right back to ancient Rome, the ‘betrothal ring’ was given as a kind of promise ring. In ancient Greece, rings were worn as a way to keep a loved one constantly on their mind<em> (We love that!)</em></p><p>Fast forward to the early 1700s, where the \"poesy ring\" became popular. It was a ring engraved with a poem or promise to a friend or lover.</p><p>But it didn’t get called a promise ring until the 1970s when it was known as the official pre-engagement ring.</p><p>Today, The Promise Ring Co. is on a mission to redefine the Promise Ring. Whether that be a Promise to yourself, a loved one, your bestie... your mum... every ring is its very own wearable story.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_GyHgaz",
+        "question_pM6NC4",
+        "question_kRFnWP"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "show_categories": false,
+        "subheading": "",
+        "title": "Promise Ring FAQs",
+        "content": ""
+      }
+    }
+  },
+  "order": [
+    "rich_text_cKVycM",
+    "faq",
+    "faq_CzJ7Hz",
+    "faq_agTXqH",
+    "faq_8efLwW"
+  ]
+}

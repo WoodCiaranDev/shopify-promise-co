@@ -1,0 +1,454 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_title": false,
+        "page_width": "xs"
+      }
+    },
+    "promise_title": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_block": {
+          "type": "subheading",
+          "settings": {
+            "text": "Discover"
+          }
+        },
+        "heading_block": {
+          "type": "heading",
+          "settings": {
+            "text": "A world full of promise",
+            "heading_tag": "h1"
+          }
+        },
+        "button_block": {
+          "type": "button",
+          "settings": {
+            "style": "solid",
+            "text": "See promises",
+            "url": "#promise-wall",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_block",
+        "heading_block",
+        "button_block"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": false,
+        "content_width": "lg",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": true,
+        "use_ogg_font": false,
+        "use_compact_spacing": true,
+        "section_id": ""
+      }
+    },
+    "promise_map": {
+      "type": "promise-map",
+      "blocks": {
+        "promise_london": {
+          "type": "promise",
+          "settings": {
+            "title": "Love Always Wins",
+            "content": "I promise to choose love over fear in every decision I make, spreading positivity wherever I go.",
+            "location_name": "London, UK",
+            "latitude": "51.5074",
+            "longitude": "-0.1278"
+          }
+        },
+        "promise_madrid": {
+          "type": "promise",
+          "settings": {
+            "title": "Chase Your Dreams",
+            "content": "I promise to never give up on my dreams and to inspire others to pursue theirs with passion.",
+            "location_name": "Madrid, Spain",
+            "latitude": "40.4168",
+            "longitude": "-3.7038"
+          }
+        },
+        "promise_dublin": {
+          "type": "promise",
+          "settings": {
+            "title": "Be Present",
+            "content": "I promise to live in the moment and appreciate the beauty in everyday life.",
+            "location_name": "Dublin, Ireland",
+            "latitude": "53.3498",
+            "longitude": "-6.2603"
+          }
+        }
+      },
+      "block_order": [
+        "promise_london",
+        "promise_madrid",
+        "promise_dublin"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": false,
+        "map_height": 500,
+        "remove_vertical_spacing": false,
+        "use_compact_spacing": false
+      }
+    },
+    "promise_process_title": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_block": {
+          "type": "subheading",
+          "settings": {
+            "text": "Discover"
+          }
+        },
+        "heading_block": {
+          "type": "heading",
+          "settings": {
+            "text": "How to make your promise:",
+            "heading_tag": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_block",
+        "heading_block"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "content_width": "lg",
+        "text_position": "center",
+        "remove_vertical_spacing": true,
+        "use_baka_too_font": false,
+        "use_ogg_font": true,
+        "use_compact_spacing": true,
+        "section_id": ""
+      }
+    },
+    "promise_steps": {
+      "type": "promise-steps",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "fallback_image": "promise-ring.png",
+            "title": "CHOOSE A RING",
+            "content": "<p>Start with a piece that feels right for your promise - whether it’s to yourself, a friend, or someone you love</p>"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "fallback_image": "promise-cards.png",
+            "title": "WRITE IT DOWN",
+            "content": "<p>Every order comes with a Promise Card, your space to write down your words and make your promise real</p>"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "fallback_image": "promise-sparkles.png",
+            "title": "MAKE IT OFFICIAL",
+            "content": "<p>Post your promise to Promise World... where your words live alongside others, each one part of something bigger</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "remove_vertical_spacing": true,
+        "use_compact_spacing": false
+      }
+    },
+    "promise_form": {
+      "type": "promise-form",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": false,
+        "content_width": "sm",
+        "text_position": "center",
+        "subheading": "MAKE IT OFFICIAL",
+        "title": "Tell us your promise:",
+        "content": "",
+        "button_text": "TELL THE WORLD"
+      }
+    },
+    "promise_community": {
+      "type": "promise-community",
+      "blocks": {
+        "promise_1": {
+          "type": "promise",
+          "settings": {
+            "card_image": "shopify://shop_images/3_3be53fc4-b537-4813-8789-7cb63a677756.png",
+            "author_name": "Felicity Warman",
+            "location": "New York, USA",
+            "promise_content": "I promise to keep choosing you."
+          }
+        },
+        "promise_2": {
+          "type": "promise",
+          "settings": {
+            "card_image": "shopify://shop_images/ryan.jpg",
+            "author_name": "Ryan",
+            "location": "London, UK",
+            "promise_content": "I promise to marry you."
+          }
+        },
+        "promise_3": {
+          "type": "promise",
+          "settings": {
+            "card_image": "shopify://shop_images/1_9d1e70d0-f3f3-44cc-a481-2f22d07a9e71.png",
+            "author_name": "Aisha K",
+            "location": "Canada",
+            "promise_content": "I promise to love myself the way i've always deserved."
+          }
+        },
+        "promise_4": {
+          "type": "promise",
+          "settings": {
+            "card_image": "shopify://shop_images/5_da96e02c-d57b-407d-b58a-c5b67a012c39.png",
+            "author_name": "Amy Waters",
+            "location": "Utah, USA",
+            "promise_content": "I promise to be kinder to myself."
+          }
+        },
+        "promise_5": {
+          "type": "promise",
+          "settings": {
+            "card_image": "shopify://shop_images/2_aba66238-0bfb-400e-bb56-b33126784aaf.png",
+            "author_name": "Grace Victoria Lees",
+            "location": "Bamford, UK",
+            "promise_content": "I promise to never give up on my dreams."
+          }
+        },
+        "promise_6": {
+          "type": "promise",
+          "settings": {
+            "card_image": "shopify://shop_images/7_d17143d2-b8a6-4f89-aafd-2155501118d2.png",
+            "author_name": "Charlotte Davies",
+            "location": "Los Angeles",
+            "promise_content": "I promise to never miss your 3am phone calls."
+          }
+        }
+      },
+      "block_order": [
+        "promise_1",
+        "promise_2",
+        "promise_3",
+        "promise_4",
+        "promise_5",
+        "promise_6"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": false,
+        "title_line_1": "7000+ Promises",
+        "title_line_2": "Already Made",
+        "autoplay": false,
+        "cycle_speed": 5,
+        "button_text": "Make Your Promise",
+        "button_url": "#promise-wall-section",
+        "use_baka_too_font": true,
+        "use_ogg_font": true
+      }
+    },
+    "promise_wall_title": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_block": {
+          "type": "subheading",
+          "settings": {
+            "text": "DISCOVER"
+          }
+        },
+        "heading_block": {
+          "type": "heading",
+          "settings": {
+            "text": "Our Promise Community:",
+            "heading_tag": "h2"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_block",
+        "heading_block"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "content_width": "lg",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": true,
+        "use_compact_spacing": true,
+        "section_id": "promise-wall"
+      }
+    },
+    "promise_wall": {
+      "type": "promise-wall",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "show_counter": true,
+        "initial_load": 8,
+        "load_per_click": 8
+      }
+    },
+    "rich_text_bTU3zT": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_LmqCTC": {
+          "type": "heading",
+          "settings": {
+            "text": "Ready to make your Promise?",
+            "heading_tag": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_LmqCTC"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": true,
+        "use_ogg_font": false,
+        "use_compact_spacing": true,
+        "section_id": ""
+      }
+    },
+    "category_cards_7LUAGX": {
+      "type": "category-cards",
+      "blocks": {
+        "category_image_G4NtY8": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2025-06-23_at_15.11.59.jpg",
+            "title": "Best Sellers",
+            "description": "<p>DISCOVER</p>",
+            "link": "shopify://collections/best-sellers"
+          }
+        },
+        "category_image_KQb6xb": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/1_28863cdf-f265-46c6-995f-4add6c739708.png",
+            "title": "Single Stone Rings",
+            "description": "<p>PROMISE RINGS</p>",
+            "link": "shopify://collections/single-stone-promise-rings"
+          }
+        },
+        "category_image_PkzDeE": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Screenshot_2025-06-23_at_15.11.50.jpg",
+            "title": "Bands & Stacking",
+            "description": "<p>EXPLORE</p>",
+            "link": "shopify://collections/bands-and-stacking-rings"
+          }
+        },
+        "category_image_pPJ389": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_74.png",
+            "title": "Pinky Rings",
+            "description": "<p>OUR CURRENT FAVE</p>",
+            "link": "shopify://collections/pinky-rings"
+          }
+        }
+      },
+      "block_order": [
+        "category_image_G4NtY8",
+        "category_image_KQb6xb",
+        "category_image_PkzDeE",
+        "category_image_pPJ389"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "background_color": "#ffffff",
+        "title_color": "#000000",
+        "subtitle_color": "#666666",
+        "section_padding_top": 0,
+        "section_padding_bottom": 64,
+        "mobile_single_column": false
+      }
+    },
+    "promise_slider": {
+      "type": "promise-slider",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "image_left": "shopify://shop_images/women-hands-left-image.png",
+            "image_right": "shopify://shop_images/hands-right-image.png",
+            "content": "<p><strong>I promise</strong> to support you with everything, always.</p>",
+            "background_color": ""
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "image_left": "shopify://shop_images/women-hands-left-image.png",
+            "image_right": "shopify://shop_images/hands-right-image.png",
+            "content": "<p><strong>I promise</strong> to support you with everything, always.</p>",
+            "background_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2"
+      ],
+      "disabled": true,
+      "settings": {
+        "height": 80,
+        "autoplay": true,
+        "autoplay_speed": 5,
+        "show_dots": true,
+        "background_color": "#ffffff"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "promise_title",
+    "promise_map",
+    "promise_process_title",
+    "promise_steps",
+    "promise_form",
+    "promise_community",
+    "promise_wall_title",
+    "promise_wall",
+    "rich_text_bTU3zT",
+    "category_cards_7LUAGX",
+    "promise_slider"
+  ]
+}

@@ -1,0 +1,448 @@
+{%- comment -%} Get promise entries - Note: Shopify only returns published metaobjects by default {%- endcomment -%}
+{%- assign promise_entries = shop.metaobjects.promise_entry.values -%}
+
+{%- comment -%} Force render - we know the data exists {%- endcomment -%}
+{%- comment -%}
+  ------------------------------------------------------------------------------------------------------------------------
+  CSS - Promise Wall Mosaic Grid Layout
+  ------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --promise-wall-gap: 1.5rem;
+    --promise-card-border-radius: 8px;
+    background-color: white;
+    padding: 3rem 0;
+  }
+
+  .promise-wall {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .promise-wall__header {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .promise-wall__counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: #000000;
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  .promise-wall__sort {
+    font-size: 14px;
+    color: #000000;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .promise-wall__sort select {
+    font-size: 14px;
+    color: #000000;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    padding-right: 15px;
+  }
+
+  /* CSS Columns Masonry Layout */
+  .promise-wall__grid {
+    columns: 1;
+    column-gap: var(--promise-wall-gap);
+  }
+
+  @media screen and (min-width: 768px) {
+    .promise-wall__grid {
+      columns: 2;
+    }
+  }
+
+  @media screen and (min-width: 992px) {
+    .promise-wall__grid {
+      columns: 3;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .promise-wall__grid {
+      columns: 4;
+    }
+  }
+
+  /* Promise Card Styling */
+  .promise-wall-card {
+    background: #F2EEE8;
+    border-radius: 0;
+    padding: 3.5rem 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    margin-bottom: var(--promise-wall-gap);
+    display: inline-block;
+    width: 100%;
+  }
+
+  .promise-wall-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .promise-wall-card__author {
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid #707070;
+  }
+
+  .promise-wall-card__name {
+    font-family: "ogg", serif;
+    font-size: 1.53rem;
+    font-weight: 400;
+    color: #2c2c2c;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .promise-wall-card__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .promise-wall-card__location,
+  .promise-wall-card__date {
+    font-family: "minerva-modern", sans-serif;
+    font-size: 0.85rem;
+    color: #000000;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+  }
+
+  .promise-wall-card__label {
+    font-family: "minerva-modern", sans-serif;
+    font-size: 1.105rem;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .promise-wall-card__content {
+    font-family: "covik-sans", sans-serif;
+    font-size: 1.02rem;
+    line-height: 1.5;
+    color: #000;
+    margin: 0;
+  }
+
+  /* Load More Section */
+  .promise-wall__load-more {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+    gap: 1rem;
+  }
+
+
+  /* Loading states */
+  .promise-wall-card.loading {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .promise-wall-card.loaded {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  /* Responsive adjustments */
+  @media screen and (max-width: 767px) {
+    .promise-wall {
+      padding: 0 1rem;
+    }
+
+    .promise-wall__title {
+      font-size: 2.2rem;
+    }
+
+    .promise-wall-card {
+      padding: 1.25rem;
+    }
+
+    .promise-wall-card__name {
+      font-size: 1.105rem;
+    }
+  }
+</style>
+
+{%- comment -%}
+  ------------------------------------------------------------------------------------------------------------------------
+  LIQUID - Promise Wall Structure
+  ------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+<div class="promise-wall" id="promise-wall-section">
+  {%- assign visible_count = section.settings.initial_load | default: 16 -%}
+  {%- assign total_promises = 0 -%}
+  {%- for promise in promise_entries -%}
+    {%- assign total_promises = total_promises | plus: 1 -%}
+  {%- endfor -%}
+  {%- if visible_count > total_promises -%}
+    {%- assign visible_count = total_promises -%}
+  {%- endif -%}
+
+  <div class="promise-wall__grid" id="promise-grid">
+    {%- for promise in promise_entries limit: section.settings.initial_load -%}
+      <div class="promise-wall-card loaded" data-promise-index="{{ forloop.index0 }}">
+        <div class="promise-wall-card__author">
+          {%- if promise.name != blank -%}
+            <div class="promise-wall-card__name">{{ promise.name }}</div>
+          {%- endif -%}
+
+          {%- if promise.location != blank or promise.date_submitted != blank -%}
+            <div class="promise-wall-card__meta">
+              {%- if promise.location != blank -%}
+                <div class="promise-wall-card__location">{{ promise.location }}</div>
+              {%- endif -%}
+              {%- if promise.date_submitted != blank -%}
+                <div class="promise-wall-card__date">
+                  {{ promise.date_submitted | date: '%B %Y' }}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- if promise.promise_content != blank -%}
+          <div class="promise-wall-card__label">Promises To:</div>
+          <div class="promise-wall-card__content">{{ promise.promise_content }}</div>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- if total_promises > visible_count -%}
+    <div class="promise-wall__load-more">
+      <button class="button button--tertiary" id="load-more-btn">Load More</button>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_counter -%}
+    <div class="promise-wall__counter" id="promise-counter">
+      <div class="promise-wall__counter-text">
+        <span id="visible-count">{{ visible_count }}</span> promises
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+{%- comment -%}
+  ------------------------------------------------------------------------------------------------------------------------
+  JAVASCRIPT - Load More Functionality
+  ------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+<script>
+    // Smooth scroll with header offset
+    document.addEventListener('DOMContentLoaded', function() {
+      // Handle smooth scrolling for anchor links
+      document.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href^="#"]');
+        if (!link) return;
+        
+        const targetId = link.getAttribute('href');
+        if (!targetId || targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (!targetElement) return;
+        
+        e.preventDefault();
+        
+        // Calculate header height using the header section
+        const headerSection = document.querySelector('.shopify-section--header');
+        let offset = 0;
+        
+        if (headerSection) {
+          offset += headerSection.offsetHeight;
+        }
+        
+        // Calculate scroll position
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+        
+        // Smooth scroll to target
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      });
+      
+      const loadMoreBtn = document.getElementById('load-more-btn');
+      const promiseGrid = document.getElementById('promise-grid');
+      const visibleCount = document.getElementById('visible-count');
+
+      
+      let currentlyVisible = {{ visible_count }};
+      const loadPerClick = {{ section.settings.load_per_click | default: 8 }};
+      const totalPromises = {{ total_promises }};
+      
+      // All promise entries data from metaobject
+      const allPromises = [
+        {%- for promise in promise_entries -%}
+        {
+          name: {{ promise.name | json }},
+          location: {{ promise.location | json }},
+          date: {{ promise.date_submitted | date: "%B %Y" | json }},
+          promise_content: {{ promise.promise_content | strip_html | json }}
+        }{%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+      ];
+      
+      // Debug: log the data to see what we're working with
+      console.log('All promises data:', allPromises);
+      console.log('Total promises in JS array:', allPromises.length);
+      console.log('Initially visible:', currentlyVisible);
+      console.log('Total promises from Liquid:', totalPromises);
+
+      if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+          loadMoreBtn.disabled = true;
+          loadMoreBtn.textContent = 'Loading...';
+          
+          const nextBatch = allPromises.slice(currentlyVisible, currentlyVisible + loadPerClick);
+          
+          nextBatch.forEach((promise, index) => {
+            setTimeout(() => {
+              const card = createPromiseCard(promise, currentlyVisible + index);
+              card.classList.add('loading');
+              promiseGrid.appendChild(card);
+              
+              // Trigger animation
+              requestAnimationFrame(() => {
+                card.classList.remove('loading');
+                card.classList.add('loaded');
+              });
+            }, index * 100); // Stagger the animations
+          });
+          
+          currentlyVisible += nextBatch.length;
+          
+          // Update counter
+          if (visibleCount) {
+            visibleCount.textContent = currentlyVisible;
+          }
+          
+          // Hide button if all loaded
+          if (currentlyVisible >= totalPromises) {
+            loadMoreBtn.style.display = 'none';
+          } else {
+            loadMoreBtn.disabled = false;
+            loadMoreBtn.textContent = 'Load More';
+          }
+        });
+      }
+
+      function createPromiseCard(promise, index) {
+        // Debug: log the individual promise data
+        console.log('Creating card for promise:', promise);
+        
+        const card = document.createElement('div');
+        card.className = 'promise-wall-card';
+        card.setAttribute('data-block-index', index);
+        
+        let metaHtml = '';
+        if (promise.location || promise.date) {
+          metaHtml = '<div class="promise-wall-card__meta">';
+          if (promise.location) {
+            metaHtml += `<div class="promise-wall-card__location">${promise.location}</div>`;
+          }
+          if (promise.date) {
+            metaHtml += `<div class="promise-wall-card__date">${promise.date}</div>`;
+          }
+          metaHtml += '</div>';
+        }
+
+        card.innerHTML = `
+          <div class="promise-wall-card__author">
+            ${promise.name ? `<div class="promise-wall-card__name">${promise.name}</div>` : ''}
+            ${metaHtml}
+          </div>
+          ${promise.promise_content ? `
+            <div class="promise-wall-card__label">Promises To:</div>
+            <div class="promise-wall-card__content">${promise.promise_content}</div>
+          ` : ''}
+        `;
+        
+        return card;
+      }
+    });
+</script>
+
+{% schema %}
+{
+  "name": "Promise Wall",
+  "class": "shopify-section--promise-wall",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "separate_section_with_border",
+      "label": "Separate section with border",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Display Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_counter",
+      "label": "Show promise counter",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "initial_load",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "label": "Initial promises to show",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "load_per_click",
+      "min": 4,
+      "max": 16,
+      "step": 4,
+      "label": "Promises to load per click",
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promise Wall"
+    }
+  ]
+}
+{% endschema %}

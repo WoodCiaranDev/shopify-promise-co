@@ -1,0 +1,415 @@
+{%- assign color_scheme_hash = section.settings.color_scheme.settings.background_gradient
+  | default: section.settings.color_scheme.settings.background
+  | md5
+-%}
+
+<style>
+  #promise-form {
+    background-color: #f2eee8 !important;
+  }
+
+  .promise-form-wrapper {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .promise-form .fieldset-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .promise-form .fieldset-row .form-control {
+    width: 100%;
+  }
+
+  .promise-form .fieldset-row .form-control__label--checkbox {
+    text-align: left;
+    width: 100%;
+  }
+
+  .promise-form__submit {
+    text-align: left !important;
+  }
+
+  .promise-form-wrapper input,
+  .promise-form-wrapper textarea {
+    background-color: white;
+  }
+</style>
+
+<div
+  id="promise-form"
+  class="section-spacing color-scheme color-scheme--{{ section.settings.color_scheme.id }} color-scheme--bg-{{ color_scheme_hash }} {% if section.settings.separate_section_with_border %}bordered-section{% endif %}"
+>
+  <div class="container container--{{ section.settings.content_width }}">
+    <div class="section-stack text-{{ section.settings.text_position }}">
+      {%- if section.settings.subheading != blank or section.settings.title != blank -%}
+        {%- render 'section-header',
+          subheading: section.settings.subheading,
+          heading: section.settings.title,
+          content: section.settings.content,
+          text_alignment: section.settings.text_position
+        -%}
+      {%- endif -%}
+
+      {%- comment -%} Promise Form {%- endcomment -%}
+      <div class="promise-form-wrapper">
+        <form class="promise-form form" id="promise-form-element" method="post" action="javascript:void(0)">
+          {%- comment -%} Success/Error Messages {%- endcomment -%}
+          <div id="promise-form-messages" class="promise-form__messages" style="display: none;"></div>
+
+          <div class="fieldset">
+            <div class="fieldset-row">
+              {%- assign name_label = 'promise_form.name' | t | default: 'Name' -%}
+              {%- render 'input',
+                type: 'text',
+                name: 'promise_name',
+                label: name_label,
+                required: true,
+                autocomplete: 'name'
+              -%}
+
+              {%- assign email_label = 'promise_form.email' | t | default: 'Email' -%}
+              {%- render 'input',
+                type: 'email',
+                name: 'promise_email',
+                label: email_label,
+                required: true,
+                autocomplete: 'email'
+              -%}
+            </div>
+
+            <div class="fieldset-row">
+              {%- assign telephone_label = 'promise_form.telephone' | t | default: 'Telephone' -%}
+              {%- render 'input',
+                type: 'tel',
+                name: 'promise_telephone',
+                label: telephone_label,
+                required: false,
+                autocomplete: 'tel'
+              -%}
+
+              {%- assign location_label = 'promise_form.location' | t | default: 'Location' -%}
+              {%- render 'input',
+                type: 'text',
+                name: 'promise_location',
+                label: location_label,
+                required: true,
+                autocomplete: 'address-level2'
+              -%}
+            </div>
+
+            {%- assign promise_label = 'promise_form.promise_content' | t | default: 'Your Promise' -%}
+            {%- render 'input', name: 'promise_content', label: promise_label, required: true, multiline: 4, placeholder: 'promise_form.promise_placeholder' | t -%}
+
+            {%- comment -%} Consent Checkbox {%- endcomment -%}
+            <div class="fieldset-row">
+              <label class="form-control__label form-control__label--checkbox">
+                <input
+                  type="checkbox"
+                  name="promise_consent"
+                  value="yes"
+                  required
+                  checked
+                  class="form-control__checkbox"
+                >
+                <span class="form-control__checkbox-indicator"></span>
+                <span class="form-control__text"> I consent to signing up to newsletters & marketing </span>
+              </label>
+            </div>
+
+            {%- comment -%} Membership Checkbox {%- endcomment -%}
+            <div class="fieldset-row">
+              <label class="form-control__label form-control__label--checkbox">
+                <input type="checkbox" name="promise_membership" value="yes" checked class="form-control__checkbox">
+                <span class="form-control__checkbox-indicator"></span>
+                <span class="form-control__text">
+                  Tick this if you'd like to be a part of our future members points club Co-lab
+                </span>
+              </label>
+            </div>
+          </div>
+
+          {%- comment -%} Submit Button {%- endcomment -%}
+          <div class="promise-form__submit">
+            {%- assign button_content = section.settings.button_text -%}
+            {%- if button_content == blank -%}
+              {%- assign button_content = 'promise_form.submit' | t -%}
+            {%- endif -%}
+            <button type="submit" id="promise-submit-btn" class="button button--primary">
+              <span class="promise-submit-text">{{ button_content }}</span>
+              <span class="promise-submit-loader" style="display: none;">
+                {{- 'promise_form.submitting' | t | default: 'Submitting...' -}}
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- comment -%} Promise Form JavaScript {%- endcomment -%}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    console.log('Promise form script loaded');
+    const form = document.getElementById('promise-form-element');
+    const submitBtn = document.getElementById('promise-submit-btn');
+    const submitText = submitBtn.querySelector('.promise-submit-text');
+    const submitLoader = submitBtn.querySelector('.promise-submit-loader');
+    const messagesContainer = document.getElementById('promise-form-messages');
+
+    console.log('Form element:', form);
+    if (!form) {
+      console.error('Promise form not found!');
+      return;
+    }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      // Disable submit button and show loading
+      submitBtn.disabled = true;
+      submitText.style.display = 'none';
+      submitLoader.style.display = 'inline';
+
+      // Clear previous messages
+      messagesContainer.style.display = 'none';
+      messagesContainer.innerHTML = '';
+
+      // Get form data
+      const formData = new FormData(form);
+
+      // Debug: Log all form fields
+      console.log('Form fields:');
+      for (let [key, value] of formData.entries()) {
+        console.log(key + ': ' + value);
+      }
+
+      const promiseData = {
+        name: formData.get('promise_name'),
+        email: formData.get('promise_email'),
+        telephone: formData.get('promise_telephone') || '',
+        location: formData.get('promise_location'),
+        promise_content: formData.get('promise_content'),
+        consent: formData.get('promise_consent') === 'yes',
+        membership: formData.get('promise_membership') === 'yes',
+      };
+
+      // Debug: Log extracted data
+      console.log('Extracted promise data:', promiseData);
+      console.log(
+        'Promise content length:',
+        promiseData.promise_content ? promiseData.promise_content.length : 'undefined'
+      );
+
+      // Validate consent
+      if (!promiseData.consent) {
+        showMessage(
+          '{{ "promise_form.error_consent" | t | default: "Please agree to the terms and conditions." }}',
+          'error'
+        );
+        resetSubmitButton();
+        return;
+      }
+
+      // Validate required fields
+      if (!promiseData.name || !promiseData.email || !promiseData.location || !promiseData.promise_content) {
+        showMessage(
+          '{{ "promise_form.error_required" | t | default: "Please fill in all required fields." }}',
+          'error'
+        );
+        resetSubmitButton();
+        return;
+      }
+
+      // Validate field lengths
+      if (promiseData.name.length < 2 || promiseData.name.length > 100) {
+        showMessage(
+          '{{ "promise_form.error_name_length" | t | default: "Name must be between 2 and 100 characters." }}',
+          'error'
+        );
+        resetSubmitButton();
+        return;
+      }
+
+      if (promiseData.location.length < 2 || promiseData.location.length > 100) {
+        showMessage(
+          '{{ "promise_form.error_location_length" | t | default: "Location must be between 2 and 100 characters." }}',
+          'error'
+        );
+        resetSubmitButton();
+        return;
+      }
+
+      if (promiseData.promise_content.length < 10 || promiseData.promise_content.length > 500) {
+        showMessage(
+          '{{ "promise_form.error_content_length" | t | default: "Promise must be between 10 and 500 characters." }}',
+          'error'
+        );
+        resetSubmitButton();
+        return;
+      }
+
+      // Submit to Google Apps Script webhook
+      try {
+        const response = await fetch(
+          'https://script.google.com/macros/s/AKfycbxokwM3SiD-4Y3wWN5FLTA45H5Iqufu5D1HsWjhUzOQUjqTSUJDPPjBBTaSGQolVi6k/exec',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'text/plain;charset=utf-8',
+            },
+            redirect: 'follow',
+            body: JSON.stringify(promiseData),
+          }
+        );
+
+        const result = await response.json();
+
+        if (result.success === true) {
+          // Success
+          showMessage(
+            '{{ "promise_form.success_message" | t | default: "Thank you! Your promise has been submitted successfully." }}',
+            'success'
+          );
+          form.reset();
+          // Prevent resubmission by keeping button disabled for a moment
+          setTimeout(() => {
+            resetSubmitButton();
+          }, 2000);
+        } else {
+          // Error from webhook
+          const error =
+            result.error ||
+            '{{ "promise_form.error_general" | t | default: "There was an error submitting your promise. Please try again." }}';
+          showMessage(error, 'error');
+          resetSubmitButton();
+        }
+      } catch (error) {
+        console.error('Promise submission error:', error);
+        showMessage(
+          '{{ "promise_form.error_network" | t | default: "Network error. Please check your connection and try again." }}',
+          'error'
+        );
+        resetSubmitButton();
+      }
+    });
+
+    function showMessage(message, type) {
+      messagesContainer.innerHTML = `
+      <div class="banner banner--${type}">
+        <div class="banner__content">${message}</div>
+      </div>
+    `;
+      messagesContainer.style.display = 'block';
+      messagesContainer.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetSubmitButton() {
+      submitBtn.disabled = false;
+      submitText.style.display = 'inline';
+      submitLoader.style.display = 'none';
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Promise Form",
+  "class": "shopify-section--promise-form",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "separate_section_with_border",
+      "label": "Separate section with border",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "Content width",
+      "options": [
+        {
+          "value": "xs",
+          "label": "Extra small"
+        },
+        {
+          "value": "sm",
+          "label": "Small"
+        },
+        {
+          "value": "md",
+          "label": "Medium"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        }
+      ],
+      "default": "sm"
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Heading",
+      "default": "Tell us your promise:"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "TELL THE WORLD"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promise Form",
+      "settings": {
+        "title": "Tell us your promise:",
+        "subheading": "MAKE IT OFFICIAL"
+      }
+    }
+  ]
+}
+{% endschema %}

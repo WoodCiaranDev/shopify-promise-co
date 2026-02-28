@@ -1,0 +1,90 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+MEGA MENU COMPONENT
+----------------------------------------------------------------------------------------------------------------------
+
+Render the mega-menu. The mega-menu is a kind of menu optimized for showing a large number of items into several
+columns.
+
+********************************************
+Supported variables
+********************************************
+
+* link: the link from which we need to render the mega-menu. The link must always be a second level link, but it can
+        also be empty (no links), which is the case if the merchant only want to show images, for instance.
+* block: the block containing all the information about the menu to render
+{%- endcomment -%}
+
+<div class="mega-menu {% if block.settings.images_position == 'left' %}mega-menu--reverse{% endif %}{% if block.settings.debug_mode %} mega-menu--debug{% endif %}" {{ block.shopify_attributes }}>
+  {%- if block.settings.debug_mode -%}
+    <div style="position: absolute; top: 0; right: 0; background: #ff0000; color: white; padding: 2px 8px; font-size: 12px; z-index: 9999;">DEBUG MODE</div>
+  {%- endif -%}
+  {%- if link.levels > 0 -%}
+    <ul class="mega-menu__linklist unstyled-list">
+      {%- for sub_link in link.links -%}
+        <li class="v-stack justify-items-start gap-5">
+          <a href="{{ sub_link.url }}" class="h6 mega-menu__link--with-icon">
+            {%- render 'diamond-shape-icon', shape: sub_link.title -%}
+            <span>{{ sub_link.title }}</span>
+          </a>
+
+          {%- if sub_link.links.size > 0 -%}
+            <ul class="v-stack gap-2.5 unstyled-list">
+              {%- for sub_sub_link in sub_link.links -%}
+                <li>
+                  <a href="{{ sub_sub_link.url }}" class="link-faded mega-menu__link--with-icon">
+                    {%- render 'diamond-shape-icon', shape: sub_sub_link.title -%}
+                    <span>{{ sub_sub_link.title }}</span>
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+
+  {%- comment -%}Collection Launch Component for Desktop{%- endcomment -%}
+  {%- if section.settings.show_collection_countdown -%}
+    <div class="c-collection-launch c-collection-launch--desktop">
+      <h6 class="c-collection-launch__title">Next Collection Launch</h6>
+      {%- assign date_parts = section.settings.countdown_date | split: '-' -%}
+      {%- assign countdown_date_formatted = date_parts[2] | append: '-' | append: date_parts[1] | append: '-' | append: date_parts[0] -%}
+      <div class="c-collection-launch__countdown" data-countdown-date="{{ countdown_date_formatted }}T00:00:00">
+        <div class="c-collection-launch__countdown-row">
+          <div class="c-collection-launch__countdown-item">
+            <span class="c-collection-launch__countdown-label">Months:</span>
+            <span class="c-collection-launch__countdown-value" data-months>00</span>
+          </div>
+          <div class="c-collection-launch__countdown-item">
+            <span class="c-collection-launch__countdown-label">Days:</span>
+            <span class="c-collection-launch__countdown-value" data-days>00</span>
+          </div>
+          <div class="c-collection-launch__countdown-item">
+            <span class="c-collection-launch__countdown-label">Hours:</span>
+            <span class="c-collection-launch__countdown-value" data-hours>00</span>
+          </div>
+          <div class="c-collection-launch__countdown-item">
+            <span class="c-collection-launch__countdown-label">Minutes:</span>
+            <span class="c-collection-launch__countdown-value" data-minutes>00</span>
+          </div>
+          <div class="c-collection-launch__countdown-item">
+            <span class="c-collection-launch__countdown-label">Seconds:</span>
+            <span class="c-collection-launch__countdown-value" data-seconds>00</span>
+          </div>
+        </div>
+      </div>
+      <div class="c-collection-launch__image">
+        {%- if section.settings.countdown_image != blank -%}
+          {{ section.settings.countdown_image | image_url: width: 500 | image_tag:
+            loading: 'lazy',
+            alt: 'Next Collection',
+            class: 'c-collection-launch__img'
+          }}
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+</div>

@@ -1,0 +1,505 @@
+/* Mobile Menu Component - BEM Style */
+
+.o-mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s ease, opacity 0.3s ease;
+}
+
+.o-mobile-menu.is-open {
+  visibility: visible;
+}
+
+.o-mobile-menu.is-visible {
+  opacity: 1;
+}
+
+/* Overlay */
+.o-mobile-menu__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  transition: opacity 0.3s ease;
+}
+
+/* Container */
+.o-mobile-menu__container {
+  position: relative;
+  width: 100%;
+  max-width: 375px;
+  height: calc(100dvh - 37px);
+  background-color: #F2EEE8;
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.o-mobile-menu.is-visible .o-mobile-menu__container {
+  transform: translateX(0);
+}
+
+/* Header */
+.o-mobile-menu__header {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #F2EEE8;
+}
+
+/* Close Button */
+.o-mobile-menu__close {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  transition: opacity 0.2s ease;
+}
+
+.o-mobile-menu__close:hover {
+  opacity: 0.7;
+}
+
+/* Panel Container */
+.o-mobile-menu__panels {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  min-height: 0;
+}
+
+/* Individual Panel */
+.o-mobile-menu__panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  overflow-y: auto;
+}
+
+.o-mobile-menu__panel[data-panel-level="main"] {
+  display: flex;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.o-mobile-menu__panel.is-active {
+  display: flex;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.o-mobile-menu__panel[data-panel-level="secondary"],
+.o-mobile-menu__panel[data-panel-level="tertiary"] {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+/* Panel Scroller */
+.o-mobile-menu__scroller {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+/* Back Button */
+.o-mobile-menu__back {
+  font-family: "covik-sans", sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #000000;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.5rem;
+  gap: 10px;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.o-mobile-menu__back:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Navigation */
+.o-mobile-menu__nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.o-mobile-menu__nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.o-mobile-menu__nav-item {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: none;
+}
+
+/* Navigation Links */
+.o-mobile-menu__nav-link {
+  font-family: "minerva-modern", serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #000000;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border: none;
+  border-top: none;
+  border-bottom: none;
+  background: none;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Sub panel navigation links (secondary and tertiary) */
+.o-mobile-menu__panel[data-panel-level="secondary"] .o-mobile-menu__nav-link,
+.o-mobile-menu__panel[data-panel-level="tertiary"] .o-mobile-menu__nav-link {
+  font-family: "covik-sans", sans-serif;
+  font-size: 17px;
+  text-transform: none;
+}
+
+/* Navigation links with icons */
+.o-mobile-menu__nav-link--with-icon {
+  justify-content: flex-start;
+  gap: 0.75rem;
+}
+
+.o-mobile-menu__nav-link--with-icon .diamond-shape-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+
+.o-mobile-menu__nav-link--has-children::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M4.5 2.25L8.25 6L4.5 9.75' stroke='%23000000' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.2s ease;
+}
+
+/* Highlighted navigation links (red and bold) */
+.o-mobile-menu__nav-link.o-mobile-menu__nav-link--highlighted,
+.mega-menu__link--with-icon.o-mobile-menu__nav-link--highlighted {
+  color: #cc0000 !important;
+  font-weight: bold;
+}
+
+/* Dividers */
+
+/* Collection Launch Component */
+.c-collection-launch {
+  margin-top: 2rem;
+  padding: 1rem 0;
+  border-top: 1px solid #D3D3D3;
+  border-bottom: 1px solid #D3D3D3;
+}
+
+.c-collection-launch__title {
+  font-family: "minerva-modern", serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #000000;
+  margin: 0;
+  margin-bottom: 1rem;
+  font-weight: lighter;
+}
+
+.c-collection-launch__content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.c-collection-launch__countdown {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.c-collection-launch__countdown-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.c-collection-launch__countdown-label {
+  font-family: "covik-sans", sans-serif;
+  font-size: 14px;
+  color: #000000;
+  min-width: 70px;
+}
+
+.c-collection-launch__countdown-value {
+  font-family: "minerva-modern", serif;
+  font-size: 14px;
+  color: #000000;
+  line-height: 1;
+}
+
+.c-collection-launch__image {
+  flex: 1;
+}
+
+.c-collection-launch__image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  filter: blur(8px);
+}
+
+/* Footer */
+.o-mobile-menu__footer {
+  padding: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #F2EEE8;
+}
+
+.o-mobile-menu__footer-link {
+  font-family: "covik-sans", sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #000000;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: opacity 0.2s ease;
+}
+
+.o-mobile-menu__footer-link:hover {
+  opacity: 0.7;
+}
+
+/* Localization Selectors */
+.o-mobile-menu__localization {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.o-mobile-menu__localization .localization-toggle {
+  color: #000000;
+}
+
+/* Panel State Classes */
+.o-mobile-menu__panel.is-top {
+  z-index: 3;
+}
+
+.o-mobile-menu__panel.is-secondary {
+  z-index: 2;
+}
+
+.o-mobile-menu__panel.is-tertiary {
+  z-index: 1;
+}
+
+/* Animation States */
+.o-mobile-menu__panel--entering {
+  animation: slideInRight 0.3s ease-out forwards;
+}
+
+.o-mobile-menu__panel--leaving {
+  animation: slideOutLeft 0.3s ease-out forwards;
+}
+
+/* Animations */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+/* Prevent body scroll when menu is open */
+body.mobile-menu-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  .o-mobile-menu__container {
+    max-width: 100%;
+    width: 85%;
+  }
+}
+
+@media (max-width: 480px) {
+  .o-mobile-menu__container {
+    width: 100%;
+  }
+}
+
+/* Shop All Button */
+.o-mobile-menu__shop-all {
+  padding: 0 1rem 30px 1rem;
+  background-color: #F2EEE8;
+}
+
+.o-mobile-menu__shop-all-link {
+  font-family: "covik-sans", sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #000000;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.o-mobile-menu__shop-all-link:hover {
+  opacity: 0.7;
+}
+
+/* Featured Collections */
+.o-mobile-menu__featured-collections {
+  display: flex;
+  gap: 5px;
+  padding: 0 1rem;
+  margin-top: 20px;
+  background-color: #F2EEE8;
+}
+
+.o-mobile-menu__featured-collection {
+  flex: 1;
+  width: 50%;
+}
+
+.o-mobile-menu__featured-collection-link {
+  display: block;
+  text-decoration: none;
+  color: #000000;
+  transition: opacity 0.2s ease;
+}
+
+.o-mobile-menu__featured-collection-link:hover {
+  opacity: 0.8;
+}
+
+.o-mobile-menu__featured-collection-image {
+  position: relative;
+  width: 100%;
+  padding-bottom: 133.33%; /* 15:20 aspect ratio (20/15 = 1.3333) */
+  background-color: #f5f5f5;
+  overflow: hidden;
+}
+
+.o-mobile-menu__featured-collection-image img,
+.o-mobile-menu__featured-collection-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.o-mobile-menu__featured-collection-title {
+  display: block;
+  margin-top: 10px;
+  font-family: "covik-sans", sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Promotional Block */
+.o-mobile-menu__promo-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 180px;
+  background-color: #62AFE1;
+  color: #FFFFFF;
+  text-decoration: none;
+  margin: 1rem;
+  transition: opacity 0.2s ease;
+}
+
+.o-mobile-menu__promo-block:hover {
+  opacity: 0.9;
+}
+
+.o-mobile-menu__promo-block span {
+  font-family: "baka-too", "minerva-modern", serif;
+  font-size: 30px;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+/* Accessibility improvements */
+.o-mobile-menu__nav-link:focus,
+.o-mobile-menu__close:focus,
+.o-mobile-menu__back:focus,
+.o-mobile-menu__shop-all-link:focus {
+  outline: 2px solid #000000;
+  outline-offset: 2px;
+}

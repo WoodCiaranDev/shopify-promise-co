@@ -1,0 +1,228 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "color_scheme": "scheme-b68b61c5-ba0e-4161-a0e3-3d59622e9bf4",
+        "show_title": true,
+        "page_width": "xs"
+      }
+    },
+    "image_with_text_overlay_N7xfeh": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_kXfWRe": {
+          "type": "heading",
+          "settings": {
+            "text": "",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_Jmm7yX": {
+          "type": "richtext",
+          "settings": {
+            "content": "<h1>2 year warranty</h1><p><em>\"We promise to look after you\"</em></p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_kXfWRe",
+        "richtext_Jmm7yX"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-d5edcbdb-8201-4756-b51e-e475c222d050",
+        "image_size": "auto",
+        "allow_transparent_header": false,
+        "reveal_on_scroll": true,
+        "remove_vertical_spacing": true,
+        "content_width": "md",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "rich_text_z3pPMt": {
+      "type": "rich-text",
+      "blocks": {
+        "richtext_M38mpm": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>At The Promise Ring Co. we are committed to providing you with exceptional service and ensuring that your purchase of your ring is a truly special and sentimental experience. We understand that these pieces aren't just jewellery; they are symbols of love, commitment, and cherished moments. </p><p>That's why we stand by our products and offer a 2-year guarantee to give you peace of mind*</p>"
+          }
+        }
+      },
+      "block_order": [
+        "richtext_M38mpm"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "images_with_text_scroll_tqHbEJ": {
+      "type": "images-with-text-scroll",
+      "blocks": {
+        "image_with_text_PkF3xR": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/3_36a55e43-fc27-4da6-8dbd-545cadf7ffaa.png",
+            "subheading": "",
+            "title": "",
+            "content": "<h2>repair & replace</h2><p>Our 5-year guarantee covers the following:</p><p><strong>Repair:</strong> If your jewellery shows a clear manufacturing fault, we will repair it free of charge within the first 5 years from the date of purchase</p><p><strong>Replacement: </strong>If, in rare cases, we are unable to repair your jewellery, we will provide you with an entirely new, identical ring for a small fee. If we do not stock your style, we will work with you to find a close alternative</p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "solid"
+          }
+        },
+        "image_with_text_3FkyiW": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/9_c0662fe6-e990-44c8-9dce-014fe56f6b64.png",
+            "subheading": "",
+            "title": "exclusions",
+            "content": "<p>Please note that our guarantee does not cover damages or defects resulting from:</p><p><em>Normal wear and tear, or fading of plating</em></p><p><em><strong>Accidental damage, including but not limited to scratches, dents, or bent rings</strong></em></p><p><em>Unauthorised modifications or repairs performed by third parties</em></p><p><em><strong>Damage caused by misuse, neglect, or improper care</strong></em></p><p><em>The warranty only applies to the size and style of the ring you originally purchased. Replacements in a different size or style are not covered under the warranty</em></p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "solid"
+          }
+        },
+        "image_with_text_N4fA9W": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/10_e09b96b5-a075-4eff-864f-94f64621b677.png",
+            "subheading": "",
+            "title": "requesting warranty coverage",
+            "content": "<p>If you believe your jewellery has a manufacturing fault and is covered under our guarantee, please follow these steps:</p><p>Contact our Customer Service: <a href=\"mailto:info@thepromiseringco.com\">info@thepromise</a><a href=\"mailto:info@thepromiseringco.com\">co.com</a> to initiate the warranty claim</p><p>Provide your original order information, including the order number and date of purchase</p><p>Describe the issue with your jewellery and provide clear photographs if possible</p><p>Our Customer Service team will guide you through the process of returning your item for assessment</p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "solid"
+          }
+        }
+      },
+      "block_order": [
+        "image_with_text_PkF3xR",
+        "image_with_text_3FkyiW",
+        "image_with_text_N4fA9W"
+      ],
+      "settings": {
+        "color_scheme": "scheme-d5edcbdb-8201-4756-b51e-e475c222d050",
+        "background_image": "shopify://shop_images/2_f3839625-40ab-46ac-bd8a-ad64dcb8c2ec.png",
+        "image_position": "start",
+        "text_alignment": "start",
+        "heading_tag": "h3",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "rich_text_RbxdcL": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_NQ6j8M": {
+          "type": "heading",
+          "settings": {
+            "text": "Ready to make your Promise?",
+            "heading_tag": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_NQ6j8M"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": true,
+        "use_ogg_font": false,
+        "use_compact_spacing": true,
+        "section_id": ""
+      }
+    },
+    "category_cards_HqLmjE": {
+      "type": "category-cards",
+      "blocks": {
+        "category_image_mf6HFH": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/2_080efb18-8960-4515-8029-cb2da2f60254.png",
+            "title": "Best Sellers",
+            "description": "<p>DISCOVER</p>",
+            "link": "shopify://collections/best-sellers"
+          }
+        },
+        "category_image_tR6L73": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/4_18c5bbdd-e181-4b3a-8e3c-2411e576827f.png",
+            "title": "Single Stone Rings",
+            "description": "<p>PROMISE RINGS</p>",
+            "link": "shopify://collections/single-stone-promise-rings"
+          }
+        },
+        "category_image_gicyGG": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/3_86b63cb8-1679-4cbb-a63d-f90c8d38b8c5.png",
+            "title": "Bands & Stacking",
+            "description": "<p>EXPLORE</p>",
+            "link": "shopify://collections/bands-and-stacking-rings"
+          }
+        },
+        "category_image_XheEUA": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/1_22bcb349-9582-4cdc-90a1-76c536b995d1.png",
+            "title": "Pinky Rings",
+            "description": "<p>OUR CURRENT FAVE</p>",
+            "link": "shopify://collections/pinky-rings"
+          }
+        }
+      },
+      "block_order": [
+        "category_image_mf6HFH",
+        "category_image_tR6L73",
+        "category_image_gicyGG",
+        "category_image_XheEUA"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "background_color": "#ffffff",
+        "title_color": "#000000",
+        "subtitle_color": "#666666",
+        "section_padding_top": 0,
+        "section_padding_bottom": 64,
+        "mobile_single_column": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_with_text_overlay_N7xfeh",
+    "rich_text_z3pPMt",
+    "images_with_text_scroll_tqHbEJ",
+    "rich_text_RbxdcL",
+    "category_cards_HqLmjE"
+  ]
+}

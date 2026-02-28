@@ -1,0 +1,153 @@
+<div class="section-spacing color-scheme color-scheme--scheme-1">
+  <div class="container container--sm">
+    <div class="ring-size-guide">
+      <div class="ring-size-guide__icon">
+        <img src="{{ 'promise-ring.png' | asset_url }}" alt="Promise Ring" width="120">
+      </div>
+
+      <h1 class="ring-size-guide__title ogg-font">Our Size Guide</h1>
+
+      <div class="ring-size-guide__intro prose">
+        <p>We now offer US sizes 4-10 across all women's rings, and 8-13 in our men's collection. All our rings follow standard US sizing.</p>
+        <p>At the moment, we don't offer half sizes – but we've included a sizing guide below to help you find your best fit.</p>
+        <p>If your size isn't available, we'd love to hear from you. Please get in touch via our contact page – we're always open to expanding our range based on customer feedback.</p>
+      </div>
+
+      <div class="ring-size-guide__table-wrapper">
+        <table class="ring-size-guide__table table--lg">
+          <thead>
+            <tr>
+              <th>US/Promise Co</th>
+              <th>Diameter (mm)</th>
+              <th>Circumference (mm)</th>
+              <th>UK</th>
+              <th>Europe</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>4</td>
+              <td>14.9</td>
+              <td>46.8</td>
+              <td>H ½</td>
+              <td>47</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>15.7</td>
+              <td>49.3</td>
+              <td>J ½</td>
+              <td>49.3</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>16.5</td>
+              <td>51.9</td>
+              <td>L ½</td>
+              <td>51.9</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>17.3</td>
+              <td>54.5</td>
+              <td>N ½</td>
+              <td>54.4</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>18.1</td>
+              <td>57</td>
+              <td>P ½</td>
+              <td>57</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>18.9</td>
+              <td>59.5</td>
+              <td>R ½</td>
+              <td>59.5</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>19.8</td>
+              <td>62.1</td>
+              <td>T ½</td>
+              <td>62.1</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>20.6</td>
+              <td>64.6</td>
+              <td>V ½</td>
+              <td>64.6</td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>21.4</td>
+              <td>67.2</td>
+              <td>X ½</td>
+              <td>67.2</td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td>22.2</td>
+              <td>70</td>
+              <td>Z ½</td>
+              <td>70</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      {%- assign pdf_url = settings.size_guide_pdf_url | default: section.settings.pdf_link -%}
+      {%- if pdf_url == blank -%}
+        {%- assign pdf_url = 'size-guide-promise-co-130126.pdf' | file_url -%}
+      {%- endif -%}
+
+      <div class="ring-size-guide__cta">
+        <h2 class="ring-size-guide__title ogg-font">Still Not Sure?</h2>
+        <p class="ring-size-guide__text">Use our <a href="{{ pdf_url }}" target="_blank" style="text-decoration: underline;" download>handy printable PDF</a> to help you find your ring size</p>
+      </div>
+
+      {% if section.settings.preview_image != blank %}
+        <div class="ring-size-guide__preview" style="margin: 2rem auto; max-width: 400px;">
+          <a href="{{ pdf_url }}" target="_blank" download>
+            <img
+              src="{{ section.settings.preview_image | image_url: width: 600 }}"
+              alt="Ring Size Guide Preview"
+              width="600"
+              loading="lazy"
+              class="ring-size-guide__preview-image"
+              style="width: 100%; height: auto; display: block; border: 1px solid #e5e5e5;"
+            >
+          </a>
+        </div>
+      {% endif %}
+
+      <div class="ring-size-guide__actions">
+        <a href="{{ pdf_url }}" class="button ring-size-guide__btn" target="_blank" download>DOWNLOAD OUR RING SIZER</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Ring Size Guide Content",
+  "tag": "section",
+  "class": "shopify-section--ring-size-guide-content",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "preview_image",
+      "label": "PDF Preview Image"
+    },
+    {
+      "type": "url",
+      "id": "pdf_link",
+      "label": "PDF Download Link (Override)",
+      "info": "Leave blank to use the global Size Guide PDF from Theme Settings"
+    }
+  ]
+}
+{% endschema %}

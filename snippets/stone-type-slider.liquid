@@ -1,0 +1,164 @@
+{%- comment -%}
+  Stone Type Slider
+  Renders a Swiper slider of stone types from theme settings.
+
+  Usage: {% render 'stone-type-slider' %}
+{%- endcomment -%}
+
+{%- assign has_stone_types = false -%}
+{%- if settings.stone_type_1_image != blank or settings.stone_type_2_image != blank or settings.stone_type_3_image != blank or settings.stone_type_4_image != blank or settings.stone_type_5_image != blank or settings.stone_type_6_image != blank or settings.stone_type_7_image != blank or settings.stone_type_8_image != blank or settings.stone_type_9_image != blank or settings.stone_type_10_image != blank or settings.stone_type_11_image != blank -%}
+  {%- assign has_stone_types = true -%}
+{%- endif -%}
+
+{%- if has_stone_types -%}
+  {%- assign slider_id = 'stone-slider-' | append: section.id -%}
+
+  <div class="stone-slider">
+    <div class="swiper stone-swiper" id="{{ slider_id }}">
+      <div class="swiper-wrapper">
+        {%- if settings.stone_type_1_image != blank -%}
+          <div class="swiper-slide stone-slide">
+            <a href="{{ settings.stone_type_1_link }}" class="stone-slide__link">
+              <div class="stone-slide__image">
+                {{- settings.stone_type_1_image | image_url: width: 400 | image_tag: loading: 'lazy', sizes: '(max-width: 767px) 200px, 180px', widths: '180,200,360,400' -}}
+              </div>
+              {%- if settings.stone_type_1_title != blank -%}
+                <p class="stone-slide__title">{{ settings.stone_type_1_title }}</p>
+              {%- endif -%}
+            </a>
+          </div>
+        {%- endif -%}
+
+        {%- if settings.stone_type_2_image != blank -%}
+          <div class="swiper-slide stone-slide">
+            <a href="{{ settings.stone_type_2_link }}" class="stone-slide__link">
+              <div class="stone-slide__image">
+                {{- settings.stone_type_2_image | image_url: width: 400 | image_tag: loading: 'lazy', sizes: '(max-width: 767px) 200px, 180px', widths: '180,200,360,400' -}}
+              </div>
+              {%- if settings.stone_type_2_title != blank -%}
+                <p class="stone-slide__title">{{ settings.stone_type_2_title }}</p>
+              {%- endif -%}
+            </a>
+          </div>
+        {%- endif -%}
+
+        {%- if settings.stone_type_3_image != blank -%}
+          <div class="swiper-slide stone-slide">
+            <a href="{{ settings.stone_type_3_link }}" class="stone-slide__link">
+              <div class="stone-slide__image">
+                {{- settings.stone_type_3_image | image_url: width: 400 | image_tag: loading: 'lazy', sizes: '(max-width: 767px) 200px, 180px', widths: '180,200,360,400' -}}
+              </div>
+              {%- if settings.stone_type_3_title != blank -%}
+                <p class="stone-slide__title">{{ settings.stone_type_3_title }}</p>
+              {%- endif -%}
+            </a>
+          </div>
+        {%- endif -%}
+
+        {%- if settings.stone_type_4_image != blank -%}
+          <div class="swiper-slide stone-slide">
+            <a href="{{ settings.stone_type_4_link }}" class="stone-slide__link">
+              <div class="stone-slide__image">
+                {{- settings.stone_type_4_image | image_url: width: 400 | image_tag: loading: 'lazy', sizes: '(max-width: 767px) 200px, 180px', widths: '180,200,360,400' -}}
+              </div>
+              {%- if settings.stone_type_4_title != blank -%}
+                <p class="stone-slide__title">{{ settings.stone_type_4_title }}</p>
+              {%- endif -%}
+            </a>
+          </div>
+        {%- endif -%}
+
+        {%- if settings.stone_type_5_image != blank -%}
+          <div class="swiper-slide stone-slide">
+            <a href="{{ settings.stone_type_5_link }}" class="stone-slide__link">
+              <div class="stone-slide__image">
+                {{- settings.stone_type_5_image | image_url: width: 400 | image_tag: loading: 'lazy', sizes: '(max-width: 767px) 200px, 180px', widths: '180,200,360,400' -}}
+              </div>
+              {%- if settings.stone_type_5_title != blank -%}
+                <p class="stone-slide__title">{{ settings.stone_type_5_title }}</p>
+              {%- endif -%}
+            </a>
+          </div>
+        {%- endif -%}
+
+        {%- if settings.stone_type_6_image != blank -%}
+          <div class="swiper-slide stone-slide">
+            <a href="{{ settings.stone_type_6_link }}" class="stone-slide__link">
+              <div class="stone-slide__image">
+                {{- settings.stone_type_6_image | image_url: width: 400 | image_tag: loading: 'lazy', sizes: '(max-width: 767px) 200px, 180px', widths: '180,200,360,400' -}}
+              </div>
+              {%- if settings.stone_type_6_title != blank -%}
+                <p class="stone-slide__title">{{ settings.stone_type_6_title }}</p>
+              {%- endif -%}
+            </a>
+          </div>
+        {%- endif -%}
+
+        {%- if settings.stone_type_7_image != blank -%}
+          <div class="swiper-slide stone-slide">
+            <a href="{{ settings.stone_type_7_link }}" class="stone-slide__link">
+              <div class="stone-slide__image">
+                {{- settings.stone_type_7_image | image_url: width: 400 | image_tag: loading: 'lazy', sizes: '(max-width: 767px) 200px, 180px', widths: '180,200,360,400' -}}
+              </div>
+              {%- if settings.stone_type_7_title != blank -%}
+                <p class="stone-slide__title">{{ settings.stone_type_7_title }}</p>
+              {%- endif -%}
+            </a>
+          </div>
+        {%- endif -%}
+
+        {%- if settings.stone_type_8_image != blank -%}
+          <div class="swiper-slide stone-slide">
+            <a href="{{ settings.stone_type_8_link }}" class="stone-slide__link">
+              <div class="stone-slide__image">
+                {{- settings.stone_type_8_image | image_url: width: 400 | image_tag: loading: 'lazy', sizes: '(max-width: 767px) 200px, 180px', widths: '180,200,360,400' -}}
+              </div>
+              {%- if settings.stone_type_8_title != blank -%}
+                <p class="stone-slide__title">{{ settings.stone_type_8_title }}</p>
+              {%- endif -%}
+            </a>
+          </div>
+        {%- endif -%}
+
+        {%- if settings.stone_type_9_image != blank -%}
+          <div class="swiper-slide stone-slide">
+            <a href="{{ settings.stone_type_9_link }}" class="stone-slide__link">
+              <div class="stone-slide__image">
+                {{- settings.stone_type_9_image | image_url: width: 400 | image_tag: loading: 'lazy', sizes: '(max-width: 767px) 200px, 180px', widths: '180,200,360,400' -}}
+              </div>
+              {%- if settings.stone_type_9_title != blank -%}
+                <p class="stone-slide__title">{{ settings.stone_type_9_title }}</p>
+              {%- endif -%}
+            </a>
+          </div>
+        {%- endif -%}
+
+        {%- if settings.stone_type_10_image != blank -%}
+          <div class="swiper-slide stone-slide">
+            <a href="{{ settings.stone_type_10_link }}" class="stone-slide__link">
+              <div class="stone-slide__image">
+                {{- settings.stone_type_10_image | image_url: width: 400 | image_tag: loading: 'lazy', sizes: '(max-width: 767px) 200px, 180px', widths: '180,200,360,400' -}}
+              </div>
+              {%- if settings.stone_type_10_title != blank -%}
+                <p class="stone-slide__title">{{ settings.stone_type_10_title }}</p>
+              {%- endif -%}
+            </a>
+          </div>
+        {%- endif -%}
+
+        {%- if settings.stone_type_11_image != blank -%}
+          <div class="swiper-slide stone-slide">
+            <a href="{{ settings.stone_type_11_link }}" class="stone-slide__link">
+              <div class="stone-slide__image">
+                {{- settings.stone_type_11_image | image_url: width: 400 | image_tag: loading: 'lazy', sizes: '(max-width: 767px) 200px, 180px', widths: '180,200,360,400' -}}
+              </div>
+              {%- if settings.stone_type_11_title != blank -%}
+                <p class="stone-slide__title">{{ settings.stone_type_11_title }}</p>
+              {%- endif -%}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}

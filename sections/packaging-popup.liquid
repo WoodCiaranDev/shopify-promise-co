@@ -1,0 +1,73 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+PACKAGING POPUP
+----------------------------------------------------------------------------------------------------------------------
+
+A centered modal popup showing packaging information with an image on the left and content on the right.
+Triggered via aria-controls targeting the modal ID.
+{%- endcomment -%}
+
+<x-modal id="packaging-popup" class="packaging-popup modal color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
+  <p class="h5 sr-only" slot="header">{{ section.settings.title }}</p>
+
+  <div class="packaging-popup__grid">
+    <dialog-close-button class="contents">
+      <button type="button" class="packaging-popup__close-button">
+        <span class="sr-only">{{ 'general.accessibility.close' | t }}</span>
+        {%- render 'icon' with 'close' -%}
+      </button>
+    </dialog-close-button>
+
+    {%- if section.settings.image != blank -%}
+      <div class="packaging-popup__image">
+        {{- section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'packaging-popup__img' -}}
+      </div>
+    {%- endif -%}
+
+    <div class="packaging-popup__content">
+      <div class="packaging-popup__content-inner">
+        {%- if section.settings.title != blank -%}
+          <h2 class="packaging-popup__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.content != blank -%}
+          <div class="packaging-popup__text prose">
+            {{ section.settings.content }}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</x-modal>
+
+{% schema %}
+{
+  "name": "Packaging popup",
+  "class": "shopify-section--packaging-popup",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:global.colors.scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "Luxury Packaging with Every Order"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content",
+      "default": "<p>Each Promise Co. piece arrives in our signature velvet pouch - designed not only to protect your jewellery but to live on as a chic coin purse or travel case.</p>"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,186 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "collection-banner": {
+      "type": "collection-banner",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "image_size": "auto",
+        "allow_transparent_header": true,
+        "reveal": true,
+        "enable_parallax": true,
+        "show_image": true,
+        "show_collection_title": true,
+        "show_collection_description": true,
+        "show_breadcrumb": true,
+        "content_width": "xs",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "show_usp_tabs": false,
+        "show_stone_type_slider": true
+      }
+    },
+    "before_after_kXfYHy": {
+      "type": "before-after",
+      "blocks": {
+        "before_jCeWFe": {
+          "type": "before",
+          "settings": {
+            "color_scheme": "",
+            "image": "shopify://shop_images/1_6c58de69-0630-475e-acdd-84cf9478a417.png",
+            "mobile_image": "shopify://shop_images/1_6c58de69-0630-475e-acdd-84cf9478a417.png",
+            "text": "",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link"
+          }
+        },
+        "after_pDVyL8": {
+          "type": "after",
+          "settings": {
+            "color_scheme": "",
+            "image": "shopify://shop_images/2_a62270ff-0a0a-4e22-9c8a-c0f925ca2a61.png",
+            "text": "",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "before_jCeWFe",
+        "after_pDVyL8"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "subheading": "",
+        "title": "Gift ready with<em> Free</em> Luxury Packaging",
+        "content": "",
+        "cursor_direction": "horizontal",
+        "cursor_initial_position": 50,
+        "cursor_background": "#ffffff",
+        "cursor_arrows_color": "#000000"
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "hide_product_information": false,
+        "products_per_page": 48,
+        "products_per_row_mobile": "2",
+        "products_size_desktop": "large",
+        "show_grid_mode_selector": true,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "filter_layout": "sidebar",
+        "quick_links_menu": "",
+        "show_sort_by": true,
+        "show_filters": true,
+        "show_results_count": false,
+        "show_filter_group_name": false,
+        "show_filter_values_count": true,
+        "open_filters_by_default": false
+      }
+    },
+    "rich_text_yX46cT": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_PT9UDw": {
+          "type": "heading",
+          "settings": {
+            "text": "You might also like...",
+            "heading_tag": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_PT9UDw"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": true,
+        "use_ogg_font": false,
+        "use_compact_spacing": true,
+        "section_id": ""
+      }
+    },
+    "category_cards_4zj4kH": {
+      "type": "category-cards",
+      "blocks": {
+        "category_image_rFfXLX": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/2_080efb18-8960-4515-8029-cb2da2f60254.png",
+            "title": "Best Sellers",
+            "description": "<p>DISCOVER</p>",
+            "link": "shopify://collections/best-sellers"
+          }
+        },
+        "category_image_kp6Nz3": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/4_18c5bbdd-e181-4b3a-8e3c-2411e576827f.png",
+            "title": "Single Stone Rings",
+            "description": "<p>PROMISE RINGS</p>",
+            "link": "shopify://collections/single-stone-promise-rings"
+          }
+        },
+        "category_image_LK4XYz": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/3_86b63cb8-1679-4cbb-a63d-f90c8d38b8c5.png",
+            "title": "Bands & Stacking",
+            "description": "<p>EXPLORE</p>",
+            "link": "shopify://collections/bands-and-stacking-rings"
+          }
+        },
+        "category_image_CgrtxT": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design-16.png",
+            "title": "necklaces",
+            "description": "<p>OUR CURRENT FAVE</p>",
+            "link": "shopify://products/promise-trinity-necklace"
+          }
+        }
+      },
+      "block_order": [
+        "category_image_rFfXLX",
+        "category_image_kp6Nz3",
+        "category_image_LK4XYz",
+        "category_image_CgrtxT"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "background_color": "#ffffff",
+        "title_color": "#000000",
+        "subtitle_color": "#666666",
+        "section_padding_top": 0,
+        "section_padding_bottom": 64,
+        "mobile_single_column": false
+      }
+    }
+  },
+  "order": [
+    "collection-banner",
+    "before_after_kXfYHy",
+    "main",
+    "rich_text_yX46cT",
+    "category_cards_4zj4kH"
+  ]
+}

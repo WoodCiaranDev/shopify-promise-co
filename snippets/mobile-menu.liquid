@@ -1,0 +1,308 @@
+{%- comment -%}
+  ----------------------------------------------------------------------------------------------------------------------
+  MOBILE MENU COMPONENT
+  ----------------------------------------------------------------------------------------------------------------------
+
+  Clean mobile menu implementation using BEM naming conventions.
+
+  ********************************************
+  Supported variables
+  ********************************************
+
+  * menu: the menu to render
+  * color_scheme: the color scheme to use for the menu
+  * show_dividers: whether dividers are shown between menu items
+  * open_second_level_menus: if true, second level menus are open by default
+  * highlighted_menu_items: comma or newline-separated menu item titles to highlight in red and bold
+{%- endcomment -%}
+
+{%- liquid
+  if highlighted_menu_items != blank
+    if highlighted_menu_items contains newline
+      assign highlighted_items_array = highlighted_menu_items | split: newline
+    else
+      assign highlighted_items_array = highlighted_menu_items | split: ','
+    endif
+  else
+    assign highlighted_items_array = empty_array
+  endif
+-%}
+
+<mobile-menu id="mobile-menu" class="o-mobile-menu {% if show_dividers %}o-mobile-menu--show-dividers{% endif %}">
+  <!-- Overlay -->
+  <div class="o-mobile-menu__overlay"></div>
+
+  <!-- Menu Container -->
+  <div class="o-mobile-menu__container">
+    <!-- Header -->
+    <div class="o-mobile-menu__header">
+      {%- liquid
+        if section.settings.show_country_selector and localization.available_countries.size > 1
+          assign show_country_selector = true
+        endif
+
+        if section.settings.show_locale_selector and localization.available_languages.size > 1
+          assign show_locale_selector = true
+        endif
+      -%}
+
+      {%- if show_country_selector or show_locale_selector -%}
+        <div class="o-mobile-menu__localization localization-selectors">
+          {%- if show_country_selector -%}
+            {%- render 'localization-selector',
+              type: 'country',
+              placement: 'bottom-start',
+              show_country_name: section.settings.show_country_name,
+              show_country_flag: false,
+              id_prefix: 'mobile-menu'
+            -%}
+          {%- endif -%}
+
+          {%- if show_country_selector and show_locale_selector -%}
+            <span class="localization-selectors__separator" aria-hidden="true"></span>
+          {%- endif -%}
+
+          {%- if show_locale_selector -%}
+            {%- render 'localization-selector', type: 'locale', placement: 'bottom-start', id_prefix: 'mobile-menu' -%}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <button type="button" class="o-mobile-menu__close" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+        {%- render 'icon' with 'close', width: 16 -%}
+      </button>
+    </div>
+
+    <!-- Panels Container -->
+    <div class="o-mobile-menu__panels">
+      <!-- Main Panel -->
+      <div class="o-mobile-menu__panel" data-panel-level="main" data-panel-id="main">
+        <div class="o-mobile-menu__scroller">
+          <nav
+            class="o-mobile-menu__nav"
+            role="navigation"
+            aria-label="{{ 'header.general.primary_navigation' | t | escape }}"
+          >
+            <ul role="list">
+              {%- for link in menu.links -%}
+                <li class="o-mobile-menu__nav-item">
+                  {%- if link.links.size > 0 -%}
+                    <button
+                      type="button"
+                      class="o-mobile-menu__nav-link o-mobile-menu__nav-link--has-children{% if highlighted_items_array contains link.title %} o-mobile-menu__nav-link--highlighted{% endif %}"
+                      data-panel="secondary-{{ forloop.index }}"
+                      aria-expanded="false"
+                    >
+                      <span>{{ link.title }}</span>
+                    </button>
+                  {%- else -%}
+                    <a
+                      href="{{ link.url }}"
+                      class="o-mobile-menu__nav-link{% if highlighted_items_array contains link.title %} o-mobile-menu__nav-link--highlighted{% endif %}"
+                      {% if link.current %}
+                        aria-current="page"
+                      {% endif %}
+                    >
+                      <span>{{ link.title }}</span>
+                    </a>
+                  {%- endif -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+          </nav>
+
+          {%- comment -%}Collection Launch Component{%- endcomment -%}
+          {%- if section.settings.show_collection_countdown -%}
+            <div class="c-collection-launch">
+              <h3 class="c-collection-launch__title">{{ countdown_title }}</h3>
+              <div class="c-collection-launch__content">
+                {%- assign date_parts = section.settings.countdown_date | split: '-' -%}
+                {%- assign countdown_date_formatted = date_parts[2] | append: '-' | append: date_parts[1] | append: '-' | append: date_parts[0] -%}
+                <div class="c-collection-launch__countdown" data-countdown-date="{{ countdown_date_formatted }}T00:00:00">
+                  <div class="c-collection-launch__countdown-item">
+                    <span class="c-collection-launch__countdown-label">Months:</span>
+                    <span class="c-collection-launch__countdown-value" data-months>00</span>
+                  </div>
+                  <div class="c-collection-launch__countdown-item">
+                    <span class="c-collection-launch__countdown-label">Days:</span>
+                    <span class="c-collection-launch__countdown-value" data-days>00</span>
+                  </div>
+                  <div class="c-collection-launch__countdown-item">
+                    <span class="c-collection-launch__countdown-label">Hours:</span>
+                    <span class="c-collection-launch__countdown-value" data-hours>00</span>
+                  </div>
+                  <div class="c-collection-launch__countdown-item">
+                    <span class="c-collection-launch__countdown-label">Minutes:</span>
+                    <span class="c-collection-launch__countdown-value" data-minutes>00</span>
+                  </div>
+                  <div class="c-collection-launch__countdown-item">
+                    <span class="c-collection-launch__countdown-label">Seconds:</span>
+                    <span class="c-collection-launch__countdown-value" data-seconds>00</span>
+                  </div>
+                </div>
+                <div class="c-collection-launch__image">
+                  {%- if section.settings.countdown_image != blank -%}
+                    {{ section.settings.countdown_image | image_url: width: 300 | image_tag:
+                      loading: 'lazy',
+                      width: 150,
+                      height: 150,
+                      alt: 'Next Collection'
+                    }}
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- comment -%}Main Panel Featured Collections{%- endcomment -%}
+          {%- assign main_featured_block = blocks[0] -%}
+          {%- render 'mobile-menu-featured-collections', featured_block: main_featured_block, show: show_main_featured_collections -%}
+        </div>
+
+        {%- if shop.customer_accounts_enabled -%}
+          <div class="o-mobile-menu__footer">
+            <a
+              href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}"
+              class="o-mobile-menu__footer-link"
+            >
+              {%- render 'icon' with 'account', width: 20 -%}
+              {%- if customer -%}
+                {{ 'header.general.account' | t }}
+              {%- else -%}
+                {{ 'header.general.login' | t }}
+              {%- endif -%}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Secondary Level Panels -->
+      {%- for link in menu.links -%}
+        {%- if link.links.size > 0 -%}
+          <div
+            class="o-mobile-menu__panel is-secondary"
+            data-panel-level="secondary"
+            data-panel-id="secondary-{{ forloop.index }}"
+          >
+            <button type="button" class="o-mobile-menu__back">
+              {%- render 'icon' with 'arrow-left', width: 12, direction_aware: true -%}
+              BACK TO MAIN MENU
+            </button>
+
+            <div class="o-mobile-menu__scroller">
+              <nav class="o-mobile-menu__nav" role="navigation">
+                <ul role="list">
+                  {%- for sub_link in link.links -%}
+                    <li class="o-mobile-menu__nav-item">
+                      {%- if sub_link.links.size > 0 -%}
+                        <button
+                          type="button"
+                          class="o-mobile-menu__nav-link o-mobile-menu__nav-link--has-children{% if highlighted_items_array contains sub_link.title %} o-mobile-menu__nav-link--highlighted{% endif %}"
+                          data-panel="tertiary-{{ forloop.parentloop.index }}-{{ forloop.index }}"
+                          aria-expanded="false"
+                        >
+                          <span>{{ sub_link.title }}</span>
+                        </button>
+                      {%- else -%}
+                        <a
+                          href="{{ sub_link.url }}"
+                          class="o-mobile-menu__nav-link o-mobile-menu__nav-link--with-icon{% if highlighted_items_array contains sub_link.title %} o-mobile-menu__nav-link--highlighted{% endif %}"
+                          {% if sub_link.current %}
+                            aria-current="page"
+                          {% endif %}
+                        >
+                          {%- render 'diamond-shape-icon', shape: sub_link.title -%}
+                          <span>{{ sub_link.title }}</span>
+                        </a>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </nav>
+
+              {%- comment -%}Get Mega Menu Block for Featured Collections{%- endcomment -%}
+              {%- liquid
+                assign link_title_downcase = link.title | strip | downcase
+                assign mega_menu_block = ''
+
+                for block in section.blocks
+                  assign menu_item_downcase = block.settings.menu_item | strip | downcase
+
+                  if menu_item_downcase == link_title_downcase
+                    assign mega_menu_block = block
+                    break
+                  endif
+                endfor
+              -%}
+            </div>
+
+            <!-- Shop All Button -->
+            <div class="o-mobile-menu__shop-all">
+              <a href="/collections/shop-all" class="o-mobile-menu__shop-all-link">
+                Shop All
+              </a>
+            </div>
+
+            {%- comment -%}Featured Collections{%- endcomment -%}
+            {%- render 'mobile-menu-featured-collections', featured_block: mega_menu_block, show: true -%}
+
+            <!-- Promotional Block -->
+            {%- if mega_menu_block.settings.promo_block_text != blank and mega_menu_block.settings.promo_block_link != blank -%}
+              <a href="{{ mega_menu_block.settings.promo_block_link }}" class="o-mobile-menu__promo-block">
+                <span>{{ mega_menu_block.settings.promo_block_text }}</span>
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+
+      <!-- Tertiary Level Panels -->
+      {%- for link in menu.links -%}
+        {%- if link.links.size > 0 -%}
+          {%- for sub_link in link.links -%}
+            {%- if sub_link.links.size > 0 -%}
+              <div
+                class="o-mobile-menu__panel is-tertiary"
+                data-panel-level="tertiary"
+                data-panel-id="tertiary-{{ forloop.parentloop.index }}-{{ forloop.index }}"
+              >
+                <button type="button" class="o-mobile-menu__back">
+                  {%- render 'icon' with 'arrow-left', width: 12, direction_aware: true -%}
+                  BACK TO {{ link.title | upcase }}
+                </button>
+
+                <div class="o-mobile-menu__scroller">
+                  <nav class="o-mobile-menu__nav" role="navigation">
+                    <ul role="list">
+                      {%- for sub_sub_link in sub_link.links -%}
+                        <li class="o-mobile-menu__nav-item">
+                          <a
+                            href="{{ sub_sub_link.url }}"
+                            class="o-mobile-menu__nav-link o-mobile-menu__nav-link--with-icon{% if highlighted_items_array contains sub_sub_link.title %} o-mobile-menu__nav-link--highlighted{% endif %}"
+                            {% if sub_sub_link.current %}
+                              aria-current="page"
+                            {% endif %}
+                          >
+                            {%- render 'diamond-shape-icon', shape: sub_sub_link.title -%}
+                            <span>{{ sub_sub_link.title }}</span>
+                          </a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  </nav>
+                </div>
+
+                <!-- Shop All Button -->
+                <div class="o-mobile-menu__shop-all">
+                  <a href="/collections/all" class="o-mobile-menu__shop-all-link">
+                    Shop All
+                  </a>
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</mobile-menu>

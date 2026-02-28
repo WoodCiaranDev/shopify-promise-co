@@ -1,0 +1,405 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_title": true,
+        "page_width": "xs"
+      }
+    },
+    "multiple_media_with_text_pB7mBV": {
+      "type": "multiple-media-with-text",
+      "blocks": {
+        "image_nnke8d": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_46.png",
+            "rotation": 0
+          }
+        },
+        "video_gmMWXh": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/copy_669ACD4A-0216-471B-94E3-FD06C5535B6A_VSCO.mov",
+            "rotation": 0
+          }
+        }
+      },
+      "block_order": [
+        "image_nnke8d",
+        "video_gmMWXh"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-1",
+        "reveal_on_scroll": true,
+        "separate_section_with_border": false,
+        "media_position_desktop": "before_text",
+        "media_position_mobile": "before_text",
+        "media_layout": "overlap",
+        "media_alignment": "center",
+        "media_alignment_offset": 0,
+        "media_mobile_alignment_offset": 0,
+        "text_alignment": "center",
+        "subheading": "quality promise",
+        "title": "What makes us different",
+        "content": "<p>We understand that these pieces aren’t just jewellery – they’re symbols of love, commitment, and the moments that matter most.</p><p>As proud members of the <strong>National Association of Jewellers</strong>, we hold ourselves to the highest standards of quality and care.</p><p>Our commitment to excellence begins with <strong>18ct gold vermeil</strong>, which is 25 times thicker than standard gold plating. We plate all our silver with<strong> rhodium</strong>, one of the rarest and most valuable metals, and apply an <strong>anti-tarnish e-coating</strong> for added protection and water resistance.</p><p>Each of our diamond simulants is meticulously hand-set, reflecting our dedication to craftsmanship.</p><p>We use ECO Packaging which is FSC® certified... and if all this wasn't enough, we offer a 2 Year Warranty for peace of mind.</p>",
+        "button_1_text": "",
+        "button_1_link": "",
+        "button_1_style": "solid",
+        "button_2_text": "",
+        "button_2_link": "",
+        "button_2_style": "solid"
+      }
+    },
+    "images_with_text_scroll_AEN7LT": {
+      "type": "images-with-text-scroll",
+      "blocks": {
+        "image_with_text_gM7Gnh": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/I_PROMISE_CARD_GRAPHIC_1080_x_1080_px.png",
+            "subheading": "What's your promise?",
+            "title": "promise keepsake card",
+            "content": "<p>Every ring purchase comes with a complimentary keepsake card - <strong>a little piece of your journey.</strong></p><p>This card is more than just a token<strong>; </strong>it's a canvas for your most cherished promises.</p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "solid"
+          }
+        },
+        "image_with_text_V7My3x": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/I_PROMISE_CARD_GRAPHIC_1080_x_1080_px.png",
+            "subheading": "What's your promise?",
+            "title": "",
+            "content": "<p>Whether it's a love note to your partner, a reminder of self-motivation, a bond of friendship, or a manifestation of your dreams, this keepsake is a tangible way to record and treasure your intentions.</p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "solid"
+          }
+        },
+        "image_with_text_EWMfn3": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/I_PROMISE_CARD_GRAPHIC_1080_x_1080_px.png",
+            "subheading": "What's your promise?",
+            "title": "",
+            "content": "<p>As you wear your ring, let this card be a constant reminder of the commitments and goals that matter most to you.</p><p><em><strong>Your promise, beautifully captured.</strong></em></p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "solid"
+          }
+        }
+      },
+      "block_order": [
+        "image_with_text_gM7Gnh",
+        "image_with_text_V7My3x",
+        "image_with_text_EWMfn3"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-1",
+        "image_position": "end",
+        "text_alignment": "center",
+        "heading_tag": "h3",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "image_with_text_DHCdDb": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_BYbzHW": {
+          "type": "subheading",
+          "settings": {
+            "text": "We promise to be there for you"
+          }
+        },
+        "heading_W4EJtq": {
+          "type": "heading",
+          "settings": {
+            "text": "our customers are everything to us.",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_Vw8bcN": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Every day, we pinch ourselves to believe it's real. It's an incredible honour that each of you chooses our promise rings to symbolise your special commitments. </p><p>Knowing that our rings are part of your meaningful moments fills us with gratitude. </p><p>Thank you for trusting us with something so personal and important. <strong>It means the world to us.</strong></p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_BYbzHW",
+        "heading_W4EJtq",
+        "richtext_Vw8bcN"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/customer_banner_2060_x_2060_px.png",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "image_with_text_J9HyfR": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_tY4aBn": {
+          "type": "subheading",
+          "settings": {
+            "text": "We started with a question:"
+          }
+        },
+        "heading_hrNkLe": {
+          "type": "heading",
+          "settings": {
+            "text": "What does it really mean to make a promise?",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_EMPPNH": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>And why hadn’t the jewellery industry evolved to reflect the depth and diversity of the promises we make today?</p><p>Traditionally, promise rings were tied to romantic milestones. And while we’ll <em>always </em>celebrate those love stories – they’re at the heart of so much of what we do – we also knew there was more. Because in real life, promises aren’t one-size-fits-all.</p><p>They can be quiet and steady. Fierce and full of hope. A vow to begin again. A bond between best friends. A reminder to keep going.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_tY4aBn",
+        "heading_hrNkLe",
+        "richtext_EMPPNH"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "image": "shopify://shop_images/1_25748864-f890-4304-b7dc-af8e62b39b20.png",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "image_with_text_w3EUGy": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_yLKnM4": {
+          "type": "subheading",
+          "settings": {
+            "text": "We didn’t see jewellery that spoke to those promises."
+          }
+        },
+        "heading_thQmra": {
+          "type": "heading",
+          "settings": {
+            "text": "So we created it",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_rQ3W73": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>At The Promise Co., we’re here to redefine what a promise ring can be. To move beyond tradition and make space for the full spectrum of what it means to care, to commit, and to believe in something – or someone.</p><p>This is jewellery that honours all kinds of promises. The big ones. The quiet ones. The ones you share and the ones you keep just for yourself.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_yLKnM4",
+        "heading_thQmra",
+        "richtext_rQ3W73"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "image": "shopify://shop_images/3_a50c6029-20f6-40d3-bd60-45b6f61698c3.png",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "image_with_text_Fw6MQA": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_M8Wj3c": {
+          "type": "subheading",
+          "settings": {
+            "text": "We’re not just building a brand"
+          }
+        },
+        "heading_hLE78U": {
+          "type": "heading",
+          "settings": {
+            "text": "We’re building a movement",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_iMHYKz": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Rooted in real stories, personal meaning, and the idea that something small can hold something enormous.</p><p>A promise ring is your own wearable story. A reminder of who you are, and everything you're becoming.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_M8Wj3c",
+        "heading_hLE78U",
+        "richtext_iMHYKz"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "image": "shopify://shop_images/2_18f40421-de17-4a13-a6ac-3690df3ab0ed.png",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "scrolling_content_ezbPWb": {
+      "type": "scrolling-content",
+      "blocks": {
+        "text_3dNepw": {
+          "type": "text",
+          "settings": {
+            "text": "Whats your promise?"
+          }
+        },
+        "text_eG9mMP": {
+          "type": "text",
+          "settings": {
+            "text": "Whats your promise?"
+          }
+        }
+      },
+      "block_order": [
+        "text_3dNepw",
+        "text_eG9mMP"
+      ],
+      "name": "t:sections.scrolling_content.presets.scrolling_content.name",
+      "settings": {
+        "separate_section_with_border": false,
+        "scrolling_speed": 0.1,
+        "scroll_direction": "left",
+        "pause_on_hover": false,
+        "text_font": "heading",
+        "text_font_size_mobile": 10,
+        "text_font_size_desktop": 14,
+        "section_vertical_spacing_mobile": 10,
+        "section_vertical_spacing_desktop": 10,
+        "item_horizontal_spacing_mobile": 30,
+        "item_horizontal_spacing_desktop": 50,
+        "background": "#62afe1",
+        "text_color": "#ffffff"
+      }
+    },
+    "featured_collections_g4ttNx": {
+      "type": "featured-collections",
+      "blocks": {
+        "collection_A94Jpa": {
+          "type": "collection",
+          "settings": {
+            "collection": "best-sellers",
+            "products_count": 8,
+            "title": "",
+            "link_url": "",
+            "link_text": "View all"
+          }
+        }
+      },
+      "block_order": [
+        "collection_A94Jpa"
+      ],
+      "name": "t:sections.featured_collections.presets.featured_collections.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "hide_product_information": false,
+        "stack_products": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "subheading": "Discover"
+      }
+    },
+    "image_with_text_ChrzMP": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_y89QQJ": {
+          "type": "heading",
+          "settings": {
+            "text": "A note from the founder",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_XK4NXr": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>I've always felt that jewellery should mean something. The pieces we keep close aren’t just beautiful, they become little anchors in our lives. Reminders of who we are, where we’ve been, and what matters most. The ring from my Nan that’s never left my finger. The one my partner Raj gave me when we made our first promise. The piece my mum had made for my 21st – filled with pride and love. They’re more than just pieces of jewellery. They hold meaning. And they’ve stayed with me through everything. </p><p>That’s what I wanted to create with The Promise Co. – jewellery that does the same for you. What started as a simple idea, rooted in my love for sentimental jewellery, has grown into something far bigger than I ever imagined. Every day, I get to witness your promises – to your partner, your sister, your oldest friend. And to yourself. You trust us with the most personal, powerful moments of your life – and that never stops feeling like the greatest privilege. </p><p>So thank you, truly, for being part of this. You are the reason this brand exists.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_y89QQJ",
+        "richtext_XK4NXr"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-b68b61c5-ba0e-4161-a0e3-3d59622e9bf4",
+        "separate_section_with_border": false,
+        "image": "shopify://shop_images/Artboard_38_10x_1eccc768-d36e-4410-9293-be6bc14e95f2.png",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": false
+      }
+    },
+    "newsletter_VX9p7R": {
+      "type": "newsletter",
+      "name": "t:sections.newsletter.presets.newsletter.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image_size": "auto",
+        "subheading": "The Promise club",
+        "title": "Co-lab",
+        "content": "<p>Sign up to our newsletter to be be the first to know about our brand new exclusive member club  </p>",
+        "button_text": "Subscribe",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "multiple_media_with_text_pB7mBV",
+    "images_with_text_scroll_AEN7LT",
+    "image_with_text_DHCdDb",
+    "image_with_text_J9HyfR",
+    "image_with_text_w3EUGy",
+    "image_with_text_Fw6MQA",
+    "scrolling_content_ezbPWb",
+    "featured_collections_g4ttNx",
+    "image_with_text_ChrzMP",
+    "newsletter_VX9p7R"
+  ]
+}

@@ -1,0 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "announcement_marquee_bQ8aXY": {
+      "settings": {},
+      "blocks": {
+        "message_QL6kA": {
+          "type": "message",
+          "disabled": false,
+          "settings": {
+            "text": "Orders under €150 (excluding shipping fees) ship with no import fees"
+          }
+        }
+      },
+      "block_order": [
+        "message_PwLUb7",
+        "message_QL6kA",
+        "message_P4eVKB",
+        "message_9JGdFV"
+      ]
+    }
+  },
+  "context": {
+    "market": "europe"
+  },
+  "parent": "header-group.json"
+}

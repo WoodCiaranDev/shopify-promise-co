@@ -1,0 +1,70 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "parent": "product.json",
+  "context": {
+    "market": "usa"
+  },
+  "sections": {
+    "main": {
+      "settings": {},
+      "blocks": {
+        "delivery_countdown_GeGVy3": {
+          "settings": {
+            "cutoff_hour": 13,
+            "suffix_text": "for fast USA delivery"
+          }
+        },
+        "accordion_xfbPBi": {
+          "settings": {
+            "content": "<p><strong>Gold Vermeil </strong>- A thick layer of real 18ct gold bonded to solid sterling silver - up to 25x thicker than standard plating. Designed to last, crafted to shine, made to hold meaning.</p><p><strong>Solid 925 sterling silver</strong> - finished with rhodium - a rare metal from the platinum family. This bright, durable layer protects against tarnish and keeps every piece shining beautifully.</p><p><strong>Protective anti-tarnish coating</strong> that helps preserve shine and colour over time. It adds an invisible shield against daily wear, so your jewelry stays as beautiful as the day you received it. </p><p><strong>Conflict-free simulated diamonds,</strong> hand-set for a flawless finish.</p><p></p>"
+          }
+        },
+        "accordion_YBgV49": {
+          "type": "accordion",
+          "disabled": false,
+          "settings": {
+            "show_below_gallery": true,
+            "icon": "none",
+            "custom_icon": null,
+            "title": "Shipping",
+            "content": "<p>All US orders are shipped from our West Coast US warehouse for <strong>faster, tariff-free delivery </strong>with no hidden fees or charges.<em> </em></p><p><strong>Free express shipping</strong> <em>(1-4 days) </em>on orders over <strong>$220</strong></p><p><strong>Express Shipping - 1-4 Business Days $13</strong></p><p><em>We are proud to be in the top 1% of US businesses for speed and reliability.</em></p><p>Any orders before 1pm MST <em>(Monday-Friday) </em>are usually dispatched on the same day. </p><p>Every parcel is fully tracked and beautifully packaged - ready to gift the moment it arrives.<br/><br/><em>Please note we do not ship on public holidays or weekends. </em>Fulfilment<br/>and delivery times may vary due to busy periods, customs or courier delays. </p>",
+            "liquid": "",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "judge_me_reviews_preview_badge_WQEMyy",
+        "payment_terms",
+        "separator",
+        "variant_picker",
+        "delivery_countdown_GeGVy3",
+        "text_TzkTaX",
+        "quantity_selector",
+        "buy_buttons",
+        "text_aUJmQk",
+        "description",
+        "accordion_yUkiTP",
+        "accordion_xfbPBi",
+        "accordion_YBgV49",
+        "feature_with_icon_FTccY4",
+        "feature_with_icon_XfGd6d",
+        "feature_with_icon_tUrRgp",
+        "feature_with_icon_TyH8jB",
+        "feature_with_icon_tTcWak",
+        "feature_with_icon_badge6",
+        "share_buttons_cbEwqV"
+      ]
+    }
+  }
+}

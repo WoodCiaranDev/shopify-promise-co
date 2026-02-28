@@ -1,0 +1,161 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+SIZE GUIDE POPUP
+----------------------------------------------------------------------------------------------------------------------
+
+A centered modal popup showing ring size conversion chart with an editable table.
+Triggered via aria-controls targeting the modal ID or clicking a link with href="#size-guide-popup".
+{%- endcomment -%}
+
+<x-modal id="size-guide-popup" class="size-guide-popup modal color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
+  <p class="h5 sr-only" slot="header">{{ section.settings.title }}</p>
+
+  <div class="size-guide-popup__container">
+    <div class="size-guide-popup__card">
+      <dialog-close-button class="contents">
+        <button type="button" class="size-guide-popup__close-button">
+          <span class="sr-only">{{ 'general.accessibility.close' | t }}</span>
+          {%- render 'icon' with 'close' -%}
+        </button>
+      </dialog-close-button>
+
+      {%- if section.settings.title != blank -%}
+        <h2 class="size-guide-popup__title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+
+      {%- assign pdf_url = settings.size_guide_pdf_url | default: section.settings.pdf_url -%}
+      {%- if pdf_url == blank -%}
+        {%- assign pdf_url = 'size-guide-promise-co-130126.pdf' | file_url -%}
+      {%- endif -%}
+      <div class="size-guide-popup__intro prose">
+        <p>Not sure on your sizing? Need to secretly measure for a loved one? Find <a href="{{ pdf_url }}" target="_blank" rel="noopener" download style="text-decoration: underline;">our handy printable PDF</a>.</p>
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="size-guide-popup__table-wrapper">
+          <table class="size-guide-popup__table">
+            <thead>
+              <tr>
+                <th>US/Promise Co</th>
+                <th>Diameter (mm)</th>
+                <th>Circumference (mm)</th>
+                <th>UK</th>
+                <th>Europe</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for block in section.blocks -%}
+                <tr {{ block.shopify_attributes }}>
+                  <td>{{ block.settings.us_size }}</td>
+                  <td>{{ block.settings.diameter }}</td>
+                  <td>{{ block.settings.circumference }}</td>
+                  <td>{{ block.settings.uk_size }}</td>
+                  <td>{{ block.settings.europe_size }}</td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</x-modal>
+
+<script>
+  // Handle clicks on links pointing to #size-guide-popup
+  document.addEventListener('click', function(event) {
+    const link = event.target.closest('a[href="#size-guide-popup"]');
+    if (link) {
+      event.preventDefault();
+      const modal = document.getElementById('size-guide-popup');
+      if (modal && typeof modal.show === 'function') {
+        modal.show();
+      } else if (modal) {
+        modal.setAttribute('open', '');
+      }
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Size guide popup",
+  "class": "shopify-section--size-guide-popup",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:global.colors.scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "Our Size Guide"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_text",
+      "label": "Intro text",
+      "default": "<p>Not sure on your sizing? Need to secretly measure for a loved one? Find our handy printable PDF</p>"
+    },
+    {
+      "type": "url",
+      "id": "pdf_url",
+      "label": "PDF Download Link (Override)",
+      "info": "Leave blank to use the global Size Guide PDF from Theme Settings"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "size_row",
+      "name": "Size row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "us_size",
+          "label": "US/Promise Co"
+        },
+        {
+          "type": "text",
+          "id": "diameter",
+          "label": "Diameter (mm)"
+        },
+        {
+          "type": "text",
+          "id": "circumference",
+          "label": "Circumference (mm)"
+        },
+        {
+          "type": "text",
+          "id": "uk_size",
+          "label": "UK"
+        },
+        {
+          "type": "text",
+          "id": "europe_size",
+          "label": "Europe"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Size guide popup",
+      "blocks": [
+        { "type": "size_row", "settings": { "us_size": "4", "diameter": "14.9", "circumference": "46.8", "uk_size": "H \u00bd", "europe_size": "47" } },
+        { "type": "size_row", "settings": { "us_size": "5", "diameter": "15.7", "circumference": "49.3", "uk_size": "J \u00bd", "europe_size": "49.3" } },
+        { "type": "size_row", "settings": { "us_size": "6", "diameter": "16.5", "circumference": "51.9", "uk_size": "L \u00bd", "europe_size": "51.9" } },
+        { "type": "size_row", "settings": { "us_size": "7", "diameter": "17.3", "circumference": "54.5", "uk_size": "N \u00bd", "europe_size": "54.4" } },
+        { "type": "size_row", "settings": { "us_size": "8", "diameter": "18.1", "circumference": "57", "uk_size": "P \u00bd", "europe_size": "57" } },
+        { "type": "size_row", "settings": { "us_size": "9", "diameter": "18.9", "circumference": "59.5", "uk_size": "R \u00bd", "europe_size": "59.5" } },
+        { "type": "size_row", "settings": { "us_size": "10", "diameter": "19.8", "circumference": "62.1", "uk_size": "T \u00bd", "europe_size": "62.1" } },
+        { "type": "size_row", "settings": { "us_size": "11", "diameter": "20.6", "circumference": "64.6", "uk_size": "V \u00bd", "europe_size": "64.6" } },
+        { "type": "size_row", "settings": { "us_size": "12", "diameter": "21.4", "circumference": "67.2", "uk_size": "X \u00bd", "europe_size": "67.2" } },
+        { "type": "size_row", "settings": { "us_size": "13", "diameter": "22.2", "circumference": "70", "uk_size": "Z \u00bd", "europe_size": "70" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

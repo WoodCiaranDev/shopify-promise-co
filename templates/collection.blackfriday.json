@@ -1,0 +1,356 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "rich_text_wMNiPf": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_weFRwt": {
+          "type": "subheading",
+          "settings": {
+            "text": "What's your Promise?"
+          }
+        },
+        "heading_6kB7dr": {
+          "type": "heading",
+          "settings": {
+            "text": "",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_MnfcG9": {
+          "type": "richtext",
+          "settings": {
+            "content": "<h1>Shop the Collection</h1><p></p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_weFRwt",
+        "heading_6kB7dr",
+        "richtext_MnfcG9"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "collection-banner": {
+      "type": "collection-banner",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-3",
+        "image_size": "auto",
+        "allow_transparent_header": true,
+        "reveal": true,
+        "enable_parallax": true,
+        "show_image": true,
+        "show_collection_title": true,
+        "show_collection_description": true,
+        "show_breadcrumb": true,
+        "content_width": "xs",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "show_usp_tabs": false,
+        "show_stone_type_slider": false
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-2",
+        "hide_product_information": false,
+        "products_per_page": 48,
+        "products_per_row_mobile": "2",
+        "products_size_desktop": "large",
+        "show_grid_mode_selector": true,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "filter_layout": "sidebar",
+        "quick_links_menu": "",
+        "show_sort_by": true,
+        "show_filters": true,
+        "show_results_count": false,
+        "show_filter_group_name": false,
+        "show_filter_values_count": true,
+        "open_filters_by_default": false
+      }
+    },
+    "rich_text_hdDUpR": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_fX4tKA": {
+          "type": "heading",
+          "settings": {
+            "text": "Sign up to be first.",
+            "heading_tag": "h1"
+          }
+        },
+        "subheading_kk7k7j": {
+          "type": "subheading",
+          "settings": {
+            "text": "up to 60% off"
+          }
+        },
+        "richtext_qkAdGR": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p><strong>Never Happened Before. Won’t Happen Again.</strong><br/><br/>Our only Black Friday event.<br/><br/>Live 9am UK time, 26 November.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_fX4tKA",
+        "subheading_kk7k7j",
+        "richtext_qkAdGR"
+      ],
+      "disabled": true,
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "separate_section_with_border": false,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "ss_countdown_timer_2_jkwpR6": {
+      "type": "ss-countdown-timer-2",
+      "blocks": {
+        "text_YWRci6": {
+          "type": "text",
+          "settings": {
+            "heading": "BLACK FRIDAY",
+            "color": "#ffffff",
+            "font_size": 42,
+            "richtext": "<p>Our Biggest Sale Ever </p><p></p><p><em>Up to 60% off.</em></p><p><br/>Live Wednesday 26th of November.<br/>Once A Year. Limited Time Only<br/><br/><strong>sign up below to be first to access.</strong></p><p></p>",
+            "richtext_color": "#ffffff",
+            "richtext_font_size": 15
+          }
+        },
+        "timer_GJzmtx": {
+          "type": "timer",
+          "settings": {
+            "year": "2025",
+            "month": "11",
+            "day": "26",
+            "hour": "09",
+            "minute": "00",
+            "hide_timer_on_completed": false,
+            "timer_completed_text": "",
+            "color": "#ffffff",
+            "days_translated": "Days",
+            "hours_translated": "Hours",
+            "minutes_translated": "Minutes",
+            "seconds_translated": "Seconds"
+          }
+        }
+      },
+      "block_order": [
+        "text_YWRci6",
+        "timer_GJzmtx"
+      ],
+      "custom_css": [],
+      "name": "SS - Countdown timer 2",
+      "settings": {
+        "full_width": false,
+        "border_radius": 0,
+        "bg_color": "#1c1c1c",
+        "section-background-color": "#ffffff",
+        "pt": 20,
+        "pb": 20,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "1763635298657e25a8": {
+      "type": "apps",
+      "blocks": {
+        "klaviyo_email_marketing_sms_form_embed_block_a3jCfq": {
+          "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
+          "settings": {
+            "formId": "<div class=\"klaviyo-form-SyyWPk\"></div>"
+          }
+        }
+      },
+      "block_order": [
+        "klaviyo_email_marketing_sms_form_embed_block_a3jCfq"
+      ],
+      "settings": {
+        "color_scheme": "scheme-4b89ab38-ef9e-4a8e-9dd4-1364903253e0",
+        "separate_section_with_border": false,
+        "remove_vertical_spacing": true,
+        "remove_horizontal_spacing": false
+      }
+    },
+    "rich_text_yX46cT": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_PT9UDw": {
+          "type": "heading",
+          "settings": {
+            "text": "You might also like...",
+            "heading_tag": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_PT9UDw"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": true,
+        "use_ogg_font": false,
+        "use_compact_spacing": true,
+        "section_id": ""
+      }
+    },
+    "category_cards_4zj4kH": {
+      "type": "category-cards",
+      "blocks": {
+        "category_image_rFfXLX": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/2_080efb18-8960-4515-8029-cb2da2f60254.png",
+            "title": "Best Sellers",
+            "description": "<p>DISCOVER</p>",
+            "link": "shopify://collections/best-sellers"
+          }
+        },
+        "category_image_kp6Nz3": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/4_18c5bbdd-e181-4b3a-8e3c-2411e576827f.png",
+            "title": "Single Stone Rings",
+            "description": "<p>PROMISE RINGS</p>",
+            "link": "shopify://collections/single-stone-promise-rings"
+          }
+        },
+        "category_image_LK4XYz": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/3_86b63cb8-1679-4cbb-a63d-f90c8d38b8c5.png",
+            "title": "Bands & Stacking",
+            "description": "<p>EXPLORE</p>",
+            "link": "shopify://collections/bands-and-stacking-rings"
+          }
+        },
+        "category_image_CgrtxT": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design-16.png",
+            "title": "necklaces",
+            "description": "<p>OUR CURRENT FAVE</p>",
+            "link": "shopify://products/promise-trinity-necklace"
+          }
+        }
+      },
+      "block_order": [
+        "category_image_rFfXLX",
+        "category_image_kp6Nz3",
+        "category_image_LK4XYz",
+        "category_image_CgrtxT"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "background_color": "#ffffff",
+        "title_color": "#000000",
+        "subtitle_color": "#666666",
+        "section_padding_top": 0,
+        "section_padding_bottom": 64,
+        "mobile_single_column": false
+      }
+    },
+    "multi_column_6rLKqy": {
+      "type": "multi-column",
+      "blocks": {
+        "image_with_text_N76bxy": {
+          "type": "image_with_text",
+          "settings": {
+            "title": "interlocking promise rings for couples",
+            "heading_tag": "h5",
+            "content": "<p>Our unique design features interlocking rings so you have a piece of eachother wherever you go.</p><p>These rings represent being together no matter what, even when you're far apart. They're perfect for couples who are far away and want to feel close, or for those ready to show their commitment. Anyone can wear them to show how much they care about each other. With our special rings, you can say \"I promise\" and celebrate your love together.</p>",
+            "link_url": "",
+            "link_text": ""
+          }
+        },
+        "image_with_text_ANbFUr": {
+          "type": "image_with_text",
+          "settings": {
+            "title": "His and hers Promise rings",
+            "heading_tag": "h5",
+            "content": "<p>Celebrate the bond of love with our exquisite collection of his and hers couples rings. Each order includes a keepsake Promise Card, allowing you to capture your unique promise and create a lasting memory together. </p><p>Show your commitment to each other with these meaningful rings, symbolising the unbreakable connection you share. </p><p>Whether it's a promise of a lifetime together or a token of your enduring love, these rings are a timeless expression of your devotion. Perfect for commemorating milestones like anniversaries or engagements, they serve as a beautiful reminder of your journey together. So why not exchange vows of love and fidelity with his and hers couples rings, forging an unbreakable bond that will be treasured for years to come?</p>",
+            "link_url": "",
+            "link_text": ""
+          }
+        },
+        "image_with_text_7mgb7U": {
+          "type": "image_with_text",
+          "settings": {
+            "title": "HAND SET WITH LOVE AND A 2 YEAR WARRANTY",
+            "heading_tag": "h5",
+            "content": "<p>At The Promise Ring Co., our dedication lies in delivering unparalleled service to ensure your ring purchase is nothing short of extraordinary. We recognise that these pieces transcend mere jewellery; they encapsulate love, commitment, and cherished memories.</p><p>That's why we wholeheartedly stand behind our products, offering a comprehensive 2-year guarantee for your peace of mind. Each ring is meticulously hand-set, ensuring it's crafted with the utmost love and care to become your perfect symbol of enduring Promise.</p>",
+            "link_url": "",
+            "link_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_with_text_N76bxy",
+        "image_with_text_ANbFUr",
+        "image_with_text_7mgb7U"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "columns_per_row": 3,
+        "stack_on_mobile": true,
+        "overlap_image": false,
+        "content_alignment": "start",
+        "text_alignment": "start",
+        "spacing": "md",
+        "subheading": "",
+        "title": "",
+        "content": ""
+      }
+    }
+  },
+  "order": [
+    "rich_text_wMNiPf",
+    "collection-banner",
+    "main",
+    "rich_text_hdDUpR",
+    "ss_countdown_timer_2_jkwpR6",
+    "1763635298657e25a8",
+    "rich_text_yX46cT",
+    "category_cards_4zj4kH",
+    "multi_column_6rLKqy"
+  ]
+}

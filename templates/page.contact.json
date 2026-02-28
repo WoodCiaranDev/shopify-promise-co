@@ -1,0 +1,392 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_title": true,
+        "page_width": "xs"
+      }
+    },
+    "intro-text": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_intro": {
+          "type": "heading",
+          "settings": {
+            "text": "Want to Get in touch with the team?",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_intro": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Our customer care hours are 9am-4pm, Monday-Friday, UK Time</p><p>Please include your order number if you are emailing about an existing order</p><p>You can use the below form or email us at info@thepromiseco.com</p>"
+          }
+        },
+        "button_intro": {
+          "type": "button",
+          "settings": {
+            "style": "solid",
+            "text": "Contact Us",
+            "url": "#contact-form",
+            "background": "#82add9",
+            "text_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "heading_intro",
+        "richtext_intro",
+        "button_intro"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "image-masonry": {
+      "type": "image-masonry",
+      "blocks": {
+        "image_H9Tdgd": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/7_e549dc0d-f0ef-4e3f-a216-100707989c95.png"
+          }
+        },
+        "image_1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/2_0c5a0124-171a-4ac5-9c25-b96383b077c2.png"
+          }
+        },
+        "image_2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/3D6A4030_copynew.jpg"
+          }
+        },
+        "image_3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/3_ae257e60-84c2-499e-a447-559f1c151709.png"
+          }
+        },
+        "image_4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/8_fe20807c-f24b-4fd3-b2a8-0275dd4e91b8.png"
+          }
+        },
+        "image_DBXMFz": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-01-04T114542.837.png"
+          }
+        },
+        "image_XG7f3M": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/4_28983c06-6078-40a7-98d2-6160469667d4.png"
+          }
+        },
+        "image_ziQpGj": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/6_fc4ed159-dffe-41dd-b581-012051f27c9f.png"
+          }
+        }
+      },
+      "block_order": [
+        "image_H9Tdgd",
+        "image_1",
+        "image_2",
+        "image_3",
+        "image_4",
+        "image_DBXMFz",
+        "image_XG7f3M",
+        "image_ziQpGj"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": false,
+        "mobile_image_1": "shopify://shop_images/7_e549dc0d-f0ef-4e3f-a216-100707989c95.png",
+        "mobile_image_2": "shopify://shop_images/2_0c5a0124-171a-4ac5-9c25-b96383b077c2.png"
+      }
+    },
+    "contact-form": {
+      "type": "contact",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": false,
+        "subheading": "*Please include your order number in your message, if you have one",
+        "title": "",
+        "content": "",
+        "section_id": "contact-form"
+      }
+    },
+    "signature": {
+      "type": "signature-image",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "image": "shopify://shop_images/with_love_the_team_x.png",
+        "max_width": 200,
+        "separate_section_with_border": false
+      }
+    },
+    "faq_FqWbPD": {
+      "type": "faq",
+      "blocks": {
+        "question_Lq96MW": {
+          "type": "question",
+          "settings": {
+            "question": "How long will my order take to ship?",
+            "answer": "<p><strong>Order Fulfilment</strong></p><ul><li>Orders are shipped <strong>Monday–Friday</strong>.</li><li>Any orders placed after <strong>1pm (local warehouse time)</strong> on Friday will not be shipped until Monday.</li></ul><p><strong>UK Shipping (from our UK warehouse)</strong></p><ul><li><strong>Royal Mail 48 Hours</strong>: Delivery in 2 working days.</li><li><strong>Royal Mail 24 Hours</strong>: Delivery in 1 working day (order before 1pm GMT to receive your parcel the next working day).</li></ul><p><strong>USA Shipping (from our USA warehouse)</strong></p><ul><li>Orders ship via <strong>DHL Express Domestic</strong>.</li><li>Delivery takes <strong>2–4 working days</strong>, depending on your shipping zone.</li><li>All tariffs and import fees are already covered by <strong>The Promise Ring Co. LTD</strong>, so there are <strong>no additional customs charges</strong> for US customers.</li></ul><p><strong>International Shipping (all other countries from our UK warehouse)</strong></p><ul><li><strong>Europe</strong>: 2–11 business days.</li><li><strong>Rest of the World (Canada, Australia, etc.)</strong>: 3–17 business days.</li></ul><p><strong>Please note:</strong> Delivery times are estimates and may occasionally be extended due to customs delays, courier disruptions, or UK bank holidays.</p>"
+          }
+        },
+        "question_7gTgX8": {
+          "type": "question",
+          "settings": {
+            "question": "Can I return my order?",
+            "answer": "<p>Yes! If your ring doesn't fit, or you simply don't like it, you can return it by emailing <strong>info@thepromiseco.com</strong></p><p>We will refund any item you are unhappy with if returned to us in its <strong>original, unaltered condition </strong>within <strong>30 days </strong>from when you received it.</p><p><strong>Please see our refund policy for full details.</strong></p>"
+          }
+        },
+        "question_XjwjE8": {
+          "type": "question",
+          "settings": {
+            "question": "When will my refund be processed?",
+            "answer": "<p>We will notify you once we’ve received and inspected your return, once your refund is approved please allow up to 10 working days for your bank to have reversed the transaction.</p><p>Please see our refund policy for full details.</p>"
+          }
+        },
+        "question_FDh8CK": {
+          "type": "question",
+          "settings": {
+            "question": "Can I exchange my order?",
+            "answer": "<p>We want to make sure your ring fits just right! If it doesn't, you're eligible for an exchange.</p><p>Please email <strong>info@thepromiseco.com </strong>to start the process</p><p>We will exchange any item you are unhappy with if returned to us in its <strong>original, unaltered condition </strong>within <strong>30</strong> <strong>days </strong>from when you received it.</p>"
+          }
+        },
+        "question_4tpEA8": {
+          "type": "question",
+          "settings": {
+            "question": "I'm buying as a gift and your return window is not long enough, what can I do?",
+            "answer": "<p>We appreciate that when it comes to unique gifts, you prefer to plan ahead. Before making your purchase, kindly reach out to us at <a>info@thepromiseco.com</a>, and we'll be happy to assist you.</p><p>If a longer timeframe is authorised, we can arrange this on an exchanges only basis (no cash refunds), provided that the ring passes our quality inspection upon return.</p>"
+          }
+        },
+        "question_ykm4gj": {
+          "type": "question",
+          "settings": {
+            "question": "Do you do express delivery?",
+            "answer": "<p><strong>Express Delivery</strong></p><ul><li><strong>UK Customers</strong> – Next Working Day delivery available with Royal Mail (order before 1pm).<br/></li><li><strong>USA Customers</strong> – Express shipping available nationwide, delivered in <strong>2–4 business days</strong>.</li></ul><p>Unfortunately for Rest of World orders we do not offer any express delivery.</p>"
+          }
+        },
+        "question_zk7DQT": {
+          "type": "question",
+          "settings": {
+            "question": "Will you cover the cost of my return?",
+            "answer": "<p>If it is proven that there is a fault with the good once inspected, we will credit you the cost of your return. There otherwise returns are at the cost of the customer.</p><p>Please see the refund policy for details.</p>"
+          }
+        },
+        "question_bdAUN3": {
+          "type": "question",
+          "settings": {
+            "question": "International Charges",
+            "answer": "<p><strong>UK Customers</strong> – No duties or fees apply.</p><p><br/><strong>USA Customers</strong> – Thanks to our new US warehouse, there are <strong>no tariffs or additional fees</strong> on your orders.<br/></p><p><strong>EU Customers -</strong>Orders under €150 (excluding shipping fees) ship with no import fees</p><p><br/><strong>Other International Customers</strong> – Deliveries outside of the UK and USA may be subject to customs duties and service fees. These vary by country, and unfortunately we cannot control or predict the charges. For more information, please contact your local customs office. Please note, we are not able to reimburse duties or taxes paid upon delivery.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_Lq96MW",
+        "question_7gTgX8",
+        "question_XjwjE8",
+        "question_FDh8CK",
+        "question_4tpEA8",
+        "question_ykm4gj",
+        "question_zk7DQT",
+        "question_bdAUN3"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": true,
+        "show_categories": false,
+        "subheading": "",
+        "title": "Delivery & Returns",
+        "content": ""
+      }
+    },
+    "faq_axAUx9": {
+      "type": "faq",
+      "blocks": {
+        "question_LVbHAd": {
+          "type": "question",
+          "settings": {
+            "question": "What precious metals do you use?",
+            "answer": "<p>Promise stones come in sterling silver with rhodium plating OR 2.5 microns of 18ct gold-plating, known as Gold Vermeil</p><p>All pieces are engraved with 925 for metal authenticity and our \"The Promise Co\" engraving for quality assurance</p>"
+          }
+        },
+        "question_fVThDy": {
+          "type": "question",
+          "settings": {
+            "question": "What stones do you use?",
+            "answer": "<p>Our pieces feature conflict-free simulated diamonds, hand-set stones for a flawless finish</p><p>Our Promise stones boast a 2.18 refractive index, MOHS rating of 8.5, perfect for everyday wear with care</p><p>To compare: Diamonds have a 2.41 refractive index and MOHS rating of 10, Swarovski Crystals sit at around 1.6 refractive index, MOHS 6-7</p><p>We aim to provide diamond-like sparkle at a fraction of the cost, using our exclusive clear or emerald cut patterns for enhanced clarity</p>"
+          }
+        },
+        "question_tYGAYq": {
+          "type": "question",
+          "settings": {
+            "question": "What is Gold Vermeil?",
+            "answer": "<p><strong>(Pronounced Ver-may!)</strong></p><p>Gold Vermeil is not to be mixed up with normal gold plating… it is a thick layer of solid 18ct Gold on top of Sterling Silver base, meaning you get the look and feel of solid gold at a fraction of the price!</p><p>We use 18ct gold that is a minimum of 2.5 microns thick, as required by the Federal Trade Commission to classify vermeil, layered over sterling silver. </p><p><strong>Did you know?</strong> Plating as thin as 0.1 microns can still be classed as Gold Plated!? Our plating is 25 times thicker than this (crazy right)</p>"
+          }
+        },
+        "question_7fEtx8": {
+          "type": "question",
+          "settings": {
+            "question": "How do I care for Gold Vermeil?",
+            "answer": "<p>Gold Vermeil is resilient, but for lasting shine:</p><ul><li>Minimise exposure to sweat and water</li><li>Remove before exercising or washing hands</li><li>Avoid perfumes and lotions</li><li>Be gentle when using hand sanitiser</li><li>Clean with a dry cloth</li><li>Store in a dry place when not worn for daily protection</li><li>Do not wear your ring in the pool, harsh chemicals and Chlorine can cause corrosion</li></ul>"
+          }
+        },
+        "question_Ad93iy": {
+          "type": "question",
+          "settings": {
+            "question": "What is Sterling Silver?",
+            "answer": "<p>925 Sterling Silver is an alloy made of 92.5% pure silver and 7.5% copper. To make sure your Sterling Silver </p><p>On top of a sterling silver base we plate jewellery in rhodium, which makes your ring extra durable and shiny. Rhodium is one of the costliest precious metals due to its rarity</p>"
+          }
+        },
+        "question_wf9CM3": {
+          "type": "question",
+          "settings": {
+            "question": "How do I care for Sterling Silver?",
+            "answer": "<p>Sterling Silver is perfect for everyday wear, but to ensure your ring lasts as long as possible:</p><ul><li>Remove before exercising, washing hands, or showering</li><li>Polish gently with a silver cloth for tarnished jewellery</li><li>Skip perfumes and lotions while wearing</li><li>Be cautious with hand sanitiser</li><li>Store in a dry place when not worn</li><li>Do not wear your ring in the pool, harsh chemicals and Chlorine can cause corrosion</li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "question_LVbHAd",
+        "question_fVThDy",
+        "question_tYGAYq",
+        "question_7fEtx8",
+        "question_Ad93iy",
+        "question_wf9CM3"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "show_categories": false,
+        "subheading": "",
+        "title": "Quality & Materials",
+        "content": ""
+      }
+    },
+    "rich_text_gBPXyn": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_DFfnUG": {
+          "type": "heading",
+          "settings": {
+            "text": "Ready to make your promise?",
+            "heading_tag": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_DFfnUG"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": true,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "category_cards_8yXtk8": {
+      "type": "category-cards",
+      "blocks": {
+        "category_image_YgYi94": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/4_18c5bbdd-e181-4b3a-8e3c-2411e576827f.png",
+            "title": "Single Stone Rings",
+            "description": "<p>Promise</p>",
+            "link": "shopify://collections/single-stone-promise-rings"
+          }
+        },
+        "category_image_pqJe9f": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/3_86b63cb8-1679-4cbb-a63d-f90c8d38b8c5.png",
+            "title": "Gifts for Her",
+            "description": "<p>Perfect</p>",
+            "link": "shopify://collections/for-her"
+          }
+        },
+        "category_image_f9UNP8": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/2_080efb18-8960-4515-8029-cb2da2f60254.png",
+            "title": "Best Sellers",
+            "description": "<p>discover</p>",
+            "link": "shopify://collections/best-sellers"
+          }
+        },
+        "category_image_XBpyFU": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design-16.png",
+            "title": "necklaces",
+            "description": "<p>our current fave</p>",
+            "link": "shopify://collections/necklaces"
+          }
+        }
+      },
+      "block_order": [
+        "category_image_YgYi94",
+        "category_image_pqJe9f",
+        "category_image_f9UNP8",
+        "category_image_XBpyFU"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "background_color": "#ffffff",
+        "title_color": "#000000",
+        "subtitle_color": "#666666",
+        "section_padding_top": 64,
+        "section_padding_bottom": 64,
+        "mobile_single_column": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "intro-text",
+    "image-masonry",
+    "contact-form",
+    "signature",
+    "faq_FqWbPD",
+    "faq_axAUx9",
+    "rich_text_gBPXyn",
+    "category_cards_8yXtk8"
+  ]
+}

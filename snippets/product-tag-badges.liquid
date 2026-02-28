@@ -1,0 +1,26 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+PRODUCT TAG BADGES COMPONENT
+----------------------------------------------------------------------------------------------------------------------
+
+Renders whitelisted product tags as badges in the top-right corner of product cards.
+
+********************************************
+Supported variables
+********************************************
+
+* product: the product to render the tag badges for (required)
+{%- endcomment -%}
+
+{%- capture tag_badges -%}
+  {%- for product_tag in product.tags -%}
+    {%- assign product_tag_handle = product_tag | handle -%}
+    <span class="tag-badge tag-badge--{{ product_tag_handle }}">{{ product_tag }}</span>
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- if tag_badges != blank -%}
+  <badge-list class="badge-list badge-list--tags">
+    {{- tag_badges -}}
+  </badge-list>
+{%- endif -%}

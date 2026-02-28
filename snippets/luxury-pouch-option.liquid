@@ -1,0 +1,137 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+GIFTING OPTIONS
+----------------------------------------------------------------------------------------------------------------------
+
+Renders gifting options for customers to opt-in to receive additional services with their order.
+State is persisted via localStorage and syncs between cart drawer and cart page.
+Uses theme settings for content configuration.
+
+********************************************
+Supported variables
+********************************************
+
+* section_id: unique identifier for the checkbox IDs
+{%- endcomment -%}
+
+{%- liquid
+  assign show_checkbox_1 = settings.gifting_show_checkbox_1
+  assign show_checkbox_2 = settings.gifting_show_checkbox_2
+  assign checkbox_1_label = settings.gifting_checkbox_1_label
+  assign checkbox_1_subtitle = settings.gifting_checkbox_1_subtitle
+  assign checkbox_1_image = settings.gifting_checkbox_1_image
+  assign checkbox_2_label = settings.gifting_checkbox_2_label
+  assign checkbox_2_subtitle = settings.gifting_checkbox_2_subtitle
+  assign checkbox_2_image = settings.gifting_checkbox_2_image
+-%}
+
+{%- if show_checkbox_1 or show_checkbox_2 -%}
+  <div class="gifting-option">
+    <div class="gifting-option__checkboxes">
+      {%- if show_checkbox_1 and checkbox_1_label != blank -%}
+        <div class="gifting-option__checkbox-row">
+          <div class="gifting-option__checkbox-content">
+            <label class="gifting-option__checkbox-label" for="gift-option-1-checkbox-{{ section_id }}">
+              <input type="hidden" name="attributes[gift_option_1]" id="gift-option-1-value-{{ section_id }}" value="Yes">
+              <input
+                type="checkbox"
+                id="gift-option-1-checkbox-{{ section_id }}"
+                class="checkbox"
+                data-gift-option="1"
+                checked
+              >
+              <span>{{ checkbox_1_label }}</span>
+            </label>
+            {%- if checkbox_1_subtitle != blank -%}
+              <p class="gifting-option__checkbox-subtitle text-subdued text-sm">{{ checkbox_1_subtitle }}</p>
+            {%- endif -%}
+          </div>
+          {%- if checkbox_1_image != blank -%}
+            <div class="gifting-option__checkbox-image">
+              {{ checkbox_1_image | image_url: width: 80 | image_tag: loading: 'lazy' }}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if show_checkbox_2 and checkbox_2_label != blank -%}
+        <div class="gifting-option__checkbox-row">
+          <div class="gifting-option__checkbox-content">
+            <label class="gifting-option__checkbox-label" for="gift-option-2-checkbox-{{ section_id }}">
+              <input type="hidden" name="attributes[gift_option_2]" id="gift-option-2-value-{{ section_id }}" value="Yes">
+              <input
+                type="checkbox"
+                id="gift-option-2-checkbox-{{ section_id }}"
+                class="checkbox"
+                data-gift-option="2"
+                checked
+              >
+              <span>{{ checkbox_2_label }}</span>
+            </label>
+            {%- if checkbox_2_subtitle != blank -%}
+              <p class="gifting-option__checkbox-subtitle text-subdued text-sm">{{ checkbox_2_subtitle }}</p>
+            {%- endif -%}
+          </div>
+          {%- if checkbox_2_image != blank -%}
+            <div class="gifting-option__checkbox-image">
+              {{ checkbox_2_image | image_url: width: 80 | image_tag: loading: 'lazy' }}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if show_checkbox_1 or show_checkbox_2 -%}
+    <script>
+      (function() {
+        const sectionId = '{{ section_id }}';
+
+        function initCheckbox(optionNum) {
+          const STORAGE_KEY = 'theme:gift-option-' + optionNum + '-selected';
+          const checkbox = document.getElementById('gift-option-' + optionNum + '-checkbox-' + sectionId);
+          const hiddenInput = document.getElementById('gift-option-' + optionNum + '-value-' + sectionId);
+
+          if (!checkbox || !hiddenInput) return;
+
+          function initFromStorage() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            // Default to checked (true) if no localStorage value exists
+            if (stored === 'false') {
+              checkbox.checked = false;
+              hiddenInput.value = 'No';
+            } else {
+              checkbox.checked = true;
+              hiddenInput.value = 'Yes';
+            }
+          }
+
+          function handleChange() {
+            const isChecked = checkbox.checked;
+            localStorage.setItem(STORAGE_KEY, isChecked.toString());
+            hiddenInput.value = isChecked ? 'Yes' : 'No';
+          }
+
+          checkbox.addEventListener('change', handleChange);
+          initFromStorage();
+        }
+
+        {%- if show_checkbox_1 -%}
+          initCheckbox(1);
+        {%- endif -%}
+        {%- if show_checkbox_2 -%}
+          initCheckbox(2);
+        {%- endif -%}
+
+        document.addEventListener('cart-drawer:refreshed', function() {
+          {%- if show_checkbox_1 -%}
+            initCheckbox(1);
+          {%- endif -%}
+          {%- if show_checkbox_2 -%}
+            initCheckbox(2);
+          {%- endif -%}
+        });
+      })();
+    </script>
+  {%- endif -%}
+{%- endif -%}

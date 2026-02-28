@@ -1,0 +1,640 @@
+{%- if section.blocks.size > 0 -%}
+  <style>
+    #shopify-section-{{ section.id }} {
+      background-color: #62AFE1;
+      position: relative;
+    }
+
+    .promise-community {
+      position: relative;
+    }
+
+
+    @media screen and (min-width: 700px) {
+      .promise-community__layout {
+        display: flex;
+        align-items: flex-start;
+        width: 100%;
+      }
+    }
+
+    .promise-community__header {
+      width: 40%;
+      text-align: left;
+      padding-left: max(2rem, calc((100vw - 1200px) / 2));
+    }
+
+    .promise-community__carousel-wrapper {
+      flex-shrink: 0;
+      margin-left: 2rem;
+    }
+
+    @media screen and (min-width: 1000px) {
+        .promise-community__carousel-wrapper {
+          width: 60%;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+      .promise-community__carousel-wrapper {
+        padding: 30px 0;
+      }
+    }
+
+    .promise-community__title {
+      margin-bottom: 0;
+      color: white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .promise-community__title .promise-count {
+      display: block;
+      font-size: 4.8rem;
+      font-weight: normal;
+      line-height: 0.4;
+      margin-top: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .promise-community__title .promise-subtitle {
+      font-size: 3.2rem;
+      font-weight: 200;
+      line-height: 1.2;
+    }
+
+    /* Extend baka-too-font to include spans */
+    .baka-too-font,
+    span.baka-too-font {
+      font-family: "baka-too", sans-serif;
+    }
+
+    .promise-community__button-wrapper {
+      margin-top: 2rem;
+    }
+
+    @media screen and (max-width: 999px) {
+      .promise-community__button-wrapper {
+        margin-top: 1.5rem;
+      }
+    }
+
+    .promise-swiper {
+      width: 100%;
+      max-width: 100%;
+      min-height: 0;
+      min-width: 0;
+      padding-bottom: 50px;
+    }
+
+    .swiper-wrapper {
+      align-items: stretch;
+    }
+
+    .swiper-slide {
+      height: auto;
+      width: auto;
+    }
+
+    @media screen and (min-width: 768px) {
+      .swiper-slide {
+        width: 180px;
+      }
+    }
+
+    .promise-card {
+      width: 100%;
+      background: white;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    @media (min-width: 768px) {
+         .promise-card {
+          height: 100%;
+         }
+    }
+
+    .promise-card__image {
+      width: 100%;
+      aspect-ratio: 1;
+      overflow: hidden;
+    }
+
+    .promise-card__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .promise-card__content {
+      padding: 12px;
+      background: white;
+    }
+
+    .promise-card__author {
+      margin-bottom: 8px;
+      flex-shrink: 0;
+    }
+
+    .promise-card__name {
+      font-family: "ogg", serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: #2c2c2c;
+      margin-bottom: 2px;
+      line-height: 1.2;
+    }
+
+    .promise-card__location {
+      font-family: "minerva-modern", sans-serif;
+      font-size: 12px;
+      color: #666;
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .promise-card__text-wrapper {
+      overflow-y: auto;
+    }
+
+    .promise-card__text {
+      font-family: "covik-sans", sans-serif;
+      font-size: 12px;
+      line-height: 1.4;
+      color: #333;
+      margin: 0;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      padding-right: 10px;
+    }
+
+    /* Custom scrollbar for promise text */
+    .promise-card__text-wrapper::-webkit-scrollbar {
+      width: 2px;
+    }
+
+    .promise-card__text-wrapper::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    .promise-card__text-wrapper::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 1px;
+    }
+
+    .promise-card__text-wrapper::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8;
+    }
+
+
+    .promise-community__decoration {
+      position: absolute;
+      bottom: -2rem;
+      left: 2rem;
+      max-width: 120px;
+      opacity: 0.8;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    @media screen and (min-width: 700px) {
+      .promise-community__decoration {
+        max-width: 150px;
+        left: 3rem;
+        bottom: -3rem;
+      }
+    }
+
+    .promise-decoration-image {
+      width: 100%;
+      height: auto;
+      transform: rotate(-5deg);
+    }
+
+    .promise-to-card {
+      position: absolute;
+      bottom: -80px;
+      width: 200px;
+      z-index: 3;
+      pointer-events: none;
+      left: 50px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .promise-to-card {
+        width: 26%;
+        left: 3%;
+        bottom: 0;
+        transform: translateY(50%);
+      }
+    }
+
+    .promise-swiper-navigation {
+        position: absolute;
+        bottom: 0;
+        right: 20px;
+        display: flex;
+        gap: 12px;
+    }
+
+    .promise-swiper-button-prev,
+    .promise-swiper-button-next {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+      opacity: 0.8;
+    }
+
+    .promise-swiper-button-prev:hover,
+    .promise-swiper-button-next:hover {
+      opacity: 1;
+    }
+
+    .promise-swiper-button-prev img,
+    .promise-swiper-button-next img {
+      width: 32px;
+      height: 32px;
+      display: block;
+    }
+
+    /* Responsive adjustments */
+    @media screen and (max-width: 999px) {
+      .promise-community__layout {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .promise-community__header {
+        width: 100%;
+        text-align: center;
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
+      .promise-community__carousel-wrapper {
+        margin-left: 0;
+      }
+    }
+
+    @media screen and (max-width: 699px) {
+      .promise-community__header {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+  </style>
+
+  {%- comment -%}
+    ------------------------------------------------------------------------------------------------------------------------
+    LIQUID
+    ------------------------------------------------------------------------------------------------------------------------
+  {%- endcomment -%}
+
+  <div class="section-spacing">
+    <div class="promise-community">
+      <div class="promise-community__layout">
+        {%- if section.settings.title_line_1 != blank or section.settings.title_line_2 != blank -%}
+          <div class="promise-community__header">
+            <h2 class="promise-community__title">
+              {%- if section.settings.title_line_1 != blank -%}
+                <span class="promise-count {% if section.settings.use_baka_too_font %}baka-too-font{% endif %}">
+                  {{- section.settings.title_line_1 -}}
+                </span>
+              {%- endif -%}
+              {%- if section.settings.title_line_2 != blank -%}
+                <span class="promise-subtitle {% if section.settings.use_ogg_font %}ogg-font{% endif %}">
+                  {{- section.settings.title_line_2 -}}
+                </span>
+              {%- endif -%}
+            </h2>
+
+            {%- if section.settings.button_text != blank -%}
+              <div class="promise-community__button-wrapper">
+                <a href="{{ section.settings.button_url | default: '#' }}" class="button button--tertiary">
+                  {{ section.settings.button_text }}
+                </a>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <div class="promise-community__carousel-wrapper">
+          {%- assign carousel_id = 'promise-swiper-' | append: section.id -%}
+
+          <div class="swiper promise-swiper" id="{{ carousel_id }}">
+            <div class="swiper-wrapper">
+              {%- for block in section.blocks -%}
+                <div class="swiper-slide" {{ block.shopify_attributes }}>
+                  <div class="promise-card">
+                    <div class="promise-card__image">
+                      {%- if block.settings.card_image != blank -%}
+                        {{
+                          block.settings.card_image
+                          | image_url: width: 370
+                          | image_tag: loading: 'lazy', alt: block.settings.author_name
+                          | default: 'Promise card image'
+                        }}
+                      {%- endif -%}
+                    </div>
+
+                    <div class="promise-card__content">
+                      <div class="promise-card__author">
+                        {%- if block.settings.author_name != blank -%}
+                          <div class="promise-card__name">{{ block.settings.author_name }}</div>
+                        {%- endif -%}
+                        {%- if block.settings.location != blank -%}
+                          <div class="promise-card__location">{{ block.settings.location }}</div>
+                        {%- endif -%}
+                      </div>
+
+                      {%- if block.settings.promise_content != blank -%}
+                        <div class="promise-card__text-wrapper">
+                          <p class="promise-card__text">{{ block.settings.promise_content }}</p>
+                        </div>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+            <!-- Navigation arrows -->
+            <div class="promise-swiper-navigation">
+              <button class="promise-swiper-button-prev" type="button" aria-label="Previous slide">
+                <img
+                  src="{{ 'arrow-white-left.png' | asset_url }}"
+                  alt="Previous"
+                  width="32"
+                  height="32"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                >
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  style="display: none;"
+                >
+                  <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <button class="promise-swiper-button-next" type="button" aria-label="Next slide">
+                <img
+                  src="{{ 'arrow-white-right.png' | asset_url }}"
+                  alt="Next"
+                  width="32"
+                  height="32"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                >
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  style="display: none;"
+                >
+                  <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {%- if section.settings.decoration_image != blank -%}
+        <div class="promise-community__decoration">
+          {{-
+            section.settings.decoration_image
+            | image_url: width: 300
+            | image_tag: class: 'promise-decoration-image', alt: 'Promise decoration', loading: 'lazy'
+          -}}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <!-- Promise to card image -->
+  <img
+    src="{{ 'promise-to-card.png' | asset_url }}"
+    alt="Promise to card"
+    class="promise-to-card"
+    loading="lazy"
+  >
+{%- endif -%}
+
+{%- comment -%}
+  ------------------------------------------------------------------------------------------------------------------------
+  JAVASCRIPT - Swiper Initialization
+  ------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const swiper{{ section.id | replace: '-', '_' }} = new Swiper('#promise-swiper-{{ section.id }}', {
+      slidesPerView: 1.2,
+      spaceBetween: 20,
+      centeredSlides: true,
+      loop: true,
+      grabCursor: true,
+      navigation: {
+        nextEl: '#promise-swiper-{{ section.id }} .promise-swiper-button-next',
+        prevEl: '#promise-swiper-{{ section.id }} .promise-swiper-button-prev',
+      },
+      {% if section.settings.autoplay %}
+      autoplay: {
+        delay: {{ section.settings.cycle_speed | times: 1000 }},
+        disableOnInteraction: false,
+      },
+      {% endif %}
+      breakpoints: {
+        768: {
+          slidesPerView: 'auto',
+          spaceBetween: 10,
+          centeredSlides: false
+        },
+      },
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Promise Community",
+  "class": "shopify-section--promise-community",
+  "tag": "section",
+  "max_blocks": 12,
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:global.colors.scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "separate_section_with_border",
+      "label": "t:global.section.separate_section_with_border",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "title_line_1",
+      "label": "Title Line 1 (Baka Font)",
+      "default": "4000+ Promises"
+    },
+    {
+      "type": "text",
+      "id": "title_line_2",
+      "label": "Title Line 2 (Ogg Font)",
+      "default": "Already Made"
+    },
+    {
+      "type": "image_picker",
+      "id": "decoration_image",
+      "label": "Decoration Image",
+      "info": "Promise letter or card image for bottom-left decoration"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto-rotate promises",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "cycle_speed",
+      "min": 3,
+      "max": 20,
+      "step": 1,
+      "unit": "sec",
+      "label": "t:sections.testimonials.cycle_speed",
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Make Your Promise"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_baka_too_font",
+      "label": "Use Baka font for count",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "use_ogg_font",
+      "label": "Use Ogg font for subtitle",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "promise",
+      "name": "Promise Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "card_image",
+          "label": "Card Image",
+          "info": "Image for the top of the promise card (185x200px recommended)"
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Author Name",
+          "default": "Sarah Johnson"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "default": "London, UK"
+        },
+        {
+          "type": "textarea",
+          "id": "promise_content",
+          "label": "Promise Content",
+          "default": "I promise to make a positive difference in my community by volunteering at local shelters and helping those in need.",
+          "info": "The promise text to display on the card (scrollable if long)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promise Community",
+      "settings": {
+        "title_line_1": "4000+ Promises",
+        "title_line_2": "Already Made"
+      },
+      "blocks": [
+        {
+          "type": "promise",
+          "settings": {
+            "promise_content": "I promise to reduce my carbon footprint by cycling to work and using renewable energy at home.",
+            "author_name": "Emma Thompson",
+            "location": "Brighton, UK"
+          }
+        },
+        {
+          "type": "promise",
+          "settings": {
+            "promise_content": "I promise to volunteer at my local food bank every weekend and help fight hunger in my community.",
+            "author_name": "James Wilson",
+            "location": "Manchester, UK"
+          }
+        },
+        {
+          "type": "promise",
+          "settings": {
+            "promise_content": "I promise to plant 100 trees this year and inspire my neighbors to create a greener future together.",
+            "author_name": "Aisha Patel",
+            "location": "Birmingham, UK"
+          }
+        },
+        {
+          "type": "promise",
+          "settings": {
+            "promise_content": "I promise to mentor young entrepreneurs and share my knowledge to help them build sustainable businesses.",
+            "author_name": "Michael Chen",
+            "location": "Edinburgh, UK"
+          }
+        },
+        {
+          "type": "promise",
+          "settings": {
+            "promise_content": "I promise to organize monthly beach cleanups and protect our beautiful coastline for future generations.",
+            "author_name": "Sophie Davies",
+            "location": "Cornwall, UK"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

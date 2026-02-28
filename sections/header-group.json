@@ -1,0 +1,149 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement_marquee_bQ8aXY": {
+      "type": "announcement-marquee",
+      "blocks": {
+        "message_PwLUb7": {
+          "type": "message",
+          "settings": {
+            "text": "5 Year Warranty"
+          }
+        },
+        "message_P4eVKB": {
+          "type": "message",
+          "settings": {
+            "text": "Anti Tarnish & Water Resistant"
+          }
+        },
+        "message_9JGdFV": {
+          "type": "message",
+          "settings": {
+            "text": "Made with 25x thicker gold"
+          }
+        }
+      },
+      "block_order": [
+        "message_PwLUb7",
+        "message_P4eVKB",
+        "message_9JGdFV"
+      ],
+      "name": "Announcement marquee",
+      "settings": {
+        "color_scheme": "scheme-b68b61c5-ba0e-4161-a0e3-3d59622e9bf4",
+        "enable_sticky": true,
+        "scroll_speed": 10,
+        "pause_on_hover": true,
+        "desktop_font_size": 11,
+        "mobile_font_size": 10
+      }
+    },
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "message-1": {
+          "type": "message",
+          "disabled": true,
+          "settings": {
+            "text": "SHOP OUR ONCE A YEAR SALE."
+          }
+        }
+      },
+      "block_order": [
+        "message-1"
+      ],
+      "settings": {
+        "color_scheme": "scheme-3",
+        "enable_sticky": false,
+        "autoplay": true,
+        "cycle_speed": 5,
+        "desktop_font_size": 11,
+        "mobile_font_size": 10
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "mega_menu_eccGwN": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "Shop",
+            "images_position": "right",
+            "image_1_heading": "",
+            "image_1_text": "",
+            "image_1_link": "",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": "",
+            "featured_collection_1": "for-her",
+            "featured_collection_1_title": "Gifts for Her",
+            "featured_collection_1_image": "shopify://shop_images/2_d058962f-dc18-4312-806f-13ea51396600.png",
+            "featured_collection_2": "best-sellers",
+            "featured_collection_2_title": "best sellers",
+            "featured_collection_2_image": "shopify://shop_images/1_a649e1ac-271b-4b10-9dcb-3a3b713c09a7.png",
+            "promo_block_text": "Visit The Promise World...",
+            "promo_block_link": "shopify://pages/the-promise-world",
+            "debug_mode": false
+          }
+        }
+      },
+      "block_order": [
+        "mega_menu_eccGwN"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "enable_sticky": true,
+        "hide_on_scroll": false,
+        "show_separation_border": true,
+        "reduce_padding": true,
+        "logo": "shopify://shop_images/Sub_Logo_-_Charcoal_1b04e55d-4fa6-4a46-8e44-ff2cbabaf9eb.svg",
+        "logo_max_width": 170,
+        "logo_mobile_max_width": 160,
+        "menu": "main-menu-v2",
+        "sidebar_menu": "mobile-menu",
+        "menu_open_trigger": "hover",
+        "enable_search": true,
+        "sidebar_color_scheme": "",
+        "sidebar_text_font": "heading",
+        "sidebar_show_dividers": true,
+        "sidebar_open_second_level_menus": false,
+        "sidebar_highlighted_menu_items": "Black Friday",
+        "layout": "logo_center_navigation_inline",
+        "show_icons": true,
+        "show_country_selector": true,
+        "show_country_name": false,
+        "show_country_flag": true,
+        "show_locale_selector": false,
+        "show_collection_countdown": false,
+        "countdown_date": "26-11-2025",
+        "countdown_image": "shopify://shop_images/hearttoi3.heic",
+        "countdown_title": "BLACK FRIDAY COUNTDOWN",
+        "show_main_featured_collections": true,
+        "transparent_header_text_color": "#ffffff"
+      }
+    },
+    "shogun_custom_html_N8Prrd": {
+      "type": "shogun-custom-html",
+      "name": "Shogun Custom HTML",
+      "settings": {
+        "html": ""
+      }
+    }
+  },
+  "order": [
+    "announcement_marquee_bQ8aXY",
+    "announcement-bar",
+    "header",
+    "shogun_custom_html_N8Prrd"
+  ]
+}

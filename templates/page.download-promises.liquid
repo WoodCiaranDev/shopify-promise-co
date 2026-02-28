@@ -1,0 +1,247 @@
+{%- comment -%}
+  Template Name: Download Promises
+  Description: Page that automatically downloads all promises as CSV when visited
+{%- endcomment -%}
+
+<div class="page-width" style="padding: 50px 0; text-align: center;">
+  <h1>Downloading Promises...</h1>
+  <p id="status">Fetching promise data...</p>
+  <div id="progress" style="margin: 20px 0;">
+    <div style="width: 100%; background: #f0f0f0; height: 20px; border-radius: 10px;">
+      <div id="progress-bar" style="width: 0%; background: #62AFE1; height: 100%; border-radius: 10px; transition: width 0.3s;"></div>
+    </div>
+  </div>
+  <p id="count" style="margin-top: 20px;"></p>
+  <button id="retry-btn" style="display: none; padding: 10px 20px; background: #000; color: #fff; border: none; cursor: pointer; margin-top: 20px;">Retry Download</button>
+</div>
+
+<script>
+(async function() {
+  const statusEl = document.getElementById('status');
+  const progressBar = document.getElementById('progress-bar');
+  const countEl = document.getElementById('count');
+  const retryBtn = document.getElementById('retry-btn');
+
+  async function fetchAllPromises() {
+    try {
+      statusEl.textContent = 'Fetching promise data...';
+      progressBar.style.width = '10%';
+      
+      const promises = [];
+      let hasNextPage = true;
+      let cursor = null;
+      let pageCount = 0;
+
+      // GraphQL query to fetch promise metaobjects
+      const query = `
+        query GetPromises($first: Int!, $after: String) {
+          metaobjects(type: "promise_entry", first: $first, after: $after) {
+            edges {
+              cursor
+              node {
+                id
+                handle
+                fields {
+                  key
+                  value
+                }
+              }
+            }
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+          }
+        }
+      `;
+
+      // Fetch all pages of promises
+      while (hasNextPage) {
+        pageCount++;
+        statusEl.textContent = `Fetching page ${pageCount}...`;
+        
+        const response = await fetch('/admin/api/2024-10/graphql.json', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Shopify-Access-Token': '{{ shop.metafields.custom.api_token }}' // You'll need to set this up
+          },
+          body: JSON.stringify({
+            query: query,
+            variables: {
+              first: 250,
+              after: cursor
+            }
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch promises');
+        }
+
+        const data = await response.json();
+        
+        if (data.errors) {
+          throw new Error('GraphQL error: ' + JSON.stringify(data.errors));
+        }
+
+        // Process the promises
+        data.data.metaobjects.edges.forEach(edge => {
+          const promise = {
+            id: edge.node.id,
+            handle: edge.node.handle
+          };
+          
+          // Convert fields array to object
+          edge.node.fields.forEach(field => {
+            promise[field.key] = field.value;
+          });
+          
+          promises.push(promise);
+        });
+
+        hasNextPage = data.data.metaobjects.pageInfo.hasNextPage;
+        cursor = data.data.metaobjects.pageInfo.endCursor;
+        
+        // Update progress
+        const progress = Math.min(90, 10 + (pageCount * 20));
+        progressBar.style.width = progress + '%';
+        countEl.textContent = `Found ${promises.length} promises so far...`;
+      }
+
+      return promises;
+    } catch (error) {
+      console.error('Error fetching promises:', error);
+      throw error;
+    }
+  }
+
+  function convertToCSV(promises) {
+    if (promises.length === 0) {
+      return 'No promises found';
+    }
+
+    // Get all unique keys from all promises
+    const allKeys = new Set();
+    promises.forEach(promise => {
+      Object.keys(promise).forEach(key => allKeys.add(key));
+    });
+    
+    // Convert to array and sort
+    const headers = Array.from(allKeys).sort();
+    
+    // Create CSV content
+    let csv = headers.map(h => `"${h}"`).join(',') + '\n';
+    
+    promises.forEach(promise => {
+      const row = headers.map(header => {
+        const value = promise[header] || '';
+        // Escape quotes and wrap in quotes
+        return `"${String(value).replace(/"/g, '""')}"`;
+      });
+      csv += row.join(',') + '\n';
+    });
+    
+    return csv;
+  }
+
+  function downloadCSV(csv, filename) {
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    
+    link.setAttribute('href', url);
+    link.setAttribute('download', filename);
+    link.style.display = 'none';
+    
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    setTimeout(() => URL.revokeObjectURL(url), 100);
+  }
+
+  async function downloadPromises() {
+    try {
+      retryBtn.style.display = 'none';
+      
+      // Fetch all promises
+      const promises = await fetchAllPromises();
+      
+      progressBar.style.width = '95%';
+      statusEl.textContent = 'Generating CSV...';
+      countEl.textContent = `Processing ${promises.length} promises...`;
+      
+      // Convert to CSV
+      const csv = convertToCSV(promises);
+      
+      // Generate filename with current date
+      const date = new Date().toISOString().split('T')[0];
+      const filename = `promises_export_${date}.csv`;
+      
+      progressBar.style.width = '100%';
+      statusEl.textContent = 'Download complete!';
+      countEl.textContent = `Downloaded ${promises.length} promises`;
+      
+      // Trigger download
+      downloadCSV(csv, filename);
+      
+    } catch (error) {
+      statusEl.textContent = 'Error: ' + error.message;
+      countEl.textContent = 'Download failed';
+      retryBtn.style.display = 'inline-block';
+      progressBar.style.width = '0%';
+    }
+  }
+
+  // Alternative approach using Storefront API (public)
+  async function downloadPromisesStorefront() {
+    try {
+      retryBtn.style.display = 'none';
+      statusEl.textContent = 'Fetching promises from storefront...';
+      progressBar.style.width = '20%';
+      
+      // This assumes you have a public metaobject query set up
+      const response = await fetch('/apps/promise-wall/promises.json');
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch promises');
+      }
+      
+      const data = await response.json();
+      const promises = data.promises || [];
+      
+      progressBar.style.width = '80%';
+      statusEl.textContent = 'Generating CSV...';
+      countEl.textContent = `Processing ${promises.length} promises...`;
+      
+      // Convert to CSV
+      const csv = convertToCSV(promises);
+      
+      // Generate filename with current date
+      const date = new Date().toISOString().split('T')[0];
+      const filename = `promises_export_${date}.csv`;
+      
+      progressBar.style.width = '100%';
+      statusEl.textContent = 'Download complete!';
+      countEl.textContent = `Downloaded ${promises.length} promises`;
+      
+      // Trigger download
+      downloadCSV(csv, filename);
+      
+    } catch (error) {
+      statusEl.textContent = 'Error: ' + error.message;
+      countEl.textContent = 'Download failed';
+      retryBtn.style.display = 'inline-block';
+      progressBar.style.width = '0%';
+    }
+  }
+
+  // Retry button handler
+  retryBtn.addEventListener('click', downloadPromisesStorefront);
+
+  // Start download automatically
+  // Use the storefront approach as it's more likely to work without authentication
+  downloadPromisesStorefront();
+})();
+</script>

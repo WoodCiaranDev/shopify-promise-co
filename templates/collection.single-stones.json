@@ -1,0 +1,188 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "rich_text_wMNiPf": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_weFRwt": {
+          "type": "subheading",
+          "settings": {
+            "text": "What's your Promise?"
+          }
+        },
+        "heading_6kB7dr": {
+          "type": "heading",
+          "settings": {
+            "text": "",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_MnfcG9": {
+          "type": "richtext",
+          "settings": {
+            "content": "<h1>single stone PROMISE RINGS</h1>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_weFRwt",
+        "heading_6kB7dr",
+        "richtext_MnfcG9"
+      ],
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "collection-banner": {
+      "type": "collection-banner",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "image_size": "auto",
+        "allow_transparent_header": true,
+        "reveal": true,
+        "enable_parallax": true,
+        "show_image": true,
+        "show_collection_title": true,
+        "show_collection_description": true,
+        "show_breadcrumb": true,
+        "content_width": "xs",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30,
+        "show_usp_tabs": false,
+        "show_stone_type_slider": true
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "hide_product_information": false,
+        "products_per_page": 48,
+        "products_per_row_mobile": "2",
+        "products_size_desktop": "large",
+        "show_grid_mode_selector": true,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "filter_layout": "sidebar",
+        "quick_links_menu": "",
+        "show_sort_by": true,
+        "show_filters": false,
+        "show_results_count": false,
+        "show_filter_group_name": false,
+        "show_filter_values_count": false,
+        "open_filters_by_default": false
+      }
+    },
+    "rich_text_kDUkmE": {
+      "type": "rich-text",
+      "blocks": {
+        "button_9QQEVz": {
+          "type": "button",
+          "settings": {
+            "style": "solid",
+            "text": "Shop the whole collection",
+            "url": "shopify://collections/shop-all",
+            "background": "#82add9",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "button_9QQEVz"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "multi_column_6rLKqy": {
+      "type": "multi-column",
+      "blocks": {
+        "image_with_text_N76bxy": {
+          "type": "image_with_text",
+          "settings": {
+            "title": "",
+            "heading_tag": "h5",
+            "content": "<h5>create your promise with our diamond simulant rings</h5><p>Declare your everlasting love with our exquisite diamond simulant rings, perfect for any occasion. Whether it's a milestone anniversary promise ring for your girlfriend or a heartfelt promise to yourself, our collection features flawless pieces guaranteed to convey your message with sincerity.</p><p>Crafted with diamond simulants, our promise rings symbolise unwavering commitment and enduring love. Choose from our stunning selection for a heartfelt gift that will be cherished always, signifying the strength of your bond with enduring beauty.</p>",
+            "link_url": "",
+            "link_text": ""
+          }
+        },
+        "image_with_text_ANbFUr": {
+          "type": "image_with_text",
+          "settings": {
+            "title": "",
+            "heading_tag": "h3",
+            "content": "<h5>affordable engagement rings</h5><p>Embark on a journey of elegance and affordability with our exquisite range of engagement rings designed with care in the UK. At The Promise Ring Co, we revolutionise luxury without breaking the bank. Discover our selection of high quality yet affordable engagement rings, from classic solitaires to intricate designs, designed to fit every budget. Embrace eternal love without compromising on quality. </p>",
+            "link_url": "",
+            "link_text": ""
+          }
+        },
+        "image_with_text_7mgb7U": {
+          "type": "image_with_text",
+          "settings": {
+            "title": "",
+            "heading_tag": "h5",
+            "content": "<h5>HAND SET WITH LOVE AND A 2 YEAR WARRANTY</h5><p>At The Promise Ring Co., our dedication lies in delivering unparalleled service to ensure your ring purchase is nothing short of extraordinary. We recognise that these pieces transcend mere jewellery; they encapsulate love, commitment, and cherished memories.</p><p>That's why we wholeheartedly stand behind our products, offering a comprehensive 2-year guarantee for your peace of mind. Each ring is meticulously hand-set, ensuring it's crafted with the utmost love and care to become your perfect symbol of enduring Promise.</p>",
+            "link_url": "",
+            "link_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_with_text_N76bxy",
+        "image_with_text_ANbFUr",
+        "image_with_text_7mgb7U"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "h2,h3,h4 {font-size: 20px;}"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "columns_per_row": 3,
+        "stack_on_mobile": true,
+        "overlap_image": false,
+        "content_alignment": "start",
+        "text_alignment": "start",
+        "spacing": "md",
+        "subheading": "",
+        "title": "",
+        "content": ""
+      }
+    }
+  },
+  "order": [
+    "rich_text_wMNiPf",
+    "collection-banner",
+    "main",
+    "rich_text_kDUkmE",
+    "multi_column_6rLKqy"
+  ]
+}
