@@ -646,6 +646,8 @@ Supported variables
             }
 
             // UK Logic - Europe/London timezone
+            // Dispatch is Mon-Fri (warehouse closed weekends).
+            // Delivery is dispatch + 1 calendar day (courier delivers Mon-Sat).
             function calculateUK() {
               const ukTime = getTestTime('Europe/London');
               const ukHour = ukTime.getHours();
@@ -653,27 +655,23 @@ Supported variables
               const isWeekday = ukDay >= 1 && ukDay <= 5;
               const beforeCutoff = ukHour < 13;
 
-              let deliveryDate, cutoffDate;
+              let dispatchDate, cutoffDate;
 
               if (isWeekday && beforeCutoff) {
-                // Rule A: Working day before 1pm - delivery next working day
-                deliveryDate = getNextWorkingDay(ukTime);
+                // Weekday before 1pm — dispatched today
+                dispatchDate = new Date(ukTime);
                 cutoffDate = new Date(ukTime);
                 cutoffDate.setHours(13, 0, 0, 0);
-              } else if (isWeekday && !beforeCutoff) {
-                // Rule B: Working day at/after 1pm - delivery = working day after next
-                deliveryDate = addWorkingDays(ukTime, 2);
-                cutoffDate = getNextWorkingDay(ukTime);
-                cutoffDate.setHours(13, 0, 0, 0);
               } else {
-                // Rule D: Weekend - delivery Tuesday, cutoff Monday 1pm
-                deliveryDate = addWorkingDays(ukTime, 2);
-                const monday = new Date(ukTime);
-                const daysUntilMonday = ukDay === 0 ? 1 : 2;
-                monday.setDate(monday.getDate() + daysUntilMonday);
-                monday.setHours(13, 0, 0, 0);
-                cutoffDate = monday;
+                // Weekday after 1pm or weekend — dispatched next working day
+                dispatchDate = getNextWorkingDay(ukTime);
+                cutoffDate = new Date(dispatchDate);
+                cutoffDate.setHours(13, 0, 0, 0);
               }
+
+              // Delivery = dispatch + 1 calendar day
+              const deliveryDate = new Date(dispatchDate);
+              deliveryDate.setDate(deliveryDate.getDate() + 1);
 
               // Calculate countdown
               const diff = cutoffDate - ukTime;
