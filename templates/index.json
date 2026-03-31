@@ -15,8 +15,8 @@
         "image_jcrmjC": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/There_is_no_greater_gift_24.png",
-            "mobile_image": "shopify://shop_images/There_is_no_greater_gift_23.png",
+            "image": "shopify://shop_images/There_is_no_greater_gift_36.png",
+            "mobile_image": "shopify://shop_images/There_is_no_greater_gift_37.png",
             "subheading": "",
             "title": "",
             "mobile_text_position": "place-self-end-center text-center",
@@ -41,18 +41,17 @@
         },
         "image_wpXLKm": {
           "type": "image",
-          "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/edit.png",
-            "mobile_image": "shopify://shop_images/Untitled_design_-_2025-11-05T102837.170.png",
+            "image": "shopify://shop_images/There_is_no_greater_gift_33.png",
+            "mobile_image": "shopify://shop_images/There_is_no_greater_gift_34.png",
             "subheading": "",
-            "title": "our new signature necklace",
-            "mobile_text_position": "place-self-start-center text-center",
-            "desktop_text_position": "sm:place-self-center sm:text-center",
+            "title": "",
+            "mobile_text_position": "place-self-end text-end",
+            "desktop_text_position": "sm:place-self-end sm:text-end",
             "content_max_width": 560,
-            "button_1_text": "Shop Now",
-            "button_1_link": "shopify://collections/necklaces",
-            "button_1_style": "link",
+            "button_1_text": "For Her",
+            "button_1_link": "shopify://collections/for-her",
+            "button_1_style": "outline",
             "button_1_background": "#ffffff",
             "button_1_text_color": "#313030",
             "button_2_text": "",
@@ -69,6 +68,7 @@
         },
         "image_G3TLPH": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/There_is_no_greater_gift_18.png",
             "mobile_image": "shopify://shop_images/There_is_no_greater_gift_17.png",
@@ -212,13 +212,13 @@
             "link": "shopify://collections/single-stone-promise-rings"
           }
         },
-        "category_3": {
+        "category_4": {
           "type": "category_image",
           "settings": {
-            "image": "shopify://shop_images/Untitled_design-22.png",
-            "title": "Gifts for Her",
-            "description": "<p>Perfect</p>",
-            "link": "shopify://collections/for-her"
+            "image": "shopify://shop_images/1_22bcb349-9582-4cdc-90a1-76c536b995d1.png",
+            "title": "Pinky Promise Rings",
+            "description": "<p>our current fave</p>",
+            "link": "shopify://collections/pinky-rings"
           }
         },
         "category_1": {
@@ -230,21 +230,21 @@
             "link": "shopify://collections/best-sellers"
           }
         },
-        "category_4": {
+        "category_3": {
           "type": "category_image",
           "settings": {
-            "image": "shopify://shop_images/5_195b5c25-a815-4223-9533-2905f0ce56cc.png",
-            "title": "necklaces",
-            "description": "<p>our current fave</p>",
-            "link": "shopify://collections/necklaces"
+            "image": "shopify://shop_images/Untitled_design-22.png",
+            "title": "Gifts for Her",
+            "description": "<p>Perfect</p>",
+            "link": "shopify://collections/for-her"
           }
         }
       },
       "block_order": [
         "category_2",
-        "category_3",
+        "category_4",
         "category_1",
-        "category_4"
+        "category_3"
       ],
       "settings": {
         "title": "",
@@ -263,7 +263,7 @@
         "subheading_9mKwtK": {
           "type": "subheading",
           "settings": {
-            "text": "jewellery that means more."
+            "text": "the modern home of promise rings"
           }
         },
         "heading_kXeF8e": {
@@ -323,7 +323,7 @@
             "custom_icon": "shopify://shop_images/Artboard_30_copy_4x_323837bd-a69a-44f4-9b87-b7db4ee5dc16.png",
             "icon_width": 64,
             "mobile_icon_width": 64,
-            "title": "Two-Year Warranty",
+            "title": "Five-Year Warranty",
             "content": "<p>We know how special your Promises are, that's why they're built to last</p>"
           }
         },
@@ -979,7 +979,7 @@
         "text_fnBnPg": {
           "type": "text",
           "settings": {
-            "text": "5000 + Promises made"
+            "text": "7000 + Promises made"
           }
         }
       },
@@ -1184,6 +1184,56 @@
         "title": "",
         "content": ""
       }
+    },
+    "image_with_text_jtH6pj": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_bVHT48": {
+          "type": "subheading",
+          "settings": {
+            "text": "the Promise co."
+          }
+        },
+        "heading_WTQkVL": {
+          "type": "heading",
+          "settings": {
+            "text": "The Modern Home of Promise Rings",
+            "heading_tag": "h1"
+          }
+        },
+        "button_9j7DxR": {
+          "type": "button",
+          "settings": {
+            "style": "solid",
+            "text": "Shop Promise Rings",
+            "url": "shopify://collections/promise-rings",
+            "background": "",
+            "text_color": ""
+          }
+        },
+        "richtext_paPaDA": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>At The Promise Co, promise rings are at the heart of everything we do.<br/><br/>A promise ring represents commitment, loyalty, and the intention to build a future together. Whether you’re celebrating a new relationship, marking an important milestone, or giving a meaningful gift, a promise ring captures that moment in a piece of jewellery designed to be worn every day.<br/><br/>Our collections bring together timeless designs, modern craftsmanship, and high-quality stones to create promise rings that feel special.<br/><br/>From delicate styles designed for her, to minimal bands for him, to matching rings for couples, every design in our collection reflects the same idea, a meaningful promise between two people.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_bVHT48",
+        "heading_WTQkVL",
+        "button_9j7DxR",
+        "richtext_paPaDA"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/1_1c5137c1-da24-4f2c-b909-0c5b2097f4ca.png",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
     }
   },
   "order": [
@@ -1209,6 +1259,7 @@
     "rich_text_QKJQkX",
     "scrolling_content_mXfTt6",
     "image_with_text_LQnacU",
-    "collection_list_rKxxaX"
+    "collection_list_rKxxaX",
+    "image_with_text_jtH6pj"
   ]
 }

@@ -47,11 +47,11 @@
     "stone_type_2_image": "shopify://shop_images/2_0c5a0124-171a-4ac5-9c25-b96383b077c2.png",
     "stone_type_2_title": "Best Sellers",
     "stone_type_2_link": "shopify://collections/best-sellers",
-    "stone_type_3_image": "shopify://shop_images/1_f9b101b3-3400-42ab-9fa9-319d622cd8e5.png",
-    "stone_type_3_title": "Necklaces",
-    "stone_type_3_link": "shopify://collections/necklaces",
+    "stone_type_3_image": "shopify://shop_images/Untitled_design-25.png",
+    "stone_type_3_title": "Mens Promise Rings",
+    "stone_type_3_link": "shopify://collections/mens-rings",
     "stone_type_4_image": "shopify://shop_images/6_fc4ed159-dffe-41dd-b581-012051f27c9f.png",
-    "stone_type_4_title": "Oval Rings",
+    "stone_type_4_title": "Oval Promise Rings",
     "stone_type_4_link": "/collections/emerald-cutpromiserings",
     "stone_type_5_image": "shopify://shop_images/4_28983c06-6078-40a7-98d2-6160469667d4.png",
     "stone_type_5_title": "Bands & Stacking Rings",
@@ -60,8 +60,8 @@
     "stone_type_6_title": "Heart Shape",
     "stone_type_6_link": "shopify://collections/heartshapepromisering",
     "stone_type_7_image": "shopify://shop_images/1_4fba85ca-87bb-4848-8ed7-3b008bff3978.png",
-    "stone_type_7_title": "New In",
-    "stone_type_7_link": "shopify://collections/new-in",
+    "stone_type_7_title": "Pinky Promise Rings",
+    "stone_type_7_link": "shopify://collections/pinky-rings",
     "stone_type_8_title": "",
     "stone_type_8_link": "/collections/toi-et-moipromiserings",
     "stone_type_9_title": "",
@@ -69,7 +69,7 @@
     "usp_tab_1_icon": "shopify://shop_images/icon-delivery.jpg",
     "usp_tab_1_title": "24 Hour Delivery",
     "usp_tab_1_icon_usa": "shopify://shop_images/icon-delivery.jpg",
-    "usp_tab_1_title_usa": "Tariff Free Express Shipping",
+    "usp_tab_1_title_usa": "Tariff-Free                             Express Shipping",
     "usp_tab_1_icon_eu": "shopify://shop_images/icon-delivery.jpg",
     "usp_tab_1_title_eu": "Orders under €150 (excluding shipping fees) ship with no import fees",
     "usp_tab_1_icon_default": "shopify://shop_images/icon-delivery.jpg",
@@ -89,7 +89,7 @@
     "usp_tab_3_icon_eu": "shopify://shop_images/icon-ring.png",
     "usp_tab_3_title_eu": "LIFETIME SPARKLE",
     "usp_tab_3_icon_default": "shopify://shop_images/icon-ring.png",
-    "usp_tab_3_title_default": "25X THICKER GOLD PLATING",
+    "usp_tab_3_title_default": "LIFETIME SPARKLE",
     "usp_tab_4_icon": "shopify://shop_images/icon-pin.png",
     "usp_tab_4_title": "5 YEAR WARRANTY",
     "usp_tab_4_icon_usa": "shopify://shop_images/icon-pin.png",
@@ -177,6 +177,15 @@
         "type": "shopify://apps/judge-me-reviews/blocks/popup_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
         "disabled": true,
         "settings": {}
+      },
+      "17368511000352060744": {
+        "type": "shopify://apps/goaffpro-affiliate-marketing/blocks/goaffpro-embedded-pixel/2f4d802b-86c2-47e4-8096-ae1aa3efbab2",
+        "disabled": false,
+        "settings": {
+          "enable_toolbar": false,
+          "enable_floating_widget": false,
+          "enable_popup": false
+        }
       }
     },
     "color_schemes": {
