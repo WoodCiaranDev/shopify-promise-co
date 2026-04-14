@@ -305,8 +305,25 @@ Supported variables
           if (sizeFieldset) sizeFieldset.dataset.sizeSelected = 'false';
           var checkedRadio = sizeFieldset.querySelector('[data-size-radios] input:checked');
           if (checkedRadio) checkedRadio.checked = false;
-          // Update button to show "Add to Cart" (disabled)
-          updateButtonForNoSize();
+          // Defer button fix — buy-buttons block hasn't been parsed yet at this point.
+          // On page load, ensure button says "Add to Cart" (enabled) so submit validation can fire.
+          // Only override if the product has at least one available variant.
+          {% if product.available %}
+            function fixButtonOnLoad() {
+              var form = document.getElementById(formId);
+              if (!form) return;
+              var button = form.querySelector('.button--add-to-cart');
+              if (!button) return;
+              var span = button.querySelector('span') || button;
+              span.textContent = '{{ 'product.general.add_to_cart_button' | t }}';
+              button.disabled = false;
+            }
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', fixButtonOnLoad);
+            } else {
+              fixButtonOnLoad();
+            }
+          {% endif %}
         } else {
           // Section re-render (e.g., after color change) - check if user selected size in this session
           var userSelectedSize = sizeSelectedKey && sessionStorage.getItem(sizeSelectedKey);
@@ -345,17 +362,25 @@ Supported variables
 
         // After section re-render completes, fix button if no size selected
         // The theme replaces the buy-buttons DOM after variant:change, so we need to run after that
-        var form = document.getElementById(formId);
-        if (form) {
-          form.addEventListener('variant:change', function() {
-            // Use setTimeout to ensure this runs after the DOM replacement completes
-            setTimeout(function() {
-              var currentSizeFieldset = document.querySelector('[data-size-option]');
-              if (currentSizeFieldset && currentSizeFieldset.dataset.sizeSelected === 'false') {
-                updateButtonForNoSize();
-              }
-            }, 0);
-          });
+        // Defer listener attachment — form (in buy-buttons block) may not exist yet during parsing
+        function attachVariantChangeListener() {
+          var form = document.getElementById(formId);
+          if (form) {
+            form.addEventListener('variant:change', function() {
+              // Use setTimeout to ensure this runs after the DOM replacement completes
+              setTimeout(function() {
+                var currentSizeFieldset = document.querySelector('[data-size-option]');
+                if (currentSizeFieldset && currentSizeFieldset.dataset.sizeSelected === 'false') {
+                  updateButtonForNoSize();
+                }
+              }, 0);
+            });
+          }
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', attachVariantChangeListener);
+        } else {
+          attachVariantChangeListener();
         }
 
         // Validate on submit - use document delegation to survive re-renders

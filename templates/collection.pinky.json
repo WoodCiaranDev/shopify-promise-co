@@ -143,12 +143,86 @@
         "title": "",
         "content": ""
       }
+    },
+    "image_with_text_tcW7Hc": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_LKCw3n": {
+          "type": "heading",
+          "settings": {
+            "text": "Pinky Promise Rings",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_NQCbmi": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>A pinky promise is one of the simplest yet most powerful gestures two people can share. When two little fingers link together, it represents a promise built on trust, loyalty and honesty. It is a moment that says “this matters” without needing anything more.<br/><br/>A pinky promise ring takes that fleeting gesture and turns it into something lasting. Instead of a promise that exists only in the moment, the ring becomes a symbol you can wear every day, a quiet reminder of a commitment made between two people.<br/><br/>At The Promise Co, this idea sits at the heart of everything we create. The brand was founded around the meaning of the pinky promise itself, making The Promise Co the original pinky promise ring brand, created to turn that universal gesture of trust into something lasting and meaningful.<br/></p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_LKCw3n",
+        "richtext_NQCbmi"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/2_e34aa82e-6cd1-45ed-85d6-e589565b91a1.png",
+        "mobile_image": "shopify://shop_images/2_e34aa82e-6cd1-45ed-85d6-e589565b91a1.png",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "image_with_text_3WgM3p": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_fTKDjU": {
+          "type": "subheading",
+          "settings": {
+            "text": ""
+          }
+        },
+        "heading_Ha8Yy6": {
+          "type": "heading",
+          "settings": {
+            "text": "The meaning behind a pinky promise ring",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_3zFgxX": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>A pinky promise ring strengthens the meaning of the pinky promise itself. While the gesture represents trust and sincerity, the ring gives that promise a physical form that can be worn and remembered.<br/><br/>For many people, the pinky promise ring represents:<br/><br/>•⁠  ⁠A promise of loyalty between partners<br/>•⁠  ⁠A meaningful connection between close friends<br/>•⁠  ⁠A reminder of trust between two people<br/>•⁠  ⁠A personal symbol of commitment and sincerity<br/><br/>Because of this, pinky promise rings often feel more personal than traditional jewellery. The ring is not simply decorative, it carries the story of a promise made and kept.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_fTKDjU",
+        "heading_Ha8Yy6",
+        "richtext_3zFgxX"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/Untitled_design-27.png",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
     }
   },
   "order": [
     "rich_text_wMNiPf",
     "collection-banner",
     "main",
-    "multi_column_6rLKqy"
+    "multi_column_6rLKqy",
+    "image_with_text_tcW7Hc",
+    "image_with_text_3WgM3p"
   ]
 }

@@ -143,12 +143,70 @@
         "title": "",
         "content": ""
       }
+    },
+    "category_cards_J34Wpq": {
+      "type": "category-cards",
+      "blocks": {
+        "category_image_6hCPQf": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-02T155051.717.png",
+            "title": "Best Sellers",
+            "description": "<p>discover</p>",
+            "link": "shopify://collections/best-sellers"
+          }
+        },
+        "category_image_mMJmwT": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-02T155151.846.png",
+            "title": "Shop for Her",
+            "description": "<p>Promise Rings</p>",
+            "link": "shopify://collections/for-her"
+          }
+        },
+        "category_image_idVf3p": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-02T155423.026.png",
+            "title": "For Him",
+            "description": "<p>Mens Promise rings</p>",
+            "link": "shopify://collections/mens-rings"
+          }
+        },
+        "category_image_nYXJfG": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/2_56c1bf44-8fb5-4832-afee-885109cf926a.png",
+            "title": "Couples Rings",
+            "description": "<p>Matching</p>",
+            "link": "shopify://collections/couples-rings"
+          }
+        }
+      },
+      "block_order": [
+        "category_image_6hCPQf",
+        "category_image_mMJmwT",
+        "category_image_idVf3p",
+        "category_image_nYXJfG"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "background_color": "#ffffff",
+        "title_color": "#000000",
+        "subtitle_color": "#666666",
+        "section_padding_top": 64,
+        "section_padding_bottom": 64,
+        "mobile_single_column": false
+      }
     }
   },
   "order": [
     "rich_text_wMNiPf",
     "collection-banner",
     "main",
-    "multi_column_6rLKqy"
+    "multi_column_6rLKqy",
+    "category_cards_J34Wpq"
   ]
 }
