@@ -49,7 +49,7 @@
     "stone_type_2_link": "shopify://collections/best-sellers",
     "stone_type_3_image": "shopify://shop_images/Untitled_design-25.png",
     "stone_type_3_title": "Mens Promise Rings",
-    "stone_type_3_link": "shopify://collections/mens-rings",
+    "stone_type_3_link": "shopify://collections/mens-promise-rings",
     "stone_type_4_image": "shopify://shop_images/6_fc4ed159-dffe-41dd-b581-012051f27c9f.png",
     "stone_type_4_title": "Oval Promise Rings",
     "stone_type_4_link": "/collections/emerald-cutpromiserings",
@@ -58,10 +58,10 @@
     "stone_type_5_link": "shopify://collections/bands-and-stacking-rings",
     "stone_type_6_image": "shopify://shop_images/7_e549dc0d-f0ef-4e3f-a216-100707989c95.png",
     "stone_type_6_title": "Heart Shape",
-    "stone_type_6_link": "shopify://collections/heartshapepromisering",
+    "stone_type_6_link": "shopify://collections/heart-shape-promise-rings",
     "stone_type_7_image": "shopify://shop_images/1_4fba85ca-87bb-4848-8ed7-3b008bff3978.png",
     "stone_type_7_title": "Pinky Promise Rings",
-    "stone_type_7_link": "shopify://collections/pinky-rings",
+    "stone_type_7_link": "shopify://collections/pinky-promise-rings",
     "stone_type_8_title": "",
     "stone_type_8_link": "/collections/toi-et-moipromiserings",
     "stone_type_9_title": "",
@@ -190,6 +190,11 @@
       "6615124273980966592": {
         "type": "shopify://apps/chatty/blocks/app-embed/1c0e135d-e8e1-4fe2-86be-1c36def46675",
         "disabled": true,
+        "settings": {}
+      },
+      "73408357045313770000": {
+        "type": "shopify://apps/gdpr-cookie-consent/blocks/banner/58c0baa2-6cc1-480c-9ea6-38d6d559556a",
+        "disabled": false,
         "settings": {}
       }
     },

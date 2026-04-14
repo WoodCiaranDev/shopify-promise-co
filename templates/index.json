@@ -17,15 +17,15 @@
           "settings": {
             "image": "shopify://shop_images/Untitled_design_-_2026-04-13T152722.239.png",
             "mobile_image": "shopify://shop_images/Banner_UK_3.png",
-            "subheading": "<strong>British Designed</strong>",
-            "title": "Handcrafted Rings",
+            "subheading": "promises that shape you",
+            "title": "Mark <strong>Your</strong> Moment",
             "mobile_text_position": "place-self-end-start text-start",
             "desktop_text_position": "sm:place-self-center sm:text-center",
             "content_max_width": 780,
             "button_1_text": "Shop all",
             "button_1_link": "shopify://collections/shop-all",
-            "button_1_style": "outline",
-            "button_1_background": "#ffffff",
+            "button_1_style": "solid",
+            "button_1_background": "#f7f5f0",
             "button_1_text_color": "#000000",
             "button_2_text": "",
             "button_2_link": "",
@@ -44,16 +44,16 @@
           "settings": {
             "image": "shopify://shop_images/Untitled_design_-_2026-04-13T155352.999.png",
             "mobile_image": "shopify://shop_images/Banner_UK_2.png",
-            "subheading": "",
-            "title": "need help choosing?",
+            "subheading": "our most loved promises",
+            "title": "When words aren't enough",
             "mobile_text_position": "place-self-end-center text-center",
             "desktop_text_position": "sm:place-self-center-start sm:text-start",
             "content_max_width": 560,
-            "button_1_text": "For Her",
-            "button_1_link": "shopify://collections/for-her",
-            "button_1_style": "outline",
-            "button_1_background": "#ffffff",
-            "button_1_text_color": "#ffffff",
+            "button_1_text": "Shop Bestsellers",
+            "button_1_link": "shopify://collections/best-sellers",
+            "button_1_style": "solid",
+            "button_1_background": "#f7f5f0",
+            "button_1_text_color": "#313030",
             "button_2_text": "",
             "button_2_link": "",
             "button_2_style": "outline",
@@ -227,7 +227,7 @@
             "image": "shopify://shop_images/Untitled_design_-_2026-04-02T155423.026.png",
             "title": "For Him",
             "description": "<p>Mens Promise rings</p>",
-            "link": "shopify://collections/mens-rings"
+            "link": "shopify://collections/mens-promise-rings"
           }
         },
         "category_2": {
@@ -236,7 +236,7 @@
             "image": "shopify://shop_images/Untitled_design_-_2026-04-06T152137.870.png",
             "title": "Couples Rings",
             "description": "<p>Matching</p>",
-            "link": "shopify://collections/couples-rings"
+            "link": "shopify://collections/couples-promise-rings"
           }
         }
       },
@@ -410,10 +410,10 @@
           "type": "collection",
           "disabled": true,
           "settings": {
-            "collection": "pinky-rings",
+            "collection": "pinky-promise-rings",
             "products_count": 8,
             "title": "pinky rings",
-            "link_url": "shopify://collections/pinky-rings",
+            "link_url": "shopify://collections/pinky-promise-rings",
             "link_text": "View all"
           }
         }
