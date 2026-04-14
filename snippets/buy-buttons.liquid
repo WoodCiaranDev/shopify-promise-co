@@ -101,7 +101,7 @@ Supported variables
                   --button-text-color: {{ payment_button_text_color.rgb }};
                 {%- endif -%}
 
-                {%- unless product.selected_or_first_available_variant.available -%}
+                {%- unless product.available -%}
                   display: none;
                 {%- endunless -%}
               }
