@@ -104,8 +104,8 @@
           "settings": {
             "show_below_gallery": true,
             "icon": "none",
-            "title": "Promise 2 Year Warranty",
-            "content": "<p>Your jewelry is more than an accessory - it’s a symbol of love, commitment, and life’s cherished moments. That’s why every piece comes with a <strong>2-year warranty</strong> for complete peace of mind.</p><p>We’ll <strong>repair</strong> any manufacturing faults free of charge or <strong>replace</strong> your piece if a repair isn’t possible.</p><p>If your warranty has expired, or any accidental damage has occurred please reach out. We’ll still do our best to help with <strong>repairs or replacements at a reduced fee</strong>.</p><p><a href=\"https://thepromiseco.com/pages/2-year-warranty\" title=\"https://thepromiseco.com/pages/2-year-warranty\">View full warranty details here.</a></p>",
+            "title": "Promise 5 Year Warranty",
+            "content": "<p>Your jewelry is more than an accessory - it’s a symbol of love, commitment, and life’s cherished moments. That’s why every piece comes with a <strong>5-year warranty</strong> for complete peace of mind.</p><p>We’ll <strong>repair</strong> any manufacturing faults free of charge or <strong>replace</strong> your piece if a repair isn’t possible.</p><p>If your warranty has expired, or any accidental damage has occurred please reach out. We’ll still do our best to help with <strong>repairs or replacements at a reduced fee</strong>.</p><p><a href=\"https://thepromiseco.com/pages/2-year-warranty\" title=\"https://thepromiseco.com/pages/2-year-warranty\">View full warranty details here.</a></p>",
             "liquid": "",
             "page": ""
           }
@@ -258,7 +258,7 @@
           "settings": {
             "review_data": "real_data",
             "max_width": 1200,
-            "show_shop_reviews": true,
+            "show_shop_reviews": false,
             "empty_state": "other_products_reviews"
           }
         }
@@ -309,7 +309,7 @@
         "image_WpkL9A": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Artboard_3_10x_5437c043-bd9d-4e37-bee7-870bdc08d6c7.png",
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-13T164059.022.png",
             "width_mode": "custom",
             "max_width": 690,
             "mobile_max_width": 400
@@ -341,7 +341,7 @@
       ],
       "name": "t:sections.rich_text.presets.rich_text.name",
       "settings": {
-        "color_scheme": "scheme-b68b61c5-ba0e-4161-a0e3-3d59622e9bf4",
+        "color_scheme": "scheme-2ca1c54f-75f1-4890-b6c9-acb7092f2a37",
         "separate_section_with_border": true,
         "content_width": "sm",
         "text_position": "center",

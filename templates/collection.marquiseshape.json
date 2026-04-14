@@ -135,17 +135,17 @@
         "open_filters_by_default": false
       }
     },
-    "image_with_text_BwRHNc": {
+    "image_with_text_kPcXTi": {
       "type": "image-with-text",
       "blocks": {
-        "heading_xtCAXi": {
+        "heading_TGeqWg": {
           "type": "heading",
           "settings": {
             "text": "Marquise Promise Rings",
             "heading_tag": "h1"
           }
         },
-        "richtext_WKEAXi": {
+        "richtext_JEDA6P": {
           "type": "richtext",
           "settings": {
             "content": "<p>A marquise promise ring is a striking and elegant symbol of love and commitment. Known for its elongated shape and pointed ends, the marquise cut creates a distinctive look that feels both timeless and modern. Its unique silhouette also gives the illusion of a larger stone, making it a popular choice for those who want a ring that stands out while remaining refined.<br/><br/>Our marquise promise rings are designed to celebrate meaningful moments and lasting promises. From delicate solitaire styles to halo settings and stackable bands, each ring balances romantic symbolism with contemporary design. Whether you are choosing a marquise cut promise ring as a thoughtful gift or as a personal symbol of commitment, the shape offers something beautifully different from traditional round or oval designs.</p>"
@@ -153,10 +153,9 @@
         }
       },
       "block_order": [
-        "heading_xtCAXi",
-        "richtext_WKEAXi"
+        "heading_TGeqWg",
+        "richtext_JEDA6P"
       ],
-      "disabled": true,
       "name": "t:sections.image_with_text.presets.image_with_text.name",
       "settings": {
         "color_scheme": "",
@@ -165,40 +164,6 @@
         "mobile_image": "shopify://shop_images/1_0a709f55-7a58-4d3e-b19b-c501c73c3ded.png",
         "reveal_on_scroll": true,
         "image_position": "start",
-        "content_width": "sm",
-        "remove_vertical_spacing": true
-      }
-    },
-    "image_with_text_q8a34T": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading_CqCpaN": {
-          "type": "heading",
-          "settings": {
-            "text": "Why choose a marquise promise ring?",
-            "heading_tag": "h1"
-          }
-        },
-        "richtext_jGCLJY": {
-          "type": "richtext",
-          "settings": {
-            "content": "<p>The marquise cut has long been admired for its elegant proportions and eye-catching shape. Its elongated design not only enhances the brilliance of the stone but also creates a flattering, slender appearance on the finger.<br/></p><ul><li>A distinctive elongated shape that stands out from classic cuts</li><li>Appears larger than many other stone shapes of the same size</li><li>Elegant, refined style with a romantic heritage</li><li>Perfect for those who want a unique promise ring design</li></ul>"
-          }
-        }
-      },
-      "block_order": [
-        "heading_CqCpaN",
-        "richtext_jGCLJY"
-      ],
-      "disabled": true,
-      "name": "t:sections.image_with_text.presets.image_with_text.name",
-      "settings": {
-        "color_scheme": "",
-        "separate_section_with_border": true,
-        "image": "shopify://shop_images/2_e34aa82e-6cd1-45ed-85d6-e589565b91a1.png",
-        "mobile_image": "shopify://shop_images/2_e34aa82e-6cd1-45ed-85d6-e589565b91a1.png",
-        "reveal_on_scroll": true,
-        "image_position": "end",
         "content_width": "sm",
         "remove_vertical_spacing": true
       }
@@ -228,6 +193,39 @@
         "use_ogg_font": false,
         "use_compact_spacing": true,
         "section_id": ""
+      }
+    },
+    "image_with_text_3zQGgC": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_KLWA9a": {
+          "type": "heading",
+          "settings": {
+            "text": "Why choose a marquise promise ring?",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_ywdBVG": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>The marquise cut has long been admired for its elegant proportions and eye-catching shape. Its elongated design not only enhances the brilliance of the stone but also creates a flattering, slender appearance on the finger.<br/></p><ul><li>A distinctive elongated shape that stands out from classic cuts</li><li>Appears larger than many other stone shapes of the same size</li><li>Elegant, refined style with a romantic heritage</li><li>Perfect for those who want a unique promise ring design</li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_KLWA9a",
+        "richtext_ywdBVG"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/2_e34aa82e-6cd1-45ed-85d6-e589565b91a1.png",
+        "mobile_image": "shopify://shop_images/2_e34aa82e-6cd1-45ed-85d6-e589565b91a1.png",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
       }
     },
     "category_cards_4zj4kH": {
@@ -347,8 +345,8 @@
     "collection-banner",
     "before_after_kXfYHy",
     "main",
-    "image_with_text_BwRHNc",
-    "image_with_text_q8a34T",
+    "image_with_text_kPcXTi",
+    "image_with_text_3zQGgC",
     "rich_text_yX46cT",
     "category_cards_4zj4kH",
     "multi_column_6rLKqy"
