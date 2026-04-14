@@ -490,13 +490,9 @@ height-observer {
 }
 
 .button--add-to-cart {
-  background-image: none;
-  background-color: #75aedc;
-  color: #fff;
-}
-
-.button--add-to-cart:hover {
-  border-color: #75aedc !important;
+  --button-background: 117, 174, 220;
+  --button-text-color: 255, 255, 255;
+  --button-outline-color: 117, 174, 220;
 }
 
 a[href="#size-guide-popup"] {
