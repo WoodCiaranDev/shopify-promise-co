@@ -262,7 +262,7 @@
         "promise_6"
       ],
       "settings": {
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2ca1c54f-75f1-4890-b6c9-acb7092f2a37",
         "separate_section_with_border": false,
         "title_line_1": "7000+ Promises",
         "title_line_2": "Already Made",
@@ -310,7 +310,7 @@
     "promise_wall": {
       "type": "promise-wall",
       "settings": {
-        "color_scheme": "",
+        "color_scheme": "scheme-1",
         "separate_section_with_border": false,
         "show_counter": true,
         "initial_load": 8,

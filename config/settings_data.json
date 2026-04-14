@@ -28,7 +28,7 @@
     "product_image_aspect_ratio": "square_crop",
     "show_secondary_image": false,
     "product_card_text_font": "heading",
-    "show_product_rating": true,
+    "show_product_rating": false,
     "cart_type": "drawer",
     "cart_icon": "shopping_bag",
     "cart_show_free_shipping_bar": true,
@@ -74,14 +74,14 @@
     "usp_tab_1_title_eu": "Orders under €150 (excluding shipping fees) ship with no import fees",
     "usp_tab_1_icon_default": "shopify://shop_images/icon-delivery.jpg",
     "usp_tab_1_title_default": "30 Day Returns",
-    "usp_tab_2_icon": "shopify://shop_images/icon-drop.png",
-    "usp_tab_2_title": "ANTI-TARNISH",
-    "usp_tab_2_icon_usa": "shopify://shop_images/icon-drop.png",
-    "usp_tab_2_title_usa": "ANTI-TARNISH",
-    "usp_tab_2_icon_eu": "shopify://shop_images/icon-drop.png",
-    "usp_tab_2_title_eu": "ANTI-TARNISH",
-    "usp_tab_2_icon_default": "shopify://shop_images/icon-drop.png",
-    "usp_tab_2_title_default": "ANTI-TARNISH",
+    "usp_tab_2_icon": "shopify://shop_images/Artboard_7_4x_80.png",
+    "usp_tab_2_title": "Luxury packaging & promise card included",
+    "usp_tab_2_icon_usa": "shopify://shop_images/Artboard_7_4x_80.png",
+    "usp_tab_2_title_usa": "Luxury packaging & promise card included",
+    "usp_tab_2_icon_eu": "shopify://shop_images/Artboard_7_4x_80.png",
+    "usp_tab_2_title_eu": "Luxury packaging & promise card included",
+    "usp_tab_2_icon_default": "shopify://shop_images/Artboard_7_4x_80.png",
+    "usp_tab_2_title_default": "Luxury packaging & promise card included",
     "usp_tab_3_icon": "shopify://shop_images/icon-ring.png",
     "usp_tab_3_title": "LIFETIME SPARKLE",
     "usp_tab_3_icon_usa": "shopify://shop_images/icon-ring.png",
@@ -133,11 +133,6 @@
         "disabled": true,
         "settings": {}
       },
-      "6615124273980966592": {
-        "type": "shopify://apps/chatty-livechat-helpdesk/blocks/app-embed/1c0e135d-e8e1-4fe2-86be-1c36def46675",
-        "disabled": false,
-        "settings": {}
-      },
       "9426859951591838832": {
         "type": "shopify://apps/chatty-livechat-helpdesk/blocks/app-page/1c0e135d-e8e1-4fe2-86be-1c36def46675",
         "disabled": false,
@@ -186,6 +181,16 @@
           "enable_floating_widget": false,
           "enable_popup": false
         }
+      },
+      "7539343560218715217": {
+        "type": "shopify://apps/lucky-orange-heatmaps-replay/blocks/lucky_orange_tracking/019b2899-e426-7dbd-b9e7-ff9f0bb0d0f3",
+        "disabled": false,
+        "settings": {}
+      },
+      "6615124273980966592": {
+        "type": "shopify://apps/chatty/blocks/app-embed/1c0e135d-e8e1-4fe2-86be-1c36def46675",
+        "disabled": true,
+        "settings": {}
       }
     },
     "color_schemes": {
@@ -312,7 +317,7 @@
       },
       "scheme-2ca1c54f-75f1-4890-b6c9-acb7092f2a37": {
         "settings": {
-          "background": "#ab004e",
+          "background": "#b8ccab",
           "background_gradient": "",
           "text_color": "#ffffff",
           "primary_button_background": "#ffffff",

@@ -66,7 +66,7 @@
         "overlay_color": "#000000",
         "overlay_opacity": 0,
         "show_usp_tabs": true,
-        "show_stone_type_slider": true
+        "show_stone_type_slider": false
       }
     },
     "before_after_kXfYHy": {
@@ -345,6 +345,63 @@
         "section_id": ""
       }
     },
+    "category_cards_Y6DNgN": {
+      "type": "category-cards",
+      "blocks": {
+        "category_image_Bdzw3z": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T093421.486.png",
+            "title": "Best Sellers",
+            "description": "<p>discover</p>",
+            "link": "shopify://collections/best-sellers"
+          }
+        },
+        "category_image_J8wAw9": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T093409.150.png",
+            "title": "Shop for Her",
+            "description": "<p>Promise Rings</p>",
+            "link": "shopify://collections/for-her"
+          }
+        },
+        "category_image_xYKXrb": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-02T155423.026.png",
+            "title": "For Him",
+            "description": "<p>Mens Promise rings</p>",
+            "link": "shopify://collections/mens-rings"
+          }
+        },
+        "category_image_6E7Vbq": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T152137.870.png",
+            "title": "Couples Rings",
+            "description": "<p>Matching</p>",
+            "link": "shopify://collections/couples-rings"
+          }
+        }
+      },
+      "block_order": [
+        "category_image_Bdzw3z",
+        "category_image_J8wAw9",
+        "category_image_xYKXrb",
+        "category_image_6E7Vbq"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "background_color": "#ffffff",
+        "title_color": "#000000",
+        "subtitle_color": "#666666",
+        "section_padding_top": 64,
+        "section_padding_bottom": 64,
+        "mobile_single_column": false
+      }
+    },
     "category_cards_4zj4kH": {
       "type": "category-cards",
       "blocks": {
@@ -391,6 +448,7 @@
         "category_image_LK4XYz",
         "category_image_CgrtxT"
       ],
+      "disabled": true,
       "settings": {
         "title": "",
         "subtitle": "",
@@ -413,6 +471,7 @@
     "image_with_text_HmnHnw",
     "faq_YGRTq6",
     "rich_text_yX46cT",
+    "category_cards_Y6DNgN",
     "category_cards_4zj4kH"
   ]
 }

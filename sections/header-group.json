@@ -40,7 +40,7 @@
       ],
       "name": "Announcement marquee",
       "settings": {
-        "color_scheme": "scheme-b68b61c5-ba0e-4161-a0e3-3d59622e9bf4",
+        "color_scheme": "scheme-2ca1c54f-75f1-4890-b6c9-acb7092f2a37",
         "enable_sticky": true,
         "scroll_speed": 10,
         "pause_on_hover": true,
@@ -87,10 +87,10 @@
             "image_2_link": "",
             "featured_collection_1": "for-her",
             "featured_collection_1_title": "Gifts for Her",
-            "featured_collection_1_image": "shopify://shop_images/2_d058962f-dc18-4312-806f-13ea51396600.png",
+            "featured_collection_1_image": "shopify://shop_images/2_3f3a0bc7-3f8b-4b39-aeef-efb0d027d723.png",
             "featured_collection_2": "best-sellers",
             "featured_collection_2_title": "best sellers",
-            "featured_collection_2_image": "shopify://shop_images/1_a649e1ac-271b-4b10-9dcb-3a3b713c09a7.png",
+            "featured_collection_2_image": "shopify://shop_images/1_9d424cc6-a010-4096-86c4-73cf89ee3afb.png",
             "promo_block_text": "Visit The Promise World...",
             "promo_block_link": "shopify://pages/the-promise-world",
             "debug_mode": false

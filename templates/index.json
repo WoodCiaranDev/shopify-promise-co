@@ -15,16 +15,16 @@
         "image_jcrmjC": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/There_is_no_greater_gift_36.png",
-            "mobile_image": "shopify://shop_images/There_is_no_greater_gift_37.png",
-            "subheading": "",
-            "title": "",
-            "mobile_text_position": "place-self-end-center text-center",
-            "desktop_text_position": "sm:place-self-end sm:text-end",
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-13T152722.239.png",
+            "mobile_image": "shopify://shop_images/Banner_UK_3.png",
+            "subheading": "<strong>British Designed</strong>",
+            "title": "Handcrafted Rings",
+            "mobile_text_position": "place-self-end-start text-start",
+            "desktop_text_position": "sm:place-self-center sm:text-center",
             "content_max_width": 780,
             "button_1_text": "Shop all",
             "button_1_link": "shopify://collections/shop-all",
-            "button_1_style": "solid",
+            "button_1_style": "outline",
             "button_1_background": "#ffffff",
             "button_1_text_color": "#000000",
             "button_2_text": "",
@@ -42,26 +42,26 @@
         "image_wpXLKm": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/There_is_no_greater_gift_33.png",
-            "mobile_image": "shopify://shop_images/There_is_no_greater_gift_34.png",
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-13T155352.999.png",
+            "mobile_image": "shopify://shop_images/Banner_UK_2.png",
             "subheading": "",
-            "title": "",
-            "mobile_text_position": "place-self-end text-end",
-            "desktop_text_position": "sm:place-self-end sm:text-end",
+            "title": "need help choosing?",
+            "mobile_text_position": "place-self-end-center text-center",
+            "desktop_text_position": "sm:place-self-center-start sm:text-start",
             "content_max_width": 560,
             "button_1_text": "For Her",
             "button_1_link": "shopify://collections/for-her",
             "button_1_style": "outline",
             "button_1_background": "#ffffff",
-            "button_1_text_color": "#313030",
+            "button_1_text_color": "#ffffff",
             "button_2_text": "",
             "button_2_link": "",
             "button_2_style": "outline",
             "button_2_background": "#ffffff",
-            "button_2_text_color": "#000000",
+            "button_2_text_color": "#ffffff",
             "background": "",
             "background_opacity": 0,
-            "text_color": "#313030",
+            "text_color": "#ffffff",
             "border_color": "",
             "gradient_overlay": ""
           }
@@ -203,28 +203,10 @@
     "category_cards": {
       "type": "category-cards",
       "blocks": {
-        "category_2": {
-          "type": "category_image",
-          "settings": {
-            "image": "shopify://shop_images/Untitled_design-21.png",
-            "title": "Single Stone Rings",
-            "description": "<p>Promise</p>",
-            "link": "shopify://collections/single-stone-promise-rings"
-          }
-        },
-        "category_4": {
-          "type": "category_image",
-          "settings": {
-            "image": "shopify://shop_images/1_22bcb349-9582-4cdc-90a1-76c536b995d1.png",
-            "title": "Pinky Promise Rings",
-            "description": "<p>our current fave</p>",
-            "link": "shopify://collections/pinky-rings"
-          }
-        },
         "category_1": {
           "type": "category_image",
           "settings": {
-            "image": "shopify://shop_images/2_96ff70e1-78e3-4694-a187-d7c83355ae21.png",
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T093421.486.png",
             "title": "Best Sellers",
             "description": "<p>discover</p>",
             "link": "shopify://collections/best-sellers"
@@ -233,18 +215,36 @@
         "category_3": {
           "type": "category_image",
           "settings": {
-            "image": "shopify://shop_images/Untitled_design-22.png",
-            "title": "Gifts for Her",
-            "description": "<p>Perfect</p>",
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T093409.150.png",
+            "title": "Shop for Her",
+            "description": "<p>Promise Rings</p>",
             "link": "shopify://collections/for-her"
+          }
+        },
+        "category_4": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-02T155423.026.png",
+            "title": "For Him",
+            "description": "<p>Mens Promise rings</p>",
+            "link": "shopify://collections/mens-rings"
+          }
+        },
+        "category_2": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T152137.870.png",
+            "title": "Couples Rings",
+            "description": "<p>Matching</p>",
+            "link": "shopify://collections/couples-rings"
           }
         }
       },
       "block_order": [
-        "category_2",
-        "category_4",
         "category_1",
-        "category_3"
+        "category_3",
+        "category_4",
+        "category_2"
       ],
       "settings": {
         "title": "",
@@ -269,7 +269,7 @@
         "heading_kXeF8e": {
           "type": "heading",
           "settings": {
-            "text": "wearble stories",
+            "text": "wearable stories",
             "heading_tag": "h1"
           }
         },
@@ -483,7 +483,7 @@
         "image_MrHrqA": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Artboard_3_10x_5437c043-bd9d-4e37-bee7-870bdc08d6c7.png",
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-13T164059.022.png",
             "width_mode": "custom",
             "max_width": 600,
             "mobile_max_width": 400
@@ -515,7 +515,7 @@
       ],
       "name": "t:sections.rich_text.presets.rich_text.name",
       "settings": {
-        "color_scheme": "scheme-b68b61c5-ba0e-4161-a0e3-3d59622e9bf4",
+        "color_scheme": "scheme-2ca1c54f-75f1-4890-b6c9-acb7092f2a37",
         "separate_section_with_border": true,
         "content_width": "sm",
         "text_position": "center",
@@ -532,13 +532,13 @@
         "text_7HGNVz": {
           "type": "text",
           "settings": {
-            "text": "Make your promise offical today"
+            "text": "Make your promise official today"
           }
         },
         "text_hpRU3M": {
           "type": "text",
           "settings": {
-            "text": "5000 + Promises made"
+            "text": "7000 + Promises made"
           }
         }
       },
@@ -973,7 +973,7 @@
         "text_bNYtp4": {
           "type": "text",
           "settings": {
-            "text": "Make your promise offical today"
+            "text": "Make your promise official today"
           }
         },
         "text_fnBnPg": {
@@ -1000,7 +1000,7 @@
         "section_vertical_spacing_desktop": 10,
         "item_horizontal_spacing_mobile": 35,
         "item_horizontal_spacing_desktop": 40,
-        "background": "#62afe1",
+        "background": "#b8ccab",
         "text_color": "#ffffff"
       }
     },
@@ -1064,7 +1064,7 @@
           "settings": {
             "color_scheme": "",
             "collection": "",
-            "image": "shopify://shop_images/6_c0870f71-f1bf-407c-8156-60aee258c2da.png",
+            "image": "shopify://shop_images/1_ceec1704-9518-4cd0-943d-06d28626e78f.png",
             "expand_collection": false,
             "content_position": "place-self-end-start text-start",
             "subheading": "",
@@ -1081,24 +1081,7 @@
           "settings": {
             "color_scheme": "",
             "collection": "",
-            "image": "shopify://shop_images/5_7191f2f9-91f9-4c61-b38c-a84baf96a764.png",
-            "expand_collection": false,
-            "content_position": "place-self-end-start text-start",
-            "subheading": "",
-            "title": "",
-            "button_text": "",
-            "button_link": "https://www.instagram.com/thepromiseco/",
-            "button_style": "solid",
-            "overlay_color": "#000000",
-            "overlay_opacity": 0
-          }
-        },
-        "collection_y9txf6": {
-          "type": "collection",
-          "settings": {
-            "color_scheme": "",
-            "collection": "",
-            "image": "shopify://shop_images/2_c6282013-402f-44b7-9148-8125f1351188.png",
+            "image": "shopify://shop_images/2_6c6ae008-98b6-45a7-8a51-ad6881b388f8.png",
             "expand_collection": false,
             "content_position": "place-self-end-start text-start",
             "subheading": "",
@@ -1115,7 +1098,24 @@
           "settings": {
             "color_scheme": "",
             "collection": "",
-            "image": "shopify://shop_images/4_a5b420c4-fc27-4705-b470-24e480492926.png",
+            "image": "shopify://shop_images/7_063e0670-221a-41a0-ab6f-0d02acbb4339.png",
+            "expand_collection": false,
+            "content_position": "place-self-end-start text-start",
+            "subheading": "",
+            "title": "",
+            "button_text": "",
+            "button_link": "https://www.instagram.com/thepromiseco/",
+            "button_style": "solid",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "collection_y9txf6": {
+          "type": "collection",
+          "settings": {
+            "color_scheme": "",
+            "collection": "",
+            "image": "shopify://shop_images/3_217306b4-6a55-453e-96e3-a7fb3f240ca1.png",
             "expand_collection": false,
             "content_position": "place-self-end-start text-start",
             "subheading": "",
@@ -1132,7 +1132,7 @@
           "settings": {
             "color_scheme": "",
             "collection": "",
-            "image": "shopify://shop_images/3_fc335fff-4b92-40f1-b071-94fab20a65fc.png",
+            "image": "shopify://shop_images/4_5a7b9670-074d-42c4-b946-4c5fbd2d7e4e.png",
             "expand_collection": false,
             "content_position": "place-self-end-start text-start",
             "subheading": "",
@@ -1149,7 +1149,7 @@
           "settings": {
             "color_scheme": "",
             "collection": "",
-            "image": "shopify://shop_images/7_e75853bb-cf56-413a-a1d5-da09ceab8730.png",
+            "image": "shopify://shop_images/8_d32e5214-144c-42d4-91cd-858c74d148b0.png",
             "expand_collection": false,
             "content_position": "place-self-end-start text-start",
             "subheading": "",
@@ -1165,8 +1165,8 @@
       "block_order": [
         "collection_Mrc9Tn",
         "collection_YUjKwe",
-        "collection_y9txf6",
         "collection_fFD47g",
+        "collection_y9txf6",
         "collection_69kGwk",
         "collection_RxYN8b"
       ],
@@ -1228,7 +1228,7 @@
       "settings": {
         "color_scheme": "",
         "separate_section_with_border": true,
-        "image": "shopify://shop_images/1_1c5137c1-da24-4f2c-b909-0c5b2097f4ca.png",
+        "image": "shopify://shop_images/5_15afce99-2166-465c-af64-4383d1b964ab.png",
         "reveal_on_scroll": true,
         "image_position": "start",
         "content_width": "sm",

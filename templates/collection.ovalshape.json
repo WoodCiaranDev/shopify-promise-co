@@ -135,6 +135,86 @@
         "open_filters_by_default": false
       }
     },
+    "image_with_text_eWniNi": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_fi88bE": {
+          "type": "subheading",
+          "settings": {
+            "text": "the promise co."
+          }
+        },
+        "heading_W6aH6b": {
+          "type": "heading",
+          "settings": {
+            "text": "Oval Promise Rings",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_GrBPea": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Oval promise rings are a modern take on a timeless symbol of love and commitment. Known for their soft, elongated shape, oval cut stones offer a refined and elegant look that feels both classic and contemporary. Their subtle brilliance and flattering silhouette make them one of the most popular choices for promise rings today.<br/><br/>At The Promise Co, our oval promise rings are designed to celebrate meaningful connections through thoughtful, wearable design. Whether you are choosing a delicate everyday piece or something more eye-catching, each ring reflects the balance between elegance, symbolism and modern style.<br/><br/>From understated solitaire designs to more detailed settings. Our collection of oval promise rings for her offers styles suited to every moment, whether it’s a meaningful gift or a personal reminder of a promise made.<br/></p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_fi88bE",
+        "heading_W6aH6b",
+        "richtext_GrBPea"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/1_dadb2f64-8b2a-4369-a6a4-15c2601f2e22.png",
+        "mobile_image": "shopify://shop_images/1_dadb2f64-8b2a-4369-a6a4-15c2601f2e22.png",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "image_with_text_8qPAYY": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_Hn4GDU": {
+          "type": "subheading",
+          "settings": {
+            "text": "oval promise rings"
+          }
+        },
+        "heading_xztQ6F": {
+          "type": "heading",
+          "settings": {
+            "text": "Why choose an Oval Promise Ring?",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_Xpjh4d": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>The oval cut has become one of the most sought-after shapes in modern jewellery. It offers the brilliance of a round stone with a more distinctive and elegant silhouette.⁠</p><ul><li>A soft, elongated shape that flatters the<br/>finger</li><li>Appears larger than many other cuts of the<br/>same size⁠</li><li>A modern yet timeless alternative to round<br/>stones⁠</li><li>Perfect for those looking for elegant promise<br/>rings for her</li></ul><p>Oval promise rings are often chosen by those<br/>who want something classic, but with a slightly more contemporary feel.</p><p>A balance of elegance and individuality. Oval promise rings strike a unique balance between traditional and modern design. While they share the brilliance of classic cuts, their shape adds a subtle individuality that sets them apart.</p><p>This makes them a popular choice for people who want a ring that feels<br/>timeless, but still slightly different. The oval cut offers a softer, more fluid look compared to sharper shapes, making it ideal for everyday wear while still feeling special.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_Hn4GDU",
+        "heading_xztQ6F",
+        "richtext_Xpjh4d"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-4b89ab38-ef9e-4a8e-9dd4-1364903253e0",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/2_762c3328-e6ea-4dbe-9b5f-e1e17d590369.png",
+        "mobile_image": "shopify://shop_images/2_762c3328-e6ea-4dbe-9b5f-e1e17d590369.png",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
     "rich_text_yX46cT": {
       "type": "rich-text",
       "blocks": {
@@ -279,6 +359,8 @@
     "collection-banner",
     "before_after_kXfYHy",
     "main",
+    "image_with_text_eWniNi",
+    "image_with_text_8qPAYY",
     "rich_text_yX46cT",
     "category_cards_4zj4kH",
     "multi_column_6rLKqy"
