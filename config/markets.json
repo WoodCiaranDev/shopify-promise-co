@@ -17,6 +17,12 @@
     },
     "europe": {
       "parent": "@default"
+    },
+    "australia": {
+      "parent": "@default"
+    },
+    "canada": {
+      "parent": "@default"
     }
   }
 }

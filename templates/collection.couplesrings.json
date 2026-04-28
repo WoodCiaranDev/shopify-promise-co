@@ -162,6 +162,86 @@
         "section_id": ""
       }
     },
+    "image_with_text_g4U7Xn": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_yDJFmQ": {
+          "type": "subheading",
+          "settings": {
+            "text": "Matching"
+          }
+        },
+        "heading_RjX7qk": {
+          "type": "heading",
+          "settings": {
+            "text": "Couples Promise Rings",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_pHNGhr": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Couples promise rings are a meaningful way to represent a shared commitment between two people. Designed to be worn together, these rings symbolise connection, loyalty and a promise that exists equally between both individuals.Unlike traditional rings that focus on one wearer, couples promise rings are chosen as a pair. </p><p>Each ring reflects the relationship it represents, whether through matching designs, complementary styles or subtle details that connect the two pieces.At The Promise Co, couples promise rings are designed to feel personal and balanced. Each pair captures the idea of two people choosing each other, creating something that feels shared, meaningful and lasting.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_yDJFmQ",
+        "heading_RjX7qk",
+        "richtext_pHNGhr"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/1_0c57e604-0556-4575-9925-d40a77eb31c1.png",
+        "mobile_image": "shopify://shop_images/1_0c57e604-0556-4575-9925-d40a77eb31c1.png",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "image_with_text_rfUbD7": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_pHQJqT": {
+          "type": "subheading",
+          "settings": {
+            "text": "couples"
+          }
+        },
+        "heading_PMxgGC": {
+          "type": "heading",
+          "settings": {
+            "text": "Matching promise rings with meaning...",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_fRy9Nm": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Matching promise rings are one of the most popular ways to express a shared bond. Some couples prefer identical designs, while others choose rings that complement each other through subtle differences in shape, size or finish.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_pHQJqT",
+        "heading_PMxgGC",
+        "richtext_fRy9Nm"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/2_cad188ed-3af8-4ccf-9615-1193a58edea8.png",
+        "mobile_image": "shopify://shop_images/2_cad188ed-3af8-4ccf-9615-1193a58edea8.png",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
     "category_cards_4zj4kH": {
       "type": "category-cards",
       "blocks": {
@@ -280,6 +360,8 @@
     "before_after_kXfYHy",
     "main",
     "rich_text_yX46cT",
+    "image_with_text_g4U7Xn",
+    "image_with_text_rfUbD7",
     "category_cards_4zj4kH",
     "multi_column_6rLKqy"
   ]

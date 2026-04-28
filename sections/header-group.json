@@ -91,8 +91,8 @@
             "featured_collection_2": "best-sellers",
             "featured_collection_2_title": "best sellers",
             "featured_collection_2_image": "shopify://shop_images/1_9d424cc6-a010-4096-86c4-73cf89ee3afb.png",
-            "promo_block_text": "Visit The Promise World...",
-            "promo_block_link": "shopify://pages/the-promise-world",
+            "promo_block_text": "",
+            "promo_block_link": "",
             "debug_mode": false
           }
         }
@@ -138,12 +138,22 @@
       "settings": {
         "html": ""
       }
+    },
+    "1777290224489aad67": {
+      "type": "apps",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false
+      }
     }
   },
   "order": [
     "announcement_marquee_bQ8aXY",
     "announcement-bar",
     "header",
-    "shogun_custom_html_N8Prrd"
+    "shogun_custom_html_N8Prrd",
+    "1777290224489aad67"
   ]
 }

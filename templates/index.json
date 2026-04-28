@@ -16,16 +16,16 @@
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/Untitled_design_-_2026-04-13T152722.239.png",
-            "mobile_image": "shopify://shop_images/Banner_UK_3.png",
+            "mobile_image": "shopify://shop_images/Banner_UK_5.png",
             "subheading": "promises that shape you",
             "title": "Mark <strong>Your</strong> Moment",
             "mobile_text_position": "place-self-end-start text-start",
             "desktop_text_position": "sm:place-self-center sm:text-center",
-            "content_max_width": 780,
+            "content_max_width": 800,
             "button_1_text": "Shop all",
             "button_1_link": "shopify://collections/shop-all",
             "button_1_style": "solid",
-            "button_1_background": "#f7f5f0",
+            "button_1_background": "#f2eee7",
             "button_1_text_color": "#000000",
             "button_2_text": "",
             "button_2_link": "",
@@ -34,7 +34,7 @@
             "button_2_text_color": "#000000",
             "background": "",
             "background_opacity": 50,
-            "text_color": "#ffffff",
+            "text_color": "#313030",
             "border_color": "",
             "gradient_overlay": ""
           }
@@ -313,7 +313,7 @@
             "icon_width": 60,
             "mobile_icon_width": 60,
             "title": "Hand Set Diamond Simulants",
-            "content": "<p>Every stone is set by hand, for that extra special finishing touch, held by precious prongs and no cheap and harmful glues</p>"
+            "content": "<p>Hand-set by our master jewellers, one stone at a time - never glued.</p>"
           }
         },
         "item_6njMBJ": {
@@ -324,7 +324,7 @@
             "icon_width": 64,
             "mobile_icon_width": 64,
             "title": "Five-Year Warranty",
-            "content": "<p>We know how special your Promises are, that's why they're built to last</p>"
+            "content": "<p>Every piece is covered with a 5-year warranty for complete peace of mind.</p>"
           }
         },
         "item_yDyQgJ": {
@@ -335,7 +335,7 @@
             "icon_width": 64,
             "mobile_icon_width": 64,
             "title": "Personalised Promise Card",
-            "content": "<p>Complimentary keepsake card with every purchase, so you can make record of your Promise</p><p></p>"
+            "content": "<p>Gift-ready packaging & complimentary keepsake card with every purchase, so you can make record of your Promise</p><p></p>"
           }
         },
         "item_htq3Le": {
@@ -492,7 +492,7 @@
         "richtext_HjPa68": {
           "type": "richtext",
           "settings": {
-            "content": "<p>Join our community like-minded promise makers</p>"
+            "content": "<p>Join our community of like-minded promise makers</p>"
           }
         },
         "button_hExhjq": {
@@ -1234,6 +1234,15 @@
         "content_width": "sm",
         "remove_vertical_spacing": true
       }
+    },
+    "17767766013a9d26cd": {
+      "type": "apps",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false
+      }
     }
   },
   "order": [
@@ -1260,6 +1269,7 @@
     "scrolling_content_mXfTt6",
     "image_with_text_LQnacU",
     "collection_list_rKxxaX",
-    "image_with_text_jtH6pj"
+    "image_with_text_jtH6pj",
+    "17767766013a9d26cd"
   ]
 }

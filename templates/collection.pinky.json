@@ -65,8 +65,8 @@
         "content_width": "xs",
         "overlay_color": "#000000",
         "overlay_opacity": 0,
-        "show_usp_tabs": false,
-        "show_stone_type_slider": true
+        "show_usp_tabs": true,
+        "show_stone_type_slider": false
       }
     },
     "main": {
@@ -211,7 +211,7 @@
         "separate_section_with_border": true,
         "image": "shopify://shop_images/Untitled_design-27.png",
         "reveal_on_scroll": true,
-        "image_position": "start",
+        "image_position": "end",
         "content_width": "sm",
         "remove_vertical_spacing": true
       }

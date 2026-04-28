@@ -135,6 +135,141 @@
         "open_filters_by_default": false
       }
     },
+    "image_with_text_x9EKPD": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_DPAd8H": {
+          "type": "subheading",
+          "settings": {
+            "text": "the best travel rings"
+          }
+        },
+        "heading_pJyaVt": {
+          "type": "heading",
+          "settings": {
+            "text": "Travel Rings",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_VWaj6X": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Travel rings are designed to give you the freedom to enjoy life’s moments without worry. Whether you’re heading abroad, spending time at the beach or simply living day to day, a travel ring allows you to wear something beautiful while keeping your most valuable pieces safe.</p><p>A travel ring is typically worn in place of your engagement ring or promise ring, offering the same elegant look without the risk. Many people choose travel rings to protect sentimental jewellery from loss, damage or theft, especially when travelling or in busy environments.</p><p>At The Promise Co, our travel rings are designed to do more than just replace your original ring. They are created to feel meaningful in their own right, combining elegant design with everyday practicality so you never have to compromise on style or sentiment.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_DPAd8H",
+        "heading_pJyaVt",
+        "richtext_VWaj6X"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/3_1f7975f1-55a7-4632-9a66-36e89230a24e.png",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "image_with_text_3X6qwR": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_HqXycX": {
+          "type": "subheading",
+          "settings": {
+            "text": "travel rings"
+          }
+        },
+        "heading_jccCJt": {
+          "type": "heading",
+          "settings": {
+            "text": "Why choose a travel ring?",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_x6mKez": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>A travel ring gives you confidence to wear a ring without the worry that often comes with more valuable jewellery. It allows you to enjoy your experiences fully, knowing your original piece is safe.</p><ul><li>Protects sentimental rings from loss, damage or theft</li><li>Designed for travel, holidays and everyday wear</li><li>Offers the same elegant look without the risk</li><li>A practical alternative for active lifestyles</li></ul><p>Many people choose travel rings not only for holidays, but also for work, exercise or daily routines where wearing a high-value ring may not be practical.</p><p>A practical ring without losing meaning</p><p>While travel rings are often seen as a practical solution, they can still carry<br/>meaning. Rather than replacing your original ring entirely, they act as an extension of it, allowing you to keep the symbolism while adapting to different moments in your life.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_HqXycX",
+        "heading_jccCJt",
+        "richtext_x6mKez"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/4_e11f38d8-7d99-4bf0-bd82-709d0566d084.png",
+        "mobile_image": "shopify://shop_images/4_e11f38d8-7d99-4bf0-bd82-709d0566d084.png",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "faq_UKLtTi": {
+      "type": "faq",
+      "blocks": {
+        "question_nyDdxY": {
+          "type": "question",
+          "settings": {
+            "question": "What is a travel ring?",
+            "answer": "<p>A travel ring is a ring worn in place of your engagement ring, wedding ring or promise ring when travelling or in situations where wearing valuable jewellery may not be practical. It is designed to offer a similar look while reducing the risk of loss or damage.</p>"
+          }
+        },
+        "question_dCFgHB": {
+          "type": "question",
+          "settings": {
+            "question": "Why do people wear travel rings?",
+            "answer": "<p>People wear travel rings to protect valuable or sentimental jewellery. They are especially useful for holidays, busy environments or active situations where there is a higher risk of losing or damaging a ring.</p>"
+          }
+        },
+        "question_4wRLV3": {
+          "type": "question",
+          "settings": {
+            "question": "Are travel rings only for holidays?",
+            "answer": "<p>No. While travel rings are popular for holidays, they are also worn for everyday activities such as going to the gym, commuting or working with your hands. They offer a practical alternative whenever wearing expensive jewellery feels risky.</p>"
+          }
+        },
+        "question_wFz9wR": {
+          "type": "question",
+          "settings": {
+            "question": "Do travel rings look like real rings?",
+            "answer": "<p>Yes. Travel rings are designed to replicate the look of traditional engagement or promise rings, often using materials that closely resemble diamonds and precious metals while remaining more affordable.</p>"
+          }
+        },
+        "question_QFe93q": {
+          "type": "question",
+          "settings": {
+            "question": "Should I leave my real ring at home when travelling?",
+            "answer": "<p>Many people choose to leave their original ring at home to avoid the risk of loss, theft or damage. Wearing a travel ring allows you to enjoy your trip without worrying about something valuable or sentimental.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_nyDdxY",
+        "question_dCFgHB",
+        "question_4wRLV3",
+        "question_wFz9wR",
+        "question_QFe93q"
+      ],
+      "name": "t:sections.faq.presets.faq.name",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "separate_section_with_border": true,
+        "show_categories": false,
+        "subheading": "travel rings",
+        "title": "Frequently Asked Questions",
+        "content": ""
+      }
+    },
     "rich_text_yX46cT": {
       "type": "rich-text",
       "blocks": {
@@ -279,6 +414,9 @@
     "collection-banner",
     "before_after_kXfYHy",
     "main",
+    "image_with_text_x9EKPD",
+    "image_with_text_3X6qwR",
+    "faq_UKLtTi",
     "rich_text_yX46cT",
     "category_cards_4zj4kH",
     "multi_column_6rLKqy"

@@ -310,7 +310,7 @@
       ],
       "name": "t:sections.faq.presets.faq.name",
       "settings": {
-        "color_scheme": "scheme-b68b61c5-ba0e-4161-a0e3-3d59622e9bf4",
+        "color_scheme": "scheme-3",
         "separate_section_with_border": true,
         "show_categories": false,
         "subheading": "Promise rings...",

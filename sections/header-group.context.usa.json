@@ -16,11 +16,18 @@
     "announcement_marquee_bQ8aXY": {
       "settings": {},
       "blocks": {
+        "message_C9rbR": {
+          "type": "message",
+          "disabled": false,
+          "settings": {
+            "text": "SHIPPING DIRECTLY FROM OUR USA WAREHOUSE"
+          }
+        },
         "message_FYyP3": {
           "type": "message",
           "disabled": false,
           "settings": {
-            "text": "tariff free domestic shipping"
+            "text": "tariff-free"
           }
         },
         "message_9JGdFV": {
@@ -30,6 +37,7 @@
         }
       },
       "block_order": [
+        "message_C9rbR",
         "message_FYyP3",
         "message_PwLUb7",
         "message_9JGdFV"

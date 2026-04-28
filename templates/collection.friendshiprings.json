@@ -135,99 +135,181 @@
         "open_filters_by_default": false
       }
     },
-    "image_with_text_wkkBUM": {
+    "image_with_text_BwRHNc": {
       "type": "image-with-text",
       "blocks": {
-        "heading_mJd64z": {
+        "heading_xtCAXi": {
           "type": "heading",
           "settings": {
-            "text": "Emerald Cut Promise Rings",
+            "text": "Marquise Promise Rings",
             "heading_tag": "h1"
           }
         },
-        "richtext_aCRd9T": {
+        "richtext_WKEAXi": {
           "type": "richtext",
           "settings": {
-            "content": "<p>An emerald cut promise ring offer a refined and understated way to symbolise love and commitment. Defined by their clean lines and elongated rectangular shape, the emerald cut is known for its quiet elegance, favouring clarity and symmetry over sparkle.<br/><br/>Rather than relying on brilliance alone, emerald cut stones create a distinctive “hall of mirrors” effect, reflecting light in smooth, structured flashes that feel calm and sophisticated.<br/><br/>At The Promise Co, emerald cut promise rings are designed for those who appreciate subtle confidence. The shape feels intentional and considered, making it a natural choice for a promise that is built on clarity, trust and depth.</p>"
+            "content": "<p>A marquise promise ring is a striking and elegant symbol of love and commitment. Known for its elongated shape and pointed ends, the marquise cut creates a distinctive look that feels both timeless and modern. Its unique silhouette also gives the illusion of a larger stone, making it a popular choice for those who want a ring that stands out while remaining refined.<br/><br/>Our marquise promise rings are designed to celebrate meaningful moments and lasting promises. From delicate solitaire styles to halo settings and stackable bands, each ring balances romantic symbolism with contemporary design. Whether you are choosing a marquise cut promise ring as a thoughtful gift or as a personal symbol of commitment, the shape offers something beautifully different from traditional round or oval designs.</p>"
           }
         }
       },
       "block_order": [
-        "heading_mJd64z",
-        "richtext_aCRd9T"
+        "heading_xtCAXi",
+        "richtext_WKEAXi"
       ],
+      "disabled": true,
       "name": "t:sections.image_with_text.presets.image_with_text.name",
       "settings": {
         "color_scheme": "",
         "separate_section_with_border": true,
-        "image": "shopify://shop_images/1_69056e06-8b67-46c3-b175-e57037dc4f23.png",
-        "mobile_image": "shopify://shop_images/1_69056e06-8b67-46c3-b175-e57037dc4f23.png",
+        "image": "shopify://shop_images/1_0a709f55-7a58-4d3e-b19b-c501c73c3ded.png",
+        "mobile_image": "shopify://shop_images/1_0a709f55-7a58-4d3e-b19b-c501c73c3ded.png",
         "reveal_on_scroll": true,
         "image_position": "start",
-        "content_width": "md",
+        "content_width": "sm",
         "remove_vertical_spacing": true
       }
     },
-    "image_with_text_Be6Rj3": {
+    "image_with_text_q8a34T": {
       "type": "image-with-text",
       "blocks": {
-        "subheading_QeyD8g": {
+        "heading_CqCpaN": {
+          "type": "heading",
+          "settings": {
+            "text": "Why choose a marquise promise ring?",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_jGCLJY": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>The marquise cut has long been admired for its elegant proportions and eye-catching shape. Its elongated design not only enhances the brilliance of the stone but also creates a flattering, slender appearance on the finger.<br/></p><ul><li>A distinctive elongated shape that stands out from classic cuts</li><li>Appears larger than many other stone shapes of the same size</li><li>Elegant, refined style with a romantic heritage</li><li>Perfect for those who want a unique promise ring design</li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_CqCpaN",
+        "richtext_jGCLJY"
+      ],
+      "disabled": true,
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/2_e34aa82e-6cd1-45ed-85d6-e589565b91a1.png",
+        "mobile_image": "shopify://shop_images/2_e34aa82e-6cd1-45ed-85d6-e589565b91a1.png",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "image_with_text_icwCFY": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_HNWYxU": {
           "type": "subheading",
           "settings": {
             "text": ""
           }
         },
-        "heading_8j9qRE": {
+        "heading_MpEBMP": {
           "type": "heading",
           "settings": {
-            "text": "What makes an emerald cut promise ring unique?",
+            "text": "Friendship Rings",
             "heading_tag": "h1"
           }
         },
-        "richtext_HCa4xK": {
+        "richtext_kR7Wtd": {
           "type": "richtext",
           "settings": {
-            "content": "<ul><li>The emerald cut stands apart from other stone shapes through its structure. Its step-cut facets and open surface place emphasis on the natural beauty of the stone, creating a look that feels clean, modern and architectural.<br/></li><li>A rectangular shape with soft, cut corners</li><li>Step-cut facets that create a smooth, reflective finish</li><li>A refined alternative to more sparkly, traditional cuts</li><li>Style associated with understated luxury and confidence</li></ul><p>Because of its simplicity, the emerald cut is often chosen by those who want a ring that feels elegant without being overstated.</p>"
+            "content": "<p>Friendship rings are a meaningful way to celebrate the connection between two people. Whether it’s a lifelong friendship, a shared journey or an unspoken bond, a friendship ring represents loyalty, trust and the moments that define your relationship.<br/><br/>At The Promise Co, friendship rings are designed to capture the same spirit as a promise. While often associated with romance, a promise can exist in many forms, and friendship promise rings reflect that idea through designs that feel personal, thoughtful and lasting.</p>"
           }
         }
       },
       "block_order": [
-        "subheading_QeyD8g",
-        "heading_8j9qRE",
-        "richtext_HCa4xK"
+        "subheading_HNWYxU",
+        "heading_MpEBMP",
+        "richtext_kR7Wtd"
       ],
       "name": "t:sections.image_with_text.presets.image_with_text.name",
       "settings": {
         "color_scheme": "",
         "separate_section_with_border": true,
-        "image": "shopify://shop_images/2_d48c3be8-670c-4cbf-985e-1964b65490d2.png",
-        "mobile_image": "shopify://shop_images/2_d48c3be8-670c-4cbf-985e-1964b65490d2.png",
+        "image": "shopify://shop_images/8_d6b55d63-cbe0-4174-9deb-f1223bda850c.png",
+        "mobile_image": "shopify://shop_images/8_d6b55d63-cbe0-4174-9deb-f1223bda850c.png",
         "reveal_on_scroll": true,
-        "image_position": "end",
-        "content_width": "md",
+        "image_position": "start",
+        "content_width": "sm",
         "remove_vertical_spacing": true
       }
     },
-    "rich_text_TDpUJ3": {
-      "type": "rich-text",
+    "image_with_text_f86mfU": {
+      "type": "image-with-text",
       "blocks": {
-        "heading_VcX7bz": {
+        "subheading_BjxLaW": {
+          "type": "subheading",
+          "settings": {
+            "text": "friendship rings"
+          }
+        },
+        "heading_pHCnWC": {
           "type": "heading",
           "settings": {
-            "text": "<strong>A quiet, confident promise ring alternative</strong>",
+            "text": "The meaning behind friendship promise rings",
             "heading_tag": "h1"
           }
         },
-        "richtext_QwDigH": {
+        "richtext_AtYwyq": {
           "type": "richtext",
           "settings": {
-            "content": "<p>Emerald cut promise rings are often chosen by those who prefer a more understated style. While other cuts focus on sparkle, the emerald cut focuses on presence, shape and proportion.<br/><br/>This gives it a unique appeal. It feels less about drawing attention, and more about expressing confidence through simplicity. The elongated shape also creates a flattering look on the hand, adding to its timeless appeal.<br/><br/>For those who want a promise ring that feels modern, elegant and quietly distinctive, the emerald cut offers something truly different.</p>"
+            "content": "<p>A friendship promise ring represents a commitment between two people that goes beyond a single moment. It symbolises trust, support and the kind of connection that remains constant over time.<br/><br/>For many, friendship promise rings represent:<br/>A lifelong bond between best friends</p><ul><li>A shared history and meaningful experiences</li><li>A promise to always support one another</li><li>A reminder of a connection that doesn’t change</li></ul><p>Unlike traditional jewellery, friendship rings often carry a deeper emotional meaning, making them one of the most personal gifts you can give.</p>"
           }
         }
       },
       "block_order": [
-        "heading_VcX7bz",
-        "richtext_QwDigH"
+        "subheading_BjxLaW",
+        "heading_pHCnWC",
+        "richtext_AtYwyq"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/7_5c2bbf33-fac3-47be-aa3f-b457ce9c5cb5.png",
+        "mobile_image": "shopify://shop_images/7_5c2bbf33-fac3-47be-aa3f-b457ce9c5cb5.png",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "rich_text_kXkrX6": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_8QLwH7": {
+          "type": "subheading",
+          "settings": {
+            "text": ""
+          }
+        },
+        "heading_PQzCam": {
+          "type": "heading",
+          "settings": {
+            "text": "<strong>Bestie rings designed to be shared</strong>",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_mBNGRx": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Bestie promise rings are a modern expression of friendship, often chosen as matching or complementary pieces. Some prefer identical rings, while others choose styles that connect in a more subtle way.</p><p>This flexibility allows each person to express their own style while still sharing something meaningful. </p><p>Whether worn every day or saved for special moments, bestie rings are a reminder of a bond that is always there.</p><p>At The Promise Co, every design is created with meaning in mind, ensuring each ring reflects the connection it represents.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_8QLwH7",
+        "heading_PQzCam",
+        "richtext_mBNGRx"
       ],
       "name": "t:sections.rich_text.presets.rich_text.name",
       "settings": {
@@ -386,9 +468,11 @@
     "collection-banner",
     "before_after_kXfYHy",
     "main",
-    "image_with_text_wkkBUM",
-    "image_with_text_Be6Rj3",
-    "rich_text_TDpUJ3",
+    "image_with_text_BwRHNc",
+    "image_with_text_q8a34T",
+    "image_with_text_icwCFY",
+    "image_with_text_f86mfU",
+    "rich_text_kXkrX6",
     "rich_text_yX46cT",
     "category_cards_4zj4kH",
     "multi_column_6rLKqy"

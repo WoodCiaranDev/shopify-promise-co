@@ -50,6 +50,15 @@
         "remove_vertical_spacing": true
       }
     },
+    "17767757490ca1673e": {
+      "type": "apps",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false
+      }
+    },
     "text-with-icons": {
       "type": "text-with-icons",
       "blocks": {
@@ -153,9 +162,18 @@
         "image_FQqF69": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Sub_Logo_-_All_White.svg",
-            "image_width": 300,
+            "image": "shopify://shop_images/Icon_-_All_White_20x_284578d4-6094-4fdc-a97c-b6d07154949d.png",
+            "image_width": 90,
             "link": ""
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "title": "The Promise Club.",
+            "content": "<p>Sign up to our newsletter to receive exclusive offers.</p>",
+            "button_background": "#1c1c1c",
+            "button_text_color": "#ffffff"
           }
         },
         "links": {
@@ -181,32 +199,14 @@
             "content": "<p><em>Contact us: </em><a href=\"mailto:info@thepromiseringco.com\" title=\"mailto:info@thepromiseringco.com\">info@thepromiseco.com</a></p>",
             "enable_follow_on_shop": false
           }
-        },
-        "newsletter": {
-          "type": "newsletter",
-          "settings": {
-            "title": "The Promise Club.",
-            "content": "<p>Sign up to our newsletter to receive exclusive offers.</p>",
-            "button_background": "#313030",
-            "button_text_color": "#ffffff"
-          }
-        },
-        "image_VcPUGf": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/Artboard_35_4x_dff76677-1a79-4fa7-b1d6-471cdc1fc207.png",
-            "image_width": 140,
-            "link": ""
-          }
         }
       },
       "block_order": [
         "image_FQqF69",
+        "newsletter",
         "links",
         "links_GfTpPU",
-        "text",
-        "newsletter",
-        "image_VcPUGf"
+        "text"
       ],
       "settings": {
         "color_scheme": "scheme-3",
@@ -222,6 +222,7 @@
   },
   "order": [
     "image_with_text_6BGXLA",
+    "17767757490ca1673e",
     "text-with-icons",
     "1745417974c7db7ced",
     "footer"

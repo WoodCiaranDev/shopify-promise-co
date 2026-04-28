@@ -207,8 +207,8 @@
             "style": "solid",
             "text": "Shop the Whole Collection",
             "url": "shopify://collections/shop-all",
-            "background": "#82add9",
-            "text_color": ""
+            "background": "#f2eee7",
+            "text_color": "#313030"
           }
         }
       },

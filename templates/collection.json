@@ -203,6 +203,129 @@
         "remove_vertical_spacing": true
       }
     },
+    "image_with_text_icwCFY": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_HNWYxU": {
+          "type": "subheading",
+          "settings": {
+            "text": "promise rings"
+          }
+        },
+        "heading_MpEBMP": {
+          "type": "heading",
+          "settings": {
+            "text": "Radiant Cut Promise Rings",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_kR7Wtd": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Radiant cut promise rings offer a bold and modern expression of love and commitment. Known for their clean lines and exceptional sparkle, the radiant cut combines the structure of a rectangular or square shape with the brilliance of a round stone, creating a design that feels both refined and eye-catching.</p><p>At The Promise Co,  our radiant cut promise rings are designed to capture that balance between strength and brilliance. </p><p>The defined shape gives the ring a confident, contemporary feel, while the light-reflecting facets create a sparkle that feels full of energy and life.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_HNWYxU",
+        "heading_MpEBMP",
+        "richtext_kR7Wtd"
+      ],
+      "disabled": true,
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/5_e3b73fa7-df65-4343-a5b2-662853bc248a.png",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "image_with_text_f86mfU": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_BjxLaW": {
+          "type": "subheading",
+          "settings": {
+            "text": "Radiant cuts"
+          }
+        },
+        "heading_pHCnWC": {
+          "type": "heading",
+          "settings": {
+            "text": "What makes a Radiant Cut Promise Ring unique?",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_AtYwyq": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>The radiant cut is known for combining two distinct qualities, structure and brilliance. Originally developed to merge the elegance of step-cut stones with the sparkle of brilliant cuts, it features a high number of facets that maximise light reflection.<br/><br/>This gives radiant promise rings a distinctive look that feels more vibrant than traditional rectangular styles, while still maintaining a clean and modern silhouette.</p><p></p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_BjxLaW",
+        "heading_pHCnWC",
+        "richtext_AtYwyq"
+      ],
+      "disabled": true,
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/6_68715419-bd2d-4e54-8e57-683576c878e3.png",
+        "mobile_image": "shopify://shop_images/6_68715419-bd2d-4e54-8e57-683576c878e3.png",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "rich_text_kXkrX6": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_8QLwH7": {
+          "type": "subheading",
+          "settings": {
+            "text": ""
+          }
+        },
+        "heading_PQzCam": {
+          "type": "heading",
+          "settings": {
+            "text": "<strong>A bold, modern take on a promise ring</strong>",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_mBNGRx": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Radiant cut promise rings are often chosen by those who want a ring that feels different from traditional styles. Their clean lines give them a contemporary edge, while their brilliance ensures they never feel understated.<br/><br/>Because the radiant cut can be either square or rectangular, it offers flexibility in style, allowing you to choose a look that feels more structured or more elongated depending on your preference.<br/><br/>This versatility, combined with its striking appearance, makes the radiant cut one of the most unique options within promise rings.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_8QLwH7",
+        "heading_PQzCam",
+        "richtext_mBNGRx"
+      ],
+      "disabled": true,
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
     "rich_text_yX46cT": {
       "type": "rich-text",
       "blocks": {
@@ -349,6 +472,9 @@
     "main",
     "image_with_text_BwRHNc",
     "image_with_text_q8a34T",
+    "image_with_text_icwCFY",
+    "image_with_text_f86mfU",
+    "rich_text_kXkrX6",
     "rich_text_yX46cT",
     "category_cards_4zj4kH",
     "multi_column_6rLKqy"

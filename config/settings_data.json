@@ -24,7 +24,7 @@
     "text_font_size_desktop": 14,
     "button_letter_spacing": 18,
     "round_color_swatches": true,
-    "color_swatch_config": "18ct Gold Vermeil:#D4AF37\nRhodium Plated Silver:#C0C0C0\n14ct Gold Vermeil:#CFB53B\nSterling Silver:#E8E8E8\nBottle Green:#006A4E\nBaby Blue:#89CFF0\nBaby Pink:#F4C2C2\nRed:#DC143C",
+    "color_swatch_config": "18k Gold Vermeil:#D4AF37\nRhodium Plated Silver:#C0C0C0\n14ct Gold Vermeil:#CFB53B\nSterling Silver:#E8E8E8\nBottle Green:#006A4E\nBaby Blue:#89CFF0\nBaby Pink:#F4C2C2\nRed:#DC143C",
     "product_image_aspect_ratio": "square_crop",
     "show_secondary_image": false,
     "product_card_text_font": "heading",
@@ -128,11 +128,6 @@
         "disabled": false,
         "settings": {}
       },
-      "6858403126979251294": {
-        "type": "shopify://apps/consentik-cookie/blocks/omega-cookies-notification/13cba824-a338-452e-9b8e-c83046a79f21",
-        "disabled": true,
-        "settings": {}
-      },
       "9426859951591838832": {
         "type": "shopify://apps/chatty-livechat-helpdesk/blocks/app-page/1c0e135d-e8e1-4fe2-86be-1c36def46675",
         "disabled": false,
@@ -194,6 +189,16 @@
       },
       "73408357045313770000": {
         "type": "shopify://apps/gdpr-cookie-consent/blocks/banner/58c0baa2-6cc1-480c-9ea6-38d6d559556a",
+        "disabled": false,
+        "settings": {}
+      },
+      "6858403126979251294": {
+        "type": "shopify://apps/consentik-cookie/blocks/omega-cookies-notification/13cba824-a338-452e-9b8e-c83046a79f21",
+        "disabled": false,
+        "settings": {}
+      },
+      "1537173939754162885": {
+        "type": "shopify://apps/accesspro-accessibility/blocks/accesspro-widget/d1a2aee8-6737-4a3e-a6aa-13d82b562c31",
         "disabled": false,
         "settings": {}
       }
@@ -324,7 +329,7 @@
         "settings": {
           "background": "#b8ccab",
           "background_gradient": "",
-          "text_color": "#ffffff",
+          "text_color": "#313030",
           "primary_button_background": "#ffffff",
           "primary_button_text_color": "#1c1c1c",
           "circle_button_background": "#ffffff",

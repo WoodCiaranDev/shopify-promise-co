@@ -272,6 +272,72 @@
         "title": "",
         "content": ""
       }
+    },
+    "image_with_text_DM6WQG": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_BAVFhE": {
+          "type": "heading",
+          "settings": {
+            "text": "Pear Cut Promise Rings",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_Ve7WCq": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>A pear cut promise ring offer a distinctive and emotional way to represent love and commitment. Also known as a teardrop shape, the pear cut combines a soft rounded edge with a single point, creating a silhouette that feels elegant, expressive and deeply personal.This unique shape is designed to catch light beautifully while also creating a flattering, elongated look on the finger. Its tapered design can make the stone appear larger and more refined, adding to its appeal as a modern yet timeless choice.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_BAVFhE",
+        "richtext_Ve7WCq"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/3_2cf90305-323d-443c-a837-f9104807c6ea.png",
+        "mobile_image": "shopify://shop_images/3_2cf90305-323d-443c-a837-f9104807c6ea.png",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "image_with_text_Ua8zfK": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_JKgaCG": {
+          "type": "heading",
+          "settings": {
+            "text": "How to choose a pear cut promise ring",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_gAWgmz": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Choosing the right pear cut promise ring comes down to personal style and how the ring will be worn.</p><p><strong>If you prefer something minimal</strong></p><p>A solitaire pear cut ring keeps the focus on the shape itself and offers a clean, elegant look.</p><p><strong>If you want something more distinctive</strong></p><p>Look for designs with multiple stones or a <a href=\"https://thepromiseco.com/collections/toi-et-moi-promise-rings\" title=\"https://thepromiseco.com/collections/toi-et-moi-promise-rings\">Toi et Moi style</a>, which adds a more expressive and modern feel.</p><p><strong>If everyday wear matters</strong></p><p>Choose a balanced setting that protects the pointed tip while remaining comfortable to wear daily.The best choice is always the one that feels natural and meaningful to the person wearing it.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_JKgaCG",
+        "richtext_gAWgmz"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/4_f4dd600f-9289-45ad-8e03-f5b471613863.png",
+        "mobile_image": "shopify://shop_images/4_f4dd600f-9289-45ad-8e03-f5b471613863.png",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
     }
   },
   "order": [
@@ -279,8 +345,10 @@
     "collection-banner",
     "before_after_kXfYHy",
     "main",
+    "multi_column_6rLKqy",
+    "image_with_text_DM6WQG",
+    "image_with_text_Ua8zfK",
     "rich_text_yX46cT",
-    "category_cards_4zj4kH",
-    "multi_column_6rLKqy"
+    "category_cards_4zj4kH"
   ]
 }
