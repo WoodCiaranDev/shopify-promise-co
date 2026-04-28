@@ -4,7 +4,8 @@
   <div class="container">
     <div class="signature-image" style="--signature-max-width: {{ section.settings.max_width }}px;">
       {%- if section.settings.image != blank -%}
-        {{- section.settings.image | image_url: width: section.settings.max_width | times: 2 | image_tag: loading: 'lazy', class: 'signature-image__img' -}}
+        {%- assign signature_image_width = section.settings.max_width | times: 2 -%}
+        {{- section.settings.image | image_url: width: signature_image_width | image_tag: loading: 'lazy', class: 'signature-image__img' -}}
       {%- else -%}
         <div class="signature-image__placeholder">
           {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
