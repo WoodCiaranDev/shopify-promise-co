@@ -22,7 +22,7 @@
           "type": "heading",
           "settings": {
             "text": "",
-            "heading_tag": "h2"
+            "heading_tag": "h1"
           }
         },
         "richtext_MnfcG9": {
@@ -56,12 +56,12 @@
         "image_Pq7qfD": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/ETHEREAL_SUMMER_2.png",
-            "mobile_image": "shopify://shop_images/Banner_UK_8.png",
-            "subheading": "ETHEREAL SUMMER",
-            "title": "out now.",
-            "mobile_text_position": "place-self-center-end text-end",
-            "desktop_text_position": "sm:place-self-start-center sm:text-center",
+            "image": "shopify://shop_images/ETHEREAL_SUMMER_1.png",
+            "mobile_image": "shopify://shop_images/Banner_UK_6.png",
+            "subheading": "",
+            "title": "",
+            "mobile_text_position": "place-self-center text-center",
+            "desktop_text_position": "sm:place-self-center sm:text-center",
             "content_max_width": 780,
             "button_1_text": "",
             "button_1_link": "",
@@ -75,7 +75,7 @@
             "button_2_text_color": "#000000",
             "background": "",
             "background_opacity": 0,
-            "text_color": "#313030",
+            "text_color": "#ffffff",
             "border_color": "",
             "gradient_overlay": ""
           }
@@ -84,7 +84,6 @@
       "block_order": [
         "image_Pq7qfD"
       ],
-      "disabled": true,
       "name": "t:sections.slideshow.presets.slideshow.name",
       "settings": {
         "allow_transparent_header": true,
@@ -104,8 +103,8 @@
         "heading_EVCa8B": {
           "type": "heading",
           "settings": {
-            "text": "coming May 29th 2026...",
-            "heading_tag": "h2"
+            "text": "coming May 31st 2026...",
+            "heading_tag": "h1"
           }
         },
         "richtext_iMbrKE": {
@@ -127,7 +126,6 @@
         "richtext_iMbrKE",
         "heading_cYg7bq"
       ],
-      "disabled": true,
       "name": "t:sections.rich_text.presets.rich_text.name",
       "settings": {
         "color_scheme": "",
@@ -154,7 +152,6 @@
       "block_order": [
         "klaviyo_email_marketing_sms_form_embed_block_ccpVFT"
       ],
-      "disabled": true,
       "settings": {
         "color_scheme": "",
         "separate_section_with_border": false,
@@ -164,6 +161,7 @@
     },
     "collection-banner": {
       "type": "collection-banner",
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-1",
         "image_size": "auto",
@@ -228,6 +226,7 @@
     },
     "main": {
       "type": "main-collection",
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-2",
         "hide_product_information": false,
@@ -254,7 +253,7 @@
           "type": "heading",
           "settings": {
             "text": "Marquise Promise Rings",
-            "heading_tag": "h2"
+            "heading_tag": "h1"
           }
         },
         "richtext_WKEAXi": {
@@ -288,7 +287,7 @@
           "type": "heading",
           "settings": {
             "text": "Why choose a marquise promise ring?",
-            "heading_tag": "h2"
+            "heading_tag": "h1"
           }
         },
         "richtext_jGCLJY": {
@@ -328,7 +327,7 @@
           "type": "heading",
           "settings": {
             "text": "Radiant Cut Promise Rings",
-            "heading_tag": "h2"
+            "heading_tag": "h1"
           }
         },
         "richtext_kR7Wtd": {
@@ -368,7 +367,7 @@
           "type": "heading",
           "settings": {
             "text": "What makes a Radiant Cut Promise Ring unique?",
-            "heading_tag": "h2"
+            "heading_tag": "h1"
           }
         },
         "richtext_AtYwyq": {
@@ -409,7 +408,7 @@
           "type": "heading",
           "settings": {
             "text": "<strong>A bold, modern take on a promise ring</strong>",
-            "heading_tag": "h2"
+            "heading_tag": "h1"
           }
         },
         "richtext_mBNGRx": {
@@ -445,7 +444,7 @@
           "type": "heading",
           "settings": {
             "text": "You might also like...",
-            "heading_tag": "h2"
+            "heading_tag": "h1"
           }
         }
       },
@@ -463,63 +462,6 @@
         "use_ogg_font": false,
         "use_compact_spacing": true,
         "section_id": ""
-      }
-    },
-    "category_cards_WPTxam": {
-      "type": "category-cards",
-      "blocks": {
-        "category_image_aNyT3x": {
-          "type": "category_image",
-          "settings": {
-            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T093421.486.png",
-            "title": "Best Sellers",
-            "description": "<p>discover</p>",
-            "link": "shopify://collections/best-sellers"
-          }
-        },
-        "category_image_mFNWqT": {
-          "type": "category_image",
-          "settings": {
-            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T093409.150.png",
-            "title": "Shop for Her",
-            "description": "<p>Promise Rings</p>",
-            "link": "shopify://collections/for-her"
-          }
-        },
-        "category_image_NC9mDt": {
-          "type": "category_image",
-          "settings": {
-            "image": "shopify://shop_images/Untitled_design_-_2026-04-02T155423.026.png",
-            "title": "Mens Rings",
-            "description": "<p>Shop</p>",
-            "link": "shopify://collections/mens-promise-rings"
-          }
-        },
-        "category_image_dP4Dyz": {
-          "type": "category_image",
-          "settings": {
-            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T152137.870.png",
-            "title": "Couples Rings",
-            "description": "<p>Matching</p>",
-            "link": "shopify://collections/couples-promise-rings"
-          }
-        }
-      },
-      "block_order": [
-        "category_image_aNyT3x",
-        "category_image_mFNWqT",
-        "category_image_NC9mDt",
-        "category_image_dP4Dyz"
-      ],
-      "settings": {
-        "title": "",
-        "subtitle": "",
-        "background_color": "#ffffff",
-        "title_color": "#000000",
-        "subtitle_color": "#666666",
-        "section_padding_top": 64,
-        "section_padding_bottom": 64,
-        "mobile_single_column": false
       }
     },
     "category_cards_4zj4kH": {
@@ -568,7 +510,6 @@
         "category_image_LK4XYz",
         "category_image_CgrtxT"
       ],
-      "disabled": true,
       "settings": {
         "title": "",
         "subtitle": "",
@@ -649,7 +590,6 @@
     "image_with_text_f86mfU",
     "rich_text_kXkrX6",
     "rich_text_yX46cT",
-    "category_cards_WPTxam",
     "category_cards_4zj4kH",
     "multi_column_6rLKqy"
   ]
