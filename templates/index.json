@@ -216,17 +216,17 @@
           "settings": {
             "image": "shopify://shop_images/Untitled_design_-_2026-04-06T093409.150.png",
             "title": "Shop for Her",
-            "description": "<p>Gift guide</p>",
+            "description": "<p>Promise Rings</p>",
             "link": "shopify://collections/for-her"
           }
         },
         "category_4": {
           "type": "category_image",
           "settings": {
-            "image": "shopify://shop_images/Untitled_design-31.png",
-            "title": "Promise Rings",
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-02T155423.026.png",
+            "title": "Mens Rings",
             "description": "<p>Shop</p>",
-            "link": "shopify://collections/promise-rings"
+            "link": "shopify://collections/mens-promise-rings"
           }
         },
         "category_2": {
@@ -254,6 +254,43 @@
         "section_padding_top": 64,
         "section_padding_bottom": 64,
         "mobile_single_column": false
+      }
+    },
+    "scrolling_content_mXfTt6": {
+      "type": "scrolling-content",
+      "blocks": {
+        "text_bNYtp4": {
+          "type": "text",
+          "settings": {
+            "text": "Rated 4.97 / 5 ★★★★★"
+          }
+        },
+        "text_fnBnPg": {
+          "type": "text",
+          "settings": {
+            "text": "7000+ Promises made"
+          }
+        }
+      },
+      "block_order": [
+        "text_bNYtp4",
+        "text_fnBnPg"
+      ],
+      "name": "t:sections.scrolling_content.presets.scrolling_content.name",
+      "settings": {
+        "separate_section_with_border": false,
+        "scrolling_speed": 0.1,
+        "scroll_direction": "left",
+        "pause_on_hover": false,
+        "text_font": "heading",
+        "text_font_size_mobile": 14,
+        "text_font_size_desktop": 10,
+        "section_vertical_spacing_mobile": 10,
+        "section_vertical_spacing_desktop": 10,
+        "item_horizontal_spacing_mobile": 35,
+        "item_horizontal_spacing_desktop": 40,
+        "background": "#b8ccab",
+        "text_color": "#ffffff"
       }
     },
     "rich_text_8gkr8U": {
@@ -431,43 +468,6 @@
         "horizontal_spacing_factor": 0.2,
         "vertical_spacing_factor": 0.2,
         "subheading": "discover"
-      }
-    },
-    "scrolling_content_mXfTt6": {
-      "type": "scrolling-content",
-      "blocks": {
-        "text_bNYtp4": {
-          "type": "text",
-          "settings": {
-            "text": "Rated 4.97 / 5 ★★★★★"
-          }
-        },
-        "text_fnBnPg": {
-          "type": "text",
-          "settings": {
-            "text": "7000+ Promises made"
-          }
-        }
-      },
-      "block_order": [
-        "text_bNYtp4",
-        "text_fnBnPg"
-      ],
-      "name": "t:sections.scrolling_content.presets.scrolling_content.name",
-      "settings": {
-        "separate_section_with_border": false,
-        "scrolling_speed": 0.1,
-        "scroll_direction": "left",
-        "pause_on_hover": false,
-        "text_font": "heading",
-        "text_font_size_mobile": 14,
-        "text_font_size_desktop": 10,
-        "section_vertical_spacing_mobile": 10,
-        "section_vertical_spacing_desktop": 10,
-        "item_horizontal_spacing_mobile": 35,
-        "item_horizontal_spacing_desktop": 40,
-        "background": "#b8ccab",
-        "text_color": "#ffffff"
       }
     },
     "featured_collections_eJrx7X": {
