@@ -43,6 +43,17 @@
   {% endif %}
 {% endunless %}
 
+{% comment %} Synthesise metal filter for gold/silver template suffixes {% endcomment %}
+{% unless has_active_filters %}
+  {% if template.suffix == 'gold' %}
+    {% assign has_active_filters = true %}
+    {% assign active_option_filters = '18k Gold Vermeil|14k Gold Vermeil' %}
+  {% elsif template.suffix == 'silver' %}
+    {% assign has_active_filters = true %}
+    {% assign active_option_filters = 'Rhodium Plated Silver|Sterling Silver' %}
+  {% endif %}
+{% endunless %}
+
 {% assign color_active = false %}
 {% for option in product.options %}
   {% if option == 'Color' or option == 'Colour' or option == 'Precious Metal' %}
