@@ -94,6 +94,43 @@
         "remove_horizontal_spacing": false
       }
     },
+    "scrolling_content_PFecae": {
+      "type": "scrolling-content",
+      "blocks": {
+        "text_EQLFrM": {
+          "type": "text",
+          "settings": {
+            "text": "Rated 4.97 / 5 ★★★★★"
+          }
+        },
+        "text_LcD7t6": {
+          "type": "text",
+          "settings": {
+            "text": "7000+ promises made"
+          }
+        }
+      },
+      "block_order": [
+        "text_EQLFrM",
+        "text_LcD7t6"
+      ],
+      "name": "t:sections.scrolling_content.presets.scrolling_content.name",
+      "settings": {
+        "separate_section_with_border": false,
+        "scrolling_speed": 0.1,
+        "scroll_direction": "left",
+        "pause_on_hover": false,
+        "text_font": "heading",
+        "text_font_size_mobile": 16,
+        "text_font_size_desktop": 16,
+        "section_vertical_spacing_mobile": 10,
+        "section_vertical_spacing_desktop": 10,
+        "item_horizontal_spacing_mobile": 30,
+        "item_horizontal_spacing_desktop": 40,
+        "background": "#f7f5f0",
+        "text_color": ""
+      }
+    },
     "17772907922604758b": {
       "type": "apps",
       "settings": {
@@ -110,7 +147,7 @@
           "type": "tab",
           "settings": {
             "title": "The Promise Standard",
-            "content": "<p>The best metals. Precision electroplating. Sealed with an anti-tarnish e-coating. <br/><strong>Six people check every piece </strong>by hand before packaging.<br/><br/>Your piece arrives in packaging chosen and assembled with the same care. Including a <strong>Promise Card</strong>, a keepsake for the words that matter most.<br/><br/>And if you ever need us, we're here. Every message answered within four hours, on average. We are <strong>rated 4.94 stars</strong> from over 430 customers.<br/><br/>Excellence isn't something we aim for. It's the only standard we know.</p>",
+            "content": "<p>The best metals. Precision electroplating. Sealed with an anti-tarnish e-coating. <br/><strong>Six people check every piece </strong>by hand before packaging.<br/><br/>Your piece arrives in packaging chosen and assembled with the same care. Including a <strong>Promise Card</strong>, a keepsake for the words that matter most.<br/><br/>And if you ever need us, we're here. We are <strong>rated 4.97 stars</strong> from over 430 customers.<br/><br/>Excellence isn't something we aim for. It's the only standard we know.</p>",
             "page": "",
             "open_on_mobile": false
           }
@@ -194,7 +231,7 @@
             "corner_styling": "round",
             "header_text_color": "#313030",
             "text_color": "#313030",
-            "card_color": "#F9F9F9",
+            "card_color": "#f9f9f9",
             "stars_color": "",
             "arrows_color": "#313030",
             "transition_speed": 5,
@@ -213,54 +250,19 @@
         "remove_horizontal_spacing": false
       }
     },
-    "scrolling_content_PFecae": {
-      "type": "scrolling-content",
-      "blocks": {
-        "text_EQLFrM": {
-          "type": "text",
-          "settings": {
-            "text": "Member of The National Association of Jewellers"
-          }
-        },
-        "text_LcD7t6": {
-          "type": "text",
-          "settings": {
-            "text": "Member of The National Association of Jewellers"
-          }
-        }
-      },
-      "block_order": [
-        "text_EQLFrM",
-        "text_LcD7t6"
-      ],
-      "name": "t:sections.scrolling_content.presets.scrolling_content.name",
-      "settings": {
-        "separate_section_with_border": false,
-        "scrolling_speed": 0.1,
-        "scroll_direction": "left",
-        "pause_on_hover": false,
-        "text_font": "heading",
-        "text_font_size_mobile": 16,
-        "text_font_size_desktop": 16,
-        "section_vertical_spacing_mobile": 10,
-        "section_vertical_spacing_desktop": 10,
-        "item_horizontal_spacing_mobile": 30,
-        "item_horizontal_spacing_desktop": 40,
-        "background": "#ffffff",
-        "text_color": ""
-      }
-    },
     "rich_text_Wj4BMe": {
       "type": "rich-text",
       "blocks": {
         "subheading_hdaBUB": {
           "type": "subheading",
+          "disabled": true,
           "settings": {
             "text": "Don't just take our word for it"
           }
         },
         "heading_JFUwpC": {
           "type": "heading",
+          "disabled": true,
           "settings": {
             "text": "7000+ promises made",
             "heading_tag": "h1"
@@ -278,6 +280,7 @@
         "heading_JFUwpC",
         "richtext_mABzQX"
       ],
+      "disabled": true,
       "name": "t:sections.rich_text.presets.rich_text.name",
       "settings": {
         "color_scheme": "scheme-1",
@@ -304,41 +307,12 @@
       "block_order": [
         "judge_me_reviews_featured_carousel_iEixqF"
       ],
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-1",
         "separate_section_with_border": false,
         "remove_vertical_spacing": true,
         "remove_horizontal_spacing": false
-      }
-    },
-    "featured_collections_aA86gR": {
-      "type": "featured-collections",
-      "blocks": {
-        "collection_LxWpTW": {
-          "type": "collection",
-          "settings": {
-            "collection": "new-in",
-            "products_count": 8,
-            "title": "",
-            "link_url": "",
-            "link_text": "View all"
-          }
-        }
-      },
-      "block_order": [
-        "collection_LxWpTW"
-      ],
-      "name": "t:sections.featured_collections.presets.featured_collections.name",
-      "settings": {
-        "color_scheme": "scheme-2",
-        "separate_section_with_border": false,
-        "hide_product_information": false,
-        "stack_products": false,
-        "products_per_row_mobile": "2",
-        "products_per_row_desktop": 5,
-        "horizontal_spacing_factor": 1,
-        "vertical_spacing_factor": 1,
-        "subheading": "Discover"
       }
     },
     "text_with_icons_PwCw3P": {
@@ -348,11 +322,11 @@
           "type": "item",
           "settings": {
             "icon": "picto-delivery-truck",
-            "custom_icon": "shopify://shop_images/Artboard_4_2x_0b5d1fcb-c012-4a17-8254-81edec1589f6.png",
+            "custom_icon": "shopify://shop_images/Untitled_design-36.png",
             "icon_width": 64,
             "mobile_icon_width": 64,
             "title": "Hand Set Diamond Simulants",
-            "content": "<p>Hand-set by our master jewellers, one stone at a time - never glued.</p>"
+            "content": "<p>By our master jewellers, one stone at a time - never glued.</p>"
           }
         },
         "item_yrTBDM": {
@@ -373,7 +347,7 @@
             "custom_icon": "shopify://shop_images/Artboard_4_copy_2x_5dad10e5-dfbe-4f89-adb1-01dffe5f9c25.png",
             "icon_width": 64,
             "mobile_icon_width": 64,
-            "title": "Personalised Promise Card",
+            "title": "Official Promise Card",
             "content": "<p>Gift-ready packaging and Promise keepsake card included with every purchase.</p>"
           }
         },
@@ -416,6 +390,121 @@
         "text_color": "",
         "text_alignment": "center"
       }
+    },
+    "rich_text_jRELhP": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_CgeYqX": {
+          "type": "heading",
+          "settings": {
+            "text": "Ready to make your promise?",
+            "heading_tag": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_CgeYqX"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": true,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "category_cards_pnnWBe": {
+      "type": "category-cards",
+      "blocks": {
+        "category_image_zXEnmE": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T093421.486.png",
+            "title": "Best Sellers",
+            "description": "<p>discover</p>",
+            "link": "shopify://collections/best-sellers"
+          }
+        },
+        "category_image_mthWKW": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T093409.150.png",
+            "title": "Shop for Her",
+            "description": "<p>Gift guide</p>",
+            "link": "shopify://collections/for-her"
+          }
+        },
+        "category_image_VNj3iY": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design-31.png",
+            "title": "Promise Rings",
+            "description": "<p>Shop</p>",
+            "link": "shopify://collections/promise-rings"
+          }
+        },
+        "category_image_NqFxgq": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T152137.870.png",
+            "title": "Couples Rings",
+            "description": "<p>Matching</p>",
+            "link": "shopify://collections/couples-promise-rings"
+          }
+        }
+      },
+      "block_order": [
+        "category_image_zXEnmE",
+        "category_image_mthWKW",
+        "category_image_VNj3iY",
+        "category_image_NqFxgq"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "background_color": "#f2eee7",
+        "title_color": "#000000",
+        "subtitle_color": "#666666",
+        "section_padding_top": 64,
+        "section_padding_bottom": 64,
+        "mobile_single_column": false
+      }
+    },
+    "featured_collections_aA86gR": {
+      "type": "featured-collections",
+      "blocks": {
+        "collection_LxWpTW": {
+          "type": "collection",
+          "settings": {
+            "collection": "new-in",
+            "products_count": 8,
+            "title": "",
+            "link_url": "",
+            "link_text": "View all"
+          }
+        }
+      },
+      "block_order": [
+        "collection_LxWpTW"
+      ],
+      "disabled": true,
+      "name": "t:sections.featured_collections.presets.featured_collections.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "hide_product_information": false,
+        "stack_products": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 5,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "subheading": "Discover"
+      }
     }
   },
   "order": [
@@ -423,13 +512,15 @@
     "video_W7M3Dj",
     "rich_text_VCHXpt",
     "177729078645f26183",
+    "scrolling_content_PFecae",
     "17772907922604758b",
     "tabs_6cKtj8",
     "1777290823673b350a",
-    "scrolling_content_PFecae",
     "rich_text_Wj4BMe",
     "1754392069335bf79c",
-    "featured_collections_aA86gR",
-    "text_with_icons_PwCw3P"
+    "text_with_icons_PwCw3P",
+    "rich_text_jRELhP",
+    "category_cards_pnnWBe",
+    "featured_collections_aA86gR"
   ]
 }

@@ -157,104 +157,27 @@
         "remove_vertical_spacing": true
       }
     },
-    "image_with_text_J9HyfR": {
-      "type": "image-with-text",
-      "blocks": {
-        "subheading_tY4aBn": {
-          "type": "subheading",
-          "settings": {
-            "text": "We started with a question:"
-          }
-        },
-        "heading_hrNkLe": {
-          "type": "heading",
-          "settings": {
-            "text": "What does it really mean to make a promise?",
-            "heading_tag": "h1"
-          }
-        },
-        "richtext_EMPPNH": {
-          "type": "richtext",
-          "settings": {
-            "content": "<p>And why hadn’t the jewellery industry evolved to reflect the depth and diversity of the promises we make today?</p><p>Traditionally, promise rings were tied to romantic milestones. And while we’ll <em>always </em>celebrate those love stories – they’re at the heart of so much of what we do – we also knew there was more. Because in real life, promises aren’t one-size-fits-all.</p><p>They can be quiet and steady. Fierce and full of hope. A vow to begin again. A bond between best friends. A reminder to keep going.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "subheading_tY4aBn",
-        "heading_hrNkLe",
-        "richtext_EMPPNH"
-      ],
-      "name": "t:sections.image_with_text.presets.image_with_text.name",
-      "settings": {
-        "color_scheme": "scheme-2",
-        "separate_section_with_border": false,
-        "image": "shopify://shop_images/1_25748864-f890-4304-b7dc-af8e62b39b20.png",
-        "reveal_on_scroll": true,
-        "image_position": "end",
-        "content_width": "sm",
-        "remove_vertical_spacing": true
-      }
-    },
-    "image_with_text_w3EUGy": {
-      "type": "image-with-text",
-      "blocks": {
-        "subheading_yLKnM4": {
-          "type": "subheading",
-          "settings": {
-            "text": "We didn’t see jewellery that spoke to those promises."
-          }
-        },
-        "heading_thQmra": {
-          "type": "heading",
-          "settings": {
-            "text": "So we created it",
-            "heading_tag": "h1"
-          }
-        },
-        "richtext_rQ3W73": {
-          "type": "richtext",
-          "settings": {
-            "content": "<p>At The Promise Co., we’re here to redefine what a promise ring can be. To move beyond tradition and make space for the full spectrum of what it means to care, to commit, and to believe in something – or someone.</p><p>This is jewellery that honours all kinds of promises. The big ones. The quiet ones. The ones you share and the ones you keep just for yourself.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "subheading_yLKnM4",
-        "heading_thQmra",
-        "richtext_rQ3W73"
-      ],
-      "name": "t:sections.image_with_text.presets.image_with_text.name",
-      "settings": {
-        "color_scheme": "scheme-2",
-        "separate_section_with_border": false,
-        "image": "shopify://shop_images/3_a50c6029-20f6-40d3-bd60-45b6f61698c3.png",
-        "reveal_on_scroll": true,
-        "image_position": "start",
-        "content_width": "sm",
-        "remove_vertical_spacing": true
-      }
-    },
     "image_with_text_Fw6MQA": {
       "type": "image-with-text",
       "blocks": {
         "subheading_M8Wj3c": {
           "type": "subheading",
+          "disabled": true,
           "settings": {
-            "text": "We’re not just building a brand"
+            "text": "for every story"
           }
         },
         "heading_hLE78U": {
           "type": "heading",
           "settings": {
-            "text": "We’re building a movement",
+            "text": "OUR STORY",
             "heading_tag": "h1"
           }
         },
         "richtext_iMHYKz": {
           "type": "richtext",
           "settings": {
-            "content": "<p>Rooted in real stories, personal meaning, and the idea that something small can hold something enormous.</p><p>A promise ring is your own wearable story. A reminder of who you are, and everything you're becoming.</p>"
+            "content": "<p>We’re here for the promises that shape us - the love that’s old, the love that’s new, and the promises made to yourself along the way.</p><p>Where tradition meets a new generation of meaning. This is the modern home of the promise ring & you're in the right place...</p>"
           }
         }
       },
@@ -267,10 +190,84 @@
       "settings": {
         "color_scheme": "scheme-2",
         "separate_section_with_border": false,
-        "image": "shopify://shop_images/2_18f40421-de17-4a13-a6ac-3690df3ab0ed.png",
+        "image": "shopify://shop_images/the_2.png",
+        "mobile_image": "shopify://shop_images/What_s_your_Promise_3.png",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "image_with_text_J9HyfR": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_tY4aBn": {
+          "type": "subheading",
+          "settings": {
+            "text": "how we started"
+          }
+        },
+        "heading_hrNkLe": {
+          "type": "heading",
+          "settings": {
+            "text": "it started with a search I couldn't finish...",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_EMPPNH": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Raj and I had been together for just over a year. We weren't ready for an engagement - but I knew what we had was real, and I wanted something to show for it. <strong>A promise.</strong></p><p>So I went looking. </p><p>What I found was brass rings from brands I'd never heard of and sets that felt like they were made for a teenager and then… nothing. Just engagement rings...</p><p>But that gap wasn't just a shopping problem. It was a cultural one. Somewhere along the way, the promise ring had been forgotten.</p><p>And that felt wrong...</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_tY4aBn",
+        "heading_hrNkLe",
+        "richtext_EMPPNH"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-d5edcbdb-8201-4756-b51e-e475c222d050",
+        "separate_section_with_border": false,
+        "image": "shopify://shop_images/3_824463c9-00f8-47ee-be89-b51e84040048.png",
+        "mobile_image": "shopify://shop_images/Untitled_design_-_2026-05-06T135014.447.png",
         "reveal_on_scroll": true,
         "image_position": "end",
-        "content_width": "sm",
+        "content_width": "md",
+        "remove_vertical_spacing": true
+      }
+    },
+    "image_with_text_w3EUGy": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_thQmra": {
+          "type": "heading",
+          "settings": {
+            "text": "the home of the Promise",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_rQ3W73": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>A promise is one of the most human things there is. It deserves to be taken seriously.</p><p>We didn't invent the promise ring. But we knew it needed a home. <em><strong>So we built one.</strong></em></p><p>The Promise Co.<strong> </strong>exists to protect what the promise has always meant - and to carry it forward into what it means today. Because now a promise can look like anything. </p><p>A love story. A commitment to yourself. </p><p>A mark of something that doesn't have a name yet but matters all the same.</p><p> <strong>What's your Promise?</strong></p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_thQmra",
+        "richtext_rQ3W73"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "image": "shopify://shop_images/Untitled_design_-_2026-01-04T114542.837.png",
+        "mobile_image": "shopify://shop_images/Untitled_design_-_2026-05-06T141042.879.png",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "md",
         "remove_vertical_spacing": true
       }
     },
@@ -394,9 +391,9 @@
     "multiple_media_with_text_pB7mBV",
     "images_with_text_scroll_AEN7LT",
     "image_with_text_DHCdDb",
+    "image_with_text_Fw6MQA",
     "image_with_text_J9HyfR",
     "image_with_text_w3EUGy",
-    "image_with_text_Fw6MQA",
     "scrolling_content_ezbPWb",
     "featured_collections_g4ttNx",
     "image_with_text_ChrzMP",

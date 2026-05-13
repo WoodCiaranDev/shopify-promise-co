@@ -9,50 +9,10 @@
  */
 {
   "sections": {
-    "rich_text_wMNiPf": {
-      "type": "rich-text",
-      "blocks": {
-        "subheading_weFRwt": {
-          "type": "subheading",
-          "settings": {
-            "text": "What's your Promise?"
-          }
-        },
-        "richtext_MnfcG9": {
-          "type": "richtext",
-          "settings": {
-            "content": "<h1>our newest rings</h1><p></p>"
-          }
-        },
-        "subheading_NzNiTU": {
-          "type": "subheading",
-          "settings": {
-            "text": ""
-          }
-        }
-      },
-      "block_order": [
-        "subheading_weFRwt",
-        "richtext_MnfcG9",
-        "subheading_NzNiTU"
-      ],
-      "settings": {
-        "color_scheme": "",
-        "separate_section_with_border": true,
-        "content_width": "sm",
-        "text_position": "center",
-        "remove_vertical_spacing": false,
-        "use_baka_too_font": false,
-        "use_ogg_font": false,
-        "use_compact_spacing": false,
-        "section_id": ""
-      }
-    },
     "collection-banner": {
       "type": "collection-banner",
-      "disabled": true,
       "settings": {
-        "color_scheme": "",
+        "color_scheme": "scheme-1",
         "image_size": "auto",
         "allow_transparent_header": true,
         "reveal": true,
@@ -64,7 +24,7 @@
         "content_width": "xs",
         "overlay_color": "#000000",
         "overlay_opacity": 30,
-        "show_usp_tabs": false,
+        "show_usp_tabs": true,
         "show_stone_type_slider": false
       }
     },
@@ -284,7 +244,6 @@
     }
   },
   "order": [
-    "rich_text_wMNiPf",
     "collection-banner",
     "main",
     "rich_text_68cjcd",

@@ -409,6 +409,19 @@ Supported variables
           }
         });
 
+        // Sync size radio → hidden select so markSizeSelected() fires and
+        // the payment-button overlay is removed when the visible UI is used.
+        if (sizeRadiosContainer) {
+          sizeRadiosContainer.addEventListener('change', function(e) {
+            if (e.target.type === 'radio' && e.target.checked) {
+              if (sizeSelect.value !== e.target.value) {
+                sizeSelect.value = e.target.value;
+              }
+              markSizeSelected();
+            }
+          });
+        }
+
         // Handle color changes - reset size (but not when size radio changes)
         variantPicker.addEventListener('change', function(e) {
           if (e.target.type === 'radio' && !e.target.closest('[data-size-option]') && !e.target.closest('[data-size-radios]')) {

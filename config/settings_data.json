@@ -138,11 +138,6 @@
         "disabled": false,
         "settings": {}
       },
-      "12198985164985445843": {
-        "type": "shopify://apps/nova-gdpr-cookie-consent/blocks/app-embed/6667ecbd-70cf-4527-84a9-e6037e6ca706",
-        "disabled": false,
-        "settings": {}
-      },
       "15079184273603081885": {
         "type": "shopify://apps/essential-shipping-bar/blocks/app_embed/4125375e-37c8-4137-949d-c4e1a3aac572",
         "disabled": false,
@@ -200,6 +195,11 @@
       "1537173939754162885": {
         "type": "shopify://apps/accesspro-accessibility/blocks/accesspro-widget/d1a2aee8-6737-4a3e-a6aa-13d82b562c31",
         "disabled": false,
+        "settings": {}
+      },
+      "12198985164985445843": {
+        "type": "shopify://apps/nova-gdpr-cookie-consent/blocks/app-embed/6667ecbd-70cf-4527-84a9-e6037e6ca706",
+        "disabled": true,
         "settings": {}
       }
     },

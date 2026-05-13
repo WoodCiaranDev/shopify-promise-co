@@ -150,9 +150,9 @@
         "category_image_6hCPQf": {
           "type": "category_image",
           "settings": {
-            "image": "shopify://shop_images/Untitled_design_-_2026-04-02T155051.717.png",
-            "title": "Best Sellers",
-            "description": "<p>discover</p>",
+            "image": "shopify://shop_images/Untitled_design-31.png",
+            "title": "Promise Rings",
+            "description": "<p>discover all</p>",
             "link": "shopify://collections/best-sellers"
           }
         },
@@ -160,7 +160,7 @@
           "type": "category_image",
           "settings": {
             "image": "shopify://shop_images/Untitled_design_-_2026-04-02T155151.846.png",
-            "title": "Shop for Her",
+            "title": "Gift Guide",
             "description": "<p>Promise Rings</p>",
             "link": "shopify://collections/for-her"
           }

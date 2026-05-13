@@ -135,6 +135,33 @@
         "open_filters_by_default": false
       }
     },
+    "rich_text_yX46cT": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_PT9UDw": {
+          "type": "heading",
+          "settings": {
+            "text": "You might also like...",
+            "heading_tag": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_PT9UDw"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": true,
+        "use_ogg_font": false,
+        "use_compact_spacing": true,
+        "section_id": ""
+      }
+    },
     "category_cards_cCJRan": {
       "type": "category-cards",
       "blocks": {
@@ -150,10 +177,10 @@
         "category_image_8MWqRD": {
           "type": "category_image",
           "settings": {
-            "image": "shopify://shop_images/Untitled_design_-_2026-04-02T155151.846.png",
-            "title": "Shop for Her",
-            "description": "<p>Promise Rings</p>",
-            "link": "shopify://collections/for-her"
+            "image": "shopify://shop_images/Untitled_design-31.png",
+            "title": "Promise Rings",
+            "description": "<p>Shop all</p>",
+            "link": "shopify://collections/promise-rings"
           }
         },
         "category_image_ApBwVA": {
@@ -190,33 +217,6 @@
         "section_padding_top": 64,
         "section_padding_bottom": 64,
         "mobile_single_column": false
-      }
-    },
-    "rich_text_yX46cT": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_PT9UDw": {
-          "type": "heading",
-          "settings": {
-            "text": "You might also like...",
-            "heading_tag": "h1"
-          }
-        }
-      },
-      "block_order": [
-        "heading_PT9UDw"
-      ],
-      "name": "t:sections.rich_text.presets.rich_text.name",
-      "settings": {
-        "color_scheme": "scheme-2",
-        "separate_section_with_border": false,
-        "content_width": "sm",
-        "text_position": "center",
-        "remove_vertical_spacing": false,
-        "use_baka_too_font": true,
-        "use_ogg_font": false,
-        "use_compact_spacing": true,
-        "section_id": ""
       }
     },
     "category_cards_4zj4kH": {

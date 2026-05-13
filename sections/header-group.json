@@ -87,7 +87,7 @@
             "image_2_link": "",
             "featured_collection_1": "for-her",
             "featured_collection_1_title": "Gifts for Her",
-            "featured_collection_1_image": "shopify://shop_images/2_3f3a0bc7-3f8b-4b39-aeef-efb0d027d723.png",
+            "featured_collection_1_image": "shopify://shop_images/Untitled_design_-_2026-04-30T212815.827.png",
             "featured_collection_2": "best-sellers",
             "featured_collection_2_title": "best sellers",
             "featured_collection_2_image": "shopify://shop_images/1_9d424cc6-a010-4096-86c4-73cf89ee3afb.png",
@@ -124,10 +124,10 @@
         "show_country_name": false,
         "show_country_flag": true,
         "show_locale_selector": false,
-        "show_collection_countdown": false,
-        "countdown_date": "26-11-2025",
-        "countdown_image": "shopify://shop_images/hearttoi3.heic",
-        "countdown_title": "BLACK FRIDAY COUNTDOWN",
+        "show_collection_countdown": true,
+        "countdown_date": "31-05-2026",
+        "countdown_image": "shopify://shop_images/Untitled_design_-_2026-05-01T090934.000.png",
+        "countdown_title": "ETHEREAL SUMMER COUNTDOWN",
         "show_main_featured_collections": true,
         "transparent_header_text_color": "#ffffff"
       }

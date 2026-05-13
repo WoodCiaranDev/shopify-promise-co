@@ -12,7 +12,8 @@
     "main": {
       "type": "ring-size-guide-content",
       "settings": {
-        "preview_image": "shopify://shop_images/ring-size-guide-preview.jpg"
+        "preview_image": "shopify://shop_images/ring-size-guide-preview.jpg",
+        "pdf_link": ""
       }
     },
     "faq_mGqRCd": {
@@ -22,21 +23,21 @@
           "type": "question",
           "settings": {
             "question": "How do I work out the right ring size?",
-            "answer": "<p>Need sizing help or advice on keeping it a secret? Email us at <strong>info@thepromiseco.com</strong> and we can help you figure out a ring size.</p><p>We recommend ordering a standard ring sizer from Amazon, they usually look like a key chain with lots of metal rings. Once you've got your size you can use our handy guide below to convert it, or email us for help.</p><p>Use our <a href=\"/pages/ring-size-guide\" target=\"_blank\" title=\"Ring Size Guide\">size guide</a> to find your perfect fit</p><p></p><p></p>"
+            "answer": "<p>You can now use our <a href=\"https://cdn.shopify.com/s/files/1/0572/2049/7548/files/size-guide-promise-co-130126.pdf?v=459384974267777057\" title=\"https://cdn.shopify.com/s/files/1/0572/2049/7548/files/size-guide-promise-co-130126.pdf?v=459384974267777057\">printable ring size guide</a> - simply place a ring you already own on top to find the match. If you don’t have one, a standard ring sizer (the keychain-style with metal loops) works perfectly too.</p><p>Once you’ve got your size, use our guide below to convert it, or just drop us an email and we’ll support at <a>info@thepromiseco.com</a></p><p></p>"
           }
         },
         "question_39kHFp": {
           "type": "question",
           "settings": {
             "question": "I don't know which ring to pick for a gift?",
-            "answer": "<p>If you need personalised support on picking the perfect ring, email our team at <strong>info@thepromiseco.com</strong> and we will do our best to support.</p><p>Alternatively, shop our <a href=\"https://thepromiseringco.com/products/the-promise-ring-co-e-gift-card\" title=\"The Promise Ring Co. E-Gift Card\">E-Gift cards</a>, for the perfect fit, everytime.</p>"
+            "answer": "<p>We have a great <a href=\"/collections/for-her\" title=\"Gifts for Her\">gift guide for her</a> and <a href=\"/collections/for-him\" title=\"For Him\">gift guide for him</a> where you can shop our most gifted pieces edit.</p><p>If you need personalised support on picking the perfect ring, email our team at <strong>info@thepromiseco.com</strong> and we will do our best to support.</p><p></p>"
           }
         },
         "question_k8h6gB": {
           "type": "question",
           "settings": {
             "question": "Is my ring under warranty?",
-            "answer": "<p>At The Promise Ring Co. we are committed to providing you with<br/>exceptional service and ensuring that your purchase of your ring is a truly special and sentimental experience. We understand that these pieces aren't just jewellery; they are symbols of love, commitment, and cherished moments.</p><p>That's why we stand by our products and offer a 2-year guarantee to give you peace of mind.</p><p>For full warranty terms <a href=\"https://thepromiseringco.com/pages/2-year-warranty\" target=\"_blank\" title=\"https://thepromiseringco.com/pages/2-year-warranty\">click here</a></p>"
+            "answer": "<p>At The Promise Ring Co. we are committed to providing you with<br/>exceptional service and ensuring that your purchase of your ring is a truly special and sentimental experience. We understand that these pieces aren't just jewellery; they are symbols of love, commitment, and cherished moments.</p><p>That's why we stand by our products and offer a 5-year guarantee to give you peace of mind.</p><p>For full warranty terms <a href=\"https://thepromiseringco.com/pages/2-year-warranty\" target=\"_blank\" title=\"https://thepromiseringco.com/pages/2-year-warranty\">click here</a></p>"
           }
         },
         "question_VnPF3N": {
@@ -45,24 +46,16 @@
             "question": "I've damaged my special ring, what can I do?",
             "answer": "<p>We understand accidents happen and we know how precious all our pieces are to each customer.</p><p>Email us a picture of the damage to <strong>info@thepromiseco.com </strong>and we will do our best to support you with solutions</p>"
           }
-        },
-        "question_zibkrY": {
-          "type": "question",
-          "settings": {
-            "question": "I need an urgent gift but your delivery doesn't work for me...",
-            "answer": "<p>Looking for the perfect gift for your last minute woes, shop our <a href=\"https://thepromiseringco.com/products/the-promise-ring-co-e-gift-card\" target=\"_blank\" title=\"The Promise Ring Co. E-Gift Card\">E-gift cards </a>for the perfect fit, everytime.</p>"
-          }
         }
       },
       "block_order": [
         "question_pTtC3c",
         "question_39kHFp",
         "question_k8h6gB",
-        "question_VnPF3N",
-        "question_zibkrY"
+        "question_VnPF3N"
       ],
       "settings": {
-        "color_scheme": "scheme-b68b61c5-ba0e-4161-a0e3-3d59622e9bf4",
+        "color_scheme": "scheme-2ca1c54f-75f1-4890-b6c9-acb7092f2a37",
         "separate_section_with_border": false,
         "show_categories": false,
         "subheading": "",

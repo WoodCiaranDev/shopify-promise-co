@@ -273,23 +273,6 @@
         "remove_horizontal_spacing": false
       }
     },
-    "related-products": {
-      "type": "related-products",
-      "settings": {
-        "color_scheme": "scheme-2",
-        "separate_section_with_border": true,
-        "hide_product_information": false,
-        "stack_products": false,
-        "recommendations_count": 10,
-        "products_per_row_mobile": "2",
-        "products_per_row_desktop": 4,
-        "horizontal_spacing_factor": 1,
-        "vertical_spacing_factor": 1,
-        "subheading": "more promises worth keeping",
-        "title": "customers also loved...",
-        "content": ""
-      }
-    },
     "rich_text_TiHHaY": {
       "type": "rich-text",
       "blocks": {
@@ -339,6 +322,7 @@
         "richtext_GTqq6R",
         "button_BbmiaU"
       ],
+      "disabled": true,
       "name": "t:sections.rich_text.presets.rich_text.name",
       "settings": {
         "color_scheme": "scheme-2ca1c54f-75f1-4890-b6c9-acb7092f2a37",
@@ -350,6 +334,86 @@
         "use_ogg_font": false,
         "use_compact_spacing": false,
         "section_id": ""
+      }
+    },
+    "multiple_media_with_text_XxetVy": {
+      "type": "multiple-media-with-text",
+      "blocks": {
+        "video_TQ8NLR": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/copy_669ACD4A-0216-471B-94E3-FD06C5535B6A_VSCO.mov",
+            "rotation": 0
+          }
+        },
+        "image_4GkdXn": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Artboard_35_4x_dff76677-1a79-4fa7-b1d6-471cdc1fc207.png",
+            "rotation": 0
+          }
+        }
+      },
+      "block_order": [
+        "video_TQ8NLR",
+        "image_4GkdXn"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "reveal_on_scroll": true,
+        "separate_section_with_border": true,
+        "media_position_desktop": "after_text",
+        "media_position_mobile": "after_text",
+        "media_layout": "overlap",
+        "media_alignment": "center",
+        "media_alignment_offset": 0,
+        "media_mobile_alignment_offset": 0,
+        "text_alignment": "center",
+        "subheading": "",
+        "title": "what makes us different",
+        "content": "<p>Our pieces are symbols of love, commitment, and the moments that matter most.<br/><br/> That's why we obsess over <strong>every detail. </strong><br/>So each and every piece is made to be kept <strong>forever.</strong><br/><br/>Every piece is hand-set by our<strong> master jewellers</strong>, backed by a 5-year warranty, and made to the best-in-class standards of the National Association of Jewellers. <br/><br/><em>A </em><em><strong>promise</strong></em><em> you can trust.</em></p>",
+        "button_1_text": "our quality",
+        "button_1_link": "shopify://pages/our-quality",
+        "button_1_style": "solid",
+        "button_2_text": "",
+        "button_2_link": "",
+        "button_2_style": "solid"
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": true,
+        "hide_product_information": false,
+        "stack_products": false,
+        "recommendations_count": 10,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "subheading": "more promises worth keeping",
+        "title": "customers also loved...",
+        "content": ""
+      }
+    },
+    "recently_viewed_products_3KM6a4": {
+      "type": "recently-viewed-products",
+      "name": "t:sections.recently_viewed_products.presets.recently_viewed_products.name",
+      "settings": {
+        "separate_section_with_border": true,
+        "color_scheme": "scheme-2",
+        "hide_product_information": false,
+        "stack_products": false,
+        "products_count": 6,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "subheading": "",
+        "title": "Your recently viewed products",
+        "content": ""
       }
     },
     "category_cards_VND4Rf": {
@@ -409,50 +473,6 @@
         "mobile_single_column": false
       }
     },
-    "multiple_media_with_text_XxetVy": {
-      "type": "multiple-media-with-text",
-      "blocks": {
-        "video_TQ8NLR": {
-          "type": "video",
-          "settings": {
-            "video": "shopify://files/videos/copy_669ACD4A-0216-471B-94E3-FD06C5535B6A_VSCO.mov",
-            "rotation": 0
-          }
-        },
-        "image_4GkdXn": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/Artboard_35_4x_dff76677-1a79-4fa7-b1d6-471cdc1fc207.png",
-            "rotation": 0
-          }
-        }
-      },
-      "block_order": [
-        "video_TQ8NLR",
-        "image_4GkdXn"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "reveal_on_scroll": true,
-        "separate_section_with_border": true,
-        "media_position_desktop": "after_text",
-        "media_position_mobile": "after_text",
-        "media_layout": "overlap",
-        "media_alignment": "center",
-        "media_alignment_offset": 0,
-        "media_mobile_alignment_offset": 0,
-        "text_alignment": "center",
-        "subheading": "quality promise",
-        "title": "what makes us different",
-        "content": "<p>We understand that these pieces aren’t just jewellery – they’re symbols of love, commitment, and the moments that matter most.</p><p>As proud members of the <strong>National Association of Jewellers</strong>, we hold ourselves to the highest standards of quality and care.</p>",
-        "button_1_text": "our quality",
-        "button_1_link": "shopify://pages/our-quality",
-        "button_1_style": "solid",
-        "button_2_text": "",
-        "button_2_link": "",
-        "button_2_style": "solid"
-      }
-    },
     "174418775193790daa": {
       "type": "apps",
       "blocks": {
@@ -476,10 +496,11 @@
   "order": [
     "main",
     "1718037938f4a04551",
-    "related-products",
     "rich_text_TiHHaY",
-    "category_cards_VND4Rf",
     "multiple_media_with_text_XxetVy",
+    "related-products",
+    "recently_viewed_products_3KM6a4",
+    "category_cards_VND4Rf",
     "174418775193790daa"
   ]
 }
