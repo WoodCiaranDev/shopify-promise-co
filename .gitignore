@@ -1,4 +1,8 @@
 -DESIGNS-/
 .DS_Store
 .env
-.claude/
+.claude/*
+!.claude/skills/
+!.claude/themes.json
+.claude/skills/*/*
+!.claude/skills/*/SKILL.md

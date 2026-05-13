@@ -12,11 +12,16 @@ Pull the live Shopify theme down, commit any client-side changes, and optionally
 
 ## Process
 
-1. **Detect the live theme**
-   - Run `shopify theme list --role=live --json`
+1. **Detect the live theme via the themes manifest**
+   - Read `.claude/themes.json` and look up `themes.live`
+   - Honour `themes.live.detect`:
+     - `type: "role"` → `shopify theme list --role=<value> --json`
+     - `type: "name_contains"` → `shopify theme list --json` filtered case-insensitively
+   - If 0 or >1 themes match, stop and inform the user
    - Parse the JSON output to extract the theme ID and name
    - Display: "Live theme: **{name}** (ID: {id})"
-   - If the command fails or returns no live theme, stop and inform the user
+   - **Branch guard**: confirm the current branch matches `themes.live.branch` (default `main`). If not, stop and ask the user to switch.
+   - If the manifest is missing, fall back to `shopify theme list --role=live --json` and warn the user the manifest is absent
 
 2. **Check the working tree**
    - Run `git status` (never use `-uall` flag)
@@ -40,6 +45,15 @@ Pull the live Shopify theme down, commit any client-side changes, and optionally
 6. **Ask about pushing**
    - Ask the user: "Push to GitHub?"
    - If yes: `git push`
+   - If no: continue
+
+7. **Ask about refreshing the SEO preview branch**
+   - Read `.claude/themes.json` — if a `themes.preview` entry exists, ask: "Also refresh the SEO Preview branch with these client changes?"
+   - If yes:
+     - `git checkout <themes.preview.branch>` (default `seo-preview`)
+     - `git merge main --no-ff -m "Merge main into seo-preview"` (resolve any heading_tag conflicts in favour of seo-preview to preserve the h1 experiments)
+     - Return to `main` with `git checkout main`
+     - Remind the user to run `/preview` from `seo-preview` to push the refreshed branch to the SEO theme
    - If no: stop
 
 ## Rules
@@ -48,6 +62,7 @@ Pull the live Shopify theme down, commit any client-side changes, and optionally
 - NEVER push to GitHub without asking the user first
 - NEVER use `git add .` or `git add -A`
 - NEVER amend existing commits
-- Always auto-detect the live theme at runtime — never hardcode a theme ID
+- Always auto-detect the live theme at runtime via `.claude/themes.json` — never hardcode a theme ID
+- NEVER sync onto any branch other than `themes.live.branch`
 - Always use UK spelling in all output (e.g. "colour" not "color", "synchronise" not "synchronize")
 - If `$ARGUMENTS` is provided, use it as context (e.g. a note for the commit or instructions)

@@ -17,11 +17,16 @@ Push only the files that changed in recent commits to the live Shopify theme.
    - If there are uncommitted changes, **warn the user**: "You have uncommitted changes that won't be deployed. Commit first?"
    - Suggest using `/commit` first, then stop and wait for confirmation
 
-2. **Detect the live theme**
-   - Run `shopify theme list --role=live --json`
+2. **Detect the live theme via the themes manifest**
+   - Read `.claude/themes.json` and look up `themes.live`
+   - Honour `themes.live.detect`:
+     - `type: "role"` → `shopify theme list --role=<value> --json`
+     - `type: "name_contains"` → `shopify theme list --json` filtered case-insensitively
+   - If 0 or >1 themes match, stop and inform the user
    - Parse the JSON output to extract the theme ID and name
    - Display: "Live theme: **{name}** (ID: {id})"
-   - If the command fails or returns no live theme, stop and inform the user
+   - **Branch guard**: confirm the current branch matches `themes.live.branch` (default `main`). If not, stop: "You're on {current_branch} — /deploy must run from {expected_branch}."
+   - If the manifest is missing, fall back to `shopify theme list --role=live --json` and warn the user the manifest is absent
 
 3. **Get changed files**
    - If `$ARGUMENTS` is provided, use it as the commit count: `git diff --name-only HEAD~<N>`
@@ -54,6 +59,7 @@ Push only the files that changed in recent commits to the live Shopify theme.
 - NEVER omit `--allow-live` or `--nodelete` flags
 - NEVER deploy uncommitted changes — only files from git history
 - NEVER deploy files outside the valid Shopify theme directories
-- Always auto-detect the live theme at runtime — never hardcode a theme ID
+- Always auto-detect the live theme at runtime via `.claude/themes.json` — never hardcode a theme ID
+- NEVER deploy from any branch other than `themes.live.branch`
 - Always use UK spelling in all output (e.g. "colour" not "color", "summarise" not "summarize")
 - If `$ARGUMENTS` is a number, treat it as the commit count for `HEAD~N`

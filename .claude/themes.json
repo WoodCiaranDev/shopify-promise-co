@@ -1,0 +1,12 @@
+{
+  "themes": {
+    "live": {
+      "detect": { "type": "role", "value": "live" },
+      "branch": "main"
+    },
+    "preview": {
+      "detect": { "type": "name_contains", "value": "Ciaran SEO" },
+      "branch": "seo-preview"
+    }
+  }
+}
