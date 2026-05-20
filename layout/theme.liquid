@@ -84,6 +84,11 @@
     <link rel="stylesheet" href="https://use.typekit.net/kvs3fhn.css">
 
 
+    <style>
+      mobile-menu:not(:defined) { display: none; }
+      .o-mobile-menu { visibility: hidden; opacity: 0; }
+    </style>
+
     {{- 'theme.css' | asset_url | stylesheet_tag: preload: true -}}
     {{- 'mobile-menu.css' | asset_url | stylesheet_tag -}}
     {{- 'mega-menu-icons.css' | asset_url | stylesheet_tag -}}
