@@ -207,8 +207,8 @@
       "settings": {
         "color_scheme": "scheme-4b89ab38-ef9e-4a8e-9dd4-1364903253e0",
         "separate_section_with_border": true,
-        "image": "shopify://shop_images/2_762c3328-e6ea-4dbe-9b5f-e1e17d590369.png",
-        "mobile_image": "shopify://shop_images/2_762c3328-e6ea-4dbe-9b5f-e1e17d590369.png",
+        "image": "shopify://shop_images/Untitled_design_-_2026-05-19T184039.344.png",
+        "mobile_image": "shopify://shop_images/Untitled_design_-_2026-05-19T184039.344.png",
         "reveal_on_scroll": true,
         "image_position": "start",
         "content_width": "sm",
@@ -307,7 +307,9 @@
           "settings": {
             "title": "rhodium plated sterling silver",
             "heading_tag": "h5",
-            "content": "<p>Our silver pieces are crafted in sterling silver with a rhodium plating. This gives a bright, mirror-like finish that resists tarnish and keeps its shine through everyday wear.</p>"
+            "content": "<p>Our silver pieces are crafted in sterling silver with a rhodium plating. This gives a bright, mirror-like finish that resists tarnish and keeps its shine through everyday wear.</p>",
+            "link_url": "",
+            "link_text": ""
           }
         },
         "col_two": {
@@ -315,7 +317,9 @@
           "settings": {
             "title": "made to be worn every day",
             "heading_tag": "h5",
-            "content": "<p>From quiet everyday rings to bolder statement pieces, our silver promise rings are designed to be lived in. Each one is finished by hand and made to be paired, stacked and treasured for years to come.</p>"
+            "content": "<p>From quiet everyday rings to bolder statement pieces, our silver promise rings are designed to be lived in. Each one is finished by hand and made to be paired, stacked and treasured for years to come.</p>",
+            "link_url": "",
+            "link_text": ""
           }
         },
         "col_three": {
@@ -323,7 +327,9 @@
           "settings": {
             "title": "HAND SET WITH LOVE AND A 2 YEAR WARRANTY",
             "heading_tag": "h5",
-            "content": "<p>At The Promise Ring Co., our dedication lies in delivering unparalleled service to ensure your ring purchase is nothing short of extraordinary. We recognise that these pieces transcend mere jewellery; they encapsulate love, commitment, and cherished memories.</p><p>That's why we wholeheartedly stand behind our products, offering a comprehensive 2-year guarantee for your peace of mind. Each ring is meticulously hand-set, ensuring it's crafted with the utmost love and care to become your perfect symbol of enduring Promise.</p>"
+            "content": "<p>At The Promise Ring Co., our dedication lies in delivering unparalleled service to ensure your ring purchase is nothing short of extraordinary. We recognise that these pieces transcend mere jewellery; they encapsulate love, commitment, and cherished memories.</p><p>That's why we wholeheartedly stand behind our products, offering a comprehensive 2-year guarantee for your peace of mind. Each ring is meticulously hand-set, ensuring it's crafted with the utmost love and care to become your perfect symbol of enduring Promise.</p>",
+            "link_url": "",
+            "link_text": ""
           }
         }
       },

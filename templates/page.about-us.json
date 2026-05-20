@@ -372,6 +372,7 @@
     },
     "newsletter_VX9p7R": {
       "type": "newsletter",
+      "disabled": true,
       "name": "t:sections.newsletter.presets.newsletter.name",
       "settings": {
         "color_scheme": "",

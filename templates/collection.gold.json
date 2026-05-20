@@ -167,8 +167,8 @@
       "settings": {
         "color_scheme": "",
         "separate_section_with_border": true,
-        "image": "shopify://shop_images/1_dadb2f64-8b2a-4369-a6a4-15c2601f2e22.png",
-        "mobile_image": "shopify://shop_images/1_dadb2f64-8b2a-4369-a6a4-15c2601f2e22.png",
+        "image": "shopify://shop_images/Untitled_design_-_2026-05-19T183905.032.png",
+        "mobile_image": "shopify://shop_images/Untitled_design_-_2026-05-19T183905.032.png",
         "reveal_on_scroll": true,
         "image_position": "end",
         "content_width": "sm",
@@ -307,7 +307,9 @@
           "settings": {
             "title": "18k gold vermeil",
             "heading_tag": "h5",
-            "content": "<p>Our gold pieces are crafted in 18k gold vermeil. A thick layer of solid 18k gold bonded to sterling silver. This gives you the rich colour and feel of fine gold without the fine gold price tag, and a finish made to last.</p>"
+            "content": "<p>Our gold pieces are crafted in 18k gold vermeil. A thick layer of solid 18k gold bonded to sterling silver. This gives you the rich colour and feel of fine gold without the fine gold price tag, and a finish made to last.</p>",
+            "link_url": "",
+            "link_text": ""
           }
         },
         "col_two": {
@@ -315,7 +317,9 @@
           "settings": {
             "title": "made to be worn every day",
             "heading_tag": "h5",
-            "content": "<p>From quiet everyday rings to bolder statement pieces, our gold promise rings are designed to be lived in. Each one is finished by hand and made to be paired, stacked and treasured for years to come.</p>"
+            "content": "<p>From quiet everyday rings to bolder statement pieces, our gold promise rings are designed to be lived in. Each one is finished by hand and made to be paired, stacked and treasured for years to come.</p>",
+            "link_url": "",
+            "link_text": ""
           }
         },
         "col_three": {
@@ -323,7 +327,9 @@
           "settings": {
             "title": "HAND SET WITH LOVE AND A 2 YEAR WARRANTY",
             "heading_tag": "h5",
-            "content": "<p>At The Promise Ring Co., our dedication lies in delivering unparalleled service to ensure your ring purchase is nothing short of extraordinary. We recognise that these pieces transcend mere jewellery; they encapsulate love, commitment, and cherished memories.</p><p>That's why we wholeheartedly stand behind our products, offering a comprehensive 2-year guarantee for your peace of mind. Each ring is meticulously hand-set, ensuring it's crafted with the utmost love and care to become your perfect symbol of enduring Promise.</p>"
+            "content": "<p>At The Promise Ring Co., our dedication lies in delivering unparalleled service to ensure your ring purchase is nothing short of extraordinary. We recognise that these pieces transcend mere jewellery; they encapsulate love, commitment, and cherished memories.</p><p>That's why we wholeheartedly stand behind our products, offering a comprehensive 2-year guarantee for your peace of mind. Each ring is meticulously hand-set, ensuring it's crafted with the utmost love and care to become your perfect symbol of enduring Promise.</p>",
+            "link_url": "",
+            "link_text": ""
           }
         }
       },
