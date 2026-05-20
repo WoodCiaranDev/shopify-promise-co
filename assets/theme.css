@@ -4937,7 +4937,14 @@ product-rerender {
   transition: opacity .2s;
 }
 
-.collection-toolbar__button:hover, .collection-toolbar__button.is-active {
+@media (hover: hover) {
+  .collection-toolbar__button:hover {
+    opacity: 1;
+  }
+}
+
+.collection-toolbar__button.is-active,
+.collection-toolbar__button[aria-expanded="true"] {
   opacity: 1;
 }
 
