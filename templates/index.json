@@ -289,7 +289,7 @@
         "section_vertical_spacing_desktop": 10,
         "item_horizontal_spacing_mobile": 35,
         "item_horizontal_spacing_desktop": 40,
-        "background": "#b8ccab",
+        "background": "#ddcbdd",
         "text_color": "#ffffff"
       }
     },
@@ -675,7 +675,7 @@
         "image_MrHrqA": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Untitled_design_-_2026-04-13T164059.022.png",
+            "image": "shopify://shop_images/map-3.png",
             "width_mode": "custom",
             "max_width": 600,
             "mobile_max_width": 400
