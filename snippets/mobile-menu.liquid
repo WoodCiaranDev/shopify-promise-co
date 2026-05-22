@@ -14,6 +14,7 @@
   * show_dividers: whether dividers are shown between menu items
   * open_second_level_menus: if true, second level menus are open by default
   * highlighted_menu_items: comma or newline-separated menu item titles to highlight in red and bold
+  * display_font_menu_items: comma or newline-separated menu item titles to render in the Ogg display font (secondary panels only)
 {%- endcomment -%}
 
 {%- liquid
@@ -25,6 +26,16 @@
     endif
   else
     assign highlighted_items_array = empty_array
+  endif
+
+  if display_font_menu_items != blank
+    if display_font_menu_items contains newline
+      assign display_font_items_array = display_font_menu_items | split: newline
+    else
+      assign display_font_items_array = display_font_menu_items | split: ','
+    endif
+  else
+    assign display_font_items_array = empty_array
   endif
 -%}
 
@@ -197,7 +208,7 @@
                       {%- if sub_link.links.size > 0 -%}
                         <button
                           type="button"
-                          class="o-mobile-menu__nav-link o-mobile-menu__nav-link--has-children{% if highlighted_items_array contains sub_link.title %} o-mobile-menu__nav-link--highlighted{% endif %}"
+                          class="o-mobile-menu__nav-link o-mobile-menu__nav-link--has-children{% if highlighted_items_array contains sub_link.title %} o-mobile-menu__nav-link--highlighted{% endif %}{% if display_font_items_array contains sub_link.title %} o-mobile-menu__nav-link--display-font{% endif %}"
                           data-panel="tertiary-{{ forloop.parentloop.index }}-{{ forloop.index }}"
                           aria-expanded="false"
                         >
@@ -206,7 +217,7 @@
                       {%- else -%}
                         <a
                           href="{{ sub_link.url }}"
-                          class="o-mobile-menu__nav-link o-mobile-menu__nav-link--with-icon{% if highlighted_items_array contains sub_link.title %} o-mobile-menu__nav-link--highlighted{% endif %}"
+                          class="o-mobile-menu__nav-link o-mobile-menu__nav-link--with-icon{% if highlighted_items_array contains sub_link.title %} o-mobile-menu__nav-link--highlighted{% endif %}{% if display_font_items_array contains sub_link.title %} o-mobile-menu__nav-link--display-font{% endif %}"
                           {% if sub_link.current %}
                             aria-current="page"
                           {% endif %}

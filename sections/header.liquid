@@ -276,7 +276,7 @@
     {%- assign sidebar_menu = section.settings.sidebar_menu | default: section.settings.menu -%}
 
     {%- if sidebar_menu.links.size > 0 -%}
-      {%- render 'mobile-menu', menu: sidebar_menu, color_scheme: section.settings.sidebar_color_scheme, show_dividers: section.settings.sidebar_show_dividers, open_second_level_menus: section.settings.sidebar_open_second_level_menus, highlighted_menu_items: section.settings.sidebar_highlighted_menu_items, countdown_title: section.settings.countdown_title, show_main_featured_collections: section.settings.show_main_featured_collections, blocks: section.blocks -%}
+      {%- render 'mobile-menu', menu: sidebar_menu, color_scheme: section.settings.sidebar_color_scheme, show_dividers: section.settings.sidebar_show_dividers, open_second_level_menus: section.settings.sidebar_open_second_level_menus, highlighted_menu_items: section.settings.sidebar_highlighted_menu_items, display_font_menu_items: section.settings.sidebar_display_font_items, countdown_title: section.settings.countdown_title, show_main_featured_collections: section.settings.show_main_featured_collections, blocks: section.blocks -%}
     {%- endif -%}
   </x-header>
 </height-observer>
@@ -433,6 +433,13 @@
       "label": "Highlighted menu items (red & bold)",
       "placeholder": "Black Friday\nSale",
       "info": "Enter menu item titles (one per line) that should be highlighted in red and bold. Match the exact menu title text."
+    },
+    {
+      "type": "textarea",
+      "id": "sidebar_display_font_items",
+      "label": "Display font menu items",
+      "placeholder": "Shop All\nBest Sellers\nPromise Rings\nTrending",
+      "info": "Enter menu item titles (one per line, or comma-separated) that should be rendered in the Ogg display font in mobile secondary panels. Match the exact menu title text."
     },
     {
       "type": "header",

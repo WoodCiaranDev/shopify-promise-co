@@ -200,6 +200,12 @@
   text-transform: none;
 }
 
+.o-mobile-menu__panel[data-panel-level="secondary"] .o-mobile-menu__nav-link--display-font {
+  font-family: "ogg", "minerva-modern", serif;
+  font-size: 19px;
+  letter-spacing: 0.01em;
+}
+
 /* Navigation links with icons */
 .o-mobile-menu__nav-link--with-icon {
   justify-content: flex-start;
