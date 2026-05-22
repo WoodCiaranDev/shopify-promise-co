@@ -29,13 +29,10 @@
   endif
 
   if display_font_menu_items != blank
-    if display_font_menu_items contains newline
-      assign display_font_items_array = display_font_menu_items | split: newline
-    else
-      assign display_font_items_array = display_font_menu_items | split: ','
-    endif
+    assign _df_lookup = display_font_menu_items | newline_to_br | replace: '<br />', '||' | replace: '<br/>', '||' | replace: ',', '||' | replace: ' ||', '||' | replace: '|| ', '||'
+    assign display_font_lookup = '||' | append: _df_lookup | append: '||'
   else
-    assign display_font_items_array = empty_array
+    assign display_font_lookup = ''
   endif
 -%}
 
@@ -208,7 +205,8 @@
                       {%- if sub_link.links.size > 0 -%}
                         <button
                           type="button"
-                          class="o-mobile-menu__nav-link o-mobile-menu__nav-link--has-children{% if highlighted_items_array contains sub_link.title %} o-mobile-menu__nav-link--highlighted{% endif %}{% if display_font_items_array contains sub_link.title %} o-mobile-menu__nav-link--display-font{% endif %}"
+                          {%- capture _sub_link_lookup -%}||{{ sub_link.title }}||{%- endcapture -%}
+                          class="o-mobile-menu__nav-link o-mobile-menu__nav-link--has-children{% if highlighted_items_array contains sub_link.title %} o-mobile-menu__nav-link--highlighted{% endif %}{% if display_font_lookup contains _sub_link_lookup %} o-mobile-menu__nav-link--display-font{% endif %}"
                           data-panel="tertiary-{{ forloop.parentloop.index }}-{{ forloop.index }}"
                           aria-expanded="false"
                         >
@@ -217,7 +215,8 @@
                       {%- else -%}
                         <a
                           href="{{ sub_link.url }}"
-                          class="o-mobile-menu__nav-link o-mobile-menu__nav-link--with-icon{% if highlighted_items_array contains sub_link.title %} o-mobile-menu__nav-link--highlighted{% endif %}{% if display_font_items_array contains sub_link.title %} o-mobile-menu__nav-link--display-font{% endif %}"
+                          {%- capture _sub_link_lookup -%}||{{ sub_link.title }}||{%- endcapture -%}
+                          class="o-mobile-menu__nav-link o-mobile-menu__nav-link--with-icon{% if highlighted_items_array contains sub_link.title %} o-mobile-menu__nav-link--highlighted{% endif %}{% if display_font_lookup contains _sub_link_lookup %} o-mobile-menu__nav-link--display-font{% endif %}"
                           {% if sub_link.current %}
                             aria-current="page"
                           {% endif %}
