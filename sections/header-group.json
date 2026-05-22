@@ -118,6 +118,7 @@
         "sidebar_show_dividers": true,
         "sidebar_open_second_level_menus": false,
         "sidebar_highlighted_menu_items": "Black Friday",
+        "sidebar_display_font_items": "Shop All\nBest Sellers\nPromise Rings",
         "layout": "logo_center_navigation_inline",
         "show_icons": true,
         "show_country_selector": true,
