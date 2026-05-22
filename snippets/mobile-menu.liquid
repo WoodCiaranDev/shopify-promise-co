@@ -29,12 +29,13 @@
   endif
 
   if display_font_menu_items != blank
-    assign _df_lookup = display_font_menu_items | newline_to_br | replace: '<br />', '||' | replace: '<br/>', '||' | replace: ',', '||' | strip_newlines | replace: ' ||', '||' | replace: '|| ', '||'
-    assign display_font_lookup = '||' | append: _df_lookup | append: '||'
+    assign _df_normalised = display_font_menu_items | newline_to_br | replace: '<br />', '|^|' | replace: '<br/>', '|^|' | replace: ',', '|^|' | strip_newlines
+    assign display_font_items_array = _df_normalised | split: '|^|'
   else
-    assign display_font_lookup = ''
+    assign display_font_items_array = '' | split: ','
   endif
 -%}
+
 
 <mobile-menu id="mobile-menu" class="o-mobile-menu {% if show_dividers %}o-mobile-menu--show-dividers{% endif %}">
   <!-- Overlay -->
@@ -205,8 +206,7 @@
                       {%- if sub_link.links.size > 0 -%}
                         <button
                           type="button"
-                          {%- capture _sub_link_lookup -%}||{{ sub_link.title }}||{%- endcapture -%}
-                          class="o-mobile-menu__nav-link o-mobile-menu__nav-link--has-children{% if highlighted_items_array contains sub_link.title %} o-mobile-menu__nav-link--highlighted{% endif %}{% if display_font_lookup contains _sub_link_lookup %} o-mobile-menu__nav-link--display-font{% endif %}"
+                          class="o-mobile-menu__nav-link o-mobile-menu__nav-link--has-children{% if highlighted_items_array contains sub_link.title %} o-mobile-menu__nav-link--highlighted{% endif %}{% if display_font_items_array contains sub_link.title %} o-mobile-menu__nav-link--display-font{% endif %}"
                           data-panel="tertiary-{{ forloop.parentloop.index }}-{{ forloop.index }}"
                           aria-expanded="false"
                         >
@@ -215,8 +215,7 @@
                       {%- else -%}
                         <a
                           href="{{ sub_link.url }}"
-                          {%- capture _sub_link_lookup -%}||{{ sub_link.title }}||{%- endcapture -%}
-                          class="o-mobile-menu__nav-link o-mobile-menu__nav-link--with-icon{% if highlighted_items_array contains sub_link.title %} o-mobile-menu__nav-link--highlighted{% endif %}{% if display_font_lookup contains _sub_link_lookup %} o-mobile-menu__nav-link--display-font{% endif %}"
+                          class="o-mobile-menu__nav-link o-mobile-menu__nav-link--with-icon{% if highlighted_items_array contains sub_link.title %} o-mobile-menu__nav-link--highlighted{% endif %}{% if display_font_items_array contains sub_link.title %} o-mobile-menu__nav-link--display-font{% endif %}"
                           {% if sub_link.current %}
                             aria-current="page"
                           {% endif %}
