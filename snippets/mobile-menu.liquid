@@ -29,7 +29,7 @@
   endif
 
   if display_font_menu_items != blank
-    assign _df_lookup = display_font_menu_items | newline_to_br | replace: '<br />', '||' | replace: '<br/>', '||' | replace: ',', '||' | replace: ' ||', '||' | replace: '|| ', '||'
+    assign _df_lookup = display_font_menu_items | newline_to_br | replace: '<br />', '||' | replace: '<br/>', '||' | replace: ',', '||' | strip_newlines | replace: ' ||', '||' | replace: '|| ', '||'
     assign display_font_lookup = '||' | append: _df_lookup | append: '||'
   else
     assign display_font_lookup = ''
