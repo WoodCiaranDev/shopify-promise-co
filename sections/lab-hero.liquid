@@ -1,0 +1,224 @@
+{%- liquid
+  assign has_content = false
+  if section.settings.logo != blank or section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.body != blank or section.settings.button_label != blank
+    assign has_content = true
+  endif
+-%}
+
+{%- if has_content -%}
+  <div class="lab-hero color-scheme color-scheme--{{ section.settings.color_scheme.id }} {% unless section.settings.remove_vertical_spacing %}section-spacing{% endunless %}{% if section.settings.no_bottom_spacing %} lab-hero--no-bottom{% endif %}{% if section.settings.separate_section_with_border %} bordered-section{% endif %}"{% if section.settings.background_color != blank and section.settings.background_color != 'rgba(0,0,0,0)' %} style="background-color: {{ section.settings.background_color }};"{% endif %}>
+    <div class="container container--{{ section.settings.content_width }}">
+      <div class="lab-hero__inner prose text-center">
+        {%- if section.settings.logo != blank -%}
+          <div class="lab-hero__logo">
+            {%- capture logo_style -%}--logo-max-width: {{ section.settings.logo_max_width }}px;{%- endcapture -%}
+            {{-
+              section.settings.logo
+              | image_url: width: section.settings.logo.width
+              | image_tag:
+                widths: '120,180,240,360,480',
+                sizes: 'min(100vw, var(--logo-max-width, 180px))',
+                class: 'lab-hero__logo-image',
+                style: logo_style,
+                loading: 'eager'
+            -}}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="lab-hero__eyebrow h6">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <{{ section.settings.heading_tag }} class="lab-hero__heading {{ section.settings.heading_tag }}">
+            {{- section.settings.heading -}}
+          </{{ section.settings.heading_tag }}>
+        {%- endif -%}
+
+        {%- if section.settings.body != blank -%}
+          <div class="lab-hero__body">
+            {{- section.settings.body -}}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.button_label != blank -%}
+          <div class="lab-hero__cta button-group justify-center">
+            {%
+              render 'button',
+              content: section.settings.button_label,
+              href: section.settings.button_link,
+              style: section.settings.button_style
+            %}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .lab-hero--no-bottom {
+    padding-block-end: 0 !important;
+  }
+
+  .lab-hero__inner > * + * {
+    margin-top: 1.5rem;
+  }
+
+  .lab-hero__logo {
+    display: flex;
+    justify-content: center;
+  }
+
+  .lab-hero__logo-image {
+    width: 100%;
+    max-width: var(--logo-max-width, 180px);
+    height: auto;
+  }
+
+  .lab-hero__eyebrow {
+    letter-spacing: 0.18em;
+  }
+
+  .lab-hero__cta {
+    margin-top: 2.5rem;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Lab hero",
+  "class": "shopify-section--lab-hero",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:global.colors.scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "t:global.sizes.content_width",
+      "options": [
+        { "value": "xs", "label": "t:global.sizes.x_small" },
+        { "value": "sm", "label": "t:global.sizes.small" },
+        { "value": "md", "label": "t:global.sizes.medium" },
+        { "value": "lg", "label": "t:global.sizes.large" }
+      ],
+      "default": "md"
+    },
+    {
+      "type": "checkbox",
+      "id": "remove_vertical_spacing",
+      "label": "t:global.spacing.remove_vertical_spacing",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "separate_section_with_border",
+      "label": "t:global.section.separate_section_with_border",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "no_bottom_spacing",
+      "label": "Remove bottom spacing (sit flush with next section)",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background colour (overrides scheme)",
+      "default": "rgba(0,0,0,0)"
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image",
+      "info": "Recommended: transparent PNG (e.g. Group 210.png / colab mark)"
+    },
+    {
+      "type": "range",
+      "id": "logo_max_width",
+      "label": "Logo maximum width",
+      "min": 40,
+      "max": 320,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "THE PROMISE CO - LAB"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Customisable Engraving & Hidden Birthstones"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading style",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Please note: Delivery times are estimates and may occasionally be extended due to customs delays, courier disruptions, or UK bank holidays.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Call to action"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop custom rings"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "solid", "label": "t:global.text.button_style_options.solid" },
+        { "value": "outline", "label": "t:global.text.button_style_options.outline" }
+      ],
+      "default": "outline"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lab hero"
+    }
+  ]
+}
+{% endschema %}
