@@ -1,0 +1,101 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_title": false,
+        "page_width": "xs"
+      }
+    },
+    "lab_hero": {
+      "type": "lab-hero",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "content_width": "md",
+        "remove_vertical_spacing": false,
+        "separate_section_with_border": false,
+        "logo": "shopify://shop_images/lab-logo.png",
+        "logo_max_width": 80,
+        "eyebrow": "THE PROMISE CO - LAB",
+        "heading": "Customisable Engraving & Hidden Birthstones",
+        "heading_tag": "h1",
+        "body": "<p>Please note: Delivery times are estimates and may occasionally be extended due to customs delays, courier disruptions, or UK bank holidays.</p>",
+        "button_label": "Shop custom rings",
+        "button_link": "",
+        "button_style": "outline"
+      }
+    },
+    "lab_hero_birthstones": {
+      "type": "lab-hero",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "content_width": "md",
+        "remove_vertical_spacing": false,
+        "separate_section_with_border": false,
+        "no_bottom_spacing": true,
+        "background_color": "#FCFBFA",
+        "logo": "shopify://shop_images/lab-logo.png",
+        "logo_max_width": 80,
+        "eyebrow": "THE PROMISE CO - LAB CUSTOMISABLE RINGS",
+        "heading": "Our Birth Stones",
+        "heading_tag": "h2",
+        "body": "<p>Please note: Delivery times are estimates and may occasionally be extended due to customs delays, courier disruptions, or UK bank holidays.</p>",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "outline"
+      }
+    },
+    "lab_birthstones": {
+      "type": "lab-birthstones",
+      "blocks": {
+        "stone_jan": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-garnet.png", "name": "Garnet", "month": "January" } },
+        "stone_feb": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-amethyst.png", "name": "Amethyst", "month": "February" } },
+        "stone_mar": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-aquamarine.png", "name": "Aquamarine", "month": "March" } },
+        "stone_apr": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-crystal.png", "name": "Crystal", "month": "April" } },
+        "stone_may": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-emerald.png", "name": "Emerald", "month": "May" } },
+        "stone_jun": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-light-amethyst.png", "name": "Light Amethyst", "month": "June" } },
+        "stone_jul": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-ruby.png", "name": "Ruby", "month": "July" } },
+        "stone_aug": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-peridot.png", "name": "Peridot", "month": "August" } },
+        "stone_sep": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-sapphire.png", "name": "Sapphire", "month": "September" } },
+        "stone_oct": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-pink-diamond.png", "name": "Pink Diamond", "month": "October" } },
+        "stone_nov": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-champagne.png", "name": "Champagne", "month": "November" } },
+        "stone_dec": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-tanzanite.png", "name": "Tanzanite", "month": "December" } }
+      },
+      "block_order": [
+        "stone_jan", "stone_feb", "stone_mar", "stone_apr", "stone_may", "stone_jun",
+        "stone_jul", "stone_aug", "stone_sep", "stone_oct", "stone_nov", "stone_dec"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "content_width": "lg",
+        "remove_vertical_spacing": false,
+        "separate_section_with_border": false,
+        "no_top_spacing": true,
+        "background_color": "#FCFBFA",
+        "columns_desktop": 6,
+        "columns_mobile": 3,
+        "icon_max_width": 30,
+        "button_label": "Design yours",
+        "button_link": "",
+        "button_style": "outline"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "lab_hero",
+    "lab_hero_birthstones",
+    "lab_birthstones"
+  ]
+}
