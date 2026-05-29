@@ -1,0 +1,292 @@
+{%- if section.blocks.size > 0 or section.settings.button_label != blank -%}
+  <div class="lab-birthstones color-scheme color-scheme--{{ section.settings.color_scheme.id }} {% unless section.settings.remove_vertical_spacing %}section-spacing{% endunless %}{% if section.settings.no_top_spacing %} lab-birthstones--no-top{% endif %}{% if section.settings.separate_section_with_border %} bordered-section{% endif %}"
+       style="--lab-birthstones-cols-desktop: {{ section.settings.columns_desktop }}; --lab-birthstones-cols-mobile: {{ section.settings.columns_mobile }}; --lab-birthstones-icon-max-width: {{ section.settings.icon_max_width }}px;{% if section.settings.background_color != blank and section.settings.background_color != 'rgba(0,0,0,0)' %} background-color: {{ section.settings.background_color }};{% endif %}">
+    <div class="container container--{{ section.settings.content_width }}">
+      {%- if section.blocks.size > 0 -%}
+        <ul class="lab-birthstones__grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'stone' -%}
+              <li class="lab-birthstones__item" {{ block.shopify_attributes }}>
+                {%- capture stone_inner -%}
+                  {%- if block.settings.image != blank -%}
+                    <div class="lab-birthstones__icon">
+                      {{-
+                        block.settings.image
+                        | image_url: width: block.settings.image.width
+                        | image_tag:
+                          widths: '60,90,120,180,240',
+                          sizes: 'min(100vw, var(--lab-birthstones-icon-max-width, 60px))',
+                          class: 'lab-birthstones__icon-image',
+                          loading: 'lazy'
+                      -}}
+                    </div>
+                  {%- endif -%}
+
+                  {%- if block.settings.name != blank -%}
+                    <p class="lab-birthstones__name h4">{{ block.settings.name }}</p>
+                  {%- endif -%}
+
+                  {%- if block.settings.month != blank -%}
+                    <p class="lab-birthstones__month h6">{{ block.settings.month }}</p>
+                  {%- endif -%}
+                {%- endcapture -%}
+
+                {%- if block.settings.link != blank -%}
+                  <a class="lab-birthstones__link" href="{{ block.settings.link }}">{{ stone_inner }}</a>
+                {%- else -%}
+                  {{- stone_inner -}}
+                {%- endif -%}
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank -%}
+        <div class="lab-birthstones__cta button-group justify-center">
+          {%
+            render 'button',
+            content: section.settings.button_label,
+            href: section.settings.button_link,
+            style: section.settings.button_style
+          %}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .lab-birthstones--no-top {
+    padding-block-start: 0 !important;
+  }
+
+  .lab-birthstones__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--lab-birthstones-cols-mobile, 3), minmax(0, 1fr));
+    gap: 2.5rem 1rem;
+    margin: 0;
+    padding: 3rem 0 0;
+    list-style: none;
+  }
+
+  @media (min-width: 700px) {
+    .lab-birthstones__grid {
+      grid-template-columns: repeat(var(--lab-birthstones-cols-desktop, 6), minmax(0, 1fr));
+      gap: 3rem 1.5rem;
+      padding-top: 4rem;
+    }
+  }
+
+  .lab-birthstones__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
+  }
+
+  .lab-birthstones__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .lab-birthstones__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .lab-birthstones__icon-image {
+    width: 100%;
+    max-width: var(--lab-birthstones-icon-max-width, 60px);
+    height: auto;
+  }
+
+  .lab-birthstones__name {
+    margin: 0;
+    line-height: 1.3;
+    hyphens: auto;
+  }
+
+  @media (max-width: 480px) {
+    .lab-birthstones__name {
+      font-size: 0.8125rem;
+    }
+  }
+
+  .lab-birthstones__month {
+    margin: 0;
+    letter-spacing: 0.18em;
+  }
+
+  .lab-birthstones__cta {
+    margin-top: 3rem;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Lab birthstones",
+  "class": "shopify-section--lab-birthstones",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:global.colors.scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "t:global.sizes.content_width",
+      "options": [
+        { "value": "xs", "label": "t:global.sizes.x_small" },
+        { "value": "sm", "label": "t:global.sizes.small" },
+        { "value": "md", "label": "t:global.sizes.medium" },
+        { "value": "lg", "label": "t:global.sizes.large" }
+      ],
+      "default": "lg"
+    },
+    {
+      "type": "checkbox",
+      "id": "remove_vertical_spacing",
+      "label": "t:global.spacing.remove_vertical_spacing",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "separate_section_with_border",
+      "label": "t:global.section.separate_section_with_border",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "no_top_spacing",
+      "label": "Remove top spacing (sit flush with previous section)",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background colour (overrides scheme)",
+      "default": "rgba(0,0,0,0)"
+    },
+    {
+      "type": "header",
+      "content": "Grid"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns (desktop)",
+      "min": 3,
+      "max": 6,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "label": "Columns (mobile)",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "icon_max_width",
+      "label": "Stone icon maximum width",
+      "min": 30,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Call to action"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Design yours"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "solid", "label": "t:global.text.button_style_options.solid" },
+        { "value": "outline", "label": "t:global.text.button_style_options.outline" }
+      ],
+      "default": "outline"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stone",
+      "name": "Stone",
+      "limit": 12,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Stone icon"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Garnet"
+        },
+        {
+          "type": "text",
+          "id": "month",
+          "label": "Month",
+          "default": "January"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lab birthstones",
+      "blocks": [
+        { "type": "stone", "settings": { "name": "Garnet", "month": "January" } },
+        { "type": "stone", "settings": { "name": "Amethyst", "month": "February" } },
+        { "type": "stone", "settings": { "name": "Aquamarine", "month": "March" } },
+        { "type": "stone", "settings": { "name": "Crystal", "month": "April" } },
+        { "type": "stone", "settings": { "name": "Emerald", "month": "May" } },
+        { "type": "stone", "settings": { "name": "Light Amethyst", "month": "June" } },
+        { "type": "stone", "settings": { "name": "Ruby", "month": "July" } },
+        { "type": "stone", "settings": { "name": "Peridot", "month": "August" } },
+        { "type": "stone", "settings": { "name": "Sapphire", "month": "September" } },
+        { "type": "stone", "settings": { "name": "Pink Diamond", "month": "October" } },
+        { "type": "stone", "settings": { "name": "Champagne", "month": "November" } },
+        { "type": "stone", "settings": { "name": "Tanzanite", "month": "December" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -36,7 +36,8 @@
         "autoplay": true,
         "show_controls": false,
         "video_size": "lg",
-        "video": "shopify://files/videos/copy_EB80F9B6-4F60-4F5B-8E24-182BC7D91161_VSCO.mov",
+        "video": "shopify://files/videos/quality (1).mp4",
+        "mobile_video": "shopify://files/videos/quality.mp4",
         "external_video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "text_color": "#ffffff"
       }
@@ -54,7 +55,7 @@
         "richtext_4kMHBj": {
           "type": "richtext",
           "settings": {
-            "content": "<p>Our pieces are symbols of love, commitment, and the moments that matter most.<br/><br/> That's why we obsess over <strong>every detail. </strong><br/>So each and every piece is made to be kept <strong>forever.</strong><br/><br/>Every piece is hand-set by our<strong> master jewellers</strong>, backed by a 5-year warranty, and made to the best-in-class standards of the National Association of Jewellers. <br/><br/><em>A </em><em><strong>promise</strong></em><em> you can trust.</em></p>"
+            "content": "<p>Our pieces are symbols of love, commitment and the moments that matter most.<br/><br/> That's why we obsess over <strong>every detail. </strong><br/>So each and every piece is made to be kept <strong>forever.</strong><br/><br/>Every piece is hand-set by our<strong> master jewellers</strong>, backed by a 5-year warranty, and made to the best-in-class standards of the National Association of Jewellers. <br/><br/><em>A </em><em><strong>promise</strong></em><em> you can trust.</em></p>"
           }
         },
         "image_PNT9if": {

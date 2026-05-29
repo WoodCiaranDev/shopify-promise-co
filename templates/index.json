@@ -12,6 +12,33 @@
     "slideshow_ygKAJC": {
       "type": "slideshow",
       "blocks": {
+        "image_G3TLPH": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/ETHEREAL_SUMMER_2.png",
+            "mobile_image": "shopify://shop_images/Banner_UK_8.png",
+            "subheading": "new in",
+            "title": "ethereal summer",
+            "mobile_text_position": "place-self-center-end text-end",
+            "desktop_text_position": "sm:place-self-start-center sm:text-center",
+            "content_max_width": 780,
+            "button_1_text": "Shop the Collection",
+            "button_1_link": "shopify://collections/ethereal-summer",
+            "button_1_style": "link",
+            "button_1_background": "#1c1c1c",
+            "button_1_text_color": "#ffffff",
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_style": "outline",
+            "button_2_background": "#82add9",
+            "button_2_text_color": "#000000",
+            "background": "",
+            "background_opacity": 50,
+            "text_color": "#313030",
+            "border_color": "",
+            "gradient_overlay": ""
+          }
+        },
         "image_wpXLKm": {
           "type": "image",
           "settings": {
@@ -35,33 +62,6 @@
             "background": "",
             "background_opacity": 0,
             "text_color": "#ffffff",
-            "border_color": "",
-            "gradient_overlay": ""
-          }
-        },
-        "image_G3TLPH": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/ETHEREAL_SUMMER_2.png",
-            "mobile_image": "shopify://shop_images/Banner_UK_8.png",
-            "subheading": "Launching may 31st",
-            "title": "ethereal summer",
-            "mobile_text_position": "place-self-center-end text-end",
-            "desktop_text_position": "sm:place-self-start-center sm:text-center",
-            "content_max_width": 780,
-            "button_1_text": "sign up for early access",
-            "button_1_link": "shopify://collections/ethereal-summer",
-            "button_1_style": "link",
-            "button_1_background": "#1c1c1c",
-            "button_1_text_color": "#ffffff",
-            "button_2_text": "",
-            "button_2_link": "",
-            "button_2_style": "outline",
-            "button_2_background": "#82add9",
-            "button_2_text_color": "#000000",
-            "background": "",
-            "background_opacity": 50,
-            "text_color": "#313030",
             "border_color": "",
             "gradient_overlay": ""
           }
@@ -179,8 +179,8 @@
         }
       },
       "block_order": [
-        "image_wpXLKm",
         "image_G3TLPH",
+        "image_wpXLKm",
         "image_jcrmjC",
         "image_ba3teU",
         "image_jjYcbD",

@@ -1,0 +1,289 @@
+{%- if section.blocks.size > 0 -%}
+  <div class="feature-strips color-scheme color-scheme--{{ section.settings.color_scheme.id }}{% if section.settings.separate_section_with_border %} bordered-section{% endif %}">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'strip' -%}
+        {%- liquid
+          assign is_reverse = false
+          if block.settings.force_direction == 'text_left'
+            assign is_reverse = false
+          elsif block.settings.force_direction == 'image_left'
+            assign is_reverse = true
+          else
+            assign mod = forloop.index | modulo: 2
+            if mod == 0
+              assign is_reverse = true
+            endif
+          endif
+        -%}
+
+        <div class="feature-strips__strip{% if is_reverse %} feature-strips__strip--reverse{% endif %}" {{ block.shopify_attributes }}>
+
+          <div class="feature-strips__media"{% if section.settings.image_background_color != blank and section.settings.image_background_color != 'rgba(0,0,0,0)' %} style="background-color: {{ section.settings.image_background_color }};"{% endif %}>
+            {%- if block.settings.image != blank -%}
+              <picture class="feature-strips__picture">
+                {%- if block.settings.mobile_image != blank -%}
+                  <source media="(max-width: 699px)"
+                          srcset="{{ block.settings.mobile_image | image_url: width: '500x' }} 500w, {{ block.settings.mobile_image | image_url: width: '700x' }} 700w, {{ block.settings.mobile_image | image_url: width: '900x' }} 900w"
+                          width="{{ block.settings.mobile_image.width }}"
+                          height="{{ block.settings.mobile_image.height }}">
+                {%- endif -%}
+                {{-
+                  block.settings.image
+                  | image_url: width: block.settings.image.width
+                  | image_tag:
+                    widths: '300,500,700,900,1100,1400,1700,2000',
+                    sizes: '(min-width: 700px) min(50vw, var(--feature-strips-image-max-width, 640px)), 100vw',
+                    class: 'feature-strips__image',
+                    loading: 'lazy'
+                -}}
+              </picture>
+            {%- endif -%}
+          </div>
+
+          <div class="feature-strips__content"{% if section.settings.text_background_color != blank and section.settings.text_background_color != 'rgba(0,0,0,0)' %} style="background-color: {{ section.settings.text_background_color }};"{% endif %}>
+            <div class="container container--{{ section.settings.content_width }} feature-strips__content-inner">
+              {%- if block.settings.subheading != blank -%}
+                <p class="feature-strips__subheading h6">{{ block.settings.subheading }}</p>
+              {%- endif -%}
+
+              {%- if block.settings.heading != blank -%}
+                <{{ block.settings.heading_tag }} class="feature-strips__heading {{ block.settings.heading_tag }}">{{ block.settings.heading }}</{{ block.settings.heading_tag }}>
+              {%- endif -%}
+
+              {%- if block.settings.content != blank -%}
+                <div class="feature-strips__body">{{ block.settings.content }}</div>
+              {%- endif -%}
+
+              {%- if block.settings.button_label != blank -%}
+                <div class="feature-strips__cta button-group">
+                  {%
+                    render 'button',
+                    content: block.settings.button_label,
+                    href: block.settings.button_link,
+                    style: block.settings.button_style
+                  %}
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .feature-strips__strip {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+  }
+
+  @media (min-width: 700px) {
+    .feature-strips__strip {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .feature-strips__strip--reverse .feature-strips__media {
+      order: 1;
+    }
+  }
+
+  .feature-strips__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  }
+
+  @media (min-width: 700px) {
+    .feature-strips__media {
+      padding: 3rem;
+    }
+  }
+
+  .feature-strips__picture {
+    display: block;
+    width: 100%;
+    max-width: var(--feature-strips-image-max-width, 640px);
+  }
+
+  .feature-strips__image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .feature-strips__content {
+    padding: 2.5rem 1rem;
+  }
+
+  @media (min-width: 700px) {
+    .feature-strips__content {
+      padding: 4rem 1.5rem;
+    }
+  }
+
+  .feature-strips__content-inner > * + * {
+    margin-top: 1rem;
+  }
+
+  .feature-strips__subheading {
+    letter-spacing: 0.18em;
+    margin: 0;
+  }
+
+  .feature-strips__heading {
+    margin: 0;
+  }
+
+  .feature-strips__cta {
+    margin-top: 2rem;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Lab feature strips",
+  "class": "shopify-section--feature-strips",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:global.colors.scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "text_background_color",
+      "label": "Text panel background",
+      "default": "#f2eee7"
+    },
+    {
+      "type": "color",
+      "id": "image_background_color",
+      "label": "Image panel background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "Text container width",
+      "options": [
+        { "value": "xs", "label": "t:global.sizes.x_small" },
+        { "value": "sm", "label": "t:global.sizes.small" },
+        { "value": "md", "label": "t:global.sizes.medium" },
+        { "value": "lg", "label": "t:global.sizes.large" }
+      ],
+      "default": "sm"
+    },
+    {
+      "type": "range",
+      "id": "image_max_width",
+      "label": "Image maximum width",
+      "min": 200,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "default": 640
+    },
+    {
+      "type": "checkbox",
+      "id": "separate_section_with_border",
+      "label": "t:global.section.separate_section_with_border",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "strip",
+      "name": "Strip",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile image (optional)"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Eyebrow"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Heading"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "Heading style",
+          "options": [
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" }
+          ],
+          "default": "h2"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Body",
+          "default": "<p>Paragraph about the types of rings you can get engraved, how it works etc...</p>"
+        },
+        {
+          "type": "select",
+          "id": "force_direction",
+          "label": "Direction",
+          "options": [
+            { "value": "auto", "label": "Auto (alternate)" },
+            { "value": "text_left", "label": "Text left, image right" },
+            { "value": "image_left", "label": "Image left, text right" }
+          ],
+          "default": "auto"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            { "value": "solid", "label": "t:global.text.button_style_options.solid" },
+            { "value": "outline", "label": "t:global.text.button_style_options.outline" }
+          ],
+          "default": "outline"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lab feature strips",
+      "blocks": [
+        { "type": "strip", "settings": { "heading": "Engraving" } },
+        { "type": "strip", "settings": { "heading": "Inner Birth Stones" } },
+        { "type": "strip", "settings": { "heading": "Engraving" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
