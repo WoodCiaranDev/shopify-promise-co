@@ -90,12 +90,155 @@
         "button_link": "",
         "button_style": "outline"
       }
+    },
+    "feature_strips": {
+      "type": "feature-strips",
+      "blocks": {
+        "strip_1": {
+          "type": "strip",
+          "settings": {
+            "image": "shopify://shop_images/ring-engraving-detail.png",
+            "subheading": "",
+            "heading": "Engraving",
+            "heading_tag": "h2",
+            "content": "<p>Paragraph about the types of rings you can get engraved, how it works etc...</p>",
+            "force_direction": "auto",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "outline"
+          }
+        },
+        "strip_2": {
+          "type": "strip",
+          "settings": {
+            "image": "shopify://shop_images/ring-engraving-detail.png",
+            "subheading": "",
+            "heading": "Inner Birth Stones",
+            "heading_tag": "h2",
+            "content": "<p>Paragraph about the types of rings you can get engraved, how it works etc...</p>",
+            "force_direction": "auto",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "outline"
+          }
+        },
+        "strip_3": {
+          "type": "strip",
+          "settings": {
+            "image": "shopify://shop_images/ring-engraving-detail.png",
+            "subheading": "",
+            "heading": "Engraving",
+            "heading_tag": "h2",
+            "content": "<p>Paragraph about the types of rings you can get engraved, how it works etc...</p>",
+            "force_direction": "auto",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "outline"
+          }
+        }
+      },
+      "block_order": ["strip_1", "strip_2", "strip_3"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "text_background_color": "#f2eee7",
+        "image_background_color": "#ffffff",
+        "content_width": "sm",
+        "image_max_width": 640,
+        "reveal_on_scroll": true,
+        "separate_section_with_border": false
+      }
+    },
+    "lab_hero_faq": {
+      "type": "lab-hero",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "content_width": "md",
+        "remove_vertical_spacing": false,
+        "separate_section_with_border": false,
+        "no_bottom_spacing": true,
+        "logo": "shopify://shop_images/lab-logo.png",
+        "logo_max_width": 80,
+        "eyebrow": "THE PROMISE CO - LAB CUSTOMISABLE RINGS",
+        "heading": "FAQ's",
+        "heading_tag": "h2",
+        "body": "",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "outline"
+      }
+    },
+    "faq_custom_landing": {
+      "type": "faq",
+      "blocks": {
+        "q_delivery": {
+          "type": "question",
+          "settings": {
+            "question": "How long will it take for me to receive my ring?",
+            "answer": "<p>Please note: Delivery times are estimates and may occasionally be extended due to customs delays, courier disruptions, or UK bank holidays.</p>"
+          }
+        },
+        "q_refund": {
+          "type": "question",
+          "settings": {
+            "question": "Are custom pieces non-refundable?",
+            "answer": "<p>Write a clear and concise answer to guide your customers.</p>"
+          }
+        },
+        "q_customisable": {
+          "type": "question",
+          "settings": {
+            "question": "Are all your rings customisable?",
+            "answer": "<p>Write a clear and concise answer to guide your customers.</p>"
+          }
+        },
+        "q_bespoke": {
+          "type": "question",
+          "settings": {
+            "question": "Do you offer complete bespoke design?",
+            "answer": "<p>Write a clear and concise answer to guide your customers.</p>"
+          }
+        }
+      },
+      "block_order": ["q_delivery", "q_refund", "q_customisable", "q_bespoke"],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "show_categories": false,
+        "subheading": "",
+        "title": "",
+        "content": ""
+      }
+    },
+    "faq_cta": {
+      "type": "rich-text",
+      "blocks": {
+        "cta_button": {
+          "type": "button",
+          "settings": {
+            "style": "outline",
+            "text": "Design yours",
+            "url": ""
+          }
+        }
+      },
+      "block_order": ["cta_button"],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "content_width": "md",
+        "text_position": "center",
+        "remove_vertical_spacing": false
+      }
     }
   },
   "order": [
     "main",
     "lab_hero",
     "lab_hero_birthstones",
-    "lab_birthstones"
+    "lab_birthstones",
+    "feature_strips",
+    "lab_hero_faq",
+    "faq_custom_landing",
+    "faq_cta"
   ]
 }
