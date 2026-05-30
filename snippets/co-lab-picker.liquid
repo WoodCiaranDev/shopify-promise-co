@@ -11,7 +11,14 @@ Inputs:
 ----------------------------------------------------------------------------------------------------------------------
 {%- endcomment -%}
 
-{%- assign stones = shop.metaobjects.birthstone.values -%}
+{%- comment -%} Pull stones in calendar order via a fixed handle list {%- endcomment -%}
+{%- assign month_order = 'garnet,amethyst,aquamarine,crystal,emerald,light-amethyst,ruby,peridot,sapphire,pink-diamond,champagne,tanzanite' | split: ',' -%}
+{%- assign all_stones = shop.metaobjects.birthstone.values -%}
+{%- assign stones = '' | split: '' -%}
+{%- for h in month_order -%}
+  {%- assign matched = all_stones | where: 'handle', h -%}
+  {%- assign stones = stones | concat: matched -%}
+{%- endfor -%}
 {%- assign first_variant = product.selected_or_first_available_variant -%}
 
 <c-co-lab-picker
@@ -27,26 +34,20 @@ Inputs:
   <product-form>
     {%- form 'product', product, id: product_form_id -%}
       <input type="hidden" name="id" value="{{ first_variant.id }}" data-variant-id>
+      <span data-base-price-display hidden>{{ first_variant.price | money_without_trailing_zeros }}</span>
 
-      <header class="c-co-lab-picker__header">
-        {%- if settings.colab_logo != blank -%}
-          {{- settings.colab_logo | image_url: width: 120 | image_tag: class: 'c-co-lab-picker__logo', loading: 'lazy', widths: '60,90,120,180' -}}
-        {%- else -%}
-          <p class="c-co-lab-picker__eyebrow h6">CoLab</p>
-        {%- endif -%}
-        <h1 class="c-co-lab-picker__title h2">{{ product.title }}</h1>
-        <p class="c-co-lab-picker__price">
-          <span data-base-price-display>{{ first_variant.price | money_without_trailing_zeros }}</span>
-        </p>
-      </header>
-
-      <section class="c-co-lab-picker__section c-co-lab-picker__section--metal">
-        <h2 class="c-co-lab-picker__section-title h6">Metal &amp; Sizing</h2>
-        {% render 'variant-picker', product: product, product_form_id: product_form_id, block: section.blocks[0] %}
+      <section class="c-co-lab-picker__card c-co-lab-picker__card--metal">
+        <h2 class="c-co-lab-picker__section-title">Metal &amp; Sizing</h2>
+        {% render 'variant-picker',
+          product: product,
+          form_id: product_form_id,
+          context: 'main_product',
+          selector_style: 'block',
+          swatch_selector_style: 'swatch' %}
       </section>
 
-      <section class="c-co-lab-picker__section c-co-lab-picker__section--custom" data-customisation>
-        <h2 class="c-co-lab-picker__section-title h6">Customisation</h2>
+      <section class="c-co-lab-picker__card c-co-lab-picker__card--custom" data-customisation>
+        <h2 class="c-co-lab-picker__section-title">Customisation</h2>
         <p class="c-co-lab-picker__note">Personalised rings are non-refundable and non-exchangeable.</p>
 
         <button type="button" class="c-co-lab-picker__stones-toggle" data-action="toggle-stones" aria-expanded="false">

@@ -18,9 +18,12 @@ Supported variables
 {%- endcomment -%}
 
 <safe-sticky class="product-info {% if center_basic_info %}product-info--center{% endif %}">
-  {%- if product.metafields.custom.product_type.value == 'co-lab' and context == 'main_product' -%}
-    {% render 'co-lab-picker', product: product, product_form_id: product_form_id %}
-  {%- else -%}
+  {%- liquid
+    assign is_co_lab = false
+    if product.metafields.custom.product_type.value == 'co-lab' and context == 'main_product'
+      assign is_co_lab = true
+    endif
+  -%}
   <div class="product-info__block-list">
     {%- liquid
       assign inside_block_group_context = false
@@ -221,15 +224,22 @@ Supported variables
 
           {%- when 'variant_picker' -%}
             {%- if product != blank -%}
-              {%- render 'variant-picker',
-                  product: product,
-                  form_id: product_form_id,
-                  context: context,
-                  hide_sold_out_variants: block.settings.hide_sold_out_variants,
-                  selector_style: block.settings.selector_style,
-                  swatch_selector_style: block.settings.swatch_selector_style,
-                  variant_image_options: block.settings.variant_image_options,
-                  size_chart_page: block.settings.size_chart_page -%}
+              {%- if is_co_lab -%}
+                {% render 'co-lab-picker',
+                    product: product,
+                    product_form_id: product_form_id,
+                    variant_picker_block: block %}
+              {%- else -%}
+                {%- render 'variant-picker',
+                    product: product,
+                    form_id: product_form_id,
+                    context: context,
+                    hide_sold_out_variants: block.settings.hide_sold_out_variants,
+                    selector_style: block.settings.selector_style,
+                    swatch_selector_style: block.settings.swatch_selector_style,
+                    variant_image_options: block.settings.variant_image_options,
+                    size_chart_page: block.settings.size_chart_page -%}
+              {%- endif -%}
             {%- endif -%}
 
           {%- when 'product_variations' -%}
@@ -357,16 +367,18 @@ Supported variables
             -%}
 
           {%- when 'buy_buttons' -%}
-            {%- render 'buy-buttons',
-                product: product,
-                form_id: product_form_id,
-                show_payment_button: block.settings.show_payment_button,
-                show_gift_card_recipient: block.settings.show_gift_card_recipient,
-                atc_button_background: block.settings.atc_button_background,
-                atc_button_text_color: block.settings.atc_button_text_color,
-                payment_button_background: block.settings.payment_button_background,
-                payment_button_text_color: block.settings.payment_button_text_color
-            -%}
+            {%- unless is_co_lab -%}
+              {%- render 'buy-buttons',
+                  product: product,
+                  form_id: product_form_id,
+                  show_payment_button: block.settings.show_payment_button,
+                  show_gift_card_recipient: block.settings.show_gift_card_recipient,
+                  atc_button_background: block.settings.atc_button_background,
+                  atc_button_text_color: block.settings.atc_button_text_color,
+                  payment_button_background: block.settings.payment_button_background,
+                  payment_button_text_color: block.settings.payment_button_text_color
+              -%}
+            {%- endunless -%}
 
           {%- when 'pickup_availability' -%}
             {%- if product != blank -%}
@@ -762,5 +774,4 @@ Supported variables
       <input type="hidden" disabled name="id" value="{{ product.selected_or_first_available_variant.id }}">
     {%- endform -%}
   {%- endunless -%}
-  {%- endif -%}
 </safe-sticky>

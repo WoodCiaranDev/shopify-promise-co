@@ -1,4 +1,10 @@
-{%- assign stones = shop.metaobjects.birthstone.values -%}
+{%- assign month_order = 'garnet,amethyst,aquamarine,crystal,emerald,light-amethyst,ruby,peridot,sapphire,pink-diamond,champagne,tanzanite' | split: ',' -%}
+{%- assign all_stones = shop.metaobjects.birthstone.values -%}
+{%- assign stones = '' | split: '' -%}
+{%- for h in month_order -%}
+  {%- assign matched = all_stones | where: 'handle', h -%}
+  {%- assign stones = stones | concat: matched -%}
+{%- endfor -%}
 {%- if stones.size > 0 or section.settings.button_label != blank -%}
   <div class="lab-birthstones color-scheme color-scheme--{{ section.settings.color_scheme.id }} {% unless section.settings.remove_vertical_spacing %}section-spacing{% endunless %}{% if section.settings.no_top_spacing %} lab-birthstones--no-top{% endif %}{% if section.settings.separate_section_with_border %} bordered-section{% endif %}"
        style="--lab-birthstones-cols-desktop: {{ section.settings.columns_desktop }}; --lab-birthstones-cols-mobile: {{ section.settings.columns_mobile }}; --lab-birthstones-icon-max-width: {{ section.settings.icon_max_width }}px;{% if section.settings.background_color != blank and section.settings.background_color != 'rgba(0,0,0,0)' %} background-color: {{ section.settings.background_color }};{% endif %}">
