@@ -47,14 +47,18 @@ Pull the live Shopify theme down, commit any client-side changes, and optionally
    - If yes: `git push`
    - If no: continue
 
-7. **Ask about refreshing the SEO preview branch**
-   - Read `.claude/themes.json` — if a `themes.preview` entry exists, ask: "Also refresh the SEO Preview branch with these client changes?"
-   - If yes:
-     - `git checkout <themes.preview.branch>` (default `seo-preview`)
-     - `git merge main --no-ff -m "Merge main into seo-preview"` (resolve any heading_tag conflicts in favour of seo-preview to preserve the h1 experiments)
+7. **Ask about refreshing each preview branch**
+   - Read `.claude/themes.json` and iterate over every entry under `themes` whose key is **not** `live`
+   - For each entry (e.g. `preview`, `colab`), ask the user: "Also refresh the **{key}** branch (`{branch}`) with these client changes?"
+   - If yes for a given entry:
+     - `git checkout <branch>`
+     - `git merge main --no-ff -m "Merge main into <branch>"`
+       - For the `preview`/`seo-preview` branch specifically: resolve any heading_tag conflicts in favour of seo-preview to preserve the h1 experiments
+       - For other branches: resolve conflicts as they arise; if any conflict is unclear, stop and ask the user
      - Return to `main` with `git checkout main`
-     - Remind the user to run `/preview` from `seo-preview` to push the refreshed branch to the SEO theme
-   - If no: stop
+     - Remind the user to run `/preview <key>` from `<branch>` to push the refreshed branch to that theme
+   - If no for an entry: skip it and move to the next
+   - When all entries are handled, stop
 
 ## Rules
 
