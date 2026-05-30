@@ -11,14 +11,7 @@ Inputs:
 ----------------------------------------------------------------------------------------------------------------------
 {%- endcomment -%}
 
-{%- comment -%} Pull stones in calendar order via a fixed handle list {%- endcomment -%}
-{%- assign month_order = 'garnet,amethyst,aquamarine,crystal,emerald,light-amethyst,ruby,peridot,sapphire,pink-diamond,champagne,tanzanite' | split: ',' -%}
-{%- assign all_stones = shop.metaobjects.birthstone.values -%}
-{%- assign stones = '' | split: '' -%}
-{%- for h in month_order -%}
-  {%- assign matched = all_stones | where: 'handle', h -%}
-  {%- assign stones = stones | concat: matched -%}
-{%- endfor -%}
+{%- assign stones = shop.metaobjects.birthstone.values | sort: 'position' -%}
 {%- assign first_variant = product.selected_or_first_available_variant -%}
 
 <c-co-lab-picker
@@ -78,7 +71,6 @@ Inputs:
                   <button type="button"
                           class="c-co-lab-picker__cell"
                           data-action="pick-stone"
-                          data-handle="{{ stone.handle }}"
                           data-name="{{ stone.name }}"
                           data-month="{{ stone.month }}"
                           data-icon="{% if stone.icon != blank %}{{ stone.icon | image_url: width: 120 }}{% endif %}">
@@ -168,7 +160,6 @@ Inputs:
         [
           {%- for stone in stones -%}
             {
-              "handle": {{ stone.handle | json }},
               "name": {{ stone.name | json }},
               "month": {{ stone.month | json }},
               "icon": {% if stone.icon != blank %}{{ stone.icon | image_url: width: 120 | json }}{% else %}null{% endif %}

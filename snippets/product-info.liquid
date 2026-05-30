@@ -353,7 +353,7 @@ Supported variables
             {%- endif -%}
 
           {%- when 'quantity_selector' -%}
-            {%- if product.available -%}
+            {%- if product.available and is_co_lab == false -%}
               {% render 'quantity-selector', variant: product.selected_or_first_available_variant, form: product_form_id %}
             {%- endif -%}
 
