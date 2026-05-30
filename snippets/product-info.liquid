@@ -18,6 +18,9 @@ Supported variables
 {%- endcomment -%}
 
 <safe-sticky class="product-info {% if center_basic_info %}product-info--center{% endif %}">
+  {%- if product.metafields.custom.product_type.value == 'co-lab' and context == 'main_product' -%}
+    {% render 'co-lab-picker', product: product, product_form_id: product_form_id %}
+  {%- else -%}
   <div class="product-info__block-list">
     {%- liquid
       assign inside_block_group_context = false
@@ -759,4 +762,5 @@ Supported variables
       <input type="hidden" disabled name="id" value="{{ product.selected_or_first_available_variant.id }}">
     {%- endform -%}
   {%- endunless -%}
+  {%- endif -%}
 </safe-sticky>

@@ -58,24 +58,6 @@
     },
     "lab_birthstones": {
       "type": "lab-birthstones",
-      "blocks": {
-        "stone_jan": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-garnet.png", "name": "Garnet", "month": "January" } },
-        "stone_feb": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-amethyst.png", "name": "Amethyst", "month": "February" } },
-        "stone_mar": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-aquamarine.png", "name": "Aquamarine", "month": "March" } },
-        "stone_apr": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-crystal.png", "name": "Crystal", "month": "April" } },
-        "stone_may": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-emerald.png", "name": "Emerald", "month": "May" } },
-        "stone_jun": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-light-amethyst.png", "name": "Light Amethyst", "month": "June" } },
-        "stone_jul": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-ruby.png", "name": "Ruby", "month": "July" } },
-        "stone_aug": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-peridot.png", "name": "Peridot", "month": "August" } },
-        "stone_sep": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-sapphire.png", "name": "Sapphire", "month": "September" } },
-        "stone_oct": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-pink-diamond.png", "name": "Pink Diamond", "month": "October" } },
-        "stone_nov": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-champagne.png", "name": "Champagne", "month": "November" } },
-        "stone_dec": { "type": "stone", "settings": { "image": "shopify://shop_images/birthstone-tanzanite.png", "name": "Tanzanite", "month": "December" } }
-      },
-      "block_order": [
-        "stone_jan", "stone_feb", "stone_mar", "stone_apr", "stone_may", "stone_jun",
-        "stone_jul", "stone_aug", "stone_sep", "stone_oct", "stone_nov", "stone_dec"
-      ],
       "settings": {
         "color_scheme": "scheme-2",
         "content_width": "lg",

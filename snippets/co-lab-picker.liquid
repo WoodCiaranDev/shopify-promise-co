@@ -1,0 +1,180 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+CO-LAB PICKER
+
+Renders the Promise Co-Lab right-column picker for products tagged with metafield custom.product_type = 'co-lab'.
+Replaces the standard block list. Multi-state UI: default → customising → stone grid → reviewing.
+
+Inputs:
+* product           — the Co-Lab ring
+* product_form_id   — form ID used by the rest of the theme (sticky bar, payment button, etc.)
+----------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- assign stones = shop.metaobjects.birthstone.values -%}
+{%- assign first_variant = product.selected_or_first_available_variant -%}
+
+<c-co-lab-picker
+  class="c-co-lab-picker"
+  data-product-id="{{ product.id }}"
+  data-base-price="{{ first_variant.price }}"
+  data-birthstone-price="1000"
+  data-engraving-price="2000"
+  data-birthstone-addon-handle="birthstone-addon"
+  data-engraving-addon-handle="engraving-addon"
+  data-moneyformat="{{ shop.money_format | escape }}"
+>
+  <product-form>
+    {%- form 'product', product, id: product_form_id -%}
+      <input type="hidden" name="id" value="{{ first_variant.id }}" data-variant-id>
+
+      <header class="c-co-lab-picker__header">
+        {%- if settings.colab_logo != blank -%}
+          {{- settings.colab_logo | image_url: width: 120 | image_tag: class: 'c-co-lab-picker__logo', loading: 'lazy', widths: '60,90,120,180' -}}
+        {%- else -%}
+          <p class="c-co-lab-picker__eyebrow h6">CoLab</p>
+        {%- endif -%}
+        <h1 class="c-co-lab-picker__title h2">{{ product.title }}</h1>
+        <p class="c-co-lab-picker__price">
+          <span data-base-price-display>{{ first_variant.price | money_without_trailing_zeros }}</span>
+        </p>
+      </header>
+
+      <section class="c-co-lab-picker__section c-co-lab-picker__section--metal">
+        <h2 class="c-co-lab-picker__section-title h6">Metal &amp; Sizing</h2>
+        {% render 'variant-picker', product: product, product_form_id: product_form_id, block: section.blocks[0] %}
+      </section>
+
+      <section class="c-co-lab-picker__section c-co-lab-picker__section--custom" data-customisation>
+        <h2 class="c-co-lab-picker__section-title h6">Customisation</h2>
+        <p class="c-co-lab-picker__note">Personalised rings are non-refundable and non-exchangeable.</p>
+
+        <button type="button" class="c-co-lab-picker__stones-toggle" data-action="toggle-stones" aria-expanded="false">
+          <span>Choose Hidden Birthstones</span>
+          <span class="c-co-lab-picker__chev" aria-hidden="true">↓</span>
+        </button>
+
+        <div class="c-co-lab-picker__stones" data-stones hidden>
+          {%- for slot in (1..2) -%}
+            <div class="c-co-lab-picker__stone-row" data-slot="{{ slot }}">
+              <p class="c-co-lab-picker__stone-label h6">
+                Birthstone {% if slot == 1 %}One{% else %}Two{% endif %}
+                <span class="c-co-lab-picker__uplift">+ £10</span>
+              </p>
+              <button type="button" class="c-co-lab-picker__stone-select" data-action="open-grid" data-slot="{{ slot }}" aria-haspopup="dialog">
+                <span class="c-co-lab-picker__stone-swatch" data-stone-swatch="{{ slot }}" hidden></span>
+                <span class="c-co-lab-picker__stone-text" data-stone-text="{{ slot }}">Select Stone</span>
+                <span class="c-co-lab-picker__chev" aria-hidden="true">↓</span>
+              </button>
+              <input type="hidden" name="properties[Birthstone {% if slot == 1 %}One{% else %}Two{% endif %}]" data-stone-input="{{ slot }}" value="" disabled>
+            </div>
+          {%- endfor -%}
+
+          <div class="c-co-lab-picker__grid" data-grid hidden>
+            <ul class="c-co-lab-picker__grid-list">
+              {%- for stone in stones -%}
+                <li>
+                  <button type="button"
+                          class="c-co-lab-picker__cell"
+                          data-action="pick-stone"
+                          data-handle="{{ stone.handle }}"
+                          data-name="{{ stone.name }}"
+                          data-month="{{ stone.month }}"
+                          data-icon="{% if stone.icon != blank %}{{ stone.icon | image_url: width: 120 }}{% endif %}">
+                    {%- if stone.icon != blank -%}
+                      <img class="c-co-lab-picker__cell-icon"
+                           src="{{ stone.icon | image_url: width: 120 }}"
+                           alt=""
+                           width="60" height="60" loading="lazy">
+                    {%- endif -%}
+                    <span class="c-co-lab-picker__cell-name h6">{{ stone.name }}</span>
+                    <span class="c-co-lab-picker__cell-month">{{ stone.month }}</span>
+                  </button>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        </div>
+
+        <div class="c-co-lab-picker__engraving">
+          <label class="c-co-lab-picker__stone-label h6" for="{{ product_form_id }}-engraving">
+            Engraving
+            <span class="c-co-lab-picker__uplift">+ £20</span>
+          </label>
+          <input type="text"
+                 id="{{ product_form_id }}-engraving"
+                 class="c-co-lab-picker__engraving-input"
+                 name="properties[Engraving]"
+                 maxlength="12"
+                 placeholder="Type Your Engraving Here"
+                 data-engraving-input
+                 disabled>
+          <p class="c-co-lab-picker__engraving-count" data-engraving-count>0/12 Characters</p>
+        </div>
+      </section>
+
+      <section class="c-co-lab-picker__section c-co-lab-picker__section--review" data-review hidden>
+        <ul class="c-co-lab-picker__summary unstyled-list">
+          <li class="c-co-lab-picker__summary-row" data-summary-row="stone-1" hidden>
+            <span class="c-co-lab-picker__summary-label h6">Birth Stone One:</span>
+            <span class="c-co-lab-picker__summary-value">
+              <span class="c-co-lab-picker__stone-swatch" data-summary-swatch="1"></span>
+              <span data-summary-text="1"></span>
+            </span>
+            <span class="c-co-lab-picker__summary-uplift">+ £10</span>
+          </li>
+          <li class="c-co-lab-picker__summary-row" data-summary-row="stone-2" hidden>
+            <span class="c-co-lab-picker__summary-label h6">Birth Stone Two:</span>
+            <span class="c-co-lab-picker__summary-value">
+              <span class="c-co-lab-picker__stone-swatch" data-summary-swatch="2"></span>
+              <span data-summary-text="2"></span>
+            </span>
+            <span class="c-co-lab-picker__summary-uplift">+ £10</span>
+          </li>
+          <li class="c-co-lab-picker__summary-row" data-summary-row="engraving" hidden>
+            <span class="c-co-lab-picker__summary-label h6">Engraving:</span>
+            <span class="c-co-lab-picker__summary-value" data-summary-engraving></span>
+            <span class="c-co-lab-picker__summary-uplift">+ £20</span>
+          </li>
+        </ul>
+        <p class="c-co-lab-picker__total h3" data-total>{{ first_variant.price | money_without_trailing_zeros }}</p>
+
+        <label class="c-co-lab-picker__confirm">
+          <input type="checkbox" data-confirm-checkbox>
+          <span class="c-co-lab-picker__confirm-label h6">I confirm this is my perfect potion</span>
+        </label>
+        <p class="c-co-lab-picker__confirm-note">
+          I confirm that by ticking this box all the information I have provided is correct and I am aware that customisable pieces are non-refundable and non-exchangeable. I am aware that each ring is made to order and has longer delivery times.
+        </p>
+      </section>
+
+      <div class="c-co-lab-picker__actions">
+        <button type="button"
+                class="c-co-lab-picker__action c-co-lab-picker__action--secondary"
+                data-action="edit"
+                hidden>
+          ← Edit My Order
+        </button>
+        <button type="submit"
+                class="c-co-lab-picker__action c-co-lab-picker__action--primary"
+                data-action="submit"
+                form="{{ product_form_id }}">
+          Add to Cart →
+        </button>
+      </div>
+
+      <script type="application/json" data-stones-json>
+        [
+          {%- for stone in stones -%}
+            {
+              "handle": {{ stone.handle | json }},
+              "name": {{ stone.name | json }},
+              "month": {{ stone.month | json }},
+              "icon": {% if stone.icon != blank %}{{ stone.icon | image_url: width: 120 | json }}{% else %}null{% endif %}
+            }{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        ]
+      </script>
+    {%- endform -%}
+  </product-form>
+</c-co-lab-picker>
