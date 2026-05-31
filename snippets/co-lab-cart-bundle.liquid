@@ -3,9 +3,8 @@
 CO-LAB CART BUNDLE
 ----------------------------------------------------------------------------------------------------------------------
 
-Renders one Co-Lab bundle (ring + 0-2 birthstone add-ons + 0-1 engraving add-on) as a single review-style
-cream card on the cart page. Mirrors the "Mega Menu – 10" design so the customer reviews their bundle here
-rather than inside the picker on the PDP.
+Renders one Co-Lab bundle as a single review-style cream card on the cart page. Mirrors the "Mega Menu – 10"
+design so the customer reviews their bundle here rather than inside the picker on the PDP.
 
 Inputs:
 * parent          — the parent ring line_item (has properties._bundle_role == 'parent')
@@ -26,53 +25,84 @@ Inputs:
   endfor
 
   assign confirm_id = 'co-lab-confirm-' | append: index
+
+  # Build a lookup of stones (name → icon URL) so summary rows can show a swatch.
+  assign all_stones = shop.metaobjects.birthstone.values
 -%}
 
 <c-co-lab-cart-bundle class="c-co-lab-cart-bundle"
                       data-bundle-id="{{ bundle_id }}"
                       data-parent-key="{{ parent.key | escape }}">
   <header class="c-co-lab-cart-bundle__header">
-    {%- if parent.image != blank -%}
-      {{- parent.image | image_url: width: 240 | image_tag: class: 'c-co-lab-cart-bundle__media', loading: 'lazy', widths: '120,180,240,360', sizes: '120px' -}}
+    {%- if settings.colab_logo != blank -%}
+      {{- settings.colab_logo | image_url: width: 120 | image_tag: class: 'c-co-lab-cart-bundle__logo', loading: 'lazy', widths: '60,90,120' -}}
+    {%- else -%}
+      <p class="c-co-lab-cart-bundle__eyebrow">colab</p>
     {%- endif -%}
-    <div class="c-co-lab-cart-bundle__heading">
-      <p class="c-co-lab-cart-bundle__eyebrow h6">CoLab</p>
-      <h2 class="c-co-lab-cart-bundle__title h3">{{ parent.product.title }}</h2>
-      {%- if parent.variant.title != 'Default Title' -%}
-        <p class="c-co-lab-cart-bundle__variant">{{ parent.variant.title }}</p>
-      {%- endif -%}
-      <p class="c-co-lab-cart-bundle__base-price">{{ parent.final_line_price | money_without_trailing_zeros }}</p>
-    </div>
+    <h2 class="c-co-lab-cart-bundle__title">{{ parent.product.title }}</h2>
+    <p class="c-co-lab-cart-bundle__base-price">{{ parent.final_line_price | money_without_trailing_zeros }}</p>
   </header>
 
-  <ul class="c-co-lab-cart-bundle__summary unstyled-list">
+  {%- if parent.variant.title != 'Default Title' -%}
+    <section class="c-co-lab-cart-bundle__group">
+      <h3 class="c-co-lab-cart-bundle__group-title">Metal &amp; Sizing</h3>
+      {%- for option in parent.product.options_with_values -%}
+        {%- assign selected_value = parent.variant.options[forloop.index0] -%}
+        <p class="c-co-lab-cart-bundle__row">
+          <span class="c-co-lab-cart-bundle__row-label">{{ option.name }}:</span>
+          <span class="c-co-lab-cart-bundle__row-value">{{ selected_value }}</span>
+        </p>
+      {%- endfor -%}
+    </section>
+  {%- endif -%}
+
+  <section class="c-co-lab-cart-bundle__group">
+    <h3 class="c-co-lab-cart-bundle__group-title">Customisation</h3>
     {%- for property in parent.properties -%}
       {%- assign first_char = property.first | slice: 0 -%}
       {%- if first_char == '_' -%}{%- continue -%}{%- endif -%}
       {%- if property.last == blank -%}{%- continue -%}{%- endif -%}
       {%- liquid
         assign uplift = ''
+        assign is_stone = false
         case property.first
           when 'Birthstone One', 'Birthstone Two'
             assign uplift = '+ £10'
+            assign is_stone = true
           when 'Engraving'
             assign uplift = '+ £20'
         endcase
-      -%}
-      <li class="c-co-lab-cart-bundle__summary-row">
-        <span class="c-co-lab-cart-bundle__summary-label h6">{{ property.first }}:</span>
-        <span class="c-co-lab-cart-bundle__summary-value">{{ property.last }}</span>
-        {%- if uplift != blank -%}
-          <span class="c-co-lab-cart-bundle__summary-uplift">{{ uplift }}</span>
-        {%- endif -%}
-      </li>
-    {%- endfor -%}
-  </ul>
 
-  <p class="c-co-lab-cart-bundle__total h2">{{ total_price | money_without_trailing_zeros }}</p>
+        assign swatch_url = ''
+        if is_stone
+          assign stone_name = property.last | split: ' - ' | first | strip
+          for s in all_stones
+            if s.name == stone_name and s.icon != blank
+              assign swatch_url = s.icon | image_url: width: 60
+              break
+            endif
+          endfor
+        endif
+      -%}
+      <p class="c-co-lab-cart-bundle__row">
+        <span class="c-co-lab-cart-bundle__row-label">{{ property.first }}:</span>
+        <span class="c-co-lab-cart-bundle__row-value">
+          {%- if swatch_url != blank -%}
+            <span class="c-co-lab-cart-bundle__row-swatch" style="background-image: url('{{ swatch_url }}');"></span>
+          {%- endif -%}
+          {{ property.last }}
+        </span>
+        {%- if uplift != blank -%}
+          <span class="c-co-lab-cart-bundle__row-uplift">{{ uplift }}</span>
+        {%- endif -%}
+      </p>
+    {%- endfor -%}
+  </section>
+
+  <p class="c-co-lab-cart-bundle__total">{{ total_price | money_without_trailing_zeros }}</p>
 
   <label class="c-co-lab-cart-bundle__confirm" for="{{ confirm_id }}">
-    <span class="c-co-lab-cart-bundle__confirm-label h6">I confirm this is my perfect potion</span>
+    <span class="c-co-lab-cart-bundle__confirm-label">I confirm this is my perfect potion</span>
     <input type="checkbox" id="{{ confirm_id }}" data-confirm-checkbox required>
   </label>
   <p class="c-co-lab-cart-bundle__confirm-note">
@@ -85,10 +115,19 @@ Inputs:
        data-action="edit-bundle">
       ← Edit My Order
     </a>
-    <button type="button"
-            class="c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--remove"
-            data-action="remove-bundle">
-      Remove
+    <button type="submit"
+            name="checkout"
+            class="c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--primary"
+            data-action="checkout">
+      Checkout →
     </button>
   </div>
+
+  <button type="button"
+          class="c-co-lab-cart-bundle__remove"
+          data-action="remove-bundle"
+          aria-label="Remove bundle from cart"
+          title="Remove this from cart">
+    Remove from cart
+  </button>
 </c-co-lab-cart-bundle>

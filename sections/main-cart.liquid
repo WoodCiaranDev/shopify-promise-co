@@ -56,11 +56,6 @@
           {%- assign update_button = 'cart.general.update_cart' | t -%}
           {%- render 'button', type: 'submit', content: update_button, style: 'outline' -%}
         </noscript>
-
-        <div class="c-co-lab-cart-page__checkout">
-          {%- assign checkout_button = 'cart.general.checkout' | t -%}
-          {%- render 'button', type: 'submit', content: checkout_button, name: 'checkout', stretch: true -%}
-        </div>
       </form>
     </div>
   {%- else -%}

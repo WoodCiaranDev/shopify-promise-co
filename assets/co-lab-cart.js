@@ -14,24 +14,17 @@
     else document.addEventListener('DOMContentLoaded', fn);
   }
 
-  function findCheckoutButton() {
-    // Cart-page checkout button — submitted as part of the cart form with name="checkout".
-    return document.querySelector('form.cart-page button[name="checkout"]');
-  }
-
-  function refreshCheckoutGate() {
-    const btn = findCheckoutButton();
-    if (!btn) return;
-    const boxes = document.querySelectorAll('c-co-lab-cart-bundle [data-confirm-checkbox]');
-    if (boxes.length === 0) {
-      btn.disabled = false;
-      return;
-    }
-    const allTicked = [...boxes].every((b) => b.checked);
-    btn.disabled = !allTicked;
-    btn.toggleAttribute('aria-disabled', !allTicked);
-    btn.style.opacity = allTicked ? '' : '0.5';
-    btn.style.cursor = allTicked ? '' : 'not-allowed';
+  function refreshCardGates() {
+    // Each card's Checkout button is gated by its own confirm checkbox.
+    document.querySelectorAll('c-co-lab-cart-bundle').forEach((card) => {
+      const cb = card.querySelector('[data-confirm-checkbox]');
+      const btn = card.querySelector('[data-action="checkout"]');
+      if (!cb || !btn) return;
+      btn.disabled = !cb.checked;
+      btn.toggleAttribute('aria-disabled', !cb.checked);
+      btn.style.opacity = cb.checked ? '' : '0.4';
+      btn.style.cursor = cb.checked ? '' : 'not-allowed';
+    });
   }
 
   async function removeBundle(bundleCard) {
@@ -64,7 +57,7 @@
 
   function init() {
     document.querySelectorAll('c-co-lab-cart-bundle [data-confirm-checkbox]').forEach((cb) => {
-      cb.addEventListener('change', refreshCheckoutGate);
+      cb.addEventListener('change', refreshCardGates);
     });
 
     document.querySelectorAll('c-co-lab-cart-bundle [data-action="remove-bundle"]').forEach((btn) => {
@@ -75,7 +68,7 @@
       });
     });
 
-    refreshCheckoutGate();
+    refreshCardGates();
   }
 
   ready(init);
