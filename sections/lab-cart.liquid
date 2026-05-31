@@ -49,6 +49,29 @@ shared snippets/co-lab-cart-bundle.liquid card for each.
           {%- endfor -%}
         </div>
 
+        <aside class="c-co-lab-cart-summary" data-cart-summary>
+          <p class="c-co-lab-cart-summary__total-row">
+            <span class="c-co-lab-cart-summary__total-label">Total</span>
+            <span class="c-co-lab-cart-summary__total-value">{{ cart.total_price | money_without_trailing_zeros }}</span>
+          </p>
+
+          <p class="c-co-lab-cart-summary__terms">
+            By checking out you confirm that all the information provided is correct. Customisable pieces are non-refundable and non-exchangeable, and each ring is made to order with longer delivery times.
+          </p>
+
+          <button type="submit"
+                  name="checkout"
+                  class="c-co-lab-cart-summary__checkout"
+                  data-global-checkout
+                  disabled>
+            Checkout →
+          </button>
+
+          <p class="c-co-lab-cart-summary__gate-note" data-gate-note hidden>
+            Confirm each ring above to continue.
+          </p>
+        </aside>
+
         <noscript>
           {%- assign update_button = 'cart.general.update_cart' | t -%}
           {%- render 'button', type: 'submit', content: update_button, style: 'outline' -%}

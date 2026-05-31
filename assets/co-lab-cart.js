@@ -1,11 +1,9 @@
 /**
  * Co-Lab cart-page behaviour.
  *
- * - Gates the global checkout button on every bundle card's confirm checkbox.
- * - Removes ALL lines of a bundle (parent + birthstone/engraving children) when
- *   the customer clicks "Remove" on a bundle card.
- *
- * Loaded site-wide; activates itself only when bundle cards are present on the page.
+ * - Per-card confirm checkboxes flip a visual "confirmed" state on the card.
+ * - The single global Checkout button is gated on every card being confirmed.
+ * - "Remove" deletes all lines of a bundle (parent + birthstone/engraving children).
  */
 
 (function () {
@@ -14,17 +12,24 @@
     else document.addEventListener('DOMContentLoaded', fn);
   }
 
-  function refreshCardGates() {
-    // Each card's Checkout button is gated by its own confirm checkbox.
-    document.querySelectorAll('c-co-lab-cart-bundle').forEach((card) => {
+  function refreshGate() {
+    const cards = document.querySelectorAll('c-co-lab-cart-bundle');
+    const checkout = document.querySelector('[data-global-checkout]');
+    const note = document.querySelector('[data-gate-note]');
+    if (!cards.length || !checkout) return;
+
+    let unconfirmed = 0;
+    cards.forEach((card) => {
       const cb = card.querySelector('[data-confirm-checkbox]');
-      const btn = card.querySelector('[data-action="checkout"]');
-      if (!cb || !btn) return;
-      btn.disabled = !cb.checked;
-      btn.toggleAttribute('aria-disabled', !cb.checked);
-      btn.style.opacity = cb.checked ? '' : '0.4';
-      btn.style.cursor = cb.checked ? '' : 'not-allowed';
+      const confirmed = !!(cb && cb.checked);
+      card.classList.toggle('c-co-lab-cart-bundle--confirmed', confirmed);
+      if (!confirmed) unconfirmed += 1;
     });
+
+    const allConfirmed = unconfirmed === 0;
+    checkout.disabled = !allConfirmed;
+    checkout.toggleAttribute('aria-disabled', !allConfirmed);
+    if (note) note.hidden = allConfirmed;
   }
 
   async function removeBundle(bundleCard) {
@@ -39,7 +44,6 @@
 
       if (keys.length === 0) return;
 
-      // /cart/update.js accepts a `updates` object of { lineKey: 0 } to remove.
       const updates = {};
       keys.forEach((k) => { updates[k] = 0; });
 
@@ -57,7 +61,7 @@
 
   function init() {
     document.querySelectorAll('c-co-lab-cart-bundle [data-confirm-checkbox]').forEach((cb) => {
-      cb.addEventListener('change', refreshCardGates);
+      cb.addEventListener('change', refreshGate);
     });
 
     document.querySelectorAll('c-co-lab-cart-bundle [data-action="remove-bundle"]').forEach((btn) => {
@@ -68,7 +72,7 @@
       });
     });
 
-    refreshCardGates();
+    refreshGate();
   }
 
   ready(init);

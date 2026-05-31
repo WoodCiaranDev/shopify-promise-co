@@ -34,6 +34,20 @@ Inputs:
 
   # Build a lookup of stones (name → icon URL) so summary rows can show a swatch.
   assign all_stones = shop.metaobjects.birthstone.values
+
+  # Detect whether any customisation properties are present so we can hide the
+  # whole section when the customer didn't pick stones or engraving.
+  assign has_customisation = false
+  for property in parent.properties
+    assign first_char = property.first | slice: 0
+    if first_char == '_'
+      continue
+    endif
+    if property.last != blank
+      assign has_customisation = true
+      break
+    endif
+  endfor
 -%}
 
 <c-co-lab-cart-bundle class="c-co-lab-cart-bundle"
@@ -61,6 +75,7 @@ Inputs:
     </section>
   {%- endif -%}
 
+  {%- if has_customisation -%}
   <section class="c-co-lab-cart-bundle__group">
     <h3 class="c-co-lab-cart-bundle__group-title">Customisation</h3>
     {%- for property in parent.properties -%}
@@ -103,16 +118,14 @@ Inputs:
       </p>
     {%- endfor -%}
   </section>
+  {%- endif -%}
 
-  <p class="c-co-lab-cart-bundle__total">{{ total_price | money_without_trailing_zeros }}</p>
+  <p class="c-co-lab-cart-bundle__total" data-bundle-total="{{ total_price }}">{{ total_price | money_without_trailing_zeros }}</p>
 
   <label class="c-co-lab-cart-bundle__confirm" for="{{ confirm_id }}">
-    <span class="c-co-lab-cart-bundle__confirm-label">I confirm this is my perfect potion</span>
     <input type="checkbox" id="{{ confirm_id }}" data-confirm-checkbox required>
+    <span class="c-co-lab-cart-bundle__confirm-label">I confirm this is my perfect potion</span>
   </label>
-  <p class="c-co-lab-cart-bundle__confirm-note">
-    I confirm that by ticking this box all the information I have provided is correct and I am aware that customisable pieces are non-refundable and non-exchangeable. I am aware that each ring is made to order and has longer delivery times.
-  </p>
 
   <div class="c-co-lab-cart-bundle__actions">
     <a class="c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--secondary"
@@ -120,19 +133,11 @@ Inputs:
        data-action="edit-bundle">
       ← Edit My Order
     </a>
-    <button type="submit"
-            name="checkout"
-            class="c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--primary"
-            data-action="checkout">
-      Checkout →
+    <button type="button"
+            class="c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--ghost"
+            data-action="remove-bundle"
+            aria-label="Remove bundle from cart">
+      Remove
     </button>
   </div>
-
-  <button type="button"
-          class="c-co-lab-cart-bundle__remove"
-          data-action="remove-bundle"
-          aria-label="Remove bundle from cart"
-          title="Remove this from cart">
-    Remove from cart
-  </button>
 </c-co-lab-cart-bundle>
