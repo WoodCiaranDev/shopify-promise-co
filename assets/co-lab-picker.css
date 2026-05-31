@@ -346,6 +346,21 @@
   padding-block: 2.5rem 3rem;
 }
 
+/* Hide the third-party "Congratulations / free shipping" widget on Co-Lab carts. */
+.c-co-lab-cart-page .free_shipping_card {
+  display: none !important;
+}
+
+.c-co-lab-cart-bundle__logo {
+  display: block;
+  margin: 0 auto -1.5rem;
+  transform: translateY(-50%);
+  max-width: 120px;
+  height: auto;
+  position: relative;
+  z-index: 2;
+}
+
 .c-co-lab-cart-page__checkout {
   margin-top: 1.5rem;
 }
@@ -372,12 +387,6 @@
   margin-bottom: 1.5rem;
 }
 
-.c-co-lab-cart-bundle__logo {
-  display: block;
-  width: auto;
-  height: 32px;
-  margin: 0 auto 0.25rem;
-}
 
 .c-co-lab-cart-bundle__eyebrow {
   margin: 0 0 0.25rem;

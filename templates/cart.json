@@ -11,7 +11,9 @@
   "sections": {
     "main": {
       "type": "main-cart",
-      "settings": {}
+      "settings": {
+        "colab_logo": "shopify:\/\/shop_images\/lab-logo.png"
+      }
     }
   },
   "order": [

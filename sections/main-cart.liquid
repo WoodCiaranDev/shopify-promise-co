@@ -46,7 +46,7 @@
           {%- assign bundle_index = 0 -%}
           {%- for item in cart.items -%}
             {%- if item.properties._bundle_role == 'parent' -%}
-              {%- render 'co-lab-cart-bundle', parent: item, cart: cart, index: bundle_index -%}
+              {%- render 'co-lab-cart-bundle', parent: item, cart: cart, index: bundle_index, colab_logo: section.settings.colab_logo -%}
               {%- assign bundle_index = bundle_index | plus: 1 -%}
             {%- endif -%}
           {%- endfor -%}
@@ -245,6 +245,11 @@
       "id": "color_scheme",
       "label": "t:global.colors.scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "image_picker",
+      "id": "colab_logo",
+      "label": "Co-Lab logo (above the bundle card)"
     },
     {
       "type": "checkbox",

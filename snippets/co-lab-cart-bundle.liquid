@@ -33,12 +33,11 @@ Inputs:
 <c-co-lab-cart-bundle class="c-co-lab-cart-bundle"
                       data-bundle-id="{{ bundle_id }}"
                       data-parent-key="{{ parent.key | escape }}">
+  {%- if colab_logo != blank -%}
+    {{- colab_logo | image_url: width: 240 | image_tag: class: 'c-co-lab-cart-bundle__logo', loading: 'lazy', widths: '80,120,240', sizes: '120px', alt: 'CoLab' -}}
+  {%- endif -%}
+
   <header class="c-co-lab-cart-bundle__header">
-    {%- if settings.colab_logo != blank -%}
-      {{- settings.colab_logo | image_url: width: 120 | image_tag: class: 'c-co-lab-cart-bundle__logo', loading: 'lazy', widths: '60,90,120' -}}
-    {%- else -%}
-      <p class="c-co-lab-cart-bundle__eyebrow">colab</p>
-    {%- endif -%}
     <h2 class="c-co-lab-cart-bundle__title">{{ parent.product.title }}</h2>
     <p class="c-co-lab-cart-bundle__base-price">{{ parent.final_line_price | money_without_trailing_zeros }}</p>
   </header>
