@@ -1,0 +1,94 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+CO-LAB CART BUNDLE
+----------------------------------------------------------------------------------------------------------------------
+
+Renders one Co-Lab bundle (ring + 0-2 birthstone add-ons + 0-1 engraving add-on) as a single review-style
+cream card on the cart page. Mirrors the "Mega Menu – 10" design so the customer reviews their bundle here
+rather than inside the picker on the PDP.
+
+Inputs:
+* parent          — the parent ring line_item (has properties._bundle_role == 'parent')
+* cart            — the cart object, used to locate child lines by shared _bundle_id
+* index           — 0-based index, used to make checkbox ids unique when multiple bundles are in cart
+----------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- liquid
+  assign bundle_id = parent.properties._bundle_id
+  assign edit_url = parent.properties._product_url | default: parent.product.url
+
+  assign total_price = parent.final_line_price
+  for sibling in cart.items
+    if sibling.properties._bundle_id == bundle_id and sibling.properties._bundle_role != 'parent'
+      assign total_price = total_price | plus: sibling.final_line_price
+    endif
+  endfor
+
+  assign confirm_id = 'co-lab-confirm-' | append: index
+-%}
+
+<c-co-lab-cart-bundle class="c-co-lab-cart-bundle"
+                      data-bundle-id="{{ bundle_id }}"
+                      data-parent-key="{{ parent.key | escape }}">
+  <header class="c-co-lab-cart-bundle__header">
+    {%- if parent.image != blank -%}
+      {{- parent.image | image_url: width: 240 | image_tag: class: 'c-co-lab-cart-bundle__media', loading: 'lazy', widths: '120,180,240,360', sizes: '120px' -}}
+    {%- endif -%}
+    <div class="c-co-lab-cart-bundle__heading">
+      <p class="c-co-lab-cart-bundle__eyebrow h6">CoLab</p>
+      <h2 class="c-co-lab-cart-bundle__title h3">{{ parent.product.title }}</h2>
+      {%- if parent.variant.title != 'Default Title' -%}
+        <p class="c-co-lab-cart-bundle__variant">{{ parent.variant.title }}</p>
+      {%- endif -%}
+      <p class="c-co-lab-cart-bundle__base-price">{{ parent.final_line_price | money_without_trailing_zeros }}</p>
+    </div>
+  </header>
+
+  <ul class="c-co-lab-cart-bundle__summary unstyled-list">
+    {%- for property in parent.properties -%}
+      {%- assign first_char = property.first | slice: 0 -%}
+      {%- if first_char == '_' -%}{%- continue -%}{%- endif -%}
+      {%- if property.last == blank -%}{%- continue -%}{%- endif -%}
+      {%- liquid
+        assign uplift = ''
+        case property.first
+          when 'Birthstone One', 'Birthstone Two'
+            assign uplift = '+ £10'
+          when 'Engraving'
+            assign uplift = '+ £20'
+        endcase
+      -%}
+      <li class="c-co-lab-cart-bundle__summary-row">
+        <span class="c-co-lab-cart-bundle__summary-label h6">{{ property.first }}:</span>
+        <span class="c-co-lab-cart-bundle__summary-value">{{ property.last }}</span>
+        {%- if uplift != blank -%}
+          <span class="c-co-lab-cart-bundle__summary-uplift">{{ uplift }}</span>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+
+  <p class="c-co-lab-cart-bundle__total h2">{{ total_price | money_without_trailing_zeros }}</p>
+
+  <label class="c-co-lab-cart-bundle__confirm" for="{{ confirm_id }}">
+    <span class="c-co-lab-cart-bundle__confirm-label h6">I confirm this is my perfect potion</span>
+    <input type="checkbox" id="{{ confirm_id }}" data-confirm-checkbox required>
+  </label>
+  <p class="c-co-lab-cart-bundle__confirm-note">
+    I confirm that by ticking this box all the information I have provided is correct and I am aware that customisable pieces are non-refundable and non-exchangeable. I am aware that each ring is made to order and has longer delivery times.
+  </p>
+
+  <div class="c-co-lab-cart-bundle__actions">
+    <a class="c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--secondary"
+       href="{{ edit_url }}"
+       data-action="edit-bundle">
+      ← Edit My Order
+    </a>
+    <button type="button"
+            class="c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--remove"
+            data-action="remove-bundle">
+      Remove
+    </button>
+  </div>
+</c-co-lab-cart-bundle>

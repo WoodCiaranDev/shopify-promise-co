@@ -326,6 +326,7 @@ Supported variables
             {%- endif -%}
 
           {%- when 'delivery_countdown' -%}
+            {%- if is_co_lab -%}{%- continue -%}{%- endif -%}
             {%- liquid
               assign show_countdown = false
               assign market_type = ''
@@ -439,6 +440,7 @@ Supported variables
             {%- endunless -%}
 
           {%- when 'text' -%}
+            {%- if is_co_lab -%}{%- continue -%}{%- endif -%}
             {%- if block.settings.text != blank -%}
               <div class="prose">
                 {{- block.settings.text -}}
@@ -456,6 +458,7 @@ Supported variables
             -%}
 
           {%- when 'feature_with_icon' -%}
+            {%- if is_co_lab -%}{%- continue -%}{%- endif -%}
             {%- if block.settings.text != blank or block.settings.icon != 'none' or block.settings.custom_icon != blank -%}
               {%- capture feature_content -%}
                 {%- if block.settings.custom_icon != blank -%}
