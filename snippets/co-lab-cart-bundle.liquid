@@ -15,7 +15,13 @@ Inputs:
 
 {%- liquid
   assign bundle_id = parent.properties._bundle_id
-  assign edit_url = parent.properties._product_url | default: parent.product.url
+  assign base_url = parent.properties._product_url | default: parent.product.url
+  # Append ?edit_bundle=<id> so the picker can pre-populate from this cart line.
+  if base_url contains '?'
+    assign edit_url = base_url | append: '&edit_bundle=' | append: bundle_id
+  else
+    assign edit_url = base_url | append: '?edit_bundle=' | append: bundle_id
+  endif
 
   assign total_price = parent.final_line_price
   for sibling in cart.items

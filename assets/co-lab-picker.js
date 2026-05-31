@@ -11,8 +11,96 @@ class CoLabPicker extends HTMLElement {
     this.engravingCount = this.querySelector('[data-engraving-count]');
     this.variantIdInput = this.querySelector('[data-variant-id]');
 
+    this.stonesDataEl = this.querySelector('[data-stones-json]');
+    try {
+      this.stonesData = JSON.parse(this.stonesDataEl?.textContent || '[]');
+    } catch {
+      this.stonesData = [];
+    }
+
     this.bindEvents();
     this.refresh();
+    this.maybePrefillFromCart();
+  }
+
+  /**
+   * If the URL carries ?edit_bundle=<id>, look the matching bundle up in the
+   * cart, populate the picker with the customer's previous selections, and
+   * remove that bundle so the next Add to Cart creates a fresh one without
+   * duplicating.
+   */
+  async maybePrefillFromCart() {
+    const params = new URLSearchParams(window.location.search);
+    const editId = params.get('edit_bundle');
+    if (!editId) return;
+
+    try {
+      const cart = await fetch(`${window.Shopify.routes.root}cart.js`).then((r) => r.json());
+      const parent = cart.items.find(
+        (i) => i.properties?._bundle_id === editId && i.properties?._bundle_role === 'parent'
+      );
+      if (!parent) return;
+
+      this.applyBundleProperties(parent.properties, parent.variant_id);
+      await this.removeBundleLines(cart, editId);
+    } catch (err) {
+      console.warn('[co-lab-picker] prefill from cart failed', err);
+    }
+  }
+
+  applyBundleProperties(properties, variantId) {
+    // Open the customisation section first so its inputs are interactive.
+    if (this.stonesToggle?.getAttribute('aria-expanded') !== 'true') {
+      this.toggleStones();
+    }
+
+    // Variant — sync the hidden form input. The size-select web component
+    // listens to its own select element; we update both to keep them in sync.
+    if (variantId && this.variantIdInput) {
+      this.variantIdInput.value = String(variantId);
+      const sizeSelect = document.querySelector('[data-size-select]');
+      if (sizeSelect) {
+        const opt = [...sizeSelect.options].find((o) => o.value === String(variantId));
+        if (opt) {
+          sizeSelect.value = String(variantId);
+          sizeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      }
+    }
+
+    // Stones — properties carry "Sapphire - September" style values.
+    [['1', 'Birthstone One'], ['2', 'Birthstone Two']].forEach(([slot, key]) => {
+      const value = properties[key];
+      if (!value) return;
+      const stoneName = value.split(' - ')[0].trim();
+      const stone = this.stonesData.find((s) => s.name === stoneName);
+      this.activeSlot = slot;
+      this.pickStone({
+        name: stone?.name || stoneName,
+        month: stone?.month || (value.split(' - ')[1] || '').trim(),
+        icon: stone?.icon || '',
+      });
+    });
+
+    // Engraving
+    if (properties.Engraving && this.engravingInput) {
+      this.engravingInput.value = properties.Engraving;
+      this.onEngravingChange();
+    }
+  }
+
+  async removeBundleLines(cart, bundleId) {
+    const keys = cart.items
+      .filter((i) => i.properties?._bundle_id === bundleId)
+      .map((i) => i.key);
+    if (keys.length === 0) return;
+    const updates = {};
+    keys.forEach((k) => { updates[k] = 0; });
+    await fetch(`${window.Shopify.routes.root}cart/update.js`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ updates }),
+    });
   }
 
   bindEvents() {
