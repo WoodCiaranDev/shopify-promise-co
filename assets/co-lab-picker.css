@@ -675,6 +675,27 @@
   line-height: 1.55;
 }
 
+/* ERROR */
+.c-co-lab-picker__error {
+  margin: 0 0 0.75rem;
+  padding: 0.75rem 1rem;
+  background: #fdecec;
+  color: #8a1f1f;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+}
+
+.c-co-lab-picker__error[hidden] {
+  display: none;
+}
+
+.c-co-lab-picker__action[aria-busy="true"] {
+  opacity: 0.6;
+  cursor: progress;
+}
+
 /* ACTIONS */
 .c-co-lab-picker__actions {
   display: flex;

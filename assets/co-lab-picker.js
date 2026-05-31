@@ -10,6 +10,7 @@ class CoLabPicker extends HTMLElement {
     this.engravingInput = this.querySelector('[data-engraving-input]');
     this.engravingCount = this.querySelector('[data-engraving-count]');
     this.variantIdInput = this.querySelector('[data-variant-id]');
+    this.errorEl = this.querySelector('[data-error]');
 
     this.stonesDataEl = this.querySelector('[data-stones-json]');
     try {
@@ -120,11 +121,15 @@ class CoLabPicker extends HTMLElement {
       });
     });
 
-    this.engravingInput?.addEventListener('input', () => this.onEngravingChange());
+    this.engravingInput?.addEventListener('input', () => {
+      this.clearError();
+      this.onEngravingChange();
+    });
 
     document.addEventListener('variant:change', (e) => {
       if (e.detail?.variant?.id && this.variantIdInput) {
         this.variantIdInput.value = e.detail.variant.id;
+        this.clearError();
         this.refresh();
       }
     });
@@ -194,6 +199,7 @@ class CoLabPicker extends HTMLElement {
 
   pickStone({ name, month, icon }) {
     if (!this.activeSlot) return;
+    this.clearError();
     const slot = this.activeSlot;
     const input = this.querySelector(`[data-stone-input="${slot}"]`);
     const text = this.querySelector(`[data-stone-text="${slot}"]`);
@@ -244,8 +250,16 @@ class CoLabPicker extends HTMLElement {
 
   async onSubmit(event) {
     event.preventDefault();
+    // The form is wrapped in the theme's <product-form>, whose own submit
+    // handler would fire a second /cart/add and dispatch cart:change — opening
+    // the cart drawer for a flash before our redirect lands.
+    event.stopImmediatePropagation();
+    this.clearError();
 
-    if (!this.variantSelected()) return;
+    if (!this.variantSelected()) {
+      this.showError('Please choose a size before adding to cart.');
+      return;
+    }
 
     const bundleId = (crypto.randomUUID && crypto.randomUUID()) || `bundle-${Date.now()}-${Math.random().toString(36).slice(2)}`;
     const items = [];
@@ -269,44 +283,108 @@ class CoLabPicker extends HTMLElement {
       properties: parentProps,
     });
 
+    // Resolve customisation addons BEFORE posting — if the customer picked
+    // stones/engraving but the addon product is missing/unpublished, abort
+    // loudly rather than silently dropping the upcharge line.
     const stoneCount = (this.hasStone(1) ? 1 : 0) + (this.hasStone(2) ? 1 : 0);
     if (stoneCount > 0) {
       const variantId = await this.resolveVariantId(this.dataset.birthstoneAddonHandle);
-      if (variantId) {
-        items.push({
-          id: variantId,
-          quantity: stoneCount,
-          properties: { _bundle_id: bundleId, _bundle_role: 'birthstone' },
-        });
+      if (!variantId) {
+        this.showError("We couldn't add your birthstones right now. Please refresh and try again, or contact us if this persists.");
+        return;
       }
+      items.push({
+        id: variantId,
+        quantity: stoneCount,
+        properties: { _bundle_id: bundleId, _bundle_role: 'birthstone' },
+      });
     }
     if (this.hasEngraving()) {
       const variantId = await this.resolveVariantId(this.dataset.engravingAddonHandle);
-      if (variantId) {
-        items.push({
-          id: variantId,
-          quantity: 1,
-          properties: { _bundle_id: bundleId, _bundle_role: 'engraving' },
-        });
+      if (!variantId) {
+        this.showError("We couldn't add your engraving right now. Please refresh and try again, or contact us if this persists.");
+        return;
       }
+      items.push({
+        id: variantId,
+        quantity: 1,
+        properties: { _bundle_id: bundleId, _bundle_role: 'engraving' },
+      });
     }
 
     this.submitBtn.disabled = true;
+    this.submitBtn.setAttribute('aria-busy', 'true');
     try {
       const res = await fetch(`${window.Shopify.routes.root}cart/add.js`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({ items }),
       });
-      if (!res.ok) throw new Error(await res.text());
+      if (!res.ok) {
+        const payload = await this.safeJson(res);
+        throw new CartAddError(res.status, payload);
+      }
       // Go to the dedicated Co-Lab review page (a Shopify Page at handle "lab-cart"
       // using template "lab-cart"). Avoids /cart entirely so third-party widgets
       // injected on the standard cart don't appear here.
       window.location.assign(`${window.Shopify.routes.root}pages/lab-cart`);
     } catch (err) {
       console.error('[co-lab-picker] add to cart failed', err);
+      this.showError(this.friendlyErrorMessage(err));
       this.submitBtn.disabled = false;
+      this.submitBtn.removeAttribute('aria-busy');
     }
+  }
+
+  async safeJson(response) {
+    try { return await response.json(); } catch { return null; }
+  }
+
+  /**
+   * Map an add-to-cart failure to customer-friendly copy.
+   *
+   * - Network failures (offline, DNS, CORS) surface as TypeError from fetch.
+   * - Shopify cart errors come back as 422 with { status, message, description }.
+   *   The `description` is already customer-friendly so we prefer it.
+   * - 429 = rate limit. 5xx = server. Anything else falls through to a generic.
+   */
+  friendlyErrorMessage(err) {
+    if (err instanceof TypeError) {
+      return "We couldn't reach the store. Check your connection and try again.";
+    }
+    if (err instanceof CartAddError) {
+      const { status, payload } = err;
+      const msg = (payload && (payload.description || payload.message)) || '';
+      if (status === 422) {
+        if (/sold out|not available|unavailable/i.test(msg)) {
+          return 'Sorry, this size has just sold out. Please choose another size.';
+        }
+        if (/quantity/i.test(msg)) {
+          return 'There is a per-order limit on this product. Please reduce the quantity.';
+        }
+        return msg || "We couldn't add this to your cart. Please try again.";
+      }
+      if (status === 429) {
+        return 'Too many requests right now — please wait a moment and try again.';
+      }
+      if (status >= 500) {
+        return 'The store is having a moment. Please try again in a few seconds.';
+      }
+      return msg || "Something went wrong adding this to your cart.";
+    }
+    return "Something went wrong adding this to your cart. Please try again.";
+  }
+
+  showError(message) {
+    if (!this.errorEl) return;
+    this.errorEl.textContent = message;
+    this.errorEl.hidden = false;
+  }
+
+  clearError() {
+    if (!this.errorEl) return;
+    this.errorEl.textContent = '';
+    this.errorEl.hidden = true;
   }
 
   async resolveVariantId(handle) {
@@ -323,6 +401,14 @@ class CoLabPicker extends HTMLElement {
     } catch {
       return null;
     }
+  }
+}
+
+class CartAddError extends Error {
+  constructor(status, payload) {
+    super(`Cart add failed (${status})`);
+    this.status = status;
+    this.payload = payload;
   }
 }
 
