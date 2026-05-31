@@ -1,0 +1,81 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+LAB CART
+----------------------------------------------------------------------------------------------------------------------
+
+Bespoke cart-review page for Co-Lab bundles. Lives at /pages/lab-cart (handle `lab-cart`, template `lab-cart`).
+Completely isolated from /cart and main-cart.liquid so the standard cart layout — and any third-party app widgets
+that target it — never appear here.
+
+Reads `cart` directly. Iterates parent bundle lines (properties._bundle_role == 'parent') and renders the
+shared snippets/co-lab-cart-bundle.liquid card for each.
+{%- endcomment -%}
+
+{%- liquid
+  assign bundle_parents = '' | split: ''
+  for item in cart.items
+    if item.properties._bundle_role == 'parent'
+      assign bundle_parents = bundle_parents | concat: cart.items | where: 'key', item.key
+    endif
+  endfor
+-%}
+
+<div class="c-co-lab-cart-page c-co-lab-cart-page--standalone">
+  <div class="container container--xs">
+    {%- if bundle_parents.size == 0 -%}
+      <div class="c-co-lab-cart-page__empty">
+        <p class="c-co-lab-cart-page__empty-title h3">Your Co-Lab cart is empty.</p>
+        <p class="c-co-lab-cart-page__empty-body">
+          {%- assign empty_link = section.settings.empty_link | default: '/collections/promise-co-lab' -%}
+          <a href="{{ empty_link }}">← Back to Co-Lab</a>
+        </p>
+      </div>
+    {%- else -%}
+      <form action="{{ routes.cart_url }}" method="POST" class="cart-page c-co-lab-cart-page__form">
+        <input type="hidden" name="attributes[products_mobile_grid_mode]" value="">
+        <input type="hidden" name="attributes[products_desktop_grid_mode]" value="">
+
+        <div class="c-co-lab-cart-bundles">
+          {%- assign bundle_index = 0 -%}
+          {%- for item in cart.items -%}
+            {%- if item.properties._bundle_role == 'parent' -%}
+              {%- render 'co-lab-cart-bundle',
+                  parent: item,
+                  cart: cart,
+                  index: bundle_index,
+                  colab_logo: section.settings.colab_logo -%}
+              {%- assign bundle_index = bundle_index | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        <noscript>
+          {%- assign update_button = 'cart.general.update_cart' | t -%}
+          {%- render 'button', type: 'submit', content: update_button, style: 'outline' -%}
+        </noscript>
+      </form>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Lab Cart",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "colab_logo",
+      "label": "Co-Lab logo (above each bundle card)"
+    },
+    {
+      "type": "url",
+      "id": "empty_link",
+      "label": "Empty-state \"back\" link"
+    }
+  ],
+  "presets": [
+    { "name": "Lab Cart" }
+  ]
+}
+{% endschema %}

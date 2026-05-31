@@ -299,8 +299,10 @@ class CoLabPicker extends HTMLElement {
         body: JSON.stringify({ items }),
       });
       if (!res.ok) throw new Error(await res.text());
-      // Always go to the cart page — the review / confirm step lives there now.
-      window.location.assign(`${window.Shopify.routes.root}cart`);
+      // Go to the dedicated Co-Lab review page (a Shopify Page at handle "lab-cart"
+      // using template "lab-cart"). Avoids /cart entirely so third-party widgets
+      // injected on the standard cart don't appear here.
+      window.location.assign(`${window.Shopify.routes.root}pages/lab-cart`);
     } catch (err) {
       console.error('[co-lab-picker] add to cart failed', err);
       this.submitBtn.disabled = false;

@@ -1,28 +1,6 @@
 {%- assign color_scheme_hash = section.settings.color_scheme.settings.background_gradient | default: section.settings.color_scheme.settings.background | md5 -%}
 
 <div class="section-spacing section-spacing--tight color-scheme color-scheme--{{ section.settings.color_scheme.id }} color-scheme--bg-{{ color_scheme_hash }}">
-  {%- comment -%} Tally Co-Lab vs standard items so the cart layout adapts. {%- endcomment -%}
-  {%- liquid
-    assign has_standard_items = false
-    assign has_co_lab_bundles = false
-    for item in cart.items
-      if item.properties._bundle_role == 'parent'
-        assign has_co_lab_bundles = true
-      elsif item.properties._bundle_role == 'birthstone' or item.properties._bundle_role == 'engraving'
-        # skip — child add-on, handled inside the bundle card
-      else
-        assign has_standard_items = true
-      endif
-    endfor
-  -%}
-
-  {%- liquid
-    assign co_lab_only = false
-    if has_co_lab_bundles and has_standard_items == false
-      assign co_lab_only = true
-    endif
-  -%}
-
   {%- if cart.empty? -%}
     <div class="container container--xs">
       <div class="empty-state">
@@ -34,29 +12,6 @@
           {%- render 'button', content: button_content, href: settings.cart_empty_cart_link -%}
         </div>
       </div>
-    </div>
-  {%- elsif co_lab_only -%}
-    {%- comment -%} Bespoke Co-Lab cart: minimal page, just the bundle cards + a single Checkout button. {%- endcomment -%}
-    <div class="container container--xs c-co-lab-cart-page">
-      <form action="{{ routes.cart_url }}" method="POST" class="cart-page">
-        <input type="hidden" name="attributes[products_mobile_grid_mode]" value="">
-        <input type="hidden" name="attributes[products_desktop_grid_mode]" value="">
-
-        <div class="c-co-lab-cart-bundles">
-          {%- assign bundle_index = 0 -%}
-          {%- for item in cart.items -%}
-            {%- if item.properties._bundle_role == 'parent' -%}
-              {%- render 'co-lab-cart-bundle', parent: item, cart: cart, index: bundle_index, colab_logo: section.settings.colab_logo -%}
-              {%- assign bundle_index = bundle_index | plus: 1 -%}
-            {%- endif -%}
-          {%- endfor -%}
-        </div>
-
-        <noscript>
-          {%- assign update_button = 'cart.general.update_cart' | t -%}
-          {%- render 'button', type: 'submit', content: update_button, style: 'outline' -%}
-        </noscript>
-      </form>
     </div>
   {%- else -%}
     <div class="container container--sm">
@@ -81,54 +36,38 @@
             ORDER SUMMARY
             ----------------------------------------------------------------------------------------------------------------
             {%- endcomment -%}
-            {%- if has_standard_items -%}
-              <table class="order-summary table--reduce-border">
-                <thead class="order-summary__header">
+            <table class="order-summary table--reduce-border">
+              <thead class="order-summary__header">
+                <tr>
+                  <th>{{ 'cart.order.product' | t }}</th>
+                  <th class="text-center">{{ 'cart.order.quantity' | t }}</th>
+                  <th class="text-end">{{ 'cart.order.total' | t }}</th>
+                </tr>
+              </thead>
+
+              <tbody class="order-summary__body">
+                {%- for line_item in cart.items -%}
                   <tr>
-                    <th>{{ 'cart.order.product' | t }}</th>
-                    <th class="text-center">{{ 'cart.order.quantity' | t }}</th>
-                    <th class="text-end">{{ 'cart.order.total' | t }}</th>
+                    <td>{%- render 'line-item', line_item: line_item, show_quantity_selector: true -%}</td>
+
+                    <td class="text-center">
+                      <line-item-quantity class="v-stack justify-items-center gap-2">
+                        {%- render 'quantity-selector', line_item: line_item, size: 'sm', add_updates: true -%}
+                        <a href="{{ line_item.url_to_remove }}" class="link text-xs">{{ 'cart.order.remove' | t }}</a>
+                      </line-item-quantity>
+                    </td>
+
+                    <td class="text-end">
+                      {%- if settings.currency_code_enabled -%}
+                        {{- line_item.final_line_price | money_with_currency -}}
+                      {%- else -%}
+                        {{- line_item.final_line_price | money -}}
+                      {%- endif -%}
+                    </td>
                   </tr>
-                </thead>
-
-                <tbody class="order-summary__body">
-                  {%- for line_item in cart.items -%}
-                    {%- comment -%} Skip Co-Lab bundle lines — they render as cards below. {%- endcomment -%}
-                    {%- if line_item.properties._bundle_role -%}{%- continue -%}{%- endif -%}
-                    <tr>
-                      <td>{%- render 'line-item', line_item: line_item, show_quantity_selector: true -%}</td>
-
-                      <td class="text-center">
-                        <line-item-quantity class="v-stack justify-items-center gap-2">
-                          {%- render 'quantity-selector', line_item: line_item, size: 'sm', add_updates: true -%}
-                          <a href="{{ line_item.url_to_remove }}" class="link text-xs">{{ 'cart.order.remove' | t }}</a>
-                        </line-item-quantity>
-                      </td>
-
-                      <td class="text-end">
-                        {%- if settings.currency_code_enabled -%}
-                          {{- line_item.final_line_price | money_with_currency -}}
-                        {%- else -%}
-                          {{- line_item.final_line_price | money -}}
-                        {%- endif -%}
-                      </td>
-                    </tr>
-                  {%- endfor -%}
-                </tbody>
-              </table>
-            {%- endif -%}
-
-            {%- if has_co_lab_bundles -%}
-              <div class="c-co-lab-cart-bundles">
-                {%- assign bundle_index = 0 -%}
-                {%- for item in cart.items -%}
-                  {%- if item.properties._bundle_role == 'parent' -%}
-                    {%- render 'co-lab-cart-bundle', parent: item, cart: cart, index: bundle_index -%}
-                    {%- assign bundle_index = bundle_index | plus: 1 -%}
-                  {%- endif -%}
                 {%- endfor -%}
-              </div>
-            {%- endif -%}
+              </tbody>
+            </table>
 
             {%- comment -%}
             ----------------------------------------------------------------------------------------------------------------
@@ -245,11 +184,6 @@
       "id": "color_scheme",
       "label": "t:global.colors.scheme",
       "default": "scheme-1"
-    },
-    {
-      "type": "image_picker",
-      "id": "colab_logo",
-      "label": "Co-Lab logo (above the bundle card)"
     },
     {
       "type": "checkbox",
