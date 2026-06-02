@@ -12,6 +12,9 @@
     "main": {
       "type": "ring-size-guide-content",
       "settings": {
+        "heading": "Our Size Guide",
+        "intro": "<p>Not sure of their ring size? Don't worry - we've made it easy.</p><p>Use our <strong>printable size guide below</strong> and simply place one of their existing rings over the circles to find the closest match. All our rings use standard US sizing - if you don't know your US size, you'll find an easy table below.</p><p>Women's rings are available in US sizes 3-10, and men's rings in US sizes 8-13.</p>",
+        "cta_heading": "Still Not Sure?",
         "preview_image": "shopify://shop_images/ring-size-guide-preview.jpg",
         "pdf_link": ""
       }
