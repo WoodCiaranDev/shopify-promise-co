@@ -16,6 +16,12 @@
   height: 18px;
 }
 
+/* Restore cream background on header dropdown and mega-menu panels */
+.header__dropdown-menu,
+.mega-menu {
+  background: #f2eee7;
+}
+
 .mega-menu .h6 {
   font-size: 13px;
 }
