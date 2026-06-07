@@ -77,7 +77,7 @@
         "mega_menu_eccGwN": {
           "type": "mega_menu",
           "settings": {
-            "menu_item": "Shop",
+            "menu_item": "Shop Jewelry",
             "images_position": "right",
             "image_1_heading": "",
             "image_1_text": "",
@@ -88,9 +88,31 @@
             "featured_collection_1": "for-her",
             "featured_collection_1_title": "Gifts for Her",
             "featured_collection_1_image": "shopify://shop_images/Untitled_design_-_2026-04-30T212815.827.png",
-            "featured_collection_2": "best-sellers",
-            "featured_collection_2_title": "best sellers",
-            "featured_collection_2_image": "shopify://shop_images/1_9d424cc6-a010-4096-86c4-73cf89ee3afb.png",
+            "featured_collection_2": "ethereal-summer",
+            "featured_collection_2_title": "Ethereal Summer Collection",
+            "featured_collection_2_image": "shopify://shop_images/Banner_UK_7.png",
+            "promo_block_text": "",
+            "promo_block_link": "",
+            "debug_mode": false
+          }
+        },
+        "mega_menu_promise": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "Promise Rings",
+            "images_position": "right",
+            "image_1_heading": "",
+            "image_1_text": "",
+            "image_1_link": "",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": "",
+            "featured_collection_1": "for-her",
+            "featured_collection_1_title": "Gifts for Her",
+            "featured_collection_1_image": "shopify://shop_images/Untitled_design_-_2026-04-30T212815.827.png",
+            "featured_collection_2": "ethereal-summer",
+            "featured_collection_2_title": "Ethereal Summer Collection",
+            "featured_collection_2_image": "shopify://shop_images/Banner_UK_7.png",
             "promo_block_text": "",
             "promo_block_link": "",
             "debug_mode": false
@@ -98,7 +120,8 @@
         }
       },
       "block_order": [
-        "mega_menu_eccGwN"
+        "mega_menu_eccGwN",
+        "mega_menu_promise"
       ],
       "settings": {
         "color_scheme": "",
@@ -118,13 +141,14 @@
         "sidebar_show_dividers": true,
         "sidebar_open_second_level_menus": false,
         "sidebar_highlighted_menu_items": "Black Friday",
-        "layout": "logo_center_navigation_inline",
+        "sidebar_display_font_items": "Shop All\nAll Promise Rings",
+        "layout": "logo_left_navigation_center",
         "show_icons": true,
         "show_country_selector": true,
         "show_country_name": false,
         "show_country_flag": true,
         "show_locale_selector": false,
-        "show_collection_countdown": true,
+        "show_collection_countdown": false,
         "countdown_date": "31-05-2026",
         "countdown_image": "shopify://shop_images/Untitled_design_-_2026-05-01T090934.000.png",
         "countdown_title": "ETHEREAL SUMMER COUNTDOWN",

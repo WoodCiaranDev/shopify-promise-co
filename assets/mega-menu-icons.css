@@ -16,6 +16,34 @@
   height: 18px;
 }
 
+/*
+ * Touch devices: the transparent header turns solid on :hover (theme.css), which on
+ * touch swallows the first tap (tap = hover) and makes the burger require multiple taps.
+ * On hover-less devices, drive the transparent state from .is-solid / open state only,
+ * never :hover, so taps are never consumed.
+ */
+@media (hover: none) {
+  :has(.shopify-section:first-child [allow-transparent-header]):not(:has(.shopify-section--header + .shopify-section-group-header-group)) .header:not(.is-solid):not(:has([open])) {
+    --header-show-transparent-logo: 1;
+    --header-separation-border-color: 0 0 0 / 0;
+    --background: 0 0 0 / 0;
+    --background-gradient: 0 0 0 / 0;
+    --border-color: 0 0 0 / 0;
+    --text-color: var(--header-transparent-header-text-color);
+  }
+
+  :has(.shopify-section:first-child [allow-transparent-header]):not(:has(.shopify-section--header + .shopify-section-group-header-group)) .header:not(.is-solid):not(:has([open])) .link-faded {
+    color: currentColor;
+    transition: none;
+  }
+}
+
+/* Restore cream background on header dropdown and mega-menu panels */
+.header__dropdown-menu,
+.mega-menu {
+  background: #f7f5f0;
+}
+
 .mega-menu .h6 {
   font-size: 13px;
 }
