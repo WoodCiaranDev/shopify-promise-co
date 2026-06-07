@@ -1,14 +1,89 @@
 {%- liquid
   assign has_content = false
-  if section.settings.logo != blank or section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.body != blank or section.settings.button_label != blank
+  if section.settings.logo != blank or section.settings.logo_asset != blank or section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.body != blank or section.settings.button_label != blank or section.settings.background_image != blank or section.settings.background_asset != blank
     assign has_content = true
   endif
 -%}
 
+{%- liquid
+  assign has_bg_image = false
+  if section.settings.background_image != blank
+    assign has_bg_image = true
+  elsif section.settings.background_asset != blank
+    assign has_bg_image = true
+  endif
+
+  assign has_logo_asset = false
+  if section.settings.logo == blank and section.settings.logo_asset != blank
+    assign has_logo_asset = true
+  endif
+
+  assign alignment = section.settings.content_alignment | default: 'center'
+  assign inner_class = 'lab-hero__inner prose'
+  if alignment == 'left'
+    assign inner_class = inner_class | append: ' text-left lab-hero__inner--left'
+  else
+    assign inner_class = inner_class | append: ' text-center'
+  endif
+
+  assign root_class = 'lab-hero color-scheme color-scheme--' | append: section.settings.color_scheme.id
+  unless section.settings.remove_vertical_spacing
+    assign root_class = root_class | append: ' section-spacing'
+  endunless
+  if section.settings.no_bottom_spacing
+    assign root_class = root_class | append: ' lab-hero--no-bottom'
+  endif
+  if section.settings.separate_section_with_border
+    assign root_class = root_class | append: ' bordered-section'
+  endif
+  if has_bg_image
+    assign root_class = root_class | append: ' lab-hero--lifestyle'
+  endif
+
+  capture root_style
+    if section.settings.background_color != blank and section.settings.background_color != 'rgba(0,0,0,0)'
+      echo 'background-color: '
+      echo section.settings.background_color
+      echo ';'
+    endif
+    if has_bg_image
+      echo ' --lab-hero-min-height: '
+      echo section.settings.min_height
+      echo 'px;'
+    endif
+  endcapture
+-%}
+
 {%- if has_content -%}
-  <div class="lab-hero color-scheme color-scheme--{{ section.settings.color_scheme.id }} {% unless section.settings.remove_vertical_spacing %}section-spacing{% endunless %}{% if section.settings.no_bottom_spacing %} lab-hero--no-bottom{% endif %}{% if section.settings.separate_section_with_border %} bordered-section{% endif %}"{% if section.settings.background_color != blank and section.settings.background_color != 'rgba(0,0,0,0)' %} style="background-color: {{ section.settings.background_color }};"{% endif %}>
+  <div class="{{ root_class }}"{% if root_style != blank %} style="{{ root_style | strip }}"{% endif %}>
+    {%- if has_bg_image -%}
+      <div class="lab-hero__media" aria-hidden="true">
+        {%- if section.settings.background_image != blank -%}
+          {{-
+            section.settings.background_image
+            | image_url: width: 2400
+            | image_tag:
+              widths: '480,720,1080,1440,1920,2400',
+              sizes: '100vw',
+              class: 'lab-hero__media-image',
+              loading: 'eager',
+              fetchpriority: 'high'
+          -}}
+        {%- else -%}
+          <img src="{{ section.settings.background_asset | asset_url }}"
+               class="lab-hero__media-image"
+               alt=""
+               loading="eager"
+               fetchpriority="high">
+        {%- endif -%}
+        {%- if section.settings.scrim_opacity > 0 -%}
+          <div class="lab-hero__scrim" style="--lab-hero-scrim: {{ section.settings.scrim_opacity | divided_by: 100.0 }};"></div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
     <div class="container container--{{ section.settings.content_width }}">
-      <div class="lab-hero__inner prose text-center">
+      <div class="{{ inner_class }}">
         {%- if section.settings.logo != blank -%}
           <div class="lab-hero__logo">
             {%- capture logo_style -%}--logo-max-width: {{ section.settings.logo_max_width }}px;{%- endcapture -%}
@@ -22,6 +97,14 @@
                 style: logo_style,
                 loading: 'eager'
             -}}
+          </div>
+        {%- elsif has_logo_asset -%}
+          <div class="lab-hero__logo">
+            <img src="{{ section.settings.logo_asset | asset_url }}"
+                 class="lab-hero__logo-image"
+                 style="--logo-max-width: {{ section.settings.logo_max_width }}px;"
+                 alt="Co-Lab"
+                 loading="eager">
           </div>
         {%- endif -%}
 
@@ -70,6 +153,10 @@
     justify-content: center;
   }
 
+  .lab-hero__inner--left .lab-hero__logo {
+    justify-content: flex-start;
+  }
+
   .lab-hero__logo-image {
     width: 100%;
     max-width: var(--logo-max-width, 180px);
@@ -82,6 +169,64 @@
 
   .lab-hero__cta {
     margin-top: 2.5rem;
+  }
+
+  .lab-hero__inner--left .lab-hero__cta {
+    justify-content: flex-start;
+  }
+
+  /* Lifestyle (background-image) variant */
+  .lab-hero--lifestyle {
+    position: relative;
+    min-height: var(--lab-hero-min-height, 560px);
+    display: flex;
+    align-items: center;
+    color: #fff;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .lab-hero--lifestyle .container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+
+  .lab-hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .lab-hero__media-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .lab-hero__scrim {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, var(--lab-hero-scrim, 0.25));
+  }
+
+  .lab-hero--lifestyle,
+  .lab-hero--lifestyle .lab-hero__eyebrow,
+  .lab-hero--lifestyle .lab-hero__heading,
+  .lab-hero--lifestyle .lab-hero__body,
+  .lab-hero--lifestyle .lab-hero__body * {
+    color: #fff;
+  }
+
+  .lab-hero--lifestyle .button--outline {
+    color: #fff;
+    border-color: #fff;
+  }
+
+  .lab-hero--lifestyle .button--outline:hover {
+    color: #000;
+    background: #fff;
   }
 {% endstylesheet %}
 
@@ -137,6 +282,52 @@
       "default": "rgba(0,0,0,0)"
     },
     {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "options": [
+        { "value": "center", "label": "Centre" },
+        { "value": "left", "label": "Left" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Background image (lifestyle hero)"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image",
+      "info": "Switches the hero into lifestyle mode (full-bleed image, white text). Overrides theme asset fallback."
+    },
+    {
+      "type": "text",
+      "id": "background_asset",
+      "label": "Background image — theme asset filename",
+      "info": "Used as a fallback when no Background image is uploaded above (e.g. co-lab-collection-hero.png)."
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "label": "Minimum height",
+      "min": 320,
+      "max": 900,
+      "step": 20,
+      "unit": "px",
+      "default": 560
+    },
+    {
+      "type": "range",
+      "id": "scrim_opacity",
+      "label": "Image darken (scrim)",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 25
+    },
+    {
       "type": "header",
       "content": "Logo"
     },
@@ -145,6 +336,12 @@
       "id": "logo",
       "label": "Logo image",
       "info": "Recommended: transparent PNG (e.g. Group 210.png / colab mark)"
+    },
+    {
+      "type": "text",
+      "id": "logo_asset",
+      "label": "Logo — theme asset filename",
+      "info": "Used as fallback when no Logo image is uploaded above (e.g. co-lab-logo-white.png)."
     },
     {
       "type": "range",
