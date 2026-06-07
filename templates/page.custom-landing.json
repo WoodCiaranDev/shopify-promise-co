@@ -31,7 +31,7 @@
         "heading": "Customisable Engraving & Hidden Birthstones",
         "heading_tag": "h1",
         "body": "<p>Please note: Delivery times are estimates and may occasionally be extended due to customs delays, courier disruptions, or UK bank holidays.</p>",
-        "button_label": "Shop custom rings",
+        "button_label": "",
         "button_link": "",
         "button_style": "outline"
       }
@@ -216,11 +216,11 @@
   "order": [
     "main",
     "lab_hero",
-    "lab_hero_birthstones",
-    "lab_birthstones",
     "feature_strips",
     "lab_hero_faq",
     "faq_custom_landing",
-    "faq_cta"
+    "faq_cta",
+    "lab_hero_birthstones",
+    "lab_birthstones"
   ]
 }
