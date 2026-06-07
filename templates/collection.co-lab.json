@@ -1,0 +1,129 @@
+{
+  "sections": {
+    "lab_hero": {
+      "type": "lab-hero",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "content_width": "lg",
+        "content_alignment": "left",
+        "remove_vertical_spacing": true,
+        "separate_section_with_border": false,
+        "background_asset": "co-lab-collection-hero.png",
+        "min_height": 560,
+        "scrim_opacity": 25,
+        "logo_asset": "co-lab-logo-white.png",
+        "logo_max_width": 80,
+        "eyebrow": "THE PROMISE CO - LAB",
+        "heading": "Customisable Rings, Engraving & Hidden Birthstones",
+        "heading_tag": "h1",
+        "body": "<p>Crafted to your story — choose your piece, your stones and your engraving.</p>",
+        "button_label": "Design yours",
+        "button_link": "#products",
+        "button_style": "outline"
+      }
+    },
+    "wearable_stories": {
+      "type": "text-with-icons",
+      "blocks": {
+        "item_hand_set": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-award-gift",
+            "custom_icon": "shopify://shop_images/Untitled_design-36.png",
+            "icon_width": 64,
+            "mobile_icon_width": 64,
+            "title": "Hand Set Diamond Simulants",
+            "content": "<p>By our master jewellers, one stone at a time - never glued.</p>"
+          }
+        },
+        "item_warranty": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-award-gift",
+            "custom_icon": "shopify://shop_images/Artboard_30_copy_4x_323837bd-a69a-44f4-9b87-b7db4ee5dc16.png",
+            "icon_width": 64,
+            "mobile_icon_width": 64,
+            "title": "Five-Year Warranty",
+            "content": "<p>Every piece is covered with a 5-year warranty for complete peace of mind.</p>"
+          }
+        },
+        "item_promise_card": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-award-gift",
+            "custom_icon": "shopify://shop_images/Artboard_30_copy_2_4x_80cd0fa4-7652-4c4f-b2ed-b45208f623b6.png",
+            "icon_width": 64,
+            "mobile_icon_width": 64,
+            "title": "Personalised Promise Card",
+            "content": "<p>Gift-ready packaging & complimentary keepsake card with every purchase, so you can make record of your Promise.</p>"
+          }
+        },
+        "item_anti_tarnish": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-award-gift",
+            "custom_icon": "shopify://shop_images/Artboard_33_4x_a331b0fc-7364-4b91-8dfe-db9ecd4ec7cd.png",
+            "icon_width": 48,
+            "mobile_icon_width": 64,
+            "title": "Anti Tarnish",
+            "content": "<p>Our thick gold and rhodium plating is set with a protective E-Coating to prevent tarnish and scratching.</p>"
+          }
+        }
+      },
+      "block_order": ["item_hand_set", "item_warranty", "item_promise_card", "item_anti_tarnish"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": false,
+        "stack_on_mobile": false,
+        "icon_color": "",
+        "text_color": "",
+        "text_alignment": "center"
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "settings": {}
+    },
+    "faq_custom_collection": {
+      "type": "faq",
+      "blocks": {
+        "q_delivery": {
+          "type": "question",
+          "settings": {
+            "question": "How long will it take for me to receive my ring?",
+            "answer": "<p>Please note: Delivery times are estimates and may occasionally be extended due to customs delays, courier disruptions, or UK bank holidays.</p>"
+          }
+        },
+        "q_refund": {
+          "type": "question",
+          "settings": {
+            "question": "Are custom pieces non-refundable?",
+            "answer": "<p>Customisable pieces are non-refundable and non-exchangeable.</p>"
+          }
+        },
+        "q_customisable": {
+          "type": "question",
+          "settings": {
+            "question": "Are all your rings customisable?",
+            "answer": "<p>Only rings shown in this collection can be customised.</p>"
+          }
+        }
+      },
+      "block_order": ["q_delivery", "q_refund", "q_customisable"],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "show_categories": false,
+        "subheading": "THE PROMISE CO - LAB",
+        "title": "FAQ's",
+        "content": ""
+      }
+    }
+  },
+  "order": [
+    "lab_hero",
+    "wearable_stories",
+    "main",
+    "faq_custom_collection"
+  ]
+}
