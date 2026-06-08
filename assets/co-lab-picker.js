@@ -1,6 +1,7 @@
 class CoLabPicker extends HTMLElement {
   connectedCallback() {
     this.activeSlot = null;
+    this.hasUserSelectedVariant = false;
 
     this.form = this.querySelector('form[action*="/cart/add"]');
     this.stonesToggle = this.querySelector('[data-action="toggle-stones"]');
@@ -11,97 +12,31 @@ class CoLabPicker extends HTMLElement {
     this.engravingCount = this.querySelector('[data-engraving-count]');
     this.variantIdInput = this.querySelector('[data-variant-id]');
     this.errorEl = this.querySelector('[data-error]');
+    this.customCard = this.querySelector('.c-co-lab-picker__card--custom');
 
-    this.stonesDataEl = this.querySelector('[data-stones-json]');
-    try {
-      this.stonesData = JSON.parse(this.stonesDataEl?.textContent || '[]');
-    } catch {
-      this.stonesData = [];
-    }
+    // Per-product pricing / slot configuration (defaults baked into the Liquid).
+    this.bsCharged = this.dataset.birthstoneCharged === 'true';
+    this.engCharged = this.dataset.engravingCharged === 'true';
+    this.bsPrice = parseInt(this.dataset.birthstonePrice, 10) || 0;
+    this.engPrice = parseInt(this.dataset.engravingPrice, 10) || 0;
+    this.basePrice = parseInt(this.dataset.basePrice, 10) || 0;
+    this.productTitle = this.dataset.productTitle || '';
+
+    this.stonesData = this.parseJson('[data-stones-json]', []);
+    this.productOptions = this.parseJson('[data-product-options]', []);
+    this.selectedVariant = this.parseJson('[data-initial-variant]', null);
 
     this.bindEvents();
     this.refresh();
-    this.maybePrefillFromCart();
   }
 
-  /**
-   * If the URL carries ?edit_bundle=<id>, look the matching bundle up in the
-   * cart, populate the picker with the customer's previous selections, and
-   * remove that bundle so the next Add to Cart creates a fresh one without
-   * duplicating.
-   */
-  async maybePrefillFromCart() {
-    const params = new URLSearchParams(window.location.search);
-    const editId = params.get('edit_bundle');
-    if (!editId) return;
-
+  parseJson(selector, fallback) {
+    const el = this.querySelector(selector);
     try {
-      const cart = await fetch(`${window.Shopify.routes.root}cart.js`).then((r) => r.json());
-      const parent = cart.items.find(
-        (i) => i.properties?._bundle_id === editId && i.properties?._bundle_role === 'parent'
-      );
-      if (!parent) return;
-
-      this.applyBundleProperties(parent.properties, parent.variant_id);
-      await this.removeBundleLines(cart, editId);
-    } catch (err) {
-      console.warn('[co-lab-picker] prefill from cart failed', err);
+      return JSON.parse(el?.textContent || '');
+    } catch {
+      return fallback;
     }
-  }
-
-  applyBundleProperties(properties, variantId) {
-    // Open the customisation section first so its inputs are interactive.
-    if (this.stonesToggle?.getAttribute('aria-expanded') !== 'true') {
-      this.toggleStones();
-    }
-
-    // Variant — sync the hidden form input. The size-select web component
-    // listens to its own select element; we update both to keep them in sync.
-    if (variantId && this.variantIdInput) {
-      this.variantIdInput.value = String(variantId);
-      const sizeSelect = document.querySelector('[data-size-select]');
-      if (sizeSelect) {
-        const opt = [...sizeSelect.options].find((o) => o.value === String(variantId));
-        if (opt) {
-          sizeSelect.value = String(variantId);
-          sizeSelect.dispatchEvent(new Event('change', { bubbles: true }));
-        }
-      }
-    }
-
-    // Stones — properties carry "Sapphire - September" style values.
-    [['1', 'Birthstone One'], ['2', 'Birthstone Two']].forEach(([slot, key]) => {
-      const value = properties[key];
-      if (!value) return;
-      const stoneName = value.split(' - ')[0].trim();
-      const stone = this.stonesData.find((s) => s.name === stoneName);
-      this.activeSlot = slot;
-      this.pickStone({
-        name: stone?.name || stoneName,
-        month: stone?.month || (value.split(' - ')[1] || '').trim(),
-        icon: stone?.icon || '',
-      });
-    });
-
-    // Engraving
-    if (properties.Engraving && this.engravingInput) {
-      this.engravingInput.value = properties.Engraving;
-      this.onEngravingChange();
-    }
-  }
-
-  async removeBundleLines(cart, bundleId) {
-    const keys = cart.items
-      .filter((i) => i.properties?._bundle_id === bundleId)
-      .map((i) => i.key);
-    if (keys.length === 0) return;
-    const updates = {};
-    keys.forEach((k) => { updates[k] = 0; });
-    await fetch(`${window.Shopify.routes.root}cart/update.js`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ updates }),
-    });
   }
 
   bindEvents() {
@@ -129,12 +64,23 @@ class CoLabPicker extends HTMLElement {
     document.addEventListener('variant:change', (e) => {
       if (e.detail?.variant?.id && this.variantIdInput) {
         this.variantIdInput.value = e.detail.variant.id;
+        this.selectedVariant = e.detail.variant;
         this.clearError();
         this.refresh();
+        // Smoothly guide the customer down to the customisation step once they've
+        // picked a size. Guard against the picker's own initial render firing this.
+        if (this.hasUserSelectedVariant) {
+          this.scrollToCustomisation();
+        }
+        this.hasUserSelectedVariant = true;
       }
     });
 
     this.form?.addEventListener('submit', (e) => this.onSubmit(e));
+  }
+
+  scrollToCustomisation() {
+    this.customCard?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   toggleStones() {
@@ -235,6 +181,19 @@ class CoLabPicker extends HTMLElement {
     return !!(input && input.value);
   }
 
+  stoneValue(slot) {
+    const input = this.querySelector(`[data-stone-input="${slot}"]`);
+    return input ? input.value : '';
+  }
+
+  stoneSlots() {
+    return Array.from(this.querySelectorAll('[data-stone-input]')).map((i) => i.dataset.stoneInput);
+  }
+
+  pickedStoneCount() {
+    return this.stoneSlots().filter((slot) => this.hasStone(slot)).length;
+  }
+
   hasEngraving() {
     return !!(this.engravingInput && this.engravingInput.value.trim());
   }
@@ -248,11 +207,13 @@ class CoLabPicker extends HTMLElement {
     if (this.submitBtn) this.submitBtn.disabled = !this.variantSelected();
   }
 
-  async onSubmit(event) {
+  // --- Phase A: open the review modal (no cart mutation yet) -----------------
+
+  onSubmit(event) {
     event.preventDefault();
-    // The form is wrapped in the theme's <product-form>, whose own submit
-    // handler would fire a second /cart/add and dispatch cart:change — opening
-    // the cart drawer for a flash before our redirect lands.
+    // The form is wrapped in the theme's <product-form>, whose own submit handler
+    // would fire its own /cart/add with only the parent variant — missing our
+    // add-on lines and bundle properties. Suppress it.
     event.stopImmediatePropagation();
     this.clearError();
 
@@ -261,78 +222,254 @@ class CoLabPicker extends HTMLElement {
       return;
     }
 
+    const modal = document.getElementById(this.dataset.reviewModalId);
+    if (!modal) {
+      // No modal in the DOM — fall back to adding straight away.
+      this.confirmAndAdd();
+      return;
+    }
+
+    const body = modal.querySelector('[data-colab-review-body]');
+    if (body) this.renderReviewInto(body);
+    modal.show ? modal.show() : modal.setAttribute('open', '');
+  }
+
+  // --- Review card (built with safe DOM construction, no innerHTML) ----------
+
+  formatMoney(pence) {
+    if (window.Shopify && typeof window.Shopify.formatMoney === 'function' && window.themeVariables?.settings?.moneyFormat) {
+      return window.Shopify.formatMoney(pence, window.themeVariables.settings.moneyFormat);
+    }
+    // Fallback: assume GBP, trim trailing zeros.
+    const value = (pence / 100).toFixed(2).replace(/\.00$/, '');
+    return `£${value}`;
+  }
+
+  computedTotal() {
+    let total = this.basePrice;
+    if (this.bsCharged) total += this.pickedStoneCount() * this.bsPrice;
+    if (this.engCharged && this.hasEngraving()) total += this.engPrice;
+    return total;
+  }
+
+  stoneSwatchUrl(value) {
+    const name = (value || '').split(' - ')[0].trim();
+    const stone = this.stonesData.find((s) => s.name === name);
+    return stone?.icon || '';
+  }
+
+  /** Tiny element builder: el('p', 'class', 'text') or el('div', 'class', [children]). */
+  el(tag, className, content) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (Array.isArray(content)) {
+      content.filter(Boolean).forEach((c) => node.appendChild(c));
+    } else if (content != null) {
+      node.textContent = content;
+    }
+    return node;
+  }
+
+  reviewRow(label, value, swatchUrl, uplift) {
+    const labelEl = this.el('span', 'c-co-lab-cart-bundle__row-label', `${label}:`);
+    const valueEl = this.el('span', 'c-co-lab-cart-bundle__row-value');
+    if (swatchUrl) {
+      const swatch = this.el('span', 'c-co-lab-cart-bundle__row-swatch');
+      swatch.style.backgroundImage = `url('${swatchUrl}')`;
+      valueEl.appendChild(swatch);
+    }
+    valueEl.appendChild(document.createTextNode(value));
+    const children = [labelEl, valueEl];
+    if (uplift) children.push(this.el('span', 'c-co-lab-cart-bundle__row-uplift', uplift));
+    return this.el('p', 'c-co-lab-cart-bundle__row', children);
+  }
+
+  renderReviewInto(container) {
+    container.textContent = '';
+
+    const card = this.el('c-co-lab-cart-bundle', 'c-co-lab-cart-bundle');
+
+    const header = this.el('header', 'c-co-lab-cart-bundle__header', [
+      this.el('h2', 'c-co-lab-cart-bundle__title', this.productTitle),
+      this.el('p', 'c-co-lab-cart-bundle__base-price', this.formatMoney(this.basePrice)),
+    ]);
+    card.appendChild(header);
+
+    // Metal & Sizing
+    const isDefaultVariant = !this.selectedVariant || this.selectedVariant.title === 'Default Title';
+    const optionValues = this.selectedVariant?.options || [];
+    if (!isDefaultVariant) {
+      const rows = this.productOptions
+        .map((name, i) => (optionValues[i] ? this.reviewRow(name, optionValues[i]) : null))
+        .filter(Boolean);
+      if (rows.length) {
+        const group = this.el('section', 'c-co-lab-cart-bundle__group', [
+          this.el('h3', 'c-co-lab-cart-bundle__group-title', 'Metal & Sizing'),
+          ...rows,
+        ]);
+        card.appendChild(group);
+      }
+    }
+
+    // Customisation
+    const customRows = [];
+    this.stoneSlots().forEach((slot) => {
+      if (!this.hasStone(slot)) return;
+      const value = this.stoneValue(slot);
+      customRows.push(this.reviewRow('Birthstone', value, this.stoneSwatchUrl(value), this.bsCharged ? `+ ${this.formatMoney(this.bsPrice)}` : ''));
+    });
+    if (this.hasEngraving()) {
+      customRows.push(this.reviewRow('Engraving', this.engravingInput.value.trim(), '', this.engCharged ? `+ ${this.formatMoney(this.engPrice)}` : ''));
+    }
+    if (customRows.length) {
+      const group = this.el('section', 'c-co-lab-cart-bundle__group', [
+        this.el('h3', 'c-co-lab-cart-bundle__group-title', 'Customisation'),
+        ...customRows,
+      ]);
+      card.appendChild(group);
+    }
+
+    card.appendChild(this.el('p', 'c-co-lab-cart-bundle__total', this.formatMoney(this.computedTotal())));
+
+    // Confirm checkbox
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.required = true;
+    checkbox.setAttribute('data-confirm-checkbox', '');
+    const confirmLabel = this.el('label', 'c-co-lab-cart-bundle__confirm', [
+      checkbox,
+      this.el('span', 'c-co-lab-cart-bundle__confirm-label', 'I confirm this is my perfect potion'),
+    ]);
+    card.appendChild(confirmLabel);
+
+    const modalError = this.el('p', 'c-co-lab-picker__error');
+    modalError.setAttribute('data-modal-error', '');
+    modalError.setAttribute('role', 'alert');
+    modalError.setAttribute('aria-live', 'polite');
+    modalError.hidden = true;
+    card.appendChild(modalError);
+    this.modalErrorEl = modalError;
+
+    // Actions
+    const backBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--secondary', '← Edit');
+    backBtn.type = 'button';
+    const confirmBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--primary', 'Add to Cart →');
+    confirmBtn.type = 'button';
+    confirmBtn.disabled = true;
+    card.appendChild(this.el('div', 'c-co-lab-cart-bundle__actions', [backBtn, confirmBtn]));
+
+    checkbox.addEventListener('change', () => { confirmBtn.disabled = !checkbox.checked; });
+    confirmBtn.addEventListener('click', () => this.confirmAndAdd(confirmBtn));
+    backBtn.addEventListener('click', () => this.closeModal());
+
+    container.appendChild(card);
+  }
+
+  closeModal() {
+    const modal = document.getElementById(this.dataset.reviewModalId);
+    if (modal) modal.hide ? modal.hide() : modal.removeAttribute('open');
+  }
+
+  // --- Phase B: build the bundle, add to cart, open the drawer ---------------
+
+  async confirmAndAdd(confirmBtn) {
+    this.clearModalError();
+
+    if (!this.variantSelected()) {
+      this.showModalError('Please choose a size before adding to cart.');
+      return;
+    }
+
     const bundleId = (crypto.randomUUID && crypto.randomUUID()) || `bundle-${Date.now()}-${Math.random().toString(36).slice(2)}`;
     const items = [];
 
-    // Parent: the ring. We stash the product URL on a hidden property so the cart
-    // page's "Edit My Order" link can return the customer to this PDP without
-    // needing a server-side product lookup.
-    const productUrl = this.dataset.productUrl || window.location.pathname;
-    const parentProps = {
-      _bundle_id: bundleId,
-      _bundle_role: 'parent',
-      _product_url: productUrl,
-    };
-    if (this.hasStone(1)) parentProps['Birthstone One'] = this.querySelector('[data-stone-input="1"]').value;
-    if (this.hasStone(2)) parentProps['Birthstone Two'] = this.querySelector('[data-stone-input="2"]').value;
+    // Parent: the ring. Human-readable customisation properties always ride on
+    // the parent line (so they print on the order) regardless of whether the
+    // extras are charged.
+    const parentProps = { _bundle_id: bundleId, _bundle_role: 'parent' };
+    this.stoneSlots().forEach((slot) => {
+      if (!this.hasStone(slot)) return;
+      const input = this.querySelector(`[data-stone-input="${slot}"]`);
+      parentProps[input.name.replace(/^properties\[|\]$/g, '')] = input.value;
+    });
     if (this.hasEngraving()) parentProps['Engraving'] = this.engravingInput.value.trim();
 
-    items.push({
-      id: parseInt(this.variantIdInput.value, 10),
-      quantity: 1,
-      properties: parentProps,
-    });
+    items.push({ id: parseInt(this.variantIdInput.value, 10), quantity: 1, properties: parentProps });
 
-    // Resolve customisation addons BEFORE posting — if the customer picked
-    // stones/engraving but the addon product is missing/unpublished, abort
-    // loudly rather than silently dropping the upcharge line.
-    const stoneCount = (this.hasStone(1) ? 1 : 0) + (this.hasStone(2) ? 1 : 0);
-    if (stoneCount > 0) {
+    // Charged add-on lines only. If an extra is "included" in the base price we
+    // create no add-on line (and showed no uplift).
+    const stoneCount = this.pickedStoneCount();
+    if (this.bsCharged && stoneCount > 0) {
       const variantId = await this.resolveVariantId(this.dataset.birthstoneAddonHandle);
       if (!variantId) {
-        this.showError("We couldn't add your birthstones right now. Please refresh and try again, or contact us if this persists.");
+        this.showModalError("We couldn't add your birthstones right now. Please refresh and try again, or contact us if this persists.");
         return;
       }
-      items.push({
-        id: variantId,
-        quantity: stoneCount,
-        properties: { _bundle_id: bundleId, _bundle_role: 'birthstone' },
-      });
+      items.push({ id: variantId, quantity: stoneCount, properties: { _bundle_id: bundleId, _bundle_role: 'birthstone' } });
     }
-    if (this.hasEngraving()) {
+    if (this.engCharged && this.hasEngraving()) {
       const variantId = await this.resolveVariantId(this.dataset.engravingAddonHandle);
       if (!variantId) {
-        this.showError("We couldn't add your engraving right now. Please refresh and try again, or contact us if this persists.");
+        this.showModalError("We couldn't add your engraving right now. Please refresh and try again, or contact us if this persists.");
         return;
       }
-      items.push({
-        id: variantId,
-        quantity: 1,
-        properties: { _bundle_id: bundleId, _bundle_role: 'engraving' },
-      });
+      items.push({ id: variantId, quantity: 1, properties: { _bundle_id: bundleId, _bundle_role: 'engraving' } });
     }
 
-    this.submitBtn.disabled = true;
-    this.submitBtn.setAttribute('aria-busy', 'true');
+    if (confirmBtn) {
+      confirmBtn.disabled = true;
+      confirmBtn.setAttribute('aria-busy', 'true');
+    }
+
     try {
-      const res = await fetch(`${window.Shopify.routes.root}cart/add.js`, {
+      // Ask the theme which sections want re-rendering after the add (the cart
+      // drawer registers itself here), so we can hand them to /cart/add.js and
+      // then to the drawer's cart:change listener.
+      const sectionsToBundle = [];
+      document.documentElement.dispatchEvent(new CustomEvent('cart:prepare-bundled-sections', {
+        bubbles: true,
+        detail: { sections: sectionsToBundle },
+      }));
+
+      const root = window.Shopify.routes.root;
+      const res = await fetch(`${root}cart/add.js`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ items }),
+        body: JSON.stringify({
+          items,
+          sections: sectionsToBundle.join(','),
+          sections_url: window.location.pathname,
+        }),
       });
       if (!res.ok) {
         const payload = await this.safeJson(res);
         throw new CartAddError(res.status, payload);
       }
-      // Go to the dedicated Co-Lab review page (a Shopify Page at handle "lab-cart"
-      // using template "lab-cart"). Avoids /cart entirely so third-party widgets
-      // injected on the standard cart don't appear here.
-      window.location.assign(`${window.Shopify.routes.root}pages/lab-cart`);
+      const addResponse = await res.json();
+
+      this.closeModal();
+
+      // Re-render the cart and slide the normal drawer out (mirrors the theme's
+      // own product-form add flow).
+      const drawer = document.querySelector('cart-drawer');
+      if (drawer) {
+        const cartContent = await (await fetch(`${root}cart.js`)).json();
+        cartContent.sections = addResponse.sections;
+        document.documentElement.dispatchEvent(new CustomEvent('cart:change', {
+          bubbles: true,
+          detail: { baseEvent: 'variant:add', onSuccessDo: 'force_open_drawer', cart: cartContent },
+        }));
+      } else {
+        // No drawer on this storefront — send the customer to the cart page.
+        window.location.assign(`${root}cart`);
+      }
     } catch (err) {
       console.error('[co-lab-picker] add to cart failed', err);
-      this.showError(this.friendlyErrorMessage(err));
-      this.submitBtn.disabled = false;
-      this.submitBtn.removeAttribute('aria-busy');
+      this.showModalError(this.friendlyErrorMessage(err));
+      if (confirmBtn) {
+        confirmBtn.disabled = false;
+        confirmBtn.removeAttribute('aria-busy');
+      }
     }
   }
 
@@ -342,11 +479,6 @@ class CoLabPicker extends HTMLElement {
 
   /**
    * Map an add-to-cart failure to customer-friendly copy.
-   *
-   * - Network failures (offline, DNS, CORS) surface as TypeError from fetch.
-   * - Shopify cart errors come back as 422 with { status, message, description }.
-   *   The `description` is already customer-friendly so we prefer it.
-   * - 429 = rate limit. 5xx = server. Anything else falls through to a generic.
    */
   friendlyErrorMessage(err) {
     if (err instanceof TypeError) {
@@ -385,6 +517,18 @@ class CoLabPicker extends HTMLElement {
     if (!this.errorEl) return;
     this.errorEl.textContent = '';
     this.errorEl.hidden = true;
+  }
+
+  showModalError(message) {
+    if (!this.modalErrorEl) return;
+    this.modalErrorEl.textContent = message;
+    this.modalErrorEl.hidden = false;
+  }
+
+  clearModalError() {
+    if (!this.modalErrorEl) return;
+    this.modalErrorEl.textContent = '';
+    this.modalErrorEl.hidden = true;
   }
 
   async resolveVariantId(handle) {
