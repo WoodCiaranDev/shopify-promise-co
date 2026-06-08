@@ -82,7 +82,9 @@
     },
     "main": {
       "type": "main-collection",
-      "settings": {}
+      "settings": {
+        "color_scheme": "scheme-2"
+      }
     },
     "faq_custom_collection": {
       "type": "faq",
