@@ -250,6 +250,16 @@
         "max_image_zoom_level": 3
       }
     },
+    "co_lab_faq": {
+      "type": "co-lab-faq",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "subheading": "THE PROMISE CO - LAB",
+        "title": "FAQ's",
+        "content": ""
+      }
+    },
     "1718037938f4a04551": {
       "type": "apps",
       "blocks": {
@@ -495,6 +505,7 @@
   },
   "order": [
     "main",
+    "co_lab_faq",
     "1718037938f4a04551",
     "rich_text_TiHHaY",
     "multiple_media_with_text_XxetVy",

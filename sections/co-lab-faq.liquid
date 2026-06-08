@@ -1,0 +1,125 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+CO-LAB FAQ (global)
+
+Renders a single, globally-shared FAQ from the `faq` metaobject so the client edits the questions once and they appear
+everywhere they're rendered (custom landing page, Co-Lab collection, Co-Lab product pages).
+
+Metaobject `faq` fields:
+* question  — single-line text
+* answer    — rich text
+* position  — integer (sort order)
+
+Mirrors the markup/styling of sections/faq.liquid and reuses snippets/accordion.liquid.
+----------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- assign faq_entries = shop.metaobjects.faq.values | sort: 'position' -%}
+
+{%- comment -%}
+  product.json is shared by every product, so when this section is placed on the product template it must
+  only render for Co-Lab products. On non-product pages (landing, collection) it always renders.
+{%- endcomment -%}
+{%- assign render_faq = true -%}
+{%- if request.page_type == 'product' and product.metafields.custom.product_type.value != 'co-lab' -%}
+  {%- assign render_faq = false -%}
+{%- endif -%}
+
+{%- if faq_entries.size > 0 and render_faq -%}
+  {%- assign color_scheme_hash = section.settings.color_scheme.settings.background_gradient | default: section.settings.color_scheme.settings.background | md5 -%}
+
+  <div class="section-spacing color-scheme color-scheme--{{ section.settings.color_scheme.id }} color-scheme--bg-{{ color_scheme_hash }} {% if section.settings.separate_section_with_border %}bordered-section{% endif %}">
+    <div class="container container--md">
+      <div class="section-stack">
+        {%- render 'section-header', subheading: section.settings.subheading, heading: section.settings.title, content: section.settings.content -%}
+
+        <div class="faq">
+          <div class="faq__content">
+            {%- for entry in faq_entries -%}
+              {%- if entry.question != blank and entry.answer != blank -%}
+                {%- capture answer -%}
+                  <div class="prose">
+                    {{- entry.answer -}}
+                  </div>
+                {%- endcapture -%}
+
+                {%- render 'accordion', title: entry.question, content: answer, show_title_as_text: true -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%}Output the content as JSON-LD microdata for SEO{%- endcomment -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- for entry in faq_entries -%}
+          {%- if entry.question != blank and entry.answer != blank -%}
+            {
+              "@type": "Question",
+              "name": {{ entry.question | json }},
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": {{ entry.answer | strip_html | json }}
+              }
+            }{%- unless forloop.last -%},{%- endunless -%}
+          {%- endif -%}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- elsif request.design_mode and render_faq -%}
+  <div class="container container--md section-spacing">
+    <p class="text-center text-subdued">No FAQ entries found. Add entries to the <strong>faq</strong> metaobject in Settings &rarr; Custom data.</p>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Co-Lab FAQ",
+  "class": "shopify-section--co-lab-faq",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:global.colors.scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:global.text.subheading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "t:global.text.heading"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "t:global.text.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "separate_section_with_border",
+      "label": "t:global.section.separate_section_with_border",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Co-Lab FAQ"
+    }
+  ]
+}
+{% endschema %}
