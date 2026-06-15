@@ -14,10 +14,11 @@ class CoLabPicker extends HTMLElement {
     this.customCard = this.querySelector('.c-co-lab-picker__card--custom');
 
     // Per-product pricing / slot configuration (defaults baked into the Liquid).
-    this.bsCharged = this.dataset.birthstoneCharged === 'true';
-    this.engCharged = this.dataset.engravingCharged === 'true';
+    // A price of 0 always means "included", regardless of the charged flag.
     this.bsPrice = parseInt(this.dataset.birthstonePrice, 10) || 0;
     this.engPrice = parseInt(this.dataset.engravingPrice, 10) || 0;
+    this.bsCharged = this.dataset.birthstoneCharged === 'true' && this.bsPrice > 0;
+    this.engCharged = this.dataset.engravingCharged === 'true' && this.engPrice > 0;
     this.basePrice = parseInt(this.dataset.basePrice, 10) || 0;
     this.productTitle = this.dataset.productTitle || '';
 
@@ -193,7 +194,8 @@ class CoLabPicker extends HTMLElement {
 
   onEngravingChange() {
     const value = this.engravingInput.value;
-    this.engravingCount.textContent = `${value.length}/12 Characters`;
+    const max = this.engravingInput.maxLength > 0 ? this.engravingInput.maxLength : value.length;
+    this.engravingCount.textContent = `${value.length}/${max} Characters`;
     this.refresh();
   }
 

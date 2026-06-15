@@ -23,19 +23,23 @@ Inputs:
 {%- liquid
   assign mf = product.metafields.custom
   assign slot_count = mf.birthstone_slots.value | default: 2
+  assign eng_max_chars = mf.engraving_max_chars.value | default: 12
 
-  assign bs_charged = true
-  unless mf.birthstone_charged == nil
-    assign bs_charged = mf.birthstone_charged.value
-  endunless
+  # Extra pricing in pence. 0 (or unset) = included in the base price; any positive
+  # amount = charged on top as an add-on line. A single number drives both the
+  # "included vs extra" behaviour and the amount.
+  assign bs_price = mf.birthstone_price.value | default: 0
+  assign eng_price = mf.engraving_price.value | default: 0
 
-  assign eng_charged = true
-  unless mf.engraving_charged == nil
-    assign eng_charged = mf.engraving_charged.value
-  endunless
+  assign bs_charged = false
+  if bs_price > 0
+    assign bs_charged = true
+  endif
 
-  assign bs_price = mf.birthstone_price.value | default: 1000
-  assign eng_price = mf.engraving_price.value | default: 2000
+  assign eng_charged = false
+  if eng_price > 0
+    assign eng_charged = true
+  endif
 -%}
 
 <c-co-lab-picker
@@ -143,7 +147,7 @@ Inputs:
                    id="{{ product_form_id }}-engraving"
                    class="c-co-lab-picker__engraving-input"
                    name="properties[Engraving]"
-                   maxlength="12"
+                   maxlength="{{ eng_max_chars }}"
                    placeholder="Type Your Engraving Here"
                    data-engraving-input
                    disabled>
@@ -152,7 +156,7 @@ Inputs:
             {%- endif -%}
             <span class="c-co-lab-picker__engraving-arrow" aria-hidden="true">→</span>
           </div>
-          <p class="c-co-lab-picker__engraving-count" data-engraving-count>0/12 Characters</p>
+          <p class="c-co-lab-picker__engraving-count" data-engraving-count>0/{{ eng_max_chars }} Characters</p>
         </div>
       </section>
 
