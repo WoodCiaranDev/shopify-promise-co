@@ -1,3 +1,9 @@
+/* Co-Lab products: don't pin the product-info column. The theme's safe-sticky
+   bails when the computed position isn't sticky, so the picker scrolls normally. */
+safe-sticky.product-info:has(c-co-lab-picker) {
+  position: static;
+}
+
 .c-co-lab-picker {
   display: block;
   --c-co-lab-card-bg: #fcfbfa;
