@@ -1,0 +1,4 @@
+Order,Date,Customer,Ship Country,SKU,Product,Metal,Size,Qty,Engraving,Birthstone 1,Birthstone 2,Birthstone 3,Order Note,Line Total (GBP),Bundle ID
+#1001,2026-06-15,A. Smith,GB,718CTGOLDVEPROMISEHEA0403,Promise Heart Solitaire Ring,18k Gold Vermeil,7,1,Forever & Always,April (Diamond),July (Ruby),,Gift - please omit invoice,96.00,bundle-7f3a
+#1001,2026-06-15,A. Smith,GB,COLAB-ENGRAVING-ADDON,Engraving add-on,,,1,,,,,,20.00,bundle-7f3a
+#1002,2026-06-15,J. Doe,US,5RHODIUMPLAPROMISEHEA0408,Promise Heart Solitaire Ring,Rhodium Plated Silver,5,1,,September (Sapphire),,,,96.00,bundle-2c9b
