@@ -1,7 +1,6 @@
 class CoLabPicker extends HTMLElement {
   connectedCallback() {
     this.activeSlot = null;
-    this.hasUserSelectedVariant = false;
 
     this.form = this.querySelector('form[action*="/cart/add"]');
     this.stonesToggle = this.querySelector('[data-action="toggle-stones"]');
@@ -28,6 +27,13 @@ class CoLabPicker extends HTMLElement {
 
     this.bindEvents();
     this.refresh();
+
+    // The first size pick triggers a full re-render that rebuilds this picker with the
+    // size already selected, so scroll here. Fresh loads start at the placeholder.
+    requestAnimationFrame(() => {
+      const sizeSelect = this.querySelector('[data-size-select]');
+      if (sizeSelect && sizeSelect.value) this.scrollToCustomisation();
+    });
   }
 
   parseJson(selector, fallback) {
@@ -67,20 +73,41 @@ class CoLabPicker extends HTMLElement {
         this.selectedVariant = e.detail.variant;
         this.clearError();
         this.refresh();
-        // Smoothly guide the customer down to the customisation step once they've
-        // picked a size. Guard against the picker's own initial render firing this.
-        if (this.hasUserSelectedVariant) {
-          this.scrollToCustomisation();
-        }
-        this.hasUserSelectedVariant = true;
+      }
+    });
+
+    // Scroll to customisation when a size is picked (delegated; ignores metal swatches).
+    this.addEventListener('change', (e) => {
+      const target = e.target;
+      if (target && target.matches && target.matches('[data-size-select]') && target.value) {
+        this.scrollToCustomisation();
       }
     });
 
     this.form?.addEventListener('submit', (e) => this.onSubmit(e));
   }
 
+  // Resolve --sticky-area-height (a calc() string) to pixels so the card clears the header.
+  headerOffset() {
+    const probe = document.createElement('div');
+    probe.style.cssText = 'position:absolute;visibility:hidden;height:var(--sticky-area-height);';
+    document.body.appendChild(probe);
+    const px = probe.offsetHeight || 0;
+    probe.remove();
+    return px;
+  }
+
   scrollToCustomisation() {
-    this.customCard?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const tryScroll = () => {
+      // Re-query the live card: the first size pick rebuilds the picker, so a cached
+      // reference can point at a destroyed node.
+      const card = document.querySelector('.c-co-lab-picker__card--custom');
+      if (!card) return;
+      const top = card.getBoundingClientRect().top + window.scrollY - this.headerOffset() - 20;
+      window.scrollTo({ top, behavior: 'smooth' });
+    };
+    // Re-assert a few times: the theme's async re-render can cancel a single smooth scroll.
+    [0, 300, 600].forEach((delay) => setTimeout(tryScroll, delay));
   }
 
   toggleStones() {
