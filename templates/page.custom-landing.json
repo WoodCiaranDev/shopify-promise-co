@@ -119,14 +119,17 @@
           }
         }
       },
-      "block_order": ["strip_1", "strip_2", "strip_3"],
+      "block_order": [
+        "strip_1",
+        "strip_2",
+        "strip_3"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "text_background_color": "#f2eee7",
         "image_background_color": "#ffffff",
         "content_width": "sm",
         "image_max_width": 640,
-        "reveal_on_scroll": true,
         "separate_section_with_border": false
       }
     },
@@ -150,45 +153,13 @@
       }
     },
     "faq_custom_landing": {
-      "type": "faq",
-      "blocks": {
-        "q_delivery": {
-          "type": "question",
-          "settings": {
-            "question": "How long will it take for me to receive my ring?",
-            "answer": "<p>Please note: Delivery times are estimates and may occasionally be extended due to customs delays, courier disruptions, or UK bank holidays.</p>"
-          }
-        },
-        "q_refund": {
-          "type": "question",
-          "settings": {
-            "question": "Are custom pieces non-refundable?",
-            "answer": "<p>Write a clear and concise answer to guide your customers.</p>"
-          }
-        },
-        "q_customisable": {
-          "type": "question",
-          "settings": {
-            "question": "Are all your rings customisable?",
-            "answer": "<p>Write a clear and concise answer to guide your customers.</p>"
-          }
-        },
-        "q_bespoke": {
-          "type": "question",
-          "settings": {
-            "question": "Do you offer complete bespoke design?",
-            "answer": "<p>Write a clear and concise answer to guide your customers.</p>"
-          }
-        }
-      },
-      "block_order": ["q_delivery", "q_refund", "q_customisable", "q_bespoke"],
+      "type": "co-lab-faq",
       "settings": {
         "color_scheme": "scheme-2",
-        "separate_section_with_border": false,
-        "show_categories": false,
         "subheading": "",
         "title": "",
-        "content": ""
+        "content": "",
+        "separate_section_with_border": false
       }
     },
     "faq_cta": {
@@ -203,7 +174,9 @@
           }
         }
       },
-      "block_order": ["cta_button"],
+      "block_order": [
+        "cta_button"
+      ],
       "settings": {
         "color_scheme": "scheme-2",
         "separate_section_with_border": false,
