@@ -1,5 +1,11 @@
 {%- if section.blocks.size > 0 -%}
   <div class="feature-strips color-scheme color-scheme--{{ section.settings.color_scheme.id }}{% if section.settings.separate_section_with_border %} bordered-section{% endif %}">
+    {%- comment -%}
+      On mobile the strips become a horizontal Swiper slider (initialised in JS below). On desktop the
+      Swiper is destroyed and the stylesheet neutralises Swiper's flex layout so the strips stack as before.
+    {%- endcomment -%}
+    <div class="feature-strips__slider swiper" id="feature-strips-{{ section.id }}">
+      <div class="feature-strips__wrapper swiper-wrapper">
     {%- for block in section.blocks -%}
       {%- if block.type == 'strip' -%}
         {%- liquid
@@ -16,7 +22,7 @@
           endif
         -%}
 
-        <div class="feature-strips__strip{% if is_reverse %} feature-strips__strip--reverse{% endif %}" {{ block.shopify_attributes }}>
+        <div class="feature-strips__strip swiper-slide{% if is_reverse %} feature-strips__strip--reverse{% endif %}" {{ block.shopify_attributes }}>
 
           <div class="feature-strips__media"{% if section.settings.image_background_color != blank and section.settings.image_background_color != 'rgba(0,0,0,0)' %} style="background-color: {{ section.settings.image_background_color }};"{% endif %}>
             {%- if block.settings.image != blank -%}
@@ -69,7 +75,40 @@
         </div>
       {%- endif -%}
     {%- endfor -%}
+      </div>
+      <div class="feature-strips__pagination swiper-pagination"></div>
+    </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var el = document.getElementById('feature-strips-{{ section.id }}');
+      if (!el || typeof Swiper === 'undefined') return;
+
+      var instance = null;
+      var mq = window.matchMedia('(max-width: 699px)');
+
+      function sync() {
+        if (mq.matches && !instance) {
+          instance = new Swiper(el, {
+            slidesPerView: 1.1,
+            spaceBetween: 16,
+            grabCursor: true,
+            pagination: {
+              el: el.querySelector('.feature-strips__pagination'),
+              clickable: true,
+            },
+          });
+        } else if (!mq.matches && instance) {
+          instance.destroy(true, true);
+          instance = null;
+        }
+      }
+
+      sync();
+      mq.addEventListener('change', sync);
+    });
+  </script>
 {%- endif -%}
 
 {% stylesheet %}
@@ -77,6 +116,32 @@
     display: grid;
     grid-template-columns: 1fr;
     align-items: center;
+  }
+
+  /* Mobile: give each slide its own width so the slider can page between strips */
+  @media (max-width: 699px) {
+    .feature-strips__strip.swiper-slide {
+      height: auto;
+    }
+  }
+
+  /* Desktop: neutralise Swiper's flex layout so strips stack full-width as before */
+  @media (min-width: 700px) {
+    .feature-strips__slider.swiper {
+      overflow: visible;
+    }
+
+    .feature-strips__wrapper.swiper-wrapper {
+      display: block;
+    }
+
+    .feature-strips__strip.swiper-slide {
+      width: auto;
+    }
+
+    .feature-strips__pagination {
+      display: none;
+    }
   }
 
   @media (min-width: 700px) {
