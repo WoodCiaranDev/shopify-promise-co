@@ -68,8 +68,8 @@
           "settings": {
             "show_payment_button": true,
             "show_gift_card_recipient": true,
-            "atc_button_background": "#ddcbdd",
-            "atc_button_text_color": "#313030",
+            "atc_button_background": "#75aedc",
+            "atc_button_text_color": "#ffffff",
             "payment_button_background": "",
             "payment_button_text_color": ""
           }
@@ -416,51 +416,51 @@
         "content": ""
       }
     },
-    "category_cards_VND4Rf": {
+    "category_cards_Ut7eFP": {
       "type": "category-cards",
       "blocks": {
-        "category_image_djBJCT": {
+        "category_image_ykJMNB": {
           "type": "category_image",
           "settings": {
-            "image": "shopify://shop_images/2_080efb18-8960-4515-8029-cb2da2f60254.png",
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T093421.486.png",
             "title": "Best Sellers",
             "description": "<p>discover</p>",
             "link": "shopify://collections/best-sellers"
           }
         },
-        "category_image_YVPqfb": {
+        "category_image_LPffKf": {
           "type": "category_image",
           "settings": {
-            "image": "shopify://shop_images/4_18c5bbdd-e181-4b3a-8e3c-2411e576827f.png",
-            "title": "Single Stone Rings",
-            "description": "<p>shop</p>",
-            "link": "shopify://collections/single-stone-promise-rings"
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T093409.150.png",
+            "title": "Shop for Her",
+            "description": "<p>Promise Rings</p>",
+            "link": "shopify://collections/for-her"
           }
         },
-        "category_image_RDrpg4": {
+        "category_image_qGh7nN": {
           "type": "category_image",
           "settings": {
-            "image": "shopify://shop_images/1_22bcb349-9582-4cdc-90a1-76c536b995d1.png",
-            "title": "Pinky Rings",
-            "description": "<p>our current fave</p>",
-            "link": "shopify://collections/pinky-promise-rings"
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-02T155423.026.png",
+            "title": "Mens Rings",
+            "description": "<p>Shop</p>",
+            "link": "shopify://collections/mens-promise-rings"
           }
         },
-        "category_image_wgj7Mn": {
+        "category_image_Dgft73": {
           "type": "category_image",
           "settings": {
-            "image": "shopify://shop_images/3_86b63cb8-1679-4cbb-a63d-f90c8d38b8c5.png",
-            "title": "Bands & Stacking",
-            "description": "<p>promise</p>",
-            "link": "shopify://collections/bands-and-stacking-rings"
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T152137.870.png",
+            "title": "Couples Rings",
+            "description": "<p>Matching</p>",
+            "link": "shopify://collections/couples-promise-rings"
           }
         }
       },
       "block_order": [
-        "category_image_djBJCT",
-        "category_image_YVPqfb",
-        "category_image_RDrpg4",
-        "category_image_wgj7Mn"
+        "category_image_ykJMNB",
+        "category_image_LPffKf",
+        "category_image_qGh7nN",
+        "category_image_Dgft73"
       ],
       "settings": {
         "title": "",
@@ -500,7 +500,7 @@
     "multiple_media_with_text_XxetVy",
     "related-products",
     "recently_viewed_products_3KM6a4",
-    "category_cards_VND4Rf",
+    "category_cards_Ut7eFP",
     "174418775193790daa"
   ]
 }

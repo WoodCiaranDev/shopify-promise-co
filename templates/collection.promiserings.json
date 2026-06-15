@@ -369,19 +369,19 @@
         "category_image_xYKXrb": {
           "type": "category_image",
           "settings": {
-            "image": "shopify://shop_images/Untitled_design_-_2026-04-02T155423.026.png",
-            "title": "For Him",
-            "description": "<p>Mens Promise rings</p>",
-            "link": "shopify://collections/mens-promise-rings"
+            "image": "shopify://shop_images/Untitled_design-31.png",
+            "title": "Gold Promise Rings",
+            "description": "<p>Shop</p>",
+            "link": "shopify://collections/gold-promise-rings"
           }
         },
         "category_image_6E7Vbq": {
           "type": "category_image",
           "settings": {
-            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T152137.870.png",
-            "title": "Couples Rings",
-            "description": "<p>Matching</p>",
-            "link": "shopify://collections/couples-promise-rings"
+            "image": "shopify://shop_images/emerald_solitaire.png",
+            "title": "Silver Promise Rings",
+            "description": "<p>Explore</p>",
+            "link": "shopify://collections/silver-promise-rings"
           }
         }
       },

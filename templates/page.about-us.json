@@ -304,7 +304,7 @@
         "section_vertical_spacing_desktop": 10,
         "item_horizontal_spacing_mobile": 30,
         "item_horizontal_spacing_desktop": 50,
-        "background": "#ddcbdd",
+        "background": "#75aedc",
         "text_color": "#ffffff"
       }
     },
@@ -361,7 +361,7 @@
       ],
       "name": "t:sections.image_with_text.presets.image_with_text.name",
       "settings": {
-        "color_scheme": "scheme-2ca1c54f-75f1-4890-b6c9-acb7092f2a37",
+        "color_scheme": "scheme-b68b61c5-ba0e-4161-a0e3-3d59622e9bf4",
         "separate_section_with_border": false,
         "image": "shopify://shop_images/Artboard_38_10x_1eccc768-d36e-4410-9293-be6bc14e95f2.png",
         "reveal_on_scroll": true,
