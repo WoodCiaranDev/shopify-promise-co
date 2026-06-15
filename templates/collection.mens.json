@@ -43,7 +43,11 @@
         "separate_section_with_border": true,
         "content_width": "sm",
         "text_position": "center",
-        "remove_vertical_spacing": false
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
       }
     },
     "collection-banner": {
@@ -139,12 +143,70 @@
         "title": "",
         "content": ""
       }
+    },
+    "category_cards_HV7hhz": {
+      "type": "category-cards",
+      "blocks": {
+        "category_image_WTUaRk": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T093421.486.png",
+            "title": "Best Sellers",
+            "description": "<p>discover</p>",
+            "link": "shopify://collections/best-sellers"
+          }
+        },
+        "category_image_egKxgA": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T093409.150.png",
+            "title": "Shop for Her",
+            "description": "<p>Promise Rings</p>",
+            "link": "shopify://collections/for-her"
+          }
+        },
+        "category_image_VkAMLj": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design-31.png",
+            "title": "Top 15 Rings",
+            "description": "<p>Shop</p>",
+            "link": "shopify://collections/top-15-promise-rings"
+          }
+        },
+        "category_image_CYY6Jz": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T152137.870.png",
+            "title": "Couples Rings",
+            "description": "<p>Matching</p>",
+            "link": "shopify://collections/couples-promise-rings"
+          }
+        }
+      },
+      "block_order": [
+        "category_image_WTUaRk",
+        "category_image_egKxgA",
+        "category_image_VkAMLj",
+        "category_image_CYY6Jz"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "background_color": "#ffffff",
+        "title_color": "#000000",
+        "subtitle_color": "#666666",
+        "section_padding_top": 64,
+        "section_padding_bottom": 64,
+        "mobile_single_column": false
+      }
     }
   },
   "order": [
     "rich_text_wMNiPf",
     "collection-banner",
     "main",
-    "multi_column_6rLKqy"
+    "multi_column_6rLKqy",
+    "category_cards_HV7hhz"
   ]
 }
