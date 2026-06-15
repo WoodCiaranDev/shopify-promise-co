@@ -14,15 +14,43 @@ Inputs:
 {%- assign stones = shop.metaobjects.birthstone.values | sort: 'position' -%}
 {%- assign first_variant = product.selected_or_first_available_variant -%}
 
+{%- comment -%}
+  Per-product pricing & slot configuration via metafields, with backwards-compatible defaults
+  (2 slots, both extras charged at £10 / £20). Prices are stored in integer pence to match the
+  legacy hardcoded 1000 / 2000. Booleans need an explicit nil check — `| default: true` would
+  wrongly flip an intentionally-set `false`.
+{%- endcomment -%}
+{%- liquid
+  assign mf = product.metafields.custom
+  assign slot_count = mf.birthstone_slots.value | default: 2
+
+  assign bs_charged = true
+  unless mf.birthstone_charged == nil
+    assign bs_charged = mf.birthstone_charged.value
+  endunless
+
+  assign eng_charged = true
+  unless mf.engraving_charged == nil
+    assign eng_charged = mf.engraving_charged.value
+  endunless
+
+  assign bs_price = mf.birthstone_price.value | default: 1000
+  assign eng_price = mf.engraving_price.value | default: 2000
+-%}
+
 <c-co-lab-picker
   class="c-co-lab-picker"
   data-product-id="{{ product.id }}"
   data-base-price="{{ first_variant.price }}"
-  data-birthstone-price="1000"
-  data-engraving-price="2000"
+  data-birthstone-price="{{ bs_price }}"
+  data-engraving-price="{{ eng_price }}"
+  data-birthstone-charged="{{ bs_charged }}"
+  data-engraving-charged="{{ eng_charged }}"
+  data-slot-count="{{ slot_count }}"
   data-birthstone-addon-handle="birthstone-addon"
   data-engraving-addon-handle="engraving-addon"
-  data-product-url="{{ product.url }}"
+  data-review-modal-id="co-lab-review-{{ product.id }}"
+  data-product-title="{{ product.title | escape }}"
 >
   <product-form>
     {%- form 'product', product, id: product_form_id -%}
@@ -53,18 +81,30 @@ Inputs:
           </button>
 
           <div class="c-co-lab-picker__stones" data-stones hidden>
-            {%- for slot in (1..2) -%}
+            {%- for slot in (1..slot_count) -%}
+              {%- liquid
+                case slot
+                  when 1
+                    assign slot_label = 'One'
+                  when 2
+                    assign slot_label = 'Two'
+                  else
+                    assign slot_label = slot
+                endcase
+              -%}
               <div class="c-co-lab-picker__stone-row" data-slot="{{ slot }}">
                 <p class="c-co-lab-picker__stone-label">
-                  <span>Birthstone {% if slot == 1 %}One{% else %}Two{% endif %}:</span>
-                  <span class="c-co-lab-picker__uplift">+ £10</span>
+                  <span>Birthstone {{ slot_label }}:</span>
+                  {%- if bs_charged -%}
+                    <span class="c-co-lab-picker__uplift">+ {{ bs_price | money_without_trailing_zeros }}</span>
+                  {%- endif -%}
                 </p>
                 <button type="button" class="c-co-lab-picker__stone-select" data-action="open-grid" data-slot="{{ slot }}" aria-haspopup="dialog">
                   <span class="c-co-lab-picker__stone-swatch" data-stone-swatch="{{ slot }}" hidden></span>
                   <span class="c-co-lab-picker__stone-text" data-stone-text="{{ slot }}">Select Stone</span>
                   <span class="c-co-lab-picker__chev" aria-hidden="true">→</span>
                 </button>
-                <input type="hidden" name="properties[Birthstone {% if slot == 1 %}One{% else %}Two{% endif %}]" data-stone-input="{{ slot }}" value="" disabled>
+                <input type="hidden" name="properties[Birthstone {{ slot_label }}]" data-stone-input="{{ slot }}" value="" disabled>
               </div>
             {%- endfor -%}
           </div>
@@ -107,7 +147,9 @@ Inputs:
                    placeholder="Type Your Engraving Here"
                    data-engraving-input
                    disabled>
-            <span class="c-co-lab-picker__engraving-uplift" aria-hidden="true">+ £20</span>
+            {%- if eng_charged -%}
+              <span class="c-co-lab-picker__engraving-uplift" aria-hidden="true">+ {{ eng_price | money_without_trailing_zeros }}</span>
+            {%- endif -%}
             <span class="c-co-lab-picker__engraving-arrow" aria-hidden="true">→</span>
           </div>
           <p class="c-co-lab-picker__engraving-count" data-engraving-count>0/12 Characters</p>
@@ -125,6 +167,17 @@ Inputs:
         </button>
       </div>
 
+      <script type="application/json" data-product-options>{{ product.options | json }}</script>
+
+      <script type="application/json" data-initial-variant>
+        {
+          "id": {{ first_variant.id }},
+          "title": {{ first_variant.title | json }},
+          "price": {{ first_variant.price }},
+          "options": {{ first_variant.options | json }}
+        }
+      </script>
+
       <script type="application/json" data-stones-json>
         [
           {%- for stone in stones -%}
@@ -138,4 +191,15 @@ Inputs:
       </script>
     {%- endform -%}
   </product-form>
+
+  {%- comment -%}
+    Pre-add review modal. Empty on render; co-lab-picker.js builds the review card from the
+    current selections, opens this modal, and only adds to cart once the customer confirms.
+    Uses the theme's <x-modal> component (relocates itself to <body> on first open — resolve
+    it by id from JS, never via this.querySelector).
+  {%- endcomment -%}
+  <x-modal id="co-lab-review-{{ product.id }}" class="modal modal--lg color-scheme color-scheme--dialog" data-colab-review-modal>
+    <span class="h5" slot="header">Review your ring</span>
+    <div data-colab-review-body></div>
+  </x-modal>
 </c-co-lab-picker>

@@ -10,14 +10,14 @@
 .c-co-lab-picker form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 10px;
 }
 
 /* CARDS */
 .c-co-lab-picker__card {
   background: var(--c-co-lab-card-bg);
   border-radius: 1.25rem;
-  padding: 2rem;
+  padding: 1.5rem 1.75rem;
 }
 
 .c-co-lab-picker__card--metal {
@@ -271,7 +271,7 @@
   letter-spacing: 0;
   text-transform: uppercase;
   opacity: 1;
-  padding-top: 10px;
+  padding-top: 2px;
   margin-top: auto;
 }
 
@@ -338,69 +338,9 @@
 }
 
 /* ============================================================
-   CART PAGE — co-lab bundle review card
+   CO-LAB REVIEW CARD — shown inside the pre-add review modal
    Reuses the picker tokens (cream backgrounds, pill controls).
    ============================================================ */
-
-.c-co-lab-cart-page {
-  padding-block: 2.5rem 3rem;
-}
-
-.c-co-lab-cart-page--standalone {
-  min-height: 60vh;
-}
-
-.c-co-lab-cart-page__empty {
-  text-align: center;
-  padding: 4rem 1rem;
-}
-
-.c-co-lab-cart-page__empty-title {
-  margin: 0 0 1rem;
-  font-family: var(--heading-font-family, serif);
-  font-weight: 400;
-}
-
-.c-co-lab-cart-page__empty-body a {
-  color: inherit;
-  text-decoration: underline;
-}
-
-/* Hide the third-party "Congratulations / free shipping" widget on Co-Lab carts. */
-.c-co-lab-cart-page .free_shipping_card {
-  display: none !important;
-}
-
-/* Drop theme.css's huge row-gap on .cart-page when it's our lab-cart form. */
-.c-co-lab-cart-page .cart-page {
-  row-gap: 0;
-}
-
-.c-co-lab-cart-bundle__logo {
-  display: block;
-  margin: 0 auto -1.5rem;
-  top: 0;
-  max-width: 120px;
-  height: auto;
-  position: absolute;
-  z-index: 2;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.c-co-lab-cart-page__checkout {
-  margin-top: 1.5rem;
-}
-
-.c-co-lab-cart-page__checkout button {
-  width: 100%;
-}
-
-.c-co-lab-cart-bundles {
-  display: flex;
-  flex-direction: column;
-  gap: 3.5rem;
-}
 
 .c-co-lab-cart-bundle {
   display: block;
@@ -579,71 +519,19 @@
   opacity: 1;
 }
 
-.c-co-lab-cart-summary {
-  margin: 2rem auto 0;
-  padding: 1.5rem 1.75rem 1.75rem;
-  background: var(--c-co-lab-card-bg, #fcfbfa);
-  border-radius: 12px;
-  max-width: 560px;
-}
-
-.c-co-lab-cart-summary__total-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin: 0 0 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.c-co-lab-cart-summary__total-label {
-  font-size: 0.75rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-
-.c-co-lab-cart-summary__total-value {
-  font-family: var(--heading-font-family, serif);
-  font-size: 1.6rem;
-}
-
-.c-co-lab-cart-summary__terms {
-  margin: 0 0 1.25rem;
-  font-size: 0.72rem;
-  line-height: 1.55;
-  opacity: 0.6;
-}
-
-.c-co-lab-cart-summary__checkout {
-  display: block;
-  width: 100%;
-  padding: 0.95rem 1rem;
+/* Primary action — used as the modal's confirm/add button (pill, matches checkout) */
+.c-co-lab-cart-bundle__action--primary {
+  padding: 0.85rem 1.5rem;
   background: #2a2a2a;
   color: #fff;
-  border: none;
   border-radius: 999px;
-  font: inherit;
-  font-size: 0.85rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
   font-weight: 600;
-  cursor: pointer;
   transition: opacity 0.2s ease;
 }
 
-.c-co-lab-cart-summary__checkout:disabled {
+.c-co-lab-cart-bundle__action--primary:disabled {
   opacity: 0.35;
   cursor: not-allowed;
-}
-
-.c-co-lab-cart-summary__gate-note {
-  margin: 0.75rem 0 0;
-  text-align: center;
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  opacity: 0.6;
 }
 
 .c-co-lab-picker__engraving-count {
@@ -789,11 +677,11 @@
 /* Responsive */
 @media (max-width: 480px) {
   .c-co-lab-picker__card {
-    padding: 1.5rem;
+    padding: 1.25rem 1.25rem;
     border-radius: 1rem;
   }
   .c-co-lab-picker__grid-list {
-    gap: 1.25rem 0.25rem;
+    gap: 1.4rem 0.4rem;
   }
   .c-co-lab-picker {
     --c-co-lab-stone-size: 28px;
