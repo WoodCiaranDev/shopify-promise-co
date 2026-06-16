@@ -217,18 +217,11 @@ Inputs:
       <p>Personalise your ring with the birthstones that mean the most to you. Choose a stone for each available setting — an <strong>inner birthstone</strong> hidden inside the band, and/or an <strong>outer birthstone</strong> on the face — and add an optional internal engraving.</p>
       <p>Each birth month has its own stone colour:</p>
       <ul class="c-co-lab-birthstone-info__list">
-        <li>January — Garnet</li>
-        <li>February — Amethyst</li>
-        <li>March — Aquamarine</li>
-        <li>April — Diamond Simulant</li>
-        <li>May — Emerald</li>
-        <li>June — Lavender</li>
-        <li>July — Ruby</li>
-        <li>August — Apple Green</li>
-        <li>September — Sapphire Blue</li>
-        <li>October — Pink</li>
-        <li>November — Champagne</li>
-        <li>December — Tanzanite</li>
+        {%- for stone in stones -%}
+          {%- if stone.month != blank or stone.name != blank -%}
+            <li>{{ stone.month }}{% if stone.month != blank and stone.name != blank %} — {% endif %}{{ stone.name }}</li>
+          {%- endif -%}
+        {%- endfor -%}
       </ul>
     </div>
   </x-modal>
