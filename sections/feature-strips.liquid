@@ -1,11 +1,13 @@
 {%- if section.blocks.size > 0 -%}
   <div class="feature-strips color-scheme color-scheme--{{ section.settings.color_scheme.id }}{% if section.settings.separate_section_with_border %} bordered-section{% endif %}">
-    {%- comment -%}
-      On mobile the strips become a horizontal scroll-snap slider (CSS only, each strip is a slide).
-      On desktop they stack full-width and alternate image/text side as before.
-    {%- endcomment -%}
-    <div class="feature-strips__slider">
-      <div class="feature-strips__wrapper">
+    <div
+      class="feature-strips__slider swiper"
+      id="feature-strips-{{ section.id }}"
+      data-feature-strips-slider
+      data-autoplay="{{ section.settings.autoplay }}"
+      data-autoplay-speed="{{ section.settings.autoplay_speed }}"
+    >
+      <div class="feature-strips__wrapper swiper-wrapper">
     {%- for block in section.blocks -%}
       {%- if block.type == 'strip' -%}
         {%- liquid
@@ -22,7 +24,7 @@
           endif
         -%}
 
-        <div class="feature-strips__strip{% if is_reverse %} feature-strips__strip--reverse{% endif %}" {{ block.shopify_attributes }}>
+        <div class="feature-strips__strip swiper-slide{% if is_reverse %} feature-strips__strip--reverse{% endif %}" {{ block.shopify_attributes }}>
 
           <div class="feature-strips__media"{% if section.settings.image_background_color != blank and section.settings.image_background_color != 'rgba(0,0,0,0)' %} style="background-color: {{ section.settings.image_background_color }};"{% endif %}>
             {%- if block.settings.image != blank -%}
@@ -76,47 +78,96 @@
       {%- endif -%}
     {%- endfor -%}
       </div>
+
+      {%- if section.blocks.size > 1 -%}
+        <div class="feature-strips__nav">
+          <button type="button" class="feature-strips__arrow feature-strips__arrow--prev" data-feature-strips-prev aria-label="Previous slide">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button type="button" class="feature-strips__arrow feature-strips__arrow--next" data-feature-strips-next aria-label="Next slide">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      {%- endif -%}
     </div>
   </div>
 {%- endif -%}
 
 {% stylesheet %}
-  .feature-strips__strip {
+  .feature-strips__slider {
+    position: relative;
+  }
+
+  .feature-strips .feature-strips__strip {
     display: grid;
     grid-template-columns: 1fr;
     align-items: center;
+    height: auto;
   }
 
-  /* Mobile: horizontal scroll-snap slider — each strip is its own slide */
-  @media (max-width: 699px) {
-    .feature-strips__wrapper {
-      display: flex;
-      gap: 1rem;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      padding-inline: 1rem;
-    }
-
-    .feature-strips__wrapper::-webkit-scrollbar {
-      display: none;
-    }
-
-    .feature-strips__strip {
-      flex: 0 0 86%;
-      scroll-snap-align: center;
-    }
-  }
-
-  /* Desktop: full-width stacked strips, alternating image/text side */
   @media (min-width: 700px) {
-    .feature-strips__strip {
+    .feature-strips .feature-strips__strip {
       grid-template-columns: 1fr 1fr;
     }
 
-    .feature-strips__strip--reverse .feature-strips__media {
+    .feature-strips .feature-strips__strip--reverse .feature-strips__media {
       order: 1;
+    }
+  }
+
+  .feature-strips__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    color: #1a1a1a;
+    cursor: pointer;
+    transition: background 0.2s ease, opacity 0.2s ease;
+  }
+
+  .feature-strips__arrow:hover {
+    background: #ffffff;
+  }
+
+  .feature-strips__arrow svg {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .feature-strips__nav {
+    display: flex;
+    justify-content: center;
+    gap: 3.5rem;
+    margin-top: 0.25rem;
+    padding-bottom: 1.5rem;
+  }
+
+  @media (min-width: 700px) {
+    .feature-strips__nav {
+      display: contents;
+    }
+
+    .feature-strips__arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    .feature-strips__arrow--prev {
+      left: 1rem;
+    }
+
+    .feature-strips__arrow--next {
+      right: 1rem;
     }
   }
 
@@ -173,6 +224,61 @@
   }
 {% endstylesheet %}
 
+<script>
+  (function () {
+    function initFeatureStrips(slider) {
+      if (!slider || typeof Swiper === 'undefined') return;
+      if (slider.swiper) return;
+
+      var slideCount = slider.querySelectorAll('.swiper-slide').length;
+      if (slideCount < 2) return;
+
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var autoplayOn = slider.dataset.autoplay === 'true' && !reduceMotion;
+      var speed = parseInt(slider.dataset.autoplaySpeed, 10) || 5;
+
+      new Swiper(slider, {
+        loop: true,
+        grabCursor: true,
+        speed: 600,
+        autoplay: autoplayOn
+          ? { delay: speed * 1000, disableOnInteraction: false, pauseOnMouseEnter: true }
+          : false,
+        navigation: {
+          prevEl: slider.querySelector('[data-feature-strips-prev]'),
+          nextEl: slider.querySelector('[data-feature-strips-next]')
+        },
+        slidesPerView: 1.1,
+        centeredSlides: true,
+        spaceBetween: 16,
+        breakpoints: {
+          700: {
+            slidesPerView: 1,
+            centeredSlides: false,
+            spaceBetween: 0
+          }
+        }
+      });
+    }
+
+    function initAll() {
+      document.querySelectorAll('[data-feature-strips-slider]').forEach(initFeatureStrips);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAll);
+    } else {
+      initAll();
+    }
+
+    document.addEventListener('shopify:section:load', function (event) {
+      var section = event.target;
+      if (!section) return initAll();
+      section.querySelectorAll('[data-feature-strips-slider]').forEach(initFeatureStrips);
+    });
+  })();
+</script>
+
 {% schema %}
 {
   "name": "Lab feature strips",
@@ -227,6 +333,26 @@
       "id": "separate_section_with_border",
       "label": "t:global.section.separate_section_with_border",
       "default": false
+    },
+    {
+      "type": "header",
+      "content": "Slider"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto-advance slides",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Seconds between slides",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 5
     }
   ],
   "blocks": [
