@@ -464,8 +464,6 @@ class CoLabPicker extends HTMLElement {
       }
       await res.json();
 
-      // Fewer steps for a bespoke item: once the bundle is in the cart, take the
-      // customer straight to checkout (skips the cart drawer). Only reached on success.
       window.location.assign(`${root}checkout`);
     } catch (err) {
       console.error('[co-lab-picker] add to cart failed', err);
