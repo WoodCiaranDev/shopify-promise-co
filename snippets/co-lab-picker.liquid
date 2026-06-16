@@ -41,7 +41,6 @@ Inputs:
     assign eng_charged = true
   endif
 
-  # Reuse the standard buy-buttons block colours so the Co-Lab ATC matches the rest of the store.
   assign buy_buttons_block = section.blocks | where: 'type', 'buy_buttons' | first
   assign atc_bg = buy_buttons_block.settings.atc_button_background
   assign atc_text = buy_buttons_block.settings.atc_button_text_color
@@ -175,7 +174,7 @@ Inputs:
 
       <p class="c-co-lab-picker__error" data-error role="alert" aria-live="polite" hidden></p>
 
-      {%- render 'delivery-countdown' -%}
+      {%- render 'delivery-countdown', static_message: 'Made to order: ', static_message_strong: 'Ships in 2-3 weeks.' -%}
 
       <div class="c-co-lab-picker__buy">
         {% render 'quantity-selector', variant: first_variant, form: product_form_id %}

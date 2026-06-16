@@ -628,6 +628,16 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   cursor: not-allowed;
 }
 
+/* Made-to-order static delivery card — slightly larger text + icon */
+.delivery-countdown--static .delivery-countdown__message {
+  font-size: 0.9rem;
+}
+
+.delivery-countdown--static .delivery-countdown__icon img {
+  width: 48px;
+  height: auto;
+}
+
 /* FEATURE LISTICLE — compact icon + text rows under the ATC */
 .co-lab-feature-list {
   list-style: none;

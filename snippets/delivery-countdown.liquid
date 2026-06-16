@@ -5,7 +5,23 @@ DELIVERY COUNTDOWN
 
 Renders the market-aware delivery countdown button (UK / USA) and the script that keeps it ticking.
 Used by the standard product info block and by the Co-Lab picker so both share one implementation.
+
+* static_message: when provided, render a fixed message instead of the live countdown (used for
+  made-to-order Co-Lab products, e.g. "Made to order: ").
+* static_message_strong: optional bold portion appended after static_message (e.g. "Ships in 2-3 weeks.").
 {%- endcomment -%}
+
+{%- if static_message != blank or static_message_strong != blank -%}
+  <div class="delivery-countdown delivery-countdown--static">
+    <div class="delivery-countdown__icon">
+      <img src="{{ 'icon-delivery.png' | file_url }}" alt="Delivery" width="40" height="40" loading="lazy">
+    </div>
+    <p class="delivery-countdown__text">
+      <span class="delivery-countdown__message">{{ static_message }}{% if static_message_strong != blank %}<strong>{{ static_message_strong }}</strong>{% endif %}</span>
+    </p>
+  </div>
+
+{%- else -%}
 
 {%- liquid
   assign show_countdown = false
@@ -114,9 +130,6 @@ Used by the standard product info block and by the Co-Lab picker so both share o
         return next;
       }
 
-      // UK Logic - Europe/London timezone.
-      // Dispatch is Mon-Fri (warehouse closed weekends); delivery is dispatch + 1 calendar day.
-      // Returns an array of message parts ({ bold } marks emphasised segments).
       function calculateUK() {
         const ukTime = getTestTime('Europe/London');
         const ukHour = ukTime.getHours();
@@ -156,7 +169,6 @@ Used by the standard product info block and by the Co-Lab picker so both share o
         ];
       }
 
-      // USA Logic - MST timezone.
       function calculateUSA() {
         const mstTime = getTestTime('America/Denver');
         const mstHour = mstTime.getHours();
@@ -200,7 +212,6 @@ Used by the standard product info block and by the Co-Lab picker so both share o
         ];
       }
 
-      // Build the message with safe DOM nodes (no innerHTML).
       function render(parts) {
         messageEl.textContent = '';
         parts.forEach((part) => {
@@ -226,4 +237,5 @@ Used by the standard product info block and by the Co-Lab picker so both share o
       setInterval(updateTimer, 60000);
     })();
   </script>
+{%- endif -%}
 {%- endif -%}
