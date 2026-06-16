@@ -116,9 +116,7 @@ Inputs:
               <div class="c-co-lab-picker__stone-row" data-slot="{{ slot }}">
                 <p class="c-co-lab-picker__stone-label">
                   <span>Birthstone {{ slot_label }}:</span>
-                  {%- if bs_charged -%}
-                    <span class="c-co-lab-picker__uplift">+ {{ bs_price | money_without_trailing_zeros }}</span>
-                  {%- endif -%}
+                  <span class="c-co-lab-picker__uplift">{% if bs_charged %}+ {{ bs_price | money_without_trailing_zeros }}{% else %}Free{% endif %}</span>
                 </p>
                 <button type="button" class="c-co-lab-picker__stone-select" data-action="open-grid" data-slot="{{ slot }}" aria-haspopup="dialog">
                   <span class="c-co-lab-picker__stone-swatch" data-stone-swatch="{{ slot }}" hidden></span>
@@ -168,9 +166,7 @@ Inputs:
                    placeholder="Type Your Engraving Here"
                    data-engraving-input
                    disabled>
-            {%- if eng_charged -%}
-              <span class="c-co-lab-picker__engraving-uplift" aria-hidden="true">+ {{ eng_price | money_without_trailing_zeros }}</span>
-            {%- endif -%}
+            <span class="c-co-lab-picker__engraving-uplift" aria-hidden="true">{% if eng_charged %}+ {{ eng_price | money_without_trailing_zeros }}{% else %}Free{% endif %}</span>
             <span class="c-co-lab-picker__engraving-arrow" aria-hidden="true">→</span>
           </div>
           <p class="c-co-lab-picker__engraving-count" data-engraving-count>0/{{ eng_max_chars }} Characters</p>

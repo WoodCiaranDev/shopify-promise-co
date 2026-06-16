@@ -345,10 +345,10 @@ class CoLabPicker extends HTMLElement {
     this.stoneSlots().forEach((slot) => {
       if (!this.hasStone(slot)) return;
       const value = this.stoneValue(slot);
-      customRows.push(this.reviewRow('Birthstone', value, this.stoneSwatchUrl(value), this.bsCharged ? `+ ${this.formatMoney(this.bsPrice)}` : ''));
+      customRows.push(this.reviewRow('Birthstone', value, this.stoneSwatchUrl(value), this.bsCharged ? `+ ${this.formatMoney(this.bsPrice)}` : 'Free'));
     });
     if (this.hasEngraving()) {
-      customRows.push(this.reviewRow('Engraving', this.engravingInput.value.trim(), '', this.engCharged ? `+ ${this.formatMoney(this.engPrice)}` : ''));
+      customRows.push(this.reviewRow('Engraving', this.engravingInput.value.trim(), '', this.engCharged ? `+ ${this.formatMoney(this.engPrice)}` : 'Free'));
     }
     if (customRows.length) {
       const group = this.el('section', 'c-co-lab-cart-bundle__group', [
