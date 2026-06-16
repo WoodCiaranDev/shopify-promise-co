@@ -30,6 +30,10 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   background: var(--c-co-lab-inner-bg);
 }
 
+.c-co-lab-picker__card--custom {
+  background: var(--c-co-lab-inner-bg);
+}
+
 .c-co-lab-picker__section-title {
   margin: 0 0 1.5rem;
   font-family: var(--heading-font-family, serif);
@@ -88,9 +92,9 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   line-height: 1.2;
 }
 
-/* Inner cream card — contains the toggle, stone rows, and grid */
+/* Inner card — contains the toggle, stone rows, and grid */
 .c-co-lab-picker__inner {
-  background: var(--c-co-lab-inner-bg);
+  background: var(--c-co-lab-card-bg);
   border-radius: 2rem;
   padding: 0.5rem 1.25rem;
 }
@@ -165,7 +169,7 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   width: 100%;
   padding: 0.9rem 1.25rem;
   background: var(--c-co-lab-pill-bg);
-  border: none;
+  border: 1px solid var(--c-co-lab-border);
   border-radius: 999px;
   font: inherit;
   cursor: pointer;
@@ -199,6 +203,7 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   margin-top: 0.75rem;
   padding: 1.25rem 0;
   background: var(--c-co-lab-pill-bg);
+  border: 1px solid var(--c-co-lab-border);
   border-radius: 0.75rem;
   overflow: hidden;
 }
@@ -307,7 +312,7 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   display: block;
   width: 100%;
   padding: 0.9rem 5.5rem 0.9rem 1.25rem;
-  background: transparent;
+  background: var(--c-co-lab-pill-bg);
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 999px;
   font: inherit;
