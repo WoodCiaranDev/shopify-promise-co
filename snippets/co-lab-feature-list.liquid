@@ -1,0 +1,36 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+CO-LAB FEATURE LIST
+
+Compact icon + text listicle shown under the Add-to-Cart section on Co-Lab products. Driven by the
+global `co_lab_feature` metaobject (label, icon, position) so the client edits it once for every
+Co-Lab product.
+----------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- assign co_lab_features = shop.metaobjects.co_lab_feature.values | sort: 'position' -%}
+
+{%- if co_lab_features.size > 0 -%}
+  <ul class="co-lab-feature-list">
+    {%- for feature in co_lab_features -%}
+      {%- if feature.label != blank -%}
+        <li class="co-lab-feature-list__item">
+          {%- if feature.icon != blank -%}
+            <span class="co-lab-feature-list__icon">
+              {{-
+                feature.icon
+                | image_url: width: 72
+                | image_tag:
+                  widths: '24,36,48,72',
+                  sizes: '24px',
+                  class: 'co-lab-feature-list__icon-image',
+                  loading: 'lazy'
+              -}}
+            </span>
+          {%- endif -%}
+          <span class="co-lab-feature-list__label">{{ feature.label }}</span>
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+{%- endif -%}

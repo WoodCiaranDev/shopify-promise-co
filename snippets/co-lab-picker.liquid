@@ -90,7 +90,6 @@ Inputs:
 
       <section class="c-co-lab-picker__card c-co-lab-picker__card--custom" data-customisation>
         <h2 class="c-co-lab-picker__section-title">Customisation</h2>
-        <p class="c-co-lab-picker__note">Personalised rings are non-refundable and non-exchangeable.</p>
 
         <p class="c-co-lab-picker__birthstone-help">
           <a href="#co-lab-birthstone-info-{{ product.id }}" title="How birthstones work">How do birthstones work?</a>
@@ -192,6 +191,8 @@ Inputs:
           Add to Cart
         </button>
       </div>
+
+      {%- render 'co-lab-feature-list' -%}
 
       <script type="application/json" data-product-options>{{ product.options | json }}</script>
 
