@@ -55,7 +55,7 @@
 -%}
 
 {%- if has_content -%}
-  <div class="{{ root_class }}"{% if root_style != blank %} style="{{ root_style | strip }}"{% endif %}>
+  <div class="{{ root_class }}"{% if section.settings.anchor_id != blank %} id="{{ section.settings.anchor_id | handle }}" style="scroll-margin-top: 100px;{{ root_style | strip }}"{% elsif root_style != blank %} style="{{ root_style | strip }}"{% endif %}>
     {%- if has_bg_image -%}
       <div class="lab-hero__media" aria-hidden="true">
         {%- if section.settings.background_image != blank -%}
@@ -124,14 +124,28 @@
           </div>
         {%- endif -%}
 
-        {%- if section.settings.button_label != blank -%}
+        {%- if section.settings.button_label != blank or section.settings.button2_label != blank -%}
           <div class="lab-hero__cta button-group justify-center">
-            {%
-              render 'button',
-              content: section.settings.button_label,
-              href: section.settings.button_link,
-              style: section.settings.button_style
-            %}
+            {%- if section.settings.button_label != blank -%}
+              {%
+                render 'button',
+                content: section.settings.button_label,
+                href: section.settings.button_link,
+                style: section.settings.button_style,
+                background: section.settings.button_background,
+                text_color: section.settings.button_text_color
+              %}
+            {%- endif -%}
+            {%- if section.settings.button2_label != blank -%}
+              {%
+                render 'button',
+                content: section.settings.button2_label,
+                href: section.settings.button2_link,
+                style: section.settings.button2_style,
+                background: section.settings.button_background,
+                text_color: section.settings.button_text_color
+              %}
+            {%- endif -%}
           </div>
         {%- endif -%}
       </div>
@@ -282,6 +296,12 @@
       "default": "rgba(0,0,0,0)"
     },
     {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Optional. Lets other buttons scroll to this section, e.g. set to 'birthstones' then link a button to #birthstones."
+    },
+    {
       "type": "select",
       "id": "content_alignment",
       "label": "Content alignment",
@@ -409,7 +429,45 @@
         { "value": "solid", "label": "t:global.text.button_style_options.solid" },
         { "value": "outline", "label": "t:global.text.button_style_options.outline" }
       ],
-      "default": "outline"
+      "default": "solid"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button colour",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text colour",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "header",
+      "content": "Secondary button (e.g. Jump to FAQs)"
+    },
+    {
+      "type": "text",
+      "id": "button2_label",
+      "label": "Secondary button label"
+    },
+    {
+      "type": "text",
+      "id": "button2_link",
+      "label": "Secondary button link",
+      "info": "To jump to the FAQ section on this page, leave as #faqs",
+      "default": "#faqs"
+    },
+    {
+      "type": "select",
+      "id": "button2_style",
+      "label": "Secondary button style",
+      "options": [
+        { "value": "solid", "label": "t:global.text.button_style_options.solid" },
+        { "value": "outline", "label": "t:global.text.button_style_options.outline" }
+      ],
+      "default": "solid"
     }
   ],
   "presets": [

@@ -31,9 +31,14 @@
         "heading": "Customisable Engraving & Hidden Birthstones",
         "heading_tag": "h1",
         "body": "<p>Please note: Delivery times are estimates and may occasionally be extended due to customs delays, courier disruptions, or UK bank holidays.</p>",
-        "button_label": "",
-        "button_link": "",
-        "button_style": "outline"
+        "button_label": "Design yours",
+        "button_link": "#birthstones",
+        "button_style": "solid",
+        "button_background": "#ffffff",
+        "button_text_color": "#1a1a1a",
+        "button2_label": "Jump to FAQs",
+        "button2_link": "#faqs",
+        "button2_style": "solid"
       }
     },
     "lab_hero_birthstones": {
@@ -45,6 +50,7 @@
         "separate_section_with_border": false,
         "no_bottom_spacing": true,
         "background_color": "#FCFBFA",
+        "anchor_id": "birthstones",
         "logo": "shopify://shop_images/lab-logo.png",
         "logo_max_width": 80,
         "eyebrow": "THE PROMISE CO - LAB CUSTOMISABLE RINGS",
