@@ -40,6 +40,20 @@ Inputs:
   if eng_price > 0
     assign eng_charged = true
   endif
+
+  # Reuse the standard buy-buttons block colours so the Co-Lab ATC matches the rest of the store.
+  assign buy_buttons_block = section.blocks | where: 'type', 'buy_buttons' | first
+  assign atc_bg = buy_buttons_block.settings.atc_button_background
+  assign atc_text = buy_buttons_block.settings.atc_button_text_color
+  capture atc_style
+    if atc_bg != blank and atc_bg != 'rgba(0,0,0,0)'
+      echo '--button-background: ' | append: atc_bg.rgb | append: ';'
+      echo '--button-outline-color: ' | append: atc_bg.rgb | append: ';'
+    endif
+    if atc_text != blank and atc_text != 'rgba(0,0,0,0)'
+      echo '--button-text-color: ' | append: atc_text.rgb | append: ';'
+    endif
+  endcapture
 -%}
 
 <c-co-lab-picker
@@ -166,12 +180,16 @@ Inputs:
 
       <p class="c-co-lab-picker__error" data-error role="alert" aria-live="polite" hidden></p>
 
-      <div class="c-co-lab-picker__actions">
+      {%- render 'delivery-countdown' -%}
+
+      <div class="c-co-lab-picker__buy">
+        {% render 'quantity-selector', variant: first_variant, form: product_form_id %}
         <button type="submit"
-                class="c-co-lab-picker__action c-co-lab-picker__action--primary"
+                class="button button--add-to-cart c-co-lab-picker__atc"
                 data-action="submit"
-                form="{{ product_form_id }}">
-          Add to Cart →
+                form="{{ product_form_id }}"
+                {% if atc_style != blank %}style="{{ atc_style | strip }}"{% endif %}>
+          Add to Cart
         </button>
       </div>
 

@@ -324,21 +324,21 @@ class CoLabPicker extends HTMLElement {
     ]);
     card.appendChild(header);
 
-    // Metal & Sizing
+    // Metal, Sizing and Quantity
     const isDefaultVariant = !this.selectedVariant || this.selectedVariant.title === 'Default Title';
     const optionValues = this.selectedVariant?.options || [];
+    const qty = Math.max(1, parseInt(this.querySelector('input[name="quantity"]')?.value, 10) || 1);
+    const metalRows = [];
     if (!isDefaultVariant) {
-      const rows = this.productOptions
-        .map((name, i) => (optionValues[i] ? this.reviewRow(name, optionValues[i]) : null))
-        .filter(Boolean);
-      if (rows.length) {
-        const group = this.el('section', 'c-co-lab-cart-bundle__group', [
-          this.el('h3', 'c-co-lab-cart-bundle__group-title', 'Metal & Sizing'),
-          ...rows,
-        ]);
-        card.appendChild(group);
-      }
+      this.productOptions.forEach((name, i) => {
+        if (optionValues[i]) metalRows.push(this.reviewRow(name, optionValues[i]));
+      });
     }
+    metalRows.push(this.reviewRow('Quantity', String(qty)));
+    card.appendChild(this.el('section', 'c-co-lab-cart-bundle__group', [
+      this.el('h3', 'c-co-lab-cart-bundle__group-title', 'Metal, Sizing and Quantity'),
+      ...metalRows,
+    ]));
 
     // Customisation
     const customRows = [];
@@ -360,17 +360,6 @@ class CoLabPicker extends HTMLElement {
 
     card.appendChild(this.el('p', 'c-co-lab-cart-bundle__total', this.formatMoney(this.computedTotal())));
 
-    // Confirm checkbox
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.required = true;
-    checkbox.setAttribute('data-confirm-checkbox', '');
-    const confirmLabel = this.el('label', 'c-co-lab-cart-bundle__confirm', [
-      checkbox,
-      this.el('span', 'c-co-lab-cart-bundle__confirm-label', 'I confirm this is my perfect potion'),
-    ]);
-    card.appendChild(confirmLabel);
-
     const modalError = this.el('p', 'c-co-lab-picker__error');
     modalError.setAttribute('data-modal-error', '');
     modalError.setAttribute('role', 'alert');
@@ -382,12 +371,10 @@ class CoLabPicker extends HTMLElement {
     // Actions
     const backBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--secondary', '← Edit');
     backBtn.type = 'button';
-    const confirmBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--primary', 'Add to Cart →');
+    const confirmBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--primary', 'Checkout →');
     confirmBtn.type = 'button';
-    confirmBtn.disabled = true;
     card.appendChild(this.el('div', 'c-co-lab-cart-bundle__actions', [backBtn, confirmBtn]));
 
-    checkbox.addEventListener('change', () => { confirmBtn.disabled = !checkbox.checked; });
     confirmBtn.addEventListener('click', () => this.confirmAndAdd(confirmBtn));
     backBtn.addEventListener('click', () => this.closeModal());
 
@@ -410,6 +397,7 @@ class CoLabPicker extends HTMLElement {
     }
 
     const bundleId = (crypto.randomUUID && crypto.randomUUID()) || `bundle-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    const qty = Math.max(1, parseInt(this.querySelector('input[name="quantity"]')?.value, 10) || 1);
     const items = [];
 
     // Parent: the ring. Human-readable customisation properties always ride on
@@ -423,7 +411,7 @@ class CoLabPicker extends HTMLElement {
     });
     if (this.hasEngraving()) parentProps['Engraving'] = this.engravingInput.value.trim();
 
-    items.push({ id: parseInt(this.variantIdInput.value, 10), quantity: 1, properties: parentProps });
+    items.push({ id: parseInt(this.variantIdInput.value, 10), quantity: qty, properties: parentProps });
 
     // Charged add-on lines only. If an extra is "included" in the base price we
     // create no add-on line (and showed no uplift).
@@ -434,7 +422,7 @@ class CoLabPicker extends HTMLElement {
         this.showModalError("We couldn't add your birthstones right now. Please refresh and try again, or contact us if this persists.");
         return;
       }
-      items.push({ id: variantId, quantity: stoneCount, properties: { _bundle_id: bundleId, _bundle_role: 'birthstone' } });
+      items.push({ id: variantId, quantity: stoneCount * qty, properties: { _bundle_id: bundleId, _bundle_role: 'birthstone' } });
     }
     if (this.engCharged && this.hasEngraving()) {
       const variantId = await this.resolveVariantId(this.dataset.engravingAddonHandle);
@@ -442,7 +430,7 @@ class CoLabPicker extends HTMLElement {
         this.showModalError("We couldn't add your engraving right now. Please refresh and try again, or contact us if this persists.");
         return;
       }
-      items.push({ id: variantId, quantity: 1, properties: { _bundle_id: bundleId, _bundle_role: 'engraving' } });
+      items.push({ id: variantId, quantity: qty, properties: { _bundle_id: bundleId, _bundle_role: 'engraving' } });
     }
 
     if (confirmBtn) {
@@ -474,24 +462,11 @@ class CoLabPicker extends HTMLElement {
         const payload = await this.safeJson(res);
         throw new CartAddError(res.status, payload);
       }
-      const addResponse = await res.json();
+      await res.json();
 
-      this.closeModal();
-
-      // Re-render the cart and slide the normal drawer out (mirrors the theme's
-      // own product-form add flow).
-      const drawer = document.querySelector('cart-drawer');
-      if (drawer) {
-        const cartContent = await (await fetch(`${root}cart.js`)).json();
-        cartContent.sections = addResponse.sections;
-        document.documentElement.dispatchEvent(new CustomEvent('cart:change', {
-          bubbles: true,
-          detail: { baseEvent: 'variant:add', onSuccessDo: 'force_open_drawer', cart: cartContent },
-        }));
-      } else {
-        // No drawer on this storefront — send the customer to the cart page.
-        window.location.assign(`${root}cart`);
-      }
+      // Fewer steps for a bespoke item: once the bundle is in the cart, take the
+      // customer straight to checkout (skips the cart drawer). Only reached on success.
+      window.location.assign(`${root}checkout`);
     } catch (err) {
       console.error('[co-lab-picker] add to cart failed', err);
       this.showModalError(this.friendlyErrorMessage(err));
