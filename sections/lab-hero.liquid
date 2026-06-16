@@ -1,13 +1,31 @@
 {%- liquid
+  assign hero_heading = section.settings.heading
+  assign hero_body = section.settings.body
+  assign hero_bg_image = section.settings.background_image
+
+  if section.settings.use_collection_content and collection != blank
+    if collection.title != blank
+      assign hero_heading = collection.title
+    endif
+    if collection.description != blank
+      assign hero_body = collection.description
+    endif
+    if collection.image != blank
+      assign hero_bg_image = collection.image
+    endif
+  endif
+-%}
+
+{%- liquid
   assign has_content = false
-  if section.settings.logo != blank or section.settings.logo_asset != blank or section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.body != blank or section.settings.button_label != blank or section.settings.background_image != blank or section.settings.background_asset != blank
+  if section.settings.logo != blank or section.settings.logo_asset != blank or section.settings.eyebrow != blank or hero_heading != blank or hero_body != blank or section.settings.button_label != blank or hero_bg_image != blank or section.settings.background_asset != blank
     assign has_content = true
   endif
 -%}
 
 {%- liquid
   assign has_bg_image = false
-  if section.settings.background_image != blank
+  if hero_bg_image != blank
     assign has_bg_image = true
   elsif section.settings.background_asset != blank
     assign has_bg_image = true
@@ -50,6 +68,9 @@
       echo ' --lab-hero-min-height: '
       echo section.settings.min_height
       echo 'px;'
+      echo ' --lab-hero-min-height-mobile: '
+      echo section.settings.min_height_mobile
+      echo 'px;'
     endif
   endcapture
 -%}
@@ -58,9 +79,9 @@
   <div class="{{ root_class }}"{% if section.settings.anchor_id != blank %} id="{{ section.settings.anchor_id | handle }}" style="scroll-margin-top: 100px;{{ root_style | strip }}"{% elsif root_style != blank %} style="{{ root_style | strip }}"{% endif %}>
     {%- if has_bg_image -%}
       <div class="lab-hero__media" aria-hidden="true">
-        {%- if section.settings.background_image != blank -%}
+        {%- if hero_bg_image != blank -%}
           {{-
-            section.settings.background_image
+            hero_bg_image
             | image_url: width: 2400
             | image_tag:
               widths: '480,720,1080,1440,1920,2400',
@@ -112,15 +133,15 @@
           <p class="lab-hero__eyebrow h6">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
 
-        {%- if section.settings.heading != blank -%}
+        {%- if hero_heading != blank -%}
           <{{ section.settings.heading_tag }} class="lab-hero__heading {{ section.settings.heading_tag }}">
-            {{- section.settings.heading -}}
+            {{- hero_heading -}}
           </{{ section.settings.heading_tag }}>
         {%- endif -%}
 
-        {%- if section.settings.body != blank -%}
+        {%- if hero_body != blank -%}
           <div class="lab-hero__body">
-            {{- section.settings.body -}}
+            {{- hero_body -}}
           </div>
         {%- endif -%}
 
@@ -198,6 +219,12 @@
     color: #fff;
     isolation: isolate;
     overflow: hidden;
+  }
+
+  @media (max-width: 699px) {
+    .lab-hero--lifestyle {
+      min-height: var(--lab-hero-min-height-mobile, 380px);
+    }
   }
 
   .lab-hero--lifestyle .container {
@@ -330,12 +357,22 @@
     {
       "type": "range",
       "id": "min_height",
-      "label": "Minimum height",
+      "label": "Minimum height (desktop)",
       "min": 320,
       "max": 900,
       "step": 20,
       "unit": "px",
       "default": 560
+    },
+    {
+      "type": "range",
+      "id": "min_height_mobile",
+      "label": "Minimum height (mobile)",
+      "min": 240,
+      "max": 700,
+      "step": 20,
+      "unit": "px",
+      "default": 380
     },
     {
       "type": "range",
@@ -376,6 +413,13 @@
     {
       "type": "header",
       "content": "Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_collection_content",
+      "label": "Use this collection's title, description & image",
+      "info": "On a collection page, pulls the heading from the collection title, the body from the collection description and the background from the collection image. Lets one template serve many Co-Lab collections. Falls back to the fields below when empty.",
+      "default": false
     },
     {
       "type": "text",
