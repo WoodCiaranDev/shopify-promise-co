@@ -19,14 +19,16 @@
         "separate_section_with_border": false,
         "background_asset": "co-lab-collection-hero.png",
         "min_height": 560,
+        "min_height_mobile": 380,
         "scrim_opacity": 25,
         "logo_asset": "co-lab-logo-white.png",
         "logo_max_width": 80,
+        "use_collection_content": true,
         "eyebrow": "THE PROMISE CO - LAB",
         "heading": "Customisable Rings, Engraving & Hidden Birthstones",
         "heading_tag": "h1",
         "body": "<p>Crafted to your story — choose your piece, your stones and your engraving.</p>",
-        "button_label": "Design yours",
+        "button_label": "",
         "button_link": "#products",
         "button_style": "outline"
       }
@@ -83,6 +85,7 @@
       "settings": {
         "color_scheme": "scheme-1",
         "separate_section_with_border": false,
+        "reduce_mobile_spacing": true,
         "stack_on_mobile": false,
         "icon_color": "",
         "text_color": "",
