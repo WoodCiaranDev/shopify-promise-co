@@ -1,7 +1,7 @@
 {%- if section.blocks.size > 0 -%}
   {%- assign color_scheme_hash = section.settings.color_scheme.settings.background_gradient | default: section.settings.color_scheme.settings.background | md5 -%}
 
-  <div class="section-spacing section-spacing--tight color-scheme color-scheme--{{ section.settings.color_scheme.id }} color-scheme--bg-{{ color_scheme_hash }} {% if section.settings.separate_section_with_border %}bordered-section{% endif %}">
+  <div class="section-spacing section-spacing--tight color-scheme color-scheme--{{ section.settings.color_scheme.id }} color-scheme--bg-{{ color_scheme_hash }}{% if section.settings.reduce_mobile_spacing %} text-with-icons--tight-mobile{% endif %}{% if section.settings.separate_section_with_border %} bordered-section{% endif %}">
     <div class="container">
       <div class="v-stack gap-8">
         {%- capture section_content -%}
@@ -72,6 +72,14 @@
   </div>
 {%- endif -%}
 
+{% stylesheet %}
+  @media (max-width: 699px) {
+    .text-with-icons--tight-mobile {
+      --section-vertical-spacing-override: 1.5rem;
+    }
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "t:sections.text_with_icons.name",
@@ -93,6 +101,12 @@
       "id": "separate_section_with_border",
       "label": "t:global.section.separate_section_with_border",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "reduce_mobile_spacing",
+      "label": "Reduce top/bottom spacing on mobile",
+      "default": false
     },
     {
       "type": "checkbox",
