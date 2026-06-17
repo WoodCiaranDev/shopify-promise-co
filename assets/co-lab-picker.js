@@ -13,6 +13,13 @@ class CoLabPicker extends HTMLElement {
     this.errorEl = this.querySelector('[data-error]');
     this.customCard = this.querySelector('.c-co-lab-picker__card--custom');
 
+    // Single-SKU model: metal & size are line-item properties, not variants.
+    this.metalRadios = Array.from(this.querySelectorAll('input[data-metal-option]'));
+    this.metalSelectedLabel = this.querySelector('[data-metal-selected]');
+    this.sizeSelect = this.querySelector('[data-size-select]');
+    this.selectedMetal = '';
+    this.selectedSize = '';
+
     // Per-product pricing / slot configuration (defaults baked into the Liquid).
     // A price of 0 always means "included", regardless of the charged flag.
     this.bsPrice = parseInt(this.dataset.birthstonePrice, 10) || 0;
@@ -23,18 +30,13 @@ class CoLabPicker extends HTMLElement {
     this.productTitle = this.dataset.productTitle || '';
 
     this.stonesData = this.parseJson('[data-stones-json]', []);
-    this.productOptions = this.parseJson('[data-product-options]', []);
-    this.selectedVariant = this.parseJson('[data-initial-variant]', null);
+
+    // The first metal is checked in the markup; sync state from whichever is checked.
+    const checkedMetal = this.metalRadios.find((r) => r.checked) || this.metalRadios[0];
+    if (checkedMetal) this.selectMetal(checkedMetal.value);
 
     this.bindEvents();
     this.refresh();
-
-    // The first size pick triggers a full re-render that rebuilds this picker with the
-    // size already selected, so scroll here. Fresh loads start at the placeholder.
-    requestAnimationFrame(() => {
-      const sizeSelect = this.querySelector('[data-size-select]');
-      if (sizeSelect && sizeSelect.value) this.scrollToCustomisation();
-    });
   }
 
   parseJson(selector, fallback) {
@@ -68,24 +70,32 @@ class CoLabPicker extends HTMLElement {
       this.onEngravingChange();
     });
 
-    document.addEventListener('variant:change', (e) => {
-      if (e.detail?.variant?.id && this.variantIdInput) {
-        this.variantIdInput.value = e.detail.variant.id;
-        this.selectedVariant = e.detail.variant;
-        this.clearError();
-        this.refresh();
-      }
+    this.metalRadios.forEach((radio) => {
+      radio.addEventListener('change', () => this.selectMetal(radio.value));
     });
 
-    // Scroll to customisation when a size is picked (delegated; ignores metal swatches).
-    this.addEventListener('change', (e) => {
-      const target = e.target;
-      if (target && target.matches && target.matches('[data-size-select]') && target.value) {
-        this.scrollToCustomisation();
-      }
+    this.sizeSelect?.addEventListener('change', () => {
+      this.selectSize(this.sizeSelect.value);
+      if (this.selectedSize) this.scrollToCustomisation();
     });
 
     this.form?.addEventListener('submit', (e) => this.onSubmit(e));
+  }
+
+  selectMetal(value) {
+    this.selectedMetal = value || '';
+    this.metalRadios.forEach((radio) => {
+      if (radio.value === value) radio.checked = true;
+    });
+    if (this.metalSelectedLabel) this.metalSelectedLabel.textContent = this.selectedMetal;
+    this.clearError();
+    this.refresh();
+  }
+
+  selectSize(value) {
+    this.selectedSize = value || '';
+    this.clearError();
+    this.refresh();
   }
 
   // Resolve --sticky-area-height (a calc() string) to pixels so the card clears the header.
@@ -227,13 +237,18 @@ class CoLabPicker extends HTMLElement {
     return !!(this.engravingInput && this.engravingInput.value.trim());
   }
 
-  variantSelected() {
-    return !!(this.variantIdInput && this.variantIdInput.value);
+  metalRequired() {
+    return this.metalRadios.length > 0;
+  }
+
+  selectionComplete() {
+    if (this.metalRequired() && !this.selectedMetal) return false;
+    return !!this.selectedSize;
   }
 
   refresh() {
     this.syncStoneInputs();
-    if (this.submitBtn) this.submitBtn.disabled = !this.variantSelected();
+    if (this.submitBtn) this.submitBtn.disabled = !this.selectionComplete();
   }
 
   // --- Phase A: open the review modal (no cart mutation yet) -----------------
@@ -246,7 +261,11 @@ class CoLabPicker extends HTMLElement {
     event.stopImmediatePropagation();
     this.clearError();
 
-    if (!this.variantSelected()) {
+    if (this.metalRequired() && !this.selectedMetal) {
+      this.showError('Please choose a metal before adding to cart.');
+      return;
+    }
+    if (!this.selectedSize) {
       this.showError('Please choose a size before adding to cart.');
       return;
     }
@@ -325,15 +344,10 @@ class CoLabPicker extends HTMLElement {
     card.appendChild(header);
 
     // Metal, Sizing and Quantity
-    const isDefaultVariant = !this.selectedVariant || this.selectedVariant.title === 'Default Title';
-    const optionValues = this.selectedVariant?.options || [];
     const qty = Math.max(1, parseInt(this.querySelector('input[name="quantity"]')?.value, 10) || 1);
     const metalRows = [];
-    if (!isDefaultVariant) {
-      this.productOptions.forEach((name, i) => {
-        if (optionValues[i]) metalRows.push(this.reviewRow(name, optionValues[i]));
-      });
-    }
+    if (this.selectedMetal) metalRows.push(this.reviewRow('Precious Metal', this.selectedMetal));
+    if (this.selectedSize) metalRows.push(this.reviewRow('Size', this.selectedSize));
     metalRows.push(this.reviewRow('Quantity', String(qty)));
     card.appendChild(this.el('section', 'c-co-lab-cart-bundle__group', [
       this.el('h3', 'c-co-lab-cart-bundle__group-title', 'Metal, Sizing and Quantity'),
@@ -391,7 +405,7 @@ class CoLabPicker extends HTMLElement {
   async confirmAndAdd(confirmBtn) {
     this.clearModalError();
 
-    if (!this.variantSelected()) {
+    if (!this.selectionComplete()) {
       this.showModalError('Please choose a size before adding to cart.');
       return;
     }
@@ -404,6 +418,8 @@ class CoLabPicker extends HTMLElement {
     // the parent line (so they print on the order) regardless of whether the
     // extras are charged.
     const parentProps = { _bundle_id: bundleId, _bundle_role: 'parent' };
+    if (this.selectedMetal) parentProps['Precious Metal'] = this.selectedMetal;
+    if (this.selectedSize) parentProps['Size'] = this.selectedSize;
     this.stoneSlots().forEach((slot) => {
       if (!this.hasStone(slot)) return;
       const input = this.querySelector(`[data-stone-input="${slot}"]`);

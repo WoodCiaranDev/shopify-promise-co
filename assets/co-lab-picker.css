@@ -42,34 +42,25 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   letter-spacing: 0.04em;
 }
 
-/* METAL & SIZE — re-skin the embedded variant-picker for this card */
-.c-co-lab-picker__card--metal .variant-picker {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+/* METAL & SIZE — uses the theme's native variant-picker classes (.color-swatch, .select)
+   so the controls are identical to every other product. Spacing between the two fieldsets only. */
+.c-co-lab-picker__card--metal .variant-picker__option + .variant-picker__option {
+  margin-top: 1.5rem;
 }
 
-.c-co-lab-picker__card--metal .variant-picker__option-info legend {
-  font-size: 0.75rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  opacity: 0.7;
-}
-
-.c-co-lab-picker__card--metal .variant-picker__option-values {
-  margin-top: 0.5rem;
-}
-
+/* Size dropdown: match the white birthstone pills exactly (stone-select / engraving input) */
 .c-co-lab-picker__card--metal .select {
   width: 100%;
-  padding: 0.9rem 1.25rem;
+  padding: 0.9rem 2.5rem 0.9rem 1.25rem;
   background: var(--c-co-lab-pill-bg);
   border: 1px solid var(--c-co-lab-border);
   border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  box-shadow: none;
   font: inherit;
+}
+
+.c-co-lab-picker__card--metal .select ~ svg {
+  inset-inline-end: 1.25rem;
 }
 
 .c-co-lab-picker__size-guide {

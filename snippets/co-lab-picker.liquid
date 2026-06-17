@@ -53,6 +53,9 @@ Inputs:
       echo '--button-text-color: ' | append: atc_text.rgb | append: ';'
     endif
   endcapture
+
+  assign metal_list = mf.metals.value | split: ','
+  assign size_list = mf.sizes.value | split: ','
 -%}
 
 <c-co-lab-picker
@@ -76,12 +79,58 @@ Inputs:
 
       <section class="c-co-lab-picker__card c-co-lab-picker__card--metal">
         <h2 class="c-co-lab-picker__section-title">Metal &amp; Sizing</h2>
-        {% render 'variant-picker',
-          product: product,
-          form_id: product_form_id,
-          context: 'main_product',
-          selector_style: 'block',
-          swatch_selector_style: 'swatch' %}
+
+        {%- if metal_list.size > 0 -%}
+          {%- assign swatch_config = settings.color_swatch_config | newline_to_br | split: '<br />' -%}
+          <fieldset class="variant-picker__option v-stack gap-2">
+            <div class="variant-picker__option-info h-stack justify-between gap-2">
+              <div class="h-stack gap-1">
+                <legend>Precious Metal:</legend>
+                <span data-metal-selected>{{ metal_list.first | strip }}</span>
+              </div>
+            </div>
+            <div class="variant-picker__option-values h-stack gap-2.5 wrap">
+              {%- for metal in metal_list -%}
+                {%- assign metal_name = metal | strip -%}
+                {%- assign metal_down = metal_name | downcase -%}
+                {%- assign metal_swatch = '#dddddd' -%}
+                {%- for item in swatch_config -%}
+                  {%- assign parts = item | split: ':' -%}
+                  {%- assign cfg_name = parts.first | downcase | strip -%}
+                  {%- if cfg_name == metal_down -%}
+                    {%- assign metal_swatch = parts.last | strip -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- capture metal_id -%}{{ product_form_id }}-metal-{{ forloop.index }}{%- endcapture -%}
+                <input class="sr-only" type="radio" name="properties[Precious Metal]" id="{{ metal_id }}" value="{{ metal_name | escape }}" form="{{ product_form_id }}" data-metal-option data-value="{{ metal_name | escape }}"{% if forloop.first %} checked{% endif %}>
+                <label class="color-swatch rounded-full" for="{{ metal_id }}" style="--swatch-background: {{ metal_swatch }};" data-tooltip="{{ metal_name | escape }}">
+                  <span class="sr-only">{{ metal_name }}</span>
+                </label>
+              {%- endfor -%}
+            </div>
+          </fieldset>
+        {%- endif -%}
+
+        {%- if size_list.size > 0 -%}
+          <fieldset class="variant-picker__option v-stack gap-2">
+            <div class="variant-picker__option-info h-stack justify-between gap-2">
+              <div class="h-stack gap-1">
+                <legend>Size:</legend>
+              </div>
+            </div>
+            <div class="relative">
+              <select class="select" data-size-select>
+                <option value="" disabled selected>Select your size</option>
+                {%- for size in size_list -%}
+                  {%- assign size_name = size | strip -%}
+                  <option value="{{ size_name | escape }}">{{ size_name }}</option>
+                {%- endfor -%}
+              </select>
+              {%- render 'icon' with 'dropdown-chevron' -%}
+            </div>
+          </fieldset>
+        {%- endif -%}
+
         <p class="c-co-lab-picker__size-guide">
           <a href="#size-guide-popup" title="Ring Size Guide">Unsure on sizing? &mdash; Size Guide Here</a>
         </p>
@@ -188,17 +237,6 @@ Inputs:
       </div>
 
       {%- render 'co-lab-feature-list' -%}
-
-      <script type="application/json" data-product-options>{{ product.options | json }}</script>
-
-      <script type="application/json" data-initial-variant>
-        {
-          "id": {{ first_variant.id }},
-          "title": {{ first_variant.title | json }},
-          "price": {{ first_variant.price }},
-          "options": {{ first_variant.options | json }}
-        }
-      </script>
 
       <script type="application/json" data-stones-json>
         [
