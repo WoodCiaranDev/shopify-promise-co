@@ -23,7 +23,7 @@ Inputs:
 {%- liquid
   assign mf = product.metafields.custom
   assign slot_count = mf.birthstone_slots.value | default: 2
-  assign eng_max_chars = mf.engraving_max_chars.value | default: 12
+  assign eng_max_chars = mf.engraving_max_chars.value | default: 8
 
   # Extra pricing in pence. 0 (or unset) = included in the base price; any positive
   # amount = charged on top as an add-on line. A single number drives both the
