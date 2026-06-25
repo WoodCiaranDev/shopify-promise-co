@@ -223,6 +223,40 @@ LIQUID
                 {%- render 'active-facets', results: collection -%}
 
                 <product-list id="product-list-{{ section.id }}" class="product-list" collection-mobile-layout="{{ products_mobile_grid_mode }}" collection-desktop-layout="{{ products_desktop_grid_mode }}">
+                  {%- if section.settings.show_intro_card and paginate.current_page == 1 -%}
+                    {%- liquid
+                      assign intro_has_content = false
+                      if section.settings.intro_card_logo != blank or section.settings.intro_card_heading != blank or section.settings.intro_card_text != blank or section.settings.intro_card_button_label != blank
+                        assign intro_has_content = true
+                      endif
+                    -%}
+                    {%- if intro_has_content -%}
+                      <div class="collection-intro-card{% if section.settings.intro_card_white_bg %} collection-intro-card--white{% endif %}">
+                        <div class="collection-intro-card__inner">
+                          {%- if section.settings.intro_card_logo != blank -%}
+                            {{
+                              section.settings.intro_card_logo
+                              | image_url: width: 320
+                              | image_tag:
+                                widths: '120,180,240,320',
+                                sizes: '160px',
+                                class: 'collection-intro-card__logo',
+                                loading: 'lazy'
+                            }}
+                          {%- endif -%}
+                          {%- if section.settings.intro_card_heading != blank -%}
+                            <p class="collection-intro-card__heading">{{ section.settings.intro_card_heading }}</p>
+                          {%- endif -%}
+                          {%- if section.settings.intro_card_text != blank -%}
+                            <div class="collection-intro-card__text">{{ section.settings.intro_card_text }}</div>
+                          {%- endif -%}
+                          {%- if section.settings.intro_card_button_label != blank -%}
+                            {%- render 'button', content: section.settings.intro_card_button_label, href: section.settings.intro_card_button_link, style: 'outline' -%}
+                          {%- endif -%}
+                        </div>
+                      </div>
+                    {%- endif -%}
+                  {%- endif -%}
                   {%- for product in collection.products -%}
                     {%- render 'color-variant', product: product, reveal: settings.stagger_products_apparition, position: forloop.index, hide_product_information: section.settings.hide_product_information, stacked: true -%}
                   {%- endfor -%}
@@ -255,6 +289,49 @@ LIQUID
       "id": "hide_product_information",
       "label": "t:global.product_list.hide_product_information",
       "info": "t:global.product_list.hide_product_information_collection_info"
+    },
+    {
+      "type": "header",
+      "content": "Intro card (first product slot)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_intro_card",
+      "label": "Show intro card in first slot",
+      "info": "Adds an editable card as the first item of the grid (page 1 only). Leave all fields below blank to hide it.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "intro_card_white_bg",
+      "label": "White background",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "intro_card_logo",
+      "label": "Logo / image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "intro_card_heading",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_card_text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "intro_card_button_label",
+      "label": "Button label",
+      "info": "Optional — leave blank for no button."
+    },
+    {
+      "type": "url",
+      "id": "intro_card_button_link",
+      "label": "Button link"
     },
     {
       "type": "header",
@@ -403,3 +480,43 @@ LIQUID
   ]
 }
 {% endschema %}
+{% stylesheet %}
+.collection-intro-card {
+  display: flex;
+}
+
+.collection-intro-card__inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  background: #f2eee7;
+  border-radius: 1rem;
+}
+
+.collection-intro-card--white .collection-intro-card__inner {
+  background: #ffffff;
+}
+
+.collection-intro-card__logo {
+  max-width: 160px;
+  height: auto;
+}
+
+.collection-intro-card__heading {
+  margin: 0;
+  font-family: var(--heading-font-family, serif);
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.collection-intro-card__text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+{% endstylesheet %}

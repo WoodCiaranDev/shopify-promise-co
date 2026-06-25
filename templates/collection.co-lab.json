@@ -18,8 +18,8 @@
         "remove_vertical_spacing": true,
         "separate_section_with_border": false,
         "background_asset": "co-lab-collection-hero.png",
-        "min_height": 560,
-        "min_height_mobile": 380,
+        "min_height": 280,
+        "min_height_mobile": 200,
         "scrim_opacity": 25,
         "logo_asset": "co-lab-logo-white.png",
         "logo_max_width": 80,
@@ -101,7 +101,7 @@
     "faq_custom_collection": {
       "type": "co-lab-faq",
       "settings": {
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
         "separate_section_with_border": false,
         "subheading": "THE PROMISE CO - LAB",
         "title": "FAQ's",

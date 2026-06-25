@@ -31,7 +31,17 @@ safe-sticky.product-info:has(c-co-lab-picker) {
 }
 
 .c-co-lab-picker__card--custom {
-  background: var(--c-co-lab-inner-bg);
+  background: var(--c-co-lab-card-bg);
+}
+
+/* Step eyebrow above each card heading (Step 2 / Step 3) */
+.c-co-lab-picker__step {
+  margin: 0 0 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.55;
 }
 
 .c-co-lab-picker__section-title {
@@ -73,14 +83,19 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   text-underline-offset: 3px;
 }
 
-/* Inner card — contains the toggle, stone rows, and grid */
+/* Inner card — contains the toggle, stone rows, and grid (and the engraving tray) */
 .c-co-lab-picker__inner {
-  background: var(--c-co-lab-card-bg);
+  background: var(--c-co-lab-inner-bg);
   border-radius: 2rem;
   padding: 0.5rem 1.25rem;
 }
 
-.c-co-lab-picker__inner:has([data-action="toggle-stones"][aria-expanded="true"]) {
+.c-co-lab-picker__inner--engraving {
+  margin-top: 1rem;
+}
+
+.c-co-lab-picker__inner:has([data-action="toggle-stones"][aria-expanded="true"]),
+.c-co-lab-picker__inner:has([data-action="toggle-engraving"][aria-expanded="true"]) {
   padding-top: 0.5rem;
   padding-bottom: 1.25rem;
 }
@@ -279,9 +294,28 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   border-color: currentColor;
 }
 
-/* ENGRAVING — sits in the OUTER card, below the inner */
+/* ENGRAVING — lives inside its own collapsible tray (mirrors the birthstones tray) */
 .c-co-lab-picker__engraving {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
+}
+
+.c-co-lab-picker__engraving-label {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.c-co-lab-picker__engraving-note {
+  margin: 0.4rem 0 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  opacity: 0.6;
+  text-transform: none;
 }
 
 .c-co-lab-picker__engraving-wrap {
@@ -292,23 +326,13 @@ safe-sticky.product-info:has(c-co-lab-picker) {
 .c-co-lab-picker__engraving-input {
   display: block;
   width: 100%;
-  padding: 0.9rem 5.5rem 0.9rem 1.25rem;
+  padding: 0.9rem 2.75rem 0.9rem 1.25rem;
+  text-transform: uppercase;
   background: var(--c-co-lab-pill-bg);
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 999px;
   font: inherit;
   color: inherit;
-}
-
-.c-co-lab-picker__engraving-uplift {
-  position: absolute;
-  right: 3rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 0.75rem;
-  opacity: 0.55;
-  pointer-events: none;
-  letter-spacing: 0.04em;
 }
 
 .c-co-lab-picker__engraving-input::placeholder {
@@ -599,6 +623,7 @@ safe-sticky.product-info:has(c-co-lab-picker) {
 
 .c-co-lab-picker__buy {
   display: flex;
+  flex-wrap: wrap;
   align-items: stretch;
   gap: 0.75rem;
   margin-top: 1rem;
@@ -608,8 +633,13 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   flex-shrink: 0;
 }
 
+/* Full-width add-to-cart (wraps below the quantity selector) to match a normal
+   product's button. Blue by default; still overridable from the buy_buttons block. */
 .c-co-lab-picker__atc {
-  flex: 1;
+  flex: 1 1 100%;
+  --button-background: #1f4fd8;
+  --button-outline-color: #1f4fd8;
+  --button-text-color: #ffffff;
 }
 
 .c-co-lab-picker__atc:disabled {
@@ -690,4 +720,15 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   columns: 2;
   gap: 1.5rem;
   margin: 0.5rem 0 0;
+}
+
+.c-co-lab-birthstone-info__image {
+  margin: 0 0 1.25rem;
+}
+
+.c-co-lab-birthstone-info__image-tag {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
 }

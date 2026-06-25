@@ -6,6 +6,8 @@ class CoLabPicker extends HTMLElement {
     this.stonesToggle = this.querySelector('[data-action="toggle-stones"]');
     this.stonesEl = this.querySelector('[data-stones]');
     this.gridEl = this.querySelector('[data-grid]');
+    this.engravingToggle = this.querySelector('[data-action="toggle-engraving"]');
+    this.engravingPanel = this.querySelector('[data-engraving]');
     this.submitBtn = this.querySelector('[data-action="submit"]');
     this.engravingInput = this.querySelector('[data-engraving-input]');
     this.engravingCount = this.querySelector('[data-engraving-count]');
@@ -50,6 +52,7 @@ class CoLabPicker extends HTMLElement {
 
   bindEvents() {
     this.stonesToggle?.addEventListener('click', () => this.toggleStones());
+    this.engravingToggle?.addEventListener('click', () => this.toggleEngraving());
 
     this.querySelectorAll('[data-action="open-grid"]').forEach((btn) => {
       btn.addEventListener('click', (e) => {
@@ -125,9 +128,22 @@ class CoLabPicker extends HTMLElement {
     const expanded = this.stonesToggle.getAttribute('aria-expanded') === 'true';
     this.stonesToggle.setAttribute('aria-expanded', String(!expanded));
     this.stonesEl.hidden = expanded;
-    if (this.engravingInput) this.engravingInput.disabled = expanded;
     this.closeGrid();
     this.syncStoneInputs();
+    this.refresh();
+  }
+
+  // Engraving lives in its own collapsible tray (mirrors the birthstones tray).
+  // The input is disabled while collapsed so an empty tray contributes nothing.
+  toggleEngraving() {
+    if (!this.engravingToggle || !this.engravingPanel) return;
+    const expanded = this.engravingToggle.getAttribute('aria-expanded') === 'true';
+    this.engravingToggle.setAttribute('aria-expanded', String(!expanded));
+    this.engravingPanel.hidden = expanded;
+    if (this.engravingInput) {
+      this.engravingInput.disabled = expanded;
+      if (!expanded) this.engravingInput.focus();
+    }
     this.refresh();
   }
 
@@ -203,8 +219,20 @@ class CoLabPicker extends HTMLElement {
   }
 
   onEngravingChange() {
-    const value = this.engravingInput.value;
-    const max = this.engravingInput.maxLength > 0 ? this.engravingInput.maxLength : value.length;
+    const input = this.engravingInput;
+    const raw = input.value;
+    // Force capitals and strip anything that isn't a letter, number, space or basic
+    // punctuation — keeps emojis and special characters out of the engraving.
+    const cleaned = raw.toUpperCase().replace(/[^A-Z0-9 .,'&-]/g, '');
+    if (cleaned !== raw) {
+      const removed = raw.length - cleaned.length;
+      const caret = Math.max(0, (input.selectionStart || cleaned.length) - removed);
+      input.value = cleaned;
+      try { input.setSelectionRange(caret, caret); } catch (e) { /* unsupported input type */ }
+      this.showError('Engravings can use capital letters, numbers and basic punctuation only — no emojis or special characters.');
+    }
+    const value = input.value;
+    const max = input.maxLength > 0 ? input.maxLength : value.length;
     this.engravingCount.textContent = `${value.length}/${max} Characters`;
     this.refresh();
   }
@@ -338,6 +366,7 @@ class CoLabPicker extends HTMLElement {
     const card = this.el('c-co-lab-cart-bundle', 'c-co-lab-cart-bundle');
 
     const header = this.el('header', 'c-co-lab-cart-bundle__header', [
+      this.el('p', 'c-co-lab-cart-bundle__eyebrow', 'Step 4'),
       this.el('h2', 'c-co-lab-cart-bundle__title', this.productTitle),
       this.el('p', 'c-co-lab-cart-bundle__base-price', this.formatMoney(this.basePrice)),
     ]);
@@ -382,13 +411,27 @@ class CoLabPicker extends HTMLElement {
     card.appendChild(modalError);
     this.modalErrorEl = modalError;
 
+    // Step 4 — explicit confirmation gate. The customer must tick this before the
+    // made-to-order piece can go to checkout (it cannot be returned once in production).
+    const confirmCheck = document.createElement('input');
+    confirmCheck.type = 'checkbox';
+    confirmCheck.id = `${this.dataset.reviewModalId}-confirm`;
+    const confirmLabel = this.el('label', 'c-co-lab-picker__confirm');
+    confirmLabel.htmlFor = confirmCheck.id;
+    confirmLabel.appendChild(this.el('span', 'c-co-lab-picker__confirm-label', 'I confirm this is my perfect piece'));
+    confirmLabel.appendChild(confirmCheck);
+    card.appendChild(confirmLabel);
+    card.appendChild(this.el('p', 'c-co-lab-picker__confirm-note', 'We build your perfect ring and dispatch in 2-3 weeks. As each piece is made to order, it cannot be returned, exchanged or amended once production has begun.'));
+
     // Actions
     const backBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--secondary', '← Edit');
     backBtn.type = 'button';
     const confirmBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--primary', 'Checkout →');
     confirmBtn.type = 'button';
+    confirmBtn.disabled = true;
     card.appendChild(this.el('div', 'c-co-lab-cart-bundle__actions', [backBtn, confirmBtn]));
 
+    confirmCheck.addEventListener('change', () => { confirmBtn.disabled = !confirmCheck.checked; });
     confirmBtn.addEventListener('click', () => this.confirmAndAdd(confirmBtn));
     backBtn.addEventListener('click', () => this.closeModal());
 

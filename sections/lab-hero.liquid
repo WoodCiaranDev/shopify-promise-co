@@ -163,8 +163,8 @@
                 content: section.settings.button2_label,
                 href: section.settings.button2_link,
                 style: section.settings.button2_style,
-                background: section.settings.button_background,
-                text_color: section.settings.button_text_color
+                background: section.settings.button2_background,
+                text_color: section.settings.button2_text_color
               %}
             {%- endif -%}
           </div>
@@ -512,6 +512,19 @@
         { "value": "outline", "label": "t:global.text.button_style_options.outline" }
       ],
       "default": "solid"
+    },
+    {
+      "type": "color",
+      "id": "button2_background",
+      "label": "Secondary button colour",
+      "info": "Set a contrasting colour so the Jump to FAQs button stands out.",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "button2_text_color",
+      "label": "Secondary button text colour",
+      "default": "#ffffff"
     }
   ],
   "presets": [
