@@ -623,7 +623,6 @@ safe-sticky.product-info:has(c-co-lab-picker) {
 
 .c-co-lab-picker__buy {
   display: flex;
-  flex-wrap: wrap;
   align-items: stretch;
   gap: 0.75rem;
   margin-top: 1rem;
@@ -633,13 +632,11 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   flex-shrink: 0;
 }
 
-/* Full-width add-to-cart (wraps below the quantity selector) to match a normal
-   product's button. Blue by default; still overridable from the buy_buttons block. */
+/* Sits next to the quantity selector (same row), filling the remaining width to
+   match a normal product's add-to-cart. Colours inherit the theme button (and any
+   buy_buttons block override), so it's identical to a standard PDP. */
 .c-co-lab-picker__atc {
-  flex: 1 1 100%;
-  --button-background: #1f4fd8;
-  --button-outline-color: #1f4fd8;
-  --button-text-color: #ffffff;
+  flex: 1;
 }
 
 .c-co-lab-picker__atc:disabled {

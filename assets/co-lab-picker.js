@@ -277,7 +277,8 @@ class CoLabPicker extends HTMLElement {
 
   refresh() {
     this.syncStoneInputs();
-    if (this.submitBtn) this.submitBtn.disabled = !this.selectionComplete();
+    // Keep the add-to-cart solid/enabled like a normal product. onSubmit() validates
+    // metal/size and shows an inline error if anything's missing - no faded button.
   }
 
   // --- Phase A: open the review modal (no cart mutation yet) -----------------
