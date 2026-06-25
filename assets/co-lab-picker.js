@@ -221,15 +221,16 @@ class CoLabPicker extends HTMLElement {
   onEngravingChange() {
     const input = this.engravingInput;
     const raw = input.value;
-    // Force capitals and strip anything that isn't a letter, number, space or basic
-    // punctuation — keeps emojis and special characters out of the engraving.
-    const cleaned = raw.toUpperCase().replace(/[^A-Z0-9 .,'&-]/g, '');
+    // Allow mixed case. Strip anything that isn't a letter, number, space or basic
+    // punctuation - this removes emojis, special characters and any em/en dashes
+    // (e.g. pasted from AI-generated text), which are not engravable.
+    const cleaned = raw.replace(/[^A-Za-z0-9 .,'&-]/g, '');
     if (cleaned !== raw) {
       const removed = raw.length - cleaned.length;
       const caret = Math.max(0, (input.selectionStart || cleaned.length) - removed);
       input.value = cleaned;
       try { input.setSelectionRange(caret, caret); } catch (e) { /* unsupported input type */ }
-      this.showError('Engravings can use capital letters, numbers and basic punctuation only — no emojis or special characters.');
+      this.showError('Engravings can use letters, numbers and basic punctuation only. No emojis, dashes or special characters.');
     }
     const value = input.value;
     const max = input.maxLength > 0 ? input.maxLength : value.length;
@@ -388,7 +389,9 @@ class CoLabPicker extends HTMLElement {
     this.stoneSlots().forEach((slot) => {
       if (!this.hasStone(slot)) return;
       const value = this.stoneValue(slot);
-      customRows.push(this.reviewRow('Birthstone', value, this.stoneSwatchUrl(value), this.bsCharged ? `+ ${this.formatMoney(this.bsPrice)}` : 'Free'));
+      const input = this.querySelector(`[data-stone-input="${slot}"]`);
+      const label = input?.dataset.stoneLabel || 'Birthstone';
+      customRows.push(this.reviewRow(label, value, this.stoneSwatchUrl(value), this.bsCharged ? `+ ${this.formatMoney(this.bsPrice)}` : 'Free'));
     });
     if (this.hasEngraving()) {
       customRows.push(this.reviewRow('Engraving', this.engravingInput.value.trim(), '', this.engCharged ? `+ ${this.formatMoney(this.engPrice)}` : 'Free'));

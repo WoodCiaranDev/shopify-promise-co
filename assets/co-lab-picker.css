@@ -31,7 +31,7 @@ safe-sticky.product-info:has(c-co-lab-picker) {
 }
 
 .c-co-lab-picker__card--custom {
-  background: var(--c-co-lab-card-bg);
+  background: var(--c-co-lab-inner-bg);
 }
 
 /* Step eyebrow above each card heading (Step 2 / Step 3) */
@@ -83,9 +83,10 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   text-underline-offset: 3px;
 }
 
-/* Inner card — contains the toggle, stone rows, and grid (and the engraving tray) */
+/* Inner card — contains the toggle, stone rows, and grid (and the engraving tray).
+   Lighter than the outer Customisation card so the nested tray contrasts. */
 .c-co-lab-picker__inner {
-  background: var(--c-co-lab-inner-bg);
+  background: var(--c-co-lab-card-bg);
   border-radius: 2rem;
   padding: 0.5rem 1.25rem;
 }
@@ -327,7 +328,6 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   display: block;
   width: 100%;
   padding: 0.9rem 2.75rem 0.9rem 1.25rem;
-  text-transform: uppercase;
   background: var(--c-co-lab-pill-bg);
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 999px;

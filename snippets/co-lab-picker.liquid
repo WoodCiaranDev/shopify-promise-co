@@ -56,6 +56,20 @@ Inputs:
 
   assign metal_list = mf.metals.value | split: ','
   assign size_list = mf.sizes.value | split: ','
+
+  # Per-product, client-editable birthstone & engraving copy.
+  # birthstone_labels: list, one editable name per slot (e.g. "Centre Stone", "Halo Stones").
+  # birthstone_heading / engraving_heading: optional overrides; otherwise auto-generated
+  # (heading auto-pluralises off the slot count).
+  assign bs_labels = mf.birthstone_labels.value
+  capture bs_heading_default
+    echo 'Choose Your Birthstone'
+    if slot_count != 1
+      echo 's'
+    endif
+  endcapture
+  assign bs_heading = mf.birthstone_heading.value | default: bs_heading_default
+  assign eng_heading = mf.engraving_heading.value | default: 'Add an Engraving'
 -%}
 
 <c-co-lab-picker
@@ -145,27 +159,32 @@ Inputs:
           <a href="#co-lab-birthstone-info-{{ product.id }}" title="Need help configuring?">Need help configuring?</a>
         </p>
 
+        {%- if slot_count > 0 -%}
         <div class="c-co-lab-picker__inner">
           <button type="button" class="c-co-lab-picker__stones-toggle" data-action="toggle-stones" aria-expanded="false">
-            <span>Choose Hidden Birthstones</span>
+            <span>{{ bs_heading }}</span>
             <span class="c-co-lab-picker__chev" aria-hidden="true">↓</span>
           </button>
 
           <div class="c-co-lab-picker__stones" data-stones hidden>
             {%- for slot in (1..slot_count) -%}
               {%- liquid
-                case slot
-                  when 1
-                    assign slot_label = 'One'
-                  when 2
-                    assign slot_label = 'Two'
-                  else
-                    assign slot_label = slot
-                endcase
+                # Per-slot label: editable custom.birthstone_labels entry, else "Birthstone One/Two/N".
+                assign slot_label = bs_labels[forloop.index0]
+                if slot_label == blank
+                  case slot
+                    when 1
+                      assign slot_label = 'Birthstone One'
+                    when 2
+                      assign slot_label = 'Birthstone Two'
+                    else
+                      assign slot_label = 'Birthstone ' | append: slot
+                  endcase
+                endif
               -%}
               <div class="c-co-lab-picker__stone-row" data-slot="{{ slot }}">
                 <p class="c-co-lab-picker__stone-label">
-                  <span>Birthstone {{ slot_label }}:</span>
+                  <span>{{ slot_label }}:</span>
                   <span class="c-co-lab-picker__uplift">{% if bs_charged %}+ {{ bs_price | money_without_trailing_zeros }}{% else %}Free{% endif %}</span>
                 </p>
                 <button type="button" class="c-co-lab-picker__stone-select" data-action="open-grid" data-slot="{{ slot }}" aria-haspopup="dialog">
@@ -173,7 +192,7 @@ Inputs:
                   <span class="c-co-lab-picker__stone-text" data-stone-text="{{ slot }}">Select Stone</span>
                   <span class="c-co-lab-picker__chev" aria-hidden="true">→</span>
                 </button>
-                <input type="hidden" name="properties[Birthstone {{ slot_label }}]" data-stone-input="{{ slot }}" value="" disabled>
+                <input type="hidden" name="properties[{{ slot_label }}]" data-stone-input="{{ slot }}" data-stone-label="{{ slot_label | escape }}" value="" disabled>
               </div>
             {%- endfor -%}
           </div>
@@ -205,10 +224,11 @@ Inputs:
             </ul>
           </div>
         </div>
+        {%- endif -%}
 
         <div class="c-co-lab-picker__inner c-co-lab-picker__inner--engraving">
           <button type="button" class="c-co-lab-picker__stones-toggle" data-action="toggle-engraving" aria-expanded="false">
-            <span>Add an Engraving</span>
+            <span>{{ eng_heading }}</span>
             <span class="c-co-lab-picker__chev" aria-hidden="true">↓</span>
           </button>
 
@@ -217,15 +237,14 @@ Inputs:
               <span>Engraving</span>
               <span class="c-co-lab-picker__uplift">{% if eng_charged %}+ {{ eng_price | money_without_trailing_zeros }}{% else %}Free{% endif %}</span>
             </p>
-            <p class="c-co-lab-picker__engraving-note">Capital letters only. No emojis or special characters.</p>
+            <p class="c-co-lab-picker__engraving-note">No emojis or special characters.</p>
             <div class="c-co-lab-picker__engraving-wrap">
               <input type="text"
                      id="{{ product_form_id }}-engraving"
                      class="c-co-lab-picker__engraving-input"
                      name="properties[Engraving]"
                      maxlength="{{ eng_max_chars }}"
-                     placeholder="TYPE YOUR ENGRAVING HERE"
-                     autocapitalize="characters"
+                     placeholder="Type your engraving here"
                      data-engraving-input
                      disabled>
               <span class="c-co-lab-picker__engraving-arrow" aria-hidden="true">→</span>
