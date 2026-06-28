@@ -463,6 +463,17 @@
     "settings": [
       {
         "type": "header",
+        "content": "Tag badges"
+      },
+      {
+        "type": "textarea",
+        "id": "hidden_tag_badges",
+        "label": "Warehouse-only tags (hidden from cards)",
+        "info": "Comma-separated. These product tags will NOT appear as badges on product cards (e.g. for warehouse/admin use). All other tags still show as badges.",
+        "default": "Made to order"
+      },
+      {
+        "type": "header",
         "content": "t:theme_settings.product_card.product_image_category"
       },
       {

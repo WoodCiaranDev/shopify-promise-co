@@ -12,10 +12,22 @@ Supported variables
 * product: the product to render the tag badges for (required)
 {%- endcomment -%}
 
+{%- assign hidden_tag_handles = settings.hidden_tag_badges | split: ',' -%}
+
 {%- capture tag_badges -%}
   {%- for product_tag in product.tags -%}
     {%- assign product_tag_handle = product_tag | handle -%}
-    <span class="tag-badge tag-badge--{{ product_tag_handle }}">{{ product_tag }}</span>
+    {%- assign is_hidden = false -%}
+    {%- for hidden_tag in hidden_tag_handles -%}
+      {%- assign hidden_tag_handle = hidden_tag | handle -%}
+      {%- if hidden_tag_handle == product_tag_handle -%}
+        {%- assign is_hidden = true -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- unless is_hidden -%}
+      <span class="tag-badge tag-badge--{{ product_tag_handle }}">{{ product_tag }}</span>
+    {%- endunless -%}
   {%- endfor -%}
 {%- endcapture -%}
 
