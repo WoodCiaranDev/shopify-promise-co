@@ -226,11 +226,24 @@ LIQUID
                   {%- if section.settings.show_intro_card and paginate.current_page == 1 -%}
                     {%- liquid
                       assign intro_has_content = false
-                      if section.settings.intro_card_logo != blank or section.settings.intro_card_heading != blank or section.settings.intro_card_text != blank or section.settings.intro_card_button_label != blank
+                      if section.settings.intro_card_image != blank or section.settings.intro_card_logo != blank or section.settings.intro_card_heading != blank or section.settings.intro_card_text != blank or section.settings.intro_card_button_label != blank
                         assign intro_has_content = true
                       endif
                     -%}
                     {%- if intro_has_content -%}
+                      {%- if section.settings.intro_card_image != blank -%}
+                        <div class="collection-intro-card collection-intro-card--image">
+                          {{
+                            section.settings.intro_card_image
+                            | image_url: width: 800
+                            | image_tag:
+                              widths: '300,450,600,800',
+                              sizes: '(min-width: 750px) 25vw, 50vw',
+                              class: 'collection-intro-card__image',
+                              loading: 'lazy'
+                          }}
+                        </div>
+                      {%- else -%}
                       <div class="collection-intro-card{% if section.settings.intro_card_white_bg %} collection-intro-card--white{% endif %}">
                         <div class="collection-intro-card__inner">
                           {%- if section.settings.intro_card_logo != blank -%}
@@ -255,6 +268,7 @@ LIQUID
                           {%- endif -%}
                         </div>
                       </div>
+                      {%- endif -%}
                     {%- endif -%}
                   {%- endif -%}
                   {%- for product in collection.products -%}
@@ -306,6 +320,12 @@ LIQUID
       "id": "intro_card_white_bg",
       "label": "White background",
       "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "intro_card_image",
+      "label": "Placeholder image",
+      "info": "When set, the card shows this image filling the slot instead of the text content below."
     },
     {
       "type": "image_picker",
@@ -483,6 +503,21 @@ LIQUID
 {% stylesheet %}
 .collection-intro-card {
   display: flex;
+}
+
+.collection-intro-card--image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.collection-intro-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .collection-intro-card__inner {

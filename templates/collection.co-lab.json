@@ -18,8 +18,6 @@
         "remove_vertical_spacing": true,
         "separate_section_with_border": false,
         "background_asset": "co-lab-collection-hero.png",
-        "min_height": 480,
-        "min_height_mobile": 360,
         "scrim_opacity": 25,
         "logo_asset": "co-lab-logo-white.png",
         "logo_max_width": 80,
@@ -79,7 +77,9 @@
     "main": {
       "type": "main-collection",
       "settings": {
-        "color_scheme": "scheme-2"
+        "color_scheme": "scheme-2",
+        "show_intro_card": true,
+        "intro_card_image": "shopify://shop_images/intro-card-placeholder.png"
       }
     },
     "faq_custom_collection": {
