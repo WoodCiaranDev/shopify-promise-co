@@ -71,6 +71,11 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   inset-inline-end: 1.25rem;
 }
 
+.c-co-lab-picker [data-size-locked] {
+  pointer-events: none;
+  padding-inline-end: 1.25rem;
+}
+
 .c-co-lab-picker__size-guide {
   margin: 1rem 0 0;
   text-align: center;
@@ -198,7 +203,7 @@ safe-sticky.product-info:has(c-co-lab-picker) {
 /* STONE GRID — white panel inside the inner cream card */
 .c-co-lab-picker__grid {
   margin-top: 0.75rem;
-  padding: 1.25rem 0;
+  padding: 0.5rem;
   background: var(--c-co-lab-pill-bg);
   border: 1px solid var(--c-co-lab-border);
   border-radius: 0.75rem;
@@ -743,4 +748,71 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   width: 100%;
   height: auto;
   border-radius: 0.75rem;
+}
+
+/* ------------------------------------------------------------------------- */
+/* NECKLACE PICKER — option-grid rows (Initial / Stone Shape / Birthstone).  */
+/* Reuses the stone grid component; adds letter cells + per-row spacing.      */
+/* ------------------------------------------------------------------------- */
+.c-co-lab-picker--necklace .c-co-lab-picker__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+.c-co-lab-picker__option-row {
+  gap: 0.5rem;
+}
+
+/* Selected-value preview that shows a letter instead of a stone image. */
+.c-co-lab-picker__option-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--c-co-lab-card-bg);
+  font-family: var(--heading-font-family, serif);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 1;
+  color: inherit;
+}
+
+/* A-Z grid: tighter columns than the 3-up stone grid. */
+.c-co-lab-picker__grid-list--letters {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.5rem 0.4rem;
+  justify-items: stretch;
+}
+.c-co-lab-picker__cell--letter {
+  padding: 0;
+  width: 100%;
+}
+.c-co-lab-picker__cell-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  border: 1px solid var(--c-co-lab-border);
+  font-family: var(--heading-font-family, serif);
+  font-size: 1rem;
+  line-height: 1;
+  text-transform: uppercase;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.c-co-lab-picker__cell--letter:hover .c-co-lab-picker__cell-letter {
+  border-color: rgba(0, 0, 0, 0.45);
+}
+.c-co-lab-picker__cell--letter.c-co-lab-picker__cell--selected .c-co-lab-picker__cell-letter {
+  border-color: currentColor;
+  background-color: var(--c-co-lab-pill-bg);
+}
+
+@media (max-width: 749px) {
+  .c-co-lab-picker__grid-list--letters {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
 }

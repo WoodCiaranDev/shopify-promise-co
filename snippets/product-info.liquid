@@ -20,8 +20,12 @@ Supported variables
 <safe-sticky class="product-info {% if center_basic_info %}product-info--center{% endif %}">
   {%- liquid
     assign is_co_lab = false
+    assign is_co_lab_necklace = false
     if product.metafields.custom.product_type.value == 'co-lab' and context == 'main_product'
       assign is_co_lab = true
+      if product.metafields.custom.colab_layout.value == 'necklace'
+        assign is_co_lab_necklace = true
+      endif
     endif
   -%}
   <div class="product-info__block-list">
@@ -224,7 +228,12 @@ Supported variables
 
           {%- when 'variant_picker' -%}
             {%- if product != blank -%}
-              {%- if is_co_lab -%}
+              {%- if is_co_lab_necklace -%}
+                {% render 'co-lab-necklace-picker',
+                    product: product,
+                    product_form_id: product_form_id,
+                    variant_picker_block: block %}
+              {%- elsif is_co_lab -%}
                 {% render 'co-lab-picker',
                     product: product,
                     product_form_id: product_form_id,
