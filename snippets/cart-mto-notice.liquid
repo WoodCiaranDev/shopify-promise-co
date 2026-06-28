@@ -1,0 +1,15 @@
+{%- liquid
+  assign has_mto = false
+  for line_item in cart.items
+    if line_item.product.type == 'Co-Lab' or line_item.product.metafields.custom.product_type.value == 'co-lab'
+      assign has_mto = true
+      break
+    endif
+  endfor
+-%}
+{%- if has_mto -%}
+  <div class="cart-mto-notice">
+    {%- render 'icon' with 'picto-timer', width: 20 -%}
+    <p class="cart-mto-notice__text">Your bag includes a made-to-order piece. To keep your order together, the full order is dispatched in 2-3 weeks.</p>
+  </div>
+{%- endif -%}

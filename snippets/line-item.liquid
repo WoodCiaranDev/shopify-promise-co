@@ -43,6 +43,10 @@ Supported variables
         {%- endif -%}
 
         {%- render 'price-list', line_item: line_item, context: 'line_item' -%}
+
+        {%- if line_item.product.type == 'Co-Lab' or line_item.product.metafields.custom.product_type.value == 'co-lab' -%}
+          <span class="line-item__mto-badge">Made to order</span>
+        {%- endif -%}
       </div>
 
       {%- capture secondary_information -%}
