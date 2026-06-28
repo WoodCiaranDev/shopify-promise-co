@@ -18,8 +18,8 @@
         "remove_vertical_spacing": true,
         "separate_section_with_border": false,
         "background_asset": "co-lab-collection-hero.png",
-        "min_height": 320,
-        "min_height_mobile": 240,
+        "min_height": 480,
+        "min_height_mobile": 360,
         "scrim_opacity": 25,
         "logo_asset": "co-lab-logo-white.png",
         "logo_max_width": 80,
@@ -34,62 +34,46 @@
       }
     },
     "wearable_stories": {
-      "type": "text-with-icons",
+      "type": "co-lab-steps",
       "blocks": {
-        "item_hand_set": {
-          "type": "item",
+        "step_1": {
+          "type": "step",
           "settings": {
-            "icon": "picto-award-gift",
-            "custom_icon": "shopify://shop_images/Untitled_design-36.png",
-            "icon_width": 64,
-            "mobile_icon_width": 64,
-            "title": "Hand Set Diamond Simulants",
-            "content": "<p>By our master jewellers, one stone at a time - never glued.</p>"
+            "icon": "shopify://shop_images/step-1-choose-piece.png",
+            "step_label": "Step 1",
+            "title": "Choose your piece"
           }
         },
-        "item_warranty": {
-          "type": "item",
+        "step_2": {
+          "type": "step",
           "settings": {
-            "icon": "picto-award-gift",
-            "custom_icon": "shopify://shop_images/Artboard_30_copy_4x_323837bd-a69a-44f4-9b87-b7db4ee5dc16.png",
-            "icon_width": 64,
-            "mobile_icon_width": 64,
-            "title": "Five-Year Warranty",
-            "content": "<p>Every piece is covered with a 5-year warranty for complete peace of mind.</p>"
+            "icon": "shopify://shop_images/Artboard_33_4x_a331b0fc-7364-4b91-8dfe-db9ecd4ec7cd.png",
+            "step_label": "Step 2",
+            "title": "Choose your metal and size"
           }
         },
-        "item_promise_card": {
-          "type": "item",
+        "step_3": {
+          "type": "step",
           "settings": {
-            "icon": "picto-award-gift",
-            "custom_icon": "shopify://shop_images/Artboard_30_copy_2_4x_80cd0fa4-7652-4c4f-b2ed-b45208f623b6.png",
-            "icon_width": 64,
-            "mobile_icon_width": 64,
-            "title": "Personalised Promise Card",
-            "content": "<p>Gift-ready packaging & complimentary keepsake card with every purchase, so you can make record of your Promise.</p>"
+            "icon": "shopify://shop_images/step-3-customisations.png",
+            "step_label": "Step 3",
+            "title": "Choose your customisations"
           }
         },
-        "item_anti_tarnish": {
-          "type": "item",
+        "step_4": {
+          "type": "step",
           "settings": {
-            "icon": "picto-award-gift",
-            "custom_icon": "shopify://shop_images/Artboard_33_4x_a331b0fc-7364-4b91-8dfe-db9ecd4ec7cd.png",
-            "icon_width": 48,
-            "mobile_icon_width": 64,
-            "title": "Anti Tarnish",
-            "content": "<p>Our thick gold and rhodium plating is set with a protective E-Coating to prevent tarnish and scratching.</p>"
+            "icon": "shopify://shop_images/step-4-dispatch.png",
+            "step_label": "Step 4",
+            "title": "We build your perfect ring and dispatch in 2-3 weeks"
           }
         }
       },
-      "block_order": ["item_hand_set", "item_warranty", "item_promise_card", "item_anti_tarnish"],
+      "block_order": ["step_1", "step_2", "step_3", "step_4"],
       "settings": {
         "color_scheme": "scheme-1",
-        "separate_section_with_border": false,
-        "reduce_mobile_spacing": true,
-        "stack_on_mobile": false,
-        "icon_color": "",
-        "text_color": "",
-        "text_alignment": "center"
+        "content_width": "md",
+        "separate_section_with_border": false
       }
     },
     "main": {

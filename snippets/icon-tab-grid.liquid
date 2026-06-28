@@ -16,8 +16,8 @@
   {%- assign market_type = 'eu' -%}
 {%- endif -%}
 
-<div class="collection-usp-tabs">
-  <div class="collection-usp-tabs__container">
+<div class="icon-tab-grid">
+  <div class="icon-tab-grid__container">
     {%- comment -%} Tab 1 {%- endcomment -%}
     {%- assign tab_1_title = settings.usp_tab_1_title -%}
     {%- assign tab_1_icon = settings.usp_tab_1_icon -%}
@@ -32,13 +32,13 @@
       {%- if settings.usp_tab_1_icon_default != blank -%}{%- assign tab_1_icon = settings.usp_tab_1_icon_default -%}{%- endif -%}
     {%- endif -%}
     {%- if tab_1_title != blank -%}
-      <div class="collection-usp-tab">
+      <div class="icon-tab">
         {%- if tab_1_icon != blank -%}
-          <div class="collection-usp-tab__icon">
+          <div class="icon-tab__icon">
             {{ tab_1_icon | image_url: width: 160 | image_tag: loading: 'lazy' }}
           </div>
         {%- endif -%}
-        <span class="collection-usp-tab__title">{{ tab_1_title }}</span>
+        <span class="icon-tab__title">{{ tab_1_title }}</span>
       </div>
     {%- endif -%}
 
@@ -56,13 +56,13 @@
       {%- if settings.usp_tab_2_icon_default != blank -%}{%- assign tab_2_icon = settings.usp_tab_2_icon_default -%}{%- endif -%}
     {%- endif -%}
     {%- if tab_2_title != blank -%}
-      <div class="collection-usp-tab">
+      <div class="icon-tab">
         {%- if tab_2_icon != blank -%}
-          <div class="collection-usp-tab__icon">
+          <div class="icon-tab__icon">
             {{ tab_2_icon | image_url: width: 160 | image_tag: loading: 'lazy' }}
           </div>
         {%- endif -%}
-        <span class="collection-usp-tab__title">{{ tab_2_title }}</span>
+        <span class="icon-tab__title">{{ tab_2_title }}</span>
       </div>
     {%- endif -%}
 
@@ -80,13 +80,13 @@
       {%- if settings.usp_tab_3_icon_default != blank -%}{%- assign tab_3_icon = settings.usp_tab_3_icon_default -%}{%- endif -%}
     {%- endif -%}
     {%- if tab_3_title != blank -%}
-      <div class="collection-usp-tab">
+      <div class="icon-tab">
         {%- if tab_3_icon != blank -%}
-          <div class="collection-usp-tab__icon">
+          <div class="icon-tab__icon">
             {{ tab_3_icon | image_url: width: 160 | image_tag: loading: 'lazy' }}
           </div>
         {%- endif -%}
-        <span class="collection-usp-tab__title">{{ tab_3_title }}</span>
+        <span class="icon-tab__title">{{ tab_3_title }}</span>
       </div>
     {%- endif -%}
 
@@ -104,13 +104,13 @@
       {%- if settings.usp_tab_4_icon_default != blank -%}{%- assign tab_4_icon = settings.usp_tab_4_icon_default -%}{%- endif -%}
     {%- endif -%}
     {%- if tab_4_title != blank -%}
-      <div class="collection-usp-tab">
+      <div class="icon-tab">
         {%- if tab_4_icon != blank -%}
-          <div class="collection-usp-tab__icon">
+          <div class="icon-tab__icon">
             {{ tab_4_icon | image_url: width: 160 | image_tag: loading: 'lazy' }}
           </div>
         {%- endif -%}
-        <span class="collection-usp-tab__title">{{ tab_4_title }}</span>
+        <span class="icon-tab__title">{{ tab_4_title }}</span>
       </div>
     {%- endif -%}
   </div>
