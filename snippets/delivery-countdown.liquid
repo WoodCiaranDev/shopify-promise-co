@@ -15,18 +15,27 @@ Used by the standard product info block and by the Co-Lab picker so both share o
 {%- endcomment -%}
 
 {%- if static_message != blank or static_message_strong != blank -%}
-  <div class="delivery-countdown delivery-countdown--static">
-    <div class="delivery-countdown__icon">
-      <img src="{{ 'icon-delivery.png' | file_url }}" alt="Delivery" width="40" height="40" loading="lazy">
-    </div>
-    <p class="delivery-countdown__text">
-      <span class="delivery-countdown__message">{{ static_message }}{% if static_message_strong != blank %}<strong>{{ static_message_strong }}</strong>{% endif %}</span>
-      {%- if info_target != blank -%}
+  {%- if info_target != blank -%}
+    <a class="delivery-countdown delivery-countdown--static" href="{{ info_target }}" data-countdown-info-target="{{ info_target }}">
+      <div class="delivery-countdown__icon">
+        <img src="{{ 'icon-delivery.png' | file_url }}" alt="Delivery" width="40" height="40" loading="lazy">
+      </div>
+      <p class="delivery-countdown__text">
+        <span class="delivery-countdown__message">{{ static_message }}{% if static_message_strong != blank %}<strong>{{ static_message_strong }}</strong>{% endif %}</span>
         <br>
-        <a class="delivery-countdown__cta delivery-countdown__cta--link" href="{{ info_target }}" data-countdown-info-target="{{ info_target }}">{{ info_label | default: 'Click for more info' }}</a>
-      {%- endif -%}
-    </p>
-  </div>
+        <span class="delivery-countdown__cta">{{ info_label | default: 'Click for more info' }}</span>
+      </p>
+    </a>
+  {%- else -%}
+    <div class="delivery-countdown delivery-countdown--static">
+      <div class="delivery-countdown__icon">
+        <img src="{{ 'icon-delivery.png' | file_url }}" alt="Delivery" width="40" height="40" loading="lazy">
+      </div>
+      <p class="delivery-countdown__text">
+        <span class="delivery-countdown__message">{{ static_message }}{% if static_message_strong != blank %}<strong>{{ static_message_strong }}</strong>{% endif %}</span>
+      </p>
+    </div>
+  {%- endif -%}
 
   {%- if info_target != blank -%}
     <script>
@@ -38,8 +47,15 @@ Used by the standard product info block and by the Co-Lab picker so both share o
           event.preventDefault();
           var el = document.querySelector(target);
           if (!el) return;
-          var details = el.matches('details') ? el : el.querySelector('details');
-          if (details) { details.open = true; }
+          var disclosure = el.matches('accordion-disclosure') ? el : el.querySelector('accordion-disclosure');
+          if (disclosure && typeof disclosure.toggle === 'function') {
+            disclosure.toggle(true);
+            var content = disclosure.querySelector('.accordion__content');
+            if (content) { content.style.opacity = ''; }
+          } else {
+            var details = el.matches('details') ? el : el.querySelector('details');
+            if (details) { details.open = true; }
+          }
           el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
       })();

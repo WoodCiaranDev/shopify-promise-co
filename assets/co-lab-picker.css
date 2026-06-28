@@ -653,6 +653,21 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   height: auto;
 }
 
+.delivery-countdown--static .delivery-countdown__cta {
+  display: inline-block;
+  margin-top: 0.25rem;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (max-width: 749px) {
+  .delivery-countdown--static {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
 /* FEATURE LISTICLE */
 .co-lab-feature-list {
   list-style: none;
