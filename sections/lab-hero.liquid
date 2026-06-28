@@ -68,9 +68,6 @@
       echo ' --lab-hero-min-height: '
       echo section.settings.min_height
       echo 'px;'
-      echo ' --lab-hero-min-height-mobile: '
-      echo section.settings.min_height_mobile
-      echo 'px;'
     endif
   endcapture
 -%}
@@ -223,7 +220,7 @@
 
   @media (max-width: 699px) {
     .lab-hero--lifestyle {
-      min-height: var(--lab-hero-min-height-mobile, 380px);
+      min-height: 225px;
     }
   }
 
@@ -363,16 +360,6 @@
       "step": 20,
       "unit": "px",
       "default": 560
-    },
-    {
-      "type": "range",
-      "id": "min_height_mobile",
-      "label": "Minimum height (mobile)",
-      "min": 240,
-      "max": 700,
-      "step": 20,
-      "unit": "px",
-      "default": 380
     },
     {
       "type": "range",
