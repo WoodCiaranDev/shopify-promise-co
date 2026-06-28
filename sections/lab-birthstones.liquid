@@ -39,7 +39,10 @@
             render 'button',
             content: section.settings.button_label,
             href: section.settings.button_link,
-            style: section.settings.button_style
+            style: section.settings.button_style,
+            background: section.settings.button_background,
+            text_color: section.settings.button_text_color,
+            custom_class: 'colab-light-cta'
           %}
         </div>
       {%- endif -%}
@@ -117,6 +120,17 @@
 
   .lab-birthstones__cta {
     margin-top: 3rem;
+  }
+
+  .colab-light-cta {
+    border-color: rgba(0, 0, 0, 0.18) !important;
+  }
+
+  .colab-light-cta:hover {
+    color: #ffffff !important;
+    background-color: #1c1c1c !important;
+    background-image: none !important;
+    border-color: #1c1c1c !important;
   }
 {% endstylesheet %}
 
@@ -227,6 +241,16 @@
         { "value": "outline", "label": "t:global.text.button_style_options.outline" }
       ],
       "default": "outline"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text colour"
     }
   ],
   "presets": [

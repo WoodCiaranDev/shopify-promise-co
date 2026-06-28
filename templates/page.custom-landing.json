@@ -75,8 +75,10 @@
         "columns_mobile": 3,
         "icon_max_width": 30,
         "button_label": "Design yours",
-        "button_link": "",
-        "button_style": "outline"
+        "button_link": "/collections/custom-jewelry",
+        "button_style": "solid",
+        "button_background": "#FFFFFF",
+        "button_text_color": "#1c1c1c"
       }
     },
     "feature_strips": {
@@ -142,7 +144,7 @@
     "lab_hero_faq": {
       "type": "lab-hero",
       "settings": {
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
         "content_width": "md",
         "remove_vertical_spacing": false,
         "separate_section_with_border": false,
@@ -174,9 +176,12 @@
         "cta_button": {
           "type": "button",
           "settings": {
-            "style": "outline",
+            "style": "solid",
             "text": "Design yours",
-            "url": ""
+            "url": "/collections/custom-jewelry",
+            "background": "#FCFBFA",
+            "text_color": "#1c1c1c",
+            "custom_class": "colab-light-cta"
           }
         }
       },

@@ -70,7 +70,7 @@
 
             {%- when 'button' -%}
               {%- if block.settings.text != blank -%}
-                {% render 'button', content: block.settings.text, href: block.settings.url, size: block.settings.size, style: block.settings.style, background: block.settings.background, text_color: block.settings.text_color, block: block %}
+                {% render 'button', content: block.settings.text, href: block.settings.url, size: block.settings.size, style: block.settings.style, background: block.settings.background, text_color: block.settings.text_color, custom_class: block.settings.custom_class, block: block %}
               {%- endif -%}
 
             {%- when 'liquid' -%}
@@ -378,6 +378,12 @@
           "type": "color",
           "id": "text_color",
           "label": "t:global.text.text"
+        },
+        {
+          "type": "text",
+          "id": "custom_class",
+          "label": "Custom CSS class",
+          "info": "Optional extra class on the button (e.g. colab-light-cta)."
         }
       ]
     },
