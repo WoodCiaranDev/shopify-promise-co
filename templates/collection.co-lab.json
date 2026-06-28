@@ -19,10 +19,11 @@
         "separate_section_with_border": false,
         "background_asset": "co-lab-collection-hero.png",
         "scrim_opacity": 25,
+        "logo": "shopify://shop_images/the-promise-lab-logo-white.png",
         "logo_asset": "co-lab-logo-white.png",
-        "logo_max_width": 80,
+        "logo_max_width": 200,
         "use_collection_content": true,
-        "eyebrow": "THE PROMISE CO - LAB",
+        "eyebrow": "",
         "heading": "Customisable Rings, Engraving & Hidden Birthstones",
         "heading_tag": "h1",
         "body": "<p>Crafted to your story — choose your piece, your stones and your engraving.</p>",
@@ -62,7 +63,7 @@
           "type": "step",
           "settings": {
             "icon": "shopify://shop_images/step-4-dispatch.png",
-            "step_label": "Step 4",
+            "step_label": "Production",
             "title": "We build your perfect ring and dispatch in 2-3 weeks"
           }
         }
@@ -82,14 +83,44 @@
         "intro_card_image": "shopify://shop_images/intro-card-placeholder.png"
       }
     },
-    "faq_custom_collection": {
-      "type": "co-lab-faq",
+    "lab_hero_birthstones": {
+      "type": "lab-hero",
       "settings": {
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
+        "content_width": "md",
+        "remove_vertical_spacing": false,
         "separate_section_with_border": false,
-        "subheading": "THE PROMISE CO - LAB",
-        "title": "FAQ's",
-        "content": ""
+        "no_bottom_spacing": true,
+        "background_color": "#FCFBFA",
+        "anchor_id": "birthstones",
+        "logo": "",
+        "logo_max_width": 200,
+        "eyebrow": "",
+        "heading": "Our Birth Stones",
+        "heading_tag": "h2",
+        "body": "<p>Please note: Delivery times are estimates and may occasionally be extended due to customs delays, courier disruptions, or UK bank holidays.</p>",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "outline"
+      }
+    },
+    "lab_birthstones": {
+      "type": "lab-birthstones",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "content_width": "lg",
+        "remove_vertical_spacing": false,
+        "separate_section_with_border": false,
+        "no_top_spacing": true,
+        "background_color": "#FCFBFA",
+        "columns_desktop": 6,
+        "columns_mobile": 3,
+        "icon_max_width": 30,
+        "button_label": "",
+        "button_link": "",
+        "button_style": "solid",
+        "button_background": "#FFFFFF",
+        "button_text_color": "#1c1c1c"
       }
     }
   },
@@ -97,6 +128,7 @@
     "lab_hero",
     "wearable_stories",
     "main",
-    "faq_custom_collection"
+    "lab_hero_birthstones",
+    "lab_birthstones"
   ]
 }
