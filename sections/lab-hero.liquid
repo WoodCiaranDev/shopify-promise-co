@@ -64,11 +64,6 @@
       echo section.settings.background_color
       echo ';'
     endif
-    if has_bg_image
-      echo ' --lab-hero-min-height: '
-      echo section.settings.min_height
-      echo 'px;'
-    endif
   endcapture
 -%}
 
@@ -210,7 +205,7 @@
   /* Lifestyle (background-image) variant */
   .lab-hero--lifestyle {
     position: relative;
-    min-height: var(--lab-hero-min-height, 560px);
+    min-height: 400px;
     display: flex;
     align-items: center;
     color: #fff;
@@ -350,16 +345,6 @@
       "id": "background_asset",
       "label": "Background image — theme asset filename",
       "info": "Used as a fallback when no Background image is uploaded above (e.g. co-lab-collection-hero.png)."
-    },
-    {
-      "type": "range",
-      "id": "min_height",
-      "label": "Minimum height (desktop)",
-      "min": 320,
-      "max": 900,
-      "step": 20,
-      "unit": "px",
-      "default": 560
     },
     {
       "type": "range",
