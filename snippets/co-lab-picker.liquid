@@ -127,6 +127,8 @@ Inputs:
         {%- endif -%}
 
         {%- if size_list.size > 0 -%}
+          {%- assign size_locked = false -%}
+          {%- if size_list.size == 1 -%}{%- assign size_locked = true -%}{%- endif -%}
           <fieldset class="variant-picker__option v-stack gap-2">
             <div class="variant-picker__option-info h-stack justify-between gap-2">
               <div class="h-stack gap-1">
@@ -134,14 +136,18 @@ Inputs:
               </div>
             </div>
             <div class="relative">
-              <select class="select" data-size-select>
-                <option value="" disabled selected>Select your size</option>
+              <select class="select" data-size-select{% if size_locked %} data-size-locked aria-disabled="true"{% endif %}>
+                {%- unless size_locked -%}
+                  <option value="" disabled selected>Select your size</option>
+                {%- endunless -%}
                 {%- for size in size_list -%}
                   {%- assign size_name = size | strip -%}
-                  <option value="{{ size_name | escape }}">{{ size_name }}</option>
+                  <option value="{{ size_name | escape }}"{% if size_locked %} selected{% endif %}>{{ size_name }}</option>
                 {%- endfor -%}
               </select>
-              {%- render 'icon' with 'dropdown-chevron' -%}
+              {%- unless size_locked -%}
+                {%- render 'icon' with 'dropdown-chevron' -%}
+              {%- endunless -%}
             </div>
           </fieldset>
         {%- endif -%}
@@ -237,7 +243,7 @@ Inputs:
               <span>Engraving</span>
               <span class="c-co-lab-picker__uplift">{% if eng_charged %}+ {{ eng_price | money_without_trailing_zeros }}{% else %}Free{% endif %}</span>
             </p>
-            <p class="c-co-lab-picker__engraving-note">No emojis or special characters.</p>
+            <p class="c-co-lab-picker__engraving-note">Case sensitive. Can include numbers and special characters. No emojis</p>
             <div class="c-co-lab-picker__engraving-wrap">
               <input type="text"
                      id="{{ product_form_id }}-engraving"

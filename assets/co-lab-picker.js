@@ -37,6 +37,8 @@ class CoLabPicker extends HTMLElement {
     const checkedMetal = this.metalRadios.find((r) => r.checked) || this.metalRadios[0];
     if (checkedMetal) this.selectMetal(checkedMetal.value);
 
+    if (this.sizeSelect && this.sizeSelect.value) this.selectSize(this.sizeSelect.value);
+
     this.bindEvents();
     this.refresh();
   }
@@ -79,7 +81,9 @@ class CoLabPicker extends HTMLElement {
 
     this.sizeSelect?.addEventListener('change', () => {
       this.selectSize(this.sizeSelect.value);
-      if (this.selectedSize) this.scrollToCustomisation();
+      if (this.selectedSize && window.matchMedia('(min-width: 750px)').matches) {
+        this.scrollToCustomisation();
+      }
     });
 
     this.form?.addEventListener('submit', (e) => this.onSubmit(e));
@@ -221,16 +225,15 @@ class CoLabPicker extends HTMLElement {
   onEngravingChange() {
     const input = this.engravingInput;
     const raw = input.value;
-    // Allow mixed case. Strip anything that isn't a letter, number, space or basic
-    // punctuation - this removes emojis, special characters and any em/en dashes
-    // (e.g. pasted from AI-generated text), which are not engravable.
-    const cleaned = raw.replace(/[^A-Za-z0-9 .,'&-]/g, '');
+    // Allow mixed case, numbers and special characters. Strip only emojis and the
+    // zero-width joiners / variation selectors / keycap combiners that build them.
+    const cleaned = raw.replace(/[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{2190}-\u{21FF}\u{FE00}-\u{FE0F}\u{200D}\u{20E3}\u{E0000}-\u{E007F}]/gu, '');
     if (cleaned !== raw) {
       const removed = raw.length - cleaned.length;
       const caret = Math.max(0, (input.selectionStart || cleaned.length) - removed);
       input.value = cleaned;
       try { input.setSelectionRange(caret, caret); } catch (e) { /* unsupported input type */ }
-      this.showError('Engravings can use letters, numbers and basic punctuation only. No emojis, dashes or special characters.');
+      this.showError('Engravings can include numbers and special characters, but no emojis.');
     }
     const value = input.value;
     const max = input.maxLength > 0 ? input.maxLength : value.length;
