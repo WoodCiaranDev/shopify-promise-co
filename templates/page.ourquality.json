@@ -36,7 +36,8 @@
         "autoplay": true,
         "show_controls": false,
         "video_size": "lg",
-        "video": "shopify://files/videos/copy_EB80F9B6-4F60-4F5B-8E24-182BC7D91161_VSCO.mov",
+        "video": "shopify://files/videos/quality (1).mp4",
+        "mobile_video": "shopify://files/videos/quality.mp4",
         "external_video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "text_color": "#ffffff"
       }
@@ -54,7 +55,7 @@
         "richtext_4kMHBj": {
           "type": "richtext",
           "settings": {
-            "content": "<p>Our pieces are symbols of love, commitment, and the moments that matter most.<br/><br/> That's why we obsess over <strong>every detail. </strong><br/>So each and every piece is made to be kept <strong>forever.</strong><br/><br/>Every piece is hand-set by our<strong> master jewellers</strong>, backed by a 5-year warranty, and made to the best-in-class standards of the National Association of Jewellers. <br/><br/><em>A </em><em><strong>promise</strong></em><em> you can trust.</em></p>"
+            "content": "<p>Our pieces are symbols of love, commitment and the moments that matter most.<br/><br/> That's why we obsess over <strong>every detail. </strong><br/>So each and every piece is made to be kept <strong>forever.</strong><br/><br/>Every piece is hand-set by our<strong> master jewellers</strong>, backed by a 5-year warranty, and made to the best-in-class standards of the National Association of Jewellers. <br/><br/><em>A </em><em><strong>promise</strong></em><em> you can trust.</em></p>"
           }
         },
         "image_PNT9if": {
@@ -100,7 +101,7 @@
         "text_EQLFrM": {
           "type": "text",
           "settings": {
-            "text": "Rated 4.97 / 5 ★★★★★"
+            "text": "Rated 4.9 / 5 ★★★★★"
           }
         },
         "text_LcD7t6": {
@@ -198,7 +199,7 @@
       ],
       "name": "t:sections.tabs.presets.tab.name",
       "settings": {
-        "color_scheme": "scheme-2ca1c54f-75f1-4890-b6c9-acb7092f2a37",
+        "color_scheme": "scheme-b68b61c5-ba0e-4161-a0e3-3d59622e9bf4",
         "separate_section_with_border": false,
         "subheading": "",
         "title": "",

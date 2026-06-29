@@ -16,7 +16,7 @@
     "shipping-popup": {
       "settings": {
         "title": "Delivery & Shipping - USA",
-        "content": "<p><strong>Orders are shipped Monday–Friday.</strong></p><p>Any orders placed after 1pm (local warehouse time) on Friday will not be shipped until Monday.</p><h3>USA Shipping (from our USA warehouse)</h3><p>Orders ship via DHL Express Domestic and Tariff free. Delivery takes <strong>1–4 working days</strong>, depending on your shipping zone.</p><p>All tariffs and import fees are already covered by The Promise Ring Co. LTD, so there are <strong>no additional customs</strong> charges for US customers.</p>"
+        "content": "<p><strong>Orders are shipped Monday–Friday.</strong></p><p>Any orders placed before 1pm (Mountain Standard Time) are usually dispatched on the same day, Monday–Friday.</p><h3>USA Shipping (from our USA warehouse)</h3><p>Orders ship via DHL Express Domestic and Tariff free. Delivery takes <strong>1–4 working days</strong>, depending on your state.</p><p>All tariffs and import fees are already covered by The Promise Ring Co. LTD, so there are <strong>no additional customs</strong> charges for US customers.</p>"
       },
       "blocks": {}
     }

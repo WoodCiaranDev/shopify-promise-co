@@ -15,7 +15,7 @@
         "subheading_PEk8iN": {
           "type": "subheading",
           "settings": {
-            "text": "what's your promise?"
+            "text": ""
           }
         },
         "heading_YgCVdt": {
@@ -29,7 +29,7 @@
         "richtext_gCmw3t": {
           "type": "richtext",
           "settings": {
-            "content": "<h1>frequently asked questions</h1><p>Have a question? Feel free to check out our FAQs</p>"
+            "content": "<h1>MOST frequently asked questions</h1><p></p>"
           }
         }
       },
@@ -53,79 +53,169 @@
     "faq": {
       "type": "faq",
       "blocks": {
+        "category_Ga4CNN": {
+          "type": "category",
+          "settings": {
+            "title": "general",
+            "icon": "none",
+            "icon_width": 16
+          }
+        },
+        "question_MKaVVf": {
+          "type": "question",
+          "settings": {
+            "question": "How do I contact your customer care team?",
+            "answer": "<p>Please contact us at - <a href=\"mailto:info@thepromiseco.com\" target=\"_blank\" title=\"mailto:info@thepromiseco.com\">info@thepromiseco.com</a> and we will do our best to help. Please provide y<strong>our order number</strong> if possible and as much information  regarding your request. <br/><br/>Our customer service hours are <strong>9am-5pm (UK time) Monday - Friday</strong>.</p>"
+          }
+        },
         "question-1": {
           "type": "question",
           "settings": {
-            "question": "How long will my order take to ship?",
-            "answer": "<p><strong>Order Fulfilment</strong></p><ul><li>Orders are shipped <strong>Monday–Friday</strong>.</li><li>Any orders placed after <strong>1pm (local warehouse time)</strong> on Friday will not be shipped until Monday.</li></ul><p><strong>UK Shipping (from our UK warehouse)</strong></p><ul><li><strong>Royal Mail 48 Hours</strong>: Delivery in 2 working days.</li><li><strong>Royal Mail 24 Hours</strong>: Delivery in 1 working day (order before 1pm GMT to receive your parcel the next working day).</li></ul><p><strong>USA Shipping (from our USA warehouse)</strong></p><ul><li>Orders ship via <strong>DHL Express Domestic</strong>.</li><li>Delivery takes <strong>1–4 working days</strong>, depending on your shipping zone.</li><li>All tariffs and import fees are already covered by <strong>The Promise Ring Co. LTD</strong>, so there are <strong>no additional customs charges</strong> for US customers.</li></ul><p><strong>International Shipping (all other countries from our UK warehouse)</strong></p><ul><li><strong>Europe</strong>: 2–11 business days.</li><li>Orders under €150 (excluding shipping fees) ship with no import fees</li></ul><p></p><ul><li><strong>Rest of the World (Canada, Australia, etc.)</strong>: 3–17 business days.</li></ul><p><strong>Please note:</strong> Delivery times are estimates and may occasionally be extended due to customs delays, courier disruptions, or UK bank holidays.</p>"
-          }
-        },
-        "question-2": {
-          "type": "question",
-          "settings": {
-            "question": "Can I return my order?",
-            "answer": "<p>Yes! If your ring doesn't fit, or you simply don't like it, you can return it by emailing <strong>info@thepromiseco.com</strong></p><p>We will refund any item you are unhappy with if returned to us in its <strong>original, unaltered condition </strong>within <strong>30 days </strong>from when you received it.</p><p><strong>Please see our refund policy for full details.</strong></p>"
-          }
-        },
-        "question-3": {
-          "type": "question",
-          "settings": {
-            "question": "When will my refund be processed?",
-            "answer": "<p>We will notify you once we’ve received and inspected your return, once your refund is approved please allow up to 10 working days for your bank to have reversed the transaction.</p><p>Please see our refund policy for full details.</p>"
+            "question": "How long will my order take to dispatch?",
+            "answer": "<h5><strong>Order Fulfilment:</strong></h5><ul><li>Orders are shipped <strong>Monday–Friday</strong>.</li><li>Any orders placed after <strong>1pm (local warehouse time)</strong> on Fridays, will not be shipped until Monday.</li></ul><p></p><p><strong>Ready To Wear Pieces:<br/></strong>If the item is in stock and your order is placed <strong>before 1pm </strong>(local warehouse time). The order will be fulfilled on the same day. </p><p><strong>Made To Order - Custom Lab:<br/></strong>These unique items are crafted just for you so once your order is placed - <strong>please allow 2-3 weeks for dispatch of your order.</strong></p><p>Please note dispatch times are an estimate and may occasionally be extended due to busy periods, sales, or UK/ USA public holidays.</p><p>If you have any questions or need any additional help, please contact us at <a href=\"mailto:info@thepromiseco.com\" target=\"_blank\" title=\"mailto:info@thepromiseco.com\">info@thepromiseco.com</a></p>"
           }
         },
         "question_XkktdC": {
           "type": "question",
           "settings": {
-            "question": "Can I exchange my order?",
-            "answer": "<p>We want to make sure your ring fits just right! If it doesn't, you're eligible for an exchange.</p><p>Please email <strong>info@thepromiseco.com </strong>to start the process</p><p>We will exchange any item you are unhappy with if returned to us in its <strong>original, unaltered condition </strong>within <strong>30</strong> <strong>days </strong>from when you received it.</p>"
+            "question": "How long does delivery take?",
+            "answer": "<h5><strong>UK Shipping (from our UK warehouse)</strong></h5><ul><li><strong>Royal Mail 24 Hours</strong>: Delivery in 1 working day (order before 1pm GMT to receive your parcel the next working day).</li><li><strong>Royal Mail 48 Hours</strong>: Delivery in 2 working days.</li></ul><p></p><h5><strong>USA Shipping (from our USA warehouse)</strong></h5><ul><li>Orders ship via <strong>DHL Express Domestic</strong>.</li><li>Delivery takes <strong>1–4 working days</strong>, depending on your shipping zone.</li><li>All tariffs and import fees are already covered by <strong>The Promise Ring Co. LTD</strong>, so there are <strong>no additional customs charges</strong> for US customers.</li></ul><h5><strong>International Shipping (all other countries from our UK warehouse)</strong></h5><ul><li><strong>Europe</strong>: 2–11 business days.</li><li>Orders under €150 (excluding shipping fees) ship with no import fees</li></ul><p></p><ul><li><strong>Canada, Australia & ROW</strong>: 3–17 business days.</li></ul><p><strong>Please note:</strong> Delivery times are estimates and may occasionally be extended due to customs delays, courier disruptions, or UK/ USA public holidays.<br/><br/>If you have any questions or need any additional help, please contact us at <a href=\"mailto:info@thepromiseco.com\" target=\"_blank\" title=\"mailto:info@thepromiseco.com\">info@thepromiseco.com</a></p>"
           }
         },
-        "question_cMEztV": {
+        "question_NwzYNY": {
           "type": "question",
           "settings": {
-            "question": "I'm buying as a gift and your return window is not long enough, what can I do?",
-            "answer": "<p>We appreciate that when it comes to unique gifts, you prefer to plan ahead. Before making your purchase, kindly reach out to us at <a>info@thepromiseco.com</a>, and we'll be happy to assist you.</p><p>If a longer timeframe is authorised, we can arrange this on an exchanges only basis (no cash refunds), provided that the ring passes our quality inspection upon return.</p>"
+            "question": "Is my item covered by a  warranty?",
+            "answer": "<p>Yes, all products are covered by a 5-year warranty to give you complete peace of mind against any manufacturing faults or defects.  <br/><br/>These pieces aren't just jewellery; they are symbols of love, commitment, and cherished moments.</p><p>That's why we stand by our products. Full warranty terms <a href=\"https://thepromiseco.com/pages/5-year-warranty\" title=\"https://thepromiseco.com/pages/5-year-warranty\">here</a></p>"
           }
         },
         "question_3eWW9D": {
           "type": "question",
           "settings": {
-            "question": "Do you do express delivery?",
-            "answer": "<p><strong>Express Delivery</strong></p><ul><li><strong>UK Customers</strong> – Next Working Day delivery available with Royal Mail (order before 1pm).<br/></li><li><strong>USA Customers</strong> – Express shipping available nationwide, delivered in <strong>2–4 business days</strong>.</li></ul><p>Unfortunately for Rest of World orders we do not offer any express delivery.</p>"
+            "question": "Do you offer express delivery?",
+            "answer": "<p><strong>Express Delivery</strong></p><ul><li><strong>UK Customers</strong> – Next Working Day delivery available with Royal Mail (order before 1pm GMT).<br/></li><li><strong>USA Customers</strong> – Express shipping available nationwide, delivered in 1<strong>–4 business days</strong>. (Order before 1pm MST)</li></ul><p>If you require your order sooner, please contact us at <a href=\"mailto:info@thepromiseco.com\" target=\"_blank\" title=\"mailto:info@thepromiseco.com\">info@thepromiseco.com</a></p>"
           }
         },
-        "question_kmw8nm": {
+        "question_VG7jyh": {
           "type": "question",
           "settings": {
-            "question": "Will you cover the cost of my return?",
-            "answer": "<p>If it is proven that there is a fault with the good once inspected, we will credit you the cost of your return. There otherwise returns are at the cost of the customer.</p><p>Please see the refund policy for details.</p>"
+            "question": "Can I update or cancel my order once I have placed it?",
+            "answer": "<p>We move quickly to get your order to you, so there's only a short window to make changes. Just email <a href=\"mailto:info@thepromiseco.com\" target=\"_blank\" title=\"mailto:info@thepromiseco.com\">info@thepromiseco.com</a> as soon as you can and we'll do our best to help.</p><p><strong>Ready To Wear:</strong><br/><br/>If your order hasn't been dispatched yet, we can usually help with changes like your address, ring size or a swap. Once it's left the warehouse, we're unable to make changes - but you're covered by our standard 30-day returns. </p><p><strong>Made To Order - Custom Lab:</strong><br/><br/>You have <strong>60 minutes after ordering to amend your details</strong> - your engraving, birthstone, size or anything else. Just email us within that hour and we'll update it for you.<br/><br/>After 60 minutes, your piece moves into production, so it <strong>can't be amended or cancelled</strong> — and because each Lab piece is made just for you, Lab orders can't be cancelled at all once placed. This is why we ask you to check everything on your confirmation screen before you order.</p>"
           }
         },
         "question_UmtchC": {
           "type": "question",
           "settings": {
-            "question": "International Charges",
-            "answer": "<p><strong>UK Customers</strong> – No duties or fees apply.</p><p><br/><strong>USA Customers</strong> – Thanks to our new US warehouse, there are <strong>no tariffs or additional fees</strong> on your orders.<br/></p><p><strong>EU Customers -</strong> Orders under €150 (excluding shipping fees) ship with no import fees</p><p><br/><strong>Other International Customers</strong> – Deliveries outside of the UK and USA may be subject to customs duties and service fees. These vary by country, and unfortunately we cannot control or predict the charges. For more information, please contact your local customs office. Please note, we are not able to reimburse duties or taxes paid upon delivery.</p>"
+            "question": "Are there be duties or custom fees?",
+            "answer": "<p><strong>UK Customers:<br/></strong>No duties or fees apply.<br/><br/><strong>USA Customers:</strong><br/>Thanks to our new US warehouse, there are <strong>no tariffs or additional fees</strong> on your orders.<br/></p><p><strong>EU Customers:</strong> <br/><strong>Orders under €150 </strong>(plus shipping fees) ship with <strong>no import fees.<br/><br/></strong>If the items in your basket exceed €150 (before shipping) please see below<br/><br/><strong>Other International Customers:</strong> Deliveries outside of the UK and USA may be subject to customs fees, duties and taxes. These vary by country, and unfortunately we cannot control or predict the charges. For more information, please contact your local customs office. <br/>Please note, we are not able to reimburse duties or taxes paid upon delivery. </p>"
+          }
+        },
+        "question_amCgdd": {
+          "type": "question",
+          "settings": {
+            "question": "My items have different delivery timeframes?",
+            "answer": "<p>If your order contains multiple items with different delivery timeframes, your entire order will follow the longest delivery date.</p><p>For example, if you order a ready to wear piece and a custom piece, both items will arrive in one parcel when the custom piece is finished, 2-3 weeks after placing your order.</p><p>To help reduce packaging waste and unnecessary shipments, we do not split ship orders. Everything will be sent together once the final item is ready.<br/><br/>If you require additional support with this please contact us and we will do our best to help - <a href=\"mailto:info@thepromiseco.com\" target=\"_blank\" title=\"mailto:info@thepromiseco.com\">info@thepromiseco.com</a></p>"
+          }
+        },
+        "category_nUYzNF": {
+          "type": "category",
+          "disabled": true,
+          "settings": {
+            "title": "Made to order",
+            "icon": "none",
+            "icon_width": 16
+          }
+        },
+        "question_VRFrPK": {
+          "type": "question",
+          "settings": {
+            "question": "Can I return my made to order piece?",
+            "answer": "<p>Each Custom Lab piece is handcrafted specifically to your chosen specifications, including your selected design, metal, birthstones and/or engraving. Because of this, all Custom Lab orders are made to order and are final sale. </p><p>They cannot be returned or exchanged unless they arrive with a manufacturing fault.</p>"
+          }
+        },
+        "question_JFrVHd": {
+          "type": "question",
+          "settings": {
+            "question": "How long will it take to make?",
+            "answer": "<p>All our rings are hand set and crafted by our master jewellers in 2-3 weeks, then they will dispatch as per your local shipping estimate.</p>"
           }
         }
       },
       "block_order": [
+        "category_Ga4CNN",
+        "question_MKaVVf",
         "question-1",
-        "question-2",
-        "question-3",
         "question_XkktdC",
-        "question_cMEztV",
+        "question_NwzYNY",
         "question_3eWW9D",
-        "question_kmw8nm",
-        "question_UmtchC"
+        "question_VG7jyh",
+        "question_UmtchC",
+        "question_amCgdd",
+        "category_nUYzNF",
+        "question_VRFrPK",
+        "question_JFrVHd"
       ],
       "settings": {
         "color_scheme": "",
         "separate_section_with_border": true,
         "show_categories": false,
         "subheading": "",
-        "title": "Delivery & Returns",
+        "title": "Orders & Delivery",
+        "content": ""
+      }
+    },
+    "faq_EjjLir": {
+      "type": "faq",
+      "blocks": {
+        "question_8yE4UU": {
+          "type": "question",
+          "settings": {
+            "question": "Can I exchange my order?",
+            "answer": "<p><strong>Ready To Wear:</strong><br/><br/>We want to make sure your item fits just right! If it doesn't, you're eligible for an exchange.</p><p>Please email <a href=\"mailto:info@thepromiseco.com\" target=\"_blank\" title=\"mailto:info@thepromiseco.com\"><strong>info@thepromiseco.com</strong></a><strong> </strong>to start the process</p><p>We will exchange any ready to wear item you are unhappy with if returned to us in its <strong>original, unaltered condition </strong>within <strong>30</strong> <strong>days </strong>from when you received it.<br/><br/><strong>Made To Order - Custom Lab:</strong><br/><br/>Because each Lab piece is made specifically for you, Lab orders are <strong>final sale.</strong> That means no returns or exchanges.<br/>You'll have <strong>60 minutes after ordering to amend your details</strong>; after that your piece is in production and can't be changed. So please check everything before you order.<br/><br/>And if a Lab piece ever arrives faulty, we'll always make it right — see our <a href=\"https://thepromiseco.com/pages/5-year-warranty\" title=\"https://thepromiseco.com/pages/5-year-warranty\">5-year warranty.</a></p><p><strong>Please see our </strong><a href=\"https://thepromiseco.com/policies/refund-policy\" title=\"https://thepromiseco.com/policies/refund-policy\"><strong>refund policy</strong></a><strong> for full details.</strong></p>"
+          }
+        },
+        "question_Y4jb7k": {
+          "type": "question",
+          "settings": {
+            "question": "Can I return my order?",
+            "answer": "<p><strong>Ready To Wear Pieces: </strong><br/><br/>Yes! If your ring doesn't fit, or you simply don't love it, you can return it by emailing <a href=\"mailto:info@thepromiseco.com\" title=\"mailto:info@thepromiseco.com\"><strong>info@thepromiseco.com</strong></a><strong><br/></strong>We will refund any item you are unhappy with if returned to us in its original, unaltered condition within 30 days from when you received it.<br/><br/><strong>Made To Order - Custom Lab:</strong><br/><br/>Because each Lab piece is made specifically for you, Lab orders are <strong>final sale.</strong> That means no returns or exchanges.<br/>You'll have <strong>60 minutes after ordering to amend your details</strong>; after that your piece is in production and can't be changed. So please check everything before you order.<br/><br/>And if a Lab piece ever arrives faulty, we'll always make it right — see our <a href=\"https://thepromiseco.com/pages/5-year-warranty\" title=\"https://thepromiseco.com/pages/5-year-warranty\">5-year warranty.</a></p><p><strong>Please see our </strong><a href=\"https://thepromiseco.com/policies/refund-policy\" title=\"https://thepromiseco.com/policies/refund-policy\"><strong>refund policy</strong></a><strong> for full details.</strong></p>"
+          }
+        },
+        "question_em8hhW": {
+          "type": "question",
+          "settings": {
+            "question": "When will my refund be processed?",
+            "answer": "<p>We will notify you once we’ve received and inspected your return, once your refund is approved please allow up to 10 working days for your bank to have cleared the transaction.</p><p>Please see our refund policy for full details.</p>"
+          }
+        },
+        "question_9mjra6": {
+          "type": "question",
+          "settings": {
+            "question": "I'm buying as a gift and your return window is not long enough, what can I do?",
+            "answer": "<p>We appreciate that when it comes to unique gifts, you prefer to plan ahead. Before making your purchase, kindly reach out to us at <a>info@thepromiseco.com</a>, and we'll be happy to assist you.</p><p>If a longer timeframe is authorised, we can arrange this on an exchanges only basis (no cash refunds), provided that the ring passes our quality inspection upon return.</p>"
+          }
+        },
+        "question_ypp9jd": {
+          "type": "question",
+          "settings": {
+            "question": "Will you cover the cost of my return?",
+            "answer": "<p>If it is proven that there is a fault with the good once inspected, we will credit you the cost of your return. There otherwise returns are at the cost of the customer.</p><p>Please see the refund policy for details.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_8yE4UU",
+        "question_Y4jb7k",
+        "question_em8hhW",
+        "question_9mjra6",
+        "question_ypp9jd"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "show_categories": false,
+        "subheading": "",
+        "title": "Returns & Exchanges",
         "content": ""
       }
     },
@@ -136,7 +226,7 @@
           "type": "question",
           "settings": {
             "question": "What precious metals do you use?",
-            "answer": "<p>Promise stones come in sterling silver with rhodium plating OR 2.5 microns of 18k gold-plating, known as Gold Vermeil</p><p>All pieces are engraved with 925 for metal authenticity and our \"The Promise Co\" engraving for quality assurance</p>"
+            "answer": "<p>Promise Co. jewellery comes in sterling silver with rhodium plating OR 2.5 microns of 18k or 14k gold-plating, known as Gold Vermeil</p><p>All pieces are engraved with 925 for metal authenticity and our \"The Promise Co\" engraving for quality assurance</p>"
           }
         },
         "question_ih7yBU": {
@@ -206,14 +296,7 @@
           "type": "question",
           "settings": {
             "question": "I don't know which ring to pick for a gift?",
-            "answer": "<p>If you need personalised support on picking the perfect ring, email our team at <strong>info@thepromiseco.com</strong> and we will do our best to support.</p><p>Alternatively, shop our <a href=\"https://thepromiseringco.com/products/the-promise-ring-co-e-gift-card\" title=\"The Promise Ring Co. E-Gift Card\">E-Gift cards</a>, for the perfect fit, everytime.</p>"
-          }
-        },
-        "question_D7Tbyq": {
-          "type": "question",
-          "settings": {
-            "question": "Is my ring under warranty?",
-            "answer": "<p>At The Promise Ring Co. we are committed to providing you with<br/>exceptional service and ensuring that your purchase of your ring is a truly special and sentimental experience. We understand that these pieces aren't just jewellery; they are symbols of love, commitment, and cherished moments.</p><p>That's why we stand by our products and offer a 2-year guarantee to give you peace of mind.</p><p>For full warranty terms <a href=\"https://thepromiseringco.com/pages/2-year-warranty\" target=\"_blank\" title=\"https://thepromiseringco.com/pages/2-year-warranty\">click here</a></p>"
+            "answer": "<p>If you need personalised support on picking the perfect ring, email our team at <strong>info@thepromiseco.com</strong> and we will do our best to support.</p>"
           }
         },
         "question_gyga4F": {
@@ -222,21 +305,12 @@
             "question": "I've damaged my special ring, what can I do?",
             "answer": "<p>We understand accidents happen and we know how precious all our pieces are to each customer.</p><p>Email us a picture of the damage to <strong>info@thepromiseco.com </strong>and we will do our best to support you with solutions</p>"
           }
-        },
-        "question_BWTWVH": {
-          "type": "question",
-          "settings": {
-            "question": "I need an urgent gift but your delivery doesn't work for me...",
-            "answer": "<p>Looking for the perfect gift for your last minute woes, shop our <a href=\"https://thepromiseringco.com/products/the-promise-ring-co-e-gift-card\" target=\"_blank\" title=\"The Promise Ring Co. E-Gift Card\">E-gift cards </a>for the perfect fit, everytime.</p>"
-          }
         }
       },
       "block_order": [
         "question_pyUfij",
         "question_pTJXBJ",
-        "question_D7Tbyq",
-        "question_gyga4F",
-        "question_BWTWVH"
+        "question_gyga4F"
       ],
       "settings": {
         "color_scheme": "",
@@ -290,6 +364,7 @@
   "order": [
     "rich_text_cKVycM",
     "faq",
+    "faq_EjjLir",
     "faq_CzJ7Hz",
     "faq_agTXqH",
     "faq_8efLwW"

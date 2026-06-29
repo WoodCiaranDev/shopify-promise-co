@@ -22,7 +22,7 @@
           "type": "heading",
           "settings": {
             "text": "",
-            "heading_tag": "h2"
+            "heading_tag": "h1"
           }
         },
         "richtext_MnfcG9": {
@@ -48,118 +48,6 @@
         "use_ogg_font": false,
         "use_compact_spacing": false,
         "section_id": ""
-      }
-    },
-    "slideshow_XegWKq": {
-      "type": "slideshow",
-      "blocks": {
-        "image_Pq7qfD": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/ETHEREAL_SUMMER_2.png",
-            "mobile_image": "shopify://shop_images/Banner_UK_8.png",
-            "subheading": "ETHEREAL SUMMER",
-            "title": "out now.",
-            "mobile_text_position": "place-self-center-end text-end",
-            "desktop_text_position": "sm:place-self-start-center sm:text-center",
-            "content_max_width": 780,
-            "button_1_text": "",
-            "button_1_link": "",
-            "button_1_style": "solid",
-            "button_1_background": "#ffffff",
-            "button_1_text_color": "#000000",
-            "button_2_text": "",
-            "button_2_link": "",
-            "button_2_style": "outline",
-            "button_2_background": "#ffffff",
-            "button_2_text_color": "#000000",
-            "background": "",
-            "background_opacity": 0,
-            "text_color": "#313030",
-            "border_color": "",
-            "gradient_overlay": ""
-          }
-        }
-      },
-      "block_order": [
-        "image_Pq7qfD"
-      ],
-      "disabled": true,
-      "name": "t:sections.slideshow.presets.slideshow.name",
-      "settings": {
-        "allow_transparent_header": true,
-        "show_next_section_button": true,
-        "media_size": "auto",
-        "show_initial_transition": false,
-        "autoplay": true,
-        "autoplay_pause_on_video": true,
-        "cycle_speed": 5,
-        "background": "#000000",
-        "controls_color": "#ffffff"
-      }
-    },
-    "rich_text_CyEmiF": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_EVCa8B": {
-          "type": "heading",
-          "settings": {
-            "text": "coming May 29th 2026...",
-            "heading_tag": "h2"
-          }
-        },
-        "richtext_iMbrKE": {
-          "type": "richtext",
-          "settings": {
-            "content": "<p>Ethereal summer isn’t loud. It’s the kind you feel more than you see.</p><p>It’s soft light on your skin, golden evenings that stretch a little longer than they should, the quiet pause between moments you wish you could hold onto. It’s warmth without weight. Effortless, glowing, undone.</p><p>A moment. A feeling. A warmth. <strong>A promise.</strong></p><p>Ethereal summer captures the essence of stillness in motion – the in-between where everything feels light, certain, and just beginning.</p>"
-          }
-        },
-        "heading_cYg7bq": {
-          "type": "heading",
-          "settings": {
-            "text": "be the first to hear...",
-            "heading_tag": "h4"
-          }
-        }
-      },
-      "block_order": [
-        "heading_EVCa8B",
-        "richtext_iMbrKE",
-        "heading_cYg7bq"
-      ],
-      "disabled": true,
-      "name": "t:sections.rich_text.presets.rich_text.name",
-      "settings": {
-        "color_scheme": "",
-        "separate_section_with_border": true,
-        "content_width": "sm",
-        "text_position": "center",
-        "remove_vertical_spacing": false,
-        "use_baka_too_font": false,
-        "use_ogg_font": true,
-        "use_compact_spacing": false,
-        "section_id": ""
-      }
-    },
-    "1777623198581f270d": {
-      "type": "apps",
-      "blocks": {
-        "klaviyo_email_marketing_sms_form_embed_block_ccpVFT": {
-          "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
-          "settings": {
-            "formId": "<div class=\"klaviyo-form-SyyWPk\"></div>"
-          }
-        }
-      },
-      "block_order": [
-        "klaviyo_email_marketing_sms_form_embed_block_ccpVFT"
-      ],
-      "disabled": true,
-      "settings": {
-        "color_scheme": "",
-        "separate_section_with_border": false,
-        "remove_vertical_spacing": false,
-        "remove_horizontal_spacing": false
       }
     },
     "collection-banner": {
@@ -253,14 +141,14 @@
         "heading_xtCAXi": {
           "type": "heading",
           "settings": {
-            "text": "Marquise Promise Rings",
-            "heading_tag": "h2"
+            "text": "Teen Promise Rings",
+            "heading_tag": "h1"
           }
         },
         "richtext_WKEAXi": {
           "type": "richtext",
           "settings": {
-            "content": "<p>A marquise promise ring is a striking and elegant symbol of love and commitment. Known for its elongated shape and pointed ends, the marquise cut creates a distinctive look that feels both timeless and modern. Its unique silhouette also gives the illusion of a larger stone, making it a popular choice for those who want a ring that stands out while remaining refined.<br/><br/>Our marquise promise rings are designed to celebrate meaningful moments and lasting promises. From delicate solitaire styles to halo settings and stackable bands, each ring balances romantic symbolism with contemporary design. Whether you are choosing a marquise cut promise ring as a thoughtful gift or as a personal symbol of commitment, the shape offers something beautifully different from traditional round or oval designs.</p>"
+            "content": "<p>Promise rings for teenagers should feel meaningful, personal and easy to wear. They can represent a first relationship, a close friendship, a special milestone or even a promise made to yourself. Unlike engagement rings, they do not need to feel formal or grown-up. They are about the meaning behind the moment.At The Promise Co, every ring is designed around the idea that a promise can take many forms. It might be a promise of loyalty, love, friendship, self-belief or connection. That makes our teen promise rings a thoughtful choice for anyone looking for jewellery that feels symbolic without feeling too serious.</p>"
           }
         }
       },
@@ -268,13 +156,12 @@
         "heading_xtCAXi",
         "richtext_WKEAXi"
       ],
-      "disabled": true,
       "name": "t:sections.image_with_text.presets.image_with_text.name",
       "settings": {
         "color_scheme": "",
         "separate_section_with_border": true,
-        "image": "shopify://shop_images/1_0a709f55-7a58-4d3e-b19b-c501c73c3ded.png",
-        "mobile_image": "shopify://shop_images/1_0a709f55-7a58-4d3e-b19b-c501c73c3ded.png",
+        "image": "shopify://shop_images/2_d8674861-8ceb-4706-b0d9-8aa6a6f04949.png",
+        "mobile_image": "shopify://shop_images/2_d8674861-8ceb-4706-b0d9-8aa6a6f04949.png",
         "reveal_on_scroll": true,
         "image_position": "start",
         "content_width": "sm",
@@ -287,14 +174,14 @@
         "heading_CqCpaN": {
           "type": "heading",
           "settings": {
-            "text": "Why choose a marquise promise ring?",
-            "heading_tag": "h2"
+            "text": "Choosing a promise ring for a teenager",
+            "heading_tag": "h1"
           }
         },
         "richtext_jGCLJY": {
           "type": "richtext",
           "settings": {
-            "content": "<p>The marquise cut has long been admired for its elegant proportions and eye-catching shape. Its elongated design not only enhances the brilliance of the stone but also creates a flattering, slender appearance on the finger.<br/></p><ul><li>A distinctive elongated shape that stands out from classic cuts</li><li>Appears larger than many other stone shapes of the same size</li><li>Elegant, refined style with a romantic heritage</li><li>Perfect for those who want a unique promise ring design</li></ul>"
+            "content": "<p>The best promise rings for teenagers are the ones that feel natural to wear. They should reflect the person’s style, but also carry a meaning that feels genuine.<br/><br/>Some teenagers prefer simple, understated designs that can be worn every day. Others may want something more romantic, such as a <a href=\"https://thepromiseco.com/collections/heart-shape-promise-rings\" title=\"https://thepromiseco.com/collections/heart-shape-promise-rings\">heart promise ring</a>, or something more personal, such as a <a href=\"https://thepromiseco.com/collections/pinky-promise-rings\" title=\"https://thepromiseco.com/collections/pinky-promise-rings\">pinky promise ring </a>or <a href=\"https://thepromiseco.com/collections/friendship-rings\" title=\"https://thepromiseco.com/collections/friendship-rings\">friendship ring</a>.</p>"
           }
         }
       },
@@ -302,140 +189,112 @@
         "heading_CqCpaN",
         "richtext_jGCLJY"
       ],
-      "disabled": true,
       "name": "t:sections.image_with_text.presets.image_with_text.name",
       "settings": {
         "color_scheme": "",
         "separate_section_with_border": true,
-        "image": "shopify://shop_images/2_e34aa82e-6cd1-45ed-85d6-e589565b91a1.png",
-        "mobile_image": "shopify://shop_images/2_e34aa82e-6cd1-45ed-85d6-e589565b91a1.png",
+        "image": "shopify://shop_images/1_7dcebc73-a6e6-48d6-af4d-893123cf9578.png",
+        "mobile_image": "shopify://shop_images/1_7dcebc73-a6e6-48d6-af4d-893123cf9578.png",
         "reveal_on_scroll": true,
         "image_position": "end",
         "content_width": "sm",
         "remove_vertical_spacing": true
       }
     },
-    "image_with_text_icwCFY": {
-      "type": "image-with-text",
+    "faq_mNKFmN": {
+      "type": "faq",
       "blocks": {
-        "subheading_HNWYxU": {
-          "type": "subheading",
+        "question_Nq4maG": {
+          "type": "question",
           "settings": {
-            "text": "promise rings"
+            "question": "What are promise rings for teenagers?",
+            "answer": "<p>Promise rings for teenagers are rings given or worn to represent a meaningful promise. They can symbolise friendship, young love, loyalty, personal growth or an important milestone.</p>"
           }
         },
-        "heading_MpEBMP": {
-          "type": "heading",
+        "question_Q4gTjD": {
+          "type": "question",
           "settings": {
-            "text": "Radiant Cut Promise Rings",
-            "heading_tag": "h2"
+            "question": "Are promise rings for teenagers the same as engagement rings?",
+            "answer": "<p>No. Promise rings are different from engagement rings. A promise ring is usually more personal and flexible, while an engagement ring represents a formal intention to marry. </p><p>For teenagers, promise rings should feel meaningful without creating pressure.</p>"
           }
         },
-        "richtext_kR7Wtd": {
-          "type": "richtext",
+        "question_kMjeN7": {
+          "type": "question",
           "settings": {
-            "content": "<p>Radiant cut promise rings offer a bold and modern expression of love and commitment. Known for their clean lines and exceptional sparkle, the radiant cut combines the structure of a rectangular or square shape with the brilliance of a round stone, creating a design that feels both refined and eye-catching.</p><p>At The Promise Co,  our radiant cut promise rings are designed to capture that balance between strength and brilliance. </p><p>The defined shape gives the ring a confident, contemporary feel, while the light-reflecting facets create a sparkle that feels full of energy and life.</p>"
+            "question": "What does a teen promise ring mean?",
+            "answer": "<p>A teen promise ring can mean different things depending on the person wearing it. It might represent commitment in a relationship, a close friendship, a personal goal or a reminder of someone important.</p>"
+          }
+        },
+        "question_gyPxNV": {
+          "type": "question",
+          "settings": {
+            "question": "Are promise rings suitable for teenage couples?",
+            "answer": "<p>Yes, promise rings can be suitable for teenage couples when the meaning is thoughtful and age appropriate. They can represent loyalty, care and connection without needing to feel like an engagement ring.</p>"
+          }
+        },
+        "question_McdyAh": {
+          "type": "question",
+          "settings": {
+            "question": "Can promise rings be given between friends?",
+            "answer": "<p>Yes. Friendship promise rings are a meaningful choice for best friends who want to celebrate their bond.</p><p> They can be matching, complementary or chosen in styles that reflect each person’s personality.</p>"
+          }
+        },
+        "question_yEKUGB": {
+          "type": "question",
+          "settings": {
+            "question": "What style of promise ring is best for a teenager?",
+            "answer": "<p>Simple bands, heart rings, stackable styles and delicate stone designs are all popular choices. The <a href=\"https://thepromiseco.com/collections/promise-rings\" title=\"https://thepromiseco.com/collections/promise-rings\">best promise ring </a>is one that suits the wearer’s everyday style and feels connected to the meaning behind the gift.</p>"
+          }
+        },
+        "question_fdLaT6": {
+          "type": "question",
+          "settings": {
+            "question": "Should I choose gold or silver for a teen promise ring?",
+            "answer": "<p><a href=\"https://thepromiseco.com/collections/gold-promise-rings\" title=\"https://thepromiseco.com/collections/gold-promise-rings\">Gold promise rings </a>have a warm, classic look, while silver promise rings feel bright, modern and easy to style. The right choice depends on the jewellery they already wear and the finish they prefer.</p>"
+          }
+        },
+        "question_pBpdFV": {
+          "type": "question",
+          "settings": {
+            "question": "Can a teenager wear a promise ring every day?",
+            "answer": "<p>Yes, many promise rings are designed for everyday wear. It is still important to care for the ring properly by avoiding harsh chemicals, perfumes, lotions and unnecessary exposure to water.</p>"
+          }
+        },
+        "question_m4kHjd": {
+          "type": "question",
+          "settings": {
+            "question": "Which finger should a teenager wear a promise ring on?",
+            "answer": "<p>There is no strict rule. Some wear a promise ring on the ring finger, while others choose the middle finger, index finger or little finger depending on comfort and personal style.</p>"
+          }
+        },
+        "question_XqNXQe": {
+          "type": "question",
+          "settings": {
+            "question": "Is a promise ring a good gift for a teenager?",
+            "answer": "<p>Yes, if the meaning is clear and thoughtful. A promise ring can be a beautiful gift for a birthday, milestone, friendship, first relationship or personal reminder, especially when it is chosen with care.</p>"
           }
         }
       },
       "block_order": [
-        "subheading_HNWYxU",
-        "heading_MpEBMP",
-        "richtext_kR7Wtd"
+        "question_Nq4maG",
+        "question_Q4gTjD",
+        "question_kMjeN7",
+        "question_gyPxNV",
+        "question_McdyAh",
+        "question_yEKUGB",
+        "question_fdLaT6",
+        "question_pBpdFV",
+        "question_m4kHjd",
+        "question_XqNXQe"
       ],
-      "disabled": true,
-      "name": "t:sections.image_with_text.presets.image_with_text.name",
-      "settings": {
-        "color_scheme": "",
-        "separate_section_with_border": true,
-        "image": "shopify://shop_images/5_e3b73fa7-df65-4343-a5b2-662853bc248a.png",
-        "reveal_on_scroll": true,
-        "image_position": "start",
-        "content_width": "sm",
-        "remove_vertical_spacing": true
-      }
-    },
-    "image_with_text_f86mfU": {
-      "type": "image-with-text",
-      "blocks": {
-        "subheading_BjxLaW": {
-          "type": "subheading",
-          "settings": {
-            "text": "Radiant cuts"
-          }
-        },
-        "heading_pHCnWC": {
-          "type": "heading",
-          "settings": {
-            "text": "What makes a Radiant Cut Promise Ring unique?",
-            "heading_tag": "h2"
-          }
-        },
-        "richtext_AtYwyq": {
-          "type": "richtext",
-          "settings": {
-            "content": "<p>The radiant cut is known for combining two distinct qualities, structure and brilliance. Originally developed to merge the elegance of step-cut stones with the sparkle of brilliant cuts, it features a high number of facets that maximise light reflection.<br/><br/>This gives radiant promise rings a distinctive look that feels more vibrant than traditional rectangular styles, while still maintaining a clean and modern silhouette.</p><p></p>"
-          }
-        }
-      },
-      "block_order": [
-        "subheading_BjxLaW",
-        "heading_pHCnWC",
-        "richtext_AtYwyq"
-      ],
-      "disabled": true,
-      "name": "t:sections.image_with_text.presets.image_with_text.name",
-      "settings": {
-        "color_scheme": "",
-        "separate_section_with_border": true,
-        "image": "shopify://shop_images/6_68715419-bd2d-4e54-8e57-683576c878e3.png",
-        "mobile_image": "shopify://shop_images/6_68715419-bd2d-4e54-8e57-683576c878e3.png",
-        "reveal_on_scroll": true,
-        "image_position": "end",
-        "content_width": "sm",
-        "remove_vertical_spacing": true
-      }
-    },
-    "rich_text_kXkrX6": {
-      "type": "rich-text",
-      "blocks": {
-        "subheading_8QLwH7": {
-          "type": "subheading",
-          "settings": {
-            "text": ""
-          }
-        },
-        "heading_PQzCam": {
-          "type": "heading",
-          "settings": {
-            "text": "<strong>A bold, modern take on a promise ring</strong>",
-            "heading_tag": "h2"
-          }
-        },
-        "richtext_mBNGRx": {
-          "type": "richtext",
-          "settings": {
-            "content": "<p>Radiant cut promise rings are often chosen by those who want a ring that feels different from traditional styles. Their clean lines give them a contemporary edge, while their brilliance ensures they never feel understated.<br/><br/>Because the radiant cut can be either square or rectangular, it offers flexibility in style, allowing you to choose a look that feels more structured or more elongated depending on your preference.<br/><br/>This versatility, combined with its striking appearance, makes the radiant cut one of the most unique options within promise rings.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "subheading_8QLwH7",
-        "heading_PQzCam",
-        "richtext_mBNGRx"
-      ],
-      "disabled": true,
-      "name": "t:sections.rich_text.presets.rich_text.name",
+      "name": "t:sections.faq.presets.faq.name",
       "settings": {
         "color_scheme": "scheme-3",
         "separate_section_with_border": true,
-        "content_width": "sm",
-        "text_position": "center",
-        "remove_vertical_spacing": false,
-        "use_baka_too_font": false,
-        "use_ogg_font": false,
-        "use_compact_spacing": false,
-        "section_id": ""
+        "show_categories": false,
+        "subheading": "",
+        "title": "Frequently Asked Questions",
+        "content": ""
       }
     },
     "rich_text_yX46cT": {
@@ -445,7 +304,7 @@
           "type": "heading",
           "settings": {
             "text": "You might also like...",
-            "heading_tag": "h2"
+            "heading_tag": "h1"
           }
         }
       },
@@ -463,63 +322,6 @@
         "use_ogg_font": false,
         "use_compact_spacing": true,
         "section_id": ""
-      }
-    },
-    "category_cards_WPTxam": {
-      "type": "category-cards",
-      "blocks": {
-        "category_image_aNyT3x": {
-          "type": "category_image",
-          "settings": {
-            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T093421.486.png",
-            "title": "Best Sellers",
-            "description": "<p>discover</p>",
-            "link": "shopify://collections/best-sellers"
-          }
-        },
-        "category_image_mFNWqT": {
-          "type": "category_image",
-          "settings": {
-            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T093409.150.png",
-            "title": "Shop for Her",
-            "description": "<p>Promise Rings</p>",
-            "link": "shopify://collections/for-her"
-          }
-        },
-        "category_image_NC9mDt": {
-          "type": "category_image",
-          "settings": {
-            "image": "shopify://shop_images/Untitled_design_-_2026-04-02T155423.026.png",
-            "title": "Mens Rings",
-            "description": "<p>Shop</p>",
-            "link": "shopify://collections/mens-promise-rings"
-          }
-        },
-        "category_image_dP4Dyz": {
-          "type": "category_image",
-          "settings": {
-            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T152137.870.png",
-            "title": "Couples Rings",
-            "description": "<p>Matching</p>",
-            "link": "shopify://collections/couples-promise-rings"
-          }
-        }
-      },
-      "block_order": [
-        "category_image_aNyT3x",
-        "category_image_mFNWqT",
-        "category_image_NC9mDt",
-        "category_image_dP4Dyz"
-      ],
-      "settings": {
-        "title": "",
-        "subtitle": "",
-        "background_color": "#ffffff",
-        "title_color": "#000000",
-        "subtitle_color": "#666666",
-        "section_padding_top": 64,
-        "section_padding_bottom": 64,
-        "mobile_single_column": false
       }
     },
     "category_cards_4zj4kH": {
@@ -568,7 +370,6 @@
         "category_image_LK4XYz",
         "category_image_CgrtxT"
       ],
-      "disabled": true,
       "settings": {
         "title": "",
         "subtitle": "",
@@ -578,6 +379,129 @@
         "section_padding_top": 0,
         "section_padding_bottom": 64,
         "mobile_single_column": false
+      }
+    },
+    "image_with_text_icwCFY": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_HNWYxU": {
+          "type": "subheading",
+          "settings": {
+            "text": "promise rings"
+          }
+        },
+        "heading_MpEBMP": {
+          "type": "heading",
+          "settings": {
+            "text": "Radiant Cut Promise Rings",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_kR7Wtd": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Radiant cut promise rings offer a bold and modern expression of love and commitment. Known for their clean lines and exceptional sparkle, the radiant cut combines the structure of a rectangular or square shape with the brilliance of a round stone, creating a design that feels both refined and eye-catching.</p><p>At The Promise Co,  our radiant cut promise rings are designed to capture that balance between strength and brilliance. </p><p>The defined shape gives the ring a confident, contemporary feel, while the light-reflecting facets create a sparkle that feels full of energy and life.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_HNWYxU",
+        "heading_MpEBMP",
+        "richtext_kR7Wtd"
+      ],
+      "disabled": true,
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/5_e3b73fa7-df65-4343-a5b2-662853bc248a.png",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "image_with_text_f86mfU": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_BjxLaW": {
+          "type": "subheading",
+          "settings": {
+            "text": "Radiant cuts"
+          }
+        },
+        "heading_pHCnWC": {
+          "type": "heading",
+          "settings": {
+            "text": "What makes a Radiant Cut Promise Ring unique?",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_AtYwyq": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>The radiant cut is known for combining two distinct qualities, structure and brilliance. Originally developed to merge the elegance of step-cut stones with the sparkle of brilliant cuts, it features a high number of facets that maximise light reflection.<br/><br/>This gives radiant promise rings a distinctive look that feels more vibrant than traditional rectangular styles, while still maintaining a clean and modern silhouette.</p><p></p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_BjxLaW",
+        "heading_pHCnWC",
+        "richtext_AtYwyq"
+      ],
+      "disabled": true,
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/6_68715419-bd2d-4e54-8e57-683576c878e3.png",
+        "mobile_image": "shopify://shop_images/6_68715419-bd2d-4e54-8e57-683576c878e3.png",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "rich_text_kXkrX6": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_8QLwH7": {
+          "type": "subheading",
+          "settings": {
+            "text": ""
+          }
+        },
+        "heading_PQzCam": {
+          "type": "heading",
+          "settings": {
+            "text": "<strong>A bold, modern take on a promise ring</strong>",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_mBNGRx": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Radiant cut promise rings are often chosen by those who want a ring that feels different from traditional styles. Their clean lines give them a contemporary edge, while their brilliance ensures they never feel understated.<br/><br/>Because the radiant cut can be either square or rectangular, it offers flexibility in style, allowing you to choose a look that feels more structured or more elongated depending on your preference.<br/><br/>This versatility, combined with its striking appearance, makes the radiant cut one of the most unique options within promise rings.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_8QLwH7",
+        "heading_PQzCam",
+        "richtext_mBNGRx"
+      ],
+      "disabled": true,
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
       }
     },
     "multi_column_6rLKqy": {
@@ -637,20 +561,17 @@
   },
   "order": [
     "rich_text_wMNiPf",
-    "slideshow_XegWKq",
-    "rich_text_CyEmiF",
-    "1777623198581f270d",
     "collection-banner",
     "before_after_kXfYHy",
     "main",
     "image_with_text_BwRHNc",
     "image_with_text_q8a34T",
+    "faq_mNKFmN",
+    "rich_text_yX46cT",
+    "category_cards_4zj4kH",
     "image_with_text_icwCFY",
     "image_with_text_f86mfU",
     "rich_text_kXkrX6",
-    "rich_text_yX46cT",
-    "category_cards_WPTxam",
-    "category_cards_4zj4kH",
     "multi_column_6rLKqy"
   ]
 }

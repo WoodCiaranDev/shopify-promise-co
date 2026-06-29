@@ -12,7 +12,7 @@
     "main": {
       "type": "main-page",
       "settings": {
-        "color_scheme": "scheme-2ca1c54f-75f1-4890-b6c9-acb7092f2a37",
+        "color_scheme": "scheme-3",
         "show_title": true,
         "page_width": "xs"
       }
@@ -58,7 +58,7 @@
         "richtext_M38mpm": {
           "type": "richtext",
           "settings": {
-            "content": "<p>At The Promise Ring Co. we are committed to providing you with exceptional service and ensuring that your purchase of your ring is a truly special and sentimental experience. We understand that these pieces aren't just jewellery; they are symbols of love, commitment, and cherished moments. </p><p>That's why we stand by our products and offer a 5-year guarantee to give you peace of mind*</p>"
+            "content": "<p>At The Promise Ring Co. we are committed to providing you with exceptional service and ensuring that your purchase of your ring is a truly special and sentimental experience. We understand that these pieces aren't just jewellery; they are symbols of love, commitment, and cherished moments. </p><p>That's why we stand by our products and offer a 5-year warranty to give you peace of mind*</p>"
           }
         }
       },

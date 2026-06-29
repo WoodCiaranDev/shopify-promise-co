@@ -21,14 +21,24 @@ Supported variables
   {%- endif -%}
   {%- if link.levels > 0 -%}
     <ul class="mega-menu__linklist unstyled-list">
+      {%- comment -%}
+        Second-level items with children render as their own column (heading + sub-links).
+        Childless items are grouped into a single shared column so they don't render as empty columns.
+      {%- endcomment -%}
+      {%- assign standalone_links = '' -%}
       {%- for sub_link in link.links -%}
-        <li class="v-stack justify-items-start gap-5">
-          <a href="{{ sub_link.url }}" class="h6 mega-menu__link--with-icon">
-            {%- render 'diamond-shape-icon', shape: sub_link.title -%}
-            <span>{{ sub_link.title }}</span>
-          </a>
+        {%- if sub_link.links.size > 0 -%}
+          {%- comment -%}Flush any buffered standalone links into one column before this heading column{%- endcomment -%}
+          {%- if standalone_links != blank -%}
+            <li class="v-stack justify-items-start gap-5">{{ standalone_links }}</li>
+            {%- assign standalone_links = '' -%}
+          {%- endif -%}
+          <li class="v-stack justify-items-start gap-5">
+            <a href="{{ sub_link.url }}" class="h6 mega-menu__link--with-icon">
+              {%- render 'diamond-shape-icon', shape: sub_link.title -%}
+              <span>{{ sub_link.title }}</span>
+            </a>
 
-          {%- if sub_link.links.size > 0 -%}
             <ul class="v-stack gap-2.5 unstyled-list">
               {%- for sub_sub_link in sub_link.links -%}
                 <li>
@@ -39,9 +49,21 @@ Supported variables
                 </li>
               {%- endfor -%}
             </ul>
-          {%- endif -%}
-        </li>
+          </li>
+        {%- else -%}
+          {%- capture standalone_links -%}
+            {{ standalone_links }}
+            <a href="{{ sub_link.url }}" class="h6 mega-menu__link--with-icon">
+              {%- render 'diamond-shape-icon', shape: sub_link.title -%}
+              <span>{{ sub_link.title }}</span>
+            </a>
+          {%- endcapture -%}
+        {%- endif -%}
       {%- endfor -%}
+      {%- comment -%}Flush any trailing standalone links{%- endcomment -%}
+      {%- if standalone_links != blank -%}
+        <li class="v-stack justify-items-start gap-5">{{ standalone_links }}</li>
+      {%- endif -%}
     </ul>
   {%- endif -%}
 
