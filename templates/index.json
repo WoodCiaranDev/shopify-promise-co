@@ -15,16 +15,16 @@
         "image_wpXLKm": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Untitled_design_-_2026-04-13T155352.999.png",
-            "mobile_image": "shopify://shop_images/Banner_UK_2.png",
-            "subheading": "our most loved promises",
-            "title": "When words aren't enough",
+            "image": "shopify://shop_images/bannerdesk1.heic",
+            "mobile_image": "shopify://shop_images/Banner_UK_d431ad4f-ad5c-4164-b53c-a29ef36ab803.png",
+            "subheading": "<strong>when words aren't enough</strong>",
+            "title": "<strong>Make A Promise</strong>",
             "mobile_text_position": "place-self-end-center text-center",
             "desktop_text_position": "sm:place-self-center-end sm:text-end",
             "content_max_width": 560,
             "button_1_text": "Shop All",
             "button_1_link": "shopify://collections/shop-all",
-            "button_1_style": "solid",
+            "button_1_style": "link",
             "button_1_background": "#f7f5f0",
             "button_1_text_color": "#313030",
             "button_2_text": "",
@@ -42,7 +42,7 @@
         "image_G3TLPH": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/ETHEREAL_SUMMER_2.png",
+            "image": "shopify://shop_images/banners-2.png",
             "mobile_image": "shopify://shop_images/Banner_UK_8.png",
             "subheading": "new in",
             "title": "ethereal summer",
@@ -69,15 +69,15 @@
         "image_jcrmjC": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Untitled_design_-_2026-04-13T152722.239.png",
-            "mobile_image": "shopify://shop_images/Banner_UK_5.png",
+            "image": "shopify://shop_images/bannerdesk2.heic",
+            "mobile_image": "shopify://shop_images/bannermobile2.heic",
             "subheading": "promises that shape you",
-            "title": "Mark <strong>Your</strong> Moment",
-            "mobile_text_position": "place-self-end-start text-start",
+            "title": "Mark <strong>your</strong> Moment",
+            "mobile_text_position": "place-self-start text-start",
             "desktop_text_position": "sm:place-self-center sm:text-center",
             "content_max_width": 800,
-            "button_1_text": "Shop all",
-            "button_1_link": "shopify://collections/shop-all",
+            "button_1_text": "For her",
+            "button_1_link": "shopify://collections/for-her",
             "button_1_style": "solid",
             "button_1_background": "#f2eee7",
             "button_1_text_color": "#000000",
@@ -88,7 +88,7 @@
             "button_2_text_color": "#000000",
             "background": "",
             "background_opacity": 50,
-            "text_color": "#313030",
+            "text_color": "#fcfcfc",
             "border_color": "",
             "gradient_overlay": ""
           }
@@ -97,12 +97,12 @@
           "type": "image",
           "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/6_a824f489-e6cd-4756-aad8-545832a0c286.png",
-            "mobile_image": "shopify://shop_images/8_65e2b098-bc4e-4959-9e1d-bc017c410374.png",
+            "image": "shopify://shop_images/banners-3.png",
+            "mobile_image": "shopify://shop_images/Banner_UK-2.png",
             "subheading": "Your promise, your way",
-            "title": "Create your signature stack.",
-            "mobile_text_position": "place-self-start-center text-center",
-            "desktop_text_position": "sm:place-self-start sm:text-start",
+            "title": "Custom Rings & Necklaces",
+            "mobile_text_position": "place-self-end-center text-center",
+            "desktop_text_position": "sm:place-self-end-center sm:text-center",
             "content_max_width": 780,
             "button_1_text": "Shop all",
             "button_1_link": "shopify://collections/shop-all",
@@ -262,7 +262,7 @@
         "text_bNYtp4": {
           "type": "text",
           "settings": {
-            "text": "Rated 4.97 / 5 ★★★★★"
+            "text": "Rated 4.9 / 5 ★★★★★"
           }
         },
         "text_fnBnPg": {
