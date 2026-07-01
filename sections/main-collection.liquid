@@ -17,6 +17,11 @@
     assign show_filters = false
   endif
 
+  # Custom Lab collection: never show the filter toolbar/button (curated grid, not faceted).
+  if template.suffix == 'co-lab'
+    assign show_filters = false
+  endif
+
   # First, we retrieve, based on the merchant settings, the user preferences and the available space the most appropriate size
   assign products_mobile_grid_mode = cart.attributes.products_mobile_grid_mode
 
@@ -256,7 +261,7 @@ LIQUID
                   -%}
                   {%- capture intro_card_html -%}
                     {%- if ic_image != blank -%}
-                      <div class="collection-intro-card collection-intro-card--image">
+                      <div class="collection-intro-card collection-intro-card--image" data-intro-card>
                         {{
                           ic_image
                           | image_url: width: 800
@@ -268,7 +273,7 @@ LIQUID
                         }}
                       </div>
                     {%- else -%}
-                    <div class="collection-intro-card{% if ic_white %} collection-intro-card--white{% endif %}">
+                    <div class="collection-intro-card{% if ic_white %} collection-intro-card--white{% endif %}" data-intro-card>
                       <div class="collection-intro-card__inner">
                         {%- if ic_logo != blank -%}
                           {{
@@ -306,6 +311,82 @@ LIQUID
                     {{ intro_card_html }}
                   {%- endif -%}
                 </product-list>
+
+                {%- if show_intro -%}
+                  <script>
+                    (function () {
+                      var section = document.getElementById('shopify-section-{{ section.id }}');
+                      if (!section) return;
+
+                      // Pin the intro card to the top-right of row 1 on desktop, and to the
+                      // 4th slot (row 2, right) on mobile — measured from the live column count,
+                      // because the product grid uses repeat(auto-fit, ...) not fixed columns.
+                      function targetPosition(cols) {
+                        if (cols >= 3) return cols;   // 4 cols -> 4th, 3 cols -> 3rd (row-1 right)
+                        if (cols === 2) return 4;     // mobile -> row-2 right
+                        return 2;                     // single column fallback
+                      }
+
+                      // Real grid cells only — skip zero-size sentinels/sizers the product-list
+                      // element injects (those broke earlier top-based measurements).
+                      function gridCells(list) {
+                        return Array.prototype.slice.call(list.children).filter(function (el) {
+                          return el.offsetWidth > 0 && el.offsetHeight > 0;
+                        });
+                      }
+
+                      // Columns = how many cells share the first row, detected by offsetLeft
+                      // increasing until it wraps. offsetLeft is the layout position, so it's
+                      // immune to the cards' reveal transforms and to vertical alignment.
+                      function columnCount(cells) {
+                        if (!cells.length) return 1;
+                        var firstLeft = cells[0].offsetLeft;
+                        var n = 1;
+                        for (var i = 1; i < cells.length; i++) {
+                          if (cells[i].offsetLeft <= firstLeft + 1) break; // wrapped to next row
+                          n++;
+                        }
+                        return n;
+                      }
+
+                      function place() {
+                        var list = section.querySelector('product-list');
+                        if (!list) return;
+                        var card = list.querySelector('[data-intro-card]');
+                        if (!card) return;
+                        var cells = gridCells(list);
+                        if (cells.length < 2) return;
+                        var cols = columnCount(cells);
+                        var products = cells.filter(function (el) { return el !== card; });
+                        if (!products.length) return;
+                        var pos = Math.min(targetPosition(cols), products.length + 1); // 1-based
+                        var ref = products[pos - 1] || null;
+                        if (card.nextElementSibling !== ref && card !== ref) list.insertBefore(card, ref);
+                      }
+
+                      function init() {
+                        place();
+                        var list = section.querySelector('product-list');
+                        // ResizeObserver fires once layout settles and on every breakpoint change,
+                        // which corrects the early/stale placement reliably.
+                        if (list && window.ResizeObserver) {
+                          new ResizeObserver(function () { place(); }).observe(list);
+                        }
+                      }
+
+                      if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', init);
+                      } else {
+                        init();
+                      }
+                      window.addEventListener('load', place);
+                      window.addEventListener('resize', place);
+                      document.addEventListener('shopify:section:load', function (e) {
+                        if (e.detail && e.detail.sectionId === '{{ section.id }}') place();
+                      });
+                    })();
+                  </script>
+                {%- endif -%}
 
                 {%- render 'pagination', paginate: paginate, facet: true -%}
               </div>
