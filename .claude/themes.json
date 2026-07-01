@@ -7,6 +7,10 @@
     "preview": {
       "detect": { "type": "name_contains", "value": "Ciaran SEO" },
       "branch": "seo-preview"
+    },
+    "colab": {
+      "detect": { "type": "name_contains", "value": "Co-Lab Preview" },
+      "branch": "feature/custom-lab-flow"
     }
   }
 }

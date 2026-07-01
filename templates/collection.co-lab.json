@@ -1,0 +1,141 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "lab_hero": {
+      "type": "lab-hero",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "content_width": "lg",
+        "content_alignment": "left",
+        "remove_vertical_spacing": true,
+        "separate_section_with_border": false,
+        "background_asset": "co-lab-collection-hero.png",
+        "scrim_opacity": 25,
+        "logo": "shopify://shop_images/the-promise-lab-logo-white.png",
+        "logo_asset": "co-lab-logo-white.png",
+        "logo_max_width": 200,
+        "use_collection_content": true,
+        "eyebrow": "",
+        "heading": "Customisable Rings, Engraving & Hidden Birthstones",
+        "heading_tag": "h1",
+        "body": "<p>Crafted to your story — choose your piece, your stones and your engraving.</p>",
+        "button_label": "",
+        "button_link": "#products",
+        "button_style": "outline",
+        "background_image": "shopify://shop_images/co-lab-collection-hero-desktop.jpg",
+        "background_image_mobile": "shopify://shop_images/co-lab-collection-hero-mobile.jpg"
+      }
+    },
+    "wearable_stories": {
+      "type": "co-lab-steps",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "icon": "shopify://shop_images/step-1-choose-piece.png",
+            "step_label": "Step 1",
+            "title": "Choose your piece"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "icon": "shopify://shop_images/Artboard_33_4x_a331b0fc-7364-4b91-8dfe-db9ecd4ec7cd.png",
+            "step_label": "Step 2",
+            "title": "Choose your metal and size"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "icon": "shopify://shop_images/step-3-customisations.png",
+            "step_label": "Step 3",
+            "title": "Choose your customisations"
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "icon": "shopify://shop_images/step-4-dispatch.png",
+            "step_label": "Production",
+            "title": "We build your perfect ring and dispatch in 2-3 weeks"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "content_width": "md",
+        "separate_section_with_border": false
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "show_intro_card": true,
+        "intro_card_image": "shopify://shop_images/intro-card-placeholder.png"
+      }
+    },
+    "lab_hero_birthstones": {
+      "type": "lab-hero",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "content_width": "md",
+        "remove_vertical_spacing": false,
+        "separate_section_with_border": false,
+        "no_bottom_spacing": true,
+        "background_color": "#FCFBFA",
+        "anchor_id": "birthstones",
+        "logo": "",
+        "logo_max_width": 200,
+        "eyebrow": "",
+        "heading": "Our Birth Stones",
+        "heading_tag": "h2",
+        "body": "<p>Please note: Delivery times are estimates and may occasionally be extended due to customs delays, courier disruptions, or UK bank holidays.</p>",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "outline"
+      }
+    },
+    "lab_birthstones": {
+      "type": "lab-birthstones",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "content_width": "lg",
+        "remove_vertical_spacing": false,
+        "separate_section_with_border": false,
+        "no_top_spacing": true,
+        "background_color": "#FCFBFA",
+        "columns_desktop": 6,
+        "columns_mobile": 3,
+        "icon_max_width": 30,
+        "button_label": "",
+        "button_link": "",
+        "button_style": "solid",
+        "button_background": "#FFFFFF",
+        "button_text_color": "#1c1c1c"
+      }
+    }
+  },
+  "order": [
+    "lab_hero",
+    "wearable_stories",
+    "main",
+    "lab_hero_birthstones",
+    "lab_birthstones"
+  ]
+}

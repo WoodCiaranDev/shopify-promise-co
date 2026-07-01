@@ -1,0 +1,892 @@
+/* Co-Lab products: don't pin the product-info column. The theme's safe-sticky
+   bails when the computed position isn't sticky, so the picker scrolls normally. */
+safe-sticky.product-info:has(c-co-lab-picker) {
+  position: static;
+}
+
+.c-co-lab-picker {
+  display: block;
+  --c-co-lab-card-bg: #fcfbfa;
+  --c-co-lab-inner-bg: #f2eee8;
+  --c-co-lab-pill-bg: #ffffff;
+  --c-co-lab-border: rgba(0, 0, 0, 0.08);
+  --c-co-lab-stone-size: 30px;
+}
+
+.c-co-lab-picker form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* CARDS */
+.c-co-lab-picker__card {
+  background: var(--c-co-lab-card-bg);
+  border-radius: 1.25rem;
+  padding: 1.5rem 1.75rem;
+}
+
+.c-co-lab-picker__card--metal {
+  background: var(--c-co-lab-inner-bg);
+}
+
+.c-co-lab-picker__card--custom {
+  background: var(--c-co-lab-inner-bg);
+}
+
+/* Step eyebrow above each card heading (Step 2 / Step 3) */
+.c-co-lab-picker__step {
+  margin: 0 0 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+.c-co-lab-picker__section-title {
+  margin: 0 0 1.5rem;
+  font-family: var(--heading-font-family, serif);
+  font-weight: 400;
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+}
+
+/* METAL & SIZE */
+.c-co-lab-picker__card--metal .variant-picker__option + .variant-picker__option {
+  margin-top: 1.5rem;
+}
+
+.c-co-lab-picker__card--metal .select {
+  width: 100%;
+  padding: 0.9rem 2.5rem 0.9rem 1.25rem;
+  background: var(--c-co-lab-pill-bg);
+  border: 1px solid var(--c-co-lab-border);
+  border-radius: 999px;
+  box-shadow: none;
+  font: inherit;
+}
+
+.c-co-lab-picker__card--metal .select ~ svg {
+  inset-inline-end: 1.25rem;
+}
+
+.c-co-lab-picker [data-size-locked] {
+  pointer-events: none;
+  padding-inline-end: 1.25rem;
+}
+
+.c-co-lab-picker__size-guide {
+  margin: 1rem 0 0;
+  text-align: center;
+  font-size: 0.8125rem;
+}
+
+.c-co-lab-picker__size-guide a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Inner card — contains the toggle, stone rows, and grid (and the engraving tray).
+   Lighter than the outer Customisation card so the nested tray contrasts. */
+.c-co-lab-picker__inner {
+  background: var(--c-co-lab-card-bg);
+  border-radius: 2rem;
+  padding: 0.5rem 1.25rem;
+}
+
+.c-co-lab-picker__inner--engraving {
+  margin-top: 1rem;
+}
+
+.c-co-lab-picker__inner:has([data-action="toggle-stones"][aria-expanded="true"]),
+.c-co-lab-picker__inner:has([data-action="toggle-engraving"][aria-expanded="true"]) {
+  padding-top: 0.5rem;
+  padding-bottom: 1.25rem;
+}
+
+/* "Choose Hidden Birthstones" toggle — transparent so it sits on inner bg */
+.c-co-lab-picker__stones-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5rem 0.25rem;
+  background: transparent;
+  border: none;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+
+.c-co-lab-picker__stones-toggle[aria-expanded="true"] .c-co-lab-picker__chev {
+  transform: rotate(180deg);
+}
+
+.c-co-lab-picker__chev {
+  display: inline-block;
+  transition: transform 0.2s ease;
+  font-size: 0.95em;
+  opacity: 0.85;
+}
+
+/* Stone rows */
+.c-co-lab-picker__stones {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.c-co-lab-picker__stone-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.c-co-lab-picker__stone-label {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.c-co-lab-picker__uplift {
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  opacity: 0.6;
+}
+
+.c-co-lab-picker__optional {
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  opacity: 0.55;
+}
+
+.c-co-lab-picker__stone-select {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.9rem 1.25rem;
+  background: var(--c-co-lab-pill-bg);
+  border: 1px solid var(--c-co-lab-border);
+  border-radius: 999px;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.c-co-lab-picker__stone-text {
+  flex: 1;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.c-co-lab-picker__stone-select[data-has-value="true"] .c-co-lab-picker__stone-text,
+.c-co-lab-picker__stone-row.is-filled .c-co-lab-picker__stone-text {
+  color: inherit;
+}
+
+.c-co-lab-picker__stone-swatch {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-color: #ddd;
+  flex-shrink: 0;
+  border: 1px solid var(--c-co-lab-border);
+}
+
+/* STONE GRID — white panel inside the inner cream card */
+.c-co-lab-picker__grid {
+  margin-top: 0.75rem;
+  padding: 0.5rem;
+  background: var(--c-co-lab-pill-bg);
+  border: 1px solid var(--c-co-lab-border);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.c-co-lab-picker__grid-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem 0.5rem;
+  justify-items: center;
+}
+
+.c-co-lab-picker__grid-list > li {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.c-co-lab-picker__cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 0.25rem 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  text-align: center;
+  border-radius: 0.5rem;
+  min-width: 0;
+}
+
+.c-co-lab-picker__cell-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--c-co-lab-stone-size) + 10px);
+  height: calc(var(--c-co-lab-stone-size) + 10px);
+  border-radius: 50%;
+  border: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+
+.c-co-lab-picker__cell--selected .c-co-lab-picker__cell-icon-wrap {
+  border-color: rgba(0, 0, 0, 0.45);
+}
+
+.c-co-lab-picker__cell-icon {
+  width: var(--c-co-lab-stone-size);
+  height: var(--c-co-lab-stone-size);
+  object-fit: contain;
+}
+
+.c-co-lab-picker__cell-name {
+  font-family: var(--heading-font-family, serif);
+  font-weight: 400;
+  margin: 0;
+  /* Fluid scale: floor at ~10px on mobile, scales at 0.8vw in the picker's range, caps at ~14.4px on ultrawide */
+  font-size: clamp(0.62rem, 0.8vw, 0.9rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.15;
+  hyphens: none;
+  word-break: normal;
+  overflow-wrap: normal;
+  max-width: 100%;
+  padding: 0.25rem 0.25rem 0;
+}
+
+.c-co-lab-picker__cell-month {
+  margin: 0;
+  font-size: 0.55rem;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  opacity: 1;
+  padding-top: 2px;
+  margin-top: auto;
+}
+
+.c-co-lab-picker__cell:hover .c-co-lab-picker__cell-icon-wrap {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.c-co-lab-picker__cell:focus-visible {
+  outline: none;
+}
+
+.c-co-lab-picker__cell:focus-visible .c-co-lab-picker__cell-icon-wrap {
+  border-color: currentColor;
+}
+
+/* ENGRAVING — lives inside its own collapsible tray (mirrors the birthstones tray) */
+.c-co-lab-picker__engraving {
+  margin-top: 1rem;
+}
+
+.c-co-lab-picker__engraving-label {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.c-co-lab-picker__engraving-note {
+  margin: 0.4rem 0 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  opacity: 0.6;
+  text-transform: none;
+}
+
+.c-co-lab-picker__engraving-wrap {
+  position: relative;
+  margin-top: 0.5rem;
+}
+
+.c-co-lab-picker__engraving-input {
+  display: block;
+  width: 100%;
+  padding: 0.9rem 2.75rem 0.9rem 1.25rem;
+  background: var(--c-co-lab-pill-bg);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 999px;
+  font: inherit;
+  color: inherit;
+}
+
+.c-co-lab-picker__engraving-input::placeholder {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.c-co-lab-picker__engraving-input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.c-co-lab-picker__engraving-arrow {
+  position: absolute;
+  right: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ============================================================
+   CO-LAB REVIEW CARD — shown inside the pre-add review modal
+   Reuses the picker tokens (cream backgrounds, pill controls).
+   ============================================================ */
+
+/* Blur the page behind the pre-add review modal (ring + necklace). */
+[data-colab-review-modal]::part(overlay) {
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+/* Larger header on the pre-add review modal (ring + necklace). */
+[data-colab-review-modal] [slot="header"] {
+  font-size: 1.3rem;
+}
+
+/* On mobile the review modal goes full screen with no dimmed/blurred backdrop;
+   the content itself still scrolls. */
+@media (max-width: 699px) {
+  [data-colab-review-modal]::part(overlay) {
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  [data-colab-review-modal]::part(content) {
+    width: 100%;
+    max-width: none;
+    height: 100dvh;
+    max-height: 100dvh;
+    border-radius: 0;
+  }
+}
+
+.c-co-lab-cart-bundle {
+  display: block;
+  background: #fcfbfa;
+  border-radius: 1.25rem;
+  padding: 2.5rem 2rem 1.75rem;
+  position: relative;
+}
+
+.c-co-lab-cart-bundle__header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+
+.c-co-lab-cart-bundle__eyebrow {
+  margin: 0 0 0.25rem;
+  font-family: var(--heading-font-family, serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  opacity: 0.9;
+}
+
+.c-co-lab-cart-bundle__title {
+  margin: 0 0 0.5rem;
+  font-family: var(--heading-font-family, serif);
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.15;
+}
+
+.c-co-lab-cart-bundle__base-price {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.c-co-lab-cart-bundle__group {
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.c-co-lab-cart-bundle__group-title {
+  margin: 0 0 0.5rem;
+  font-family: var(--heading-font-family, serif);
+  font-weight: 400;
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.c-co-lab-cart-bundle__row {
+  margin: 0 0 0.35rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.5rem 1rem;
+  align-items: center;
+  font-size: 0.875rem;
+}
+
+.c-co-lab-cart-bundle__row:last-child {
+  margin-bottom: 0;
+}
+
+.c-co-lab-cart-bundle__row-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.65;
+  font-weight: 500;
+}
+
+.c-co-lab-cart-bundle__row-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.c-co-lab-cart-bundle__row-swatch {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-color: #ddd;
+  flex-shrink: 0;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.c-co-lab-cart-bundle__row-uplift {
+  font-size: 0.8rem;
+  opacity: 0.55;
+}
+
+.c-co-lab-cart-bundle__total {
+  margin: 1.5rem 0 0;
+  padding-top: 0.5rem;
+  font-family: var(--heading-font-family, serif);
+  font-weight: 400;
+  font-size: 1.6rem;
+  text-align: right;
+}
+
+.c-co-lab-cart-bundle__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.c-co-lab-cart-bundle__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  border: none;
+  padding: 0.25rem 0;
+  font: inherit;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+.c-co-lab-cart-bundle__action--secondary {
+  opacity: 0.8;
+}
+
+.c-co-lab-cart-bundle__action--ghost {
+  margin-left: auto;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  opacity: 0.45;
+}
+
+.c-co-lab-cart-bundle__action--ghost:hover {
+  opacity: 1;
+}
+
+/* Primary action — used as the modal's confirm/add button (pill, matches checkout) */
+.c-co-lab-cart-bundle__action--primary {
+  padding: 0.85rem 1.5rem;
+  background: #2a2a2a;
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: opacity 0.2s ease;
+}
+
+.c-co-lab-cart-bundle__action--primary:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.c-co-lab-picker__engraving-count {
+  margin: 0.5rem 0 0;
+  text-align: right;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+
+/* REVIEW */
+.c-co-lab-picker__summary {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+.c-co-lab-picker__summary-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.5rem 1rem;
+  align-items: center;
+}
+
+.c-co-lab-picker__summary-label {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.c-co-lab-picker__summary-value {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.c-co-lab-picker__summary-uplift {
+  font-size: 0.8125rem;
+  opacity: 0.6;
+}
+
+.c-co-lab-picker__total {
+  margin: 0 0 1.25rem;
+  font-family: var(--heading-font-family, serif);
+  font-weight: 400;
+}
+
+.c-co-lab-picker__confirm {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--c-co-lab-border);
+  cursor: pointer;
+}
+
+.c-co-lab-picker__confirm-label {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.c-co-lab-picker__confirm input[type="checkbox"] {
+  order: 2;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.c-co-lab-picker__confirm-note {
+  margin: 0 0 1rem;
+  font-size: 0.75rem;
+  opacity: 0.6;
+  line-height: 1.55;
+}
+
+/* ERROR */
+.c-co-lab-picker__error {
+  margin: 0 0 0.75rem;
+  padding: 0.75rem 1rem;
+  background: #fdecec;
+  color: #8a1f1f;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+}
+
+.c-co-lab-picker__error[hidden] {
+  display: none;
+}
+
+/* BUY ROW */
+.c-co-lab-picker .delivery-countdown {
+  margin-top: 1.25rem;
+}
+
+.c-co-lab-picker__buy {
+  display: flex;
+  align-items: stretch;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.c-co-lab-picker__buy .quantity-selector {
+  flex-shrink: 0;
+}
+
+/* Sits next to the quantity selector (same row), filling the remaining width to
+   match a normal product's add-to-cart. Colours inherit the theme button (and any
+   buy_buttons block override), so it's identical to a standard PDP. */
+.c-co-lab-picker__atc {
+  flex: 1;
+}
+
+.c-co-lab-picker__atc:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.delivery-countdown--static .delivery-countdown__message {
+  font-size: 0.9rem;
+}
+
+.delivery-countdown--static .delivery-countdown__icon img {
+  width: 48px;
+  height: auto;
+}
+
+.delivery-countdown--static .delivery-countdown__cta {
+  display: inline-block;
+  margin-top: 0.25rem;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (max-width: 749px) {
+  .delivery-countdown--static {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+/* FEATURE LISTICLE */
+.co-lab-feature-list {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 1.25rem 1.5rem;
+  background: var(--c-co-lab-inner-bg);
+  border-radius: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.co-lab-feature-list__item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.co-lab-feature-list__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  flex-shrink: 0;
+}
+
+.co-lab-feature-list__icon-image {
+  width: 100%;
+  height: auto;
+}
+
+.co-lab-feature-list__label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .c-co-lab-picker__card {
+    padding: 1.25rem 1.25rem;
+    border-radius: 1rem;
+  }
+  .c-co-lab-picker__grid-list {
+    gap: 1.4rem 0.4rem;
+  }
+  .c-co-lab-picker {
+    --c-co-lab-stone-size: 28px;
+  }
+}
+
+.c-co-lab-picker__birthstone-help {
+  margin: 0.5rem 0 1.5rem;
+  font-size: 0.85rem;
+}
+
+.c-co-lab-picker__birthstone-help a {
+  text-decoration: underline;
+}
+
+.c-co-lab-birthstone-info__list {
+  columns: 2;
+  gap: 1.5rem;
+  margin: 0.5rem 0 0;
+}
+
+.c-co-lab-birthstone-info__image {
+  margin: 0 0 1.25rem;
+}
+
+.c-co-lab-birthstone-info__image-tag {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+}
+
+/* ------------------------------------------------------------------------- */
+/* NECKLACE PICKER — option-grid rows (Initial / Stone Shape / Birthstone).  */
+/* Reuses the stone grid component; adds letter cells + per-row spacing.      */
+/* ------------------------------------------------------------------------- */
+.c-co-lab-picker--necklace .c-co-lab-picker__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+.c-co-lab-picker__option-row {
+  gap: 0.5rem;
+}
+
+/* Selected-value preview that shows a letter instead of a stone image. */
+.c-co-lab-picker__option-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--c-co-lab-card-bg);
+  font-family: var(--heading-font-family, serif);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 1;
+  color: inherit;
+}
+
+/* A-Z grid: tighter columns than the 3-up stone grid. */
+.c-co-lab-picker__grid-list--letters {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.5rem 0.4rem;
+  justify-items: stretch;
+}
+.c-co-lab-picker__cell--letter {
+  padding: 0;
+  width: 100%;
+}
+.c-co-lab-picker__cell-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  border: 1px solid var(--c-co-lab-border);
+  font-family: var(--heading-font-family, serif);
+  font-size: 1rem;
+  line-height: 1;
+  text-transform: uppercase;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.c-co-lab-picker__cell--letter:hover .c-co-lab-picker__cell-letter {
+  border-color: rgba(0, 0, 0, 0.45);
+}
+.c-co-lab-picker__cell--letter.c-co-lab-picker__cell--selected .c-co-lab-picker__cell-letter {
+  border-color: currentColor;
+  background-color: var(--c-co-lab-pill-bg);
+}
+
+@media (max-width: 749px) {
+  .c-co-lab-picker__grid-list--letters {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* ------------------------------------------------------------------------- */
+/* HELP MODAL — shared by ring + necklace pickers. Image left, copy right.   */
+/* ------------------------------------------------------------------------- */
+.c-co-lab-help__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+.c-co-lab-help__image {
+  flex: 0 0 auto;
+  width: 100%;
+}
+.c-co-lab-help__image-tag {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+.c-co-lab-help__text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.c-co-lab-help__key-title {
+  margin-top: 1.25rem;
+  font-weight: 600;
+}
+
+@media (min-width: 700px) {
+  .c-co-lab-help__body {
+    flex-direction: row;
+  }
+  .c-co-lab-help__image {
+    width: 320px;
+  }
+}

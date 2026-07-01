@@ -1,43 +1,34 @@
-{%- if section.blocks.size > 0 or section.settings.button_label != blank -%}
+{%- assign stones = shop.metaobjects.birthstone.values | sort: 'position' -%}
+{%- if stones.size > 0 or section.settings.button_label != blank -%}
   <div class="lab-birthstones color-scheme color-scheme--{{ section.settings.color_scheme.id }} {% unless section.settings.remove_vertical_spacing %}section-spacing{% endunless %}{% if section.settings.no_top_spacing %} lab-birthstones--no-top{% endif %}{% if section.settings.separate_section_with_border %} bordered-section{% endif %}"
        style="--lab-birthstones-cols-desktop: {{ section.settings.columns_desktop }}; --lab-birthstones-cols-mobile: {{ section.settings.columns_mobile }}; --lab-birthstones-icon-max-width: {{ section.settings.icon_max_width }}px;{% if section.settings.background_color != blank and section.settings.background_color != 'rgba(0,0,0,0)' %} background-color: {{ section.settings.background_color }};{% endif %}">
     <div class="container container--{{ section.settings.content_width }}">
-      {%- if section.blocks.size > 0 -%}
+      {%- if stones.size > 0 -%}
         <ul class="lab-birthstones__grid">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'stone' -%}
-              <li class="lab-birthstones__item" {{ block.shopify_attributes }}>
-                {%- capture stone_inner -%}
-                  {%- if block.settings.image != blank -%}
-                    <div class="lab-birthstones__icon">
-                      {{-
-                        block.settings.image
-                        | image_url: width: block.settings.image.width
-                        | image_tag:
-                          widths: '60,90,120,180,240',
-                          sizes: 'min(100vw, var(--lab-birthstones-icon-max-width, 60px))',
-                          class: 'lab-birthstones__icon-image',
-                          loading: 'lazy'
-                      -}}
-                    </div>
-                  {%- endif -%}
+          {%- for stone in stones -%}
+            <li class="lab-birthstones__item">
+              {%- if stone.icon != blank -%}
+                <div class="lab-birthstones__icon">
+                  {{-
+                    stone.icon
+                    | image_url: width: 240
+                    | image_tag:
+                      widths: '60,90,120,180,240',
+                      sizes: 'min(100vw, var(--lab-birthstones-icon-max-width, 60px))',
+                      class: 'lab-birthstones__icon-image',
+                      loading: 'lazy'
+                  -}}
+                </div>
+              {%- endif -%}
 
-                  {%- if block.settings.name != blank -%}
-                    <p class="lab-birthstones__name h4">{{ block.settings.name }}</p>
-                  {%- endif -%}
+              {%- if stone.name != blank -%}
+                <p class="lab-birthstones__name h4">{{ stone.name }}</p>
+              {%- endif -%}
 
-                  {%- if block.settings.month != blank -%}
-                    <p class="lab-birthstones__month h6">{{ block.settings.month }}</p>
-                  {%- endif -%}
-                {%- endcapture -%}
-
-                {%- if block.settings.link != blank -%}
-                  <a class="lab-birthstones__link" href="{{ block.settings.link }}">{{ stone_inner }}</a>
-                {%- else -%}
-                  {{- stone_inner -}}
-                {%- endif -%}
-              </li>
-            {%- endif -%}
+              {%- if stone.month != blank -%}
+                <p class="lab-birthstones__month h6">{{ stone.month }}</p>
+              {%- endif -%}
+            </li>
           {%- endfor -%}
         </ul>
       {%- endif -%}
@@ -48,7 +39,10 @@
             render 'button',
             content: section.settings.button_label,
             href: section.settings.button_link,
-            style: section.settings.button_style
+            style: section.settings.button_style,
+            background: section.settings.button_background,
+            text_color: section.settings.button_text_color,
+            custom_class: 'colab-light-cta'
           %}
         </div>
       {%- endif -%}
@@ -126,6 +120,17 @@
 
   .lab-birthstones__cta {
     margin-top: 3rem;
+  }
+
+  .colab-light-cta {
+    border-color: rgba(0, 0, 0, 0.18) !important;
+  }
+
+  .colab-light-cta:hover {
+    color: #ffffff !important;
+    background-color: #1c1c1c !important;
+    background-image: none !important;
+    border-color: #1c1c1c !important;
   }
 {% endstylesheet %}
 
@@ -236,56 +241,21 @@
         { "value": "outline", "label": "t:global.text.button_style_options.outline" }
       ],
       "default": "outline"
-    }
-  ],
-  "blocks": [
+    },
     {
-      "type": "stone",
-      "name": "Stone",
-      "limit": 12,
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Stone icon"
-        },
-        {
-          "type": "text",
-          "id": "name",
-          "label": "Name",
-          "default": "Garnet"
-        },
-        {
-          "type": "text",
-          "id": "month",
-          "label": "Month",
-          "default": "January"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Link (optional)"
-        }
-      ]
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text colour"
     }
   ],
   "presets": [
     {
-      "name": "Lab birthstones",
-      "blocks": [
-        { "type": "stone", "settings": { "name": "Garnet", "month": "January" } },
-        { "type": "stone", "settings": { "name": "Amethyst", "month": "February" } },
-        { "type": "stone", "settings": { "name": "Aquamarine", "month": "March" } },
-        { "type": "stone", "settings": { "name": "Crystal", "month": "April" } },
-        { "type": "stone", "settings": { "name": "Emerald", "month": "May" } },
-        { "type": "stone", "settings": { "name": "Light Amethyst", "month": "June" } },
-        { "type": "stone", "settings": { "name": "Ruby", "month": "July" } },
-        { "type": "stone", "settings": { "name": "Peridot", "month": "August" } },
-        { "type": "stone", "settings": { "name": "Sapphire", "month": "September" } },
-        { "type": "stone", "settings": { "name": "Pink Diamond", "month": "October" } },
-        { "type": "stone", "settings": { "name": "Champagne", "month": "November" } },
-        { "type": "stone", "settings": { "name": "Tanzanite", "month": "December" } }
-      ]
+      "name": "Lab birthstones"
     }
   ]
 }

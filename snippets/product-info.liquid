@@ -18,6 +18,16 @@ Supported variables
 {%- endcomment -%}
 
 <safe-sticky class="product-info {% if center_basic_info %}product-info--center{% endif %}">
+  {%- liquid
+    assign is_co_lab = false
+    assign is_co_lab_necklace = false
+    if product.metafields.custom.product_type.value == 'co-lab' and context == 'main_product'
+      assign is_co_lab = true
+      if product.metafields.custom.colab_layout.value == 'necklace'
+        assign is_co_lab_necklace = true
+      endif
+    endif
+  -%}
   <div class="product-info__block-list">
     {%- liquid
       assign inside_block_group_context = false
@@ -218,15 +228,27 @@ Supported variables
 
           {%- when 'variant_picker' -%}
             {%- if product != blank -%}
-              {%- render 'variant-picker',
-                  product: product,
-                  form_id: product_form_id,
-                  context: context,
-                  hide_sold_out_variants: block.settings.hide_sold_out_variants,
-                  selector_style: block.settings.selector_style,
-                  swatch_selector_style: block.settings.swatch_selector_style,
-                  variant_image_options: block.settings.variant_image_options,
-                  size_chart_page: block.settings.size_chart_page -%}
+              {%- if is_co_lab_necklace -%}
+                {% render 'co-lab-necklace-picker',
+                    product: product,
+                    product_form_id: product_form_id,
+                    variant_picker_block: block %}
+              {%- elsif is_co_lab -%}
+                {% render 'co-lab-picker',
+                    product: product,
+                    product_form_id: product_form_id,
+                    variant_picker_block: block %}
+              {%- else -%}
+                {%- render 'variant-picker',
+                    product: product,
+                    form_id: product_form_id,
+                    context: context,
+                    hide_sold_out_variants: block.settings.hide_sold_out_variants,
+                    selector_style: block.settings.selector_style,
+                    swatch_selector_style: block.settings.swatch_selector_style,
+                    variant_image_options: block.settings.variant_image_options,
+                    size_chart_page: block.settings.size_chart_page -%}
+              {%- endif -%}
             {%- endif -%}
 
           {%- when 'product_variations' -%}
@@ -313,34 +335,11 @@ Supported variables
             {%- endif -%}
 
           {%- when 'delivery_countdown' -%}
-            {%- liquid
-              assign show_countdown = false
-              assign market_type = ''
-              assign current_market = localization.market.handle | downcase
-
-              if current_market == 'gb' or current_market == 'uk' or current_market == 'united-kingdom'
-                assign show_countdown = true
-                assign market_type = 'uk'
-              elsif current_market == 'usa' or current_market == 'us' or current_market == 'united-states'
-                assign show_countdown = true
-                assign market_type = 'usa'
-              endif
-            -%}
-            {%- if show_countdown -%}
-              <button type="button" aria-controls="shipping-popup" class="delivery-countdown">
-                <div class="delivery-countdown__icon">
-                  <img src="{{ 'icon-delivery.png' | file_url }}" alt="Delivery" width="40" height="40" loading="lazy">
-                </div>
-                <p class="delivery-countdown__text">
-                  <span class="delivery-countdown__message" data-market="{{ market_type }}"></span>
-                  <br>
-                  <span class="delivery-countdown__cta">Click for more info</span>
-                </p>
-              </button>
-            {%- endif -%}
+            {%- if is_co_lab -%}{%- continue -%}{%- endif -%}
+            {%- render 'delivery-countdown' -%}
 
           {%- when 'quantity_selector' -%}
-            {%- if product.available -%}
+            {%- if product.available and is_co_lab == false -%}
               {% render 'quantity-selector', variant: product.selected_or_first_available_variant, form: product_form_id %}
             {%- endif -%}
 
@@ -354,16 +353,18 @@ Supported variables
             -%}
 
           {%- when 'buy_buttons' -%}
-            {%- render 'buy-buttons',
-                product: product,
-                form_id: product_form_id,
-                show_payment_button: block.settings.show_payment_button,
-                show_gift_card_recipient: block.settings.show_gift_card_recipient,
-                atc_button_background: block.settings.atc_button_background,
-                atc_button_text_color: block.settings.atc_button_text_color,
-                payment_button_background: block.settings.payment_button_background,
-                payment_button_text_color: block.settings.payment_button_text_color
-            -%}
+            {%- unless is_co_lab -%}
+              {%- render 'buy-buttons',
+                  product: product,
+                  form_id: product_form_id,
+                  show_payment_button: block.settings.show_payment_button,
+                  show_gift_card_recipient: block.settings.show_gift_card_recipient,
+                  atc_button_background: block.settings.atc_button_background,
+                  atc_button_text_color: block.settings.atc_button_text_color,
+                  payment_button_background: block.settings.payment_button_background,
+                  payment_button_text_color: block.settings.payment_button_text_color
+              -%}
+            {%- endunless -%}
 
           {%- when 'pickup_availability' -%}
             {%- if product != blank -%}
@@ -424,6 +425,7 @@ Supported variables
             {%- endunless -%}
 
           {%- when 'text' -%}
+            {%- if is_co_lab -%}{%- continue -%}{%- endif -%}
             {%- if block.settings.text != blank -%}
               <div class="prose">
                 {{- block.settings.text -}}
@@ -441,6 +443,7 @@ Supported variables
             -%}
 
           {%- when 'feature_with_icon' -%}
+            {%- if is_co_lab -%}{%- continue -%}{%- endif -%}
             {%- if block.settings.text != blank or block.settings.icon != 'none' or block.settings.custom_icon != blank -%}
               {%- capture feature_content -%}
                 {%- if block.settings.custom_icon != blank -%}
@@ -553,191 +556,6 @@ Supported variables
         {{- block_content -}}
       </div>
 
-      {%- if block.type == 'delivery_countdown' -%}
-        <script>
-          (function() {
-            const messageEl = document.querySelector('.delivery-countdown__message');
-            if (!messageEl) return;
-
-            const market = messageEl.dataset.market;
-
-            // Test mode: check for query params ?testDay=0-6&testHour=0-23
-            const urlParams = new URLSearchParams(window.location.search);
-            const testDay = urlParams.get('testDay');
-            const testHour = urlParams.get('testHour');
-
-            function getTimezoneDate(timezone) {
-              // Use formatToParts for robust timezone handling (avoids string parsing issues)
-              const now = new Date();
-              const formatter = new Intl.DateTimeFormat('en-GB', {
-                timeZone: timezone,
-                year: 'numeric',
-                month: 'numeric',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                second: 'numeric',
-                weekday: 'short',
-                hour12: false
-              });
-              const parts = formatter.formatToParts(now);
-              const values = {};
-              for (const { type, value } of parts) {
-                values[type] = type === 'weekday' ? value : parseInt(value, 10);
-              }
-              // Create Date using timezone-corrected components
-              const date = new Date(values.year, values.month - 1, values.day, values.hour, values.minute, values.second);
-              return date;
-            }
-
-            function getTestTime(timezone) {
-              const localTime = getTimezoneDate(timezone);
-              if (testDay !== null || testHour !== null) {
-                if (testDay !== null) {
-                  const currentDay = localTime.getDay();
-                  const targetDay = parseInt(testDay, 10);
-                  const diff = targetDay - currentDay;
-                  localTime.setDate(localTime.getDate() + diff);
-                }
-                if (testHour !== null) {
-                  localTime.setHours(parseInt(testHour, 10), 0, 0, 0);
-                }
-              }
-              return localTime;
-            }
-
-            // Date formatting helpers
-            function getOrdinal(n) {
-              const s = ['th', 'st', 'nd', 'rd'];
-              const v = n % 100;
-              return n + (s[(v - 20) % 10] || s[v] || s[0]);
-            }
-
-            function formatDay(date) {
-              return ['Sun', 'Mon', 'Tues', 'Weds', 'Thurs', 'Fri', 'Sat'][date.getDay()];
-            }
-
-            function formatMonth(date) {
-              return ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][date.getMonth()];
-            }
-
-            function isWorkingDay(date) {
-              const day = date.getDay();
-              return day >= 1 && day <= 5;
-            }
-
-            function getNextWorkingDay(date) {
-              const next = new Date(date);
-              next.setDate(next.getDate() + 1);
-              while (!isWorkingDay(next)) {
-                next.setDate(next.getDate() + 1);
-              }
-              return next;
-            }
-
-            function addWorkingDays(date, days) {
-              const result = new Date(date);
-              let added = 0;
-              while (added < days) {
-                result.setDate(result.getDate() + 1);
-                if (isWorkingDay(result)) added++;
-              }
-              return result;
-            }
-
-            // UK Logic - Europe/London timezone
-            // Dispatch is Mon-Fri (warehouse closed weekends).
-            // Delivery is dispatch + 1 calendar day (courier delivers Mon-Sat).
-            function calculateUK() {
-              const ukTime = getTestTime('Europe/London');
-              const ukHour = ukTime.getHours();
-              const ukDay = ukTime.getDay();
-              const isWeekday = ukDay >= 1 && ukDay <= 5;
-              const beforeCutoff = ukHour < 13;
-
-              let dispatchDate, cutoffDate;
-
-              if (isWeekday && beforeCutoff) {
-                // Weekday before 1pm — dispatched today
-                dispatchDate = new Date(ukTime);
-                cutoffDate = new Date(ukTime);
-                cutoffDate.setHours(13, 0, 0, 0);
-              } else {
-                // Weekday after 1pm or weekend — dispatched next working day
-                dispatchDate = getNextWorkingDay(ukTime);
-                cutoffDate = new Date(dispatchDate);
-                cutoffDate.setHours(13, 0, 0, 0);
-              }
-
-              // Delivery = dispatch + 1 calendar day
-              const deliveryDate = new Date(dispatchDate);
-              deliveryDate.setDate(deliveryDate.getDate() + 1);
-
-              // Calculate countdown
-              const diff = cutoffDate - ukTime;
-              const hours = Math.floor(diff / (1000 * 60 * 60));
-              const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-
-              const dayStr = formatDay(deliveryDate);
-              const dateStr = getOrdinal(deliveryDate.getDate()) + ' ' + formatMonth(deliveryDate);
-
-              return 'Get it on <strong>' + dayStr + ' ' + dateStr + '</strong> using <strong>24 hour delivery</strong> - order within <strong>' + hours + 'h ' + minutes + 'm</strong>';
-            }
-
-            // USA Logic - MST timezone
-            function calculateUSA() {
-              const mstTime = getTestTime('America/Denver');
-              const mstHour = mstTime.getHours();
-              const mstDay = mstTime.getDay();
-              const isWeekday = mstDay >= 1 && mstDay <= 5;
-              const beforeCutoff = mstHour < 13;
-
-              let shipsDate, cutoffDate;
-
-              if (isWeekday && beforeCutoff) {
-                // Rule A: Ships today
-                shipsDate = new Date(mstTime);
-                cutoffDate = new Date(mstTime);
-                cutoffDate.setHours(13, 0, 0, 0);
-              } else if (isWeekday && !beforeCutoff) {
-                // Rule B: Ships next working day
-                shipsDate = getNextWorkingDay(mstTime);
-                cutoffDate = new Date(shipsDate);
-                cutoffDate.setHours(13, 0, 0, 0);
-              } else {
-                // Rule C: Weekend - Ships Monday
-                const monday = new Date(mstTime);
-                const daysUntilMonday = mstDay === 0 ? 1 : 2;
-                monday.setDate(monday.getDate() + daysUntilMonday);
-                shipsDate = monday;
-                cutoffDate = new Date(monday);
-                cutoffDate.setHours(13, 0, 0, 0);
-              }
-
-              // Calculate countdown
-              const diff = cutoffDate - mstTime;
-              const hours = Math.floor(diff / (1000 * 60 * 60));
-              const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-
-              const shipDayStr = formatDay(shipsDate);
-              const shipDateStr = getOrdinal(shipsDate.getDate()) + ' ' + formatMonth(shipsDate);
-
-              return 'Ships <strong>' + shipDayStr + ' ' + shipDateStr + '</strong>, with <strong>express delivery</strong> in 1-4 Business Days - Order within <strong>' + hours + 'h ' + minutes + 'm</strong>';
-            }
-
-            function updateTimer() {
-              if (market === 'uk') {
-                messageEl.innerHTML = calculateUK();
-              } else if (market === 'usa') {
-                messageEl.innerHTML = calculateUSA();
-              }
-            }
-
-            updateTimer();
-            setInterval(updateTimer, 60000);
-          })();
-        </script>
-      {%- endif -%}
 
       {%- if inside_block_group_context and allow_block_group == false -%}
         {%- assign inside_block_group_context = false -%}

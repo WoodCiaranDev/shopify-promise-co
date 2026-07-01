@@ -85,6 +85,15 @@
                     {%- endif -%}
                   {%- endif -%}
 
+                  {%- if product.metafields.custom.product_type.value == 'co-lab' -%}
+                    {%- capture mto_default -%}<p><strong>Crafted for You</strong><br>Every piece from The Promise Lab is individually crafted to your exact specifications. Our jewellers create each piece for you - making it as unique as the story behind it. Please allow approximately 2-3 weeks for production before dispatch</p><p><strong>Final Sale</strong><br>As each piece is made specifically for you, orders from The Promise Lab cannot be returned, exchanged, cancelled or amended once production has begun. We encourage you to carefully review all details before placing your order.</p>{%- endcapture -%}
+                    {%- assign mto_title = section.settings.colab_mto_title | default: 'Made to order' -%}
+                    {%- assign mto_content = section.settings.colab_mto_content | default: mto_default -%}
+                    <div id="co-lab-mto" style="scroll-margin-top: 100px;">
+                      {%- render 'accordion', title: mto_title, content: mto_content, prose_content: true, size: 'lg' -%}
+                    </div>
+                  {%- endif -%}
+
                 {%- when 'accordion' -%}
                   {%- liquid
                     assign accordion_title = block.settings.title | default: block.settings.page.title
@@ -187,6 +196,23 @@ quick buy information in a template, that will be extracted in JS, which ensures
       "id": "color_scheme",
       "label": "t:global.colors.scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Co-Lab: Made to order tab"
+    },
+    {
+      "type": "text",
+      "id": "colab_mto_title",
+      "label": "Made to order tab title",
+      "default": "Made to order"
+    },
+    {
+      "type": "richtext",
+      "id": "colab_mto_content",
+      "label": "Made to order tab content",
+      "info": "Shown as an accordion under Description on Co-Lab products only.",
+      "default": "<p><strong>Crafted for You</strong><br/>Every piece from The Promise Lab is individually crafted to your exact specifications. Our jewellers create each piece for you - making it as unique as the story behind it. Please allow approximately 2-3 weeks for production before dispatch</p><p><strong>Final Sale</strong><br/>As each piece is made specifically for you, orders from The Promise Lab cannot be returned, exchanged, cancelled or amended once production has begun. We encourage you to carefully review all details before placing your order.</p>"
     },
     {
       "type": "select",

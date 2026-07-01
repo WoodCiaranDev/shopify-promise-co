@@ -17,6 +17,11 @@
     assign show_filters = false
   endif
 
+  # Custom Lab collection: never show the filter toolbar/button (curated grid, not faceted).
+  if template.suffix == 'co-lab'
+    assign show_filters = false
+  endif
+
   # First, we retrieve, based on the merchant settings, the user preferences and the available space the most appropriate size
   assign products_mobile_grid_mode = cart.attributes.products_mobile_grid_mode
 
@@ -223,10 +228,165 @@ LIQUID
                 {%- render 'active-facets', results: collection -%}
 
                 <product-list id="product-list-{{ section.id }}" class="product-list" collection-mobile-layout="{{ products_mobile_grid_mode }}" collection-desktop-layout="{{ products_desktop_grid_mode }}">
+                  {%- liquid
+                    # Intro card content is editable per-collection via metafields, falling back to the section settings.
+                    assign cm = collection.metafields.custom
+                    assign ic_image = cm.intro_card_image.value | default: section.settings.intro_card_image
+                    assign ic_logo = cm.intro_card_logo.value | default: section.settings.intro_card_logo
+                    assign ic_heading = cm.intro_card_heading.value | default: section.settings.intro_card_heading
+                    assign ic_text = cm.intro_card_text.value | default: section.settings.intro_card_text
+                    assign ic_btn_label = cm.intro_card_button_label.value | default: section.settings.intro_card_button_label
+                    assign ic_btn_link = cm.intro_card_button_link.value | default: section.settings.intro_card_button_link
+                    assign ic_white = section.settings.intro_card_white_bg
+                    if cm.intro_card_white_bg.value != blank
+                      assign ic_white = cm.intro_card_white_bg.value
+                    endif
+
+                    # Position: 'first' slot or 'third' slot (default). Per-collection metafield overrides the section setting.
+                    assign ic_position = section.settings.intro_card_position | default: 'third'
+                    if cm.intro_card_position.value != blank
+                      assign ic_position = cm.intro_card_position.value
+                    endif
+                    assign ic_index = 3
+                    if ic_position == 'first'
+                      assign ic_index = 1
+                    endif
+
+                    assign show_intro = false
+                    if section.settings.show_intro_card and paginate.current_page == 1
+                      if ic_image != blank or ic_logo != blank or ic_heading != blank or ic_text != blank or ic_btn_label != blank
+                        assign show_intro = true
+                      endif
+                    endif
+                  -%}
+                  {%- capture intro_card_html -%}
+                    {%- if ic_image != blank -%}
+                      <div class="collection-intro-card collection-intro-card--image" data-intro-card>
+                        {{
+                          ic_image
+                          | image_url: width: 800
+                          | image_tag:
+                            widths: '300,450,600,800',
+                            sizes: '(min-width: 750px) 25vw, 50vw',
+                            class: 'collection-intro-card__image',
+                            loading: 'lazy'
+                        }}
+                      </div>
+                    {%- else -%}
+                    <div class="collection-intro-card{% if ic_white %} collection-intro-card--white{% endif %}" data-intro-card>
+                      <div class="collection-intro-card__inner">
+                        {%- if ic_logo != blank -%}
+                          {{
+                            ic_logo
+                            | image_url: width: 320
+                            | image_tag:
+                              widths: '120,180,240,320',
+                              sizes: '160px',
+                              class: 'collection-intro-card__logo',
+                              loading: 'lazy'
+                          }}
+                        {%- endif -%}
+                        {%- if ic_heading != blank -%}
+                          <p class="collection-intro-card__heading">{{ ic_heading }}</p>
+                        {%- endif -%}
+                        {%- if ic_text != blank -%}
+                          <div class="collection-intro-card__text">{{ ic_text }}</div>
+                        {%- endif -%}
+                        {%- if ic_btn_label != blank -%}
+                          {%- render 'button', content: ic_btn_label, href: ic_btn_link, style: 'outline' -%}
+                        {%- endif -%}
+                      </div>
+                    </div>
+                    {%- endif -%}
+                  {%- endcapture -%}
+                  {%- assign intro_rendered = false -%}
                   {%- for product in collection.products -%}
+                    {%- if show_intro and intro_rendered == false and forloop.index == ic_index -%}
+                      {{ intro_card_html }}
+                      {%- assign intro_rendered = true -%}
+                    {%- endif -%}
                     {%- render 'color-variant', product: product, reveal: settings.stagger_products_apparition, position: forloop.index, hide_product_information: section.settings.hide_product_information, stacked: true -%}
                   {%- endfor -%}
+                  {%- if show_intro and intro_rendered == false -%}
+                    {{ intro_card_html }}
+                  {%- endif -%}
                 </product-list>
+
+                {%- if show_intro -%}
+                  <script>
+                    (function () {
+                      var section = document.getElementById('shopify-section-{{ section.id }}');
+                      if (!section) return;
+
+                      // Pin the intro card to the top-right of row 1 on desktop, and to the
+                      // 4th slot (row 2, right) on mobile — measured from the live column count,
+                      // because the product grid uses repeat(auto-fit, ...) not fixed columns.
+                      function targetPosition(cols) {
+                        if (cols >= 3) return cols;   // 4 cols -> 4th, 3 cols -> 3rd (row-1 right)
+                        if (cols === 2) return 4;     // mobile -> row-2 right
+                        return 2;                     // single column fallback
+                      }
+
+                      // Real grid cells only — skip zero-size sentinels/sizers the product-list
+                      // element injects (those broke earlier top-based measurements).
+                      function gridCells(list) {
+                        return Array.prototype.slice.call(list.children).filter(function (el) {
+                          return el.offsetWidth > 0 && el.offsetHeight > 0;
+                        });
+                      }
+
+                      // Columns = how many cells share the first row, detected by offsetLeft
+                      // increasing until it wraps. offsetLeft is the layout position, so it's
+                      // immune to the cards' reveal transforms and to vertical alignment.
+                      function columnCount(cells) {
+                        if (!cells.length) return 1;
+                        var firstLeft = cells[0].offsetLeft;
+                        var n = 1;
+                        for (var i = 1; i < cells.length; i++) {
+                          if (cells[i].offsetLeft <= firstLeft + 1) break; // wrapped to next row
+                          n++;
+                        }
+                        return n;
+                      }
+
+                      function place() {
+                        var list = section.querySelector('product-list');
+                        if (!list) return;
+                        var card = list.querySelector('[data-intro-card]');
+                        if (!card) return;
+                        var cells = gridCells(list);
+                        if (cells.length < 2) return;
+                        var cols = columnCount(cells);
+                        var products = cells.filter(function (el) { return el !== card; });
+                        if (!products.length) return;
+                        var pos = Math.min(targetPosition(cols), products.length + 1); // 1-based
+                        var ref = products[pos - 1] || null;
+                        if (card.nextElementSibling !== ref && card !== ref) list.insertBefore(card, ref);
+                      }
+
+                      function init() {
+                        place();
+                        var list = section.querySelector('product-list');
+                        // ResizeObserver fires once layout settles and on every breakpoint change,
+                        // which corrects the early/stale placement reliably.
+                        if (list && window.ResizeObserver) {
+                          new ResizeObserver(function () { place(); }).observe(list);
+                        }
+                      }
+
+                      if (document.readyState === 'loading') {
+                        document.addEventListener('DOMContentLoaded', init);
+                      } else {
+                        init();
+                      }
+                      window.addEventListener('load', place);
+                      window.addEventListener('resize', place);
+                      document.addEventListener('shopify:section:load', function (e) {
+                        if (e.detail && e.detail.sectionId === '{{ section.id }}') place();
+                      });
+                    })();
+                  </script>
+                {%- endif -%}
 
                 {%- render 'pagination', paginate: paginate, facet: true -%}
               </div>
@@ -255,6 +415,66 @@ LIQUID
       "id": "hide_product_information",
       "label": "t:global.product_list.hide_product_information",
       "info": "t:global.product_list.hide_product_information_collection_info"
+    },
+    {
+      "type": "header",
+      "content": "Intro card"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_intro_card",
+      "label": "Show intro card",
+      "info": "Adds an editable card to the grid (page 1 only). Content can be overridden per-collection via the collection's metafields; the fields below act as defaults. Leave all blank to hide it.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "intro_card_position",
+      "label": "Card position",
+      "options": [
+        { "value": "first", "label": "First slot" },
+        { "value": "third", "label": "Third slot (right)" }
+      ],
+      "default": "third",
+      "info": "Where the card sits in the grid. Can be overridden per-collection with the custom.intro_card_position metafield."
+    },
+    {
+      "type": "checkbox",
+      "id": "intro_card_white_bg",
+      "label": "White background",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "intro_card_image",
+      "label": "Placeholder image",
+      "info": "When set, the card shows this image filling the slot instead of the text content below."
+    },
+    {
+      "type": "image_picker",
+      "id": "intro_card_logo",
+      "label": "Logo / image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "intro_card_heading",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_card_text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "intro_card_button_label",
+      "label": "Button label",
+      "info": "Optional — leave blank for no button."
+    },
+    {
+      "type": "url",
+      "id": "intro_card_button_link",
+      "label": "Button link"
     },
     {
       "type": "header",
@@ -403,3 +623,57 @@ LIQUID
   ]
 }
 {% endschema %}
+{% stylesheet %}
+.collection-intro-card {
+  display: flex;
+}
+
+.collection-intro-card--image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.collection-intro-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.collection-intro-card__inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  background: #f2eee7;
+  border-radius: 1rem;
+}
+
+.collection-intro-card--white .collection-intro-card__inner {
+  background: #ffffff;
+}
+
+.collection-intro-card__logo {
+  max-width: 160px;
+  height: auto;
+}
+
+.collection-intro-card__heading {
+  margin: 0;
+  font-family: var(--heading-font-family, serif);
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.collection-intro-card__text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+{% endstylesheet %}

@@ -2290,6 +2290,48 @@ model-media model-viewer, model-media .shopify-model-viewer-ui {
 }
 
 
+/* Co-Lab crossfade image loop (grid + PDP). Frames stack; CSS keyframes (named per frame
+   count, defined in the co-lab-image-loop snippet) drive a synced 2s-per-image crossfade.
+   The first frame stays in flow to size the box; the rest overlay it. */
+.co-lab-loop {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.co-lab-loop__frame {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  animation-name: var(--cf-name);
+  animation-duration: calc(var(--cf-frames) * 1.5s);
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+  animation-delay: calc(var(--cf-i) * -1.5s);
+  will-change: opacity;
+}
+
+.co-lab-loop__frame--first {
+  position: relative;
+  opacity: 1;
+}
+
+.co-lab-loop__frame:not(.co-lab-loop__frame--first) {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .co-lab-loop__frame {
+    animation: none !important;
+  }
+  .co-lab-loop__frame:not(.co-lab-loop__frame--first) {
+    opacity: 0;
+  }
+}
+
 .product-card__media {
   isolation: isolate;
   display: block;
@@ -2445,6 +2487,7 @@ model-media model-viewer, model-media .shopify-model-viewer-ui {
   .product-card__figure > .badge-list--tags {
     inset-block-start: .5rem;
     inset-inline-end: .5rem;
+    inset-inline-start: auto;
   }
 }
 
@@ -2796,6 +2839,37 @@ model-media model-viewer, model-media .shopify-model-viewer-ui {
 
 .delivery-countdown__cta {
   font-style: italic;
+}
+
+.cart-mto-notice {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+  background: rgb(var(--background-secondary, 245 243 239));
+  border-radius: 0.5rem;
+}
+
+.cart-mto-notice__text {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.cart-mto-notice svg {
+  flex-shrink: 0;
+}
+
+.line-item__mto-badge {
+  display: inline-block;
+  width: fit-content;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 999px;
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 /* Shipping popup */
@@ -5834,7 +5908,7 @@ product-rerender {
 
 .mega-menu {
   max-height: calc(100vh - var(--header-height, 0px)  - var(--announcement-bar-height, 0px)  - 20px);
-  justify-content: safe center;
+  justify-content: space-between;
   align-items: start;
   column-gap: var(--mega-menu-gap);
   background: rgb(var(--background));
@@ -5884,6 +5958,13 @@ product-rerender {
   flex: 315px;
   min-width: 240px;
   max-width: 315px;
+}
+
+/* When a mega menu has only link columns (no promo images or countdown), centre the
+   column group instead of letting justify-content:space-between anchor a lone group to
+   the left. Adding more menu items then grows the group outwards from the centre. */
+.mega-menu:not(:has(.mega-menu__promo)):not(:has(.c-collection-launch)) {
+  justify-content: center;
 }
 
 @media screen and (min-width: 1400px) {
@@ -9079,14 +9160,14 @@ span.ogg-font {
   padding-bottom: 0 !important;
 }
 
-.collection-usp-tabs {
+.icon-tab-grid {
   position: relative;
   z-index: 0;
   padding: 0 20px;
   margin-top: 30px;
 }
 
-.collection-usp-tabs__container {
+.icon-tab-grid__container {
   background: #fff;
   border-radius: 20px 20px 0 0;
   padding: 40px 30px;
@@ -9098,7 +9179,7 @@ span.ogg-font {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
-.collection-usp-tab {
+.icon-tab {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -9106,7 +9187,7 @@ span.ogg-font {
   gap: 10px;
 }
 
-.collection-usp-tab summary {
+.icon-tab summary {
   list-style: none;
   cursor: pointer;
   display: flex;
@@ -9115,11 +9196,11 @@ span.ogg-font {
   gap: 10px;
 }
 
-.collection-usp-tab summary::-webkit-details-marker {
+.icon-tab summary::-webkit-details-marker {
   display: none;
 }
 
-.collection-usp-tab__icon {
+.icon-tab__icon {
   width: 80px;
   height: 80px;
   display: flex;
@@ -9127,75 +9208,75 @@ span.ogg-font {
   justify-content: center;
 }
 
-.collection-usp-tab__icon img {
+.icon-tab__icon img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
 }
 
-.collection-usp-tab__title-row {
+.icon-tab__title-row {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.collection-usp-tab__title {
+.icon-tab__title {
   font-size: 12px;
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.collection-usp-tab__chevron {
+.icon-tab__chevron {
   width: 12px;
   height: 12px;
   transition: transform 0.25s ease-in-out;
 }
 
-.collection-usp-tab[open] .collection-usp-tab__chevron {
+.icon-tab[open] .icon-tab__chevron {
   transform: rotate(180deg);
 }
 
-.collection-usp-tab__content {
+.icon-tab__content {
   padding-top: 15px;
   text-align: left;
   font-size: 14px;
   line-height: 1.6;
 }
 
-.collection-usp-tab__content p {
+.icon-tab__content p {
   margin: 0 0 10px 0;
 }
 
-.collection-usp-tab__content p:last-child {
+.icon-tab__content p:last-child {
   margin-bottom: 0;
 }
 
 @media screen and (max-width: 999px) {
-  .collection-usp-tabs__container {
+  .icon-tab-grid__container {
     grid-template-columns: repeat(2, 1fr);
     gap: 30px 20px;
   }
 }
 
 @media screen and (max-width: 599px) {
-  .collection-usp-tabs__container {
+  .icon-tab-grid__container {
     grid-template-columns: 1fr 1fr;
     padding: 30px 20px;
   }
 
-  .collection-usp-tab__icon {
+  .icon-tab__icon {
     width: 60px;
     height: 60px;
   }
 
-  .collection-usp-tab__title {
+  .icon-tab__title {
     font-size: 10px;
   }
 }
 
 /* Stone Type Slider */
-.stone-slider + .collection-usp-tabs {
+.stone-slider + .icon-tab-grid {
   margin-top: 0;
 }
 

@@ -92,6 +92,7 @@
     {{- 'theme.css' | asset_url | stylesheet_tag: preload: true -}}
     {{- 'mobile-menu.css' | asset_url | stylesheet_tag -}}
     {{- 'mega-menu-icons.css' | asset_url | stylesheet_tag -}}
+    {{- 'co-lab-picker.css' | asset_url | stylesheet_tag -}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
   
@@ -100,6 +101,8 @@
     <script src="{{ 'timesact.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'collection-countdown.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'mobile-menu.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'co-lab-picker.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'co-lab-necklace-picker.js' | asset_url }}" defer="defer"></script>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
 </head>

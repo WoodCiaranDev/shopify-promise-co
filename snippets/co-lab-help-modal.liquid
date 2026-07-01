@@ -1,0 +1,56 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+CO-LAB HELP MODAL
+
+Shared "Need help configuring?" modal used by both the ring and necklace Co-Lab pickers, so they match.
+Image sits on the left, editable copy on the right, with the birthstone colour key below.
+
+Per-product editable via metafields:
+* custom.help_image  (image)      — shown on the left
+* custom.help_text   (rich text)  — the copy on the right (falls back to a default)
+
+Inputs:
+* product — the Co-Lab product
+* stones  — birthstone metaobjects (for the colour key)
+----------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- assign help_image = product.metafields.custom.help_image -%}
+{%- assign help_text = product.metafields.custom.help_text.value -%}
+
+<x-modal id="co-lab-help-{{ product.id }}" class="modal modal--lg color-scheme color-scheme--dialog">
+  <span class="h5" slot="header">Personalisation Guide</span>
+  <div class="c-co-lab-help prose">
+    <div class="c-co-lab-help__body">
+      {%- if help_image != blank -%}
+        <div class="c-co-lab-help__image">
+          {{-
+            help_image
+            | image_url: width: 720
+            | image_tag:
+              widths: '320,480,720',
+              sizes: '(min-width: 750px) 320px, 90vw',
+              class: 'c-co-lab-help__image-tag',
+              loading: 'lazy'
+          -}}
+        </div>
+      {%- endif -%}
+      <div class="c-co-lab-help__text">
+        {%- if help_text != blank -%}
+          <p>{{ help_text | escape | newline_to_br }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</x-modal>
+
+<script>
+  document.addEventListener('click', function (event) {
+    var link = event.target.closest('a[href="#co-lab-help-{{ product.id }}"]');
+    if (!link) return;
+    event.preventDefault();
+    var modal = document.getElementById('co-lab-help-{{ product.id }}');
+    if (modal && typeof modal.show === 'function') { modal.show(); }
+    else if (modal) { modal.setAttribute('open', ''); }
+  });
+</script>

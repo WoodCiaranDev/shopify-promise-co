@@ -1,0 +1,138 @@
+<div class="co-lab-steps color-scheme color-scheme--{{ section.settings.color_scheme.id }}{% unless section.settings.remove_vertical_spacing %} section-spacing{% endunless %}{% if section.settings.separate_section_with_border %} bordered-section{% endif %}">
+  {%- if section.settings.heading != blank -%}
+    <div class="container container--{{ section.settings.content_width }}">
+      <div class="co-lab-steps__header text-center">
+        {%- if section.settings.subheading != blank -%}
+          <p class="co-lab-steps__subheading h6">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+        <h2 class="co-lab-steps__heading h3">{{ section.settings.heading }}</h2>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="icon-tab-grid">
+    <div class="icon-tab-grid__container">
+      {%- for block in section.blocks -%}
+        <div class="icon-tab" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != blank -%}
+            <div class="icon-tab__icon">
+              {{ block.settings.icon | image_url: width: 200 | image_tag: loading: 'lazy', widths: '80,120,160,200' }}
+            </div>
+          {%- endif -%}
+          {%- if block.settings.step_label != blank -%}
+            <span class="co-lab-steps__label">{{ block.settings.step_label }}</span>
+          {%- endif -%}
+          <span class="icon-tab__title">{{ block.settings.title }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .co-lab-steps.section-spacing {
+    padding-block-start: 20px;
+    padding-block-end: 0;
+  }
+
+  .co-lab-steps .icon-tab-grid {
+    margin-top: 0;
+  }
+
+  .co-lab-steps__header {
+    margin-bottom: 10px;
+  }
+
+  .co-lab-steps__label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.55;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Co-Lab steps",
+  "tag": "section",
+  "class": "shopify-section--co-lab-steps",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:global.colors.scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "t:global.sizes.content_width",
+      "options": [
+        { "value": "sm", "label": "t:global.sizes.small" },
+        { "value": "md", "label": "t:global.sizes.medium" },
+        { "value": "lg", "label": "t:global.sizes.large" }
+      ],
+      "default": "md"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "checkbox",
+      "id": "remove_vertical_spacing",
+      "label": "t:global.spacing.remove_vertical_spacing",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "separate_section_with_border",
+      "label": "t:global.section.separate_section_with_border",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "step_label",
+          "label": "Step label",
+          "info": "Optional, e.g. \"Step 1\""
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Choose your piece"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Co-Lab steps",
+      "blocks": [
+        { "type": "step", "settings": { "step_label": "Step 1", "title": "Choose your piece" } },
+        { "type": "step", "settings": { "step_label": "Step 2", "title": "Choose your metal and size" } },
+        { "type": "step", "settings": { "step_label": "Step 3", "title": "Choose your customisations" } },
+        { "type": "step", "settings": { "step_label": "Step 4", "title": "We build your perfect ring and dispatch in 2-3 weeks" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

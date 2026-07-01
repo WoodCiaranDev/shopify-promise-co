@@ -1,0 +1,16 @@
+api_version = "2025-01"
+
+[[extensions]]
+name = "Co-Lab Bundle"
+handle = "co-lab-bundle"
+type = "function"
+
+[[extensions.targeting]]
+target = "cart.transform.run"
+input_query = "src/run.graphql"
+export = "run"
+
+[extensions.build]
+command = "npm run build"
+path = "dist/function.wasm"
+watch = ["src/**/*.js", "src/**/*.graphql"]

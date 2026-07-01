@@ -1,0 +1,310 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+CO-LAB PICKER
+
+Renders the Promise Co-Lab right-column picker for products tagged with metafield custom.product_type = 'co-lab'.
+Replaces the standard block list. Multi-state UI: default → customising → stone grid → reviewing.
+
+Inputs:
+* product           — the Co-Lab ring
+* product_form_id   — form ID used by the rest of the theme (sticky bar, payment button, etc.)
+----------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- assign stones = shop.metaobjects.birthstone.values | sort: 'position' -%}
+{%- assign first_variant = product.selected_or_first_available_variant -%}
+
+{%- comment -%}
+  Per-product pricing & slot configuration via metafields, with backwards-compatible defaults
+  (2 slots, both extras charged at £10 / £20). Prices are stored in integer pence to match the
+  legacy hardcoded 1000 / 2000. Booleans need an explicit nil check — `| default: true` would
+  wrongly flip an intentionally-set `false`.
+{%- endcomment -%}
+{%- liquid
+  assign mf = product.metafields.custom
+  assign slot_count = mf.birthstone_slots.value | default: 2
+  assign hide_optional = mf.birthstone_hide_optional.value
+  assign eng_max_chars = mf.engraving_max_chars.value | default: 8
+
+  # Extra pricing in pence. 0 (or unset) = included in the base price; any positive
+  # amount = charged on top as an add-on line. A single number drives both the
+  # "included vs extra" behaviour and the amount.
+  assign bs_price = mf.birthstone_price.value | default: 0
+  assign eng_price = mf.engraving_price.value | default: 0
+
+  assign bs_charged = false
+  if bs_price > 0
+    assign bs_charged = true
+  endif
+
+  assign eng_charged = false
+  if eng_price > 0
+    assign eng_charged = true
+  endif
+
+  assign buy_buttons_block = section.blocks | where: 'type', 'buy_buttons' | first
+  assign atc_bg = buy_buttons_block.settings.atc_button_background
+  assign atc_text = buy_buttons_block.settings.atc_button_text_color
+  capture atc_style
+    if atc_bg != blank and atc_bg != 'rgba(0,0,0,0)'
+      echo '--button-background: ' | append: atc_bg.rgb | append: ';'
+      echo '--button-outline-color: ' | append: atc_bg.rgb | append: ';'
+    endif
+    if atc_text != blank and atc_text != 'rgba(0,0,0,0)'
+      echo '--button-text-color: ' | append: atc_text.rgb | append: ';'
+    endif
+  endcapture
+
+  assign metal_list = mf.metals.value | split: ','
+  assign size_list = mf.sizes.value | split: ','
+
+  # Per-product, client-editable birthstone & engraving copy.
+  # birthstone_labels: list, one editable name per slot (e.g. "Centre Stone", "Halo Stones").
+  # birthstone_heading / engraving_heading: optional overrides; otherwise auto-generated
+  # (heading auto-pluralises off the slot count).
+  assign bs_labels = mf.birthstone_labels.value
+  capture bs_heading_default
+    echo 'Choose Your Birthstone'
+    if slot_count != 1
+      echo 's'
+    endif
+  endcapture
+  assign bs_heading = mf.birthstone_heading.value | default: bs_heading_default
+  assign eng_label = 'Internal Engraving'
+  if product.handle == 'name-engraved-slim-signet-ring'
+    assign eng_label = 'External Engraving'
+  endif
+-%}
+
+<c-co-lab-picker
+  class="c-co-lab-picker"
+  data-product-id="{{ product.id }}"
+  data-base-price="{{ first_variant.price }}"
+  data-birthstone-price="{{ bs_price }}"
+  data-engraving-price="{{ eng_price }}"
+  data-birthstone-charged="{{ bs_charged }}"
+  data-engraving-charged="{{ eng_charged }}"
+  data-slot-count="{{ slot_count }}"
+  data-birthstone-addon-handle="birthstone-addon"
+  data-engraving-addon-handle="engraving-addon"
+  data-review-modal-id="co-lab-review-{{ product.id }}"
+  data-product-title="{{ product.title | escape }}"
+>
+  <product-form>
+    {%- form 'product', product, id: product_form_id -%}
+      <input type="hidden" name="id" value="{{ first_variant.id }}" data-variant-id>
+      <span data-base-price-display hidden>{{ first_variant.price | money_without_trailing_zeros }}</span>
+
+      <section class="c-co-lab-picker__card c-co-lab-picker__card--metal">
+        <p class="c-co-lab-picker__step">Step 2</p>
+        <h2 class="c-co-lab-picker__section-title">Metal &amp; Sizing</h2>
+
+        {%- if metal_list.size > 0 -%}
+          {%- assign swatch_config = settings.color_swatch_config | newline_to_br | split: '<br />' -%}
+          <fieldset class="variant-picker__option v-stack gap-2">
+            <div class="variant-picker__option-info h-stack justify-between gap-2">
+              <div class="h-stack gap-1">
+                <legend>Precious Metal:</legend>
+                <span data-metal-selected>{{ metal_list.first | strip }}</span>
+              </div>
+            </div>
+            <div class="variant-picker__option-values h-stack gap-2.5 wrap">
+              {%- for metal in metal_list -%}
+                {%- assign metal_name = metal | strip -%}
+                {%- assign metal_down = metal_name | downcase -%}
+                {%- assign metal_swatch = '#dddddd' -%}
+                {%- for item in swatch_config -%}
+                  {%- assign parts = item | split: ':' -%}
+                  {%- assign cfg_name = parts.first | downcase | strip -%}
+                  {%- if cfg_name == metal_down -%}
+                    {%- assign metal_swatch = parts.last | strip -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- capture metal_id -%}{{ product_form_id }}-metal-{{ forloop.index }}{%- endcapture -%}
+                <input class="sr-only" type="radio" name="properties[Precious Metal]" id="{{ metal_id }}" value="{{ metal_name | escape }}" form="{{ product_form_id }}" data-metal-option data-value="{{ metal_name | escape }}"{% if forloop.first %} checked{% endif %}>
+                <label class="color-swatch rounded-full" for="{{ metal_id }}" style="--swatch-background: {{ metal_swatch }};" data-tooltip="{{ metal_name | escape }}">
+                  <span class="sr-only">{{ metal_name }}</span>
+                </label>
+              {%- endfor -%}
+            </div>
+          </fieldset>
+        {%- endif -%}
+
+        {%- if size_list.size > 0 -%}
+          {%- assign size_locked = false -%}
+          {%- if size_list.size == 1 -%}{%- assign size_locked = true -%}{%- endif -%}
+          <fieldset class="variant-picker__option v-stack gap-2">
+            <div class="variant-picker__option-info h-stack justify-between gap-2">
+              <div class="h-stack gap-1">
+                <legend>Size:</legend>
+              </div>
+            </div>
+            <div class="relative">
+              <select class="select" data-size-select{% if size_locked %} data-size-locked aria-disabled="true"{% endif %}>
+                {%- unless size_locked -%}
+                  <option value="" disabled selected>Select your size</option>
+                {%- endunless -%}
+                {%- for size in size_list -%}
+                  {%- assign size_name = size | strip -%}
+                  <option value="{{ size_name | escape }}"{% if size_locked %} selected{% endif %}>{{ size_name }}</option>
+                {%- endfor -%}
+              </select>
+              {%- unless size_locked -%}
+                {%- render 'icon' with 'dropdown-chevron' -%}
+              {%- endunless -%}
+            </div>
+          </fieldset>
+        {%- endif -%}
+
+        <p class="c-co-lab-picker__size-guide">
+          <a href="#size-guide-popup" title="Ring Size Guide">Unsure on sizing? &mdash; Size Guide Here</a>
+        </p>
+      </section>
+
+      <section class="c-co-lab-picker__card c-co-lab-picker__card--custom" data-customisation>
+        <p class="c-co-lab-picker__step">Step 3</p>
+        <h2 class="c-co-lab-picker__section-title">Customisation</h2>
+
+        <p class="c-co-lab-picker__birthstone-help">
+          <a href="#co-lab-help-{{ product.id }}" title="Personalisation Guide Here">Personalisation Guide Here</a>
+        </p>
+
+        {%- if slot_count > 0 -%}
+        <div class="c-co-lab-picker__inner">
+          <button type="button" class="c-co-lab-picker__stones-toggle" data-action="toggle-stones" aria-expanded="false">
+            <span>{{ bs_heading }}</span>
+            <span class="c-co-lab-picker__chev" aria-hidden="true">↓</span>
+          </button>
+
+          <div class="c-co-lab-picker__stones" data-stones hidden>
+            {%- for slot in (1..slot_count) -%}
+              {%- liquid
+                # Per-slot label: editable custom.birthstone_labels entry, else "Birthstone One/Two/N".
+                assign slot_label = bs_labels[forloop.index0]
+                if slot_label == blank
+                  case slot
+                    when 1
+                      assign slot_label = 'Birthstone One'
+                    when 2
+                      assign slot_label = 'Birthstone Two'
+                    else
+                      assign slot_label = 'Birthstone ' | append: slot
+                  endcase
+                endif
+              -%}
+              <div class="c-co-lab-picker__stone-row" data-slot="{{ slot }}">
+                <p class="c-co-lab-picker__stone-label">
+                  <span>{{ slot_label }}:{% if slot != 1 and hide_optional != true %} <span class="c-co-lab-picker__optional">(optional)</span>{% endif %}</span>
+                  <span class="c-co-lab-picker__uplift">{% if bs_charged %}+ {{ bs_price | money_without_trailing_zeros }}{% else %}Free{% endif %}</span>
+                </p>
+                <button type="button" class="c-co-lab-picker__stone-select" data-action="open-grid" data-slot="{{ slot }}" aria-haspopup="dialog">
+                  <span class="c-co-lab-picker__stone-swatch" data-stone-swatch="{{ slot }}" hidden></span>
+                  <span class="c-co-lab-picker__stone-text" data-stone-text="{{ slot }}">Select Stone</span>
+                  <span class="c-co-lab-picker__chev" aria-hidden="true">→</span>
+                </button>
+                <input type="hidden" name="properties[{{ slot_label }}]" data-stone-input="{{ slot }}" data-stone-label="{{ slot_label | escape }}" value="" disabled>
+              </div>
+            {%- endfor -%}
+          </div>
+
+          {%- comment -%} Single grid lives at the end of the inner card; JS moves it inline next to the active stone row when opened. {%- endcomment -%}
+          <div class="c-co-lab-picker__grid" data-grid hidden>
+            <ul class="c-co-lab-picker__grid-list">
+              {%- for stone in stones -%}
+                <li>
+                  <button type="button"
+                          class="c-co-lab-picker__cell"
+                          data-action="pick-stone"
+                          data-name="{{ stone.name }}"
+                          data-month="{{ stone.month }}"
+                          data-icon="{% if stone.icon != blank %}{{ stone.icon | image_url: width: 120 }}{% endif %}">
+                    <span class="c-co-lab-picker__cell-icon-wrap">
+                      {%- if stone.icon != blank -%}
+                        <img class="c-co-lab-picker__cell-icon"
+                             src="{{ stone.icon | image_url: width: 120 }}"
+                             alt=""
+                             width="44" height="44" loading="lazy">
+                      {%- endif -%}
+                    </span>
+                    <span class="c-co-lab-picker__cell-name">{{ stone.name }}</span>
+                    <span class="c-co-lab-picker__cell-month">{{ stone.month }}</span>
+                  </button>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        </div>
+        {%- endif -%}
+
+        <div class="c-co-lab-picker__inner c-co-lab-picker__inner--engraving">
+          <button type="button" class="c-co-lab-picker__stones-toggle" data-action="toggle-engraving" aria-expanded="false">
+            <span>Add an Engraving</span>
+            <span class="c-co-lab-picker__chev" aria-hidden="true">↓</span>
+          </button>
+
+          <div class="c-co-lab-picker__engraving" data-engraving hidden>
+            <p class="c-co-lab-picker__engraving-label">
+              <span>{{ eng_label }}</span>
+              <span class="c-co-lab-picker__uplift">{% if eng_charged %}+ {{ eng_price | money_without_trailing_zeros }}{% else %}Free{% endif %}</span>
+            </p>
+            <p class="c-co-lab-picker__engraving-note">Case-sensitive. Supports letters, numbers &amp; special characters. No emojis.</p>
+            <div class="c-co-lab-picker__engraving-wrap">
+              <input type="text"
+                     id="{{ product_form_id }}-engraving"
+                     class="c-co-lab-picker__engraving-input"
+                     name="properties[Engraving]"
+                     maxlength="{{ eng_max_chars }}"
+                     placeholder="Type your engraving here"
+                     data-engraving-input
+                     disabled>
+              <span class="c-co-lab-picker__engraving-arrow" aria-hidden="true">→</span>
+            </div>
+            <p class="c-co-lab-picker__engraving-count" data-engraving-count>0/{{ eng_max_chars }} Characters</p>
+          </div>
+        </div>
+      </section>
+
+      <p class="c-co-lab-picker__error" data-error role="alert" aria-live="polite" hidden></p>
+
+      {%- render 'delivery-countdown', static_message: 'Made to order: ', static_message_strong: 'Ships in 2-3 weeks.', info_target: '#co-lab-mto', info_label: 'Click for more info' -%}
+
+      <div class="c-co-lab-picker__buy">
+        {% render 'quantity-selector', variant: first_variant, form: product_form_id %}
+        <button type="submit"
+                class="button button--add-to-cart c-co-lab-picker__atc"
+                data-action="submit"
+                form="{{ product_form_id }}"
+                {% if atc_style != blank %}style="{{ atc_style | strip }}"{% endif %}>
+          Add to Cart
+        </button>
+      </div>
+
+      {%- render 'co-lab-feature-list' -%}
+
+      <script type="application/json" data-stones-json>
+        [
+          {%- for stone in stones -%}
+            {
+              "name": {{ stone.name | json }},
+              "month": {{ stone.month | json }},
+              "icon": {% if stone.icon != blank %}{{ stone.icon | image_url: width: 120 | json }}{% else %}null{% endif %}
+            }{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        ]
+      </script>
+    {%- endform -%}
+  </product-form>
+
+  {%- comment -%}
+    Pre-add review modal. Empty on render; co-lab-picker.js builds the review card from the
+    current selections, opens this modal, and only adds to cart once the customer confirms.
+    Uses the theme's <x-modal> component (relocates itself to <body> on first open — resolve
+    it by id from JS, never via this.querySelector).
+  {%- endcomment -%}
+  <x-modal id="co-lab-review-{{ product.id }}" class="modal modal--lg color-scheme color-scheme--dialog" data-colab-review-modal>
+    <span class="h5" slot="header">Review your ring</span>
+    <div data-colab-review-body></div>
+  </x-modal>
+
+  {%- render 'co-lab-help-modal', product: product, stones: stones -%}
+</c-co-lab-picker>

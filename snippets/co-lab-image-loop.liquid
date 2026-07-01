@@ -1,0 +1,73 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+CO-LAB IMAGE LOOP
+
+Crossfade slideshow built from a product's `custom.animation_images` list (ordered stills). Used for Co-Lab custom
+products on the collection grid and the PDP main image. Pure CSS: every frame uses the same 2s-per-image slot and the
+animation starts at page load, so all instances flip on a shared beat. Images are CDN-resized (sharp, light, lazy) —
+no animated GIF, so nothing gets flattened by Shopify's image transforms.
+
+Inputs:
+* product     — the product (required)
+* sizes       — responsive sizes attribute for the frames
+* image_class — extra classes for each frame (e.g. aspect + object-cover)
+* eager       — when true, the first frame loads eagerly (above-the-fold use)
+----------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- assign anim = product.metafields.custom.animation_images.value -%}
+
+{%- if anim and anim.size > 1 -%}
+  {%- liquid
+    assign n = anim.size
+    # 2s per frame → cycle = n * 2s. Fade is 0.4s = 20/n percent of the cycle.
+    assign slot = 100.0 | divided_by: n | round: 4
+    assign fade = 20.0 | divided_by: n | round: 4
+    assign hold_end = slot | minus: fade | round: 4
+    assign fade_in = 100.0 | minus: fade | round: 4
+    assign widths = '200,300,400,500,600,700,800,1000,1200,1400,1600'
+  -%}
+  <style>
+    @keyframes coLabLoop{{ n }} {
+      0% { opacity: 1; }
+      {{ hold_end }}% { opacity: 1; }
+      {{ slot }}% { opacity: 0; }
+      {{ fade_in }}% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  </style>
+  <div class="co-lab-loop" style="--cf-name: coLabLoop{{ n }}; --cf-frames: {{ n }};" aria-hidden="false">
+    {%- for image in anim -%}
+      {%- liquid
+        assign frame_class = 'co-lab-loop__frame'
+        if forloop.first
+          assign frame_class = frame_class | append: ' co-lab-loop__frame--first'
+        endif
+        if image_class != blank
+          assign frame_class = frame_class | append: ' ' | append: image_class
+        endif
+        assign frame_loading = 'lazy'
+        if forloop.first and eager
+          assign frame_loading = 'eager'
+        endif
+        assign frame_priority = 'low'
+        if forloop.first and eager
+          assign frame_priority = 'auto'
+        endif
+        assign frame_style = '--cf-i: ' | append: forloop.index0
+      -%}
+      {{-
+        image
+        | image_url: width: image.width
+        | image_tag:
+          loading: frame_loading,
+          decoding: 'async',
+          fetchpriority: frame_priority,
+          sizes: sizes,
+          widths: widths,
+          class: frame_class,
+          style: frame_style
+      -}}
+    {%- endfor -%}
+  </div>
+{%- endif -%}

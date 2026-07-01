@@ -1,14 +1,122 @@
 {%- liquid
+  assign hero_heading = section.settings.heading
+  assign hero_body = section.settings.body
+  assign hero_bg_image = section.settings.background_image
+
+  if section.settings.use_collection_content and collection != blank
+    if collection.title != blank
+      assign hero_heading = collection.title
+    endif
+    if collection.description != blank
+      assign hero_body = collection.description
+    endif
+    if collection.image != blank
+      assign hero_bg_image = collection.image
+    endif
+  endif
+-%}
+
+{%- liquid
   assign has_content = false
-  if section.settings.logo != blank or section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.body != blank or section.settings.button_label != blank
+  if section.settings.logo != blank or section.settings.logo_asset != blank or section.settings.eyebrow != blank or hero_heading != blank or hero_body != blank or section.settings.button_label != blank or hero_bg_image != blank or section.settings.background_asset != blank
     assign has_content = true
   endif
 -%}
 
+{%- liquid
+  assign has_bg_image = false
+  if hero_bg_image != blank
+    assign has_bg_image = true
+  elsif section.settings.background_asset != blank
+    assign has_bg_image = true
+  endif
+
+  assign has_logo_asset = false
+  if section.settings.logo == blank and section.settings.logo_asset != blank
+    assign has_logo_asset = true
+  endif
+
+  assign alignment = section.settings.content_alignment | default: 'center'
+  assign inner_class = 'lab-hero__inner prose'
+  if alignment == 'left'
+    assign inner_class = inner_class | append: ' text-left lab-hero__inner--left'
+  else
+    assign inner_class = inner_class | append: ' text-center'
+  endif
+
+  assign root_class = 'lab-hero color-scheme color-scheme--' | append: section.settings.color_scheme.id
+  unless section.settings.remove_vertical_spacing
+    assign root_class = root_class | append: ' section-spacing'
+  endunless
+  if section.settings.no_bottom_spacing
+    assign root_class = root_class | append: ' lab-hero--no-bottom'
+  endif
+  if section.settings.separate_section_with_border
+    assign root_class = root_class | append: ' bordered-section'
+  endif
+  if has_bg_image
+    assign root_class = root_class | append: ' lab-hero--lifestyle'
+  endif
+
+  capture root_style
+    if section.settings.background_color != blank and section.settings.background_color != 'rgba(0,0,0,0)'
+      echo 'background-color: '
+      echo section.settings.background_color
+      echo ';'
+    endif
+  endcapture
+-%}
+
 {%- if has_content -%}
-  <div class="lab-hero color-scheme color-scheme--{{ section.settings.color_scheme.id }} {% unless section.settings.remove_vertical_spacing %}section-spacing{% endunless %}{% if section.settings.no_bottom_spacing %} lab-hero--no-bottom{% endif %}{% if section.settings.separate_section_with_border %} bordered-section{% endif %}"{% if section.settings.background_color != blank and section.settings.background_color != 'rgba(0,0,0,0)' %} style="background-color: {{ section.settings.background_color }};"{% endif %}>
+  <div class="{{ root_class }}"{% if section.settings.anchor_id != blank %} id="{{ section.settings.anchor_id | handle }}" style="scroll-margin-top: 100px;{{ root_style | strip }}"{% elsif root_style != blank %} style="{{ root_style | strip }}"{% endif %}>
+    {%- if has_bg_image -%}
+      <div class="lab-hero__media" aria-hidden="true">
+        {%- if hero_bg_image != blank -%}
+          {%- assign hero_bg_mobile = section.settings.background_image_mobile -%}
+          {%- if hero_bg_mobile != blank -%}
+            <picture>
+              <source
+                media="(max-width: 699px)"
+                srcset="{{ hero_bg_mobile | image_url: width: 600 }} 600w, {{ hero_bg_mobile | image_url: width: 900 }} 900w, {{ hero_bg_mobile | image_url: width: 1200 }} 1200w"
+                sizes="100vw">
+              {{-
+                hero_bg_image
+                | image_url: width: 2400
+                | image_tag:
+                  widths: '480,720,1080,1440,1920,2400',
+                  sizes: '100vw',
+                  class: 'lab-hero__media-image',
+                  loading: 'eager',
+                  fetchpriority: 'high'
+              -}}
+            </picture>
+          {%- else -%}
+            {{-
+              hero_bg_image
+              | image_url: width: 2400
+              | image_tag:
+                widths: '480,720,1080,1440,1920,2400',
+                sizes: '100vw',
+                class: 'lab-hero__media-image',
+                loading: 'eager',
+                fetchpriority: 'high'
+            -}}
+          {%- endif -%}
+        {%- else -%}
+          <img src="{{ section.settings.background_asset | asset_url }}"
+               class="lab-hero__media-image"
+               alt=""
+               loading="eager"
+               fetchpriority="high">
+        {%- endif -%}
+        {%- if section.settings.scrim_opacity > 0 -%}
+          <div class="lab-hero__scrim" style="--lab-hero-scrim: {{ section.settings.scrim_opacity | divided_by: 100.0 }};"></div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
     <div class="container container--{{ section.settings.content_width }}">
-      <div class="lab-hero__inner prose text-center">
+      <div class="{{ inner_class }}">
         {%- if section.settings.logo != blank -%}
           <div class="lab-hero__logo">
             {%- capture logo_style -%}--logo-max-width: {{ section.settings.logo_max_width }}px;{%- endcapture -%}
@@ -23,32 +131,54 @@
                 loading: 'eager'
             -}}
           </div>
+        {%- elsif has_logo_asset -%}
+          <div class="lab-hero__logo">
+            <img src="{{ section.settings.logo_asset | asset_url }}"
+                 class="lab-hero__logo-image"
+                 style="--logo-max-width: {{ section.settings.logo_max_width }}px;"
+                 alt="Co-Lab"
+                 loading="eager">
+          </div>
         {%- endif -%}
 
         {%- if section.settings.eyebrow != blank -%}
           <p class="lab-hero__eyebrow h6">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
 
-        {%- if section.settings.heading != blank -%}
+        {%- if hero_heading != blank -%}
           <{{ section.settings.heading_tag }} class="lab-hero__heading {{ section.settings.heading_tag }}">
-            {{- section.settings.heading -}}
+            {{- hero_heading -}}
           </{{ section.settings.heading_tag }}>
         {%- endif -%}
 
-        {%- if section.settings.body != blank -%}
+        {%- if hero_body != blank -%}
           <div class="lab-hero__body">
-            {{- section.settings.body -}}
+            {{- hero_body -}}
           </div>
         {%- endif -%}
 
-        {%- if section.settings.button_label != blank -%}
+        {%- if section.settings.button_label != blank or section.settings.button2_label != blank -%}
           <div class="lab-hero__cta button-group justify-center">
-            {%
-              render 'button',
-              content: section.settings.button_label,
-              href: section.settings.button_link,
-              style: section.settings.button_style
-            %}
+            {%- if section.settings.button_label != blank -%}
+              {%
+                render 'button',
+                content: section.settings.button_label,
+                href: section.settings.button_link,
+                style: section.settings.button_style,
+                background: section.settings.button_background,
+                text_color: section.settings.button_text_color
+              %}
+            {%- endif -%}
+            {%- if section.settings.button2_label != blank -%}
+              {%
+                render 'button',
+                content: section.settings.button2_label,
+                href: section.settings.button2_link,
+                style: section.settings.button2_style,
+                background: section.settings.button2_background,
+                text_color: section.settings.button2_text_color
+              %}
+            {%- endif -%}
           </div>
         {%- endif -%}
       </div>
@@ -68,6 +198,11 @@
   .lab-hero__logo {
     display: flex;
     justify-content: center;
+    margin-bottom: 50px;
+  }
+
+  .lab-hero__inner--left .lab-hero__logo {
+    justify-content: flex-start;
   }
 
   .lab-hero__logo-image {
@@ -82,6 +217,70 @@
 
   .lab-hero__cta {
     margin-top: 2.5rem;
+  }
+
+  .lab-hero__inner--left .lab-hero__cta {
+    justify-content: flex-start;
+  }
+
+  /* Lifestyle (background-image) variant */
+  .lab-hero--lifestyle {
+    position: relative;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  @media (max-width: 699px) {
+    .lab-hero--lifestyle {
+      min-height: 225px;
+    }
+  }
+
+  .lab-hero--lifestyle .container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+
+  .lab-hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .lab-hero__media-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .lab-hero__scrim {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, var(--lab-hero-scrim, 0.25));
+  }
+
+  .lab-hero--lifestyle,
+  .lab-hero--lifestyle .lab-hero__eyebrow,
+  .lab-hero--lifestyle .lab-hero__heading,
+  .lab-hero--lifestyle .lab-hero__body,
+  .lab-hero--lifestyle .lab-hero__body * {
+    color: #fff;
+  }
+
+  .lab-hero--lifestyle .button--outline {
+    color: #fff;
+    border-color: #fff;
+  }
+
+  .lab-hero--lifestyle .button--outline:hover {
+    color: #000;
+    background: #fff;
   }
 {% endstylesheet %}
 
@@ -137,6 +336,54 @@
       "default": "rgba(0,0,0,0)"
     },
     {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "info": "Optional. Lets other buttons scroll to this section, e.g. set to 'birthstones' then link a button to #birthstones."
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "options": [
+        { "value": "center", "label": "Centre" },
+        { "value": "left", "label": "Left" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Background image (lifestyle hero)"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image",
+      "info": "Switches the hero into lifestyle mode (full-bleed image, white text). Overrides theme asset fallback."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background image — mobile",
+      "info": "Optional portrait/tall crop used on mobile. Falls back to the desktop image when blank."
+    },
+    {
+      "type": "text",
+      "id": "background_asset",
+      "label": "Background image — theme asset filename",
+      "info": "Used as a fallback when no Background image is uploaded above (e.g. co-lab-collection-hero.png)."
+    },
+    {
+      "type": "range",
+      "id": "scrim_opacity",
+      "label": "Image darken (scrim)",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 25
+    },
+    {
       "type": "header",
       "content": "Logo"
     },
@@ -145,6 +392,12 @@
       "id": "logo",
       "label": "Logo image",
       "info": "Recommended: transparent PNG (e.g. Group 210.png / colab mark)"
+    },
+    {
+      "type": "text",
+      "id": "logo_asset",
+      "label": "Logo — theme asset filename",
+      "info": "Used as fallback when no Logo image is uploaded above (e.g. co-lab-logo-white.png)."
     },
     {
       "type": "range",
@@ -159,6 +412,13 @@
     {
       "type": "header",
       "content": "Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_collection_content",
+      "label": "Use this collection's title, description & image",
+      "info": "On a collection page, pulls the heading from the collection title, the body from the collection description and the background from the collection image. Lets one template serve many Co-Lab collections. Falls back to the fields below when empty.",
+      "default": false
     },
     {
       "type": "text",
@@ -212,7 +472,58 @@
         { "value": "solid", "label": "t:global.text.button_style_options.solid" },
         { "value": "outline", "label": "t:global.text.button_style_options.outline" }
       ],
-      "default": "outline"
+      "default": "solid"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button colour",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text colour",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "header",
+      "content": "Secondary button (e.g. Jump to FAQs)"
+    },
+    {
+      "type": "text",
+      "id": "button2_label",
+      "label": "Secondary button label"
+    },
+    {
+      "type": "text",
+      "id": "button2_link",
+      "label": "Secondary button link",
+      "info": "To jump to the FAQ section on this page, leave as #faqs",
+      "default": "#faqs"
+    },
+    {
+      "type": "select",
+      "id": "button2_style",
+      "label": "Secondary button style",
+      "options": [
+        { "value": "solid", "label": "t:global.text.button_style_options.solid" },
+        { "value": "outline", "label": "t:global.text.button_style_options.outline" }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "color",
+      "id": "button2_background",
+      "label": "Secondary button colour",
+      "info": "Set a contrasting colour so the Jump to FAQs button stands out.",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "button2_text_color",
+      "label": "Secondary button text colour",
+      "default": "#ffffff"
     }
   ],
   "presets": [

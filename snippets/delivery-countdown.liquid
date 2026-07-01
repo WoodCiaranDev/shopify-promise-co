@@ -1,0 +1,282 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+DELIVERY COUNTDOWN
+----------------------------------------------------------------------------------------------------------------------
+
+Renders the market-aware delivery countdown button (UK / USA) and the script that keeps it ticking.
+Used by the standard product info block and by the Co-Lab picker so both share one implementation.
+
+* static_message: when provided, render a fixed message instead of the live countdown (used for
+  made-to-order Co-Lab products, e.g. "Made to order: ").
+* static_message_strong: optional bold portion appended after static_message (e.g. "Ships in 2-3 weeks.").
+* info_target: optional anchor (e.g. "#co-lab-mto"); when set, renders a "more info" link that scrolls to
+  and opens that target (used to link the made-to-order accordion).
+* info_label: optional label for the info link (defaults to "Click for more info").
+{%- endcomment -%}
+
+{%- if static_message != blank or static_message_strong != blank -%}
+  {%- if info_target != blank -%}
+    <a class="delivery-countdown delivery-countdown--static" href="{{ info_target }}" data-countdown-info-target="{{ info_target }}">
+      <div class="delivery-countdown__icon">
+        <img src="{{ 'icon-delivery.png' | file_url }}" alt="Delivery" width="40" height="40" loading="lazy">
+      </div>
+      <p class="delivery-countdown__text">
+        <span class="delivery-countdown__message">{{ static_message }}{% if static_message_strong != blank %}<strong>{{ static_message_strong }}</strong>{% endif %}</span>
+        <br>
+        <span class="delivery-countdown__cta">{{ info_label | default: 'Click for more info' }}</span>
+      </p>
+    </a>
+  {%- else -%}
+    <div class="delivery-countdown delivery-countdown--static">
+      <div class="delivery-countdown__icon">
+        <img src="{{ 'icon-delivery.png' | file_url }}" alt="Delivery" width="40" height="40" loading="lazy">
+      </div>
+      <p class="delivery-countdown__text">
+        <span class="delivery-countdown__message">{{ static_message }}{% if static_message_strong != blank %}<strong>{{ static_message_strong }}</strong>{% endif %}</span>
+      </p>
+    </div>
+  {%- endif -%}
+
+  {%- if info_target != blank -%}
+    <script>
+      (function () {
+        var target = {{ info_target | json }};
+        document.addEventListener('click', function (event) {
+          var link = event.target.closest('[data-countdown-info-target="' + target + '"]');
+          if (!link) return;
+          event.preventDefault();
+          var el = document.querySelector(target);
+          if (!el) return;
+          var disclosure = el.matches('accordion-disclosure') ? el : el.querySelector('accordion-disclosure');
+          if (disclosure && typeof disclosure.toggle === 'function') {
+            disclosure.toggle(true);
+            var content = disclosure.querySelector('.accordion__content');
+            if (content) { content.style.opacity = ''; }
+          } else {
+            var details = el.matches('details') ? el : el.querySelector('details');
+            if (details) { details.open = true; }
+          }
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      })();
+    </script>
+  {%- endif -%}
+
+{%- else -%}
+
+{%- liquid
+  assign show_countdown = false
+  assign market_type = ''
+  assign current_market = localization.market.handle | downcase
+
+  if current_market == 'gb' or current_market == 'uk' or current_market == 'united-kingdom'
+    assign show_countdown = true
+    assign market_type = 'uk'
+  elsif current_market == 'usa' or current_market == 'us' or current_market == 'united-states'
+    assign show_countdown = true
+    assign market_type = 'usa'
+  endif
+-%}
+
+{%- if show_countdown -%}
+  <button type="button" aria-controls="shipping-popup" class="delivery-countdown">
+    <div class="delivery-countdown__icon">
+      <img src="{{ 'icon-delivery.png' | file_url }}" alt="Delivery" width="40" height="40" loading="lazy">
+    </div>
+    <p class="delivery-countdown__text">
+      <span class="delivery-countdown__message" data-market="{{ market_type }}"></span>
+      <br>
+      <span class="delivery-countdown__cta">Click for more info</span>
+    </p>
+  </button>
+
+  <script>
+    (function() {
+      const messageEl = document.querySelector('.delivery-countdown__message');
+      if (!messageEl) return;
+
+      const market = messageEl.dataset.market;
+
+      // Test mode: check for query params ?testDay=0-6&testHour=0-23
+      const urlParams = new URLSearchParams(window.location.search);
+      const testDay = urlParams.get('testDay');
+      const testHour = urlParams.get('testHour');
+
+      function getTimezoneDate(timezone) {
+        // Use formatToParts for robust timezone handling (avoids string parsing issues)
+        const now = new Date();
+        const formatter = new Intl.DateTimeFormat('en-GB', {
+          timeZone: timezone,
+          year: 'numeric',
+          month: 'numeric',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          second: 'numeric',
+          weekday: 'short',
+          hour12: false
+        });
+        const parts = formatter.formatToParts(now);
+        const values = {};
+        for (const { type, value } of parts) {
+          values[type] = type === 'weekday' ? value : parseInt(value, 10);
+        }
+        // Create Date using timezone-corrected components
+        const date = new Date(values.year, values.month - 1, values.day, values.hour, values.minute, values.second);
+        return date;
+      }
+
+      function getTestTime(timezone) {
+        const localTime = getTimezoneDate(timezone);
+        if (testDay !== null || testHour !== null) {
+          if (testDay !== null) {
+            const currentDay = localTime.getDay();
+            const targetDay = parseInt(testDay, 10);
+            const diff = targetDay - currentDay;
+            localTime.setDate(localTime.getDate() + diff);
+          }
+          if (testHour !== null) {
+            localTime.setHours(parseInt(testHour, 10), 0, 0, 0);
+          }
+        }
+        return localTime;
+      }
+
+      // Date formatting helpers
+      function getOrdinal(n) {
+        const s = ['th', 'st', 'nd', 'rd'];
+        const v = n % 100;
+        return n + (s[(v - 20) % 10] || s[v] || s[0]);
+      }
+
+      function formatDay(date) {
+        return ['Sun', 'Mon', 'Tues', 'Weds', 'Thurs', 'Fri', 'Sat'][date.getDay()];
+      }
+
+      function formatMonth(date) {
+        return ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][date.getMonth()];
+      }
+
+      function isWorkingDay(date) {
+        const day = date.getDay();
+        return day >= 1 && day <= 5;
+      }
+
+      function getNextWorkingDay(date) {
+        const next = new Date(date);
+        next.setDate(next.getDate() + 1);
+        while (!isWorkingDay(next)) {
+          next.setDate(next.getDate() + 1);
+        }
+        return next;
+      }
+
+      function calculateUK() {
+        const ukTime = getTestTime('Europe/London');
+        const ukHour = ukTime.getHours();
+        const ukDay = ukTime.getDay();
+        const isWeekday = ukDay >= 1 && ukDay <= 5;
+        const beforeCutoff = ukHour < 13;
+
+        let dispatchDate, cutoffDate;
+
+        if (isWeekday && beforeCutoff) {
+          dispatchDate = new Date(ukTime);
+          cutoffDate = new Date(ukTime);
+          cutoffDate.setHours(13, 0, 0, 0);
+        } else {
+          dispatchDate = getNextWorkingDay(ukTime);
+          cutoffDate = new Date(dispatchDate);
+          cutoffDate.setHours(13, 0, 0, 0);
+        }
+
+        const deliveryDate = new Date(dispatchDate);
+        deliveryDate.setDate(deliveryDate.getDate() + 1);
+
+        const diff = cutoffDate - ukTime;
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+        const dayStr = formatDay(deliveryDate);
+        const dateStr = getOrdinal(deliveryDate.getDate()) + ' ' + formatMonth(deliveryDate);
+
+        return [
+          'Get it on ',
+          { bold: dayStr + ' ' + dateStr },
+          ' using ',
+          { bold: '24 hour delivery' },
+          ' - order within ',
+          { bold: hours + 'h ' + minutes + 'm' }
+        ];
+      }
+
+      function calculateUSA() {
+        const mstTime = getTestTime('America/Denver');
+        const mstHour = mstTime.getHours();
+        const mstDay = mstTime.getDay();
+        const isWeekday = mstDay >= 1 && mstDay <= 5;
+        const beforeCutoff = mstHour < 13;
+
+        let shipsDate, cutoffDate;
+
+        if (isWeekday && beforeCutoff) {
+          shipsDate = new Date(mstTime);
+          cutoffDate = new Date(mstTime);
+          cutoffDate.setHours(13, 0, 0, 0);
+        } else if (isWeekday && !beforeCutoff) {
+          shipsDate = getNextWorkingDay(mstTime);
+          cutoffDate = new Date(shipsDate);
+          cutoffDate.setHours(13, 0, 0, 0);
+        } else {
+          const monday = new Date(mstTime);
+          const daysUntilMonday = mstDay === 0 ? 1 : 2;
+          monday.setDate(monday.getDate() + daysUntilMonday);
+          shipsDate = monday;
+          cutoffDate = new Date(monday);
+          cutoffDate.setHours(13, 0, 0, 0);
+        }
+
+        const diff = cutoffDate - mstTime;
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+        const shipDayStr = formatDay(shipsDate);
+        const shipDateStr = getOrdinal(shipsDate.getDate()) + ' ' + formatMonth(shipsDate);
+
+        return [
+          'Ships ',
+          { bold: shipDayStr + ' ' + shipDateStr },
+          ', with ',
+          { bold: 'express delivery' },
+          ' in 1-4 Business Days - Order within ',
+          { bold: hours + 'h ' + minutes + 'm' }
+        ];
+      }
+
+      function render(parts) {
+        messageEl.textContent = '';
+        parts.forEach((part) => {
+          if (typeof part === 'string') {
+            messageEl.appendChild(document.createTextNode(part));
+          } else {
+            const strong = document.createElement('strong');
+            strong.textContent = part.bold;
+            messageEl.appendChild(strong);
+          }
+        });
+      }
+
+      function updateTimer() {
+        if (market === 'uk') {
+          render(calculateUK());
+        } else if (market === 'usa') {
+          render(calculateUSA());
+        }
+      }
+
+      updateTimer();
+      setInterval(updateTimer, 60000);
+    })();
+  </script>
+{%- endif -%}
+{%- endif -%}
