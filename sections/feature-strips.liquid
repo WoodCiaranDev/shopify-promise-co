@@ -143,9 +143,9 @@
     display: flex;
     justify-content: center;
     gap: 3.5rem;
-    margin-top: 0.25rem;
-    margin-bottom: 1.2rem;
-    padding-bottom: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
   }
 
   @media (min-width: 700px) {
@@ -173,37 +173,48 @@
   }
 
   .feature-strips__media {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
+    position: relative;
+    min-height: 200px;
   }
 
   @media (min-width: 700px) {
     .feature-strips__media {
-      padding: 3rem;
+      min-height: 350px;
     }
   }
 
   .feature-strips__picture {
+    position: absolute;
+    inset: 0;
     display: block;
     width: 100%;
-    max-width: var(--feature-strips-image-max-width, 640px);
+    height: 100%;
+    max-width: none;
   }
 
   .feature-strips__image {
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
   }
 
   .feature-strips__content {
-    padding: 2.5rem 1rem;
+    padding: 1.75rem 1rem 0.75rem;
+  }
+
+  /* Mobile: centre the caption copy (desktop keeps its default alignment). */
+  .feature-strips__content-inner {
+    text-align: center;
   }
 
   @media (min-width: 700px) {
     .feature-strips__content {
       padding: 4rem 1.5rem;
+    }
+
+    .feature-strips__content-inner {
+      text-align: left;
     }
   }
 
@@ -238,26 +249,21 @@
       var autoplayOn = slider.dataset.autoplay === 'true' && !reduceMotion;
       var speed = parseInt(slider.dataset.autoplaySpeed, 10) || 5;
 
+      // One full strip per view (no fractional peek/centred slides — that combination loops
+      // janky in Swiper 11). autoHeight lets the slider adapt smoothly to each strip's height.
       new Swiper(slider, {
         loop: true,
-        grabCursor: true,
         speed: 600,
+        grabCursor: true,
+        slidesPerView: 1,
+        spaceBetween: 0,
+        autoHeight: true,
         autoplay: autoplayOn
           ? { delay: speed * 1000, disableOnInteraction: false, pauseOnMouseEnter: true }
           : false,
         navigation: {
           prevEl: slider.querySelector('[data-feature-strips-prev]'),
           nextEl: slider.querySelector('[data-feature-strips-next]')
-        },
-        slidesPerView: 1.1,
-        centeredSlides: true,
-        spaceBetween: 16,
-        breakpoints: {
-          700: {
-            slidesPerView: 1,
-            centeredSlides: false,
-            spaceBetween: 0
-          }
         }
       });
     }
