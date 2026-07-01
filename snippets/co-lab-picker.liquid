@@ -23,6 +23,7 @@ Inputs:
 {%- liquid
   assign mf = product.metafields.custom
   assign slot_count = mf.birthstone_slots.value | default: 2
+  assign hide_optional = mf.birthstone_hide_optional.value
   assign eng_max_chars = mf.engraving_max_chars.value | default: 8
 
   # Extra pricing in pence. 0 (or unset) = included in the base price; any positive
@@ -69,7 +70,10 @@ Inputs:
     endif
   endcapture
   assign bs_heading = mf.birthstone_heading.value | default: bs_heading_default
-  assign eng_heading = mf.engraving_heading.value | default: 'Add an Engraving'
+  assign eng_label = 'Internal Engraving'
+  if product.handle == 'name-engraved-slim-signet-ring'
+    assign eng_label = 'External Engraving'
+  endif
 -%}
 
 <c-co-lab-picker
@@ -162,7 +166,7 @@ Inputs:
         <h2 class="c-co-lab-picker__section-title">Customisation</h2>
 
         <p class="c-co-lab-picker__birthstone-help">
-          <a href="#co-lab-birthstone-info-{{ product.id }}" title="Need help configuring?">Need help configuring?</a>
+          <a href="#co-lab-help-{{ product.id }}" title="Personalisation Guide Here">Personalisation Guide Here</a>
         </p>
 
         {%- if slot_count > 0 -%}
@@ -190,7 +194,7 @@ Inputs:
               -%}
               <div class="c-co-lab-picker__stone-row" data-slot="{{ slot }}">
                 <p class="c-co-lab-picker__stone-label">
-                  <span>{{ slot_label }}:</span>
+                  <span>{{ slot_label }}:{% if slot != 1 and hide_optional != true %} <span class="c-co-lab-picker__optional">(optional)</span>{% endif %}</span>
                   <span class="c-co-lab-picker__uplift">{% if bs_charged %}+ {{ bs_price | money_without_trailing_zeros }}{% else %}Free{% endif %}</span>
                 </p>
                 <button type="button" class="c-co-lab-picker__stone-select" data-action="open-grid" data-slot="{{ slot }}" aria-haspopup="dialog">
@@ -234,16 +238,16 @@ Inputs:
 
         <div class="c-co-lab-picker__inner c-co-lab-picker__inner--engraving">
           <button type="button" class="c-co-lab-picker__stones-toggle" data-action="toggle-engraving" aria-expanded="false">
-            <span>{{ eng_heading }}</span>
+            <span>Add an Engraving</span>
             <span class="c-co-lab-picker__chev" aria-hidden="true">↓</span>
           </button>
 
           <div class="c-co-lab-picker__engraving" data-engraving hidden>
             <p class="c-co-lab-picker__engraving-label">
-              <span>Engraving</span>
+              <span>{{ eng_label }}</span>
               <span class="c-co-lab-picker__uplift">{% if eng_charged %}+ {{ eng_price | money_without_trailing_zeros }}{% else %}Free{% endif %}</span>
             </p>
-            <p class="c-co-lab-picker__engraving-note">Case sensitive. Can include numbers and special characters. No emojis</p>
+            <p class="c-co-lab-picker__engraving-note">Case-sensitive. Supports letters, numbers &amp; special characters. No emojis.</p>
             <div class="c-co-lab-picker__engraving-wrap">
               <input type="text"
                      id="{{ product_form_id }}-engraving"
@@ -302,42 +306,5 @@ Inputs:
     <div data-colab-review-body></div>
   </x-modal>
 
-  <x-modal id="co-lab-birthstone-info-{{ product.id }}" class="modal modal--lg color-scheme color-scheme--dialog">
-    <span class="h5" slot="header">Need help configuring?</span>
-    <div class="c-co-lab-birthstone-info prose">
-      {%- if product.metafields.custom.help_image != blank -%}
-        <div class="c-co-lab-birthstone-info__image">
-          {{-
-            product.metafields.custom.help_image
-            | image_url: width: 720
-            | image_tag:
-              widths: '320,480,720',
-              sizes: '(min-width: 750px) 600px, 90vw',
-              class: 'c-co-lab-birthstone-info__image-tag',
-              loading: 'lazy'
-          -}}
-        </div>
-      {%- endif -%}
-      <p>Personalise your ring with the birthstones that mean the most to you. Choose a stone for each available setting — an <strong>inner birthstone</strong> hidden inside the band, and/or an <strong>outer birthstone</strong> on the face — and add an optional internal engraving.</p>
-      <p>Each birth month has its own stone colour:</p>
-      <ul class="c-co-lab-birthstone-info__list">
-        {%- for stone in stones -%}
-          {%- if stone.month != blank or stone.name != blank -%}
-            <li>{{ stone.month }}{% if stone.month != blank and stone.name != blank %} — {% endif %}{{ stone.name }}</li>
-          {%- endif -%}
-        {%- endfor -%}
-      </ul>
-    </div>
-  </x-modal>
-
-  <script>
-    document.addEventListener('click', function (event) {
-      var link = event.target.closest('a[href="#co-lab-birthstone-info-{{ product.id }}"]');
-      if (!link) return;
-      event.preventDefault();
-      var modal = document.getElementById('co-lab-birthstone-info-{{ product.id }}');
-      if (modal && typeof modal.show === 'function') { modal.show(); }
-      else if (modal) { modal.setAttribute('open', ''); }
-    });
-  </script>
+  {%- render 'co-lab-help-modal', product: product, stones: stones -%}
 </c-co-lab-picker>

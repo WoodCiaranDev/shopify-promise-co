@@ -29,6 +29,10 @@ class CoLabPicker extends HTMLElement {
     this.bsCharged = this.dataset.birthstoneCharged === 'true' && this.bsPrice > 0;
     this.engCharged = this.dataset.engravingCharged === 'true' && this.engPrice > 0;
     this.basePrice = parseInt(this.dataset.basePrice, 10) || 0;
+    // The Liquid `money` filter already renders in the customer's market/presentment
+    // currency (e.g. $ on the USA market). Use that string for the base price/total so
+    // the modal matches the rest of the site instead of the shop's base currency (£).
+    this.basePriceFormatted = (this.querySelector('[data-base-price-display]')?.textContent || '').trim();
     this.productTitle = this.dataset.productTitle || '';
 
     this.stonesData = this.parseJson('[data-stones-json]', []);
@@ -81,12 +85,38 @@ class CoLabPicker extends HTMLElement {
 
     this.sizeSelect?.addEventListener('change', () => {
       this.selectSize(this.sizeSelect.value);
-      if (this.selectedSize && window.matchMedia('(min-width: 750px)').matches) {
-        this.scrollToCustomisation();
-      }
     });
 
     this.form?.addEventListener('submit', (e) => this.onSubmit(e));
+
+    // Browsers restore a remembered metal/size after navigating back without firing
+    // change, so re-read the live controls on restore (and just after load) to keep
+    // validation honest rather than relying solely on the change event.
+    this.onPageShow = () => {
+      // Returning via bfcache restores this element mid-flow: submitting still true (we set
+      // it and navigated away on the previous add) and the review modal still open with an
+      // unticked confirm. Reset the flag and close the modal so a returning customer starts
+      // clean. Only touches a boolean + closes a dialog — no cart/line-item work.
+      this.submitting = false;
+      this.closeModal();
+      this.syncSelectionsFromDom();
+    };
+    window.addEventListener('pageshow', this.onPageShow);
+    requestAnimationFrame(() => this.syncSelectionsFromDom());
+  }
+
+  // Mirror whatever the metal radios / size select currently hold into state.
+  syncSelectionsFromDom() {
+    const checkedMetal = this.metalRadios.find((r) => r.checked);
+    this.selectedMetal = checkedMetal ? checkedMetal.value : '';
+    if (this.metalSelectedLabel && this.selectedMetal) {
+      this.metalSelectedLabel.textContent = this.selectedMetal;
+    }
+    this.selectedSize = this.sizeSelect ? this.sizeSelect.value || '' : '';
+  }
+
+  disconnectedCallback() {
+    if (this.onPageShow) window.removeEventListener('pageshow', this.onPageShow);
   }
 
   selectMetal(value) {
@@ -293,6 +323,9 @@ class CoLabPicker extends HTMLElement {
     // add-on lines and bundle properties. Suppress it.
     event.stopImmediatePropagation();
     this.clearError();
+    // Validate against the live controls, not just whatever the last change event set —
+    // a browser-restored size must pass too.
+    this.syncSelectionsFromDom();
 
     if (this.metalRequired() && !this.selectedMetal) {
       this.showError('Please choose a metal before adding to cart.');
@@ -317,12 +350,27 @@ class CoLabPicker extends HTMLElement {
 
   // --- Review card (built with safe DOM construction, no innerHTML) ----------
 
-  formatMoney(pence) {
-    if (window.Shopify && typeof window.Shopify.formatMoney === 'function' && window.themeVariables?.settings?.moneyFormat) {
-      return window.Shopify.formatMoney(pence, window.themeVariables.settings.moneyFormat);
+  // Base price / total as rendered by Liquid (correct market currency), falling back to
+  // the JS formatter only if the hidden display span is missing.
+  basePriceDisplay() {
+    return this.basePriceFormatted || this.formatMoney(this.basePrice);
+  }
+
+  formatMoney(amount) {
+    // Format in the customer's active (presentment) currency, not the shop's base
+    // currency — otherwise USA shoppers see £ in the modal.
+    const currency = window.Shopify && window.Shopify.currency && window.Shopify.currency.active;
+    if (currency) {
+      try {
+        return new Intl.NumberFormat(undefined, { style: 'currency', currency })
+          .format(amount / 100)
+          .replace(/[.,]00(?=\D*$)/, '');
+      } catch (e) { /* fall through */ }
     }
-    // Fallback: assume GBP, trim trailing zeros.
-    const value = (pence / 100).toFixed(2).replace(/\.00$/, '');
+    if (window.Shopify && typeof window.Shopify.formatMoney === 'function' && window.themeVariables?.settings?.moneyFormat) {
+      return window.Shopify.formatMoney(amount, window.themeVariables.settings.moneyFormat);
+    }
+    const value = (amount / 100).toFixed(2).replace(/\.00$/, '');
     return `£${value}`;
   }
 
@@ -371,9 +419,8 @@ class CoLabPicker extends HTMLElement {
     const card = this.el('c-co-lab-cart-bundle', 'c-co-lab-cart-bundle');
 
     const header = this.el('header', 'c-co-lab-cart-bundle__header', [
-      this.el('p', 'c-co-lab-cart-bundle__eyebrow', 'Step 4'),
       this.el('h2', 'c-co-lab-cart-bundle__title', this.productTitle),
-      this.el('p', 'c-co-lab-cart-bundle__base-price', this.formatMoney(this.basePrice)),
+      this.el('p', 'c-co-lab-cart-bundle__base-price', this.basePriceDisplay()),
     ]);
     card.appendChild(header);
 
@@ -408,7 +455,10 @@ class CoLabPicker extends HTMLElement {
       card.appendChild(group);
     }
 
-    card.appendChild(this.el('p', 'c-co-lab-cart-bundle__total', this.formatMoney(this.computedTotal())));
+    // With no charged add-ons the total equals the base price, so reuse the market-correct
+    // Liquid string; only fall back to JS formatting when there are paid extras.
+    const totalDisplay = (this.bsCharged || this.engCharged) ? this.formatMoney(this.computedTotal()) : this.basePriceDisplay();
+    card.appendChild(this.el('p', 'c-co-lab-cart-bundle__total', totalDisplay));
 
     const modalError = this.el('p', 'c-co-lab-picker__error');
     modalError.setAttribute('data-modal-error', '');
@@ -425,15 +475,15 @@ class CoLabPicker extends HTMLElement {
     confirmCheck.id = `${this.dataset.reviewModalId}-confirm`;
     const confirmLabel = this.el('label', 'c-co-lab-picker__confirm');
     confirmLabel.htmlFor = confirmCheck.id;
-    confirmLabel.appendChild(this.el('span', 'c-co-lab-picker__confirm-label', 'I confirm this is my perfect piece'));
+    confirmLabel.appendChild(this.el('span', 'c-co-lab-picker__confirm-label', 'I confirm my selection is correct'));
     confirmLabel.appendChild(confirmCheck);
     card.appendChild(confirmLabel);
-    card.appendChild(this.el('p', 'c-co-lab-picker__confirm-note', 'We build your perfect ring and dispatch in 2-3 weeks. As each piece is made to order, it cannot be returned, exchanged or amended once production has begun.'));
+    card.appendChild(this.el('p', 'c-co-lab-picker__confirm-note', 'Your piece will be crafted exactly as confirmed above - made just for you and dispatched in 2-3 weeks.'));
 
     // Actions
     const backBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--secondary', '← Edit');
     backBtn.type = 'button';
-    const confirmBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--primary', 'Checkout →');
+    const confirmBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--primary', 'Add to cart');
     confirmBtn.type = 'button';
     confirmBtn.disabled = true;
     card.appendChild(this.el('div', 'c-co-lab-cart-bundle__actions', [backBtn, confirmBtn]));
@@ -455,10 +505,16 @@ class CoLabPicker extends HTMLElement {
   async confirmAndAdd(confirmBtn) {
     this.clearModalError();
 
+    // In-flight guard: a second click during the async add could mint a second bundle and
+    // duplicate the line, so ignore re-entry until the add settles (reset in finally paths).
+    if (this.submitting) return;
+
     if (!this.selectionComplete()) {
       this.showModalError('Please choose a size before adding to cart.');
       return;
     }
+
+    this.submitting = true;
 
     const bundleId = (crypto.randomUUID && crypto.randomUUID()) || `bundle-${Date.now()}-${Math.random().toString(36).slice(2)}`;
     const qty = Math.max(1, parseInt(this.querySelector('input[name="quantity"]')?.value, 10) || 1);
@@ -528,16 +584,43 @@ class CoLabPicker extends HTMLElement {
         const payload = await this.safeJson(res);
         throw new CartAddError(res.status, payload);
       }
-      await res.json();
+      const data = await res.json();
 
-      window.location.assign(`${root}checkout`);
+      // Add to cart and open the side cart drawer (the theme's own way), staying on the
+      // page rather than redirecting to checkout.
+      await this.syncCartDrawer(root, data.sections);
+
+      this.closeModal();
+      this.submitting = false;
+      if (confirmBtn) {
+        confirmBtn.disabled = false;
+        confirmBtn.removeAttribute('aria-busy');
+      }
     } catch (err) {
       console.error('[co-lab-picker] add to cart failed', err);
+      this.submitting = false;
       this.showModalError(this.friendlyErrorMessage(err));
       if (confirmBtn) {
         confirmBtn.disabled = false;
         confirmBtn.removeAttribute('aria-busy');
       }
+    }
+  }
+
+  // Mirror the theme's own ProductForm add flow: dispatch a single cart:change carrying the
+  // freshly rendered section HTML so the side cart drawer re-renders, updates the count, and
+  // opens (force_open_drawer + variant:add). No cart:refresh, no DOM swap of our own — that
+  // keeps the line-item remove/quantity controls intact.
+  async syncCartDrawer(root, sections) {
+    try {
+      const cart = await (await fetch(`${root}cart.js`, { headers: { Accept: 'application/json' } })).json();
+      cart.sections = sections;
+      document.documentElement.dispatchEvent(new CustomEvent('cart:change', {
+        bubbles: true,
+        detail: { baseEvent: 'variant:add', onSuccessDo: 'force_open_drawer', cart },
+      }));
+    } catch (err) {
+      console.error('[co-lab-picker] cart drawer update failed', err);
     }
   }
 

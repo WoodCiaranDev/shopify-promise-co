@@ -59,7 +59,7 @@ Inputs:
       <span data-base-price-display hidden>{{ first_variant.price | money_without_trailing_zeros }}</span>
 
       <section class="c-co-lab-picker__card c-co-lab-picker__card--metal">
-        <p class="c-co-lab-picker__step">Step 1</p>
+        <p class="c-co-lab-picker__step">Step 2</p>
         <h2 class="c-co-lab-picker__section-title">Metal &amp; Chain</h2>
 
         {%- if metal_list.size > 0 -%}
@@ -121,8 +121,12 @@ Inputs:
       </section>
 
       <section class="c-co-lab-picker__card c-co-lab-picker__card--custom" data-customisation>
-        <p class="c-co-lab-picker__step">Step 2</p>
-        <h2 class="c-co-lab-picker__section-title">Personalise</h2>
+        <p class="c-co-lab-picker__step">Step 3</p>
+        <h2 class="c-co-lab-picker__section-title">Customisation</h2>
+
+        <p class="c-co-lab-picker__birthstone-help">
+          <a href="#co-lab-help-{{ product.id }}" title="Personalisation Guide Here">Personalisation Guide Here</a>
+        </p>
 
         <div class="c-co-lab-picker__inner">
           {%- comment -%} 1. Initial — A-Z letter grid {%- endcomment -%}
@@ -232,4 +236,6 @@ Inputs:
     <span class="h5" slot="header">Review your necklace</span>
     <div data-colab-review-body></div>
   </x-modal>
+
+  {%- render 'co-lab-help-modal', product: product, stones: stones -%}
 </c-co-lab-necklace-picker>

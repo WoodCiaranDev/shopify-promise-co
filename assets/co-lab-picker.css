@@ -164,6 +164,13 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   opacity: 0.6;
 }
 
+.c-co-lab-picker__optional {
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  opacity: 0.55;
+}
+
 .c-co-lab-picker__stone-select {
   display: flex;
   align-items: center;
@@ -362,6 +369,35 @@ safe-sticky.product-info:has(c-co-lab-picker) {
    CO-LAB REVIEW CARD — shown inside the pre-add review modal
    Reuses the picker tokens (cream backgrounds, pill controls).
    ============================================================ */
+
+/* Blur the page behind the pre-add review modal (ring + necklace). */
+[data-colab-review-modal]::part(overlay) {
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+/* Larger header on the pre-add review modal (ring + necklace). */
+[data-colab-review-modal] [slot="header"] {
+  font-size: 1.3rem;
+}
+
+/* On mobile the review modal goes full screen with no dimmed/blurred backdrop;
+   the content itself still scrolls. */
+@media (max-width: 699px) {
+  [data-colab-review-modal]::part(overlay) {
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  [data-colab-review-modal]::part(content) {
+    width: 100%;
+    max-width: none;
+    height: 100dvh;
+    max-height: 100dvh;
+    border-radius: 0;
+  }
+}
 
 .c-co-lab-cart-bundle {
   display: block;
@@ -814,5 +850,43 @@ safe-sticky.product-info:has(c-co-lab-picker) {
 @media (max-width: 749px) {
   .c-co-lab-picker__grid-list--letters {
     grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* ------------------------------------------------------------------------- */
+/* HELP MODAL — shared by ring + necklace pickers. Image left, copy right.   */
+/* ------------------------------------------------------------------------- */
+.c-co-lab-help__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+.c-co-lab-help__image {
+  flex: 0 0 auto;
+  width: 100%;
+}
+.c-co-lab-help__image-tag {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+.c-co-lab-help__text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.c-co-lab-help__key-title {
+  margin-top: 1.25rem;
+  font-weight: 600;
+}
+
+@media (min-width: 700px) {
+  .c-co-lab-help__body {
+    flex-direction: row;
+  }
+  .c-co-lab-help__image {
+    width: 320px;
   }
 }

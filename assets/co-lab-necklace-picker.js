@@ -22,6 +22,10 @@ class CoLabNecklacePicker extends HTMLElement {
     this.selectedSize = '';
 
     this.basePrice = parseInt(this.dataset.basePrice, 10) || 0;
+    // The Liquid `money` filter already renders in the customer's market/presentment
+    // currency (e.g. $ on the USA market). Use that string so the modal matches the rest
+    // of the site instead of the shop's base currency (£).
+    this.basePriceFormatted = (this.querySelector('[data-base-price-display]')?.textContent || '').trim();
     this.productTitle = this.dataset.productTitle || '';
 
     const checkedMetal = this.metalRadios.find((r) => r.checked) || this.metalRadios[0];
@@ -29,6 +33,16 @@ class CoLabNecklacePicker extends HTMLElement {
     if (this.sizeSelect && this.sizeSelect.value) this.selectSize(this.sizeSelect.value);
 
     this.bindEvents();
+
+    // Returning via bfcache restores this element with submitting still true (we set it and
+    // navigated away on the previous add). Reset it so a returning customer can add again.
+    // Only touches a boolean — no DOM or cart work.
+    this.onPageShow = () => { this.submitting = false; this.closeModal(); };
+    window.addEventListener('pageshow', this.onPageShow);
+  }
+
+  disconnectedCallback() {
+    if (this.onPageShow) window.removeEventListener('pageshow', this.onPageShow);
   }
 
   bindEvents() {
@@ -166,11 +180,25 @@ class CoLabNecklacePicker extends HTMLElement {
     modal.show ? modal.show() : modal.setAttribute('open', '');
   }
 
-  formatMoney(pence) {
-    if (window.Shopify && typeof window.Shopify.formatMoney === 'function' && window.themeVariables?.settings?.moneyFormat) {
-      return window.Shopify.formatMoney(pence, window.themeVariables.settings.moneyFormat);
+  basePriceDisplay() {
+    return this.basePriceFormatted || this.formatMoney(this.basePrice);
+  }
+
+  formatMoney(amount) {
+    // Format in the customer's active (presentment) currency, not the shop's base
+    // currency — otherwise USA shoppers see £ in the modal.
+    const currency = window.Shopify && window.Shopify.currency && window.Shopify.currency.active;
+    if (currency) {
+      try {
+        return new Intl.NumberFormat(undefined, { style: 'currency', currency })
+          .format(amount / 100)
+          .replace(/[.,]00(?=\D*$)/, '');
+      } catch (e) { /* fall through */ }
     }
-    const value = (pence / 100).toFixed(2).replace(/\.00$/, '');
+    if (window.Shopify && typeof window.Shopify.formatMoney === 'function' && window.themeVariables?.settings?.moneyFormat) {
+      return window.Shopify.formatMoney(amount, window.themeVariables.settings.moneyFormat);
+    }
+    const value = (amount / 100).toFixed(2).replace(/\.00$/, '');
     return `£${value}`;
   }
 
@@ -199,9 +227,8 @@ class CoLabNecklacePicker extends HTMLElement {
     const card = this.el('c-co-lab-cart-bundle', 'c-co-lab-cart-bundle');
 
     card.appendChild(this.el('header', 'c-co-lab-cart-bundle__header', [
-      this.el('p', 'c-co-lab-cart-bundle__eyebrow', 'Step 3'),
       this.el('h2', 'c-co-lab-cart-bundle__title', this.productTitle),
-      this.el('p', 'c-co-lab-cart-bundle__base-price', this.formatMoney(this.basePrice)),
+      this.el('p', 'c-co-lab-cart-bundle__base-price', this.basePriceDisplay()),
     ]));
 
     const qty = Math.max(1, parseInt(this.querySelector('input[name="quantity"]')?.value, 10) || 1);
@@ -224,7 +251,7 @@ class CoLabNecklacePicker extends HTMLElement {
       ]));
     }
 
-    card.appendChild(this.el('p', 'c-co-lab-cart-bundle__total', this.formatMoney(this.basePrice)));
+    card.appendChild(this.el('p', 'c-co-lab-cart-bundle__total', this.basePriceDisplay()));
 
     const modalError = this.el('p', 'c-co-lab-picker__error');
     modalError.setAttribute('data-modal-error', '');
@@ -239,14 +266,14 @@ class CoLabNecklacePicker extends HTMLElement {
     confirmCheck.id = `${this.dataset.reviewModalId}-confirm`;
     const confirmLabel = this.el('label', 'c-co-lab-picker__confirm');
     confirmLabel.htmlFor = confirmCheck.id;
-    confirmLabel.appendChild(this.el('span', 'c-co-lab-picker__confirm-label', 'I confirm this is my perfect piece'));
+    confirmLabel.appendChild(this.el('span', 'c-co-lab-picker__confirm-label', 'I confirm my selection is correct'));
     confirmLabel.appendChild(confirmCheck);
     card.appendChild(confirmLabel);
-    card.appendChild(this.el('p', 'c-co-lab-picker__confirm-note', 'We build your perfect necklace and dispatch in 2-3 weeks. As each piece is made to order, it cannot be returned, exchanged or amended once production has begun.'));
+    card.appendChild(this.el('p', 'c-co-lab-picker__confirm-note', 'Your piece will be crafted exactly as confirmed above - made just for you and dispatched in 2-3 weeks.'));
 
     const backBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--secondary', '← Edit');
     backBtn.type = 'button';
-    const confirmBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--primary', 'Checkout →');
+    const confirmBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--primary', 'Add to cart');
     confirmBtn.type = 'button';
     confirmBtn.disabled = true;
     card.appendChild(this.el('div', 'c-co-lab-cart-bundle__actions', [backBtn, confirmBtn]));
@@ -267,8 +294,12 @@ class CoLabNecklacePicker extends HTMLElement {
 
   async confirmAndAdd(confirmBtn) {
     this.clearModalError();
+    // In-flight guard: a second click during the async add could mint a second bundle and
+    // duplicate the line, so ignore re-entry until the add settles (reset in finally paths).
+    if (this.submitting) return;
     if (!this.selectionComplete()) { this.showModalError('Please complete every option before adding to cart.'); return; }
 
+    this.submitting = true;
     const bundleId = (crypto.randomUUID && crypto.randomUUID()) || `bundle-${Date.now()}-${Math.random().toString(36).slice(2)}`;
     const qty = Math.max(1, parseInt(this.querySelector('input[name="quantity"]')?.value, 10) || 1);
 
@@ -293,12 +324,34 @@ class CoLabNecklacePicker extends HTMLElement {
         body: JSON.stringify({ items, sections: sectionsToBundle.join(','), sections_url: window.location.pathname }),
       });
       if (!res.ok) { const payload = await this.safeJson(res); throw new NecklaceCartAddError(res.status, payload); }
-      await res.json();
-      window.location.assign(`${root}checkout`);
+      const data = await res.json();
+      // Add to cart and open the side cart drawer (the theme's own way), staying on the page
+      // rather than redirecting to checkout.
+      await this.syncCartDrawer(root, data.sections);
+      this.closeModal();
+      this.submitting = false;
+      if (confirmBtn) { confirmBtn.disabled = false; confirmBtn.removeAttribute('aria-busy'); }
     } catch (err) {
       console.error('[co-lab-necklace-picker] add to cart failed', err);
+      this.submitting = false;
       this.showModalError(this.friendlyErrorMessage(err));
       if (confirmBtn) { confirmBtn.disabled = false; confirmBtn.removeAttribute('aria-busy'); }
+    }
+  }
+
+  // Mirror the theme's own ProductForm add flow: one cart:change carrying the rendered section
+  // HTML so the side cart drawer re-renders, updates the count, and opens (force_open_drawer +
+  // variant:add). No cart:refresh, no DOM swap of our own — that keeps line-item remove/quantity
+  // controls intact.
+  async syncCartDrawer(root, sections) {
+    try {
+      const cart = await (await fetch(`${root}cart.js`, { headers: { Accept: 'application/json' } })).json();
+      cart.sections = sections;
+      document.documentElement.dispatchEvent(new CustomEvent('cart:change', {
+        bubbles: true, detail: { baseEvent: 'variant:add', onSuccessDo: 'force_open_drawer', cart },
+      }));
+    } catch (err) {
+      console.error('[co-lab-necklace-picker] cart drawer update failed', err);
     }
   }
 
