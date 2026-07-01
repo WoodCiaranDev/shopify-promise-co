@@ -72,16 +72,36 @@
     {%- if has_bg_image -%}
       <div class="lab-hero__media" aria-hidden="true">
         {%- if hero_bg_image != blank -%}
-          {{-
-            hero_bg_image
-            | image_url: width: 2400
-            | image_tag:
-              widths: '480,720,1080,1440,1920,2400',
-              sizes: '100vw',
-              class: 'lab-hero__media-image',
-              loading: 'eager',
-              fetchpriority: 'high'
-          -}}
+          {%- assign hero_bg_mobile = section.settings.background_image_mobile -%}
+          {%- if hero_bg_mobile != blank -%}
+            <picture>
+              <source
+                media="(max-width: 699px)"
+                srcset="{{ hero_bg_mobile | image_url: width: 600 }} 600w, {{ hero_bg_mobile | image_url: width: 900 }} 900w, {{ hero_bg_mobile | image_url: width: 1200 }} 1200w"
+                sizes="100vw">
+              {{-
+                hero_bg_image
+                | image_url: width: 2400
+                | image_tag:
+                  widths: '480,720,1080,1440,1920,2400',
+                  sizes: '100vw',
+                  class: 'lab-hero__media-image',
+                  loading: 'eager',
+                  fetchpriority: 'high'
+              -}}
+            </picture>
+          {%- else -%}
+            {{-
+              hero_bg_image
+              | image_url: width: 2400
+              | image_tag:
+                widths: '480,720,1080,1440,1920,2400',
+                sizes: '100vw',
+                class: 'lab-hero__media-image',
+                loading: 'eager',
+                fetchpriority: 'high'
+            -}}
+          {%- endif -%}
         {%- else -%}
           <img src="{{ section.settings.background_asset | asset_url }}"
                class="lab-hero__media-image"
@@ -340,6 +360,12 @@
       "id": "background_image",
       "label": "Background image",
       "info": "Switches the hero into lifestyle mode (full-bleed image, white text). Overrides theme asset fallback."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background image — mobile",
+      "info": "Optional portrait/tall crop used on mobile. Falls back to the desktop image when blank."
     },
     {
       "type": "text",

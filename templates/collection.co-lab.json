@@ -29,7 +29,9 @@
         "body": "<p>Crafted to your story — choose your piece, your stones and your engraving.</p>",
         "button_label": "",
         "button_link": "#products",
-        "button_style": "outline"
+        "button_style": "outline",
+        "background_image": "shopify://shop_images/co-lab-collection-hero-desktop.jpg",
+        "background_image_mobile": "shopify://shop_images/co-lab-collection-hero-mobile.jpg"
       }
     },
     "wearable_stories": {
@@ -68,7 +70,12 @@
           }
         }
       },
-      "block_order": ["step_1", "step_2", "step_3", "step_4"],
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "content_width": "md",
