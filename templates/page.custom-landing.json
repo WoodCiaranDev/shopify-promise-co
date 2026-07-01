@@ -25,12 +25,20 @@
         "content_width": "md",
         "remove_vertical_spacing": false,
         "separate_section_with_border": false,
+        "no_bottom_spacing": false,
+        "background_color": "rgba(0,0,0,0)",
+        "anchor_id": "",
+        "content_alignment": "center",
+        "background_asset": "",
+        "scrim_opacity": 25,
         "logo": "shopify://shop_images/the-promise-lab-logo.png",
+        "logo_asset": "",
         "logo_max_width": 200,
+        "use_collection_content": false,
         "eyebrow": "",
-        "heading": "Customisable Engraving & Hidden Birthstones",
+        "heading": "Custom & Made to Order - FAQ's",
         "heading_tag": "h1",
-        "body": "<p>Please note: Delivery times are estimates and may occasionally be extended due to customs delays, courier disruptions, or UK bank holidays.</p>",
+        "body": "",
         "button_label": "",
         "button_link": "#birthstones",
         "button_style": "solid",
@@ -38,47 +46,9 @@
         "button_text_color": "#1a1a1a",
         "button2_label": "Jump to FAQs",
         "button2_link": "#faqs",
-        "button2_style": "solid"
-      }
-    },
-    "lab_hero_birthstones": {
-      "type": "lab-hero",
-      "settings": {
-        "color_scheme": "scheme-2",
-        "content_width": "md",
-        "remove_vertical_spacing": false,
-        "separate_section_with_border": false,
-        "no_bottom_spacing": true,
-        "background_color": "#FCFBFA",
-        "anchor_id": "birthstones",
-        "logo": "",
-        "logo_max_width": 200,
-        "eyebrow": "",
-        "heading": "Our Birth Stones",
-        "heading_tag": "h2",
-        "body": "<p>Please note: Delivery times are estimates and may occasionally be extended due to customs delays, courier disruptions, or UK bank holidays.</p>",
-        "button_label": "",
-        "button_link": "",
-        "button_style": "outline"
-      }
-    },
-    "lab_birthstones": {
-      "type": "lab-birthstones",
-      "settings": {
-        "color_scheme": "scheme-2",
-        "content_width": "lg",
-        "remove_vertical_spacing": false,
-        "separate_section_with_border": false,
-        "no_top_spacing": true,
-        "background_color": "#FCFBFA",
-        "columns_desktop": 6,
-        "columns_mobile": 3,
-        "icon_max_width": 30,
-        "button_label": "Design yours",
-        "button_link": "/collections/custom-jewelry",
-        "button_style": "solid",
-        "button_background": "#FFFFFF",
-        "button_text_color": "#1c1c1c"
+        "button2_style": "solid",
+        "button2_background": "#1a1a1a",
+        "button2_text_color": "#ffffff"
       }
     },
     "feature_strips": {
@@ -87,11 +57,12 @@
         "strip_1": {
           "type": "strip",
           "settings": {
-            "image": "shopify://shop_images/ring-engraving-detail.png",
+            "image": "shopify://shop_images/1_eb11dfe6-fd47-47b4-ba86-5200734d8bc1.png",
+            "mobile_image": "shopify://shop_images/1_eb11dfe6-fd47-47b4-ba86-5200734d8bc1.png",
             "subheading": "",
-            "heading": "Engraving",
-            "heading_tag": "h2",
-            "content": "<p>Paragraph about the types of rings you can get engraved, how it works etc...</p>",
+            "heading": "",
+            "heading_tag": "h4",
+            "content": "<p>Create a piece that's uniquely yours, designed to celebrate the people, moments and promises that matter most.</p>",
             "force_direction": "auto",
             "button_label": "",
             "button_link": "",
@@ -101,11 +72,12 @@
         "strip_2": {
           "type": "strip",
           "settings": {
-            "image": "shopify://shop_images/ring-engraving-detail.png",
+            "image": "shopify://shop_images/2_1.png",
+            "mobile_image": "shopify://shop_images/2_1.png",
             "subheading": "",
-            "heading": "Inner Birth Stones",
-            "heading_tag": "h2",
-            "content": "<p>Paragraph about the types of rings you can get engraved, how it works etc...</p>",
+            "heading": "",
+            "heading_tag": "h4",
+            "content": "<p>Choose birthstones that represent loved ones, meaningful dates, or simply the colours you love.</p>",
             "force_direction": "auto",
             "button_label": "",
             "button_link": "",
@@ -115,11 +87,12 @@
         "strip_3": {
           "type": "strip",
           "settings": {
-            "image": "shopify://shop_images/ring-engraving-detail.png",
+            "image": "shopify://shop_images/3_bb353ca8-c451-4f5c-bea9-6f76a96537a7.png",
+            "mobile_image": "shopify://shop_images/3_bb353ca8-c451-4f5c-bea9-6f76a96537a7.png",
             "subheading": "",
-            "heading": "Engraving",
-            "heading_tag": "h2",
-            "content": "<p>Paragraph about the types of rings you can get engraved, how it works etc...</p>",
+            "heading": "",
+            "heading_tag": "h4",
+            "content": "<p>Every Custom Lab piece includes a complimentary engraving, adding a personal finishing touch that's uniquely yours.</p>",
             "force_direction": "auto",
             "button_label": "",
             "button_link": "",
@@ -138,36 +111,143 @@
         "image_background_color": "#ffffff",
         "content_width": "sm",
         "image_max_width": 640,
-        "separate_section_with_border": false
+        "separate_section_with_border": false,
+        "autoplay": true,
+        "autoplay_speed": 5
       }
     },
     "lab_hero_faq": {
       "type": "lab-hero",
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-2",
         "content_width": "md",
         "remove_vertical_spacing": false,
         "separate_section_with_border": false,
         "no_bottom_spacing": true,
-        "logo": "",
+        "background_color": "rgba(0,0,0,0)",
+        "anchor_id": "",
+        "content_alignment": "center",
+        "background_asset": "",
+        "scrim_opacity": 25,
+        "logo_asset": "",
         "logo_max_width": 200,
+        "use_collection_content": false,
         "eyebrow": "",
         "heading": "Made to order - frequently asked questions",
         "heading_tag": "h2",
         "body": "",
         "button_label": "",
         "button_link": "",
-        "button_style": "outline"
+        "button_style": "outline",
+        "button_background": "#ffffff",
+        "button_text_color": "#1a1a1a",
+        "button2_label": "",
+        "button2_link": "#faqs",
+        "button2_style": "solid",
+        "button2_background": "#1a1a1a",
+        "button2_text_color": "#ffffff"
       }
     },
     "faq_custom_landing": {
       "type": "co-lab-faq",
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-2",
         "subheading": "",
         "title": "",
         "content": "",
         "separate_section_with_border": false
+      }
+    },
+    "faq_QRFgnM": {
+      "type": "faq",
+      "blocks": {
+        "category_6Mfk3B": {
+          "type": "category",
+          "disabled": true,
+          "settings": {
+            "title": "Order",
+            "icon": "none",
+            "icon_width": 16
+          }
+        },
+        "question_iXhNDD": {
+          "type": "question",
+          "settings": {
+            "question": "What does \"Made to Order\" mean?",
+            "answer": "<p>Yes, we ship all over the world. Shipping costs will apply, and will be added at checkout. We run discounts and promotions all year, so stay tuned for exclusive deals.</p>"
+          }
+        },
+        "question_Wrpfdn": {
+          "type": "question",
+          "settings": {
+            "question": "What can I personalise?",
+            "answer": "<p>Our Made to Order collection currently includes rings and necklaces. Depending on the style, you can:</p><ul><li>Select your <strong>birthstones</strong></li><li>Add a personal <strong>engraving</strong></li><li>Choose <strong>initials</strong></li></ul><p>Each product page shows the options available for that specific piece.</p>"
+          }
+        },
+        "question_GRPVc4": {
+          "type": "question",
+          "settings": {
+            "question": "How long will my piece take to arrive?",
+            "answer": "<p><strong>Making Your Piece</strong></p><p>Because each piece is made to order, please allow <strong>2–3 weeks</strong> for it to be crafted and dispatched. During busier periods, sale events, holidays, and new launches - this can take a little longer.<br/><br/><strong>Delivering Your Piece</strong></p><p>Delivery time is additional to this and depends on your location and the shipping method you choose. </p>"
+          }
+        },
+        "question_ApWGWz": {
+          "type": "question",
+          "settings": {
+            "question": "Can I change my order after I've placed it?",
+            "answer": "<p>Yes, within <strong>60 minutes</strong> of placing your order.</p><p>Before you check out, you'll see a confirmation screen that summarises everything you've chosen: size, engraving, birthstone, initials. Please check it carefully, because it's the final step before we begin making your piece. If you spot something within 60 minutes of ordering, <a href=\"https://thepromiseco.com/pages/contact\" title=\"https://thepromiseco.com/pages/contact\">[contact us] </a>straight away and we'll help.</p><p>After that 60-minute window, your piece has entered production, and the details can no longer be changed.</p>"
+          }
+        },
+        "question_NmhzxV": {
+          "type": "question",
+          "settings": {
+            "question": "Can I cancel, return or exchange a Made to Order piece?",
+            "answer": "<p>Because each piece is made specifically for you, Made to Order items <strong>can't be cancelled</strong>, <strong>returned, or exchanged</strong> - including a change of size. This is standard for personalised pieces, and it's<br/>the reason we ask you to confirm every detail before checkout.</p><p>Because each piece is made specifically for you, Made to order items are <strong>final sale.</strong> That means no returns or exchanges.<br/><br/>You'll have <strong>60 minutes after ordering to amend your details</strong>; after that your piece is in production and can't be changed. So please check everything before you order.<br/><br/>And if a Lab piece ever arrives faulty, we'll always make it right — <strong>see our </strong><a href=\"https://thepromiseco.com/pages/5-year-warranty\" title=\"https://thepromiseco.com/pages/5-year-warranty\"><strong>5-year warranty.</strong></a></p>"
+          }
+        },
+        "question_XCa3bd": {
+          "type": "question",
+          "settings": {
+            "question": "Is my piece covered by a warranty?",
+            "answer": "<p><strong>Yes, all products are covered by a 5-year warranty </strong>to give you complete peace of mind against any manufacturing faults or defects. <br/><br/>These pieces aren't just jewellery; they are symbols of love, commitment, and cherished moments.</p><p>That's why we stand by our products. Full warranty terms <a href=\"https://thepromiseco.com/pages/5-year-warranty\" title=\"https://thepromiseco.com/pages/5-year-warranty\">here</a></p>"
+          }
+        },
+        "question_CiPyzw": {
+          "type": "question",
+          "settings": {
+            "question": "How do I make sure I order the right size?",
+            "answer": "<p>Use our <a href=\"https://thepromiseco.com/pages/ring-size-guide\" title=\"https://thepromiseco.com/pages/ring-size-guide\">size guide</a> to check, and if you're between sizes or unsure, <a href=\"https://thepromiseco.com/pages/contact\" title=\"https://thepromiseco.com/pages/contact\">reach out to us </a>before placing your order. We want to help you get it right first time.</p>"
+          }
+        },
+        "question_6typCX": {
+          "type": "question",
+          "settings": {
+            "question": "What are the stones made of?",
+            "answer": "<p>Every stone is a premium 7A hand-cut Cubic Zirconia, carefully selected for its beautiful sparkle, clarity and everyday durability.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "category_6Mfk3B",
+        "question_iXhNDD",
+        "question_Wrpfdn",
+        "question_GRPVc4",
+        "question_ApWGWz",
+        "question_NmhzxV",
+        "question_XCa3bd",
+        "question_CiPyzw",
+        "question_6typCX"
+      ],
+      "name": "t:sections.faq.presets.faq.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": true,
+        "show_categories": false,
+        "subheading": "custom faqs",
+        "title": "Frequently Asked Questions",
+        "content": ""
       }
     },
     "faq_cta": {
@@ -179,7 +259,7 @@
             "style": "solid",
             "text": "Design yours",
             "url": "/collections/custom-jewelry",
-            "background": "#FCFBFA",
+            "background": "#fcfbfa",
             "text_color": "#1c1c1c",
             "custom_class": "colab-light-cta"
           }
@@ -193,7 +273,62 @@
         "separate_section_with_border": false,
         "content_width": "md",
         "text_position": "center",
-        "remove_vertical_spacing": false
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "lab_hero_birthstones": {
+      "type": "lab-hero",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "content_width": "md",
+        "remove_vertical_spacing": false,
+        "separate_section_with_border": false,
+        "no_bottom_spacing": true,
+        "background_color": "#fcfbfa",
+        "anchor_id": "birthstones",
+        "content_alignment": "center",
+        "background_asset": "",
+        "scrim_opacity": 25,
+        "logo_asset": "",
+        "logo_max_width": 200,
+        "use_collection_content": false,
+        "eyebrow": "",
+        "heading": "Our BirthStones",
+        "heading_tag": "h2",
+        "body": "",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "outline",
+        "button_background": "#ffffff",
+        "button_text_color": "#1a1a1a",
+        "button2_label": "",
+        "button2_link": "#faqs",
+        "button2_style": "solid",
+        "button2_background": "#1a1a1a",
+        "button2_text_color": "#ffffff"
+      }
+    },
+    "lab_birthstones": {
+      "type": "lab-birthstones",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "content_width": "lg",
+        "remove_vertical_spacing": false,
+        "separate_section_with_border": false,
+        "no_top_spacing": true,
+        "background_color": "#fcfbfa",
+        "columns_desktop": 6,
+        "columns_mobile": 3,
+        "icon_max_width": 30,
+        "button_label": "Design yours",
+        "button_link": "/collections/custom-jewelry",
+        "button_style": "solid",
+        "button_background": "#ffffff",
+        "button_text_color": "#1c1c1c"
       }
     }
   },
@@ -203,6 +338,7 @@
     "feature_strips",
     "lab_hero_faq",
     "faq_custom_landing",
+    "faq_QRFgnM",
     "faq_cta",
     "lab_hero_birthstones",
     "lab_birthstones"
