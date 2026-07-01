@@ -71,39 +71,46 @@ Supported variables
 
         {%- capture main_image_classes -%}product-card__image product-card__image--primary {% if settings.product_image_aspect_ratio contains 'crop' %}object-cover{% endif %} aspect-{{ settings.product_image_aspect_ratio | split: '_' | first }}{%- endcapture -%}
 
-        {%- if variant_sel.featured_media.preview_image != null  -%} 
-        {{- variant_sel.featured_media.preview_image | image_url: width: product.featured_media.width | image_tag: loading: 'lazy', sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800', class: main_image_classes -}}
-        {% else %}
-        {{- product.featured_media | image_url: width: product.featured_media.width | image_tag: loading: 'lazy', sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800', class: main_image_classes -}}
-        {% endif %}
-    
-        {%- assign hover_image = product.metafields.custom.hover_image.value -%}
-        {%- if hover_image != blank -%}
-          {{- hover_image | image_url: width: hover_image.width | image_tag: class: 'product-card__image product-card__image--secondary', loading: 'lazy', fetchpriority: 'low', sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800' -}}
-        {%- endif -%}
+        {%- comment -%} Co-Lab products animate through their stills (custom.animation_images) instead of a static image. {%- endcomment -%}
+        {%- assign colab_anim = product.metafields.custom.animation_images.value -%}
+        {%- if colab_anim and colab_anim.size > 1 -%}
+          {%- render 'co-lab-image-loop', product: product, sizes: sizes, image_class: main_image_classes -%}
+        {%- else -%}
+          {%- if variant_sel.featured_media.preview_image != null  -%}
+          {{- variant_sel.featured_media.preview_image | image_url: width: product.featured_media.width | image_tag: loading: 'lazy', sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800', class: main_image_classes -}}
+          {% else %}
+          {{- product.featured_media | image_url: width: product.featured_media.width | image_tag: loading: 'lazy', sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800', class: main_image_classes -}}
+          {% endif %}
 
-        {%- if hover_image != blank -%}
-          <div class="swiper product-card__swiper">
-            <div class="swiper-wrapper">
-              {%- capture swiper_image_class -%}product-card__swiper-image aspect-{{ settings.product_image_aspect_ratio | split: '_' | first }}{%- endcapture -%}
-              <div class="swiper-slide">
-                {%- if variant_sel.featured_media.preview_image != null -%}
-                  {{- variant_sel.featured_media.preview_image | image_url: width: variant_sel.featured_media.preview_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800', class: swiper_image_class -}}
-                {%- else -%}
-                  {{- product.featured_media | image_url: width: product.featured_media.width | image_tag: loading: 'lazy', sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800', class: swiper_image_class -}}
-                {%- endif -%}
+          {%- assign hover_image = product.metafields.custom.hover_image.value -%}
+          {%- if hover_image != blank -%}
+            {{- hover_image | image_url: width: hover_image.width | image_tag: class: 'product-card__image product-card__image--secondary', loading: 'lazy', fetchpriority: 'low', sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800' -}}
+          {%- endif -%}
+
+          {%- if hover_image != blank -%}
+            <div class="swiper product-card__swiper">
+              <div class="swiper-wrapper">
+                {%- capture swiper_image_class -%}product-card__swiper-image aspect-{{ settings.product_image_aspect_ratio | split: '_' | first }}{%- endcapture -%}
+                <div class="swiper-slide">
+                  {%- if variant_sel.featured_media.preview_image != null -%}
+                    {{- variant_sel.featured_media.preview_image | image_url: width: variant_sel.featured_media.preview_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800', class: swiper_image_class -}}
+                  {%- else -%}
+                    {{- product.featured_media | image_url: width: product.featured_media.width | image_tag: loading: 'lazy', sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800', class: swiper_image_class -}}
+                  {%- endif -%}
+                </div>
+                <div class="swiper-slide">
+                  {{- hover_image | image_url: width: hover_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800', class: swiper_image_class -}}
+                </div>
               </div>
-              <div class="swiper-slide">
-                {{- hover_image | image_url: width: hover_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800', class: swiper_image_class -}}
-              </div>
+              <div class="swiper-pagination"></div>
             </div>
-            <div class="swiper-pagination"></div>
-          </div>
+          {%- endif -%}
         {%- endif -%}
       </div>
 
     {% comment %}
-      {%- if show_quick_buy and product.available -%}
+      {%- comment -%} Co-Lab products must be configured on the PDP, so suppress quick-buy (it would add the unconfigured ring straight to cart). {%- endcomment -%}
+      {%- if show_quick_buy and product.available and product.metafields.custom.product_type.value != 'co-lab' -%}
         {%- if product.variants.size == 1 and product.selling_plan_groups.size == 0 -%}
           {%- form 'product', product, is: 'product-form' -%}
             <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">

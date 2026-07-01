@@ -2290,6 +2290,48 @@ model-media model-viewer, model-media .shopify-model-viewer-ui {
 }
 
 
+/* Co-Lab crossfade image loop (grid + PDP). Frames stack; CSS keyframes (named per frame
+   count, defined in the co-lab-image-loop snippet) drive a synced 2s-per-image crossfade.
+   The first frame stays in flow to size the box; the rest overlay it. */
+.co-lab-loop {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.co-lab-loop__frame {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  animation-name: var(--cf-name);
+  animation-duration: calc(var(--cf-frames) * 1.5s);
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+  animation-delay: calc(var(--cf-i) * -1.5s);
+  will-change: opacity;
+}
+
+.co-lab-loop__frame--first {
+  position: relative;
+  opacity: 1;
+}
+
+.co-lab-loop__frame:not(.co-lab-loop__frame--first) {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .co-lab-loop__frame {
+    animation: none !important;
+  }
+  .co-lab-loop__frame:not(.co-lab-loop__frame--first) {
+    opacity: 0;
+  }
+}
+
 .product-card__media {
   isolation: isolate;
   display: block;
@@ -2445,6 +2487,7 @@ model-media model-viewer, model-media .shopify-model-viewer-ui {
   .product-card__figure > .badge-list--tags {
     inset-block-start: .5rem;
     inset-inline-end: .5rem;
+    inset-inline-start: auto;
   }
 }
 
@@ -5915,6 +5958,13 @@ product-rerender {
   flex: 315px;
   min-width: 240px;
   max-width: 315px;
+}
+
+/* When a mega menu has only link columns (no promo images or countdown), centre the
+   column group instead of letting justify-content:space-between anchor a lone group to
+   the left. Adding more menu items then grows the group outwards from the centre. */
+.mega-menu:not(:has(.mega-menu__promo)):not(:has(.c-collection-launch)) {
+  justify-content: center;
 }
 
 @media screen and (min-width: 1400px) {
