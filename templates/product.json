@@ -237,6 +237,8 @@
       ],
       "settings": {
         "color_scheme": "scheme-2",
+        "colab_mto_title": "Made to order",
+        "colab_mto_content": "<p><strong>Crafted for You</strong><br/>Every piece from The Promise Lab is individually crafted to your exact specifications. Our jewellers create each piece for you - making it as unique as the story behind it. Please allow approximately 2-3 weeks for production before dispatch</p><p><strong>Final Sale - </strong>As each piece is made specifically for you, orders from The Promise Lab cannot be returned, exchanged, cancelled or amended once production has begun. We encourage you to carefully review all details before placing your order.<br/><br/>Each piece is handcrafted with hand-set components, so the finish, stone colour and exact placement may differ slightly from the images shown. These natural variations are unique to your piece.<br/><br/></p>",
         "container_size": "lg",
         "product_info_size": 35,
         "show_sticky_add_to_cart": true,
@@ -311,7 +313,8 @@
             "text": "Explore now",
             "url": "shopify://pages/the-promise-world",
             "background": "#f2eee7",
-            "text_color": "#1c1c1c"
+            "text_color": "#1c1c1c",
+            "custom_class": ""
           }
         }
       },
@@ -334,6 +337,24 @@
         "use_ogg_font": false,
         "use_compact_spacing": false,
         "section_id": ""
+      }
+    },
+    "recently_viewed_products_3KM6a4": {
+      "type": "recently-viewed-products",
+      "name": "t:sections.recently_viewed_products.presets.recently_viewed_products.name",
+      "settings": {
+        "separate_section_with_border": true,
+        "color_scheme": "scheme-2",
+        "hide_product_information": false,
+        "stack_products": false,
+        "products_count": 6,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "subheading": "",
+        "title": "Your recently viewed products",
+        "content": ""
       }
     },
     "multiple_media_with_text_XxetVy": {
@@ -398,24 +419,6 @@
         "content": ""
       }
     },
-    "recently_viewed_products_3KM6a4": {
-      "type": "recently-viewed-products",
-      "name": "t:sections.recently_viewed_products.presets.recently_viewed_products.name",
-      "settings": {
-        "separate_section_with_border": true,
-        "color_scheme": "scheme-2",
-        "hide_product_information": false,
-        "stack_products": false,
-        "products_count": 6,
-        "products_per_row_mobile": "2",
-        "products_per_row_desktop": 4,
-        "horizontal_spacing_factor": 1,
-        "vertical_spacing_factor": 1,
-        "subheading": "",
-        "title": "Your recently viewed products",
-        "content": ""
-      }
-    },
     "category_cards_Ut7eFP": {
       "type": "category-cards",
       "blocks": {
@@ -440,10 +443,10 @@
         "category_image_qGh7nN": {
           "type": "category_image",
           "settings": {
-            "image": "shopify://shop_images/Untitled_design_-_2026-04-02T155423.026.png",
-            "title": "Mens Rings",
+            "image": "shopify://shop_images/custom-2.png",
+            "title": "Personalised & Custom",
             "description": "<p>Shop</p>",
-            "link": "shopify://collections/mens-promise-rings"
+            "link": "shopify://collections/custom-jewelry"
           }
         },
         "category_image_Dgft73": {
@@ -497,9 +500,9 @@
     "main",
     "1718037938f4a04551",
     "rich_text_TiHHaY",
+    "recently_viewed_products_3KM6a4",
     "multiple_media_with_text_XxetVy",
     "related-products",
-    "recently_viewed_products_3KM6a4",
     "category_cards_Ut7eFP",
     "174418775193790daa"
   ]

@@ -14,24 +14,32 @@
       "settings": {
         "color_scheme": "scheme-1",
         "content_width": "lg",
-        "content_alignment": "left",
         "remove_vertical_spacing": true,
         "separate_section_with_border": false,
+        "no_bottom_spacing": false,
+        "background_color": "rgba(0,0,0,0)",
+        "anchor_id": "",
+        "content_alignment": "center",
+        "background_image": "shopify://shop_images/Untitled_design-43.png",
         "background_asset": "co-lab-collection-hero.png",
         "scrim_opacity": 25,
-        "logo": "shopify://shop_images/the-promise-lab-logo-white.png",
-        "logo_asset": "co-lab-logo-white.png",
+        "logo_asset": "",
         "logo_max_width": 200,
         "use_collection_content": true,
         "eyebrow": "",
-        "heading": "Customisable Rings, Engraving & Hidden Birthstones",
+        "heading": "",
         "heading_tag": "h1",
-        "body": "<p>Crafted to your story — choose your piece, your stones and your engraving.</p>",
+        "body": "",
         "button_label": "",
         "button_link": "#products",
         "button_style": "outline",
-        "background_image": "shopify://shop_images/co-lab-collection-hero-desktop.jpg",
-        "background_image_mobile": "shopify://shop_images/co-lab-collection-hero-mobile.jpg"
+        "button_background": "#ffffff",
+        "button_text_color": "#1a1a1a",
+        "button2_label": "",
+        "button2_link": "#faqs",
+        "button2_style": "solid",
+        "button2_background": "#1a1a1a",
+        "button2_text_color": "#ffffff"
       }
     },
     "wearable_stories": {
@@ -42,7 +50,7 @@
           "settings": {
             "icon": "shopify://shop_images/step-1-choose-piece.png",
             "step_label": "Step 1",
-            "title": "Choose your piece"
+            "title": "Choose a design to make your own"
           }
         },
         "step_2": {
@@ -50,7 +58,7 @@
           "settings": {
             "icon": "shopify://shop_images/Artboard_33_4x_a331b0fc-7364-4b91-8dfe-db9ecd4ec7cd.png",
             "step_label": "Step 2",
-            "title": "Choose your metal and size"
+            "title": "Select precious metal & size"
           }
         },
         "step_3": {
@@ -58,15 +66,15 @@
           "settings": {
             "icon": "shopify://shop_images/step-3-customisations.png",
             "step_label": "Step 3",
-            "title": "Choose your customisations"
+            "title": "Choose your stones & engraving"
           }
         },
         "step_4": {
           "type": "step",
           "settings": {
             "icon": "shopify://shop_images/step-4-dispatch.png",
-            "step_label": "Production",
-            "title": "We build your perfect ring and dispatch in 2-3 weeks"
+            "step_label": "Made For you",
+            "title": "Our master jewellers hand-set your piece"
           }
         }
       },
@@ -79,6 +87,9 @@
       "settings": {
         "color_scheme": "scheme-1",
         "content_width": "md",
+        "subheading": "",
+        "heading": "",
+        "remove_vertical_spacing": false,
         "separate_section_with_border": false
       }
     },
@@ -86,8 +97,29 @@
       "type": "main-collection",
       "settings": {
         "color_scheme": "scheme-2",
+        "hide_product_information": false,
         "show_intro_card": true,
-        "intro_card_image": "shopify://shop_images/intro-card-placeholder.png"
+        "intro_card_position": "third",
+        "intro_card_white_bg": false,
+        "intro_card_image": "shopify://shop_images/TELL_YOUR_STORY-2.png",
+        "intro_card_heading": "",
+        "intro_card_text": "",
+        "intro_card_button_label": "",
+        "intro_card_button_link": "",
+        "products_per_page": 48,
+        "products_per_row_mobile": "2",
+        "products_size_desktop": "medium",
+        "show_grid_mode_selector": true,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "filter_layout": "sidebar",
+        "quick_links_menu": "",
+        "show_sort_by": true,
+        "show_filters": true,
+        "show_results_count": true,
+        "show_filter_group_name": false,
+        "show_filter_values_count": false,
+        "open_filters_by_default": false
       }
     },
     "lab_hero_birthstones": {
@@ -98,17 +130,28 @@
         "remove_vertical_spacing": false,
         "separate_section_with_border": false,
         "no_bottom_spacing": true,
-        "background_color": "#FCFBFA",
+        "background_color": "#fcfbfa",
         "anchor_id": "birthstones",
-        "logo": "",
+        "content_alignment": "center",
+        "background_asset": "",
+        "scrim_opacity": 25,
+        "logo_asset": "",
         "logo_max_width": 200,
+        "use_collection_content": false,
         "eyebrow": "",
-        "heading": "Our Birth Stones",
+        "heading": "Our BirthStones",
         "heading_tag": "h2",
-        "body": "<p>Please note: Delivery times are estimates and may occasionally be extended due to customs delays, courier disruptions, or UK bank holidays.</p>",
+        "body": "",
         "button_label": "",
         "button_link": "",
-        "button_style": "outline"
+        "button_style": "outline",
+        "button_background": "#ffffff",
+        "button_text_color": "#1a1a1a",
+        "button2_label": "",
+        "button2_link": "#faqs",
+        "button2_style": "solid",
+        "button2_background": "#1a1a1a",
+        "button2_text_color": "#ffffff"
       }
     },
     "lab_birthstones": {
@@ -119,15 +162,152 @@
         "remove_vertical_spacing": false,
         "separate_section_with_border": false,
         "no_top_spacing": true,
-        "background_color": "#FCFBFA",
+        "background_color": "#fcfbfa",
         "columns_desktop": 6,
         "columns_mobile": 3,
         "icon_max_width": 30,
         "button_label": "",
         "button_link": "",
         "button_style": "solid",
-        "button_background": "#FFFFFF",
+        "button_background": "#ffffff",
         "button_text_color": "#1c1c1c"
+      }
+    },
+    "category_cards_6WFay4": {
+      "type": "category-cards",
+      "blocks": {
+        "category_image_NeDNHn": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T093421.486.png",
+            "title": "Best Sellers",
+            "description": "<p>discover</p>",
+            "link": "shopify://collections/best-sellers"
+          }
+        },
+        "category_image_PH73ph": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T093409.150.png",
+            "title": "Shop for Her",
+            "description": "<p>Promise Rings</p>",
+            "link": "shopify://collections/for-her"
+          }
+        },
+        "category_image_Ajk8nD": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design-31.png",
+            "title": "Gold Promise Rings",
+            "description": "<p>Shop</p>",
+            "link": "shopify://collections/gold-promise-rings"
+          }
+        },
+        "category_image_TgeF8U": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/emerald_solitaire.png",
+            "title": "Silver Promise Rings",
+            "description": "<p>Explore</p>",
+            "link": "shopify://collections/silver-promise-rings"
+          }
+        }
+      },
+      "block_order": [
+        "category_image_NeDNHn",
+        "category_image_PH73ph",
+        "category_image_Ajk8nD",
+        "category_image_TgeF8U"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "background_color": "#ffffff",
+        "title_color": "#000000",
+        "subtitle_color": "#666666",
+        "section_padding_top": 64,
+        "section_padding_bottom": 64,
+        "mobile_single_column": false
+      }
+    },
+    "image_with_text_xTqgtQ": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_eWVawb": {
+          "type": "subheading",
+          "settings": {
+            "text": ""
+          }
+        },
+        "heading_nXzati": {
+          "type": "heading",
+          "settings": {
+            "text": "Custom Promise Rings Made for Your Story",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_6XWwry": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>A custom promise ring turns a meaningful commitment into something that feels connected to the people making it. Instead of choosing a ring simply because it looks beautiful, you can select details that represent a person, date, memory or shared part of your story.</p><p>Your ring might feature a birthstone connected to someone special, a color that holds personal meaning or two stones representing two people.</p><p>At The Promise Co, the promise always comes first. </p><p>Our personalized promise rings are designed to help you create something meaningful without placing rules or expectations around what that promise should mean.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_eWVawb",
+        "heading_nXzati",
+        "richtext_6XWwry"
+      ],
+      "disabled": true,
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/2_e91b2e95-1d12-44b0-a7ca-8f85eb66e8c8.png",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "image_with_text_9DtyNQ": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_bieyrg": {
+          "type": "subheading",
+          "settings": {
+            "text": ""
+          }
+        },
+        "heading_DJByPG": {
+          "type": "heading",
+          "settings": {
+            "text": "Create a Custom Promise Ring for Her",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_bVjiyJ": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>For a romantic look, consider soft shapes or meaningful colors or even a two-stone setting. For someone who prefers minimal jewelry, choose a delicate band or understated design that can become part of her everyday collection.<br/><br/>A personalized promise ring for a girlfriend or partner can mark a first anniversary, a shared milestone, a long distance relationship or a commitment to the future.<br/><br/>The most important part is not how large or elaborate the ring is. It is the thought behind the details you choose.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_bieyrg",
+        "heading_DJByPG",
+        "richtext_bVjiyJ"
+      ],
+      "disabled": true,
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/3_dda7e264-9420-42b2-a116-98e6e28cabd8.png",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
       }
     }
   },
@@ -136,6 +316,9 @@
     "wearable_stories",
     "main",
     "lab_hero_birthstones",
-    "lab_birthstones"
+    "lab_birthstones",
+    "category_cards_6WFay4",
+    "image_with_text_xTqgtQ",
+    "image_with_text_9DtyNQ"
   ]
 }

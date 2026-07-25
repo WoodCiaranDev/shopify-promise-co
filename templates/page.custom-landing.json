@@ -36,7 +36,7 @@
         "logo_max_width": 200,
         "use_collection_content": false,
         "eyebrow": "",
-        "heading": "Custom & Made to Order - FAQ's",
+        "heading": "Personalised FAQ's",
         "heading_tag": "h1",
         "body": "",
         "button_label": "",
@@ -92,7 +92,7 @@
             "subheading": "",
             "heading": "",
             "heading_tag": "h4",
-            "content": "<p>Every Custom Lab piece includes a complimentary engraving, adding a personal finishing touch that's uniquely yours.</p>",
+            "content": "<p>Every Promise Lab piece includes a complimentary engraving, adding a personal finishing touch that's uniquely yours.</p>",
             "force_direction": "auto",
             "button_label": "",
             "button_link": "",
@@ -176,7 +176,7 @@
           "type": "question",
           "settings": {
             "question": "What does \"Made to Order\" mean?",
-            "answer": "<p>Yes, we ship all over the world. Shipping costs will apply, and will be added at checkout. We run discounts and promotions all year, so stay tuned for exclusive deals.</p>"
+            "answer": "<p>Made to order means each piece is crafted especially for you – it literally doesn’t exist until you order it! From birthstones, to personalised engraving. It's personal to you the very first step, which is exactly what makes it worth the wait.</p>"
           }
         },
         "question_Wrpfdn": {
@@ -244,9 +244,10 @@
       "settings": {
         "color_scheme": "scheme-2",
         "separate_section_with_border": true,
+        "anchor_id": "faqs",
         "show_categories": false,
-        "subheading": "custom faqs",
-        "title": "Frequently Asked Questions",
+        "subheading": "personalised faqs",
+        "title": "FAQS",
         "content": ""
       }
     },

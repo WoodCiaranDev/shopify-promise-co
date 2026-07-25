@@ -100,7 +100,7 @@
           "type": "question",
           "settings": {
             "question": "Can I update or cancel my order once I have placed it?",
-            "answer": "<p>We move quickly to get your order to you, so there's only a short window to make changes. Just email <a href=\"mailto:info@thepromiseco.com\" target=\"_blank\" title=\"mailto:info@thepromiseco.com\">info@thepromiseco.com</a> as soon as you can and we'll do our best to help.</p><p><strong>Ready To Wear:</strong><br/><br/>If your order hasn't been dispatched yet, we can usually help with changes like your address, ring size or a swap. Once it's left the warehouse, we're unable to make changes - but you're covered by our standard 30-day returns. </p><p><strong>Made To Order - Custom Lab:</strong><br/><br/>You have <strong>60 minutes after ordering to amend your details</strong> - your engraving, birthstone, size or anything else. Just email us within that hour and we'll update it for you.<br/><br/>After 60 minutes, your piece moves into production, so it <strong>can't be amended or cancelled</strong> — and because each Lab piece is made just for you, Lab orders can't be cancelled at all once placed. This is why we ask you to check everything on your confirmation screen before you order.</p>"
+            "answer": "<p>We move quickly to get your order to you, so there's only a short window to make changes. Just email <a href=\"mailto:info@thepromiseco.com\" target=\"_blank\" title=\"mailto:info@thepromiseco.com\">info@thepromiseco.com</a> as soon as you can and we'll do our best to help.</p><p><strong>Ready To Wear:</strong><br/><br/>If your order hasn't been dispatched yet, we can try to help with changes like your address, ring size or a swap. However this cannot be guaranteed - it’s the customers responsibility to ensure the order is fully correct before purchasing. Once it's left the warehouse, we're unable to make changes - but you're covered by our standard 30-day returns. </p><p><strong>Made To Order - Custom Lab:</strong><br/><br/>You have <strong>60 minutes after ordering to amend your details</strong> - your engraving, birthstone, size or anything else. Just email us within that hour and we'll update it for you.<br/><br/>After 60 minutes, your piece moves into production, so it <strong>can't be amended or cancelled</strong> — and because each Lab piece is made just for you, Lab orders can't be cancelled at all once placed. This is why we ask you to check everything on your confirmation screen before you order.</p>"
           }
         },
         "question_UmtchC": {
@@ -158,6 +158,7 @@
       "settings": {
         "color_scheme": "",
         "separate_section_with_border": true,
+        "anchor_id": "",
         "show_categories": false,
         "subheading": "",
         "title": "Orders & Delivery",
@@ -213,6 +214,7 @@
       "settings": {
         "color_scheme": "",
         "separate_section_with_border": true,
+        "anchor_id": "",
         "show_categories": false,
         "subheading": "",
         "title": "Returns & Exchanges",
@@ -276,6 +278,7 @@
       "settings": {
         "color_scheme": "",
         "separate_section_with_border": false,
+        "anchor_id": "",
         "show_categories": false,
         "subheading": "",
         "title": "Quality & Materials",
@@ -315,6 +318,7 @@
       "settings": {
         "color_scheme": "",
         "separate_section_with_border": false,
+        "anchor_id": "",
         "show_categories": false,
         "subheading": "",
         "title": "Sizing & Support",
@@ -354,6 +358,7 @@
       "settings": {
         "color_scheme": "",
         "separate_section_with_border": true,
+        "anchor_id": "",
         "show_categories": false,
         "subheading": "",
         "title": "Promise Ring FAQs",

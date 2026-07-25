@@ -39,6 +39,33 @@
             "gradient_overlay": ""
           }
         },
+        "image_ba3teU": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/banners-3.png",
+            "mobile_image": "shopify://shop_images/Banner_UK-2.png",
+            "subheading": "<strong>make it your own</strong>",
+            "title": "Personalized Jewelry",
+            "mobile_text_position": "place-self-end-center text-center",
+            "desktop_text_position": "sm:place-self-end-center sm:text-center",
+            "content_max_width": 780,
+            "button_1_text": "Shop all",
+            "button_1_link": "shopify://collections/custom-jewelry",
+            "button_1_style": "link",
+            "button_1_background": "#ffffff",
+            "button_1_text_color": "#000000",
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_style": "outline",
+            "button_2_background": "#ffffff",
+            "button_2_text_color": "#000000",
+            "background": "",
+            "background_opacity": 50,
+            "text_color": "#ffffff",
+            "border_color": "",
+            "gradient_overlay": ""
+          }
+        },
         "image_G3TLPH": {
           "type": "image",
           "settings": {
@@ -68,6 +95,7 @@
         },
         "image_jcrmjC": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/bannerdesk2.heic",
             "mobile_image": "shopify://shop_images/bannermobile2.heic",
@@ -89,34 +117,6 @@
             "background": "",
             "background_opacity": 50,
             "text_color": "#fcfcfc",
-            "border_color": "",
-            "gradient_overlay": ""
-          }
-        },
-        "image_ba3teU": {
-          "type": "image",
-          "disabled": true,
-          "settings": {
-            "image": "shopify://shop_images/banners-3.png",
-            "mobile_image": "shopify://shop_images/Banner_UK-2.png",
-            "subheading": "Your promise, your way",
-            "title": "Custom Rings & Necklaces",
-            "mobile_text_position": "place-self-end-center text-center",
-            "desktop_text_position": "sm:place-self-end-center sm:text-center",
-            "content_max_width": 780,
-            "button_1_text": "Shop all",
-            "button_1_link": "shopify://collections/shop-all",
-            "button_1_style": "link",
-            "button_1_background": "#ffffff",
-            "button_1_text_color": "#000000",
-            "button_2_text": "",
-            "button_2_link": "",
-            "button_2_style": "outline",
-            "button_2_background": "#ffffff",
-            "button_2_text_color": "#000000",
-            "background": "",
-            "background_opacity": 50,
-            "text_color": "#ffffff",
             "border_color": "",
             "gradient_overlay": ""
           }
@@ -180,9 +180,9 @@
       },
       "block_order": [
         "image_wpXLKm",
+        "image_ba3teU",
         "image_G3TLPH",
         "image_jcrmjC",
-        "image_ba3teU",
         "image_jjYcbD",
         "image_6DJTxh"
       ],
@@ -223,10 +223,10 @@
         "category_4": {
           "type": "category_image",
           "settings": {
-            "image": "shopify://shop_images/Untitled_design_-_2026-04-02T155423.026.png",
-            "title": "Mens Rings",
+            "image": "shopify://shop_images/custom-2.png",
+            "title": "Custom & Personalized",
             "description": "<p>Shop</p>",
-            "link": "shopify://collections/mens-promise-rings"
+            "link": "shopify://collections/custom-jewelry"
           }
         },
         "category_2": {
@@ -317,7 +317,8 @@
             "text": "SHOP the full collection",
             "url": "",
             "background": "",
-            "text_color": ""
+            "text_color": "",
+            "custom_class": ""
           }
         }
       },
@@ -407,6 +408,7 @@
       "settings": {
         "color_scheme": "scheme-1",
         "separate_section_with_border": false,
+        "reduce_mobile_spacing": false,
         "stack_on_mobile": false,
         "icon_color": "",
         "text_color": "",
@@ -694,7 +696,8 @@
             "text": "Explore",
             "url": "shopify://pages/the-promise-world",
             "background": "#ffffff",
-            "text_color": "#1c1c1c"
+            "text_color": "#1c1c1c",
+            "custom_class": ""
           }
         }
       },
@@ -724,15 +727,15 @@
         "look_8iVTDG": {
           "type": "look",
           "settings": {
-            "image": "shopify://shop_images/2_c54fc5ab-38f2-451d-b91b-003d6922e521.png",
-            "hot_spots_background": "#ffffff",
-            "product_1": "heart-toi-et-moi-promise-ring",
-            "product_1_horizontal_position": 50,
-            "product_1_vertical_position": 55,
-            "product_2": "mixed-stone-pink-eternity-band",
+            "image": "shopify://shop_images/2_c5181f05-614e-43c6-b1dc-97b69d050d3f.png",
+            "hot_spots_background": "#f2eee7",
+            "product_1": "promise-sparkle-oval-ring",
+            "product_1_horizontal_position": 37,
+            "product_1_vertical_position": 52,
+            "product_2": "",
             "product_2_horizontal_position": 25,
             "product_2_vertical_position": 60,
-            "product_3": "promise-sparkle-oval-ring",
+            "product_3": "",
             "product_3_horizontal_position": 24,
             "product_3_vertical_position": 70,
             "product_4": "",
@@ -743,17 +746,17 @@
         "look_pEqhE9": {
           "type": "look",
           "settings": {
-            "image": "shopify://shop_images/1_9944c7d3-4d44-4e0f-9b60-dac801725443.png",
+            "image": "shopify://shop_images/1_29a624ce-d3c8-4816-8b46-cb81b8076d8a.png",
             "hot_spots_background": "#f2eee7",
-            "product_1": "promise-sparkle-oval-ring",
-            "product_1_horizontal_position": 45,
-            "product_1_vertical_position": 32,
-            "product_2": "russian-band",
-            "product_2_horizontal_position": 66,
-            "product_2_vertical_position": 47,
-            "product_3": "dainty-promise-band",
-            "product_3_horizontal_position": 68,
-            "product_3_vertical_position": 31,
+            "product_1": "modern-heirloom-birthstone-ring",
+            "product_1_horizontal_position": 24,
+            "product_1_vertical_position": 23,
+            "product_2": "name-engraved-slim-signet-ring",
+            "product_2_horizontal_position": 44,
+            "product_2_vertical_position": 34,
+            "product_3": "custom-curve-east-west-pear-ring",
+            "product_3_horizontal_position": 76,
+            "product_3_vertical_position": 83,
             "product_4": "",
             "product_4_horizontal_position": 85,
             "product_4_vertical_position": 85
