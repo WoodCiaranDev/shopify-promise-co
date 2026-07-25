@@ -1,0 +1,349 @@
+{%- liquid
+  assign wordmark = section.settings.wordmark
+  assign form_id = 'promise-club-form-' | append: section.id
+-%}
+
+<div class="promise-club color-scheme color-scheme--{{ section.settings.color_scheme.id }}{% unless section.settings.remove_vertical_spacing %} section-spacing{% endunless %}{% if section.settings.no_top_spacing %} promise-club--no-top{% endif %}{% if section.settings.separate_section_with_border %} bordered-section{% endif %}"
+     style="--promise-club-wordmark-scale: {{ section.settings.wordmark_scale }}%; --promise-club-wordmark-inset: {{ section.settings.wordmark_inset }}%;{% if section.settings.background_color != blank and section.settings.background_color != 'rgba(0,0,0,0)' %} background-color: {{ section.settings.background_color }};{% endif %}{% if section.settings.text_color != blank and section.settings.text_color != 'rgba(0,0,0,0)' %} --promise-club-text: {{ section.settings.text_color }};{% endif %}">
+
+  {%- comment -%}
+  --------------------------------------------------------------------------------------------------------------------
+  SCRIPT WORDMARK — sits flush to the section edges and is deliberately clipped by the band
+  --------------------------------------------------------------------------------------------------------------------
+  {%- endcomment -%}
+
+  {%- if section.settings.show_wordmark -%}
+    <div class="promise-club__wordmark{% unless section.settings.show_wordmark_mobile %} promise-club__wordmark--desktop{% endunless %}" aria-hidden="true">
+      {%- if wordmark != blank -%}
+        {{-
+          wordmark
+          | image_url: width: 900
+          | image_tag:
+            widths: '220,340,460,680,900',
+            sizes: '340px',
+            loading: 'lazy',
+            class: 'promise-club__wordmark-image'
+        -}}
+      {%- else -%}
+        <img src="{{ 'promise-club-wordmark.svg' | asset_url }}"
+             alt=""
+             width="202"
+             height="211"
+             loading="lazy"
+             class="promise-club__wordmark-image">
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="container container--{{ section.settings.content_width }}">
+    <div class="promise-club__inner">
+      {%- if section.settings.subheading != blank -%}
+        <p class="promise-club__subheading">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <div class="promise-club__heading">{{ section.settings.heading }}</div>
+      {%- endif -%}
+
+      {%- form 'customer', id: form_id, class: 'promise-club__form form' -%}
+        {%- if form.posted_successfully? -%}
+          {%- assign success_message = 'general.newsletter.subscribed_successfully' | t -%}
+          {%- render 'banner', content: success_message, status: 'success' -%}
+        {%- else -%}
+          {%- if form.errors -%}
+            {%- capture error_message -%}{{ form.errors.translated_fields['email'] }} {{ form.errors.messages['email'] }}{%- endcapture -%}
+            {%- render 'banner', content: error_message, status: 'error' -%}
+          {%- endif -%}
+
+          {%- if section.settings.customer_tag != blank -%}
+            <input type="hidden" name="contact[tags]" value="{{ section.settings.customer_tag }}">
+          {%- endif -%}
+
+          {%- render 'input', name: 'contact[email]', label: section.settings.email_label, type: 'email', required: true, autocomplete: 'email', enterkeyhint: 'send' -%}
+
+          <div class="promise-club__submit">
+            {%-
+              render 'button',
+              type: 'submit',
+              content: section.settings.button_label,
+              background: section.settings.button_background,
+              text_color: section.settings.button_text_color,
+              custom_class: 'promise-club__button'
+            -%}
+          </div>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .promise-club {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .promise-club--no-top {
+    padding-block-start: 0 !important;
+  }
+
+  /* Wordmark bleeds off the edges of the band — no gutter, clipped by the section */
+  .promise-club__wordmark {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: var(--promise-club-wordmark-inset, 3%);
+    height: var(--promise-club-wordmark-scale, 118%);
+    transform: translateY(-50%);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .promise-club__wordmark-image {
+    display: block;
+    height: 100%;
+    width: auto;
+  }
+
+  .promise-club__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: var(--promise-club-text, #ffffff);
+  }
+
+  .promise-club__subheading {
+    margin: 0;
+    font-family: "covik-sans", var(--text-font-family);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .promise-club__heading {
+    margin-block-start: 0.75rem;
+    font-family: "ogg", var(--heading-font-family);
+    font-size: clamp(1.6rem, 3.4vw, 2.75rem);
+    line-height: 1.15;
+    text-transform: none;
+  }
+
+  .promise-club__heading p {
+    margin: 0;
+  }
+
+  .promise-club__heading strong {
+    font-weight: 700;
+  }
+
+  .promise-club__form {
+    width: 100%;
+    max-width: 320px;
+    margin-block-start: 1.75rem;
+  }
+
+  /* Outlined, transparent field to match the design */
+  .promise-club__form .input {
+    background-color: transparent;
+    border: 1px solid var(--promise-club-text, #ffffff);
+    color: var(--promise-club-text, #ffffff);
+    text-align: start;
+  }
+
+  .promise-club__form .input::placeholder {
+    color: var(--promise-club-text, #ffffff);
+    opacity: 0.85;
+  }
+
+  .promise-club__form .floating-label {
+    color: var(--promise-club-text, #ffffff);
+    opacity: 0.85;
+  }
+
+  .promise-club__submit {
+    display: flex;
+    justify-content: center;
+    margin-block-start: 1.25rem;
+  }
+
+  .promise-club__button {
+    border-radius: 999px;
+    border: none;
+    padding-inline: 2.75rem;
+    letter-spacing: 0.14em;
+  }
+
+  @media screen and (max-width: 699px) {
+    .promise-club__wordmark--desktop {
+      display: none;
+    }
+
+    .promise-club__form {
+      max-width: 100%;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Promise Club",
+  "class": "shopify-section--promise-club",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:global.colors.scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "t:global.sizes.content_width",
+      "options": [
+        { "value": "xs", "label": "t:global.sizes.x_small" },
+        { "value": "sm", "label": "t:global.sizes.small" },
+        { "value": "md", "label": "t:global.sizes.medium" },
+        { "value": "lg", "label": "t:global.sizes.large" }
+      ],
+      "default": "md"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background colour (overrides scheme)",
+      "default": "#67b0da"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text colour",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "remove_vertical_spacing",
+      "label": "t:global.spacing.remove_vertical_spacing",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "no_top_spacing",
+      "label": "Remove top spacing (sit flush with previous section)",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "separate_section_with_border",
+      "label": "t:global.section.separate_section_with_border",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Wordmark"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wordmark",
+      "label": "Show script wordmark",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wordmark_mobile",
+      "label": "Show wordmark on mobile",
+      "info": "Hidden on mobile in the original design.",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "wordmark",
+      "label": "Wordmark image",
+      "info": "Leave empty to use the bundled \"The Promise Club\" SVG."
+    },
+    {
+      "type": "range",
+      "id": "wordmark_scale",
+      "label": "Wordmark height",
+      "info": "Percentage of the section height. Over 100% lets it bleed off the top and bottom.",
+      "min": 60,
+      "max": 200,
+      "step": 2,
+      "unit": "%",
+      "default": 118
+    },
+    {
+      "type": "range",
+      "id": "wordmark_inset",
+      "label": "Wordmark distance from left",
+      "min": -10,
+      "max": 30,
+      "step": 1,
+      "unit": "%",
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Join the Promise Club"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Bold text renders in Ogg Bold, matching the second line of the design.",
+      "default": "<p>A private invitation to exclusive access<br/><strong>& 10% off your first promise.</strong></p>"
+    },
+    {
+      "type": "header",
+      "content": "Sign-up form"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email field label",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Subscribe"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#f1eee7"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text colour",
+      "default": "#47a1dc"
+    },
+    {
+      "type": "text",
+      "id": "customer_tag",
+      "label": "Customer tag",
+      "info": "Applied to new subscribers so this sign-up source can be segmented in Klaviyo.",
+      "default": "promise-club"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promise Club"
+    }
+  ]
+}
+{% endschema %}

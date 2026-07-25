@@ -156,8 +156,71 @@
         "remove_horizontal_spacing": false
       }
     },
+    "promise_club": {
+      "type": "promise-club",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "content_width": "md",
+        "background_color": "#67b0da",
+        "text_color": "#ffffff",
+        "remove_vertical_spacing": false,
+        "no_top_spacing": false,
+        "separate_section_with_border": false,
+        "show_wordmark": true,
+        "show_wordmark_mobile": false,
+        "wordmark_scale": 118,
+        "wordmark_inset": 3,
+        "subheading": "Join the Promise Club",
+        "heading": "<p>A private invitation to exclusive access<br/><strong>& 10% off your first promise.</strong></p>",
+        "email_label": "Email",
+        "button_label": "Subscribe",
+        "button_background": "#f1eee7",
+        "button_text_color": "#47a1dc",
+        "customer_tag": "promise-club"
+      }
+    },
+    "promise_footer": {
+      "type": "promise-footer",
+      "blocks": {
+        "policies": {
+          "type": "links",
+          "settings": { "menu": "policies", "title": "Policies" }
+        },
+        "footer_menu": {
+          "type": "links",
+          "settings": { "menu": "footer", "title": "Footer menu" }
+        },
+        "contact": {
+          "type": "text",
+          "settings": {
+            "title": "Contact us",
+            "content": "<p>info@thepromiseco.com</p><p>The Promise Ring Co Ltd.</p><p>Company no. 13982489</p>",
+            "show_localization": true
+          }
+        }
+      },
+      "block_order": ["policies", "footer_menu", "contact"],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "content_width": "lg",
+        "background_color": "#f1eee7",
+        "text_color": "#1a1a1a",
+        "remove_vertical_spacing": false,
+        "separate_section_with_border": false,
+        "show_image_mobile": false,
+        "media_width": 40,
+        "show_monogram": true,
+        "show_brand_lockup": true,
+        "show_social_media": true,
+        "show_country_selector": true,
+        "show_country_name": true,
+        "show_country_flag": true,
+        "show_locale_selector": true
+      }
+    },
     "footer": {
       "type": "footer",
+      "disabled": true,
       "blocks": {
         "image_FQqF69": {
           "type": "image",
@@ -225,6 +288,8 @@
     "17767757490ca1673e",
     "text-with-icons",
     "1745417974c7db7ced",
+    "promise_club",
+    "promise_footer",
     "footer"
   ]
 }
