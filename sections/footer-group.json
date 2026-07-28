@@ -129,6 +129,7 @@
       "settings": {
         "color_scheme": "scheme-2",
         "separate_section_with_border": true,
+        "reduce_mobile_spacing": false,
         "stack_on_mobile": false,
         "icon_color": "",
         "text_color": "",
@@ -163,13 +164,13 @@
         "content_width": "md",
         "background_color": "#67b0da",
         "text_color": "#ffffff",
-        "remove_vertical_spacing": false,
+        "band_height": 265,
+        "remove_vertical_spacing": true,
         "no_top_spacing": false,
         "separate_section_with_border": false,
         "show_wordmark": true,
         "show_wordmark_mobile": false,
-        "wordmark_scale": 118,
-        "wordmark_inset": 3,
+        "wordmark_height": 117,
         "subheading": "Join the Promise Club",
         "heading": "<p>A private invitation to exclusive access<br/><strong>& 10% off your first promise.</strong></p>",
         "email_label": "Email",
@@ -184,11 +185,17 @@
       "blocks": {
         "policies": {
           "type": "links",
-          "settings": { "menu": "policies", "title": "Policies" }
+          "settings": {
+            "menu": "policies",
+            "title": "Policies"
+          }
         },
         "footer_menu": {
           "type": "links",
-          "settings": { "menu": "footer", "title": "Footer menu" }
+          "settings": {
+            "menu": "footer",
+            "title": "Footer menu"
+          }
         },
         "contact": {
           "type": "text",
@@ -199,7 +206,11 @@
           }
         }
       },
-      "block_order": ["policies", "footer_menu", "contact"],
+      "block_order": [
+        "policies",
+        "footer_menu",
+        "contact"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "content_width": "lg",
@@ -207,10 +218,13 @@
         "text_color": "#1a1a1a",
         "remove_vertical_spacing": false,
         "separate_section_with_border": false,
+        "image": "shopify://shop_images/footer-image.png",
+        "image_link": "",
         "show_image_mobile": false,
-        "media_width": 40,
+        "media_width": 37,
         "show_monogram": true,
         "show_brand_lockup": true,
+        "brand_text": "Wearable Stories™",
         "show_social_media": true,
         "show_country_selector": true,
         "show_country_name": true,
@@ -220,7 +234,6 @@
     },
     "footer": {
       "type": "footer",
-      "disabled": true,
       "blocks": {
         "image_FQqF69": {
           "type": "image",
@@ -271,6 +284,7 @@
         "links_GfTpPU",
         "text"
       ],
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-3",
         "separate_section_with_border": false,

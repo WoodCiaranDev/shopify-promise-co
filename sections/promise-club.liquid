@@ -1,42 +1,46 @@
 {%- liquid
   assign wordmark = section.settings.wordmark
   assign form_id = 'promise-club-form-' | append: section.id
+
+  # Unitless scale so the wordmark's width and height can both be derived from the band height.
+  assign wordmark_scale = section.settings.wordmark_height | divided_by: 100.0
 -%}
 
 <div class="promise-club color-scheme color-scheme--{{ section.settings.color_scheme.id }}{% unless section.settings.remove_vertical_spacing %} section-spacing{% endunless %}{% if section.settings.no_top_spacing %} promise-club--no-top{% endif %}{% if section.settings.separate_section_with_border %} bordered-section{% endif %}"
-     style="--promise-club-wordmark-scale: {{ section.settings.wordmark_scale }}%; --promise-club-wordmark-inset: {{ section.settings.wordmark_inset }}%;{% if section.settings.background_color != blank and section.settings.background_color != 'rgba(0,0,0,0)' %} background-color: {{ section.settings.background_color }};{% endif %}{% if section.settings.text_color != blank and section.settings.text_color != 'rgba(0,0,0,0)' %} --promise-club-text: {{ section.settings.text_color }};{% endif %}">
-
-  {%- comment -%}
-  --------------------------------------------------------------------------------------------------------------------
-  SCRIPT WORDMARK — sits flush to the section edges and is deliberately clipped by the band
-  --------------------------------------------------------------------------------------------------------------------
-  {%- endcomment -%}
-
-  {%- if section.settings.show_wordmark -%}
-    <div class="promise-club__wordmark{% unless section.settings.show_wordmark_mobile %} promise-club__wordmark--desktop{% endunless %}" aria-hidden="true">
-      {%- if wordmark != blank -%}
-        {{-
-          wordmark
-          | image_url: width: 900
-          | image_tag:
-            widths: '220,340,460,680,900',
-            sizes: '340px',
-            loading: 'lazy',
-            class: 'promise-club__wordmark-image'
-        -}}
-      {%- else -%}
-        <img src="{{ 'promise-club-wordmark.svg' | asset_url }}"
-             alt=""
-             width="202"
-             height="211"
-             loading="lazy"
-             class="promise-club__wordmark-image">
-      {%- endif -%}
-    </div>
-  {%- endif -%}
+     style="--promise-club-height: {{ section.settings.band_height }}px; --promise-club-wordmark-scale: {{ wordmark_scale }};{% if section.settings.button_background != blank %} --promise-club-field-bg: {{ section.settings.button_background }};{% endif %}{% if section.settings.button_text_color != blank %} --promise-club-field-text: {{ section.settings.button_text_color }};{% endif %}{% if section.settings.background_color != blank and section.settings.background_color != 'rgba(0,0,0,0)' %} background-color: {{ section.settings.background_color }};{% endif %}{% if section.settings.text_color != blank and section.settings.text_color != 'rgba(0,0,0,0)' %} --promise-club-text: {{ section.settings.text_color }};{% endif %}">
 
   <div class="container container--{{ section.settings.content_width }}">
     <div class="promise-club__inner">
+      {%- comment -%}
+      ----------------------------------------------------------------------------------------------------------------
+      SCRIPT WORDMARK — inline image in the left-hand column
+      ----------------------------------------------------------------------------------------------------------------
+      {%- endcomment -%}
+
+      {%- if section.settings.show_wordmark -%}
+        <div class="promise-club__media{% unless section.settings.show_wordmark_mobile %} promise-club__media--desktop{% endunless %}">
+          {%- if wordmark != blank -%}
+            {{-
+              wordmark
+              | image_url: width: 900
+              | image_tag:
+                widths: '220,340,460,680,900',
+                sizes: '300px',
+                loading: 'lazy',
+                class: 'promise-club__wordmark-image'
+            -}}
+          {%- else -%}
+            <img src="{{ 'promise-club-wordmark.svg' | asset_url }}"
+                 alt=""
+                 width="202"
+                 height="211"
+                 loading="lazy"
+                 class="promise-club__wordmark-image">
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="promise-club__content">
       {%- if section.settings.subheading != blank -%}
         <p class="promise-club__subheading">{{ section.settings.subheading }}</p>
       {%- endif -%}
@@ -59,7 +63,7 @@
             <input type="hidden" name="contact[tags]" value="{{ section.settings.customer_tag }}">
           {%- endif -%}
 
-          {%- render 'input', name: 'contact[email]', label: section.settings.email_label, type: 'email', required: true, autocomplete: 'email', enterkeyhint: 'send' -%}
+          {%- render 'input', name: 'contact[email]', label: section.settings.email_label, label_hidden: true, type: 'email', required: true, autocomplete: 'email', enterkeyhint: 'send' -%}
 
           <div class="promise-club__submit">
             {%-
@@ -73,13 +77,14 @@
           </div>
         {%- endif -%}
       {%- endform -%}
+      </div>
     </div>
   </div>
 </div>
 
 {% stylesheet %}
+  /* The wordmark runs flush to the band edges, so the band itself carries no vertical padding */
   .promise-club {
-    position: relative;
     overflow: hidden;
   }
 
@@ -87,46 +92,80 @@
     padding-block-start: 0 !important;
   }
 
-  /* Wordmark bleeds off the edges of the band — no gutter, clipped by the section */
-  .promise-club__wordmark {
-    position: absolute;
-    inset-block-start: 50%;
-    inset-inline-start: var(--promise-club-wordmark-inset, 3%);
-    height: var(--promise-club-wordmark-scale, 118%);
-    transform: translateY(-50%);
-    pointer-events: none;
-    user-select: none;
+  /* Wordmark left, form right */
+  .promise-club__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    color: var(--promise-club-text, #ffffff);
+  }
+
+  .promise-club__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
   }
 
   .promise-club__wordmark-image {
     display: block;
-    height: 100%;
     width: auto;
+    max-width: 100%;
+    height: auto;
   }
 
-  .promise-club__inner {
-    position: relative;
-    z-index: 1;
+  .promise-club__content {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    color: var(--promise-club-text, #ffffff);
+    flex: 1 1 auto;
+    padding-block: 3rem;
+  }
+
+  @media screen and (min-width: 1000px) {
+    .promise-club__inner {
+      flex-direction: row;
+      align-items: stretch;
+      justify-content: center;
+      gap: 4rem;
+      min-height: var(--promise-club-height, 265px);
+    }
+
+    /* Both dimensions come from the band height and the same unitless scale, so the column is
+       always exactly as wide as the artwork needs. Over 100% overflows vertically only and is
+       clipped by the section, as in the design. 0.95841 is the artwork's width/height ratio. */
+    .promise-club__media {
+      flex: 0 0 auto;
+      align-self: center;
+      width: calc(var(--promise-club-height, 265px) * var(--promise-club-wordmark-scale, 1.17) * 0.95841);
+    }
+
+    .promise-club__wordmark-image {
+      width: 100%;
+      max-width: none;
+      height: calc(var(--promise-club-height, 265px) * var(--promise-club-wordmark-scale, 1.17));
+    }
+
+    .promise-club__content {
+      padding-block: 1.5rem;
+    }
   }
 
   .promise-club__subheading {
     margin: 0;
     font-family: "covik-sans", var(--text-font-family);
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
   }
 
   .promise-club__heading {
-    margin-block-start: 0.75rem;
+    margin-block-start: 0.5rem;
     font-family: "ogg", var(--heading-font-family);
-    font-size: clamp(1.6rem, 3.4vw, 2.75rem);
-    line-height: 1.15;
+    font-size: clamp(1.3rem, 1.55vw, 1.5rem);
+    line-height: 1.2;
     text-transform: none;
   }
 
@@ -140,43 +179,39 @@
 
   .promise-club__form {
     width: 100%;
-    max-width: 320px;
-    margin-block-start: 1.75rem;
+    max-width: 250px;
+    margin-block-start: 1.25rem;
   }
 
-  /* Outlined, transparent field to match the design */
+  /* Solid cream field with blue copy, matching the Subscribe button */
   .promise-club__form .input {
-    background-color: transparent;
-    border: 1px solid var(--promise-club-text, #ffffff);
-    color: var(--promise-club-text, #ffffff);
+    background-color: var(--promise-club-field-bg, #f1eee7);
+    border: 1px solid var(--promise-club-field-bg, #f1eee7);
+    color: var(--promise-club-field-text, #47a1dc);
     text-align: start;
   }
 
   .promise-club__form .input::placeholder {
-    color: var(--promise-club-text, #ffffff);
-    opacity: 0.85;
-  }
-
-  .promise-club__form .floating-label {
-    color: var(--promise-club-text, #ffffff);
-    opacity: 0.85;
+    color: var(--promise-club-field-text, #47a1dc);
+    opacity: 0.75;
   }
 
   .promise-club__submit {
     display: flex;
     justify-content: center;
-    margin-block-start: 1.25rem;
+    margin-block-start: 1rem;
   }
 
-  .promise-club__button {
+  /* Doubled-up class to out-specify the theme's own .button radius */
+  .promise-club .promise-club__button {
     border-radius: 999px;
     border: none;
-    padding-inline: 2.75rem;
+    padding-inline: 2rem;
     letter-spacing: 0.14em;
   }
 
-  @media screen and (max-width: 699px) {
-    .promise-club__wordmark--desktop {
+  @media screen and (max-width: 999px) {
+    .promise-club__media--desktop {
       display: none;
     }
 
@@ -226,10 +261,22 @@
       "default": "#ffffff"
     },
     {
+      "type": "range",
+      "id": "band_height",
+      "label": "Band height (desktop)",
+      "info": "A minimum — the band grows if the wordmark or content needs more room.",
+      "min": 180,
+      "max": 420,
+      "step": 5,
+      "unit": "px",
+      "default": 265
+    },
+    {
       "type": "checkbox",
       "id": "remove_vertical_spacing",
       "label": "t:global.spacing.remove_vertical_spacing",
-      "default": false
+      "info": "Keep this on so the wordmark sits flush with the top and bottom edges.",
+      "default": true
     },
     {
       "type": "checkbox",
@@ -268,24 +315,14 @@
     },
     {
       "type": "range",
-      "id": "wordmark_scale",
+      "id": "wordmark_height",
       "label": "Wordmark height",
-      "info": "Percentage of the section height. Over 100% lets it bleed off the top and bottom.",
-      "min": 60,
-      "max": 200,
-      "step": 2,
-      "unit": "%",
-      "default": 118
-    },
-    {
-      "type": "range",
-      "id": "wordmark_inset",
-      "label": "Wordmark distance from left",
-      "min": -10,
-      "max": 30,
+      "info": "Scales the wordmark against the band height above. At 117% it is the tallest element, so it sets the band height and sits flush with the top and bottom edges.",
+      "min": 80,
+      "max": 150,
       "step": 1,
       "unit": "%",
-      "default": 3
+      "default": 117
     },
     {
       "type": "header",

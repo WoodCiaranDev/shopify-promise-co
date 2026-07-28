@@ -37,7 +37,7 @@
             | image_url: width: 1400
             | image_tag:
               widths: '400,600,800,1000,1400',
-              sizes: '(max-width: 999px) 100vw, var(--promise-footer-media-width, 40vw)',
+              sizes: '(max-width: 999px) 100vw, 40vw',
               loading: 'lazy',
               class: 'promise-footer__image'
           -}}
@@ -49,7 +49,6 @@
       {%- endif -%}
 
       <div class="promise-footer__content">
-        <div class="promise-footer__top">
           {%- if section.settings.show_monogram -%}
             <div class="promise-footer__monogram">
               {%- if section.settings.monogram != blank -%}
@@ -73,6 +72,7 @@
             </div>
           {%- endif -%}
 
+          <div class="promise-footer__main">
           {%- if section.blocks.size > 0 -%}
             <div class="promise-footer__columns">
               {%- for block in section.blocks -%}
@@ -134,19 +134,18 @@
               {%- endif -%}
             </div>
           {%- endif -%}
-        </div>
 
         {%- comment -%}
         ----------------------------------------------------------------------------------------------------------------
-        ASIDE — brand lockup, copyright, and social icons
+        ASIDE — brand lockup, copyright, and social icons. Inside __main so it shares the columns' left edge.
         ----------------------------------------------------------------------------------------------------------------
         {%- endcomment -%}
 
         <div class="promise-footer__aside">
           <div class="promise-footer__brand">
             {%- if section.settings.show_brand_lockup -%}
-              <div class="promise-footer__lockup">
-                {%- if section.settings.brand_lockup != blank -%}
+              {%- if section.settings.brand_lockup != blank -%}
+                <div class="promise-footer__lockup">
                   {{-
                     section.settings.brand_lockup
                     | image_url: width: 600
@@ -156,15 +155,10 @@
                       loading: 'lazy',
                       class: 'promise-footer__lockup-image'
                   -}}
-                {%- else -%}
-                  <img src="{{ 'promise-wearable-stories.png' | asset_url }}"
-                       alt="Wearable Stories"
-                       width="160"
-                       height="14"
-                       loading="lazy"
-                       class="promise-footer__lockup-image">
-                {%- endif -%}
-              </div>
+                </div>
+              {%- elsif section.settings.brand_text != blank -%}
+                <p class="promise-footer__lockup-text">{{ section.settings.brand_text }}</p>
+              {%- endif -%}
             {%- endif -%}
 
             <p class="promise-footer__copyright">
@@ -177,6 +171,7 @@
               {%- render 'social-media', layout: 'list' -%}
             </div>
           {%- endif -%}
+        </div>
         </div>
       </div>
     </div>
@@ -200,16 +195,21 @@
     height: auto;
   }
 
+  /* Monogram stacks above on mobile, sits beside the content on desktop */
   .promise-footer__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  /* Holds the columns and the aside, so the aside shares the columns' left edge */
+  .promise-footer__main {
     display: flex;
     flex-direction: column;
     gap: 3rem;
     justify-content: space-between;
-  }
-
-  .promise-footer__top {
-    display: flex;
-    gap: 2rem;
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   .promise-footer__monogram-image {
@@ -249,7 +249,7 @@
   .promise-footer__text a {
     color: inherit;
     text-decoration: none;
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }
@@ -260,7 +260,7 @@
   }
 
   .promise-footer__text {
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }
@@ -271,6 +271,11 @@
 
   .promise-footer__localization {
     margin-block-start: 1.25rem;
+  }
+
+  /* Keep the country label on one line — it wraps awkwardly mid-name otherwise */
+  .promise-footer__localization .localization-toggle {
+    white-space: nowrap;
   }
 
   .promise-footer__aside {
@@ -284,6 +289,14 @@
     width: 160px;
     height: auto;
     margin-block-end: 0.75rem;
+  }
+
+  .promise-footer__lockup-text {
+    margin: 0 0 0.75rem;
+    font-family: "covik-sans", var(--text-font-family);
+    font-size: 1.125rem;
+    letter-spacing: 0.01em;
+    text-transform: none;
   }
 
   .promise-footer__copyright {
@@ -310,9 +323,13 @@
       align-items: stretch;
     }
 
+    .promise-footer__content {
+      flex-direction: row;
+    }
+
     .promise-footer__columns {
       flex-direction: row;
-      gap: 3rem;
+      gap: 2rem;
     }
 
     .promise-footer__column {
@@ -420,7 +437,7 @@
       "max": 55,
       "step": 1,
       "unit": "%",
-      "default": 40
+      "default": 37
     },
     {
       "type": "header",
@@ -445,10 +462,17 @@
       "default": true
     },
     {
+      "type": "text",
+      "id": "brand_text",
+      "label": "Brand lockup text",
+      "info": "Shown above the copyright. Renders in Covik Sans.",
+      "default": "Wearable Stories™"
+    },
+    {
       "type": "image_picker",
       "id": "brand_lockup",
-      "label": "Brand lockup",
-      "info": "The \"Wearable Stories\" lockup shown above the copyright. Leave empty to use the bundled version."
+      "label": "Brand lockup image",
+      "info": "Optional. Overrides the text above if you need the exact supplied artwork."
     },
     {
       "type": "header",

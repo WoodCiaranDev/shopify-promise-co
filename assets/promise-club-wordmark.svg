@@ -58,9 +58,6 @@
 </clipPath>
 </defs>
 <g>
-<path fill-rule="nonzero" fill="#f1eee7" fill-opacity="1" d="M 346.785156 613.0625 L 1328.359375 613.0625 L 1328.359375 322.589844 L 346.785156 322.589844 Z M 346.785156 613.0625 "/>
-</g>
-<g>
 <g fill="#f1eee7" fill-opacity="1">
 <use xlink:href="#glyph-0-0" x="458.2958" y="212.5592"/>
 <use xlink:href="#glyph-0-1" x="484.666712" y="205.909984"/>
