@@ -88,9 +88,9 @@
             "featured_collection_1": "for-her",
             "featured_collection_1_title": "Gifts for Her",
             "featured_collection_1_image": "shopify://shop_images/2_a956eecb-07fc-4f61-a325-5edcf0e51b7c.png",
-            "featured_collection_2": "custom-jewelry",
-            "featured_collection_2_title": "Personalized & Custom Jewelry",
-            "featured_collection_2_image": "shopify://shop_images/1_063e9be3-b163-4e56-a7c7-54500761ed29.png",
+            "featured_collection_2": "pinky-promise-rings",
+            "featured_collection_2_title": "Pinky Promise Rings",
+            "featured_collection_2_image": "shopify://shop_images/Untitled_design-45.png",
             "promo_block_text": "",
             "promo_block_link": "",
             "debug_mode": false
@@ -98,6 +98,7 @@
         },
         "mega_menu_promise": {
           "type": "mega_menu",
+          "disabled": true,
           "settings": {
             "menu_item": "Promise Rings",
             "images_position": "right",

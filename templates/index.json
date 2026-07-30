@@ -20,10 +20,10 @@
             "subheading": "<strong>when words aren't enough</strong>",
             "title": "<strong>Make A Promise</strong>",
             "mobile_text_position": "place-self-end-center text-center",
-            "desktop_text_position": "sm:place-self-center-end sm:text-end",
+            "desktop_text_position": "sm:place-self-end-center sm:text-center",
             "content_max_width": 560,
-            "button_1_text": "Shop All",
-            "button_1_link": "shopify://collections/shop-all",
+            "button_1_text": "Top 15 Promise Rings",
+            "button_1_link": "shopify://collections/top-15-promise-rings",
             "button_1_style": "link",
             "button_1_background": "#f7f5f0",
             "button_1_text_color": "#313030",
@@ -49,7 +49,7 @@
             "mobile_text_position": "place-self-end-center text-center",
             "desktop_text_position": "sm:place-self-end-center sm:text-center",
             "content_max_width": 780,
-            "button_1_text": "Shop all",
+            "button_1_text": "Create Yours",
             "button_1_link": "shopify://collections/custom-jewelry",
             "button_1_style": "link",
             "button_1_background": "#ffffff",
@@ -232,10 +232,10 @@
         "category_2": {
           "type": "category_image",
           "settings": {
-            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T152137.870.png",
-            "title": "Couples Rings",
-            "description": "<p>Matching</p>",
-            "link": "shopify://collections/couples-promise-rings"
+            "image": "shopify://shop_images/Untitled_design_-_2026-07-30T111350.973.png",
+            "title": "Pinky Rings",
+            "description": "<p>trending</p>",
+            "link": "shopify://collections/pinky-promise-rings"
           }
         }
       },
@@ -499,7 +499,7 @@
         "products_per_row_desktop": 4,
         "horizontal_spacing_factor": 1,
         "vertical_spacing_factor": 1,
-        "subheading": "Discover"
+        "subheading": ""
       }
     },
     "rich_text_iM4XkL": {
@@ -508,7 +508,7 @@
         "subheading_LM9NRt": {
           "type": "subheading",
           "settings": {
-            "text": "<em>Our community love us</em>"
+            "text": "<em>Built on community</em>"
           }
         },
         "heading_feccrk": {
@@ -780,12 +780,6 @@
     "rich_text_bPV3kh": {
       "type": "rich-text",
       "blocks": {
-        "subheading_EM4eUg": {
-          "type": "subheading",
-          "settings": {
-            "text": "Discover"
-          }
-        },
         "heading_dWYLiK": {
           "type": "heading",
           "settings": {
@@ -795,7 +789,6 @@
         }
       },
       "block_order": [
-        "subheading_EM4eUg",
         "heading_dWYLiK"
       ],
       "settings": {
