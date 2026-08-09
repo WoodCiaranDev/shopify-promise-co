@@ -274,7 +274,18 @@
         const anchorPassed = anchor.getBoundingClientRect().bottom < 0;
         const footerHidden = !footer || footer.getBoundingClientRect().top > window.innerHeight;
 
-        bar.classList.toggle('is-visible', anchorPassed && footerHidden);
+        const visible = anchorPassed && footerHidden;
+        bar.classList.toggle('is-visible', visible);
+
+        // The app icon overlaps the sticky bar, so hide it while the bar is shown.
+        const acpIcon = document.getElementById('acp-icon');
+        if (acpIcon) {
+          if (visible) {
+            acpIcon.style.setProperty('display', 'none', 'important');
+          } else {
+            acpIcon.style.removeProperty('display');
+          }
+        }
       };
 
       const schedule = () => {
