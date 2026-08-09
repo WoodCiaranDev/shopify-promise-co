@@ -1,0 +1,428 @@
+{%- liquid
+  assign wordmark = section.settings.wordmark
+  assign form_id = 'promise-club-form-' | append: section.id
+
+  # Unitless scale so the wordmark's width and height can both be derived from the band height.
+  assign wordmark_scale = section.settings.wordmark_height | divided_by: 100.0
+-%}
+
+<div class="promise-club color-scheme color-scheme--{{ section.settings.color_scheme.id }}{% unless section.settings.remove_vertical_spacing %} section-spacing{% endunless %}{% if section.settings.no_top_spacing %} promise-club--no-top{% endif %}{% if section.settings.separate_section_with_border %} bordered-section{% endif %}"
+     style="--promise-club-height: {{ section.settings.band_height }}px; --promise-club-wordmark-scale: {{ wordmark_scale }};{% if section.settings.button_background != blank %} --promise-club-field-bg: {{ section.settings.button_background }};{% endif %}{% if section.settings.button_text_color != blank %} --promise-club-field-text: {{ section.settings.button_text_color }};{% endif %}{% if section.settings.background_color != blank and section.settings.background_color != 'rgba(0,0,0,0)' %} background-color: {{ section.settings.background_color }};{% endif %}{% if section.settings.text_color != blank and section.settings.text_color != 'rgba(0,0,0,0)' %} --promise-club-text: {{ section.settings.text_color }};{% endif %}">
+
+  <div class="container container--{{ section.settings.content_width }}">
+    <div class="promise-club__inner">
+      {%- comment -%}
+      ----------------------------------------------------------------------------------------------------------------
+      SCRIPT WORDMARK — inline image in the left-hand column
+      ----------------------------------------------------------------------------------------------------------------
+      {%- endcomment -%}
+
+      {%- if section.settings.show_wordmark -%}
+        <div class="promise-club__media{% unless section.settings.show_wordmark_mobile %} promise-club__media--desktop{% endunless %}">
+          {%- if wordmark != blank -%}
+            {{-
+              wordmark
+              | image_url: width: 900
+              | image_tag:
+                widths: '220,340,460,680,900',
+                sizes: '300px',
+                loading: 'lazy',
+                class: 'promise-club__wordmark-image'
+            -}}
+          {%- else -%}
+            <img src="{{ 'promise-club-wordmark.svg' | asset_url }}"
+                 alt=""
+                 width="202"
+                 height="211"
+                 loading="lazy"
+                 class="promise-club__wordmark-image">
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="promise-club__content">
+      {%- if section.settings.subheading != blank -%}
+        <p class="promise-club__subheading">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <div class="promise-club__heading">{{ section.settings.heading }}</div>
+      {%- endif -%}
+
+      {%- form 'customer', id: form_id, class: 'promise-club__form form' -%}
+        {%- if form.posted_successfully? -%}
+          {%- assign success_message = 'general.newsletter.subscribed_successfully' | t -%}
+          {%- render 'banner', content: success_message, status: 'success' -%}
+        {%- else -%}
+          {%- if form.errors -%}
+            {%- capture error_message -%}{{ form.errors.translated_fields['email'] }} {{ form.errors.messages['email'] }}{%- endcapture -%}
+            {%- render 'banner', content: error_message, status: 'error' -%}
+          {%- endif -%}
+
+          {%- if section.settings.customer_tag != blank -%}
+            <input type="hidden" name="contact[tags]" value="{{ section.settings.customer_tag }}">
+          {%- endif -%}
+
+          {%- render 'input', name: 'contact[email]', label: section.settings.email_label, label_hidden: true, type: 'email', required: true, autocomplete: 'email', enterkeyhint: 'send' -%}
+
+          {%- comment -%}
+          Consent copy sits outside the label and submit path, so tapping the privacy link never
+          focuses the field or submits the form.
+          {%- endcomment -%}
+          {%- if section.settings.consent_text != blank -%}
+            <div class="promise-club__consent">{{ section.settings.consent_text }}</div>
+          {%- endif -%}
+
+          <div class="promise-club__submit">
+            {%-
+              render 'button',
+              type: 'submit',
+              content: section.settings.button_label,
+              background: section.settings.button_background,
+              text_color: section.settings.button_text_color,
+              custom_class: 'promise-club__button'
+            -%}
+          </div>
+        {%- endif -%}
+      {%- endform -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .promise-club {
+    overflow: hidden;
+    --promise-club-media-width: 40%;
+    --promise-club-column-gap: 4rem;
+    --promise-club-content-offset: calc(50px + 2rem);
+  }
+
+  .promise-club--no-top {
+    padding-block-start: 0 !important;
+  }
+
+  .promise-club__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    color: var(--promise-club-text, #ffffff);
+  }
+
+  .promise-club__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+
+  .promise-club__wordmark-image {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .promise-club__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex: 1 1 auto;
+    padding-block: 1.75rem;
+  }
+
+  @media screen and (min-width: 1000px) {
+    .promise-club__inner {
+      display: grid;
+      grid-template-columns: var(--promise-club-media-width, 40%) 1fr;
+      gap: var(--promise-club-column-gap, 4rem);
+      align-items: stretch;
+      min-height: var(--promise-club-height, 265px);
+    }
+
+    .promise-club__media {
+      grid-column: 1;
+      justify-self: start;
+      align-self: center;
+      width: calc(var(--promise-club-height, 265px) * var(--promise-club-wordmark-scale, 1.17) * 0.95841);
+    }
+
+    .promise-club__wordmark-image {
+      width: 100%;
+      max-width: none;
+      height: calc(var(--promise-club-height, 265px) * var(--promise-club-wordmark-scale, 1.17));
+    }
+
+    .promise-club__content {
+      grid-column: 2;
+      align-items: flex-start;
+      text-align: start;
+      padding-block: 1rem;
+      padding-inline-start: var(--promise-club-content-offset, 82px);
+    }
+
+    .promise-club .promise-club__submit {
+      justify-content: flex-start;
+    }
+  }
+
+  .promise-club__subheading {
+    margin: 0;
+    font-family: "covik-sans", var(--text-font-family);
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .promise-club__heading {
+    margin-block-start: 0.5rem;
+    font-family: "ogg", var(--heading-font-family);
+    font-size: clamp(1.3rem, 1.55vw, 1.5rem);
+    line-height: 1.2;
+    text-transform: none;
+  }
+
+  .promise-club__heading p {
+    margin: 0;
+  }
+
+  .promise-club__heading strong {
+    font-weight: 700;
+  }
+
+  .promise-club__form {
+    width: 100%;
+    max-width: 250px;
+    margin-block-start: 1.25rem;
+  }
+
+  .promise-club .promise-club__form {
+    row-gap: 0;
+  }
+
+  .promise-club__form .input {
+    background-color: var(--promise-club-field-bg, #f1eee7);
+    border: 1px solid var(--promise-club-field-bg, #f1eee7);
+    color: var(--promise-club-field-text, #47a1dc);
+    text-align: start;
+  }
+
+  .promise-club__form .input::placeholder {
+    color: var(--promise-club-field-text, #47a1dc);
+    opacity: 0.75;
+  }
+
+  .promise-club__consent {
+    margin-block-start: 0.75rem;
+    font-size: 0.625rem;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    opacity: 0.85;
+  }
+
+  .promise-club__consent p {
+    margin: 0;
+  }
+
+  .promise-club__consent a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  .promise-club__submit {
+    display: flex;
+    justify-content: center;
+    margin-block-start: 1rem;
+  }
+
+  .promise-club .promise-club__button {
+    border-radius: 999px;
+    border: none;
+    padding-inline: 2rem;
+    letter-spacing: 0.14em;
+  }
+
+  @media screen and (max-width: 999px) {
+    .promise-club__media--desktop {
+      display: none;
+    }
+
+    .promise-club__form {
+      max-width: 100%;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Promise Club",
+  "class": "shopify-section--promise-club",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:global.colors.scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "t:global.sizes.content_width",
+      "options": [
+        { "value": "xs", "label": "t:global.sizes.x_small" },
+        { "value": "sm", "label": "t:global.sizes.small" },
+        { "value": "md", "label": "t:global.sizes.medium" },
+        { "value": "lg", "label": "t:global.sizes.large" }
+      ],
+      "default": "lg"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background colour (overrides scheme)",
+      "default": "#67b0da"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text colour",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "band_height",
+      "label": "Band height (desktop)",
+      "info": "A minimum — the band grows if the wordmark or content needs more room.",
+      "min": 180,
+      "max": 420,
+      "step": 5,
+      "unit": "px",
+      "default": 265
+    },
+    {
+      "type": "checkbox",
+      "id": "remove_vertical_spacing",
+      "label": "t:global.spacing.remove_vertical_spacing",
+      "info": "Keep this on so the wordmark sits flush with the top and bottom edges.",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "no_top_spacing",
+      "label": "Remove top spacing (sit flush with previous section)",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "separate_section_with_border",
+      "label": "t:global.section.separate_section_with_border",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Wordmark"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wordmark",
+      "label": "Show script wordmark",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wordmark_mobile",
+      "label": "Show wordmark on mobile",
+      "info": "Hidden on mobile in the original design.",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "wordmark",
+      "label": "Wordmark image",
+      "info": "Leave empty to use the bundled \"The Promise Club\" SVG."
+    },
+    {
+      "type": "range",
+      "id": "wordmark_height",
+      "label": "Wordmark height",
+      "info": "Scales the wordmark against the band height above. At 117% it is the tallest element, so it sets the band height and sits flush with the top and bottom edges.",
+      "min": 80,
+      "max": 150,
+      "step": 1,
+      "unit": "%",
+      "default": 117
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "info": "Leave empty to hide the small eyebrow line above the heading."
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Bold text renders in Ogg Bold.",
+      "default": "<p>Join for exclusive offers,<br/>access and launches</p>"
+    },
+    {
+      "type": "header",
+      "content": "Sign-up form"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email field label",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Subscribe"
+    },
+    {
+      "type": "richtext",
+      "id": "consent_text",
+      "label": "Consent text",
+      "info": "Shown between the email field and the button. Leave empty to hide.",
+      "default": "<p>We will contact you by email and you can unsubscribe anytime – <a href=\"/policies/privacy-policy\">privacy policy</a></p>"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#f1eee7"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text colour",
+      "default": "#47a1dc"
+    },
+    {
+      "type": "text",
+      "id": "customer_tag",
+      "label": "Customer tag",
+      "info": "Applied to new subscribers so this sign-up source can be segmented in Klaviyo.",
+      "default": "promise-club"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promise Club"
+    }
+  ]
+}
+{% endschema %}

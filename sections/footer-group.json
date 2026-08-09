@@ -129,6 +129,7 @@
       "settings": {
         "color_scheme": "scheme-2",
         "separate_section_with_border": true,
+        "reduce_mobile_spacing": false,
         "stack_on_mobile": false,
         "icon_color": "",
         "text_color": "",
@@ -154,6 +155,84 @@
         "separate_section_with_border": true,
         "remove_vertical_spacing": false,
         "remove_horizontal_spacing": false
+      }
+    },
+    "promise_club": {
+      "type": "promise-club",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "content_width": "lg",
+        "background_color": "#67b0da",
+        "text_color": "#ffffff",
+        "band_height": 265,
+        "remove_vertical_spacing": true,
+        "no_top_spacing": false,
+        "separate_section_with_border": false,
+        "show_wordmark": true,
+        "show_wordmark_mobile": false,
+        "wordmark_height": 117,
+        "subheading": "",
+        "heading": "<p>Join for exclusive offers,<br\/>access and launches<\/p>",
+        "email_label": "Email",
+        "button_label": "Subscribe",
+        "consent_text": "<p>We will contact you by email and you can unsubscribe anytime – <a href=\"\/policies\/privacy-policy\">privacy policy<\/a><\/p>",
+        "button_background": "#f1eee7",
+        "button_text_color": "#47a1dc",
+        "customer_tag": "promise-club"
+      }
+    },
+    "promise_footer": {
+      "type": "promise-footer",
+      "blocks": {
+        "help_support": {
+          "type": "links",
+          "settings": {
+            "menu": "help-support",
+            "title": "Help & Support"
+          }
+        },
+        "policies": {
+          "type": "links",
+          "settings": {
+            "menu": "policies",
+            "title": "Policies"
+          }
+        },
+        "footer_menu": {
+          "type": "links",
+          "settings": {
+            "menu": "footer",
+            "title": "Footer menu"
+          }
+        }
+      },
+      "block_order": [
+        "help_support",
+        "policies",
+        "footer_menu"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "content_width": "lg",
+        "background_color": "#f1eee7",
+        "text_color": "#1a1a1a",
+        "remove_vertical_spacing": false,
+        "separate_section_with_border": false,
+        "image": "shopify://shop_images/footer-image.png",
+        "image_link": "",
+        "show_image_mobile": false,
+        "media_width": 40,
+        "show_monogram": true,
+        "show_brand_lockup": true,
+        "brand_text": "Wearable Stories™",
+        "copyright_text": "© 2026 All rights reserved - The Promise Ring Co LTD. 13982489",
+        "show_payment_icons": true,
+        "payment_types": "visa,apple_pay,google_pay,master,american_express,shopify_pay",
+        "show_social_media": true,
+        "show_country_selector": true,
+        "show_country_name": true,
+        "show_country_flag": true,
+        "show_locale_selector": true
       }
     },
     "footer": {
@@ -208,6 +287,7 @@
         "links_GfTpPU",
         "text"
       ],
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-3",
         "separate_section_with_border": false,
@@ -225,6 +305,8 @@
     "17767757490ca1673e",
     "text-with-icons",
     "1745417974c7db7ced",
+    "promise_club",
+    "promise_footer",
     "footer"
   ]
 }
