@@ -1,0 +1,60 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+PROMISE FOOTER UTILITY
+----------------------------------------------------------------------------------------------------------------------
+
+Country/language selectors with the payment badges beneath them. Rendered twice — once beside the
+monogram for mobile, once in the aside for desktop — because the two positions sit in different
+flex parents and cannot be reached by ordering alone. Each render passes a distinct `id_prefix` so
+the two disclosure widgets do not share element ids, matching how the header renders this snippet
+three times over.
+
+********************************************
+Supported variables
+********************************************
+
+* variant: "mobile" or "desktop" — drives both the visibility class and the id prefix (required)
+* show_country_selector / show_locale_selector: booleans, already resolved by the section
+* show_country_name / show_country_flag: passed through to the country selector
+* show_payment_icons: boolean
+* payment_types: comma-separated payment type handles, in display order
+* amex_icon: optional image overriding the stock American Express badge
+{%- endcomment -%}
+
+{%- liquid
+  assign has_selectors = false
+  if show_country_selector or show_locale_selector
+    assign has_selectors = true
+  endif
+
+  assign has_icons = false
+  if show_payment_icons and payment_types != blank
+    assign has_icons = true
+  endif
+-%}
+
+{%- if has_selectors or has_icons -%}
+  <div class="promise-footer__utility promise-footer__utility--{{ variant }}">
+    {%- if has_selectors -%}
+      <div class="promise-footer__localization localization-selectors">
+        {%- if show_country_selector -%}
+          {%- render 'localization-selector',
+            type: 'country',
+            placement: 'top-start',
+            id_prefix: variant,
+            show_country_name: show_country_name,
+            show_country_flag: show_country_flag
+          -%}
+        {%- endif -%}
+
+        {%- if show_locale_selector -%}
+          {%- render 'localization-selector', type: 'locale', placement: 'top-start', id_prefix: variant -%}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if has_icons -%}
+      {%- render 'promise-payment-icons', types: payment_types, amex_icon: amex_icon -%}
+    {%- endif -%}
+  </div>
+{%- endif -%}

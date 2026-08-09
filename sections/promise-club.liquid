@@ -65,6 +65,14 @@
 
           {%- render 'input', name: 'contact[email]', label: section.settings.email_label, label_hidden: true, type: 'email', required: true, autocomplete: 'email', enterkeyhint: 'send' -%}
 
+          {%- comment -%}
+          Consent copy sits outside the label and submit path, so tapping the privacy link never
+          focuses the field or submits the form.
+          {%- endcomment -%}
+          {%- if section.settings.consent_text != blank -%}
+            <div class="promise-club__consent">{{ section.settings.consent_text }}</div>
+          {%- endif -%}
+
           <div class="promise-club__submit">
             {%-
               render 'button',
@@ -83,16 +91,17 @@
 </div>
 
 {% stylesheet %}
-  /* The wordmark runs flush to the band edges, so the band itself carries no vertical padding */
   .promise-club {
     overflow: hidden;
+    --promise-club-media-width: 40%;
+    --promise-club-column-gap: 4rem;
+    --promise-club-content-offset: calc(50px + 2rem);
   }
 
   .promise-club--no-top {
     padding-block-start: 0 !important;
   }
 
-  /* Wordmark left, form right */
   .promise-club__inner {
     display: flex;
     flex-direction: column;
@@ -119,25 +128,24 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
     flex: 1 1 auto;
-    padding-block: 3rem;
+    padding-block: 1.75rem;
   }
 
   @media screen and (min-width: 1000px) {
     .promise-club__inner {
-      flex-direction: row;
+      display: grid;
+      grid-template-columns: var(--promise-club-media-width, 40%) 1fr;
+      gap: var(--promise-club-column-gap, 4rem);
       align-items: stretch;
-      justify-content: center;
-      gap: 4rem;
       min-height: var(--promise-club-height, 265px);
     }
 
-    /* Both dimensions come from the band height and the same unitless scale, so the column is
-       always exactly as wide as the artwork needs. Over 100% overflows vertically only and is
-       clipped by the section, as in the design. 0.95841 is the artwork's width/height ratio. */
     .promise-club__media {
-      flex: 0 0 auto;
+      grid-column: 1;
+      justify-self: start;
       align-self: center;
       width: calc(var(--promise-club-height, 265px) * var(--promise-club-wordmark-scale, 1.17) * 0.95841);
     }
@@ -149,7 +157,15 @@
     }
 
     .promise-club__content {
-      padding-block: 1.5rem;
+      grid-column: 2;
+      align-items: flex-start;
+      text-align: start;
+      padding-block: 1rem;
+      padding-inline-start: var(--promise-club-content-offset, 82px);
+    }
+
+    .promise-club .promise-club__submit {
+      justify-content: flex-start;
     }
   }
 
@@ -183,7 +199,10 @@
     margin-block-start: 1.25rem;
   }
 
-  /* Solid cream field with blue copy, matching the Subscribe button */
+  .promise-club .promise-club__form {
+    row-gap: 0;
+  }
+
   .promise-club__form .input {
     background-color: var(--promise-club-field-bg, #f1eee7);
     border: 1px solid var(--promise-club-field-bg, #f1eee7);
@@ -196,13 +215,29 @@
     opacity: 0.75;
   }
 
+  .promise-club__consent {
+    margin-block-start: 0.75rem;
+    font-size: 0.625rem;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    opacity: 0.85;
+  }
+
+  .promise-club__consent p {
+    margin: 0;
+  }
+
+  .promise-club__consent a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
   .promise-club__submit {
     display: flex;
     justify-content: center;
     margin-block-start: 1rem;
   }
 
-  /* Doubled-up class to out-specify the theme's own .button radius */
   .promise-club .promise-club__button {
     border-radius: 999px;
     border: none;
@@ -246,7 +281,7 @@
         { "value": "md", "label": "t:global.sizes.medium" },
         { "value": "lg", "label": "t:global.sizes.large" }
       ],
-      "default": "md"
+      "default": "lg"
     },
     {
       "type": "color",
@@ -332,14 +367,14 @@
       "type": "text",
       "id": "subheading",
       "label": "Subheading",
-      "default": "Join the Promise Club"
+      "info": "Leave empty to hide the small eyebrow line above the heading."
     },
     {
       "type": "richtext",
       "id": "heading",
       "label": "Heading",
-      "info": "Bold text renders in Ogg Bold, matching the second line of the design.",
-      "default": "<p>A private invitation to exclusive access<br/><strong>& 10% off your first promise.</strong></p>"
+      "info": "Bold text renders in Ogg Bold.",
+      "default": "<p>Join for exclusive offers,<br/>access and launches</p>"
     },
     {
       "type": "header",
@@ -356,6 +391,13 @@
       "id": "button_label",
       "label": "Button label",
       "default": "Subscribe"
+    },
+    {
+      "type": "richtext",
+      "id": "consent_text",
+      "label": "Consent text",
+      "info": "Shown between the email field and the button. Leave empty to hide.",
+      "default": "<p>We will contact you by email and you can unsubscribe anytime – <a href=\"/policies/privacy-policy\">privacy policy</a></p>"
     },
     {
       "type": "color",

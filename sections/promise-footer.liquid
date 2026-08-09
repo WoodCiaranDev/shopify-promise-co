@@ -10,10 +10,6 @@
     assign show_locale_selector = true
   endif
 
-  assign has_localization_selectors = false
-  if show_country_selector or show_locale_selector
-    assign has_localization_selectors = true
-  endif
 -%}
 
 <div class="promise-footer color-scheme color-scheme--{{ section.settings.color_scheme.id }}{% unless section.settings.remove_vertical_spacing %} section-spacing{% endunless %}{% if section.settings.separate_section_with_border %} bordered-section{% endif %}"
@@ -49,6 +45,13 @@
       {%- endif -%}
 
       <div class="promise-footer__content">
+        {%- comment -%}
+        ----------------------------------------------------------------------------------------------------------------
+        TOP ROW — monogram, plus the utility group hoisted alongside it on mobile only
+        ----------------------------------------------------------------------------------------------------------------
+        {%- endcomment -%}
+
+        <div class="promise-footer__top">
           {%- if section.settings.show_monogram -%}
             <div class="promise-footer__monogram">
               {%- if section.settings.monogram != blank -%}
@@ -71,6 +74,18 @@
               {%- endif -%}
             </div>
           {%- endif -%}
+
+          {%- render 'promise-footer-utility',
+            variant: 'mobile',
+            show_country_selector: show_country_selector,
+            show_locale_selector: show_locale_selector,
+            show_country_name: section.settings.show_country_name,
+            show_country_flag: section.settings.show_country_flag,
+            show_payment_icons: section.settings.show_payment_icons,
+            payment_types: section.settings.payment_types,
+            amex_icon: section.settings.amex_icon
+          -%}
+        </div>
 
           <div class="promise-footer__main">
           {%- if section.blocks.size > 0 -%}
@@ -103,18 +118,6 @@
                       {%- if block.settings.content != blank -%}
                         <div class="promise-footer__text">{{ block.settings.content }}</div>
                       {%- endif -%}
-
-                      {%- if block.settings.show_localization and has_localization_selectors -%}
-                        <div class="promise-footer__localization localization-selectors">
-                          {%- if show_country_selector -%}
-                            {%- render 'localization-selector', type: 'country', placement: 'top-start', show_country_name: section.settings.show_country_name, show_country_flag: section.settings.show_country_flag -%}
-                          {%- endif -%}
-
-                          {%- if show_locale_selector -%}
-                            {%- render 'localization-selector', type: 'locale', placement: 'top-start' -%}
-                          {%- endif -%}
-                        </div>
-                      {%- endif -%}
                   {%- endcase -%}
                 {%- endcapture -%}
 
@@ -137,10 +140,11 @@
 
         {%- comment -%}
         ----------------------------------------------------------------------------------------------------------------
-        ASIDE — brand lockup, copyright, and social icons. Inside __main so it shares the columns' left edge.
+        ASIDE — brand lockup, then the utility group and social icons, with the copyright beneath both.
         ----------------------------------------------------------------------------------------------------------------
         {%- endcomment -%}
 
+        <div class="promise-footer__bottom">
         <div class="promise-footer__aside">
           <div class="promise-footer__brand">
             {%- if section.settings.show_brand_lockup -%}
@@ -161,16 +165,38 @@
               {%- endif -%}
             {%- endif -%}
 
-            <p class="promise-footer__copyright">
-              &copy; {{ 'now' | date: '%Y' }} - {{ shop.name }} {{ powered_by_link }}
-            </p>
           </div>
 
-          {%- if section.settings.show_social_media -%}
-            <div class="promise-footer__socials promise-footer__socials--desktop">
-              {%- render 'social-media', layout: 'list' -%}
-            </div>
-          {%- endif -%}
+          <div class="promise-footer__aside-end">
+            {%- render 'promise-footer-utility',
+              variant: 'desktop',
+              show_country_selector: show_country_selector,
+              show_locale_selector: show_locale_selector,
+              show_country_name: section.settings.show_country_name,
+              show_country_flag: section.settings.show_country_flag,
+              show_payment_icons: section.settings.show_payment_icons,
+              payment_types: section.settings.payment_types,
+              amex_icon: section.settings.amex_icon
+            -%}
+
+            {%- if section.settings.show_social_media -%}
+              <div class="promise-footer__socials promise-footer__socials--desktop">
+                {%- render 'social-media', layout: 'list' -%}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+
+        {%- comment -%}
+        ----------------------------------------------------------------------------------------------------------------
+        LEGAL — a full-width row beneath the aside, so it clears both the brand lockup and the
+        utility/social group rather than hanging off one of them.
+        ----------------------------------------------------------------------------------------------------------------
+        {%- endcomment -%}
+
+        {%- if section.settings.copyright_text != blank -%}
+          <p class="promise-footer__copyright">{{ section.settings.copyright_text }}</p>
+        {%- endif -%}
         </div>
         </div>
       </div>
@@ -195,14 +221,12 @@
     height: auto;
   }
 
-  /* Monogram stacks above on mobile, sits beside the content on desktop */
   .promise-footer__content {
     display: flex;
     flex-direction: column;
     gap: 2rem;
   }
 
-  /* Holds the columns and the aside, so the aside shares the columns' left edge */
   .promise-footer__main {
     display: flex;
     flex-direction: column;
@@ -212,10 +236,55 @@
     min-width: 0;
   }
 
+  .promise-footer__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
   .promise-footer__monogram-image {
     display: block;
     width: 50px;
     height: auto;
+  }
+
+  .promise-footer__utility {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+  }
+
+  .promise-footer__utility--desktop {
+    display: none;
+  }
+
+  .promise-footer__utility--mobile {
+    align-items: flex-end;
+    text-align: end;
+  }
+
+  .promise-footer__utility--mobile .promise-payment-icons {
+    justify-content: flex-end;
+  }
+
+  .promise-payment-icons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  .promise-payment-icons svg,
+  .promise-payment-icons__custom {
+    display: block;
+    width: auto;
+    height: var(--promise-footer-payment-icon-height, 24px);
+  }
+
+  .promise-footer__socials {
+    --social-media-icon-size: 1.625rem;
+    --social-media-list-gap: 0.75rem 1.5rem;
   }
 
   .promise-footer__columns {
@@ -269,19 +338,21 @@
     margin: 0 0 0.375rem;
   }
 
-  .promise-footer__localization {
-    margin-block-start: 1.25rem;
-  }
-
-  /* Keep the country label on one line — it wraps awkwardly mid-name otherwise */
   .promise-footer__localization .localization-toggle {
     white-space: nowrap;
+  }
+
+  .promise-footer__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
   .promise-footer__aside {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    row-gap: 1.5rem;
+    column-gap: 0;
   }
 
   .promise-footer__lockup-image {
@@ -301,13 +372,20 @@
 
   .promise-footer__copyright {
     margin: 0;
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
+    line-height: 1.5;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    opacity: 0.75;
+    opacity: 1;
+    text-align: start;
   }
 
-  /* Socials sit between the second and third column on mobile, bottom-right on desktop */
+  .promise-footer__aside-end {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
   .promise-footer__socials--mobile {
     order: 25;
   }
@@ -329,7 +407,35 @@
 
     .promise-footer__columns {
       flex-direction: row;
-      gap: 2rem;
+      gap: 3rem;
+    }
+
+    .promise-footer__top {
+      flex: 0 0 auto;
+      display: block;
+    }
+
+    .promise-footer__utility--mobile {
+      display: none;
+    }
+
+    .promise-footer__utility--desktop {
+      display: flex;
+      align-items: flex-end;
+      text-align: end;
+    }
+
+    .promise-footer__utility--desktop .promise-payment-icons {
+      justify-content: flex-end;
+    }
+
+    .promise-footer__aside-end {
+      align-items: flex-end;
+      flex: 0 0 auto;
+    }
+
+    .promise-footer__aside-end .promise-payment-icons {
+      flex-wrap: nowrap;
     }
 
     .promise-footer__column {
@@ -339,7 +445,7 @@
 
     .promise-footer__aside {
       flex-direction: row;
-      align-items: flex-end;
+      align-items: flex-start;
       justify-content: space-between;
     }
 
@@ -362,7 +468,7 @@
 {% schema %}
 {
   "name": "Promise footer",
-  "class": "shopify-section--promise-footer",
+  "class": "shopify-section--promise-footer shopify-section--footer",
   "tag": "footer",
   "max_blocks": 4,
   "settings": [
@@ -437,7 +543,7 @@
       "max": 55,
       "step": 1,
       "unit": "%",
-      "default": 37
+      "default": 40
     },
     {
       "type": "header",
@@ -473,6 +579,35 @@
       "id": "brand_lockup",
       "label": "Brand lockup image",
       "info": "Optional. Overrides the text above if you need the exact supplied artwork."
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright line",
+      "default": "© 2026 All rights reserved - The Promise Ring Co LTD. 13982489"
+    },
+    {
+      "type": "header",
+      "content": "Payment badges"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment badges",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "payment_types",
+      "label": "Badges to show",
+      "info": "Comma-separated, in display order. Options include visa, master, american_express, paypal, klarna, apple_pay, google_pay, shopify_pay, maestro, discover.",
+      "default": "visa,apple_pay,google_pay,master,american_express,shopify_pay"
+    },
+    {
+      "type": "image_picker",
+      "id": "amex_icon",
+      "label": "Custom American Express badge",
+      "info": "Optional. Replaces the badge Shopify supplies, which the client found unclear."
     },
     {
       "type": "header",
@@ -554,12 +689,6 @@
           "id": "content",
           "label": "t:global.text.content",
           "default": "<p>info@thepromiseco.com</p><p>The Promise Ring Co Ltd.</p><p>Company no. 13982489</p>"
-        },
-        {
-          "type": "checkbox",
-          "id": "show_localization",
-          "label": "Show country and language selectors in this column",
-          "default": true
         }
       ]
     }
@@ -568,9 +697,9 @@
     {
       "name": "Promise footer",
       "blocks": [
+        { "type": "links", "settings": { "menu": "help-support", "title": "Help & Support" } },
         { "type": "links", "settings": { "menu": "policies", "title": "Policies" } },
-        { "type": "links", "settings": { "menu": "footer", "title": "Footer menu" } },
-        { "type": "text" }
+        { "type": "links", "settings": { "menu": "footer", "title": "Footer menu" } }
       ]
     }
   ]
