@@ -94,7 +94,7 @@
             "show_below_gallery": true,
             "icon": "none",
             "title": "Materials",
-            "content": "<p><strong>Gold Vermeil </strong>- A thick layer of real 18k gold bonded to solid sterling silver - up to 25x thicker than standard plating. Designed to last, crafted to shine, made to hold meaning.</p><p><strong>Solid 925 sterling silver</strong> - finished with rhodium - a rare metal from the platinum family. This bright, durable layer protects against tarnish and keeps every piece shining beautifully.</p><p><strong>Rhodium Plating </strong>applied to sterling silver. Rhodium is one of the world’s most precious metals, known for its mirror-like shine and exceptional resistance to tarnishing.</p><p><strong>Protective anti-tarnish coating</strong> that helps preserve shine and colour over time. It adds an invisible shield against daily wear, so your jewelry stays as beautiful as the day you received it. </p><p><strong>Conflict-free simulated diamonds,</strong> hand-set promise zirconia for a flawless finish.</p><p><strong>Sparkle Index (Refractive Index)</strong></p><p>Our stones: <strong>2.18 </strong>| Natural diamonds: <strong>2.41</strong></p><p><strong>Durability (MOHS Hardness) </strong></p><p>Our stones: <strong>8.5 </strong>| Natural diamonds: <strong>10</strong></p>",
+            "content": "<p><strong>Gold Vermeil </strong>- A thick layer of real 18k or 14k gold bonded to solid sterling silver - up to 25x thicker than standard plating. Designed to last, crafted to shine, made to hold meaning.</p><p><strong>Solid 925 sterling silver</strong> - finished with rhodium - a rare metal from the platinum family. This bright, durable layer protects against tarnish and keeps every piece shining beautifully.</p><p><strong>Rhodium Plating </strong>applied to sterling silver. Rhodium is one of the world’s most precious metals, known for its mirror-like shine and exceptional resistance to tarnishing.</p><p><strong>Protective anti-tarnish coating</strong> that helps preserve shine and colour over time. It adds an invisible shield against daily wear, so your jewelry stays as beautiful as the day you received it. </p><p><strong>Conflict-free simulated diamonds,</strong> hand-set promise zirconia for a flawless finish.</p><p><strong>Sparkle Index (Refractive Index)</strong></p><p>Our stones: <strong>2.18 </strong>| Natural diamonds: <strong>2.41</strong></p><p><strong>Durability (MOHS Hardness) </strong></p><p>Our stones: <strong>8.5 </strong>| Natural diamonds: <strong>10</strong></p>",
             "liquid": "",
             "page": ""
           }
@@ -125,7 +125,28 @@
         "judge_me_reviews_review_snippet_widget_YnLLY8": {
           "type": "shopify://apps/judge-me-reviews/blocks/review_snippet_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "disabled": true,
-          "settings": {}
+          "settings": {
+            "reviews_selection": "auto",
+            "products": [],
+            "filter_pinned": false,
+            "filter_featured": false,
+            "filter_custom_tags": "",
+            "min_star_rating": "inherit",
+            "show_review_media": true,
+            "max_reviews": 5,
+            "review_length": "medium",
+            "text_size": "medium",
+            "max_width": 1100,
+            "max_image_size": "small",
+            "arrows_visibility": "always_shown",
+            "transition_speed": 5,
+            "corner_styling": "inherit",
+            "text_color": "",
+            "card_color": "",
+            "stars_color": "",
+            "arrows_color": "",
+            "arrows_background_color": ""
+          }
         },
         "feature_with_icon_FTccY4": {
           "type": "feature_with_icon",
