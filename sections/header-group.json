@@ -98,7 +98,6 @@
         },
         "mega_menu_promise": {
           "type": "mega_menu",
-          "disabled": true,
           "settings": {
             "menu_item": "Promise Rings",
             "images_position": "right",
