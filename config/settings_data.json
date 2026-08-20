@@ -24,7 +24,7 @@
     "text_font_size_desktop": 14,
     "button_letter_spacing": 18,
     "round_color_swatches": true,
-    "color_swatch_config": "18k Gold Vermeil:#D4AF37\nRhodium Plated Silver:#C0C0C0\n14k Gold Vermeil:#CFB53B\nSterling Silver:#C0C0C0\nBottle Green:#006A4E\nBaby Blue:#89CFF0\nBaby Pink:#F4C2C2\nRed:#DC143C",
+    "color_swatch_config": "18k Gold Vermeil:#D4AF37\n18k Gold Plated:#D4AF37\nRhodium Plated Silver:#C0C0C0\n14k Gold Vermeil:#CFB53B\nSterling Silver:#C0C0C0\nBottle Green:#006A4E\nBaby Blue:#89CFF0\nBaby Pink:#F4C2C2\nRed:#DC143C",
     "product_image_aspect_ratio": "square_crop",
     "show_secondary_image": false,
     "product_card_text_font": "heading",
