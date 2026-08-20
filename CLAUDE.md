@@ -29,6 +29,9 @@ Valid Shopify theme directories in this repo:
 | `/deploy` | Push only git-changed files to the live Shopify theme |
 | `/commit` | Assess the working tree, group changes into clean logical commits |
 | `/merge` | Merge a feature branch into a target using `--no-ff` merge commits |
+| `/update-dev` | Sync client changes into `main`, merge into `dev`, push to the Promise Co - Dev theme |
+| `/push-to-dev` | Merge the current feature branch into `dev` and push changed files to the Promise Co - Dev theme |
+| `/copy-dev-url` | Copy a client-shareable Dev theme preview URL to the clipboard, deep-linked to the relevant page |
 
 ## Conventions
 
