@@ -49,7 +49,7 @@ Pull the live Shopify theme down, commit any client-side changes, and optionally
 
 7. **Ask about refreshing each preview branch**
    - Read `.claude/themes.json` and iterate over every entry under `themes` whose key is **not** `live`
-   - For each entry (e.g. `preview`, `colab`), ask the user: "Also refresh the **{key}** branch (`{branch}`) with these client changes?"
+   - For each entry (e.g. `preview`), ask the user: "Also refresh the **{key}** branch (`{branch}`) with these client changes?"
    - If yes for a given entry:
      - `git checkout <branch>`
      - `git merge main --no-ff -m "Merge main into <branch>"`
