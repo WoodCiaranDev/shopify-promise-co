@@ -107,7 +107,7 @@
         "text_LcD7t6": {
           "type": "text",
           "settings": {
-            "text": "7000+ promises made"
+            "text": "9000+ promises made"
           }
         }
       },
@@ -215,6 +215,9 @@
             "show_sample_reviews": false,
             "reviews_selection": "all",
             "products": [],
+            "filter_pinned": false,
+            "filter_featured": false,
+            "filter_custom_tags": "",
             "star_rating": "all",
             "show_review_media": true,
             "display_order": "media_first",
@@ -237,7 +240,8 @@
             "arrows_color": "#313030",
             "transition_speed": 5,
             "header_text": "",
-            "show_average_rating": true
+            "show_average_rating": true,
+            "rating_display": "default"
           }
         }
       },
@@ -386,6 +390,7 @@
       "settings": {
         "color_scheme": "scheme-2",
         "separate_section_with_border": false,
+        "reduce_mobile_spacing": false,
         "stack_on_mobile": false,
         "icon_color": "",
         "text_color": "",

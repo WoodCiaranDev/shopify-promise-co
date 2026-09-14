@@ -14,8 +14,18 @@
   },
   "sections": {
     "main": {
-      "settings": {},
+      "settings": {
+        "colab_mto_content": "<p><strong>Crafted for You</strong><br/>Every piece from The Promise Lab is individually crafted to your exact specifications. Our jewellers create each piece for you - making it as unique as the story behind it. Please allow approximately 10-15 business days for production before dispatch.</p><p><strong>Final Sale - </strong>As each piece is made specifically for you, orders from The Promise Lab cannot be returned, exchanged, cancelled or amended once production has begun. We encourage you to carefully review all details before placing your order.<br/><br/>Each piece is handcrafted with hand-set components, so the finish, stone colour and exact placement may differ slightly from the images shown. These natural variations are unique to your piece.<br/><br/></p>"
+      },
       "blocks": {
+        "judge_me_reviews_all_reviews_text_ri7tM": {
+          "type": "shopify://apps/judge-me-reviews/blocks/all_reviews_text/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": false,
+          "settings": {
+            "paragraph-bc361b3a581092422121b3f75759b7a8": null,
+            "paragraph-dea7d5537a0bfbf0125d54985f0ef467": null
+          }
+        },
         "delivery_countdown_GeGVy3": {
           "settings": {
             "cutoff_hour": 13,
@@ -24,7 +34,7 @@
         },
         "accordion_xfbPBi": {
           "settings": {
-            "content": "<p><strong>Gold Vermeil </strong>- A thick layer of real 18k or 14k gold bonded to solid sterling silver - up to 25x thicker than standard plating. Designed to last, crafted to shine, made to hold meaning.</p><p><strong>Solid 925 sterling silver</strong> - finished with rhodium - a rare metal from the platinum family. This bright, durable layer protects against tarnish and keeps every piece shining beautifully.</p><p><strong>Rhodium Plating </strong>applied to sterling silver. Rhodium is one of the world’s most precious metals, known for its mirror-like shine and exceptional resistance to tarnishing.</p><p><strong>Protective anti-tarnish coating</strong> that helps preserve shine and colour over time. It adds an invisible shield against daily wear, so your jewelry stays as beautiful as the day you received it. </p><p><strong>Conflict-free simulated diamonds,</strong> hand-set promise zirconia for a flawless finish.</p><p><strong>Sparkle Index (Refractive Index)</strong></p><p>Our stones: <strong>2.18 </strong>| Natural diamonds: <strong>2.41</strong></p><p><strong>Durability (MOHS Hardness) </strong></p><p>Our stones: <strong>8.5 </strong>| Natural diamonds: <strong>10</strong></p>"
+            "content": "<p><strong>Gold Vermeil </strong>- A thick layer of real 18k or 14k gold bonded to solid sterling silver - up to 25x thicker than standard plating. Designed to last, crafted to shine, made to hold meaning.</p><p><strong>Solid 925 sterling silver</strong> - finished with rhodium - a rare metal from the platinum family. This bright, durable layer protects against tarnish and keeps every piece shining beautifully.</p><p><strong>Rhodium Plating </strong>applied to sterling silver. Rhodium is one of the world’s most precious metals, known for its mirror-like shine and exceptional resistance to tarnishing.</p><p><strong>Protective anti-tarnish coating</strong> that helps preserve shine and colour over time. It adds an invisible shield against daily wear, so your jewelry stays as beautiful as the day you received it. </p><p><strong>Conflict-free simulated diamonds,</strong> hand-set promise cubic zirconia for a flawless finish.</p><p><strong>Sparkle Index (Refractive Index)</strong></p><p>Our stones: <strong>2.18 </strong>| Natural diamonds: <strong>2.41</strong></p><p><strong>Durability (MOHS Hardness) </strong></p><p>Our stones: <strong>8.5 </strong>| Natural diamonds: <strong>10</strong></p>"
           }
         },
         "accordion_YBgV49": {
@@ -42,9 +52,9 @@
         }
       },
       "block_order": [
+        "judge_me_reviews_all_reviews_text_ri7tM",
         "title",
         "price",
-        "judge_me_reviews_preview_badge_WQEMyy",
         "payment_terms",
         "separator",
         "variant_picker",
