@@ -243,14 +243,14 @@
         "heading_nXzati": {
           "type": "heading",
           "settings": {
-            "text": "Birthstone Promise Rings With Personal Meaning",
+            "text": "Custom Promise Rings Made for Your Story",
             "heading_tag": "h1"
           }
         },
         "richtext_6XWwry": {
           "type": "richtext",
           "settings": {
-            "content": "<p>A birthstone promise ring tells more than one story. The ring represents the promise itself, while the stone connects it to a particular person, date or memory.<br/><br/>You might choose your partner’s birthstone, the month you first met or the stone associated with a child, best friend or family member. You may simply choose the color that feels most like the person receiving it.</p>"
+            "content": "<p>A custom promise ring turns a meaningful commitment into something that feels connected to the people making it. Instead of choosing a ring simply because it looks beautiful, you can select details that represent a person, date, memory or shared part of your story.</p><p>Your ring might feature a birthstone connected to someone special, a color that holds personal meaning or two stones representing two people.</p><p>At The Promise Co, the promise always comes first. </p><p>Our personalized promise rings are designed to help you create something meaningful without placing rules or expectations around what that promise should mean.</p>"
           }
         }
       },
@@ -259,6 +259,7 @@
         "heading_nXzati",
         "richtext_6XWwry"
       ],
+      "disabled": true,
       "name": "t:sections.image_with_text.presets.image_with_text.name",
       "settings": {
         "color_scheme": "",
@@ -282,14 +283,14 @@
         "heading_DJByPG": {
           "type": "heading",
           "settings": {
-            "text": "Our Birthstones",
+            "text": "Create a Custom Promise Ring for Her",
             "heading_tag": "h1"
           }
         },
         "richtext_bVjiyJ": {
           "type": "richtext",
           "settings": {
-            "content": "<p>Our birthstone colors have been selected to represent every month of the year.</p><p>January: Garnet, deep red</p><p>February: Amethyst, purple</p><p>March: Aquamarine, light blue</p><p>April: Diamond Simulant, clear</p><p>May: Emerald, rich green</p><p>June: Lavender, soft purple</p><p>July: Ruby, vivid red</p><p>August: Apple Green, bright green</p><p>September: Sapphire Blue, deep blue</p><p>October: Pink, soft pink</p><p>November: Champagne, warm golden tone</p><p>December: Tanzanite, blue-violet</p>"
+            "content": "<p>For a romantic look, consider soft shapes or meaningful colors or even a two-stone setting. For someone who prefers minimal jewelry, choose a delicate band or understated design that can become part of her everyday collection.<br/><br/>A personalized promise ring for a girlfriend or partner can mark a first anniversary, a shared milestone, a long distance relationship or a commitment to the future.<br/><br/>The most important part is not how large or elaborate the ring is. It is the thought behind the details you choose.</p>"
           }
         }
       },
@@ -298,6 +299,7 @@
         "heading_DJByPG",
         "richtext_bVjiyJ"
       ],
+      "disabled": true,
       "name": "t:sections.image_with_text.presets.image_with_text.name",
       "settings": {
         "color_scheme": "",
@@ -307,71 +309,6 @@
         "image_position": "end",
         "content_width": "sm",
         "remove_vertical_spacing": true
-      }
-    },
-    "faq_QJJp3F": {
-      "type": "faq",
-      "blocks": {
-        "question_Ln3MWX": {
-          "type": "question",
-          "settings": {
-            "question": "What is a birthstone promise ring?",
-            "answer": "<p>A birthstone promise ring features a stone color associated with a month of the year. It combines the meaning of a promise ring with a personal connection to a birthday, date, loved one or memory.</p>"
-          }
-        },
-        "question_XmWNA4": {
-          "type": "question",
-          "settings": {
-            "question": "Which birthstones are available?",
-            "answer": "<p>The available colors are January Garnet, February Amethyst, March Aquamarine, April Diamond Simulant, May Emerald, June Lavender, July Ruby, August Apple Green, September Sapphire Blue, October Pink, November Champagne and December Tanzanite.</p>"
-          }
-        },
-        "question_x8663n": {
-          "type": "question",
-          "settings": {
-            "question": "Do I have to choose the wearer’s birth month?",
-            "answer": "<p>No. You can choose a partner’s birthstone, a child’s birthstone, an anniversary month or simply a color that feels personal to the wearer.<br/></p>"
-          }
-        },
-        "question_gqnBQ4": {
-          "type": "question",
-          "settings": {
-            "question": "Can a birthstone promise ring feature more than one stone?",
-            "answer": "<p>Selected designs allow more than one birthstone. This can be used to represent a couple, children, family members or several meaningful months within one ring.<br/></p>"
-          }
-        },
-        "question_gdbHLn": {
-          "type": "question",
-          "settings": {
-            "question": "Are birthstone promise rings only for romantic relationships?",
-            "answer": "<p>No. They can represent romantic love, friendship, family, self-love or a personal milestone. The meaning depends on the person and promise behind the ring.</p>"
-          }
-        },
-        "question_G9KErz": {
-          "type": "question",
-          "settings": {
-            "question": "Do the personalization options vary by ring?",
-            "answer": "<p>Yes. The number, position and style of birthstones available depend on the design. Check the individual product page for the exact options before ordering.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "question_Ln3MWX",
-        "question_XmWNA4",
-        "question_x8663n",
-        "question_gqnBQ4",
-        "question_gdbHLn",
-        "question_G9KErz"
-      ],
-      "name": "t:sections.faq.presets.faq.name",
-      "settings": {
-        "color_scheme": "scheme-27cf44bf-c8a8-484b-bfb4-2b967cabc2a7",
-        "separate_section_with_border": true,
-        "anchor_id": "",
-        "show_categories": false,
-        "subheading": "Frequently Asked Questions",
-        "title": "Birthstone Promise Rings",
-        "content": ""
       }
     }
   },
@@ -383,7 +320,6 @@
     "lab_birthstones",
     "category_cards_6WFay4",
     "image_with_text_xTqgtQ",
-    "image_with_text_9DtyNQ",
-    "faq_QJJp3F"
+    "image_with_text_9DtyNQ"
   ]
 }

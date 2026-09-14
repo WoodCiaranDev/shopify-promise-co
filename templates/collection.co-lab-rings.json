@@ -20,8 +20,7 @@
         "background_color": "rgba(0,0,0,0)",
         "anchor_id": "",
         "content_alignment": "center",
-        "background_image": "shopify://shop_images/Untitled_design-52.png",
-        "background_image_mobile": "shopify://shop_images/Untitled_design-49.png",
+        "background_image": "shopify://shop_images/Untitled_design-43.png",
         "background_asset": "co-lab-collection-hero.png",
         "scrim_opacity": 25,
         "logo_asset": "",
@@ -259,7 +258,6 @@
         "heading_nXzati",
         "richtext_6XWwry"
       ],
-      "disabled": true,
       "name": "t:sections.image_with_text.presets.image_with_text.name",
       "settings": {
         "color_scheme": "",
@@ -299,7 +297,6 @@
         "heading_DJByPG",
         "richtext_bVjiyJ"
       ],
-      "disabled": true,
       "name": "t:sections.image_with_text.presets.image_with_text.name",
       "settings": {
         "color_scheme": "",

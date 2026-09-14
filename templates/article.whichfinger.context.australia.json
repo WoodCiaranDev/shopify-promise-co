@@ -1,0 +1,122 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "context": {
+    "market": "australia"
+  },
+  "parent": "article.whichfinger.json",
+  "sections": {
+    "rich_text_8BCpNn": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "rich_text_rLkyTp": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "image_with_text_B6D4Yt": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "rich_text_RGBhcB": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "text_with_icons_Pjxjm4": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "rich_text_AHWmYY": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "image_with_text_TdcT6e": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "rich_text_9HgCnJ": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "rich_text_G6NGN9": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "image_with_text_overlay_Rhtg7n": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "rich_text_Ma7Tp8": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "multi_column_4FjN8P": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "rich_text_UQmrXb": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "text_with_icons_cg7kX8": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "faq_6rXbCj": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "rich_text_9YCJBh": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "rich_text_3iUw7W": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "image_with_text_R9MHBN": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "rich_text_gQCrHn": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "category_cards_wXGkpz": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {}
+    },
+    "rich_text_D3Diwr": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    }
+  }
+}
