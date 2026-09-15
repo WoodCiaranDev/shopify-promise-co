@@ -269,7 +269,7 @@ class CoLabNecklacePicker extends HTMLElement {
     confirmLabel.appendChild(this.el('span', 'c-co-lab-picker__confirm-label', 'I confirm my selection is correct'));
     confirmLabel.appendChild(confirmCheck);
     card.appendChild(confirmLabel);
-    card.appendChild(this.el('p', 'c-co-lab-picker__confirm-note', 'Your piece will be crafted exactly as confirmed above - made just for you and dispatched in 2-3 weeks.'));
+    card.appendChild(this.el('p', 'c-co-lab-picker__confirm-note', 'Your piece will be crafted exactly as confirmed above - made just for you and dispatched in 10-15 business days.'));
 
     const backBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--secondary', '← Edit');
     backBtn.type = 'button';
