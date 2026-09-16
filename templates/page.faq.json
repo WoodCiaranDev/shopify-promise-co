@@ -72,7 +72,7 @@
           "type": "question",
           "settings": {
             "question": "How long will my order take to dispatch?",
-            "answer": "<h5><strong>Order Fulfilment:</strong></h5><ul><li>Orders are shipped <strong>Monday–Friday</strong>.</li><li>Any orders placed after <strong>1pm (local warehouse time)</strong> on Fridays, will not be shipped until Monday.</li></ul><p></p><p><strong>Ready To Wear Pieces:<br/></strong>If the item is in stock and your order is placed <strong>before 1pm </strong>(local warehouse time). The order will be fulfilled on the same day. </p><p><strong>Made To Order - Custom Lab:<br/></strong>These unique items are crafted just for you so once your order is placed - <strong>please allow 10-15 business days for dispatch of your order.</strong></p><p>Please note dispatch times are an estimate and may occasionally be extended due to busy periods, sales, or UK/ USA public holidays.</p><p>If you have any questions or need any additional help, please contact us at <a href=\"mailto:info@thepromiseco.com\" target=\"_blank\" title=\"mailto:info@thepromiseco.com\">info@thepromiseco.com</a></p>"
+            "answer": "<h5><strong>Order Fulfilment:</strong></h5><ul><li>Orders are shipped <strong>Monday–Friday</strong>.</li><li>Any orders placed after <strong>1pm (local warehouse time)</strong> on Fridays, will not be shipped until Monday.</li></ul><p></p><p><strong>Ready To Wear Pieces:<br/></strong>If the item is in stock and your order is placed <strong>before 1pm </strong>(local warehouse time). The order will be fulfilled on the same day. </p><p><strong>Made To Order - Custom Lab:<br/></strong>These unique items are crafted just for you so once your order is placed - <strong>please allow 10 - 15 business days for dispatch of your order.</strong></p><p>Please note dispatch times are an estimate and may occasionally be extended due to busy periods, sales, or UK/ USA public holidays.</p><p>If you have any questions or need any additional help, please contact us at <a href=\"mailto:info@thepromiseco.com\" target=\"_blank\" title=\"mailto:info@thepromiseco.com\">info@thepromiseco.com</a></p>"
           }
         },
         "question_XkktdC": {
@@ -114,7 +114,7 @@
           "type": "question",
           "settings": {
             "question": "My items have different delivery timeframes?",
-            "answer": "<p>If your order contains multiple items with different delivery timeframes, your entire order will follow the longest delivery date.</p><p>For example, if you order a ready to wear piece and a custom piece, both items will arrive in one parcel when the custom piece is finished, 10-15 days after placing your order.</p><p>To help reduce packaging waste and unnecessary shipments, we do not split ship orders. Everything will be sent together once the final item is ready.<br/><br/>If you require additional support with this please contact us and we will do our best to help - <a href=\"mailto:info@thepromiseco.com\" target=\"_blank\" title=\"mailto:info@thepromiseco.com\">info@thepromiseco.com</a></p>"
+            "answer": "<p>If your order contains multiple items with different delivery timeframes, your entire order will follow the longest delivery date.</p><p>For example, if you order a ready to wear piece and a custom piece, both items will arrive in one parcel when the custom piece is finished, 10 - 15 days after placing your order.</p><p>To help reduce packaging waste and unnecessary shipments, we do not split ship orders. Everything will be sent together once the final item is ready.<br/><br/>If you require additional support with this please contact us and we will do our best to help - <a href=\"mailto:info@thepromiseco.com\" target=\"_blank\" title=\"mailto:info@thepromiseco.com\">info@thepromiseco.com</a></p>"
           }
         },
         "category_nUYzNF": {
@@ -137,7 +137,7 @@
           "type": "question",
           "settings": {
             "question": "How long will it take to make?",
-            "answer": "<p>All our rings are hand set and crafted by our master jewellers in 10-15 business days, then they will dispatch as per your local shipping estimate.</p>"
+            "answer": "<p>All our rings are hand set and crafted by our master jewellers in 10 - 15 business days, then they will dispatch as per your local shipping estimate.</p>"
           }
         }
       },
