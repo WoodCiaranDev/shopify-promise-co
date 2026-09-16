@@ -143,46 +143,6 @@
         "section_id": ""
       }
     },
-    "promise_steps": {
-      "type": "promise-steps",
-      "blocks": {
-        "step_1": {
-          "type": "step",
-          "settings": {
-            "fallback_image": "promise-ring.png",
-            "title": "CHOOSE A RING",
-            "content": "<p>Start with a piece that feels right for your promise - whether it’s to yourself, a friend, or someone you love</p>"
-          }
-        },
-        "step_2": {
-          "type": "step",
-          "settings": {
-            "fallback_image": "promise-cards.png",
-            "title": "WRITE IT DOWN",
-            "content": "<p>Every order comes with a Promise Card, your space to write down your words and make your promise real</p>"
-          }
-        },
-        "step_3": {
-          "type": "step",
-          "settings": {
-            "fallback_image": "promise-sparkles.png",
-            "title": "MAKE IT OFFICIAL",
-            "content": "<p>Post your promise to Promise World... where your words live alongside others, each one part of something bigger</p>"
-          }
-        }
-      },
-      "block_order": [
-        "step_1",
-        "step_2",
-        "step_3"
-      ],
-      "settings": {
-        "color_scheme": "scheme-2",
-        "separate_section_with_border": false,
-        "remove_vertical_spacing": true,
-        "use_compact_spacing": false
-      }
-    },
     "promise_form": {
       "type": "promise-form",
       "settings": {
@@ -316,6 +276,46 @@
         "button_url": "#promise-wall-section",
         "use_baka_too_font": true,
         "use_ogg_font": true
+      }
+    },
+    "promise_steps": {
+      "type": "promise-steps",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "fallback_image": "promise-ring.png",
+            "title": "CHOOSE A RING",
+            "content": "<p>Start with a piece that feels right for your promise - whether it’s to yourself, a friend, or someone you love</p>"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "fallback_image": "promise-cards.png",
+            "title": "WRITE IT DOWN",
+            "content": "<p>Every order comes with a Promise Card, your space to write down your words and make your promise real</p>"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "fallback_image": "promise-sparkles.png",
+            "title": "MAKE IT OFFICIAL",
+            "content": "<p>Post your promise to Promise World... where your words live alongside others, each one part of something bigger</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "remove_vertical_spacing": true,
+        "use_compact_spacing": false
       }
     },
     "rich_text_bTU3zT": {
@@ -501,11 +501,11 @@
     "promise_title",
     "promise_map",
     "promise_process_title",
-    "promise_steps",
     "promise_form",
     "promise_wall_title",
     "promise_wall",
     "promise_community",
+    "promise_steps",
     "rich_text_bTU3zT",
     "category_cards_6rCpEy",
     "category_cards_7LUAGX",
