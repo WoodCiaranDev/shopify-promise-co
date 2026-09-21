@@ -165,6 +165,12 @@ Inputs:
         <p class="c-co-lab-picker__step">Step 3</p>
         <h2 class="c-co-lab-picker__section-title">Customisation</h2>
 
+        {%- comment -%} On mobile the gallery has scrolled away by the time stones are chosen,
+        so the preview is repeated here where the choosing actually happens. {%- endcomment -%}
+        {%- if product.handle == 'modern-heirloom-birthstone-ring' -%}
+          {%- render 'co-lab-stone-preview', product: product, variant: 'compact' -%}
+        {%- endif -%}
+
         <p class="c-co-lab-picker__birthstone-help">
           <a href="#co-lab-help-{{ product.id }}" title="Personalisation Guide Here">Personalisation Guide Here</a>
         </p>
