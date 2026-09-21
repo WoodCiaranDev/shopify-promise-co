@@ -312,6 +312,19 @@ class CoLabPicker extends HTMLElement {
     this.syncStoneInputs();
     // Keep the add-to-cart solid/enabled like a normal product. onSubmit() validates
     // metal/size and shows an inline error if anything's missing - no faded button.
+    this.emitChange();
+  }
+
+  emitChange() {
+    const slots = {};
+    this.stoneSlots().forEach((slot) => {
+      const value = this.stoneValue(slot);
+      slots[slot] = value ? value.split(' - ')[0].trim() : '';
+    });
+    this.dispatchEvent(new CustomEvent('colab:change', {
+      bubbles: true,
+      detail: { metal: this.selectedMetal, size: this.selectedSize, slots },
+    }));
   }
 
   // --- Phase A: open the review modal (no cart mutation yet) -----------------
