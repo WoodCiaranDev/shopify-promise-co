@@ -1,0 +1,58 @@
+.co-lab-stone-preview {
+  display: block;
+  width: 100%;
+}
+
+.co-lab-stone-preview__plate {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #fff;
+  overflow: hidden;
+}
+
+.co-lab-stone-preview__layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.co-lab-stone-preview[data-ready='true'] .co-lab-stone-preview__layer {
+  opacity: 1;
+}
+
+.co-lab-stone-preview__caption {
+  margin: 0.75rem 0 0;
+  text-align: center;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgb(var(--text-color) / 0.6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .co-lab-stone-preview__layer { transition: none; }
+}
+
+.co-lab-stone-preview--compact {
+  margin: 0 0 1.25rem;
+  max-width: 320px;
+}
+
+.co-lab-stone-preview--compact .co-lab-stone-preview__plate {
+  border: 1px solid rgb(var(--border-color, 0 0 0) / 0.12);
+  border-radius: 3px;
+}
+
+.co-lab-stone-preview--compact .co-lab-stone-preview__caption {
+  margin-top: 0.5rem;
+  font-size: 0.6875rem;
+}
+
+@media screen and (min-width: 1000px) {
+  .co-lab-stone-preview--compact { display: none; }
+}
