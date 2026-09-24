@@ -1,112 +1,103 @@
 (() => {
+  const SIZES = { slide: [400, 700, 1000], thumb: [56, 112, 168], compact: [480, 700, 1000] };
+  const DISPLAY = { slide: 1000, thumb: 168, compact: 1000 };
+
   class CoLabStonePreview extends HTMLElement {
     connectedCallback() {
-      this.config = this.parseConfig();
-      this.centreEl = this.querySelector('[data-layer="centre"]');
-      this.haloEl = this.querySelector('[data-layer="halo"]');
-      this.captionEl = this.querySelector('[data-preview-caption]');
-      if (!this.config || !this.centreEl || !this.haloEl) return;
-
+      this.config = this.parse();
+      if (!this.config) return;
+      this.base = this.dataset.base;
+      // One version token for the whole set: all combinations are rebuilt and uploaded together,
+      // so this busts the browser/CDN cache whenever the images are replaced.
+      this.q = this.dataset.version ? `?v=${this.dataset.version}&` : '?';
       this.state = {
-        metal: this.dataset.defaultMetal || '',
-        centre: this.dataset.defaultCentre || '',
-        halo: this.dataset.defaultHalo || '',
+        metal: this.dataset.metal || 'gold',
+        centre: this.dataset.centre || 'may',
+        halo: this.dataset.halo || 'april',
       };
-      this.onPickerChange = this.onPickerChange.bind(this);
-      document.addEventListener('colab:change', this.onPickerChange);
-      this.render();
+      this.generation = 0;
+      this.onChange = this.onChange.bind(this);
+      document.addEventListener('colab:change', this.onChange);
 
       const picker = document.querySelector('c-co-lab-picker');
       if (picker && typeof picker.emitChange === 'function') picker.emitChange();
     }
 
     disconnectedCallback() {
-      document.removeEventListener('colab:change', this.onPickerChange);
+      document.removeEventListener('colab:change', this.onChange);
     }
 
-    parseConfig() {
-      const el = this.querySelector('[data-preview-config]');
-      try { return JSON.parse(el.textContent); } catch { return null; }
+    parse() {
+      try { return JSON.parse(this.querySelector('[data-preview-config]').textContent); }
+      catch { return null; }
     }
 
     metalKey(name) {
       if (!name) return null;
-      const exact = this.config.metals[name];
-      if (exact) return exact;
-      return /silver/i.test(name) ? 'silver' : 'gold';
+      return this.config.metals[name] || (/silver/i.test(name) ? 'silver' : 'gold');
     }
 
     stoneKey(name) {
       if (!name) return null;
-      const entry = this.config.stones[name];
-      if (entry) return entry.key;
-      const match = Object.keys(this.config.stones).find(
-        (k) => k.toLowerCase() === String(name).toLowerCase()
-      );
-      return match ? this.config.stones[match].key : null;
+      if (this.config.stones[name]) return this.config.stones[name];
+      const hit = Object.keys(this.config.stones).find((k) => k.toLowerCase() === String(name).toLowerCase());
+      return hit ? this.config.stones[hit] : null;
     }
 
-    onPickerChange(event) {
+    onChange(event) {
       const { metal, slots } = event.detail || {};
-      const values = Object.values(slots || {});
-      const centre = this.stoneKey(values[0]);
-      const halo = this.stoneKey(values[1]);
-      if (metal) this.state.metal = metal;
+      const picked = Object.values(slots || {});
+      const metalKey = this.metalKey(metal);
+      const centre = this.stoneKey(picked[0]);
+      const halo = this.stoneKey(picked[1]);
+      if (metalKey) this.state.metal = metalKey;
       if (centre) this.state.centre = centre;
       if (halo) this.state.halo = halo;
       this.render();
     }
 
-    urlsFor(metalKey, stoneKey) {
-      const set = this.config.urls[metalKey];
-      return set ? set[stoneKey] : null;
+    url(role) {
+      const { metal, centre, halo } = this.state;
+      return `${this.base}colab-heirloom-${metal}-${centre}-${halo}.jpg${this.q}width=${DISPLAY[role] || 1000}`;
+    }
+
+    srcset(role) {
+      const { metal, centre, halo } = this.state;
+      const file = `${this.base}colab-heirloom-${metal}-${centre}-${halo}.jpg`;
+      return (SIZES[role] || SIZES.slide).map((w) => `${file}${this.q}width=${w} ${w}w`).join(', ');
     }
 
     async render() {
-      const mk = this.metalKey(this.state.metal) || 'gold';
-      const centre = this.urlsFor(mk, this.state.centre);
-      const halo = this.urlsFor(mk, this.state.halo);
-      if (!centre || !halo) return;
+      const token = ++this.generation;
+      const targets = document.querySelectorAll('[data-colab-preview-img]');
+      if (!targets.length) return;
 
-      // Decode before swapping so the ring never flashes an empty setting.
-      const next = [centre.centre, halo.halo];
-      const [a, b] = await Promise.all(next.map((src) => this.decoded(src)));
-      if (a) this.centreEl.src = a;
-      if (b) this.haloEl.src = b;
-      this.setAttribute('data-ready', 'true');
-      if (this.captionEl) this.captionEl.textContent = this.caption();
-      this.warm(mk);
-    }
+      // Decode the largest variant once, then apply everywhere. The previous frame
+      // stays on screen until it is ready, so a fast tap-through never flashes.
+      const probe = new Image();
+      probe.src = this.url('slide');
+      probe.srcset = this.srcset('slide');
+      probe.sizes = '1000px';
+      try { await probe.decode(); } catch { /* fall through and swap anyway */ }
+      if (token !== this.generation) return;
 
-    decoded(src) {
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => resolve(src);
-        img.onerror = () => resolve(null);
-        img.src = src;
+      targets.forEach((img) => {
+        const role = img.dataset.colabRole || 'slide';
+        img.srcset = this.srcset(role);
+        img.src = this.url(role);
+      });
+
+      const caption = this.captionText();
+      document.querySelectorAll('[data-colab-preview-caption]').forEach((el) => { el.textContent = caption; });
+      document.querySelectorAll('[data-colab-preview-img]').forEach((img) => {
+        if (img.dataset.colabRole !== 'thumb') img.alt = caption || img.alt;
       });
     }
 
-    caption() {
-      const name = (key) => {
-        const hit = Object.entries(this.config.stones).find(([, v]) => v.key === key);
-        return hit ? hit[0] : '';
-      };
-      const c = name(this.state.centre);
-      const h = name(this.state.halo);
-      if (!c && !h) return '';
-      return `${c} centre stone, ${h} halo`;
-    }
-
-    warm(metalKey) {
-      if (this.warmed === metalKey || !('requestIdleCallback' in window)) return;
-      this.warmed = metalKey;
-      requestIdleCallback(() => {
-        Object.values(this.config.urls[metalKey] || {}).forEach((u) => {
-          new Image().src = u.centre;
-          new Image().src = u.halo;
-        });
-      });
+    captionText() {
+      const c = this.config.labels[this.state.centre];
+      const h = this.config.labels[this.state.halo];
+      return c && h ? `${c} centre stone, ${h} halo` : '';
     }
   }
 

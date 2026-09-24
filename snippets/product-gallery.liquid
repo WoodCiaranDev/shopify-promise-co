@@ -159,12 +159,12 @@ only way to do it on Shopify right now.
 
           {%- if has_stone_preview -%}
             <div class="product-gallery__media snap-center is-initial" data-media-type="image" data-media-id="co-lab-stone-preview" role="group" aria-label="{{ 'general.accessibility.item_nth_of_count' | t: index: 1, count: product.media.size | plus: 1 }}">
-              {%- render 'co-lab-stone-preview', product: product -%}
+              {%- render 'co-lab-stone-preview', product: product, variant: 'slide', sizes: sizes -%}
             </div>
           {%- endif -%}
 
           {%- if has_anim -%}
-            <div class="product-gallery__media snap-center{% unless has_stone_preview %} is-initial{% endunless %}" data-media-type="image" data-media-id="co-lab-loop" role="group" aria-label="{{ 'general.accessibility.item_nth_of_count' | t: index: 1, count: product.media.size | plus: 1 }}">
+            <div class="product-gallery__media snap-center{% unless has_stone_preview %} is-initial{% endunless %}" data-media-type="{% if has_stone_preview %}animation{% else %}image{% endif %}" data-media-id="co-lab-loop" role="group" aria-label="{{ 'general.accessibility.item_nth_of_count' | t: index: 1, count: product.media.size | plus: 1 }}">
               {%- render 'co-lab-image-loop', product: product, sizes: sizes, image_class: 'object-contain', eager: true -%}
             </div>
           {%- endif -%}
@@ -251,7 +251,7 @@ only way to do it on Shopify right now.
           {%- if product != blank -%}
             {%- if has_stone_preview -%}
               <button type="button" class="product-gallery__thumbnail" data-media-type="image" data-media-position="0" data-media-id="co-lab-stone-preview" aria-current="true" aria-label="{{ 'general.accessibility.go_to_item' | t: index: 1 | escape }}">
-                <img src="{{ 'colab-heirloom-gold-centre-may.jpg' | asset_url }}" alt="" width="56" height="56" loading="lazy" class="object-contain">
+                {%- render 'co-lab-stone-preview', product: product, variant: 'thumb' -%}
               </button>
             {%- endif -%}
             {%- if has_anim -%}
