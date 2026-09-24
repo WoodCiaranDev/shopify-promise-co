@@ -1,6 +1,15 @@
 class CoLabPicker extends HTMLElement {
   connectedCallback() {
+    if (this._connected) return;
+    this._connected = true;
     this.activeSlot = null;
+
+    // Customise slide-out (heirloom ring only): stones + engraving live in a drawer that stays
+    // inside this element and its form, so every scoped lookup below still finds them.
+    this.drawer = this.dataset.customiseDrawerId ? document.getElementById(this.dataset.customiseDrawerId) : null;
+    this.summaryEl = this.querySelector('[data-customise-summary]');
+    this.confirmPriceEl = this.querySelector('[data-confirm-price]');
+    this.quantityInput = this.querySelector('input[name="quantity"]');
 
     this.form = this.querySelector('form[action*="/cart/add"]');
     this.stonesToggle = this.querySelector('[data-action="toggle-stones"]');
@@ -70,6 +79,8 @@ class CoLabPicker extends HTMLElement {
     this.querySelectorAll('[data-action="pick-stone"]').forEach((btn) => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
+        // Drawer tiles carry their own slot (one full grid per slot); the shared grid uses activeSlot.
+        if (btn.dataset.slot) this.activeSlot = btn.dataset.slot;
         this.pickStone(btn.dataset);
       });
     });
@@ -89,6 +100,25 @@ class CoLabPicker extends HTMLElement {
 
     this.form?.addEventListener('submit', (e) => this.onSubmit(e));
 
+    this.querySelector('[data-action="confirm-customise"]')?.addEventListener('click', () => this.confirmCustomise());
+    this.quantityInput?.addEventListener('input', () => this.refresh());
+    this.quantityInput?.addEventListener('change', () => this.refresh());
+    // The quantity +/- buttons set the value programmatically; re-read after any click in the buy row.
+    this.querySelector('.c-co-lab-picker__buy')?.addEventListener('click', () => requestAnimationFrame(() => this.refresh()));
+
+    if (this.drawer) {
+      // Esc with the stone grid open closes the grid, not the whole drawer. The theme's focus
+      // trap listens on document (capture), so intercept earlier, on window.
+      this.onDrawerKeydown = (e) => {
+        if (e.key !== 'Escape' || !this.drawer.open || this.activeSlot == null) return;
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        this.closeGrid();
+      };
+      window.addEventListener('keydown', this.onDrawerKeydown, true);
+      this.drawer.addEventListener('dialog:after-hide', () => this.closeGrid());
+    }
+
     // Browsers restore a remembered metal/size after navigating back without firing
     // change, so re-read the live controls on restore (and just after load) to keep
     // validation honest rather than relying solely on the change event.
@@ -99,6 +129,7 @@ class CoLabPicker extends HTMLElement {
       // clean. Only touches a boolean + closes a dialog — no cart/line-item work.
       this.submitting = false;
       this.closeModal();
+      if (this.drawer?.open) this.drawer.hide();
       this.syncSelectionsFromDom();
     };
     window.addEventListener('pageshow', this.onPageShow);
@@ -117,6 +148,8 @@ class CoLabPicker extends HTMLElement {
 
   disconnectedCallback() {
     if (this.onPageShow) window.removeEventListener('pageshow', this.onPageShow);
+    if (this.onDrawerKeydown) window.removeEventListener('keydown', this.onDrawerKeydown, true);
+    this._connected = false;
   }
 
   selectMetal(value) {
@@ -185,7 +218,7 @@ class CoLabPicker extends HTMLElement {
     if (!this.gridEl) return;
     // Save scroll position so closing restores the viewport (otherwise the user
     // is left looking at empty space below where the grid was).
-    if (this.activeSlot == null) {
+    if (this.activeSlot == null && !this.drawer) {
       this._scrollSnapshot = window.scrollY;
     }
     // Toggle: clicking the active row's select while open should close.
@@ -208,7 +241,10 @@ class CoLabPicker extends HTMLElement {
   }
 
   closeGrid() {
-    if (!this.gridEl) return;
+    if (!this.gridEl) {
+      this.activeSlot = null;
+      return;
+    }
     this.gridEl.hidden = true;
     this.gridEl.dataset.activeSlot = '';
     this.activeSlot = null;
@@ -241,13 +277,20 @@ class CoLabPicker extends HTMLElement {
 
     input.value = `${name}${month ? ' - ' + month : ''}`;
     input.disabled = false;
-    text.textContent = input.value;
-    if (icon) {
-      swatch.hidden = false;
-      swatch.style.backgroundImage = `url(${icon})`;
-    } else {
-      swatch.hidden = true;
+    if (text) text.textContent = this.drawer ? `${name}${month ? ' · ' + month : ''}` : input.value;
+    if (swatch) {
+      if (icon) {
+        swatch.hidden = false;
+        swatch.style.backgroundImage = `url(${icon})`;
+      } else {
+        swatch.hidden = true;
+      }
     }
+    this.querySelectorAll(`.c-co-lab-customise__cell[data-slot="${slot}"]`).forEach((cell) => {
+      const on = cell.dataset.name === name;
+      cell.classList.toggle('is-selected', on);
+      cell.setAttribute('aria-pressed', String(on));
+    });
     this.closeGrid();
     this.refresh();
   }
@@ -310,6 +353,7 @@ class CoLabPicker extends HTMLElement {
 
   refresh() {
     this.syncStoneInputs();
+    this.updateCustomiseUi();
     // Keep the add-to-cart solid/enabled like a normal product. onSubmit() validates
     // metal/size and shows an inline error if anything's missing - no faded button.
     this.emitChange();
@@ -335,6 +379,31 @@ class CoLabPicker extends HTMLElement {
     // would fire its own /cart/add with only the parent variant — missing our
     // add-on lines and bundle properties. Suppress it.
     event.stopImmediatePropagation();
+    // With the Customise drawer, submitting (e.g. Enter in the engraving box) goes through the
+    // same path as the Confirm button so the review never opens on top of the drawer.
+    if (this.drawer) {
+      this.confirmCustomise();
+      return;
+    }
+    this.openReview();
+  }
+
+  // Resolve when a dialog finishes hiding, or after a short cap: the theme's promise waits on a
+  // Web Animation, which never finishes if the tab is backgrounded mid-close.
+  hideDialog(dialog) {
+    if (!dialog?.open) return Promise.resolve();
+    return Promise.race([dialog.hide(), new Promise((r) => setTimeout(r, 700))]);
+  }
+
+  async confirmCustomise() {
+    await this.hideDialog(this.drawer);
+    if (!this.openReview() && this.errorEl && !this.errorEl.hidden) {
+      this.errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  // Validate metal/size and open the review modal. Returns true when the modal opened.
+  openReview() {
     this.clearError();
     // Validate against the live controls, not just whatever the last change event set —
     // a browser-restored size must pass too.
@@ -342,23 +411,52 @@ class CoLabPicker extends HTMLElement {
 
     if (this.metalRequired() && !this.selectedMetal) {
       this.showError('Please choose a metal before adding to cart.');
-      return;
+      return false;
     }
     if (!this.selectedSize) {
       this.showError('Please choose a size before adding to cart.');
-      return;
+      return false;
     }
 
     const modal = document.getElementById(this.dataset.reviewModalId);
     if (!modal) {
       // No modal in the DOM — fall back to adding straight away.
       this.confirmAndAdd();
-      return;
+      return true;
     }
 
     const body = modal.querySelector('[data-colab-review-body]');
     if (body) this.renderReviewInto(body);
     modal.show ? modal.show() : modal.setAttribute('open', '');
+    return true;
+  }
+
+  quantity() {
+    return Math.max(1, parseInt(this.quantityInput?.value, 10) || 1);
+  }
+
+  // Price for the whole line: per-ring total (base + charged extras) times quantity.
+  lineTotalDisplay() {
+    const qty = this.quantity();
+    if (qty === 1 && !this.bsCharged && !this.engCharged) return this.basePriceDisplay();
+    return this.formatMoney(this.computedTotal() * qty);
+  }
+
+  // Confirm price in the drawer and the one-line summary shown on the page.
+  updateCustomiseUi() {
+    if (!this.drawer) return;
+    if (this.confirmPriceEl) this.confirmPriceEl.textContent = this.lineTotalDisplay();
+    if (!this.summaryEl) return;
+    const parts = [];
+    this.stoneSlots().forEach((slot) => {
+      if (!this.hasStone(slot)) return;
+      const input = this.querySelector(`[data-stone-input="${slot}"]`);
+      const name = this.stoneValue(slot).split(' - ')[0].trim();
+      const label = (input?.dataset.stoneLabel || '').replace(/\s*stones?$/i, '').trim().toLowerCase();
+      parts.push(label ? `${name} ${label}` : name);
+    });
+    if (this.hasEngraving()) parts.push(`Engraving: ${this.engravingInput.value.trim()}`);
+    this.summaryEl.textContent = parts.length ? parts.join(' · ') : 'Choose your gemstones & engraving';
   }
 
   // --- Review card (built with safe DOM construction, no innerHTML) ----------
@@ -438,7 +536,7 @@ class CoLabPicker extends HTMLElement {
     card.appendChild(header);
 
     // Metal, Sizing and Quantity
-    const qty = Math.max(1, parseInt(this.querySelector('input[name="quantity"]')?.value, 10) || 1);
+    const qty = this.quantity();
     const metalRows = [];
     if (this.selectedMetal) metalRows.push(this.reviewRow('Precious Metal', this.selectedMetal));
     if (this.selectedSize) metalRows.push(this.reviewRow('Size', this.selectedSize));
@@ -470,7 +568,7 @@ class CoLabPicker extends HTMLElement {
 
     // With no charged add-ons the total equals the base price, so reuse the market-correct
     // Liquid string; only fall back to JS formatting when there are paid extras.
-    const totalDisplay = (this.bsCharged || this.engCharged) ? this.formatMoney(this.computedTotal()) : this.basePriceDisplay();
+    const totalDisplay = this.lineTotalDisplay();
     card.appendChild(this.el('p', 'c-co-lab-cart-bundle__total', totalDisplay));
 
     const modalError = this.el('p', 'c-co-lab-picker__error');
@@ -503,14 +601,20 @@ class CoLabPicker extends HTMLElement {
 
     confirmCheck.addEventListener('change', () => { confirmBtn.disabled = !confirmCheck.checked; });
     confirmBtn.addEventListener('click', () => this.confirmAndAdd(confirmBtn));
-    backBtn.addEventListener('click', () => this.closeModal());
+    backBtn.addEventListener('click', async () => {
+      await this.hideDialog(document.getElementById(this.dataset.reviewModalId));
+      if (this.drawer) this.drawer.show();
+    });
 
     container.appendChild(card);
   }
 
   closeModal() {
     const modal = document.getElementById(this.dataset.reviewModalId);
-    if (modal) modal.hide ? modal.hide() : modal.removeAttribute('open');
+    if (!modal) return Promise.resolve();
+    if (modal.hide) return modal.hide();
+    modal.removeAttribute('open');
+    return Promise.resolve();
   }
 
   // --- Phase B: build the bundle, add to cart, open the drawer ---------------
@@ -530,7 +634,7 @@ class CoLabPicker extends HTMLElement {
     this.submitting = true;
 
     const bundleId = (crypto.randomUUID && crypto.randomUUID()) || `bundle-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    const qty = Math.max(1, parseInt(this.querySelector('input[name="quantity"]')?.value, 10) || 1);
+    const qty = this.quantity();
     const items = [];
 
     // Parent: the ring. Human-readable customisation properties always ride on
@@ -555,6 +659,7 @@ class CoLabPicker extends HTMLElement {
       const variantId = await this.resolveVariantId(this.dataset.birthstoneAddonHandle);
       if (!variantId) {
         this.showModalError("We couldn't add your birthstones right now. Please refresh and try again, or contact us if this persists.");
+        this.submitting = false;
         return;
       }
       items.push({ id: variantId, quantity: stoneCount * qty, properties: { _bundle_id: bundleId, _bundle_role: 'birthstone' } });
@@ -563,6 +668,7 @@ class CoLabPicker extends HTMLElement {
       const variantId = await this.resolveVariantId(this.dataset.engravingAddonHandle);
       if (!variantId) {
         this.showModalError("We couldn't add your engraving right now. Please refresh and try again, or contact us if this persists.");
+        this.submitting = false;
         return;
       }
       items.push({ id: variantId, quantity: qty, properties: { _bundle_id: bundleId, _bundle_role: 'engraving' } });
@@ -721,3 +827,15 @@ class CartAddError extends Error {
 }
 
 customElements.define('c-co-lab-picker', CoLabPicker);
+
+// Theme drawer that stays where it is rendered instead of moving to <body> while open, so the
+// stone and engraving inputs inside it remain part of the picker's product form.
+customElements.whenDefined('x-drawer').then(() => {
+  if (customElements.get('co-lab-customise-drawer')) return;
+  const Drawer = customElements.get('x-drawer');
+  customElements.define('co-lab-customise-drawer', class extends Drawer {
+    get shouldAppendToBody() {
+      return false;
+    }
+  });
+});

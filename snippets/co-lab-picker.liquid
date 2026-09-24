@@ -76,7 +76,17 @@ Inputs:
   endif
 -%}
 
+{%- comment -%} Customise slide-out: stones + engraving move into a right-hand drawer (heirloom ring only for now). {%- endcomment -%}
+{%- liquid
+  assign use_drawer = false
+  if product.handle == 'modern-heirloom-birthstone-ring'
+    assign use_drawer = true
+  endif
+  assign drawer_id = 'co-lab-customise-' | append: product.id
+-%}
+
 <c-co-lab-picker
+  data-customise-drawer-id="{% if use_drawer %}{{ drawer_id }}{% endif %}"
   class="c-co-lab-picker"
   data-product-id="{{ product.id }}"
   data-base-price="{{ first_variant.price }}"
@@ -165,12 +175,102 @@ Inputs:
         <p class="c-co-lab-picker__step">Step 3</p>
         <h2 class="c-co-lab-picker__section-title">Customisation</h2>
 
+        {%- if use_drawer -%}
+        {%- comment -%}
+          Heirloom ring: gemstones + engraving live in a right-hand slide-out. The page shows one
+          select-style button carrying a summary of the choices.
+        {%- endcomment -%}
+        <button type="button" class="c-co-lab-picker__customise-select" aria-controls="{{ drawer_id }}" aria-expanded="false">
+          <span class="c-co-lab-picker__customise-select-text" data-customise-summary aria-live="polite">Choose your gemstones &amp; engraving</span>
+          {%- render 'icon' with 'dropdown-chevron' -%}
+        </button>
+
+        <co-lab-customise-drawer id="{{ drawer_id }}" class="drawer color-scheme color-scheme--dialog c-co-lab-customise" initial-focus='[data-action="pick-stone"]'>
+          <span class="c-co-lab-customise__title" slot="header">Customise your ring</span>
+          <div class="c-co-lab-customise__body">
+            {%- render 'co-lab-stone-preview', product: product, variant: 'compact' -%}
+
+            {%- for slot in (1..slot_count) -%}
+              {%- liquid
+                assign slot_label = bs_labels[forloop.index0]
+                if slot_label == blank
+                  case slot
+                    when 1
+                      assign slot_label = 'Birthstone One'
+                    when 2
+                      assign slot_label = 'Birthstone Two'
+                    else
+                      assign slot_label = 'Birthstone ' | append: slot
+                  endcase
+                endif
+              -%}
+              <div class="c-co-lab-customise__section" data-slot="{{ slot }}" role="group" aria-labelledby="{{ drawer_id }}-slot-{{ slot }}">
+                <p class="c-co-lab-customise__head">
+                  <span class="c-co-lab-customise__label" id="{{ drawer_id }}-slot-{{ slot }}">
+                    {{- slot_label -}}
+                    {%- if slot != 1 and hide_optional != true %} <span class="c-co-lab-picker__optional">(optional)</span>{% endif -%}
+                    {%- if bs_charged %} <span class="c-co-lab-picker__optional">+ {{ bs_price | money_without_trailing_zeros }}</span>{% endif -%}
+                  </span>
+                  <span class="c-co-lab-customise__choice" data-stone-text="{{ slot }}">Select a stone</span>
+                </p>
+                <span data-stone-swatch="{{ slot }}" hidden></span>
+                <input type="hidden" name="properties[{{ slot_label }}]" data-stone-input="{{ slot }}" data-stone-label="{{ slot_label | escape }}" value="" disabled>
+                <ul class="c-co-lab-customise__grid" role="list">
+                  {%- for stone in stones -%}
+                    <li>
+                      <button type="button"
+                              class="c-co-lab-customise__cell"
+                              data-action="pick-stone"
+                              data-slot="{{ slot }}"
+                              data-name="{{ stone.name }}"
+                              data-month="{{ stone.month }}"
+                              data-icon="{% if stone.icon != blank %}{{ stone.icon | image_url: width: 120 }}{% endif %}"
+                              aria-pressed="false"
+                              aria-label="{{ stone.name | escape }}, {{ stone.month | escape }}">
+                        {%- if stone.icon != blank -%}
+                          <img class="c-co-lab-customise__cell-icon" src="{{ stone.icon | image_url: width: 120 }}" alt="" width="44" height="44" loading="lazy">
+                        {%- endif -%}
+                        <span class="c-co-lab-customise__cell-month">{{ stone.month }}</span>
+                      </button>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- endfor -%}
+
+            <div class="c-co-lab-customise__section" data-engraving>
+              <p class="c-co-lab-customise__head">
+                <label class="c-co-lab-customise__label" for="{{ product_form_id }}-engraving">{{ eng_label }} <span class="c-co-lab-picker__optional">(optional)</span></label>
+                <span class="c-co-lab-customise__choice">{% if eng_charged %}+ {{ eng_price | money_without_trailing_zeros }}{% else %}Free{% endif %}</span>
+              </p>
+              <div class="c-co-lab-picker__engraving-wrap">
+                <input type="text"
+                       id="{{ product_form_id }}-engraving"
+                       class="c-co-lab-picker__engraving-input"
+                       name="properties[Engraving]"
+                       maxlength="{{ eng_max_chars }}"
+                       placeholder="Type your engraving here"
+                       data-engraving-input>
+                <span class="c-co-lab-picker__engraving-arrow" aria-hidden="true">→</span>
+              </div>
+              <p class="c-co-lab-customise__note">
+                <span>Letters, numbers &amp; special characters. No emojis.</span>
+                <span data-engraving-count>0/{{ eng_max_chars }} Characters</span>
+              </p>
+            </div>
+          </div>
+          <div class="c-co-lab-customise__footer" slot="footer">
+            <button type="button"
+                    class="button button--add-to-cart c-co-lab-picker__atc c-co-lab-customise__confirm"
+                    data-action="confirm-customise"
+                    {% if atc_style != blank %}style="{{ atc_style | strip }}"{% endif %}>
+              Confirm &middot; <span data-confirm-price>{{ first_variant.price | money_without_trailing_zeros }}</span>
+            </button>
+          </div>
+        </co-lab-customise-drawer>
+        {%- else -%}
         {%- comment -%} On mobile the gallery has scrolled away by the time stones are chosen,
         so the preview is repeated here where the choosing actually happens. {%- endcomment -%}
-        {%- if product.handle == 'modern-heirloom-birthstone-ring' -%}
-          {%- render 'co-lab-stone-preview', product: product, variant: 'compact' -%}
-        {%- endif -%}
-
         <p class="c-co-lab-picker__birthstone-help">
           <a href="#co-lab-help-{{ product.id }}" title="Personalisation Guide Here">Personalisation Guide Here</a>
         </p>
@@ -268,6 +368,7 @@ Inputs:
             <p class="c-co-lab-picker__engraving-count" data-engraving-count>0/{{ eng_max_chars }} Characters</p>
           </div>
         </div>
+        {%- endif -%}
       </section>
 
       <p class="c-co-lab-picker__error" data-error role="alert" aria-live="polite" hidden></p>
