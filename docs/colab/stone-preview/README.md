@@ -239,3 +239,23 @@ settings (`18_stone_transplant.py`):
   metals. April stays as the AI's colourless stones, because they can't be located reliably
   on the silver photo. The six birthstones without a client photo still use the colour
   matching.
+
+## Real centre stones and recoloured real halos (24 Sep 2026)
+
+- **Centre stones are no longer AI.** The client said the AI centres changed the cut, so each
+  centre is now the live picker's real stone image (`picker-stones/`, 200px source), placed
+  by `20_real_centre_stones.py`. Each stone is scaled uniformly, never stretched, until it
+  just covers the bezel opening, then blended through the soft centre mask so our bezel stays
+  on top.
+- **Every halo is now a real cut stone.** The five client-photo halos (August, March, June,
+  July, September) are transplanted as before. The other seven are the client's real round
+  stones, quantile-mapped onto that birthstone's picker colour, lifted slightly lighter as
+  small stones read:
+  - January and February use the July donor.
+  - May and December use the September donor.
+  - October and November use the June donor.
+  - April uses the March donor with no lift, so the clear stones keep their contrast.
+- **The tuner is halo-only.** It sits in `tuner/` and is published at
+  https://claude.ai/artifact/ALU3GY545aHKR5AasstyRu. The centres are fixed picker stones and
+  can only be chosen, to see pairings. The halo settings apply through
+  `19_apply_client_colours.py`, and the base image hash is now in `tuner/base.json`.

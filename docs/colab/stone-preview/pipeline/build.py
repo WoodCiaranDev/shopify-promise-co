@@ -6,7 +6,7 @@ from icon_match import icon_stats, match, light_part_stats
 from halo_v2 import repair, match_distribution
 from centre_real import place_centre, cover_scale
 from ref_px import ref_px
-DL="/Users/ciaranwood/Downloads/promise-co-birthstones"
+DL="ai-slots"  # legacy AI halo slots; unused now every halo has a transplant in transplants_ps/
 K=["january","february","march","april","may","june","july","august","september","october","november","december"]
 CFG={"gold":(f"{DL}/per-slot-source","client/real07.jpg","photo/mask_centre.npy","photo/mask_halo.npy"),
      "silver":(f"{DL}/silver/per-slot-source","packshots/silver.jpg","photo/silver_mask_centre.npy","photo/silver_mask_halo.npy")}
