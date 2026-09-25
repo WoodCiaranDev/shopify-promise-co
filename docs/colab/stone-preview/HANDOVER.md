@@ -82,6 +82,15 @@ Never change `STORE_KEY` in `index.html`, or the client's saved work disappears.
   Size stones by neighbour spacing.
 - **Protected AI rim clean-up doesn't work.** Gemini thickened the bezels and smudged the
   prongs (`23_ai_rim_cleanup_experiment.py`, kept for reference only).
-- **OpenRouter key:** it's in 1Password as "Open Router Promise Co" and in each Mac's
-  git-ignored `.env` as `OPENROUTER_API_KEY`. It's only needed for AI experiments, not for
-  rebuilds.
+- **OpenRouter key** (only for AI experiments; rebuilds don't need it). It's in 1Password:
+  - Vault: `Freelance`. Item: `Open Router Promise Co`. Field: `password`.
+  - Reference: `op://Freelance/Open Router Promise Co/password`.
+  - Read it with `opc` (`~/.local/bin/opc`, which caches in the Keychain). Pass it straight
+    into the command and never echo it:
+
+    ```bash
+    OPENROUTER_API_KEY="$(opc read 'op://Freelance/Open Router Promise Co/password')" .venv/bin/python <script>.py
+    ```
+
+  - Or add it once to the repo's git-ignored `.env` as `OPENROUTER_API_KEY=` (the Pro's
+    `.env` may not have it yet).
