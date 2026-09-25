@@ -119,6 +119,13 @@
       "settings": {
         "color_scheme": "scheme-2",
         "hide_product_information": false,
+        "show_intro_card": false,
+        "intro_card_position": "third",
+        "intro_card_white_bg": false,
+        "intro_card_heading": "",
+        "intro_card_text": "",
+        "intro_card_button_label": "",
+        "intro_card_button_link": "",
         "products_per_page": 48,
         "products_per_row_mobile": "2",
         "products_size_desktop": "large",
@@ -312,6 +319,7 @@
       "settings": {
         "color_scheme": "scheme-3",
         "separate_section_with_border": true,
+        "anchor_id": "",
         "show_categories": false,
         "subheading": "Promise rings...",
         "title": "Frequently Asked Questions",
