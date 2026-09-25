@@ -66,6 +66,22 @@ co-lab-customise-drawer .co-lab-stone-preview--compact .co-lab-stone-preview__pl
   }
 }
 
+co-lab-customise-drawer .co-lab-stone-preview--compact {
+  cursor: zoom-in;
+}
+
+co-lab-customise-drawer .co-lab-stone-preview__zoom {
+  position: absolute;
+  inset-block-end: 0.75rem;
+  inset-inline-end: 0.75rem;
+  pointer-events: none;
+}
+
+co-lab-customise-drawer .co-lab-stone-preview--compact:focus-visible {
+  outline: 2px solid rgb(var(--text-color));
+  outline-offset: -4px;
+}
+
 /* The drawer's own rows already name the stones; the caption only repeats them. */
 co-lab-customise-drawer .co-lab-stone-preview__caption {
   display: none;

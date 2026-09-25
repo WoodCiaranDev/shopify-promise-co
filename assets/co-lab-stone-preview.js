@@ -1,5 +1,5 @@
 (() => {
-  const SIZES = { slide: [400, 700, 1000], thumb: [56, 112, 168], compact: [480, 700, 1000] };
+  const SIZES = { slide: [400, 700, 1000, 1600], thumb: [56, 112, 168], compact: [480, 700, 1000] };
   const DISPLAY = { slide: 1000, thumb: 168, compact: 1000 };
 
   class CoLabStonePreview extends HTMLElement {

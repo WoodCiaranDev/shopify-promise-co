@@ -117,6 +117,7 @@ class CoLabPicker extends HTMLElement {
       };
       window.addEventListener('keydown', this.onDrawerKeydown, true);
       this.drawer.addEventListener('dialog:after-hide', () => this.closeGrid());
+      this.setupPreviewZoom();
     }
 
     // Browsers restore a remembered metal/size after navigating back without firing
@@ -386,6 +387,44 @@ class CoLabPicker extends HTMLElement {
       return;
     }
     this.openReview();
+  }
+
+  // Tapping the preview in the Customise drawer opens the theme's native full-screen gallery
+  // (PhotoSwipe) on the stone preview slide, on top of the drawer. While it is open the drawer's
+  // focus trap is paused, otherwise clicks and Esc inside the viewer would close the drawer too.
+  setupPreviewZoom() {
+    const trigger = this.drawer.querySelector('.co-lab-stone-preview--compact');
+    if (!trigger) return;
+    trigger.setAttribute('role', 'button');
+    trigger.setAttribute('tabindex', '0');
+    trigger.setAttribute('aria-label', 'View larger image');
+    trigger.addEventListener('click', () => this.openPreviewLightbox(trigger));
+    trigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.openPreviewLightbox(trigger);
+      }
+    });
+  }
+
+  openPreviewLightbox(trigger) {
+    const gallery = document.querySelector('product-gallery');
+    const cell = gallery?.querySelector('[data-media-id="co-lab-stone-preview"]');
+    if (!gallery || !cell || !gallery.carousel) return;
+    const imageCells = gallery.carousel.cells.filter((c) => c.getAttribute('data-media-type') === 'image');
+    const index = imageCells.indexOf(cell);
+    if (index < 0) return;
+
+    const trap = this.drawer.focusTrap;
+    const lightBox = gallery.lightBox;
+    trap?.pause?.();
+    const resume = () => {
+      lightBox.off?.('destroy', resume);
+      trap?.unpause?.();
+      trigger.focus({ preventScroll: true });
+    };
+    lightBox.on('destroy', resume);
+    gallery.dispatchEvent(new CustomEvent('lightbox:open', { detail: { index } }));
   }
 
   // Resolve when a dialog finishes hiding, or after a short cap: the theme's promise waits on a
