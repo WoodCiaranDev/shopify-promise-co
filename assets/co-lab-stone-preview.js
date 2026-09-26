@@ -12,8 +12,8 @@
       this.q = this.dataset.version ? `?v=${this.dataset.version}&` : '?';
       this.state = {
         metal: this.dataset.metal || 'gold',
-        centre: this.dataset.centre || 'may',
-        halo: this.dataset.halo || 'april',
+        centre: this.dataset.centre || 'october',
+        halo: this.dataset.halo || 'june',
       };
       this.generation = 0;
       this.onChange = this.onChange.bind(this);

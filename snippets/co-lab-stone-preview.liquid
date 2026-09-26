@@ -20,8 +20,8 @@ Inputs:
   assign metals = product.metafields.custom.metals.value | split: ','
   assign kind = variant | default: 'slide'
   assign default_metal = 'gold'
-  assign default_centre = 'may'
-  assign default_halo = 'april'
+  assign default_centre = 'october'
+  assign default_halo = 'june'
   capture default_asset
     echo 'colab-heirloom-' | append: default_metal | append: '-' | append: default_centre | append: '-' | append: default_halo | append: '.jpg'
   endcapture
