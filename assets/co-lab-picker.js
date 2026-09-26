@@ -118,6 +118,7 @@ class CoLabPicker extends HTMLElement {
       window.addEventListener('keydown', this.onDrawerKeydown, true);
       this.drawer.addEventListener('dialog:after-hide', () => this.closeGrid());
       this.setupPreviewZoom();
+      this.watchBottomBars();
     }
 
     // Browsers restore a remembered metal/size after navigating back without firing
@@ -387,6 +388,57 @@ class CoLabPicker extends HTMLElement {
       return;
     }
     this.openReview();
+  }
+
+  // Shopify's theme-preview bar (#PBarNextFrameWrapper, only on ?preview_theme_id links) is a
+  // fixed strip over the bottom of the screen that would cover the drawer's Confirm button.
+  // Measure it live (it is injected late and can be hidden) and expose its height as
+  // --colab-bottom-bar so the drawer stops above it. Customers never get the bar, so it's 0 for them.
+  watchBottomBars() {
+    const root = document.documentElement;
+    const update = () => {
+      const bar = document.getElementById('PBarNextFrameWrapper');
+      let h = 0;
+      if (bar) {
+        const r = bar.getBoundingClientRect();
+        const visible = getComputedStyle(bar).display !== 'none' && r.height > 0 && r.top < window.innerHeight;
+        if (visible) h = Math.max(0, Math.round(window.innerHeight - r.top));
+      }
+      root.style.setProperty('--colab-bottom-bar', h + 'px');
+    };
+    let ro = null;
+    const attach = () => {
+      const bar = document.getElementById('PBarNextFrameWrapper');
+      if (!bar || bar === this._barEl) return;
+      this._barEl = bar;
+      ro?.disconnect();
+      if ('ResizeObserver' in window) { ro = new ResizeObserver(update); ro.observe(bar); }
+      new MutationObserver(update).observe(bar, { attributes: true, attributeFilter: ['style', 'class', 'hidden'] });
+    };
+    new MutationObserver(() => { attach(); update(); }).observe(document.body, { childList: true });
+    window.addEventListener('resize', update);
+    this.drawer.addEventListener('dialog:before-show', update);
+    attach(); update();
+
+    // iOS keyboard: Safari scrolls/insets the visual viewport instead of resizing the layout one,
+    // which can leave the fixed panel's bottom (Confirm) under the keyboard. While the drawer is
+    // open, pin the panel to the visual viewport; clear it again on close.
+    const vv = window.visualViewport;
+    if (!vv) return;
+    const base = () => this.drawer.shadowRoot?.querySelector('[part~="base"]');
+    const sync = () => {
+      const b = base(); if (!b || !this.drawer.open) return;
+      const bar = parseFloat(getComputedStyle(root).getPropertyValue('--colab-bottom-bar')) || 0;
+      const keyboardOpen = window.innerHeight - vv.height > 120;
+      if (!keyboardOpen) { b.style.top = b.style.height = b.style.bottom = ''; return; }
+      b.style.top = vv.offsetTop + 'px';
+      b.style.bottom = 'auto';
+      b.style.height = Math.max(200, vv.height - bar) + 'px';
+    };
+    vv.addEventListener('resize', sync);
+    vv.addEventListener('scroll', sync);
+    this.drawer.addEventListener('dialog:after-show', sync);
+    this.drawer.addEventListener('dialog:after-hide', () => { const b = base(); if (b) b.style.top = b.style.height = b.style.bottom = ''; });
   }
 
   // Tapping the preview in the Customise drawer opens the theme's native full-screen gallery
