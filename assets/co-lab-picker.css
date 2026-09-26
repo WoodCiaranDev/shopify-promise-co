@@ -1046,19 +1046,14 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   width: 100%;
 }
 
-/* iPhone Safari: the theme sizes the drawer with `position: fixed; inset: 0; height: 100%`.
-   For a fixed element, 100% resolves against the *large* viewport (toolbar hidden), so while
-   Safari's toolbar is showing the bottom ~80px of the panel sits behind it - exactly where the
-   Confirm footer is. 100dvh tracks the visible area as the toolbar shows and hides. */
-@supports (height: 100dvh) {
-  .c-co-lab-customise::part(base) {
-    inset: 0 auto auto 0;
-    height: 100dvh;
-  }
-
-  .c-co-lab-customise::part(overlay) {
-    min-height: 100dvh;
-  }
+/* Drawer sizing on phones. Size by edges, not height: inset:0 stretches the panel to whatever the
+   fixed layer's box is (which follows Safari's toolbar), and the bottom edge stops above any
+   fixed bottom bar - Shopify's theme-preview bar on Dev links (--colab-bottom-bar, measured in
+   co-lab-picker.js; 0 for customers). While the keyboard is open co-lab-picker.js also pins the
+   panel to the visual viewport so Confirm stays above it. */
+.c-co-lab-customise::part(base) {
+  inset: 0 0 var(--colab-bottom-bar, 0px) 0;
+  height: auto;
 }
 
 /* Keep the Confirm button clear of the home indicator if the viewport ever extends under it. */
