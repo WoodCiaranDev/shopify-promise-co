@@ -34,13 +34,34 @@ Read this first in a new chat. It's the working state of the stone preview for t
   - The client exports a JSON file, which is applied with `pipeline/rebuild.py`.
   - The page saves progress in the browser under a permanent key, with 20 rolling backups.
 
+## Silver = the finished gold, turned silver (26 Sep 2026)
+
+Charlotte asked for the silver images to be the approved gold rings with only the metal turned
+silver. `pipeline/gold_to_silver.py` does that inside `rebuild.py`:
+
+- **Metal away from stones:** every warm pixel is converted, so no gold survives, including
+  orange-looking gold in shadow and the small beads.
+- **Around stones:** only the gold hue band (45-100 in OKLab) is converted, so stone colour is
+  never touched. The centre stone and each halo stone's core are protected outright.
+- **Bezel lip:** the lip is found on the donor's own gold transplant, because the recoloured
+  halos (pink, champagne and so on) have a tinted lip that no longer reads as gold.
+- **Silver tone:** metal lightness is mapped onto the real silver packshot's metal, with a
+  neutral tint.
+- **Checking:** `check_no_gold.py <files>` counts gold-hued pixels outside stones. It should
+  be near zero, apart from champagne and apple green, whose own colour sits near gold.
+- **Current settings:** the client's settings are in `client_colours_2026-09-26.json`, which
+  includes her latest October and March halo edits.
+
+The silver packshot (`packshots/silver.jpg`) is no longer used for images, only for the
+silver metal tone.
+
 ## Rebuild on any Mac
 
 ```bash
 cd docs/colab/stone-preview/pipeline
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-.venv/bin/python rebuild.py client_colours_2026-09-24.json          # all 288 site images, client colours
-.venv/bin/python rebuild.py client_colours_2026-09-24.json --tuner  # also refresh the tuner's images
+.venv/bin/python rebuild.py client_colours_2026-09-26.json          # all 288 site images, client colours
+.venv/bin/python rebuild.py client_colours_2026-09-26.json --tuner  # also refresh the tuner's images
 ```
 
 A clean rebuild is verified to reproduce the committed images exactly, with zero pixel
