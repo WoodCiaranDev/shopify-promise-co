@@ -1045,3 +1045,23 @@ safe-sticky.product-info:has(c-co-lab-picker) {
 .c-co-lab-customise__confirm {
   width: 100%;
 }
+
+/* iPhone Safari: the theme sizes the drawer with `position: fixed; inset: 0; height: 100%`.
+   For a fixed element, 100% resolves against the *large* viewport (toolbar hidden), so while
+   Safari's toolbar is showing the bottom ~80px of the panel sits behind it - exactly where the
+   Confirm footer is. 100dvh tracks the visible area as the toolbar shows and hides. */
+@supports (height: 100dvh) {
+  .c-co-lab-customise::part(base) {
+    inset: 0 auto auto 0;
+    height: 100dvh;
+  }
+
+  .c-co-lab-customise::part(overlay) {
+    min-height: 100dvh;
+  }
+}
+
+/* Keep the Confirm button clear of the home indicator if the viewport ever extends under it. */
+.c-co-lab-customise::part(footer) {
+  padding-block-end: calc(var(--drawer-footer-padding-block) + env(safe-area-inset-bottom, 0px));
+}
