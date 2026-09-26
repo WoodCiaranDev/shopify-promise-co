@@ -26,7 +26,9 @@ Inputs:
     echo 'colab-heirloom-' | append: default_metal | append: '-' | append: default_centre | append: '-' | append: default_halo | append: '.jpg'
   endcapture
   assign default_src = default_asset | asset_url | split: '?' | first
-  assign asset_version = default_asset | asset_url | split: 'v=' | last
+  # Cache key for all 288 stone images: the version file is rewritten by pipeline/rebuild.py on
+  # every rebuild, so its ?v= changes whenever any image does (a single image's own ?v= may not).
+  assign asset_version = 'colab-heirloom-version.txt' | asset_url | split: 'v=' | last
 -%}
 
 {%- case kind -%}

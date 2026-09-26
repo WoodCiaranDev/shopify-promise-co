@@ -7,7 +7,7 @@
 Run from this folder. Writes the site images into the theme's assets/ folder (../../../../assets)
 and, with --tuner, the tuner assets into ../tuner/. Derived weight files are created on first run.
 """
-import sys, os, json, hashlib, itertools, numpy as np
+import sys, os, json, hashlib, itertools, glob, numpy as np
 from PIL import Image
 from scipy.ndimage import gaussian_filter, binary_dilation
 from skimage.morphology import convex_hull_image
@@ -58,7 +58,11 @@ def main():
         gold.save(f"{ASSETS}/colab-heirloom-gold-{c}-{h}.jpg", quality=84, optimize=True, progressive=True)
         det = detection_image(to_cream(img(Cr, Hr, c, h), prot), h)
         to_silver(gold, detect_from=det)[0].save(f"{ASSETS}/colab-heirloom-silver-{c}-{h}.jpg", quality=84, optimize=True, progressive=True)
-    print("288 images written (silver = gold converted)")
+    # cache-busting version file (see snippets/co-lab-stone-preview.liquid)
+    h = hashlib.sha256()
+    for f in sorted(glob.glob(f"{ASSETS}/colab-heirloom-*-*-*.jpg")): h.update(open(f, "rb").read())
+    open(f"{ASSETS}/colab-heirloom-version.txt", "w").write(h.hexdigest()[:16] + "\n")
+    print("288 images written (silver = gold converted); version", h.hexdigest()[:16])
     if "--tuner" in sys.argv:
         export_tuner(build, to_cream)
 

@@ -195,12 +195,12 @@ details pre{white-space:pre-wrap;word-break:break-all;font:12px/1.45 var(--mono)
   }
   async function getImage(metal, k){
     const key = metal + "-" + k;
-    if (!imgCache.has(key)) imgCache.set(key, pixels("img/" + key + ".webp"));
+    if (!imgCache.has(key)) imgCache.set(key, pixels("img/" + key + ".webp?v=" + encodeURIComponent(base.baseImageHash)));
     return imgCache.get(key);
   }
   async function getMasks(metal){
     if (!maskCache.has(metal)) maskCache.set(metal, (async () => {
-      const [c, h, p] = await Promise.all(["centre","halo","pair"].map(n => pixels("masks/" + metal + "-" + n + ".png")));
+      const [c, h, p] = await Promise.all(["centre","halo","pair"].map(n => pixels("masks/" + metal + "-" + n + ".png?v=" + encodeURIComponent(base.baseImageHash))));
       const n = c.length / 4, wc = new Float32Array(n), wh = new Float32Array(n), wp = new Float32Array(n);
       const ic = [], ih = [];
       for (let i = 0; i < n; i++){ wc[i] = c[i*4]/255; wh[i] = h[i*4]/255; wp[i] = p[i*4]/255; if (wc[i] > 0) ic.push(i); if (wh[i] > 0) ih.push(i); }
@@ -412,7 +412,7 @@ details pre{white-space:pre-wrap;word-break:break-all;font:12px/1.45 var(--mono)
   });
 
   (async () => {
-    base = await (await fetch("base.json")).json();
+    base = await (await fetch("base.json?t=" + Date.now(), {cache:"no-store"})).json();
     load(); buildGroup("c"); buildGroup("h"); syncUi(); save(); render();
     try {
       downloads = await (window.claude && window.claude.use ? window.claude.use("downloads") : null);
