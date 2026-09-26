@@ -1,0 +1,13 @@
+{"version":1,"space":"OKLCH","baseImageHash":"98a1febe6e8494f4","updated":"2026-09-24T21:07:36.929Z","stones":{
+"january":{"centre":{"hue":0,"saturation":0,"brightness":0,"depth":0,"notes":""},"halo":{"hue":0,"saturation":0,"brightness":0,"depth":0.11,"notes":""}},
+"february":{"centre":{"hue":0,"saturation":0,"brightness":0,"depth":0,"notes":""},"halo":{"hue":-4,"saturation":-0.24,"brightness":-0.04,"depth":0.13,"notes":""}},
+"march":{"centre":{"hue":0,"saturation":0,"brightness":0,"depth":0,"notes":""},"halo":{"hue":-20,"saturation":-0.16,"brightness":0.12,"depth":0.07,"notes":""}},
+"april":{"centre":{"hue":0,"saturation":0,"brightness":0,"depth":0,"notes":""},"halo":{"hue":0,"saturation":0,"brightness":0,"depth":0,"notes":""}},
+"may":{"centre":{"hue":0,"saturation":0,"brightness":0,"depth":0,"notes":""},"halo":{"hue":0,"saturation":-0.03,"brightness":0,"depth":0.08,"notes":""}},
+"june":{"centre":{"hue":0,"saturation":0,"brightness":0,"depth":0,"notes":""},"halo":{"hue":0,"saturation":0,"brightness":0,"depth":0,"notes":""}},
+"july":{"centre":{"hue":0,"saturation":0,"brightness":0,"depth":0,"notes":""},"halo":{"hue":10,"saturation":0.14,"brightness":0,"depth":0.17,"notes":""}},
+"august":{"centre":{"hue":0,"saturation":0,"brightness":0,"depth":0,"notes":""},"halo":{"hue":-6,"saturation":-0.12,"brightness":0.09,"depth":0.1,"notes":""}},
+"september":{"centre":{"hue":0,"saturation":0,"brightness":0,"depth":0,"notes":""},"halo":{"hue":-9,"saturation":-0.12,"brightness":0,"depth":0.16,"notes":""}},
+"october":{"centre":{"hue":0,"saturation":0,"brightness":0,"depth":0,"notes":""},"halo":{"hue":13,"saturation":-0.38,"brightness":0.05,"depth":-0.08,"notes":""}},
+"november":{"centre":{"hue":0,"saturation":0,"brightness":0,"depth":0,"notes":""},"halo":{"hue":0,"saturation":0,"brightness":0,"depth":0,"notes":""}},
+"december":{"centre":{"hue":0,"saturation":0,"brightness":0,"depth":0,"notes":""},"halo":{"hue":-7,"saturation":-0.16,"brightness":-0.11,"depth":0.15,"notes":""}}}}

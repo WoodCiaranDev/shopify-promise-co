@@ -1,0 +1,105 @@
+.co-lab-stone-preview--compact {
+  margin: 0 0 1.25rem;
+  max-width: 320px;
+}
+
+.co-lab-stone-preview--compact .co-lab-stone-preview__plate {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: #f2ede5;
+  border: 1px solid rgb(var(--border-color, 0 0 0) / 0.12);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.co-lab-stone-preview--compact .co-lab-stone-preview__plate img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.co-lab-stone-preview__caption {
+  margin: 0.5rem 0 0;
+  text-align: center;
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgb(var(--text-color) / 0.6);
+}
+
+@media screen and (min-width: 1000px) {
+  .co-lab-stone-preview--compact { display: none; }
+}
+
+/* Inside the Customise slide-out the preview is the point of the panel: always show it. */
+/* Pinned to the top of the drawer's scrolling body so every change stays in view while the
+   customer works down the options, on a cream band matching the packshot background. */
+co-lab-customise-drawer .co-lab-stone-preview--compact {
+  display: block;
+  position: sticky;
+  top: calc(-1 * var(--drawer-body-padding-block, 1.25rem));
+  z-index: 2;
+  max-width: none;
+  margin: calc(-1 * var(--drawer-body-padding-block, 1.25rem)) calc(-1 * var(--drawer-body-padding-inline, 1.25rem)) 0;
+  padding: 0;
+  background: #f2ede5;
+}
+
+/* CSS crop of the square packshot, no extra image files. The ring and its shadow sit in
+   x 278-1311, y 550-1109 of the 1600px source; the window is 1320x660 source px centred on
+   that (x 135-1455, y 475-1185), shown as a 1320:710 frame. The image is sized to 1600/1320 of the
+   frame width and offset with margins (percentages of the frame width), not transformed. */
+co-lab-customise-drawer .co-lab-stone-preview--compact .co-lab-stone-preview__plate {
+  width: min(100%, 540px);
+  aspect-ratio: 1320 / 710;
+  margin-inline: auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+
+co-lab-customise-drawer .co-lab-stone-preview--compact .co-lab-stone-preview__plate img {
+  position: static;
+  display: block;
+  inset: auto;
+  width: 121.212%;
+  max-width: none;
+  height: auto;
+  margin-left: -10.227%;
+  margin-top: -35.985%;
+  object-fit: fill;
+}
+
+@media screen and (max-width: 699px) {
+  co-lab-customise-drawer .co-lab-stone-preview--compact .co-lab-stone-preview__plate {
+    width: 100%;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+co-lab-customise-drawer .co-lab-stone-preview--compact {
+  cursor: zoom-in;
+}
+
+co-lab-customise-drawer .co-lab-stone-preview__zoom {
+  position: absolute;
+  inset-block-end: 0.75rem;
+  inset-inline-end: 0.75rem;
+  pointer-events: none;
+}
+
+co-lab-customise-drawer .co-lab-stone-preview--compact:focus-visible {
+  outline: 2px solid rgb(var(--text-color));
+  outline-offset: -4px;
+}
+
+/* The drawer's own rows already name the stones; the caption only repeats them. */
+co-lab-customise-drawer .co-lab-stone-preview__caption {
+  display: none;
+}

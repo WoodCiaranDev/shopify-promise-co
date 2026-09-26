@@ -1,0 +1,92 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+CO-LAB STONE PREVIEW
+
+Shows the customer's chosen birthstones as a normal product image.
+
+The gallery's lightbox builds its PhotoSwipe dataSource from `cell.querySelectorAll(":scope > img")`
+and indexes it with `imageCells.indexOf(selectedCell)`, so a cell that counts as an image must
+contain exactly one direct-child <img> or every later index is wrong. This renders that single
+image; JavaScript only ever swaps its src, which keeps the carousel, thumbnails and zoom native.
+
+Inputs:
+* product - the Co-Lab ring
+* variant - 'slide' (gallery), 'thumb' (gallery navigation) or 'compact' (in-picker, mobile)
+----------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- liquid
+  assign stones = shop.metaobjects.birthstone.values | sort: 'position'
+  assign metals = product.metafields.custom.metals.value | split: ','
+  assign kind = variant | default: 'slide'
+  assign default_metal = 'gold'
+  assign default_centre = 'may'
+  assign default_halo = 'april'
+  capture default_asset
+    echo 'colab-heirloom-' | append: default_metal | append: '-' | append: default_centre | append: '-' | append: default_halo | append: '.jpg'
+  endcapture
+  assign default_src = default_asset | asset_url | split: '?' | first
+  # Cache key for all 288 stone images: the version file is rewritten by pipeline/rebuild.py on
+  # every rebuild, so its ?v= changes whenever any image does (a single image's own ?v= may not).
+  assign asset_version = 'colab-heirloom-version.txt' | asset_url | split: 'v=' | last
+-%}
+
+{%- case kind -%}
+  {%- when 'thumb' -%}
+    <img
+      src="{{ default_src }}?v={{ asset_version }}&width=168"
+      srcset="{{ default_src }}?v={{ asset_version }}&width=56 56w, {{ default_src }}?v={{ asset_version }}&width=112 112w, {{ default_src }}?v={{ asset_version }}&width=168 168w"
+      sizes="56px" width="56" height="56" alt="" loading="lazy"
+      class="object-contain" data-colab-preview-img data-colab-role="thumb">
+
+  {%- when 'compact' -%}
+    <div class="co-lab-stone-preview co-lab-stone-preview--compact">
+      <div class="co-lab-stone-preview__plate">
+        <img src="{{ default_src }}?v={{ asset_version }}&width=1000"
+             srcset="{{ default_src }}?v={{ asset_version }}&width=700 700w, {{ default_src }}?v={{ asset_version }}&width=1000 1000w, {{ default_src }}?v={{ asset_version }}&width=1400 1400w"
+             sizes="(max-width: 699px) 122vw, 660px" width="1000" height="1000"
+             alt="{{ product.title | escape }}" fetchpriority="low" decoding="async"
+             data-colab-preview-img data-colab-role="compact">
+      </div>
+      <p class="co-lab-stone-preview__caption" data-colab-preview-caption></p>
+      <span class="co-lab-stone-preview__zoom circle-button circle-button--sm" aria-hidden="true">
+        {%- render 'icon' with 'zoom' -%}
+      </span>
+    </div>
+
+  {%- else -%}
+    <img
+      src="{{ default_src }}?v={{ asset_version }}&width=1000"
+      srcset="{{ default_src }}?v={{ asset_version }}&width=400 400w, {{ default_src }}?v={{ asset_version }}&width=700 700w, {{ default_src }}?v={{ asset_version }}&width=1000 1000w, {{ default_src }}?v={{ asset_version }}&width=1600 1600w"
+      sizes="{{ sizes | default: '(min-width: 1000px) 50vw, 100vw' }}"
+      width="1600" height="1600" alt="{{ product.title | escape }}"
+      fetchpriority="high" decoding="async"
+      class="object-contain" data-colab-preview-img data-colab-role="slide">
+
+    <co-lab-stone-preview hidden
+      data-base="{{ default_src | split: 'colab-heirloom-' | first }}"
+      data-version="{{ asset_version }}"
+      data-metal="{{ default_metal }}" data-centre="{{ default_centre }}" data-halo="{{ default_halo }}">
+      <script type="application/json" data-preview-config>
+        {
+          "metals": {
+            {%- for metal in metals -%}
+              {%- assign metal_name = metal | strip -%}
+              {%- if metal_name contains 'Silver' -%}{%- assign metal_key = 'silver' -%}{%- else -%}{%- assign metal_key = 'gold' -%}{%- endif -%}
+              {{ metal_name | json }}: {{ metal_key | json }}{%- unless forloop.last -%},{%- endunless -%}
+            {%- endfor -%}
+          },
+          "stones": {
+            {%- for stone in stones -%}
+              {{ stone.name | json }}: {{ stone.month | downcase | strip | json }}{%- unless forloop.last -%},{%- endunless -%}
+            {%- endfor -%}
+          },
+          "labels": {
+            {%- for stone in stones -%}
+              {{ stone.month | downcase | strip | json }}: {{ stone.name | json }}{%- unless forloop.last -%},{%- endunless -%}
+            {%- endfor -%}
+          }
+        }
+      </script>
+    </co-lab-stone-preview>
+{%- endcase -%}
