@@ -47,22 +47,39 @@ co-lab-customise-drawer .co-lab-stone-preview--compact {
   background: #f2ede5;
 }
 
-/* The plain square packshot, centred at a fixed maximum width: no height limits, cropping or
-   scaling. A soft radial fade blends its edge into the cream band so the slight colour shift
-   from Shopify's image conversion never shows as a square outline. */
+/* CSS crop of the square packshot, no extra image files. The ring and its shadow sit in
+   x 278-1311, y 550-1109 of the 1600px source; the window is 1320x660 source px centred on
+   that (x 135-1455, y 500-1160), shown as a 2:1 frame. The image is sized to 1600/1320 of the
+   frame width and offset with margins (percentages of the frame width), not transformed. */
 co-lab-customise-drawer .co-lab-stone-preview--compact .co-lab-stone-preview__plate {
-  width: min(100%, 300px);
+  width: min(100%, 540px);
+  aspect-ratio: 2 / 1;
   margin-inline: auto;
   border: 0;
   border-radius: 0;
   background: transparent;
-  -webkit-mask-image: radial-gradient(closest-side, #000 72%, transparent);
-  mask-image: radial-gradient(closest-side, #000 72%, transparent);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+
+co-lab-customise-drawer .co-lab-stone-preview--compact .co-lab-stone-preview__plate img {
+  position: static;
+  display: block;
+  inset: auto;
+  width: 121.212%;
+  max-width: none;
+  height: auto;
+  margin-left: -10.227%;
+  margin-top: -37.879%;
+  object-fit: fill;
 }
 
 @media screen and (max-width: 699px) {
   co-lab-customise-drawer .co-lab-stone-preview--compact .co-lab-stone-preview__plate {
-    width: min(100%, 240px);
+    width: 100%;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 }
 
