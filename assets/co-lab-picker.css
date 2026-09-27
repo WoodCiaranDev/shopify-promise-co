@@ -1139,3 +1139,21 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   margin-left: -22%;
   margin-top: -25.2%;
 }
+
+/* Required-stone prompt in the Customise drawer. */
+.c-co-lab-customise__error {
+  margin: 0 0 0.75rem;
+  font-size: 0.8125rem;
+  color: #8a1f1f;
+  text-align: center;
+}
+
+.c-co-lab-customise__section.is-missing .c-co-lab-customise__label {
+  color: #8a1f1f;
+}
+
+.c-co-lab-customise__section.is-missing .c-co-lab-customise__grid {
+  outline: 1px solid #d9a3a3;
+  outline-offset: 4px;
+  border-radius: 6px;
+}

@@ -288,6 +288,8 @@ class CoLabPicker extends HTMLElement {
         swatch.hidden = true;
       }
     }
+    if (this.drawer && !this.missingStoneSlot()) this.clearStoneRequired();
+    this.drawer?.querySelector(`.c-co-lab-customise__section[data-slot="${slot}"]`)?.classList.remove('is-missing');
     this.querySelectorAll(`.c-co-lab-customise__cell[data-slot="${slot}"]`).forEach((cell) => {
       const on = cell.dataset.name === name;
       cell.classList.toggle('is-selected', on);
@@ -486,7 +488,45 @@ class CoLabPicker extends HTMLElement {
     return Promise.race([dialog.hide(), new Promise((r) => setTimeout(r, 700))]);
   }
 
+  // Heirloom ring (drawer): both stones are required - a ring can't be made without them, and the
+  // cart/review images need them. Returns the first slot with no stone, or null.
+  missingStoneSlot() {
+    if (!this.drawer) return null;
+    return this.stoneSlots().find((slot) => !this.hasStone(slot)) || null;
+  }
+
+  showStoneRequired(slot) {
+    const section = this.drawer.querySelector(`.c-co-lab-customise__section[data-slot="${slot}"]`);
+    const input = this.querySelector(`[data-stone-input="${slot}"]`);
+    const label = (input?.dataset.stoneLabel || 'stone').toLowerCase();
+    let msg = this.drawer.querySelector('[data-customise-error]');
+    if (!msg) {
+      msg = document.createElement('p');
+      msg.className = 'c-co-lab-customise__error';
+      msg.setAttribute('data-customise-error', '');
+      msg.setAttribute('role', 'alert');
+      this.drawer.querySelector('.c-co-lab-customise__footer')?.prepend(msg);
+    }
+    msg.textContent = `Please choose your ${label} to continue.`;
+    msg.hidden = false;
+    section?.classList.add('is-missing');
+    section?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  clearStoneRequired() {
+    const msg = this.drawer?.querySelector('[data-customise-error]');
+    if (msg) msg.hidden = true;
+    this.drawer?.querySelectorAll('.c-co-lab-customise__section.is-missing').forEach((s) => s.classList.remove('is-missing'));
+  }
+
   async confirmCustomise() {
+    const missing = this.missingStoneSlot();
+    if (missing) {
+      if (!this.drawer.open) await this.drawer.show();
+      this.showStoneRequired(missing);
+      return;
+    }
+    this.clearStoneRequired();
     await this.hideDialog(this.drawer);
     if (!this.openReview() && this.errorEl && !this.errorEl.hidden) {
       this.errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -496,6 +536,11 @@ class CoLabPicker extends HTMLElement {
   // Validate metal/size and open the review modal. Returns true when the modal opened.
   openReview() {
     this.clearError();
+    const missingSlot = this.missingStoneSlot();
+    if (missingSlot) {
+      this.drawer.show().then(() => this.showStoneRequired(missingSlot));
+      return false;
+    }
     // Validate against the live controls, not just whatever the last change event set —
     // a browser-restored size must pass too.
     this.syncSelectionsFromDom();
