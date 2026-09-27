@@ -55,6 +55,28 @@ silver. `pipeline/gold_to_silver.py` does that inside `rebuild.py`:
 The silver packshot (`packshots/silver.jpg`) is no longer used for images, only for the
 silver metal tone.
 
+## Clean settings (27 Sep 2026)
+
+- **What was wrong.** The olive halo stones of the original gold photo showed as green crescents
+  wherever a transplanted stone didn't cover its setting exactly.
+- **Clean base.** `pipeline/base_openings.py` `clean_base()` removes every original halo stone.
+  Each setting is refilled with the bezel's own colour just outside it, sampled round the
+  circle, which gives a clean gold cup. It's saved as `photo/gold_clean_base.jpg`, and
+  `build.py` uses it for gold.
+- **Transplanted stones.** `pipeline/regen_transplants.py` rebuilds all 12
+  `transplants_ps/gold_*.jpg` on that base.
+  - Only the stone core, 0.88 × the setting radius (`CORE`), is pasted, so the gold cup forms
+    the rim.
+  - Donor stones whose core catches their own bezel are dropped.
+  - The seven recoloured halos are recoloured in the donor photo before pasting, so no halo
+    forms round them.
+  - Run it before `rebuild.py` whenever the donors or the base change.
+- **Client colour settings** apply only inside the 0.88r stone core (`weight_halo_*` in
+  `rebuild.py`), so the metal is never tinted.
+- **Silver.** `gold_to_silver.py` treats everything outside 0.855r of a halo stone as metal.
+  It also converts strong gold hues inside the stone cores, except for November (champagne),
+  whose colour overlaps gold.
+
 ## Rebuild on any Mac
 
 ```bash
