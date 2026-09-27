@@ -1060,3 +1060,65 @@ safe-sticky.product-info:has(c-co-lab-picker) {
 .c-co-lab-customise::part(footer) {
   padding-block-end: calc(var(--drawer-footer-padding-block) + env(safe-area-inset-bottom, 0px));
 }
+
+/* Review modal: condensed, with the configured ring image in place of the title. */
+.c-co-lab-cart-bundle {
+  padding: 1.25rem 1.5rem 1.25rem;
+}
+
+.c-co-lab-cart-bundle__header {
+  margin-bottom: 0.75rem;
+}
+
+/* Crop the square ring image to the ring itself (same window as the drawer preview). */
+.c-co-lab-cart-bundle__ring {
+  width: min(100%, 420px);
+  margin: 0 auto 0.25rem;
+  aspect-ratio: 1320 / 710;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: #f2ede5;
+}
+
+.c-co-lab-cart-bundle__ring img {
+  display: block;
+  width: 121.212%;
+  max-width: none;
+  height: auto;
+  margin-left: -10.227%;
+  margin-top: -35.985%;
+}
+
+.c-co-lab-cart-bundle__group {
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+}
+
+.c-co-lab-cart-bundle__group-title {
+  margin-bottom: 0.35rem;
+  font-size: 0.95rem;
+}
+
+.c-co-lab-cart-bundle__row {
+  margin-bottom: 0.2rem;
+}
+
+.c-co-lab-cart-bundle__total {
+  margin-top: 0.6rem;
+  padding-top: 0;
+  font-size: 1.4rem;
+}
+
+.c-co-lab-cart-bundle .c-co-lab-picker__confirm {
+  padding: 0.75rem 0;
+}
+
+.c-co-lab-cart-bundle .c-co-lab-picker__confirm-note {
+  margin-bottom: 0.75rem;
+}
+
+@media (max-width: 699px) {
+  .c-co-lab-cart-bundle {
+    padding: 0.75rem 0.25rem 1rem;
+  }
+}
