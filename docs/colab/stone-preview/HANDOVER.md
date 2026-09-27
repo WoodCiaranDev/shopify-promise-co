@@ -49,7 +49,7 @@ silver. `pipeline/gold_to_silver.py` does that inside `rebuild.py`:
   neutral tint.
 - **Checking:** `check_no_gold.py <files>` counts gold-hued pixels outside stones. It should
   be near zero, apart from champagne and apple green, whose own colour sits near gold.
-- **Current settings:** the client's settings are in `client_colours_2026-09-26.json`, which
+- **Current settings:** the client's settings are in `client_colours_2026-09-27.json`, which
   includes her latest October and March halo edits.
 
 The silver packshot (`packshots/silver.jpg`) is no longer used for images, only for the
@@ -60,8 +60,8 @@ silver metal tone.
 ```bash
 cd docs/colab/stone-preview/pipeline
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-.venv/bin/python rebuild.py client_colours_2026-09-26.json          # all 288 site images, client colours
-.venv/bin/python rebuild.py client_colours_2026-09-26.json --tuner  # also refresh the tuner's images
+.venv/bin/python rebuild.py client_colours_2026-09-27.json          # all 288 site images, client colours
+.venv/bin/python rebuild.py client_colours_2026-09-27.json --tuner  # also refresh the tuner's images
 ```
 
 A clean rebuild is verified to reproduce the committed images exactly, with zero pixel
