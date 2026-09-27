@@ -26,6 +26,8 @@ def parts(metal, rim="medium", halo="none"):
     # v3: everything built on the client's real product photo for this metal, so every image
     # shares identical metal and geometry (no AI ring images, nothing to misalign)
     ring=load(src)
+    if metal=="gold" and os.path.exists("photo/gold_clean_base.jpg"):
+        ring=Image.open("photo/gold_clean_base.jpg").convert("RGB")   # original halo stones removed (base_openings.py)
     mcs=np.load(mcf.replace(".npy","_stone.npy"))
     C={k:place_centre(ring,f"icons_solid/{k}.png",mcs,wc_,cover=cover_scale(f"icons_solid/{k}.png",mcs)) for k in K}
     # Halo colour, v2: whole-distribution match (lightness, chroma and hue quantiles) onto the

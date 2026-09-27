@@ -22,12 +22,12 @@ def prepare():
     from halo_v2 import disc_mask
     sm = json.load(open("slots_matched.json"))
     for metal, pre in (("gold", "photo/mask_centre"), ("silver", "photo/silver_mask_centre")):
-        if os.path.exists(f"weight_halo_{metal}.npy"): continue
+        if os.path.exists(f"weight_halo_{metal}.npy") and os.path.getmtime(f"weight_halo_{metal}.npy") > os.path.getmtime(__file__): continue
         hull = np.load(pre + "_stone.npy")
         wc = gaussian_filter(hull.astype(np.float64), 1.2)
         wh = np.zeros(hull.shape)
         for x, y, r, a in sm[metal]:
-            wh = np.maximum(wh, disc_mask(hull.shape, x, y, r, 0.96, feather=1.2))
+            wh = np.maximum(wh, disc_mask(hull.shape, x, y, r, 0.88, feather=1.0))   # = stone core only (regen_transplants.CORE)
         np.save(f"weight_centre_{metal}.npy", wc); np.save(f"weight_halo_{metal}.npy", wh * (1 - wc))
         print("prepared weights for", metal)
 
@@ -57,7 +57,7 @@ def main():
         gold = to_cream(img(Cc, Hc, c, h), prot)
         gold.save(f"{ASSETS}/colab-heirloom-gold-{c}-{h}.jpg", quality=84, optimize=True, progressive=True)
         det = detection_image(to_cream(img(Cr, Hr, c, h), prot), h)
-        to_silver(gold, detect_from=det)[0].save(f"{ASSETS}/colab-heirloom-silver-{c}-{h}.jpg", quality=84, optimize=True, progressive=True)
+        to_silver(gold, detect_from=det, halo=h)[0].save(f"{ASSETS}/colab-heirloom-silver-{c}-{h}.jpg", quality=84, optimize=True, progressive=True)
     # cache-busting version file (see snippets/co-lab-stone-preview.liquid)
     h = hashlib.sha256()
     for f in sorted(glob.glob(f"{ASSETS}/colab-heirloom-*-*-*.jpg")): h.update(open(f, "rb").read())
@@ -82,7 +82,7 @@ def export_tuner(build, to_cream):
             Image.fromarray((np.clip(mm, 0, 1) * 255).round().astype(np.uint8)).crop(BOX).resize((W, H), Image.LANCZOS).save(f"{TUNER}/masks/{metal}-{name}.png", optimize=True)
     for k in build.K:
         gold = to_cream(Image.fromarray(np.clip(C[k] * (1 - a) + Hh[k] * a, 0, 255).astype(np.uint8)), prot)
-        silver = to_silver(gold, detect_from=detection_image(gold, k))[0]
+        silver = to_silver(gold, detect_from=detection_image(gold, k), halo=k)[0]
         for metal, im in (("gold", gold), ("silver", silver)):
             full = np.asarray(im); hasher.update(full.tobytes())
             Image.fromarray(full).crop(BOX).resize((W, H), Image.LANCZOS).save(f"{TUNER}/img/{metal}-{k}.webp", lossless=True, quality=100, method=6)

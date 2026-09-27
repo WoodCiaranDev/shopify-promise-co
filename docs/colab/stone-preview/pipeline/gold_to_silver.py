@@ -21,7 +21,7 @@ def _protect(metal="gold"):
     sm = json.load(open("slots_matched.json"))[metal]
     p = np.zeros((1600, 1600), bool)
     for x, y, r, a in sm:
-        p |= disc_mask((1600, 1600), x, y, r, 0.78) > 0          # halo stone cores
+        p |= disc_mask((1600, 1600), x, y, r, 0.855) > 0         # halo stones (pasted at 0.88r, see regen_transplants.CORE)
     p |= binary_erosion(np.load("photo/mask_centre_stone.npy"), iterations=6)   # centre stone
     return p
 
@@ -41,12 +41,12 @@ def _gold_metal_weight(lab, protect):
 
 _NEAR = None
 def _near_stone(metal="gold"):
+    """Only the centre stone's surroundings get the cautious gold-band-only conversion. Halo stones
+    are pasted at exactly 0.88r onto a clean gold cup, so outside 0.855r everything is metal and
+    is converted like the rest of the ring (this also catches the stone-meets-gold blend)."""
     global _NEAR
     if _NEAR is None:
-        sm = json.load(open("slots_matched.json"))[metal]
-        m = binary_dilation(np.load("photo/mask_centre_stone.npy"), iterations=4)
-        for x, y, r, a in sm: m |= disc_mask((1600, 1600), x, y, r, 1.12) > 0
-        _NEAR = m
+        _NEAR = binary_dilation(np.load("photo/mask_centre_stone.npy"), iterations=4)
     return _NEAR
 
 _REF = None
@@ -66,7 +66,13 @@ def silver_reference():
         _REF = (np.percentile(lab[..., 0][metal], np.linspace(0, 100, 101)), lab[..., 1][metal].mean(), lab[..., 2][metal].mean())
     return _REF
 
-def to_silver(gold_img, protect=None, detect_from=None):
+def _halo_cores(metal="gold"):
+    sm = json.load(open("slots_matched.json"))[metal]
+    m = np.zeros((1600, 1600), bool)
+    for x, y, r, a in sm: m |= disc_mask((1600, 1600), x, y, r, 0.855) > 0
+    return m
+
+def to_silver(gold_img, protect=None, detect_from=None, halo=None):
     """detect_from: the same combination rendered WITHOUT client colour settings. Gold is found
     there, because a halo hue shift (e.g. pink +16 deg) can push the bezel lip out of the gold band."""
     A = np.asarray(gold_img.convert("RGB")).astype(np.float64) / 255
@@ -74,6 +80,13 @@ def to_silver(gold_img, protect=None, detect_from=None):
     if protect is None: protect = _protect()
     ref = rgb_to_oklab(np.asarray(detect_from.convert("RGB")).astype(np.float64) / 255) if detect_from is not None else lab
     w = _gold_metal_weight(ref, protect)
+    # A donor stone can carry a thin arc of its own gold bezel inside the pasted core: invisible on
+    # gold, obvious on silver. Convert strong gold hues inside halo cores too - except champagne,
+    # whose (client-shifted) colour overlaps the gold band.
+    if halo != "november":
+        h = np.degrees(np.arctan2(ref[..., 2], ref[..., 1])); C = np.hypot(ref[..., 1], ref[..., 2])
+        inner = _ramp(h, 62, 98, 4) * np.clip((C - 0.05) / 0.02, 0, 1) * _halo_cores()
+        w = np.maximum(w, gaussian_filter(inner, 0.6))
     qs, ta, tb = silver_reference()
     gm = w > 0.5
     src_q = np.percentile(lab[..., 0][gm], np.linspace(0, 100, 101))
