@@ -1122,3 +1122,20 @@ safe-sticky.product-info:has(c-co-lab-picker) {
     padding: 0.75rem 0.25rem 1rem;
   }
 }
+
+/* Cart line for the heirloom ring: the configured ring, cropped to the ring (square thumbnail). */
+.c-co-lab-line-ring {
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #f2ede5;
+}
+
+.c-co-lab-line-ring img {
+  display: block;
+  width: 145%;
+  max-width: none;
+  height: auto;
+  margin-left: -22%;
+  margin-top: -25.2%;
+}
