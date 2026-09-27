@@ -620,8 +620,20 @@ class CoLabPicker extends HTMLElement {
 
     const card = this.el('c-co-lab-cart-bundle', 'c-co-lab-cart-bundle');
 
+    // Heirloom ring: show the configured ring (the live stone preview) in place of the title.
+    const previewImg = document.querySelector('[data-colab-role="slide"]');
+    let headline = this.el('h2', 'c-co-lab-cart-bundle__title', this.productTitle);
+    if (previewImg && previewImg.currentSrc) {
+      const fig = this.el('div', 'c-co-lab-cart-bundle__ring');
+      const img = document.createElement('img');
+      img.src = previewImg.currentSrc.replace(/([?&])width=\d+/, '$1width=900');
+      img.alt = `${this.productTitle}: ${previewImg.alt || ''}`.trim();
+      img.width = 1000; img.height = 1000; img.decoding = 'async';
+      fig.appendChild(img);
+      headline = fig;
+    }
     const header = this.el('header', 'c-co-lab-cart-bundle__header', [
-      this.el('h2', 'c-co-lab-cart-bundle__title', this.productTitle),
+      headline,
       this.el('p', 'c-co-lab-cart-bundle__base-price', this.basePriceDisplay()),
     ]);
     card.appendChild(header);
@@ -690,7 +702,22 @@ class CoLabPicker extends HTMLElement {
     confirmBtn.disabled = true;
     card.appendChild(this.el('div', 'c-co-lab-cart-bundle__actions', [backBtn, confirmBtn]));
 
-    confirmCheck.addEventListener('change', () => { confirmBtn.disabled = !confirmCheck.checked; });
+    confirmCheck.addEventListener('change', () => {
+      confirmBtn.disabled = !confirmCheck.checked;
+      // Bring Add to cart into view once the selection is confirmed (it can sit below the fold).
+      if (confirmCheck.checked) requestAnimationFrame(() => confirmBtn.scrollIntoView({ behavior: 'smooth', block: 'center' }));
+    });
+
+    // Add to cart in the page's brand ATC colour (same pill shape).
+    const pageAtc = this.querySelector('.c-co-lab-picker__atc');
+    if (pageAtc) {
+      // The theme paints buttons from --button-background / --button-text-color ("r g b").
+      const cs = getComputedStyle(pageAtc);
+      const bg = cs.getPropertyValue('--button-background').trim();
+      const fg = cs.getPropertyValue('--button-text-color').trim();
+      if (bg) confirmBtn.style.background = `rgb(${bg})`;
+      if (fg) confirmBtn.style.color = `rgb(${fg})`;
+    }
     confirmBtn.addEventListener('click', () => this.confirmAndAdd(confirmBtn));
     backBtn.addEventListener('click', async () => {
       await this.hideDialog(document.getElementById(this.dataset.reviewModalId));
