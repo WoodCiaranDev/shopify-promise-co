@@ -404,8 +404,8 @@ Inputs:
     Uses the theme's <x-modal> component (relocates itself to <body> on first open — resolve
     it by id from JS, never via this.querySelector).
   {%- endcomment -%}
-  <x-modal id="co-lab-review-{{ product.id }}" class="modal modal--lg color-scheme color-scheme--dialog" data-colab-review-modal>
-    <span class="h5" slot="header">Review your ring</span>
+  <x-modal id="co-lab-review-{{ product.id }}" class="modal modal--lg color-scheme color-scheme--dialog" data-colab-review-modal aria-labelledby="co-lab-review-{{ product.id }}-title">
+    <span class="h5" slot="header" id="co-lab-review-{{ product.id }}-title">Review your ring</span>
     <div data-colab-review-body></div>
   </x-modal>
 

@@ -636,7 +636,7 @@ safe-sticky.product-info:has(c-co-lab-picker) {
 .c-co-lab-picker__confirm-note {
   margin: 0 0 1rem;
   font-size: 0.75rem;
-  opacity: 0.6;
+  opacity: 0.7;
   line-height: 1.55;
 }
 
@@ -1029,7 +1029,7 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   gap: 1rem;
   margin: 0.5rem 0 0;
   font-size: 0.7rem;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .c-co-lab-customise__footer,
