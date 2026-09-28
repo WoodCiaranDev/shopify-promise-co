@@ -15,6 +15,10 @@ from build import load
 
 DONOR = {"august": 3, "march": 4, "june": 7, "july": 8, "september": 9}
 EXCLUDE = {4: {6, 13}}   # donor stones that carry a prong/bezel inside their core (checked by eye)
+# Gold-ring donors: stones dropped after recentring, by index into donor_matched_<n>.json. August's
+# stone 10 has a pale (not gold-hued) strip of bezel across its top, which the metal check can't
+# see; it cut off the top-right halo stone (client feedback, 28 Sep 2026).
+DROP = {3: {10}}
 CORE = 0.88   # share of the setting radius taken from each donor stone; the clean gold cup forms the rim
 REC = {"january": "july", "february": "july", "may": "september", "december": "september",
        "october": "june", "november": "june", "april": "march"}
@@ -69,6 +73,23 @@ def clean_donors(img, stones, metal, core=CORE, limit=0.08):
     keep = [s for s, sc in zip(stones, scores) if sc <= cut]
     return (keep if len(keep) >= 8 else stones), scores
 
+def neutralise_stones(img, stones, keep_chroma=0.35):
+    """White stones (April, diamond simulant): take out the colour cast that recolouring leaves.
+    Inside each stone disc, shift OKLab a/b so the median is neutral, then damp what chroma is
+    left, so a cool blue-grey reads as white. Lightness (the facets and sparkle) is untouched."""
+    from oklab import rgb_to_oklab, oklab_to_rgb
+    A = np.asarray(img).astype(np.float64) / 255.
+    lab = rgb_to_oklab(A)
+    yy, xx = np.mgrid[0:img.height, 0:img.width]
+    w = np.zeros(A.shape[:2])
+    for x, y, r, a in stones:
+        w = np.maximum(w, np.clip((r - np.hypot(xx - x, yy - y)) / 2.0 + 0.5, 0, 1))
+    inside = w > 0.5
+    ab0 = np.median(lab[..., 1:][inside], axis=0)
+    new = lab.copy(); new[..., 1:] = (lab[..., 1:] - ab0) * keep_chroma
+    out = lab * (1 - w[..., None]) + new * w[..., None]
+    return Image.fromarray((np.clip(oklab_to_rgb(out), 0, 1) * 255).round().astype(np.uint8))
+
 def main():
     ours = [tuple(s) for s in json.load(open("slots_matched.json"))["gold"]]
     # recolouring (match_distribution) must touch only the pasted stone core, never the gold cup:
@@ -88,6 +109,7 @@ def main():
         else:
             cand = recentre_donors(donor, raw, dm)
             theirs, sc = clean_donors(donor, cand, dm)
+            theirs = [t for t in theirs if cand.index(t) not in DROP.get(n, ())]
         kept[k] = theirs
         print(k, "donor stones kept", len(theirs), "of", len(sc), "rim-metal scores", [round(v, 2) for v in sc])
         transplant(base, donor, ours, theirs,
@@ -102,6 +124,8 @@ def main():
         theirs = kept[dk]
         halo_v2._STONES["donor"] = [(x, y, 0.97 * r / 1.0476) for x, y, r, a in theirs]
         recoloured = halo_v2.match_distribution(donor, "donor", icon_target(k, lift=(k != "april")))
+        if k == "april":
+            recoloured = neutralise_stones(recoloured, theirs)
         transplant(base, recoloured, ours, theirs, inner=CORE, feather=1.0,
                    neutralise_gold=False).save(f"transplants_ps/gold_{k}.jpg", quality=95)
     print("12 gold halo layers rebuilt on the clean base")

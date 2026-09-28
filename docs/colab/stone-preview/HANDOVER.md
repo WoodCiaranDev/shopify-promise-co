@@ -77,6 +77,20 @@ silver metal tone.
   It also converts strong gold hues inside the stone cores, except for November (champagne),
   whose colour overlaps gold.
 
+## August and April halo fixes (28 Sep 2026)
+
+- **August top-right stone was cut off.** Donor stone 10 in `refs/3.png` has a pale strip of
+  bezel across its top. The metal check only sees gold hues, so it missed it. It's now dropped
+  by hand (`DROP` in `regen_transplants.py`), and that setting takes the next-nearest stone.
+- **April (diamond simulant) read slightly blue.** Recolouring the March donor left a cool cast.
+  `neutralise_stones()` now shifts the April stones to a neutral median and damps what chroma is
+  left. Lightness, and so the sparkle, is untouched.
+- **Only the April and August images were committed.** A full rebuild also moves a few dozen
+  pixels by up to 13 levels in other halos, which is invisible. Those were restored from git to
+  keep the change small, and the version file was recomputed.
+- **Checking Dev images:** fetch them with the page's own `?v=` tag. Any other query string can
+  return a stale CDN copy.
+
 ## Rebuild on any Mac
 
 ```bash
