@@ -1,0 +1,1970 @@
+{% comment %}
+---------------------------------------------------------
+Copyright © 2023 Section Store. All rights reserved.
+Unauthorized copying, modification, distribution, or use
+of this code or any portion of it, is strictly prohibited.
+Violators will be prosecuted to the fullest extent of the law.
+For inquiries or permissions, contact daniel@section.store
+---------------------------------------------------------
+{% endcomment %}
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+
+{%- liquid 
+  assign padding_horizontal = section.settings.padding_horizontal
+  assign padding_horizontal_mobile = section.settings.padding_horizontal_mobile
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+  assign border_color = section.settings.border_color
+  assign border_thickness = section.settings.border_thickness
+  assign margin_top = section.settings.margin_top
+  assign margin_bottom = section.settings.margin_bottom
+  assign margin_horizontal_mobile = section.settings.margin_horizontal_mobile
+  assign margin_horizontal = section.settings.margin_horizontal
+  assign background_color = section.settings.background_color
+  assign background_gradient = section.settings.background_gradient
+  assign full_width = section.settings.full_width
+  assign content_width = section.settings.content_width
+  assign lazy = section.settings.lazy
+  assign section_radius = section.settings.section_radius
+
+  assign heading = section.settings.heading
+  assign heading_size = section.settings.heading_size
+  assign heading_size_mobile = section.settings.heading_size_mobile
+  assign heading_color = section.settings.heading_color
+  assign heading_highlight_color = section.settings.heading_highlight_color
+  assign heading_custom = section.settings.heading_custom
+  assign heading_font = section.settings.heading_font
+  assign heading_height = section.settings.heading_height
+  assign heading_align = section.settings.heading_align
+  assign heading_align_mobile = section.settings.heading_align_mobile
+
+  assign dots_size = section.settings.dots_size
+  assign dots_size_mobile = section.settings.dots_size_mobile
+  assign dots_show_desktop = section.settings.dots_show_desktop
+  assign dots_show_mobile = section.settings.dots_show_mobile
+  assign dots_color = section.settings.dots_color
+  assign dots_mt = section.settings.dots_mt
+  assign dots_mt_mobile = section.settings.dots_mt_mobile
+  assign dots_align = section.settings.dots_align
+  assign dots_align_mobile = section.settings.dots_align_mobile
+
+  assign dots_horizontal_align = ""
+  if dots_align == "center"
+    assign dots_horizontal_align = "center"
+  elsif dots_align == "right"
+    assign dots_horizontal_align = "end"
+  else
+    assign dots_horizontal_align = "start"
+  endif
+
+  assign dots_horizontal_align_mobile = ""
+  if dots_align_mobile == "center"
+    assign dots_horizontal_align_mobile = "center"
+  elsif dots_align_mobile == "right"
+    assign dots_horizontal_align_mobile = "end"
+  else
+    assign dots_horizontal_align_mobile = "start"
+  endif
+
+  assign slider_gap = section.settings.slider_gap
+  assign slider_gap_mobile = section.settings.slider_gap_mobile
+  assign slider_mt = section.settings.slider_mt
+  assign slider_mt_mobile = section.settings.slider_mt_mobile
+
+  assign image_border_thickness = section.settings.image_border_thickness
+  assign image_border_color = section.settings.image_border_color
+  assign image_radius = section.settings.image_radius
+
+  assign slide_content_mt = section.settings.slide_content_mt
+  assign slide_content_mt_mobile = section.settings.slide_content_mt_mobile
+  assign slide_content_gap = section.settings.slide_content_gap
+  assign slide_content_gap_mobile = section.settings.slide_content_gap_mobile
+  assign slide_content_align = section.settings.slide_content_align
+  assign slide_content_align_mobile = section.settings.slide_content_align_mobile
+
+  assign date_size = section.settings.date_size
+  assign date_size_mobile = section.settings.date_size_mobile
+  assign date_color = section.settings.date_color
+  assign date_custom = section.settings.date_custom
+  assign date_font = section.settings.date_font
+  assign date_height = section.settings.date_height
+
+  assign text_size = section.settings.text_size
+  assign text_size_mobile = section.settings.text_size_mobile
+  assign text_color = section.settings.text_color
+  assign text_highlight_color = section.settings.text_highlight_color
+  assign text_custom = section.settings.text_custom
+  assign text_font = section.settings.text_font
+  assign text_height = section.settings.text_height
+
+  assign arrow_size = section.settings.arrow_size
+  assign arrow_size_mobile = section.settings.arrow_size_mobile
+  assign arrow_icon_size = section.settings.arrow_icon_size
+  assign arrow_icon_size_mobile = section.settings.arrow_icon_size_mobile
+  assign arrow_color = section.settings.arrow_color
+  assign arrow_hover_color = section.settings.arrow_hover_color
+  assign arrow_bg_color = section.settings.arrow_bg_color
+  assign arrow_bg_hover_color = section.settings.arrow_bg_hover_color
+  assign arrow_radius = section.settings.arrow_radius
+  assign arrow_border_thickness = section.settings.arrow_border_thickness
+  assign arrow_border_color = section.settings.arrow_border_color
+  assign arrow_border_hover_color = section.settings.arrow_border_hover_color
+  assign arrow_show_desktop = section.settings.arrow_show_desktop
+  assign arrow_show_mobile = section.settings.arrow_show_mobile
+  assign arrow_hover_effect = section.settings.arrow_hover_effect
+  assign arrow_mt = section.settings.arrow_mt
+  assign arrow_mt_mobile = section.settings.arrow_mt_mobile
+  assign arrow_align = section.settings.arrow_align
+  assign arrow_align_mobile = section.settings.arrow_align_mobile
+
+  assign arrow_horizontal_align = ""
+  if arrow_align == "center"
+    assign arrow_horizontal_align = "center"
+  elsif arrow_align == "right"
+    assign arrow_horizontal_align = "end"
+  else
+    assign arrow_horizontal_align = "start"
+  endif
+
+  assign arrow_horizontal_align_mobile = ""
+  if arrow_align_mobile == "center"
+    assign arrow_horizontal_align_mobile = "center"
+  elsif arrow_align_mobile == "right"
+    assign arrow_horizontal_align_mobile = "end"
+  else
+    assign arrow_horizontal_align_mobile = "start"
+  endif
+-%}
+
+{%- style -%}
+  {{  heading_font | font_face: font_display: 'swap' }}
+  {{ date_font | font_face: font_display: 'swap' }}
+  {{ text_font | font_face: font_display: 'swap' }}
+
+  .section-{{ section.id }} {
+    border-top: solid {{ border_color }} {{ border_thickness }}px;
+    border-bottom: solid {{ border_color }} {{ border_thickness }}px;
+    margin-top: {{ margin_top | times: 0.75 | round: 0 }}px;
+    margin-bottom: {{ margin_bottom | times: 0.75 | round: 0 }}px;
+    margin-left: {{ margin_horizontal_mobile }}rem;
+    margin-right: {{ margin_horizontal_mobile }}rem;
+    border-radius: {{ section_radius | times: 0.6 | round: 0 }}px;
+    overflow: hidden;
+  }
+  
+  .section-{{ section.id }}-settings {
+    margin: 0 auto;
+    padding-top: {{ padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
+    padding-left: {{ padding_horizontal_mobile }}rem;
+    padding-right: {{ padding_horizontal_mobile }}rem;
+  }
+
+  .timeline-heading-{{ section.id }} {
+    text-align: {{ heading_align_mobile }};
+  }
+
+  .timeline-heading-{{ section.id }} * {
+    margin: 0;
+    font-size: {{ heading_size_mobile }}px;
+    color: {{ heading_color }};
+    line-height: {{ heading_height }}%;
+    text-transform: unset;
+    text-decoration: none;
+    word-break: brak-word;
+  }
+
+  .timeline-heading-{{ section.id }} * strong {
+    color: {{ heading_highlight_color }};
+  }
+
+  .timeline-pagination-wrapper-{{ section.id }} {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: {{ dots_horizontal_align_mobile }} !important;
+  }
+
+  .timeline-pagination-{{ section.id }} {
+    position: relative !important;
+    margin-top: {{ dots_mt_mobile }}px !important;
+    width: 100% !important;
+    max-width: fit-content;
+    justify-content: center;
+    align-items: center;
+    z-index: 1 !important;
+  }
+
+  .timeline-pagination-{{ section.id }} .swiper-pagination-bullet {
+    width: {{ dots_size_mobile }}px !important;
+    height: {{ dots_size_mobile }}px !important;
+    border: 0px !important;
+    background-color: {{ dots_color }} !important;
+    opacity: 0.4 !important;
+    transition: all 0.25s ease 0s;
+    margin: 0 2px !important;
+    
+  }
+
+  .timeline-pagination-{{ section.id }} .swiper-pagination-bullet.swiper-pagination-bullet-active {
+    opacity: 1 !important;
+    transition: all 0.25s ease 0s;
+  }
+
+  .timeline-image-slider-{{ section.id }} {
+    margin-top: {{ slider_mt_mobile }}px !important;
+    margin-left: -{{ padding_horizontal_mobile }}rem !important;
+    margin-right: -{{ padding_horizontal_mobile }}rem !important;
+    padding-left: {{ padding_horizontal_mobile }}rem !important;
+    padding-right: {{ padding_horizontal_mobile }}rem !important;
+  }
+
+  .timeline-content-slider-{{ section.id }} {
+    margin-top: {{ slide_content_mt_mobile }}px !important;
+    margin-left: -{{ padding_horizontal_mobile }}rem !important;
+    margin-right: -{{ padding_horizontal_mobile }}rem !important;
+    padding-left: {{ padding_horizontal_mobile }}rem !important;
+    padding-right: {{ padding_horizontal_mobile }}rem !important;
+  }
+
+  .timeline-image-slider-wrapper-{{ section.id }} {
+    align-items: end !important;
+  }
+
+  .timeline-content-slider-wrapper-{{ section.id }} {
+    margin-left: 0rem;
+  }
+
+  .timeline-image-slide-{{ section.id }} {
+    border: {{ image_border_thickness }}px solid {{ image_border_color }} !important;
+    border-radius: {{ image_radius }}px !important;
+    overflow: hidden !important;
+    opacity: 0.3 !important;
+    transition: all 0.25s ease 0s !important;
+  }
+
+  .timeline-image-slide-{{ section.id }}.swiper-slide-active {
+    opacity: 1 !important;
+    transition: all 0.25s ease 0s !important;
+  }
+
+  .timeline-image-slide-{{ section.id }} img,
+  .timeline-image-slide-{{ section.id }} svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .timeline-image-slide-{{ section.id }} svg {
+    background-color: #AFAFAF;
+  }
+
+  .timeline-content-slide-{{ section.id }} {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: {{ slide_content_gap_mobile }}px !important;
+    opacity: 0.1;
+    transition: all 0.25s ease 0s;
+  }
+
+  .timeline-content-slide-{{ section.id }}.swiper-slide-active {
+    opacity: 1;
+    transition: all 0.25s ease 0s;
+  }
+
+  .timeline-date-{{ section.id }} {
+    margin: 0px;
+    text-align: {{ slide_content_align_mobile }};
+    font-size: {{ date_size_mobile }}px;
+    line-height: {{ date_height }}%;
+    color: {{ date_color }};
+    text-transform: unset;
+    font-weight: 700;
+  }
+
+  .timeline-text-{{ section.id }} {
+    text-align: {{ slide_content_align_mobile }};
+  }
+
+  .timeline-text-{{ section.id }} * {
+    margin: 0px;
+    font-size: {{ text_size_mobile }}px;
+    line-height: {{ text_height }}%;
+    color: {{ text_color }};
+    text-transform: unset;
+    word-break: break-word;
+  }
+
+  .timeline-text-{{ section.id }} * strong {
+    font-weight: 400;
+    color: {{ text_highlight_color }};
+  }
+
+  .timeline-buttons-{{ section.id }} {
+    display: flex;
+    justify-content: {{ arrow_horizontal_align_mobile }};
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    margin-top: {{ arrow_mt_mobile }}px;
+  }
+
+  .timeline-btn-prev-{{ section.id }},
+  .timeline-btn-next-{{ section.id }} {
+    display: flex;
+    width: {{ arrow_size_mobile }}px;
+    height: {{ arrow_size_mobile }}px;
+    border: 0px;
+    border: {{ arrow_border_thickness }}px solid {{ arrow_border_color }};
+    border-radius: {{ arrow_radius }}px;
+    background: transparent;
+    background: {{ arrow_bg_color }};
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    -webkit-appearance: none;
+    /* box-shadow: 0px 0px 10px 0px rgba(0,0,0,.15); */
+  }
+
+  .timeline-btn-prev-{{ section.id }} .animate-icon,
+  .timeline-btn-next-{{ section.id }} .animate-icon {
+    pointer-events: none;
+    place-items: center;
+    display: grid;
+  }
+
+  .timeline-btn-prev-{{ section.id }} .animate-icon:before,
+  .timeline-btn-next-{{ section.id }} .animate-icon:before {
+    content: "";
+    grid-area: 1 / -1;
+    transition: all .2s ease;
+    width: {{ arrow_icon_size_mobile }}px;
+    height: {{ arrow_icon_size_mobile }}px;
+    transform: rotate(calc(1 * 45deg));
+    box-sizing: border-box;
+    border-style: solid;
+    border: 0px;
+    border-right: 2px solid currentColor;
+    border-top: 2px solid currentColor;
+    position: relative;
+    left: -1px;
+  }
+
+  .timeline-btn-prev-{{ section.id }} .animate-icon:before {
+    left: unset;
+    right: -1px;
+    border-right: 0px;
+    border-top: 0px;
+    border-bottom: 2px solid currentColor;
+    border-left: 2px solid currentColor;
+  }
+
+  .timeline-btn-prev-{{ section.id }} .animate-icon:after,
+  .timeline-btn-next-{{ section.id }} .animate-icon:after {
+    content: "";
+    grid-area: 1 / -1;
+    transition: all .2s ease;
+    width: {{ arrow_icon_size_mobile | minus: 0.3 }}px;
+    height: 1.6px;
+    transform-origin: center;
+    opacity: 0;
+    background: currentColor;
+    transform: scaleX(.5);
+  }
+
+  .timeline-btn-prev-{{ section.id }} span,
+  .timeline-btn-next-{{ section.id }} span {
+    color: {{ arrow_color }};
+  }
+
+  .timeline-btn-prev-{{ section.id }}.swiper-button-disabled,
+  .timeline-btn-next-{{ section.id }}.swiper-button-disabled {
+    opacity: 0.5;
+  }
+
+  @media(min-width: 1024px) {
+    .timeline-content-slider-wrapper-{{ section.id }} {
+      margin-left: 10rem;
+    }  
+  }
+
+  @media(min-width: 1320px) {
+    .timeline-content-slider-wrapper-{{ section.id }} {
+      margin-left: 12rem;
+    }  
+  }
+
+  @media(min-width: 1520px) {
+    .timeline-content-slider-wrapper-{{ section.id }} {
+      margin-left: 16rem;
+    }
+  }    
+
+  
+  @media(min-width: 1024px) {
+
+    .section-{{ section.id }} {
+      margin-top: {{ margin_top }}px;
+      margin-bottom: {{ margin_bottom }}px;
+      margin-left: {{ margin_horizontal }}rem;
+      margin-right: {{ margin_horizontal }}rem;
+      border-radius: {{ section_radius }}px;
+    }
+    
+    .section-{{ section.id }}-settings {
+      padding: 0 5rem;
+      padding-top: {{ padding_top }}px;
+      padding-bottom: {{ padding_bottom }}px;
+      padding-left: {{ padding_horizontal }}rem;
+      padding-right: {{ padding_horizontal }}rem;
+    }
+
+    .timeline-heading-{{ section.id }} {
+      text-align: {{ heading_align }};
+    }
+
+    .timeline-heading-{{ section.id }} * {
+      font-size: {{ heading_size }}px;
+    }
+
+    .timeline-pagination-wrapper-{{ section.id }} {
+      justify-content: {{ dots_horizontal_align }} !important;
+    }
+
+    .timeline-pagination-{{ section.id }} {
+      margin-top: {{ dots_mt }}px !important;
+    }
+    
+    .timeline-pagination-{{ section.id }} .swiper-pagination-bullet {
+      width: {{ dots_size }}px !important;
+      height: {{ dots_size }}px !important;
+    }
+
+    .timeline-image-slider-{{ section.id }} {
+      margin-top: {{ slider_mt }}px !important;
+      margin-left: -{{ padding_horizontal }}rem !important;
+      margin-right: -{{ padding_horizontal }}rem !important;
+      padding-left: {{ padding_horizontal }}rem !important;
+      padding-right: {{ padding_horizontal }}rem !important;
+    }
+
+    .timeline-content-slider-{{ section.id }} {
+      margin-top: {{ slide_content_mt }}px !important;
+      margin-left: -{{ padding_horizontal }}rem !important;
+      margin-right: -{{ padding_horizontal }}rem !important;
+      padding-left: {{ padding_horizontal }}rem !important;
+      padding-right: {{ padding_horizontal }}rem !important;
+    } 
+
+    .timeline-content-slide-{{ section.id }} {
+      flex-direction: row !important;
+      gap: {{ slide_content_gap }}px !important;
+    }
+
+    .timeline-date-{{ section.id }} {
+      text-align: {{ slide_content_align }};
+      font-size: {{ date_size }}px;
+    }
+
+    .timeline-text-{{ section.id }} {
+      text-align: {{ slide_content_align }};
+    }
+    
+    .timeline-text-{{ section.id }} * {
+      font-size: {{ text_size }}px;
+    }
+
+    .timeline-buttons-{{ section.id }} {
+      justify-content: {{ arrow_horizontal_align }};
+      margin-top: {{ arrow_mt }}px;
+    }
+
+    .timeline-btn-prev-{{ section.id }},
+    .timeline-btn-next-{{ section.id }} {
+      width: {{ arrow_size }}px;
+      height: {{ arrow_size }}px;
+      transition: all 0.25s ease 0s;
+    }
+
+    .timeline-btn-prev-{{ section.id }} .animate-icon:before,
+    .timeline-btn-next-{{ section.id }} .animate-icon:before {
+      width: {{ arrow_icon_size }}px;
+      height: {{ arrow_icon_size }}px;
+    }
+
+    .timeline-btn-prev-{{ section.id }} .animate-icon:after,
+    .timeline-btn-next-{{ section.id }} .animate-icon:after {
+      width: {{ arrow_icon_size | minus: 0.3 }}px;
+    }
+  }
+
+  .timeline-image-slider-{{ section.id }} {
+    overflow: visible !important;
+  }
+  
+  .timeline-image-slider-{{ section.id }} .swiper-wrapper {
+    will-change: transform;
+  }
+  
+  /* Стили для мобильных устройств */
+  @media (max-width: 1023px) {
+    .timeline-image-slider-wrapper-{{ section.id }} {
+      display: flex !important;
+      flex-wrap: nowrap !important;
+    }
+  
+    .timeline-image-slide-{{ section.id }} {
+      flex: 0 0 auto !important;
+      max-width: none !important;
+    }
+  
+    /* Исправление для последнего слайда */
+    .timeline-image-slider-{{ section.id }} .swiper-slide-active:last-child {
+      opacity: 1 !important;
+    }
+  }
+
+  
+{%- endstyle -%}
+
+{% unless full_width %}
+  <style>
+    .section-{{ section.id }}-settings {
+      max-width: {{ content_width }}px;
+    }
+  </style>
+{% endunless %}
+
+{% if margin_horizontal_mobile > 0 %}
+  <style>
+    .section-{{ section.id }} {
+      border-left: solid {{ border_color }} {{ border_thickness }}px;
+      border-right: solid {{ border_color }} {{ border_thickness }}px;
+    }
+    
+    @media(min-width: 1024px) {
+      .section-{{ section.id }} {
+        border-left: 0px;
+        border-right: 0px;
+      }
+    }
+  </style>
+{% endif %}
+
+{% if margin_horizontal > 0 %}
+  <style>
+    @media(min-width: 1024px) {
+      .section-{{ section.id }} {
+        border-left: solid {{ border_color }} {{ border_thickness }}px;
+        border-right: solid {{ border_color }} {{ border_thickness }}px;
+      }
+    }
+  </style>
+{% endif %}
+
+{% if heading_custom %}
+  <style>
+    .timeline-heading-{{ section.id }} * {
+      font-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+      font-weight: {{ heading_font.weight }};
+      font-style: {{ heading_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if date_custom %}
+  <style>
+    .timeline-date-{{ section.id }} {
+      font-family: {{ date_font.family }}, {{ date_font.fallback_families }};
+      font-weight: {{ date_font.weight }};
+      font-style: {{ date_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if text_custom %}
+  <style>
+    .timeline-text-{{ section.id }} * {
+      font-family: {{ text_font.family }}, {{ text_font.fallback_families }};
+      font-weight: {{ text_font.weight }};
+      font-style: {{ text_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if dots_show_mobile %}
+  <style>
+    .timeline-pagination-{{ section.id }} {
+      display: flex !important;
+    }
+  </style>
+{% else %}
+  <style>
+    .timeline-pagination-{{ section.id }} {
+      display: none !important;
+    }
+  </style>
+{% endif %}
+
+{% if dots_show_desktop %}
+  <style>
+    @media(min-width: 1024px) {
+      .timeline-pagination-{{ section.id }} {
+        display: flex !important;
+      }
+    }
+  </style>
+{% else %}
+  <style>
+    @media(min-width: 1024px) {
+      .timeline-pagination-{{ section.id }} {
+        display: none !important;
+      }
+    }
+  </style>
+{% endif %}
+
+{% if slide_content_align_mobile == 'right' %}
+  <style>
+    .timeline-date-{{ section.id }} {
+      order: 2;
+    }
+
+    .timeline-text-{{ section.id }} {
+      order: 1;
+    }
+  </style>
+{% endif %}
+
+
+{% if slide_content_align == 'right' %}
+  <style>
+    @media (min-width: 1024px) {
+      .timeline-date-{{ section.id }} {
+        order: 2;
+      }
+      .timeline-text-{{ section.id }} {
+        order: 1;
+      }
+    } 
+  </style>
+{% else %}
+  <style>
+    @media (min-width: 1024px) {
+      .timeline-date-{{ section.id }} {
+        order: 1;
+      }
+      .timeline-text-{{ section.id }} {
+        order: 2;
+      }
+    } 
+  </style>
+{% endif %}
+
+{% if arrow_hover_effect == "color" %}
+  <style>
+    .timeline-btn-prev-{{ section.id }}:hover,
+    .timeline-btn-next-{{ section.id }}:hover {
+      transition: all 0.3s ease 0s;
+      border: {{ arrow_border_thickness }}px solid {{ arrow_border_hover_color }};
+      background: {{ arrow_bg_hover_color }};
+    }
+  
+    .timeline-btn-prev-{{ section.id }}:hover .animate-icon,
+    .timeline-btn-next-{{ section.id }}:hover .animate-icon {
+      color: {{ arrow_hover_color }};
+    }
+  </style>
+{% elsif arrow_hover_effect == "scale" %}
+  <style>
+    .timeline-btn-prev-{{ section.id }}:hover,
+    .timeline-btn-next-{{ section.id }}:hover {
+      transform: scale(0.9);
+    }
+
+    @media(min-width: 1024px) {
+      .timeline-btn-prev-{{ section.id }}:hover,
+      .timeline-btn-next-{{ section.id }}:hover {
+        transform: scale(0.9);
+      }
+    }
+  </style>
+{% elsif arrow_hover_effect == "arrow" %}
+  <style>
+    .timeline-btn-next-{{ section.id }}:hover .animate-icon:before {
+      transform: translate(calc(1 * 0.125rem)) rotate(calc(1 * 45deg));
+    }
+  
+    .timeline-btn-prev-{{ section.id }}:hover .animate-icon:before {
+      transform: translate(calc(-1 * 0.125rem)) rotate(calc(1 * 45deg));
+    }
+    
+    .timeline-btn-prev-{{ section.id }}:hover .animate-icon:after,
+    .timeline-btn-next-{{ section.id }}:hover .animate-icon:after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+  </style>
+{% endif %}
+
+{% if arrow_show_mobile %}
+  <style>
+    .timeline-buttons-{{ section.id }} {
+      display: flex;
+    }
+  </style>
+{% else %}
+  <style>
+    .timeline-buttons-{{ section.id }} {
+      display: none;
+    }
+  </style>
+{% endif %}
+
+{% if arrow_show_desktop %}
+  <style>
+    @media(min-width: 1024px) {
+      .timeline-buttons-{{ section.id }} {
+        display: flex;
+      }
+    }
+  </style>
+{% else %}
+  <style>
+    @media(min-width: 1024px) {
+      .timeline-buttons-{{ section.id }} {
+        display: none;
+      }
+    }
+  </style>
+{% endif %}
+
+{% for block in section.blocks %}
+  <style>
+
+
+    @media(min-width: 1024px) {
+      .timeline-image-slide-{{ block.id }} {
+        width: {{ block.settings.image_width }}px !important;
+      }
+    }
+  </style>
+  
+  {% if block.settings.image_ratio_mobile == "portrait" %}
+    <style>
+      .timeline-image-slide-{{ block.id }} {
+        aspect-ratio: 9.6/11;
+      }
+    </style>
+  {% elsif block.settings.image_ratio_mobile == "landscape" %}
+    <style>
+    .timeline-image-slide-{{ block.id }} {
+      aspect-ratio: 12/8;
+    }
+    </style>
+  {% elsif block.settings.image_ratio_mobile == "square" %}
+    <style>
+      .timeline-image-slide-{{ block.id }} {
+        aspect-ratio: 12/12;
+      }
+    </style>
+  {% else %}
+    <style>
+      .timeline-image-slide-{{ block.id }} {
+        aspect-ratio: auto;
+      }
+    </style>
+  {% endif %}
+
+  {% if block.settings.image_ratio == "portrait" %}
+    <style>
+      @media(min-width: 1024px) {
+        .timeline-image-slide-{{ block.id }} {
+          aspect-ratio: 9.6/11;
+        }
+      }
+      
+    </style>
+  {% elsif block.settings.image_ratio == "landscape" %}
+    <style>
+      @media(min-width: 1024px) {
+        .timeline-image-slide-{{ block.id }} {
+          aspect-ratio: 12/8;
+        }
+      }  
+    </style>
+  {% elsif block.settings.image_ratio == "square" %}
+    <style>
+      @media(min-width: 1024px) {
+        .timeline-image-slide-{{ block.id }} {
+          aspect-ratio: 12/12;
+        }
+      }    
+    </style>
+  {% else %}
+    <style>
+      @media(min-width: 1024px) {
+        .timeline-image-slide-{{ block.id }} {
+          aspect-ratio: auto;
+        }
+      }
+    </style>
+  {% endif %}
+
+{% endfor %}
+
+
+
+{% comment %} PREVIEW {% endcomment %}
+<style>
+  .product-reviews-slider-{{ section.id }}.preview .swiper-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+
+  .product-reviews-slider-{{ section.id }}.preview .product-reviews-item-{{ section.id }} {
+    width: 100%;
+  }
+
+  .product-reviews-slider-{{ section.id }}.preview .product-reviews-item-{{ section.id }}:not(:first-child) {
+    margin-left: {{ slider_gap_mobile }}px;
+  } 
+
+  @media(min-width: 1024px) {
+    .product-reviews-slider-{{ section.id }}.preview .product-reviews-item-{{ section.id }}:not(:first-child) {
+      margin-left: {{ slider_gap }}px;
+    } 
+
+    .product-reviews-slider-{{ section.id }}.preview .product-reviews-item-{{ section.id }} {
+      width: calc(100% - ({{ slider_gap }}px));
+    }
+  }
+</style>
+
+
+<div class="section-{{ section.id }} timeline-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
+    <div class="section-{{ section.id }}-settings">
+      {% if heading != blank %}
+        <div class="timeline-heading-{{ section.id }}">{{ heading }}</div>
+      {% endif %}
+      <div class="timeline-pagination-wrapper-{{ section.id }}">
+        <div class="timeline-pagination-{{ section.id }} swiper-pagination"></div>
+      </div>
+    
+      <div class="timeline-image-slider-{{ section.id }} swiper"
+          data-gap="{{ slider_gap }}"
+          data-gap-mobile="{{ slider_gap_mobile }}">
+        <div class="timeline-image-slider-wrapper-{{ section.id }} swiper-wrapper">
+          {% for block in section.blocks %}
+            {% if block.settings.text != blank or block.settings.date != blank %}
+              <div class="timeline-image-slide-{{ section.id }} timeline-image-slide-{{ block.id }} swiper-slide">
+                {% if block.settings.image != blank %}
+                  <img src="{{ block.settings.image | img_url: "1000x1000" }}" alt="{{ block.settings.image.alt }}" {% if lazy %}loading="lazy"{% endif %}>   
+                {% else %}  
+                  {{ 'image' | placeholder_svg_tag }}
+                {% endif %} 
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="timeline-content-slider-{{ section.id }} swiper"
+          data-gap="{{ slider_gap }}"
+          data-gap-mobile="{{ slider_gap_mobile }}">
+        <div class="timeline-content-slider-wrapper-{{ section.id }} swiper-wrapper">
+          {% for block in section.blocks %}
+            {% if block.settings.text != blank or block.settings.date != blank %}
+              <div class="timeline-content-slide-{{ section.id }} swiper-slide">
+                {% if block.settings.date != blank %}
+                  <p class="timeline-date-{{ section.id }}">{{ block.settings.date }}</p>
+                {% endif %}
+                {% if block.settings.text != blank %}
+                  <div class="timeline-text-{{ section.id }}">{{ block.settings.text }}</div>
+                {% endif %}             
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="timeline-buttons-{{ section.id }}">
+        <button class="timeline-btn-prev-{{ section.id }}">
+          <span class="animate-icon"></span>
+        </button>
+        <button class="timeline-btn-next-{{ section.id }}">
+          <span class="animate-icon"></span>
+        </button>   
+      </div>
+    </div>
+</div>
+
+<script>
+  function loadSwiper(callback) {
+    if (window.Swiper) {
+      callback();
+    } else {
+      const script = document.createElement('script');
+      script.src = "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js";
+      script.onload = callback;
+      document.head.appendChild(script);
+    }
+  }
+
+function initTimeline4(sectionId) {
+  // Вспомогательная функция для определения мобильного устройства
+  const isMobile = () => window.innerWidth < 1024;
+
+  const imageSlider = new Swiper(`.timeline-image-slider-${sectionId}`, {
+    speed: 300,
+    navigation: {
+      nextEl: `.timeline-btn-next-${sectionId}`,
+      prevEl: `.timeline-btn-prev-${sectionId}`,
+    },
+    pagination: {
+      el: `.timeline-pagination-${sectionId}`,
+      type: "bullets",
+      clickable: true,
+      renderBullet: function (index, className) {
+        return '<span class="' + className + '"></span>';
+      },
+    },
+    watchSlidesProgress: true,
+    breakpoints: {
+      320: {
+        spaceBetween: parseInt(document.querySelector(`.timeline-image-slider-${sectionId}`).dataset.gapMobile || 0),
+        centeredSlides: false,
+        slidesPerView: 1.5,
+        initialSlide: 0
+      },
+      768: {
+        spaceBetween: parseInt(document.querySelector(`.timeline-image-slider-${sectionId}`).dataset.gapMobile || 0),
+        centeredSlides: false,
+        slidesPerView: "auto",
+        initialSlide: 0
+      },
+      1024: {
+        spaceBetween: parseInt(document.querySelector(`.timeline-image-slider-${sectionId}`).dataset.gap || 0),
+        centeredSlides: true,
+        slidesPerView: "auto",
+      }
+    },
+    on: {
+      init: function() {
+        this.snapGrid = [...this.slidesGrid];
+      }
+    }
+  });
+
+  const contentSlider = new Swiper(`.timeline-content-slider-${sectionId}`, {
+    speed: 300,
+    allowTouchMove: false,
+    breakpoints: {
+      320: {
+        spaceBetween: 80,
+        slidesPerView: 1,
+        centeredSlides: true,
+      },
+      768: {
+        spaceBetween: 80,
+        slidesPerView: 1,
+        centeredSlides: true,
+      },
+      1024: {
+        spaceBetween: 80,
+        slidesPerView: 2.3,
+        centeredSlides: true,
+      },
+      1420: {
+        spaceBetween: 80,
+        slidesPerView: 2.6,
+        centeredSlides: true,
+      }
+    }
+  });
+
+  let isAnimating = false;
+
+  const syncSliders = (targetIndex) => {
+    if (isAnimating) return;
+
+    isAnimating = true;
+    const totalSlides = imageSlider.slides.length;
+
+    // Убедимся, что индекс в допустимых пределах
+    const safeIndex = Math.max(0, Math.min(targetIndex, totalSlides - 1));
+
+    // Синхронное перемещение слайдеров
+    imageSlider.slideTo(safeIndex, 300);
+    contentSlider.slideTo(safeIndex, 300);
+
+    setTimeout(() => {
+      isAnimating = false;
+    }, 350);
+  };
+
+  // Обработка перемещения для imageSlider
+  imageSlider.on('slideChange', function() {
+    if (!isAnimating) {
+      syncSliders(this.activeIndex);
+    }
+  });
+
+  // Обновление слайдера при изменении размера окна
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      imageSlider.update();
+      contentSlider.update();
+      
+      // Переопределяем сетку снапов
+      imageSlider.snapGrid = [...imageSlider.slidesGrid];
+      
+      // Обновляем пагинацию
+      imageSlider.pagination.render();
+      imageSlider.pagination.update();
+    }, 200);
+  });
+
+  // Принудительное обновление пагинации при достижении последнего слайда
+  imageSlider.on('reachEnd', function() {
+    const lastIndex = imageSlider.slides.length - 1;
+    
+    setTimeout(() => {
+      // Проверяем, действительно ли мы на последнем слайде
+      if (imageSlider.activeIndex !== lastIndex) {
+        syncSliders(lastIndex);
+      }
+      
+      // Обновляем пагинацию
+      imageSlider.pagination.render();
+      imageSlider.pagination.update();
+    }, 100);
+  });
+
+  // Принудительное обновление при инициализации
+  setTimeout(() => {
+    imageSlider.update();
+    contentSlider.update();
+    imageSlider.pagination.render();
+    imageSlider.pagination.update();
+  }, 100);
+}
+
+  function initializeAllTimeline4Sections() {
+    const sections = document.querySelectorAll('[id^="shopify-section-"]');
+    sections.forEach(section => {
+      if (section.querySelector('.timeline-{{ section.id }}')) {
+        const sectionId = section.id.replace('shopify-section-', '');
+        loadSwiper(() => initTimeline4(sectionId));
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeAllTimeline4Sections);
+  } else {
+    initializeAllTimeline4Sections();
+  }
+
+  if (Shopify.designMode) {
+    document.addEventListener('shopify:section:load', (event) => {
+      const sectionId = event.detail.sectionId;
+      if (event.target.querySelector('.timeline-{{ section.id }}')) {
+        loadSwiper(() => initTimeline4(sectionId));
+      }
+    });
+  }
+</script>
+
+{% schema %}
+  {
+    "name": "SS - Timeline #4",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "heading",
+        "label": "Text",
+        "default": "<h2>Time<strong>line #4</strong></h2>",
+        "info": "Use bold formatting to apply the accent color"
+      },
+      {
+        "type": "checkbox",
+        "id": "heading_custom",
+        "label": "Use custom font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "heading_font",
+        "label": "Font family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "heading_size",
+        "min": 0,
+        "max": 72,
+        "step": 2,
+        "unit": "px",
+        "label": "Font size",
+        "default": 48
+      },
+      {
+        "type": "range",
+        "id": "heading_size_mobile",
+        "min": 0,
+        "max": 72,
+        "step": 2,
+        "unit": "px",
+        "label": "Font size - mobile",
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "heading_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Line height",
+        "default": 130
+      },
+      {
+        "type": "text_alignment",
+        "id": "heading_align",
+        "label": "Alignment",
+        "default": "center"
+      },
+      {
+        "type": "text_alignment",
+        "id": "heading_align_mobile",
+        "label": "Alignment - mobile",
+        "default": "center"
+      },
+      {
+        "type": "header",
+        "content": "Dots"
+      },
+      {
+        "type": "range",
+        "id": "dots_size",
+        "min": 5,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Size",
+        "default": 8
+      },
+      {
+        "type": "range",
+        "id": "dots_size_mobile",
+        "min": 5,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Size - mobile",
+        "default": 8
+      },
+      {
+        "type": "range",
+        "id": "dots_mt",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Margin top",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "dots_mt_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Margin top - mobile",
+        "default": 16
+      },
+      {
+        "type": "checkbox",
+        "id": "dots_show_desktop",
+        "label": "Show on desktop",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "dots_show_mobile",
+        "label": "Show on mobile",
+        "default": true
+      },
+      {
+        "type": "text_alignment",
+        "id": "dots_align",
+        "label": "Alignment",
+        "default": "center"
+      },
+      {
+        "type": "text_alignment",
+        "id": "dots_align_mobile",
+        "label": "Alignment - mobile",
+        "default": "center"
+      },
+      {
+        "type": "header",
+        "content": "Slider"
+      },
+      {
+        "type": "range",
+        "id": "slider_gap",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "unit": "px",
+        "label": "Gap",
+        "default": 10
+      },
+      {
+        "type": "range",
+        "id": "slider_gap_mobile",
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "unit": "px",
+        "label": "Gap - mobile",
+        "default": 10
+      },
+      {
+        "type": "range",
+        "id": "slider_mt",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin top",
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "slider_mt_mobile",
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin top - mobile",
+        "default": 24
+      },
+      {
+        "type": "header",
+        "content": "Image"
+      },
+      {
+        "type": "range",
+        "id": "image_radius",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Roundness",
+        "default": 10
+      },  
+      {
+        "type": "range",
+        "id": "image_border_thickness",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "unit": "px",
+        "label": "Border thickness",
+        "default": 0
+      },  
+      {
+        "type": "header",
+        "content": "Slide content"
+      },
+      {
+        "type": "range",
+        "id": "slide_content_gap",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "unit": "px",
+        "label": "Gap",
+        "default": 30
+      },
+      {
+        "type": "range",
+        "id": "slide_content_gap_mobile",
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "unit": "px",
+        "label": "Gap - mobile",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "slide_content_mt",
+        "min": 0,
+        "max": 80,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin top",
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "slide_content_mt_mobile",
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "unit": "px",
+        "label": "Margin top - mobile",
+        "default": 20
+      },
+      {
+        "type": "text_alignment",
+        "id": "slide_content_align",
+        "label": "Alignment"
+      },
+      {
+        "type": "text_alignment",
+        "id": "slide_content_align_mobile",
+        "label": "Alignment - mobile"
+      },
+      {
+        "type": "header",
+        "content": "Date"
+      },
+      {
+        "type": "checkbox",
+        "id": "date_custom",
+        "label": "Use custom font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "date_font",
+        "label": "Font family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "date_size",
+        "min": 0,
+        "max": 72,
+        "step": 2,
+        "unit": "px",
+        "label": "Font size",
+        "default": 72
+      },
+      {
+        "type": "range",
+        "id": "date_size_mobile",
+        "min": 0,
+        "max": 72,
+        "step": 2,
+        "unit": "px",
+        "label": "Font size - mobile",
+        "default": 42
+      },
+      {
+        "type": "range",
+        "id": "date_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Line height",
+        "default": 130
+      },
+      {
+        "type": "header",
+        "content": "Text"
+      },
+      {
+        "type": "checkbox",
+        "id": "text_custom",
+        "label": "Use custom font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "text_font",
+        "label": "Font family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "text_size",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "text_size_mobile",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "label": "Font size - mobile",
+        "default": 15
+      },
+      {
+        "type": "range",
+        "id": "text_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Line height",
+        "default": 150
+      },
+      {
+        "type": "header",
+        "content": "Arrows"
+      },
+      {
+        "type": "range",
+        "id": "arrow_size",
+        "min": 10,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Size",
+        "default": 48
+      },
+      {
+        "type": "range",
+        "id": "arrow_size_mobile",
+        "min": 10,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Size - mobile",
+        "default": 38
+      },
+      {
+        "type": "range",
+        "id": "arrow_icon_size",
+        "min": 5,
+        "max": 15,
+        "step": 1,
+        "unit": "px",
+        "label": "Icon size",
+        "default": 10
+      },
+      {
+        "type": "range",
+        "id": "arrow_icon_size_mobile",
+        "min": 5,
+        "max": 15,
+        "step": 1,
+        "unit": "px",
+        "label": "Icon size - mobile",
+        "default": 8
+      },
+      {
+        "type": "range",
+        "id": "arrow_border_thickness",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "unit": "px",
+        "label": "Border thickness",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "arrow_radius",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Roundness",
+        "default": 100
+      },
+      {
+        "type": "select",
+        "id": "arrow_hover_effect",
+        "label": "Hover effect",
+        "default": "color",
+        "options": [
+          {
+            "label": "Change color",
+            "value": "color"
+          },
+          {
+            "label": "Change size",
+            "value": "scale"
+          },
+          {
+            "label": "Change arrow",
+            "value": "arrow"
+          },
+          {
+            "label": "None",
+            "value": "none"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "arrow_mt",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Margin top",
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "arrow_mt_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Margin top - mobile",
+        "default": 24
+      },
+      {
+        "type": "checkbox",
+        "id": "arrow_show_desktop",
+        "label": "Show on desktop",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "arrow_show_mobile",
+        "label": "Show on mobile",
+        "default": false
+      },
+      {
+        "type": "text_alignment",
+        "id": "arrow_align",
+        "label": "Alignment",
+        "default": "center"
+      },
+      {
+        "type": "text_alignment",
+        "id": "arrow_align_mobile",
+        "label": "Alignment - mobile",
+        "default": "center"
+      },
+      {
+        "type": "header",
+        "content": "Heading colors"
+      },
+      {
+        "type": "color",
+        "label": "Primary",
+        "id": "heading_color",
+        "default": "#121212"
+      },
+      {
+        "type": "color",
+        "label": "Accent",
+        "id": "heading_highlight_color",
+        "default": "#AFAFAF",
+        "info": "Use bold formatting to apply the accent color"
+      },
+      {
+        "type": "header",
+        "content": "Slide colors"
+      },
+      {
+        "type": "color",
+        "label": "Image border",
+        "id": "image_border_color",
+        "default": "#121212"
+      },
+      {
+        "type": "color",
+        "label": "Date",
+        "id": "date_color",
+        "default": "#121212"
+      },
+      {
+        "type": "color",
+        "label": "Text primary",
+        "id": "text_color",
+        "default": "#121212"
+      },
+      {
+        "type": "color",
+        "label": "Text accent",
+        "id": "text_highlight_color",
+        "default": "#AFAFAF",
+        "info": "Use bold formatting to apply the accent color"
+      },
+      {
+        "type": "header",
+        "content": "Arrow colors"
+      },
+      {
+        "type": "color",
+        "label": "Icon",
+        "id": "arrow_color",
+        "default": "#121212"
+      },
+      {
+        "type": "color",
+        "label": "Icon hover",
+        "id": "arrow_hover_color",
+        "default": "#121212"
+      },
+      {
+        "type": "color",
+        "label": "Background",
+        "id": "arrow_bg_color"
+      },
+      {
+        "type": "color",
+        "label": "Background hover",
+        "id": "arrow_bg_hover_color"
+      },
+      {
+        "type": "color",
+        "label": "Border",
+        "id": "arrow_border_color",
+        "default": "#C7C7C7"
+      },
+      {
+        "type": "color",
+        "label": "Border hover",
+        "id": "arrow_border_hover_color",
+        "default": "#C7C7C7"
+      },
+      {
+        "type": "header",
+        "content": "Dots colors"
+      },
+      {
+        "type": "color",
+        "label": "Dots",
+        "id": "dots_color",
+        "default": "#121212"
+      },
+      {
+        "type": "header",
+        "content": "Section colors"
+      },
+      {
+        "type": "color",
+        "label": "Section background",
+        "id": "background_color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color_background",
+        "id": "background_gradient",
+        "label": "Section background gradient",
+        "info": "Remove gradient to replace with solid colors"
+      },
+      {
+        "type": "color",
+        "label": "Border",
+        "id": "border_color",
+        "default": "#121212"
+      },
+      {
+        "type": "header",
+        "content": "Section margin (outside)"
+      },
+      {
+        "type": "range",
+        "id": "margin_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Margin top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Margin bottom",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_horizontal",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "unit": "rem",
+        "label": "Margin sides",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_horizontal_mobile",
+        "min": 0,
+        "max": 15,
+        "step": 0.5,
+        "unit": "rem",
+        "label": "Margin sides mobile",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Section padding (inside)"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Padding top",
+        "default": 36
+      },
+      {
+         "type": "range",
+         "id": "padding_bottom",
+         "min": 0,
+         "max": 100,
+         "step": 4,
+         "unit": "px",
+         "label": "Padding bottom",
+         "default": 36
+      },
+      {
+        "type": "range",
+        "id": "padding_horizontal",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "unit": "rem",
+        "label": "Padding sides",
+        "default": 5
+      },
+      {
+        "type": "range",
+        "id": "padding_horizontal_mobile",
+        "min": 0,
+        "max": 15,
+        "step": 0.5,
+        "unit": "rem",
+        "label": "Padding sides mobile",
+        "default": 1.5
+      },
+      {
+        "type": "header",
+        "content": "Section settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Full width",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "content_width",
+        "min": 800,
+        "max": 2000,
+        "step": 100,
+        "unit": "px",
+        "label": "Section content width",
+        "default": 1200
+      },
+      {
+        "type": "range",
+        "id": "border_thickness",
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "unit": "px",
+        "label": "Border thickness",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "section_radius",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Section roundness",
+        "default": 0
+      },
+      {
+        "type": "checkbox",
+        "id": "lazy",
+        "label": "Lazy load",
+        "info": "Lazy load images for speed optimisation",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "slide",
+        "name": "Slide",
+        "settings": [        
+          {
+            "type": "text",
+            "id": "date", 
+            "label": "Date",
+            "default": "2020"
+          },  
+          {
+            "type": "richtext",
+            "id": "text", 
+            "label": "Text",
+            "info": "Use bold formatting to apply the accent color",
+            "default": "<p>Add text content about <strong>a certain step</strong> your company has taken to get here</p>"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },   
+          {
+            "type": "range",
+            "id": "image_width",
+            "min": 40,
+            "max": 400,
+            "step": 10,
+            "unit": "px",
+            "label": "Width - desktop",
+            "default": 220
+          },  
+          {
+            "type": "select",
+            "id": "image_ratio",
+            "label": "Aspect ratio",
+            "default": "portrait",
+            "options": [
+              {
+                "label": "Portrait",
+                "value": "portrait"
+              },
+              {
+                "label": "Square",
+                "value": "square"
+              },
+              {
+                "label": "Landscape",
+                "value": "landscape"
+              },
+              {
+                "label": "Original",
+                "value": "original"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "image_ratio_mobile",
+            "label": "Aspect ratio - mobile",
+            "default": "portrait",
+            "options": [
+              {
+                "label": "Portrait",
+                "value": "portrait"
+              },
+              {
+                "label": "Square",
+                "value": "square"
+              },
+              {
+                "label": "Landscape",
+                "value": "landscape"
+              },
+              {
+                "label": "Original",
+                "value": "original"
+              }
+            ]
+          }     
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "SS - Timeline #4",
+        "blocks": [
+          {
+            "type": "slide",
+            "settings": {              
+              "image_width": 260,
+              "image_ratio": "landscape",
+              "image_ratio_mobile": "landscape"
+            }
+          },
+          {
+            "type": "slide",
+            "settings": {              
+              "image_width": 200,
+              "image_ratio": "square",
+              "image_ratio_mobile": "square"
+            }
+          },
+          {
+            "type": "slide",
+            "settings": {              
+              "image_width": 280,
+              "image_ratio": "landscape",
+              "image_ratio_mobile": "landscape"
+            }
+          },
+          {
+            "type": "slide",
+            "settings": {              
+              "image_width": 190,
+              "image_ratio": "landscape",
+              "image_ratio_mobile": "landscape"
+            }
+          },
+          {
+            "type": "slide",
+            "settings": {              
+              "image_width": 190,
+              "image_ratio": "portrait",
+              "image_ratio_mobile": "portrait"
+            }
+          },
+          {
+            "type": "slide",
+            "settings": {              
+              "image_width": 140,
+              "image_ratio": "portrait",
+              "image_ratio_mobile": "portrait"
+            }
+          },
+          {
+            "type": "slide",
+            "settings": {              
+              "image_width": 200,
+              "image_ratio": "square",
+              "image_ratio_mobile": "square"
+            }
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
