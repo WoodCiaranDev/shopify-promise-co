@@ -409,7 +409,7 @@ Inputs:
     it by id from JS, never via this.querySelector).
   {%- endcomment -%}
   <x-modal id="co-lab-review-{{ product.id }}" class="modal modal--lg color-scheme color-scheme--dialog" data-colab-review-modal>
-    <span class="h5" slot="header">Review your ring</span>
+    <span class="h5" slot="header">{% if use_drawer %}Made Just For You{% else %}Review your ring{% endif %}</span>
     <div data-colab-review-body></div>
   </x-modal>
 
