@@ -1061,7 +1061,7 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   padding-block-end: calc(var(--drawer-footer-padding-block) + env(safe-area-inset-bottom, 0px));
 }
 
-/* Review modal: condensed, with the configured ring image in place of the title. */
+/* Review modal (all Co-Lab rings): condensed; the heirloom ring also shows its configured ring image on top. */
 .c-co-lab-cart-bundle--heirloom {
   padding: 1.25rem 1.5rem 1.25rem;
 }
@@ -1094,6 +1094,13 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   padding-top: 0.6rem;
 }
 
+/* No ring image above it (Toi et Moi etc): no divider or gap before the first section. */
+.c-co-lab-cart-bundle--heirloom > .c-co-lab-cart-bundle__group:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
 .c-co-lab-cart-bundle--heirloom .c-co-lab-cart-bundle__group-title {
   margin-bottom: 0.35rem;
   font-size: 0.95rem;
@@ -1124,7 +1131,7 @@ safe-sticky.product-info:has(c-co-lab-picker) {
 }
 
 
-/* Heirloom: "Made Just For You" section title in title case (other group titles are uppercase). */
+/* "Made Just For You" section title in title case (other group titles are uppercase). */
 .c-co-lab-cart-bundle--heirloom .c-co-lab-cart-bundle__group-title--made {
   text-transform: none;
   letter-spacing: 0.02em;
