@@ -258,16 +258,21 @@ class CoLabNecklacePicker extends HTMLElement {
     confirmCheck.id = `${this.dataset.reviewModalId}-confirm`;
     const confirmLabel = this.el('label', 'c-co-lab-picker__confirm');
     confirmLabel.htmlFor = confirmCheck.id;
-    confirmLabel.appendChild(this.el('span', 'c-co-lab-picker__confirm-label', 'Confirm selection:'));
+    const confirmText = this.el('span', 'c-co-lab-picker__confirm-label', 'Confirm selection:');
+    confirmText.id = `${confirmCheck.id}-label`;
+    confirmLabel.appendChild(confirmText);
     confirmLabel.appendChild(confirmCheck);
     card.appendChild(confirmLabel);
     card.appendChild(this.el('p', 'c-co-lab-picker__confirm-note', 'Made just for you, exactly as confirmed above. Dispatches within 10 - 15 business days.'));
 
-    const backBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--secondary', '← Edit');
+    const backArrow = this.el('span', '', '← ');
+    backArrow.setAttribute('aria-hidden', 'true');
+    const backBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--secondary', [backArrow, document.createTextNode('Edit')]);
     backBtn.type = 'button';
     const confirmBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--primary', 'Add to cart');
     confirmBtn.type = 'button';
     confirmBtn.disabled = true;
+    confirmBtn.setAttribute('aria-describedby', confirmText.id);
     card.appendChild(this.el('div', 'c-co-lab-cart-bundle__actions', [backBtn, confirmBtn]));
 
     const pageAtc = this.querySelector('.c-co-lab-picker__atc');
