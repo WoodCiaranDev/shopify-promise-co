@@ -1,11 +1,13 @@
 class CoLabPicker extends HTMLElement {
   connectedCallback() {
-    if (this._connected) return;
-    this._connected = true;
+    this._global = new AbortController();
+    if (this._bound) {
+      this.bindGlobal();
+      return;
+    }
+    this._bound = true;
     this.activeSlot = null;
 
-    // Customise slide-out (heirloom ring only): stones + engraving live in a drawer that stays
-    // inside this element and its form, so every scoped lookup below still finds them.
     this.drawer = this.dataset.customiseDrawerId ? document.getElementById(this.dataset.customiseDrawerId) : null;
     this.summaryEl = this.querySelector('[data-customise-summary]');
     this.confirmPriceEl = this.querySelector('[data-confirm-price]');
@@ -18,6 +20,7 @@ class CoLabPicker extends HTMLElement {
     this.engravingToggle = this.querySelector('[data-action="toggle-engraving"]');
     this.engravingPanel = this.querySelector('[data-engraving]');
     this.submitBtn = this.querySelector('[data-action="submit"]');
+    if (this.drawer) this.submitBtn?.removeAttribute('disabled');
     this.engravingInput = this.querySelector('[data-engraving-input]');
     this.engravingCount = this.querySelector('[data-engraving-count]');
     this.variantIdInput = this.querySelector('[data-variant-id]');
@@ -53,6 +56,7 @@ class CoLabPicker extends HTMLElement {
     if (this.sizeSelect && this.sizeSelect.value) this.selectSize(this.sizeSelect.value);
 
     this.bindEvents();
+    this.bindGlobal();
     this.refresh();
   }
 
@@ -79,7 +83,6 @@ class CoLabPicker extends HTMLElement {
     this.querySelectorAll('[data-action="pick-stone"]').forEach((btn) => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        // Drawer tiles carry their own slot (one full grid per slot); the shared grid uses activeSlot.
         if (btn.dataset.slot) this.activeSlot = btn.dataset.slot;
         this.pickStone(btn.dataset);
       });
@@ -106,20 +109,7 @@ class CoLabPicker extends HTMLElement {
     // The quantity +/- buttons set the value programmatically; re-read after any click in the buy row.
     this.querySelector('.c-co-lab-picker__buy')?.addEventListener('click', () => requestAnimationFrame(() => this.refresh()));
 
-    if (this.drawer) {
-      // Esc with the stone grid open closes the grid, not the whole drawer. The theme's focus
-      // trap listens on document (capture), so intercept earlier, on window.
-      this.onDrawerKeydown = (e) => {
-        if (e.key !== 'Escape' || !this.drawer.open || this.activeSlot == null) return;
-        e.stopImmediatePropagation();
-        e.preventDefault();
-        this.closeGrid();
-      };
-      window.addEventListener('keydown', this.onDrawerKeydown, true);
-      this.drawer.addEventListener('dialog:after-hide', () => this.closeGrid());
-      this.setupPreviewZoom();
-      this.watchBottomBars();
-    }
+    if (this.drawer) this.setupPreviewZoom();
 
     // Browsers restore a remembered metal/size after navigating back without firing
     // change, so re-read the live controls on restore (and just after load) to keep
@@ -134,8 +124,12 @@ class CoLabPicker extends HTMLElement {
       if (this.drawer?.open) this.drawer.hide();
       this.syncSelectionsFromDom();
     };
-    window.addEventListener('pageshow', this.onPageShow);
     requestAnimationFrame(() => this.syncSelectionsFromDom());
+  }
+
+  bindGlobal() {
+    window.addEventListener('pageshow', this.onPageShow, { signal: this._global.signal });
+    if (this.drawer) this.watchViewport();
   }
 
   // Mirror whatever the metal radios / size select currently hold into state.
@@ -149,9 +143,9 @@ class CoLabPicker extends HTMLElement {
   }
 
   disconnectedCallback() {
-    if (this.onPageShow) window.removeEventListener('pageshow', this.onPageShow);
-    if (this.onDrawerKeydown) window.removeEventListener('keydown', this.onDrawerKeydown, true);
-    this._connected = false;
+    this._global?.abort();
+    this._observers?.forEach((o) => o.disconnect());
+    this._observers = [];
   }
 
   selectMetal(value) {
@@ -220,7 +214,7 @@ class CoLabPicker extends HTMLElement {
     if (!this.gridEl) return;
     // Save scroll position so closing restores the viewport (otherwise the user
     // is left looking at empty space below where the grid was).
-    if (this.activeSlot == null && !this.drawer) {
+    if (this.activeSlot == null) {
       this._scrollSnapshot = window.scrollY;
     }
     // Toggle: clicking the active row's select while open should close.
@@ -383,8 +377,6 @@ class CoLabPicker extends HTMLElement {
     // would fire its own /cart/add with only the parent variant — missing our
     // add-on lines and bundle properties. Suppress it.
     event.stopImmediatePropagation();
-    // With the Customise drawer, submitting (e.g. Enter in the engraving box) goes through the
-    // same path as the Confirm button so the review never opens on top of the drawer.
     if (this.drawer) {
       this.confirmCustomise();
       return;
@@ -392,60 +384,69 @@ class CoLabPicker extends HTMLElement {
     this.openReview();
   }
 
-  // Shopify's theme-preview bar (#PBarNextFrameWrapper, only on ?preview_theme_id links) is a
-  // fixed strip over the bottom of the screen that would cover the drawer's Confirm button.
-  // Measure it live (it is injected late and can be hidden) and expose its height as
-  // --colab-bottom-bar so the drawer stops above it. Customers never get the bar, so it's 0 for them.
-  watchBottomBars() {
+  watchViewport() {
     const root = document.documentElement;
-    const update = () => {
-      const bar = document.getElementById('PBarNextFrameWrapper');
-      let h = 0;
-      if (bar) {
-        const r = bar.getBoundingClientRect();
-        const visible = getComputedStyle(bar).display !== 'none' && r.height > 0 && r.top < window.innerHeight;
-        if (visible) h = Math.max(0, Math.round(window.innerHeight - r.top));
-      }
-      root.style.setProperty('--colab-bottom-bar', h + 'px');
-    };
-    let ro = null;
-    const attach = () => {
-      const bar = document.getElementById('PBarNextFrameWrapper');
-      if (!bar || bar === this._barEl) return;
-      this._barEl = bar;
-      ro?.disconnect();
-      if ('ResizeObserver' in window) { ro = new ResizeObserver(update); ro.observe(bar); }
-      new MutationObserver(update).observe(bar, { attributes: true, attributeFilter: ['style', 'class', 'hidden'] });
-    };
-    new MutationObserver(() => { attach(); update(); }).observe(document.body, { childList: true });
-    window.addEventListener('resize', update);
-    this.drawer.addEventListener('dialog:before-show', update);
-    attach(); update();
+    const signal = this._global.signal;
+    this._observers = [];
 
-    // iOS keyboard: Safari scrolls/insets the visual viewport instead of resizing the layout one,
-    // which can leave the fixed panel's bottom (Confirm) under the keyboard. While the drawer is
-    // open, pin the panel to the visual viewport; clear it again on close.
+    // Shopify's preview bar (?preview_theme_id links only) is fixed over the bottom of the screen.
+    if (/[?&]preview_theme_id=/.test(location.search) || window.Shopify?.designMode) {
+      let last = null;
+      const update = () => {
+        const bar = document.getElementById('PBarNextFrameWrapper');
+        let h = 0;
+        if (bar) {
+          const r = bar.getBoundingClientRect();
+          if (getComputedStyle(bar).display !== 'none' && r.height > 0 && r.top < window.innerHeight) h = Math.max(0, Math.round(window.innerHeight - r.top));
+        }
+        if (h !== last) root.style.setProperty('--colab-bottom-bar', `${h}px`);
+        last = h;
+      };
+      let barObserver = null;
+      const attach = () => {
+        const bar = document.getElementById('PBarNextFrameWrapper');
+        if (!bar || bar === this._barEl) return;
+        this._barEl = bar;
+        barObserver?.disconnect();
+        barObserver = new MutationObserver(update);
+        barObserver.observe(bar, { attributes: true, attributeFilter: ['style', 'class', 'hidden'] });
+        this._observers.push(barObserver);
+      };
+      const bodyObserver = new MutationObserver(() => { attach(); update(); });
+      bodyObserver.observe(document.body, { childList: true });
+      this._observers.push(bodyObserver);
+      window.addEventListener('resize', update, { signal });
+      this.drawer.addEventListener('dialog:before-show', update, { signal });
+      this._barEl = null;
+      attach(); update();
+    }
+
+    // iOS insets the visual viewport for the keyboard instead of resizing the layout viewport.
     const vv = window.visualViewport;
     if (!vv) return;
     const base = () => this.drawer.shadowRoot?.querySelector('[part~="base"]');
+    const reset = () => {
+      const b = base();
+      if (b) b.style.top = b.style.height = b.style.bottom = '';
+      this.drawer.classList.remove('is-keyboard-open');
+    };
     const sync = () => {
-      const b = base(); if (!b || !this.drawer.open) return;
+      const b = base();
+      if (!b || !this.drawer.open) return;
       const bar = parseFloat(getComputedStyle(root).getPropertyValue('--colab-bottom-bar')) || 0;
       const keyboardOpen = window.innerHeight - vv.height > 120;
-      if (!keyboardOpen) { b.style.top = b.style.height = b.style.bottom = ''; return; }
-      b.style.top = vv.offsetTop + 'px';
+      if (!keyboardOpen) { reset(); return; }
+      this.drawer.classList.add('is-keyboard-open');
+      b.style.top = `${vv.offsetTop}px`;
       b.style.bottom = 'auto';
-      b.style.height = Math.max(200, vv.height - bar) + 'px';
+      b.style.height = `${Math.max(200, vv.height - bar)}px`;
     };
-    vv.addEventListener('resize', sync);
-    vv.addEventListener('scroll', sync);
-    this.drawer.addEventListener('dialog:after-show', sync);
-    this.drawer.addEventListener('dialog:after-hide', () => { const b = base(); if (b) b.style.top = b.style.height = b.style.bottom = ''; });
+    vv.addEventListener('resize', sync, { signal });
+    vv.addEventListener('scroll', sync, { signal });
+    this.drawer.addEventListener('dialog:after-show', sync, { signal });
+    this.drawer.addEventListener('dialog:after-hide', reset, { signal });
   }
 
-  // Tapping the preview in the Customise drawer opens the theme's native full-screen gallery
-  // (PhotoSwipe) on the stone preview slide, on top of the drawer. While it is open the drawer's
-  // focus trap is paused, otherwise clicks and Esc inside the viewer would close the drawer too.
   setupPreviewZoom() {
     const trigger = this.drawer.querySelector('.co-lab-stone-preview--compact');
     if (!trigger) return;
@@ -469,27 +470,30 @@ class CoLabPicker extends HTMLElement {
     const index = imageCells.indexOf(cell);
     if (index < 0) return;
 
+    // The drawer's focus trap would treat clicks and Escape inside PhotoSwipe as outside the drawer.
     const trap = this.drawer.focusTrap;
     const lightBox = gallery.lightBox;
+    let opened = false;
+    const pause = () => { opened = true; trap?.pause?.(); };
     trap?.pause?.();
     const resume = () => {
+      lightBox.off?.('beforeOpen', pause);
       lightBox.off?.('destroy', resume);
       trap?.unpause?.();
       trigger.focus({ preventScroll: true });
     };
+    lightBox.on('beforeOpen', pause);
     lightBox.on('destroy', resume);
     gallery.dispatchEvent(new CustomEvent('lightbox:open', { detail: { index } }));
+    setTimeout(() => { if (!opened) trap?.unpause?.(); }, 4000);
   }
 
-  // Resolve when a dialog finishes hiding, or after a short cap: the theme's promise waits on a
-  // Web Animation, which never finishes if the tab is backgrounded mid-close.
+  // The theme's hide() waits on a Web Animation, which never finishes in a backgrounded tab.
   hideDialog(dialog) {
     if (!dialog?.open) return Promise.resolve();
     return Promise.race([dialog.hide(), new Promise((r) => setTimeout(r, 700))]);
   }
 
-  // Heirloom ring (drawer): both stones are required - a ring can't be made without them, and the
-  // cart/review images need them. Returns the first slot with no stone, or null.
   missingStoneSlot() {
     if (!this.drawer) return null;
     return this.stoneSlots().find((slot) => !this.hasStone(slot)) || null;
@@ -533,7 +537,6 @@ class CoLabPicker extends HTMLElement {
     }
   }
 
-  // Validate metal/size and open the review modal. Returns true when the modal opened.
   openReview() {
     this.clearError();
     const missingSlot = this.missingStoneSlot();
@@ -571,14 +574,24 @@ class CoLabPicker extends HTMLElement {
     return Math.max(1, parseInt(this.quantityInput?.value, 10) || 1);
   }
 
-  // Price for the whole line: per-ring total (base + charged extras) times quantity.
   lineTotalDisplay() {
     const qty = this.quantity();
     if (qty === 1 && !this.bsCharged && !this.engCharged) return this.basePriceDisplay();
-    return this.formatMoney(this.computedTotal() * qty);
+    return this.formatLikeBasePrice(this.computedTotal() * qty);
   }
 
-  // Confirm price in the drawer and the one-line summary shown on the page.
+  formatLikeBasePrice(amount) {
+    const number = (this.basePriceFormatted.match(/\d(?:[\d.,\s  ]*\d)?/) || [])[0];
+    if (!number) return this.formatMoney(amount);
+    const hasCents = /[.,]\d{2}$/.test(number);
+    const separators = number.replace(/\d/g, '');
+    const decimal = hasCents ? number.slice(-3, -2) : (separators.includes('.') ? ',' : '.');
+    const group = (hasCents ? separators.slice(0, -1) : separators).charAt(0) || (decimal === ',' ? '.' : ',');
+    const [whole, cents] = (amount / 100).toFixed(2).split('.');
+    const grouped = whole.replace(/\B(?=(\d{3})+(?!\d))/g, group);
+    return this.basePriceFormatted.replace(number, hasCents || cents !== '00' ? `${grouped}${decimal}${cents}` : grouped);
+  }
+
   updateCustomiseUi() {
     if (!this.drawer) return;
     if (this.confirmPriceEl) this.confirmPriceEl.textContent = this.lineTotalDisplay();
@@ -663,20 +676,16 @@ class CoLabPicker extends HTMLElement {
   renderReviewInto(container) {
     container.textContent = '';
 
-    // One review layout for every Co-Lab ring. The heirloom ring (the product with the Customise
-    // drawer and stone previews) additionally shows the configured ring at the top.
-    const heirloom = !!this.drawer;
     const card = this.el('c-co-lab-cart-bundle', 'c-co-lab-cart-bundle c-co-lab-cart-bundle--heirloom');
 
-    // Heirloom ring: the configured ring (the live stone preview) at the top. No title or price
-    // header otherwise - the total below shows the price.
-    const previewImg = document.querySelector('[data-colab-role="slide"]');
+    const preview = this.drawer ? document.querySelector('co-lab-stone-preview') : null;
+    const ringSrc = preview?.reviewImageSrc?.();
     let hasRingImage = false;
-    if (heirloom && previewImg && previewImg.currentSrc) {
+    if (ringSrc) {
       const fig = this.el('div', 'c-co-lab-cart-bundle__ring');
       const img = document.createElement('img');
-      img.src = previewImg.currentSrc.replace(/([?&])width=\d+/, '$1width=900');
-      img.alt = `${this.productTitle}: ${previewImg.alt || ''}`.trim();
+      img.src = ringSrc;
+      img.alt = `${this.productTitle}: ${preview.captionText()}`;
       img.width = 1000; img.height = 1000; img.decoding = 'async';
       fig.appendChild(img);
       card.appendChild(this.el('header', 'c-co-lab-cart-bundle__header', [fig]));
@@ -690,19 +699,16 @@ class CoLabPicker extends HTMLElement {
       const value = this.stoneValue(slot);
       const input = this.querySelector(`[data-stone-input="${slot}"]`);
       const label = input?.dataset.stoneLabel || 'Birthstone';
-      // Stones: show the uplift only when they're actually charged (no "Free" label).
-      stoneRows.push(this.reviewRow(label, value, this.stoneSwatchUrl(value), this.bsCharged ? `+ ${this.formatMoney(this.bsPrice)}` : ''));
+      stoneRows.push(this.reviewRow(label, value, this.stoneSwatchUrl(value), this.bsCharged ? `+ ${this.formatLikeBasePrice(this.bsPrice)}` : ''));
     });
     const engravingRow = this.hasEngraving()
-      ? this.reviewRow('Engraving', this.engravingInput.value.trim(), '', this.engCharged ? `+ ${this.formatMoney(this.engPrice)}` : 'Free')
+      ? this.reviewRow('Engraving', this.engravingInput.value.trim(), '', this.engCharged ? `+ ${this.formatLikeBasePrice(this.engPrice)}` : 'Free')
       : null;
     const metaRows = [];
     if (this.selectedMetal) metaRows.push(this.reviewRow('Precious Metal', this.selectedMetal));
     if (this.selectedSize) metaRows.push(this.reviewRow('Size', this.selectedSize));
     metaRows.push(this.reviewRow('Quantity', String(qty)));
 
-    // One section under "Made Just For You". Stones are listed only when there's no ring image
-    // showing them.
     card.appendChild(this.el('section', 'c-co-lab-cart-bundle__group', [
       this.el('h3', 'c-co-lab-cart-bundle__group-title c-co-lab-cart-bundle__group-title--made', 'Made Just For You'),
       ...metaRows,
@@ -743,14 +749,11 @@ class CoLabPicker extends HTMLElement {
 
     confirmCheck.addEventListener('change', () => {
       confirmBtn.disabled = !confirmCheck.checked;
-      // Bring Add to cart into view once the selection is confirmed (it can sit below the fold).
       if (confirmCheck.checked) requestAnimationFrame(() => this.revealInModal(confirmBtn));
     });
 
-    // Add to cart in the page's brand ATC colour (same pill shape).
     const pageAtc = this.querySelector('.c-co-lab-picker__atc');
     if (pageAtc) {
-      // The theme paints buttons from --button-background / --button-text-color ("r g b").
       const cs = getComputedStyle(pageAtc);
       const bg = cs.getPropertyValue('--button-background').trim();
       const fg = cs.getPropertyValue('--button-text-color').trim();
@@ -766,9 +769,7 @@ class CoLabPicker extends HTMLElement {
     container.appendChild(card);
   }
 
-  // Scroll a modal's own scroll area so `el` sits fully in view. scrollIntoView is unreliable from
-  // slotted content into the theme modal's shadow-DOM scroller (notably iOS Safari), so find the
-  // scrolling ancestor across the shadow boundary and scroll it directly.
+  // iOS Safari's scrollIntoView doesn't reach the modal's shadow-DOM scroller from slotted content.
   revealInModal(el) {
     let node = el, scroller = null;
     while (node) {
@@ -1005,8 +1006,7 @@ class CartAddError extends Error {
 
 customElements.define('c-co-lab-picker', CoLabPicker);
 
-// Theme drawer that stays where it is rendered instead of moving to <body> while open, so the
-// stone and engraving inputs inside it remain part of the picker's product form.
+// Stays in place rather than moving to <body>, so its inputs remain inside the product form.
 customElements.whenDefined('x-drawer').then(() => {
   if (customElements.get('co-lab-customise-drawer')) return;
   const Drawer = customElements.get('x-drawer');
