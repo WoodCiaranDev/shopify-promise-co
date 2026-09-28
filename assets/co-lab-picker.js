@@ -663,12 +663,15 @@ class CoLabPicker extends HTMLElement {
   renderReviewInto(container) {
     container.textContent = '';
 
-    const card = this.el('c-co-lab-cart-bundle', 'c-co-lab-cart-bundle');
+    // Heirloom ring (the product with the Customise drawer) gets the new review layout; every
+    // other Co-Lab product keeps the original pop-up exactly as it was.
+    const heirloom = !!this.drawer;
+    const card = this.el('c-co-lab-cart-bundle', heirloom ? 'c-co-lab-cart-bundle c-co-lab-cart-bundle--heirloom' : 'c-co-lab-cart-bundle');
 
     // Heirloom ring: show the configured ring (the live stone preview) in place of the title.
     const previewImg = document.querySelector('[data-colab-role="slide"]');
     let headline = this.el('h2', 'c-co-lab-cart-bundle__title', this.productTitle);
-    if (previewImg && previewImg.currentSrc) {
+    if (heirloom && previewImg && previewImg.currentSrc) {
       const fig = this.el('div', 'c-co-lab-cart-bundle__ring');
       const img = document.createElement('img');
       img.src = previewImg.currentSrc.replace(/([?&])width=\d+/, '$1width=900');
@@ -691,7 +694,7 @@ class CoLabPicker extends HTMLElement {
       const input = this.querySelector(`[data-stone-input="${slot}"]`);
       const label = input?.dataset.stoneLabel || 'Birthstone';
       // Stones: show the uplift only when they're actually charged (no "Free" label).
-      stoneRows.push(this.reviewRow(label, value, this.stoneSwatchUrl(value), this.bsCharged ? `+ ${this.formatMoney(this.bsPrice)}` : ''));
+      stoneRows.push(this.reviewRow(label, value, this.stoneSwatchUrl(value), this.bsCharged ? `+ ${this.formatMoney(this.bsPrice)}` : (heirloom ? '' : 'Free')));
     });
     const engravingRow = this.hasEngraving()
       ? this.reviewRow('Engraving', this.engravingInput.value.trim(), '', this.engCharged ? `+ ${this.formatMoney(this.engPrice)}` : 'Free')
@@ -704,7 +707,11 @@ class CoLabPicker extends HTMLElement {
     if (headline.classList.contains('c-co-lab-cart-bundle__ring')) {
       // Configured-ring image shown (heirloom): the stones are in the picture, so one untitled
       // section with metal, size, quantity and engraving.
-      card.appendChild(this.el('section', 'c-co-lab-cart-bundle__group', [...metaRows, engravingRow]));
+      card.appendChild(this.el('section', 'c-co-lab-cart-bundle__group', [
+        this.el('h3', 'c-co-lab-cart-bundle__group-title c-co-lab-cart-bundle__group-title--made', 'Made Just For You'),
+        ...metaRows,
+        engravingRow,
+      ]));
     } else {
       card.appendChild(this.el('section', 'c-co-lab-cart-bundle__group', [
         this.el('h3', 'c-co-lab-cart-bundle__group-title', 'Metal, Sizing and Quantity'),
@@ -721,7 +728,10 @@ class CoLabPicker extends HTMLElement {
 
     // With no charged add-ons the total equals the base price, so reuse the market-correct
     // Liquid string; only fall back to JS formatting when there are paid extras.
-    const totalDisplay = this.lineTotalDisplay();
+    // Heirloom: total for the whole line (x quantity). Others: original per-item total.
+    const totalDisplay = heirloom
+      ? this.lineTotalDisplay()
+      : ((this.bsCharged || this.engCharged) ? this.formatMoney(this.computedTotal()) : this.basePriceDisplay());
     card.appendChild(this.el('p', 'c-co-lab-cart-bundle__total', totalDisplay));
 
     const modalError = this.el('p', 'c-co-lab-picker__error');
@@ -739,10 +749,12 @@ class CoLabPicker extends HTMLElement {
     confirmCheck.id = `${this.dataset.reviewModalId}-confirm`;
     const confirmLabel = this.el('label', 'c-co-lab-picker__confirm');
     confirmLabel.htmlFor = confirmCheck.id;
-    confirmLabel.appendChild(this.el('span', 'c-co-lab-picker__confirm-label', 'I confirm my selection is correct'));
+    confirmLabel.appendChild(this.el('span', 'c-co-lab-picker__confirm-label', heirloom ? 'Confirm selection:' : 'I confirm my selection is correct'));
     confirmLabel.appendChild(confirmCheck);
     card.appendChild(confirmLabel);
-    card.appendChild(this.el('p', 'c-co-lab-picker__confirm-note', 'Your piece will be crafted exactly as confirmed above - made just for you and dispatched in 10 - 15 business days.'));
+    card.appendChild(this.el('p', 'c-co-lab-picker__confirm-note', heirloom
+      ? 'Made just for you, exactly as confirmed above. Dispatches within 10 - 15 business days.'
+      : 'Your piece will be crafted exactly as confirmed above - made just for you and dispatched in 10 - 15 business days.'));
 
     // Actions
     const backBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--secondary', '← Edit');
@@ -755,11 +767,11 @@ class CoLabPicker extends HTMLElement {
     confirmCheck.addEventListener('change', () => {
       confirmBtn.disabled = !confirmCheck.checked;
       // Bring Add to cart into view once the selection is confirmed (it can sit below the fold).
-      if (confirmCheck.checked) requestAnimationFrame(() => this.revealInModal(confirmBtn));
+      if (heirloom && confirmCheck.checked) requestAnimationFrame(() => this.revealInModal(confirmBtn));
     });
 
     // Add to cart in the page's brand ATC colour (same pill shape).
-    const pageAtc = this.querySelector('.c-co-lab-picker__atc');
+    const pageAtc = heirloom ? this.querySelector('.c-co-lab-picker__atc') : null;
     if (pageAtc) {
       // The theme paints buttons from --button-background / --button-text-color ("r g b").
       const cs = getComputedStyle(pageAtc);

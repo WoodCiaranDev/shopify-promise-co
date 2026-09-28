@@ -1062,11 +1062,11 @@ safe-sticky.product-info:has(c-co-lab-picker) {
 }
 
 /* Review modal: condensed, with the configured ring image in place of the title. */
-.c-co-lab-cart-bundle {
+.c-co-lab-cart-bundle--heirloom {
   padding: 1.25rem 1.5rem 1.25rem;
 }
 
-.c-co-lab-cart-bundle__header {
+.c-co-lab-cart-bundle--heirloom .c-co-lab-cart-bundle__header {
   margin-bottom: 0.75rem;
 }
 
@@ -1089,38 +1089,46 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   margin-top: -35.985%;
 }
 
-.c-co-lab-cart-bundle__group {
+.c-co-lab-cart-bundle--heirloom .c-co-lab-cart-bundle__group {
   margin-top: 0.6rem;
   padding-top: 0.6rem;
 }
 
-.c-co-lab-cart-bundle__group-title {
+.c-co-lab-cart-bundle--heirloom .c-co-lab-cart-bundle__group-title {
   margin-bottom: 0.35rem;
   font-size: 0.95rem;
 }
 
-.c-co-lab-cart-bundle__row {
+.c-co-lab-cart-bundle--heirloom .c-co-lab-cart-bundle__row {
   margin-bottom: 0.2rem;
 }
 
-.c-co-lab-cart-bundle__total {
+.c-co-lab-cart-bundle--heirloom .c-co-lab-cart-bundle__total {
   margin-top: 0.6rem;
   padding-top: 0;
   font-size: 1.4rem;
 }
 
-.c-co-lab-cart-bundle .c-co-lab-picker__confirm {
+.c-co-lab-cart-bundle--heirloom .c-co-lab-picker__confirm {
   padding: 0.75rem 0;
 }
 
-.c-co-lab-cart-bundle .c-co-lab-picker__confirm-note {
+.c-co-lab-cart-bundle--heirloom .c-co-lab-picker__confirm-note {
   margin-bottom: 0.75rem;
 }
 
 @media (max-width: 699px) {
-  .c-co-lab-cart-bundle {
+  .c-co-lab-cart-bundle--heirloom {
     padding: 0.75rem 0.25rem 1rem;
   }
+}
+
+
+/* Heirloom: "Made Just For You" section title in title case (other group titles are uppercase). */
+.c-co-lab-cart-bundle--heirloom .c-co-lab-cart-bundle__group-title--made {
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 1.15rem;
 }
 
 /* Cart line for the heirloom ring: the configured ring, cropped to the ring (square thumbnail). */
