@@ -683,36 +683,40 @@ class CoLabPicker extends HTMLElement {
     ]);
     card.appendChild(header);
 
-    // Metal, Sizing and Quantity
     const qty = this.quantity();
-    const metalRows = [];
-    if (this.selectedMetal) metalRows.push(this.reviewRow('Precious Metal', this.selectedMetal));
-    if (this.selectedSize) metalRows.push(this.reviewRow('Size', this.selectedSize));
-    metalRows.push(this.reviewRow('Quantity', String(qty)));
-    card.appendChild(this.el('section', 'c-co-lab-cart-bundle__group', [
-      this.el('h3', 'c-co-lab-cart-bundle__group-title', 'Metal, Sizing and Quantity'),
-      ...metalRows,
-    ]));
-
-    // Customisation
-    const customRows = [];
+    const stoneRows = [];
     this.stoneSlots().forEach((slot) => {
       if (!this.hasStone(slot)) return;
       const value = this.stoneValue(slot);
       const input = this.querySelector(`[data-stone-input="${slot}"]`);
       const label = input?.dataset.stoneLabel || 'Birthstone';
       // Stones: show the uplift only when they're actually charged (no "Free" label).
-      customRows.push(this.reviewRow(label, value, this.stoneSwatchUrl(value), this.bsCharged ? `+ ${this.formatMoney(this.bsPrice)}` : ''));
+      stoneRows.push(this.reviewRow(label, value, this.stoneSwatchUrl(value), this.bsCharged ? `+ ${this.formatMoney(this.bsPrice)}` : ''));
     });
-    if (this.hasEngraving()) {
-      customRows.push(this.reviewRow('Engraving', this.engravingInput.value.trim(), '', this.engCharged ? `+ ${this.formatMoney(this.engPrice)}` : 'Free'));
-    }
-    if (customRows.length) {
-      const group = this.el('section', 'c-co-lab-cart-bundle__group', [
-        this.el('h3', 'c-co-lab-cart-bundle__group-title', 'Customisation'),
-        ...customRows,
-      ]);
-      card.appendChild(group);
+    const engravingRow = this.hasEngraving()
+      ? this.reviewRow('Engraving', this.engravingInput.value.trim(), '', this.engCharged ? `+ ${this.formatMoney(this.engPrice)}` : 'Free')
+      : null;
+    const metaRows = [];
+    if (this.selectedMetal) metaRows.push(this.reviewRow('Precious Metal', this.selectedMetal));
+    if (this.selectedSize) metaRows.push(this.reviewRow('Size', this.selectedSize));
+    metaRows.push(this.reviewRow('Quantity', String(qty)));
+
+    if (headline.classList.contains('c-co-lab-cart-bundle__ring')) {
+      // Configured-ring image shown (heirloom): the stones are in the picture, so one untitled
+      // section with metal, size, quantity and engraving.
+      card.appendChild(this.el('section', 'c-co-lab-cart-bundle__group', [...metaRows, engravingRow]));
+    } else {
+      card.appendChild(this.el('section', 'c-co-lab-cart-bundle__group', [
+        this.el('h3', 'c-co-lab-cart-bundle__group-title', 'Metal, Sizing and Quantity'),
+        ...metaRows,
+      ]));
+      const customRows = [...stoneRows, engravingRow].filter(Boolean);
+      if (customRows.length) {
+        card.appendChild(this.el('section', 'c-co-lab-cart-bundle__group', [
+          this.el('h3', 'c-co-lab-cart-bundle__group-title', 'Customisation'),
+          ...customRows,
+        ]));
+      }
     }
 
     // With no charged add-ons the total equals the base price, so reuse the market-correct
