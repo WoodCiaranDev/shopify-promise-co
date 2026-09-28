@@ -14,6 +14,7 @@ import halo_v2
 from build import load
 
 DONOR = {"august": 3, "march": 4, "june": 7, "july": 8, "september": 9}
+EXCLUDE = {4: {6, 13}}   # donor stones that carry a prong/bezel inside their core (checked by eye)
 CORE = 0.88   # share of the setting radius taken from each donor stone; the clean gold cup forms the rim
 REC = {"january": "july", "february": "july", "may": "september", "december": "september",
        "october": "june", "november": "june", "april": "march"}
@@ -23,6 +24,33 @@ def icon_target(k, lift=True):
     lab = rgb2lab(im[..., :3])[im[..., 3] > 0.95]
     if lift: lab[:, 0] = np.clip(lab[:, 0] + (np.percentile(lab[:, 0], 75) - np.median(lab[:, 0])), 0, 100)
     return lab
+
+def _metal_mask(img, metal):
+    from oklab import rgb_to_oklab
+    lab = rgb_to_oklab(np.asarray(img.convert("RGB")) / 255.)
+    h = np.degrees(np.arctan2(lab[..., 2], lab[..., 1])); C = np.hypot(lab[..., 1], lab[..., 2]); L = lab[..., 0]
+    return ((h > 60) & (h < 95) & (C > 0.06)) if metal == "gold" else ((C < 0.018) & (L > 0.80))
+
+def recentre_donors(img, stones, metal, core=CORE, search=14):
+    """Nudge each donor stone's circle so the pasted core (radius core*r) holds as little bezel
+    metal as possible, weighting the outer ring of the core most (where crescents show)."""
+    mm = _metal_mask(img, metal).astype(np.float64)
+    out = []
+    for x, y, r, a in stones:
+        R = core * r
+        best = None
+        yy, xx = np.mgrid[-int(R) - search - 2:int(R) + search + 3, -int(R) - search - 2:int(R) + search + 3]
+        for dx in range(-search, search + 1):
+            for dy in range(-search, search + 1):
+                cx, cy = x + dx, y + dy
+                d = np.hypot(xx + (int(x) - cx), yy + (int(y) - cy))
+                ring = (d > 0.6 * R) & (d < R)
+                ys, xs = yy[ring] + int(y), xx[ring] + int(x)
+                ok = (ys >= 0) & (xs >= 0) & (ys < mm.shape[0]) & (xs < mm.shape[1])
+                v = mm[ys[ok], xs[ok]].mean() + 0.002 * (dx * dx + dy * dy) ** 0.5
+                if best is None or v < best[0]: best = (v, cx, cy)
+        out.append((float(best[1]), float(best[2]), r, a))
+    return out
 
 def clean_donors(img, stones, metal, core=CORE, limit=0.08):
     """Drop donor stones whose pasted core would include their own bezel (the stone sits off-centre
@@ -51,7 +79,15 @@ def main():
     kept = {}
     for k, n in DONOR.items():
         donor = Image.open(f"refs/{n}.png").convert("RGB")
-        theirs, sc = clean_donors(donor, [tuple(t) for t in json.load(open(f"donor_matched_{n}.json"))], "silver" if n == 4 else "gold")
+        dm = "silver" if n == 4 else "gold"
+        raw = [tuple(t) for t in json.load(open(f"donor_matched_{n}.json"))]
+        if n in EXCLUDE:
+            # silver-ring donor: pale aquamarine facets read as silver, so the automatic metal
+            # checks don't work; use the matched positions and the hand-checked stone list.
+            theirs = [t for i, t in enumerate(raw) if i not in EXCLUDE[n]]; sc = [0.0] * len(raw)
+        else:
+            cand = recentre_donors(donor, raw, dm)
+            theirs, sc = clean_donors(donor, cand, dm)
         kept[k] = theirs
         print(k, "donor stones kept", len(theirs), "of", len(sc), "rim-metal scores", [round(v, 2) for v in sc])
         transplant(base, donor, ours, theirs,
