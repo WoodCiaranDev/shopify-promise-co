@@ -673,6 +673,13 @@ class CoLabPicker extends HTMLElement {
     return this.el('p', 'c-co-lab-cart-bundle__row', children);
   }
 
+  reviewTotal(amount) {
+    return this.el('p', 'c-co-lab-cart-bundle__total', [
+      this.el('span', 'c-co-lab-cart-bundle__total-label', 'Total'),
+      this.el('span', 'c-co-lab-cart-bundle__total-value', amount),
+    ]);
+  }
+
   renderReviewInto(container) {
     container.textContent = '';
 
@@ -702,7 +709,7 @@ class CoLabPicker extends HTMLElement {
       stoneRows.push(this.reviewRow(label, value, this.stoneSwatchUrl(value), this.bsCharged ? `+ ${this.formatLikeBasePrice(this.bsPrice)}` : ''));
     });
     const engravingRow = this.hasEngraving()
-      ? this.reviewRow('Engraving', this.engravingInput.value.trim(), '', this.engCharged ? `+ ${this.formatLikeBasePrice(this.engPrice)}` : 'Free')
+      ? this.reviewRow('Engraving', this.engravingInput.value.trim(), '', this.engCharged ? `+ ${this.formatLikeBasePrice(this.engPrice)}` : '')
       : null;
     const metaRows = [];
     if (this.selectedMetal) metaRows.push(this.reviewRow('Precious Metal', this.selectedMetal));
@@ -710,14 +717,14 @@ class CoLabPicker extends HTMLElement {
     metaRows.push(this.reviewRow('Quantity', String(qty)));
 
     card.appendChild(this.el('section', 'c-co-lab-cart-bundle__group', [
+      hasRingImage ? null : this.el('p', 'c-co-lab-cart-bundle__product', this.productTitle),
       this.el('h3', 'c-co-lab-cart-bundle__group-title c-co-lab-cart-bundle__group-title--made', 'Made Just For You'),
       ...metaRows,
       ...(hasRingImage ? [] : stoneRows),
       engravingRow,
     ]));
 
-    const totalDisplay = this.lineTotalDisplay();
-    card.appendChild(this.el('p', 'c-co-lab-cart-bundle__total', totalDisplay));
+    card.appendChild(this.reviewTotal(this.lineTotalDisplay()));
 
     const modalError = this.el('p', 'c-co-lab-picker__error');
     modalError.setAttribute('data-modal-error', '');

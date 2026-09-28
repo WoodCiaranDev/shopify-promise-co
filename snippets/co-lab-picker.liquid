@@ -78,7 +78,7 @@ Inputs:
 
 {%- liquid
   assign use_drawer = false
-  if product.handle == 'modern-heirloom-birthstone-ring'
+  if product.metafields.custom.customise_drawer.value == true
     assign use_drawer = true
   endif
   assign drawer_id = 'co-lab-customise-' | append: product.id
@@ -185,10 +185,6 @@ Inputs:
           <div class="c-co-lab-customise__body">
             {%- render 'co-lab-stone-preview', product: product, variant: 'compact' -%}
 
-            <p class="c-co-lab-picker__birthstone-help c-co-lab-customise__help">
-              <a href="#co-lab-help-{{ product.id }}">Personalisation Guide</a>
-            </p>
-
             {%- for slot in (1..slot_count) -%}
               {%- liquid
                 assign slot_label = bs_labels[forloop.index0]
@@ -252,7 +248,7 @@ Inputs:
                 <span class="c-co-lab-picker__engraving-arrow" aria-hidden="true">→</span>
               </div>
               <p class="c-co-lab-customise__note">
-                <span>Letters, numbers &amp; special characters. No emojis.</span>
+                <span>Case-sensitive. Letters, numbers &amp; special characters. No emojis.</span>
                 <span data-engraving-count>0/{{ eng_max_chars }} Characters</span>
               </p>
             </div>
@@ -413,5 +409,7 @@ Inputs:
     <div data-colab-review-body></div>
   </x-modal>
 
-  {%- render 'co-lab-help-modal', product: product, stones: stones -%}
+  {%- unless use_drawer -%}
+    {%- render 'co-lab-help-modal', product: product, stones: stones -%}
+  {%- endunless -%}
 </c-co-lab-picker>

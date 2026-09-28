@@ -20,7 +20,7 @@ Supported variables
 <line-item class="line-item">
   {%- liquid
     assign colab_ring_src = blank
-    if line_item.product.handle == 'modern-heirloom-birthstone-ring'
+    if line_item.product.metafields.custom.customise_drawer.value == true
       assign colab_months = 'january,february,march,april,may,june,july,august,september,october,november,december' | split: ','
       assign colab_labels = line_item.product.metafields.custom.birthstone_labels.value
       assign colab_centre_label = colab_labels[0] | default: 'Birthstone One'

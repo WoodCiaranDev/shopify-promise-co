@@ -1118,6 +1118,29 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   font-size: 1.15rem;
 }
 
+.c-co-lab-cart-bundle__product {
+  margin: 0 0 0.2rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+
+.c-co-lab-cart-bundle__total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.c-co-lab-cart-bundle__total-label {
+  font-family: var(--text-font-family, inherit);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+
 .c-co-lab-line-ring {
   display: block;
   aspect-ratio: 1 / 1;
