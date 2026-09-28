@@ -1,6 +1,17 @@
 class CoLabPicker extends HTMLElement {
   connectedCallback() {
+    this._global = new AbortController();
+    if (this._bound) {
+      this.bindGlobal();
+      return;
+    }
+    this._bound = true;
     this.activeSlot = null;
+
+    this.drawer = this.dataset.customiseDrawerId ? document.getElementById(this.dataset.customiseDrawerId) : null;
+    this.summaryEl = this.querySelector('[data-customise-summary]');
+    this.confirmPriceEl = this.querySelector('[data-confirm-price]');
+    this.quantityInput = this.querySelector('input[name="quantity"]');
 
     this.form = this.querySelector('form[action*="/cart/add"]');
     this.stonesToggle = this.querySelector('[data-action="toggle-stones"]');
@@ -9,6 +20,7 @@ class CoLabPicker extends HTMLElement {
     this.engravingToggle = this.querySelector('[data-action="toggle-engraving"]');
     this.engravingPanel = this.querySelector('[data-engraving]');
     this.submitBtn = this.querySelector('[data-action="submit"]');
+    if (this.drawer) this.submitBtn?.removeAttribute('disabled');
     this.engravingInput = this.querySelector('[data-engraving-input]');
     this.engravingCount = this.querySelector('[data-engraving-count]');
     this.variantIdInput = this.querySelector('[data-variant-id]');
@@ -44,6 +56,7 @@ class CoLabPicker extends HTMLElement {
     if (this.sizeSelect && this.sizeSelect.value) this.selectSize(this.sizeSelect.value);
 
     this.bindEvents();
+    this.bindGlobal();
     this.refresh();
   }
 
@@ -70,6 +83,7 @@ class CoLabPicker extends HTMLElement {
     this.querySelectorAll('[data-action="pick-stone"]').forEach((btn) => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
+        if (btn.dataset.slot) this.activeSlot = btn.dataset.slot;
         this.pickStone(btn.dataset);
       });
     });
@@ -89,6 +103,14 @@ class CoLabPicker extends HTMLElement {
 
     this.form?.addEventListener('submit', (e) => this.onSubmit(e));
 
+    this.querySelector('[data-action="confirm-customise"]')?.addEventListener('click', () => this.confirmCustomise());
+    this.quantityInput?.addEventListener('input', () => this.refresh());
+    this.quantityInput?.addEventListener('change', () => this.refresh());
+    // The quantity +/- buttons set the value programmatically; re-read after any click in the buy row.
+    this.querySelector('.c-co-lab-picker__buy')?.addEventListener('click', () => requestAnimationFrame(() => this.refresh()));
+
+    if (this.drawer) this.setupPreviewZoom();
+
     // Browsers restore a remembered metal/size after navigating back without firing
     // change, so re-read the live controls on restore (and just after load) to keep
     // validation honest rather than relying solely on the change event.
@@ -99,10 +121,15 @@ class CoLabPicker extends HTMLElement {
       // clean. Only touches a boolean + closes a dialog — no cart/line-item work.
       this.submitting = false;
       this.closeModal();
+      if (this.drawer?.open) this.drawer.hide();
       this.syncSelectionsFromDom();
     };
-    window.addEventListener('pageshow', this.onPageShow);
     requestAnimationFrame(() => this.syncSelectionsFromDom());
+  }
+
+  bindGlobal() {
+    window.addEventListener('pageshow', this.onPageShow, { signal: this._global.signal });
+    if (this.drawer) this.watchViewport();
   }
 
   // Mirror whatever the metal radios / size select currently hold into state.
@@ -116,7 +143,9 @@ class CoLabPicker extends HTMLElement {
   }
 
   disconnectedCallback() {
-    if (this.onPageShow) window.removeEventListener('pageshow', this.onPageShow);
+    this._global?.abort();
+    this._observers?.forEach((o) => o.disconnect());
+    this._observers = [];
   }
 
   selectMetal(value) {
@@ -208,7 +237,10 @@ class CoLabPicker extends HTMLElement {
   }
 
   closeGrid() {
-    if (!this.gridEl) return;
+    if (!this.gridEl) {
+      this.activeSlot = null;
+      return;
+    }
     this.gridEl.hidden = true;
     this.gridEl.dataset.activeSlot = '';
     this.activeSlot = null;
@@ -241,13 +273,22 @@ class CoLabPicker extends HTMLElement {
 
     input.value = `${name}${month ? ' - ' + month : ''}`;
     input.disabled = false;
-    text.textContent = input.value;
-    if (icon) {
-      swatch.hidden = false;
-      swatch.style.backgroundImage = `url(${icon})`;
-    } else {
-      swatch.hidden = true;
+    if (text) text.textContent = this.drawer ? `${name}${month ? ' · ' + month : ''}` : input.value;
+    if (swatch) {
+      if (icon) {
+        swatch.hidden = false;
+        swatch.style.backgroundImage = `url(${icon})`;
+      } else {
+        swatch.hidden = true;
+      }
     }
+    if (this.drawer && !this.missingStoneSlot()) this.clearStoneRequired();
+    this.drawer?.querySelector(`.c-co-lab-customise__section[data-slot="${slot}"]`)?.classList.remove('is-missing');
+    this.querySelectorAll(`.c-co-lab-customise__cell[data-slot="${slot}"]`).forEach((cell) => {
+      const on = cell.dataset.name === name;
+      cell.classList.toggle('is-selected', on);
+      cell.setAttribute('aria-pressed', String(on));
+    });
     this.closeGrid();
     this.refresh();
   }
@@ -310,8 +351,22 @@ class CoLabPicker extends HTMLElement {
 
   refresh() {
     this.syncStoneInputs();
+    this.updateCustomiseUi();
     // Keep the add-to-cart solid/enabled like a normal product. onSubmit() validates
     // metal/size and shows an inline error if anything's missing - no faded button.
+    this.emitChange();
+  }
+
+  emitChange() {
+    const slots = {};
+    this.stoneSlots().forEach((slot) => {
+      const value = this.stoneValue(slot);
+      slots[slot] = value ? value.split(' - ')[0].trim() : '';
+    });
+    this.dispatchEvent(new CustomEvent('colab:change', {
+      bubbles: true,
+      detail: { metal: this.selectedMetal, size: this.selectedSize, slots },
+    }));
   }
 
   // --- Phase A: open the review modal (no cart mutation yet) -----------------
@@ -322,30 +377,235 @@ class CoLabPicker extends HTMLElement {
     // would fire its own /cart/add with only the parent variant — missing our
     // add-on lines and bundle properties. Suppress it.
     event.stopImmediatePropagation();
+    if (this.drawer) {
+      this.confirmCustomise();
+      return;
+    }
+    this.openReview();
+  }
+
+  watchViewport() {
+    const root = document.documentElement;
+    const signal = this._global.signal;
+    this._observers = [];
+
+    // Shopify's preview bar (?preview_theme_id links only) is fixed over the bottom of the screen.
+    if (/[?&]preview_theme_id=/.test(location.search) || window.Shopify?.designMode) {
+      let last = null;
+      const update = () => {
+        const bar = document.getElementById('PBarNextFrameWrapper');
+        let h = 0;
+        if (bar) {
+          const r = bar.getBoundingClientRect();
+          if (getComputedStyle(bar).display !== 'none' && r.height > 0 && r.top < window.innerHeight) h = Math.max(0, Math.round(window.innerHeight - r.top));
+        }
+        if (h !== last) root.style.setProperty('--colab-bottom-bar', `${h}px`);
+        last = h;
+      };
+      let barObserver = null;
+      const attach = () => {
+        const bar = document.getElementById('PBarNextFrameWrapper');
+        if (!bar || bar === this._barEl) return;
+        this._barEl = bar;
+        barObserver?.disconnect();
+        barObserver = new MutationObserver(update);
+        barObserver.observe(bar, { attributes: true, attributeFilter: ['style', 'class', 'hidden'] });
+        this._observers.push(barObserver);
+      };
+      const bodyObserver = new MutationObserver(() => { attach(); update(); });
+      bodyObserver.observe(document.body, { childList: true });
+      this._observers.push(bodyObserver);
+      window.addEventListener('resize', update, { signal });
+      this.drawer.addEventListener('dialog:before-show', update, { signal });
+      this._barEl = null;
+      attach(); update();
+    }
+
+    // iOS insets the visual viewport for the keyboard instead of resizing the layout viewport.
+    const vv = window.visualViewport;
+    if (!vv) return;
+    const base = () => this.drawer.shadowRoot?.querySelector('[part~="base"]');
+    const reset = () => {
+      const b = base();
+      if (b) b.style.top = b.style.height = b.style.bottom = '';
+      this.drawer.classList.remove('is-keyboard-open');
+    };
+    const sync = () => {
+      const b = base();
+      if (!b || !this.drawer.open) return;
+      const bar = parseFloat(getComputedStyle(root).getPropertyValue('--colab-bottom-bar')) || 0;
+      const keyboardOpen = window.innerHeight - vv.height > 120;
+      if (!keyboardOpen) { reset(); return; }
+      this.drawer.classList.add('is-keyboard-open');
+      b.style.top = `${vv.offsetTop}px`;
+      b.style.bottom = 'auto';
+      b.style.height = `${Math.max(200, vv.height - bar)}px`;
+    };
+    vv.addEventListener('resize', sync, { signal });
+    vv.addEventListener('scroll', sync, { signal });
+    this.drawer.addEventListener('dialog:after-show', sync, { signal });
+    this.drawer.addEventListener('dialog:after-hide', reset, { signal });
+  }
+
+  setupPreviewZoom() {
+    const trigger = this.drawer.querySelector('.co-lab-stone-preview--compact');
+    if (!trigger) return;
+    trigger.setAttribute('role', 'button');
+    trigger.setAttribute('tabindex', '0');
+    trigger.setAttribute('aria-label', 'View larger image');
+    trigger.addEventListener('click', () => this.openPreviewLightbox(trigger));
+    trigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.openPreviewLightbox(trigger);
+      }
+    });
+  }
+
+  openPreviewLightbox(trigger) {
+    const gallery = document.querySelector('product-gallery');
+    const cell = gallery?.querySelector('[data-media-id="co-lab-stone-preview"]');
+    if (!gallery || !cell || !gallery.carousel) return;
+    const imageCells = gallery.carousel.cells.filter((c) => c.getAttribute('data-media-type') === 'image');
+    const index = imageCells.indexOf(cell);
+    if (index < 0) return;
+
+    // The drawer's focus trap would treat clicks and Escape inside PhotoSwipe as outside the drawer.
+    const trap = this.drawer.focusTrap;
+    const lightBox = gallery.lightBox;
+    let opened = false;
+    const pause = () => { opened = true; trap?.pause?.(); };
+    trap?.pause?.();
+    const resume = () => {
+      lightBox.off?.('beforeOpen', pause);
+      lightBox.off?.('destroy', resume);
+      trap?.unpause?.();
+      trigger.focus({ preventScroll: true });
+    };
+    lightBox.on('beforeOpen', pause);
+    lightBox.on('destroy', resume);
+    gallery.dispatchEvent(new CustomEvent('lightbox:open', { detail: { index } }));
+    setTimeout(() => { if (!opened) trap?.unpause?.(); }, 4000);
+  }
+
+  // The theme's hide() waits on a Web Animation, which never finishes in a backgrounded tab.
+  hideDialog(dialog) {
+    if (!dialog?.open) return Promise.resolve();
+    return Promise.race([dialog.hide(), new Promise((r) => setTimeout(r, 700))]);
+  }
+
+  missingStoneSlot() {
+    if (!this.drawer) return null;
+    return this.stoneSlots().find((slot) => !this.hasStone(slot)) || null;
+  }
+
+  showStoneRequired(slot) {
+    const section = this.drawer.querySelector(`.c-co-lab-customise__section[data-slot="${slot}"]`);
+    const input = this.querySelector(`[data-stone-input="${slot}"]`);
+    const label = (input?.dataset.stoneLabel || 'stone').toLowerCase();
+    let msg = this.drawer.querySelector('[data-customise-error]');
+    if (!msg) {
+      msg = document.createElement('p');
+      msg.className = 'c-co-lab-customise__error';
+      msg.setAttribute('data-customise-error', '');
+      msg.setAttribute('role', 'alert');
+      this.drawer.querySelector('.c-co-lab-customise__footer')?.prepend(msg);
+    }
+    msg.textContent = `Please choose your ${label} to continue.`;
+    msg.hidden = false;
+    section?.classList.add('is-missing');
+    section?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  clearStoneRequired() {
+    const msg = this.drawer?.querySelector('[data-customise-error]');
+    if (msg) msg.hidden = true;
+    this.drawer?.querySelectorAll('.c-co-lab-customise__section.is-missing').forEach((s) => s.classList.remove('is-missing'));
+  }
+
+  async confirmCustomise() {
+    const missing = this.missingStoneSlot();
+    if (missing) {
+      if (!this.drawer.open) await this.drawer.show();
+      this.showStoneRequired(missing);
+      return;
+    }
+    this.clearStoneRequired();
+    await this.hideDialog(this.drawer);
+    if (!this.openReview() && this.errorEl && !this.errorEl.hidden) {
+      this.errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  openReview() {
     this.clearError();
+    const missingSlot = this.missingStoneSlot();
+    if (missingSlot) {
+      this.drawer.show().then(() => this.showStoneRequired(missingSlot));
+      return false;
+    }
     // Validate against the live controls, not just whatever the last change event set —
     // a browser-restored size must pass too.
     this.syncSelectionsFromDom();
 
     if (this.metalRequired() && !this.selectedMetal) {
       this.showError('Please choose a metal before adding to cart.');
-      return;
+      return false;
     }
     if (!this.selectedSize) {
       this.showError('Please choose a size before adding to cart.');
-      return;
+      return false;
     }
 
     const modal = document.getElementById(this.dataset.reviewModalId);
     if (!modal) {
       // No modal in the DOM — fall back to adding straight away.
       this.confirmAndAdd();
-      return;
+      return true;
     }
 
     const body = modal.querySelector('[data-colab-review-body]');
     if (body) this.renderReviewInto(body);
     modal.show ? modal.show() : modal.setAttribute('open', '');
+    return true;
+  }
+
+  quantity() {
+    return Math.max(1, parseInt(this.quantityInput?.value, 10) || 1);
+  }
+
+  lineTotalDisplay() {
+    const qty = this.quantity();
+    if (qty === 1 && !this.bsCharged && !this.engCharged) return this.basePriceDisplay();
+    return this.formatLikeBasePrice(this.computedTotal() * qty);
+  }
+
+  formatLikeBasePrice(amount) {
+    const number = (this.basePriceFormatted.match(/\d(?:[\d.,\s  ]*\d)?/) || [])[0];
+    if (!number) return this.formatMoney(amount);
+    const hasCents = /[.,]\d{2}$/.test(number);
+    const separators = number.replace(/\d/g, '');
+    const decimal = hasCents ? number.slice(-3, -2) : (separators.includes('.') ? ',' : '.');
+    const group = (hasCents ? separators.slice(0, -1) : separators).charAt(0) || (decimal === ',' ? '.' : ',');
+    const [whole, cents] = (amount / 100).toFixed(2).split('.');
+    const grouped = whole.replace(/\B(?=(\d{3})+(?!\d))/g, group);
+    return this.basePriceFormatted.replace(number, hasCents || cents !== '00' ? `${grouped}${decimal}${cents}` : grouped);
+  }
+
+  updateCustomiseUi() {
+    if (!this.drawer) return;
+    if (this.confirmPriceEl) this.confirmPriceEl.textContent = this.lineTotalDisplay();
+    if (!this.summaryEl) return;
+    const parts = [];
+    this.stoneSlots().forEach((slot) => {
+      if (!this.hasStone(slot)) return;
+      const input = this.querySelector(`[data-stone-input="${slot}"]`);
+      const name = this.stoneValue(slot).split(' - ')[0].trim();
+      const label = (input?.dataset.stoneLabel || '').replace(/\s*stones?$/i, '').trim().toLowerCase();
+      parts.push(label ? `${name} ${label}` : name);
+    });
+    if (this.hasEngraving()) parts.push(`Engraving: ${this.engravingInput.value.trim()}`);
+    this.summaryEl.textContent = parts.length ? parts.join(' · ') : 'Choose your gemstones & engraving';
   }
 
   // --- Review card (built with safe DOM construction, no innerHTML) ----------
@@ -413,52 +673,58 @@ class CoLabPicker extends HTMLElement {
     return this.el('p', 'c-co-lab-cart-bundle__row', children);
   }
 
+  reviewTotal(amount) {
+    return this.el('p', 'c-co-lab-cart-bundle__total', [
+      this.el('span', 'c-co-lab-cart-bundle__total-label', 'Total'),
+      this.el('span', 'c-co-lab-cart-bundle__total-value', amount),
+    ]);
+  }
+
   renderReviewInto(container) {
     container.textContent = '';
 
-    const card = this.el('c-co-lab-cart-bundle', 'c-co-lab-cart-bundle');
+    const card = this.el('c-co-lab-cart-bundle', 'c-co-lab-cart-bundle c-co-lab-cart-bundle--heirloom');
 
-    const header = this.el('header', 'c-co-lab-cart-bundle__header', [
-      this.el('h2', 'c-co-lab-cart-bundle__title', this.productTitle),
-      this.el('p', 'c-co-lab-cart-bundle__base-price', this.basePriceDisplay()),
-    ]);
-    card.appendChild(header);
+    const preview = this.drawer ? document.querySelector('co-lab-stone-preview') : null;
+    const ringSrc = preview?.reviewImageSrc?.();
+    let hasRingImage = false;
+    if (ringSrc) {
+      const fig = this.el('div', 'c-co-lab-cart-bundle__ring');
+      const img = document.createElement('img');
+      img.src = ringSrc;
+      img.alt = `${this.productTitle}: ${preview.captionText()}`;
+      img.width = 1000; img.height = 1000; img.decoding = 'async';
+      fig.appendChild(img);
+      card.appendChild(this.el('header', 'c-co-lab-cart-bundle__header', [fig]));
+      hasRingImage = true;
+    }
 
-    // Metal, Sizing and Quantity
-    const qty = Math.max(1, parseInt(this.querySelector('input[name="quantity"]')?.value, 10) || 1);
-    const metalRows = [];
-    if (this.selectedMetal) metalRows.push(this.reviewRow('Precious Metal', this.selectedMetal));
-    if (this.selectedSize) metalRows.push(this.reviewRow('Size', this.selectedSize));
-    metalRows.push(this.reviewRow('Quantity', String(qty)));
-    card.appendChild(this.el('section', 'c-co-lab-cart-bundle__group', [
-      this.el('h3', 'c-co-lab-cart-bundle__group-title', 'Metal, Sizing and Quantity'),
-      ...metalRows,
-    ]));
-
-    // Customisation
-    const customRows = [];
+    const qty = this.quantity();
+    const stoneRows = [];
     this.stoneSlots().forEach((slot) => {
       if (!this.hasStone(slot)) return;
       const value = this.stoneValue(slot);
       const input = this.querySelector(`[data-stone-input="${slot}"]`);
       const label = input?.dataset.stoneLabel || 'Birthstone';
-      customRows.push(this.reviewRow(label, value, this.stoneSwatchUrl(value), this.bsCharged ? `+ ${this.formatMoney(this.bsPrice)}` : 'Free'));
+      stoneRows.push(this.reviewRow(label, value, this.stoneSwatchUrl(value), this.bsCharged ? `+ ${this.formatLikeBasePrice(this.bsPrice)}` : ''));
     });
-    if (this.hasEngraving()) {
-      customRows.push(this.reviewRow('Engraving', this.engravingInput.value.trim(), '', this.engCharged ? `+ ${this.formatMoney(this.engPrice)}` : 'Free'));
-    }
-    if (customRows.length) {
-      const group = this.el('section', 'c-co-lab-cart-bundle__group', [
-        this.el('h3', 'c-co-lab-cart-bundle__group-title', 'Customisation'),
-        ...customRows,
-      ]);
-      card.appendChild(group);
-    }
+    const engravingRow = this.hasEngraving()
+      ? this.reviewRow('Engraving', this.engravingInput.value.trim(), '', this.engCharged ? `+ ${this.formatLikeBasePrice(this.engPrice)}` : '')
+      : null;
+    const metaRows = [];
+    if (this.selectedMetal) metaRows.push(this.reviewRow('Precious Metal', this.selectedMetal));
+    if (this.selectedSize) metaRows.push(this.reviewRow('Size', this.selectedSize));
+    metaRows.push(this.reviewRow('Quantity', String(qty)));
 
-    // With no charged add-ons the total equals the base price, so reuse the market-correct
-    // Liquid string; only fall back to JS formatting when there are paid extras.
-    const totalDisplay = (this.bsCharged || this.engCharged) ? this.formatMoney(this.computedTotal()) : this.basePriceDisplay();
-    card.appendChild(this.el('p', 'c-co-lab-cart-bundle__total', totalDisplay));
+    card.appendChild(this.el('section', 'c-co-lab-cart-bundle__group', [
+      hasRingImage ? null : this.el('p', 'c-co-lab-cart-bundle__product', this.productTitle),
+      this.el('h3', 'c-co-lab-cart-bundle__group-title c-co-lab-cart-bundle__group-title--made', 'Made Just For You'),
+      ...metaRows,
+      ...(hasRingImage ? [] : stoneRows),
+      engravingRow,
+    ]));
+
+    card.appendChild(this.reviewTotal(this.lineTotalDisplay()));
 
     const modalError = this.el('p', 'c-co-lab-picker__error');
     modalError.setAttribute('data-modal-error', '');
@@ -475,29 +741,70 @@ class CoLabPicker extends HTMLElement {
     confirmCheck.id = `${this.dataset.reviewModalId}-confirm`;
     const confirmLabel = this.el('label', 'c-co-lab-picker__confirm');
     confirmLabel.htmlFor = confirmCheck.id;
-    confirmLabel.appendChild(this.el('span', 'c-co-lab-picker__confirm-label', 'I confirm my selection is correct'));
+    const confirmText = this.el('span', 'c-co-lab-picker__confirm-label', 'Confirm selection:');
+    confirmText.id = `${confirmCheck.id}-label`;
+    confirmLabel.appendChild(confirmText);
     confirmLabel.appendChild(confirmCheck);
     card.appendChild(confirmLabel);
-    card.appendChild(this.el('p', 'c-co-lab-picker__confirm-note', 'Your piece will be crafted exactly as confirmed above - made just for you and dispatched in 10 - 15 business days.'));
+    card.appendChild(this.el('p', 'c-co-lab-picker__confirm-note', 'Made just for you, exactly as confirmed above. Dispatches within 10 - 15 business days.'));
 
     // Actions
-    const backBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--secondary', '← Edit');
+    const backArrow = this.el('span', '', '← ');
+    backArrow.setAttribute('aria-hidden', 'true');
+    const backBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--secondary', [backArrow, document.createTextNode('Edit')]);
     backBtn.type = 'button';
     const confirmBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--primary', 'Add to cart');
     confirmBtn.type = 'button';
     confirmBtn.disabled = true;
+    confirmBtn.setAttribute('aria-describedby', confirmText.id);
     card.appendChild(this.el('div', 'c-co-lab-cart-bundle__actions', [backBtn, confirmBtn]));
 
-    confirmCheck.addEventListener('change', () => { confirmBtn.disabled = !confirmCheck.checked; });
+    confirmCheck.addEventListener('change', () => {
+      confirmBtn.disabled = !confirmCheck.checked;
+      if (confirmCheck.checked) requestAnimationFrame(() => this.revealInModal(confirmBtn));
+    });
+
+    const pageAtc = this.querySelector('.c-co-lab-picker__atc');
+    if (pageAtc) {
+      const cs = getComputedStyle(pageAtc);
+      const bg = cs.getPropertyValue('--button-background').trim();
+      const fg = cs.getPropertyValue('--button-text-color').trim();
+      if (bg) confirmBtn.style.background = `rgb(${bg})`;
+      if (fg) confirmBtn.style.color = `rgb(${fg})`;
+    }
     confirmBtn.addEventListener('click', () => this.confirmAndAdd(confirmBtn));
-    backBtn.addEventListener('click', () => this.closeModal());
+    backBtn.addEventListener('click', async () => {
+      await this.hideDialog(document.getElementById(this.dataset.reviewModalId));
+      if (this.drawer) this.drawer.show();
+    });
 
     container.appendChild(card);
   }
 
+  // iOS Safari's scrollIntoView doesn't reach the modal's shadow-DOM scroller from slotted content.
+  revealInModal(el) {
+    let node = el, scroller = null;
+    while (node) {
+      if (node instanceof Element) {
+        const cs = getComputedStyle(node);
+        if (/(auto|scroll)/.test(cs.overflowY) && node.scrollHeight > node.clientHeight + 1) { scroller = node; break; }
+      }
+      node = node.assignedSlot || node.parentNode || node.host || null;
+    }
+    const rect = el.getBoundingClientRect();
+    if (!scroller) { el.scrollIntoView({ block: 'end', behavior: 'smooth' }); return; }
+    const box = scroller.getBoundingClientRect();
+    const bottom = Math.min(box.bottom, window.visualViewport ? window.visualViewport.height : window.innerHeight);
+    const delta = rect.bottom - bottom + 24;
+    if (delta > 0) scroller.scrollTo({ top: scroller.scrollTop + delta, behavior: 'smooth' });
+  }
+
   closeModal() {
     const modal = document.getElementById(this.dataset.reviewModalId);
-    if (modal) modal.hide ? modal.hide() : modal.removeAttribute('open');
+    if (!modal) return Promise.resolve();
+    if (modal.hide) return modal.hide();
+    modal.removeAttribute('open');
+    return Promise.resolve();
   }
 
   // --- Phase B: build the bundle, add to cart, open the drawer ---------------
@@ -517,7 +824,7 @@ class CoLabPicker extends HTMLElement {
     this.submitting = true;
 
     const bundleId = (crypto.randomUUID && crypto.randomUUID()) || `bundle-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    const qty = Math.max(1, parseInt(this.querySelector('input[name="quantity"]')?.value, 10) || 1);
+    const qty = this.quantity();
     const items = [];
 
     // Parent: the ring. Human-readable customisation properties always ride on
@@ -542,6 +849,7 @@ class CoLabPicker extends HTMLElement {
       const variantId = await this.resolveVariantId(this.dataset.birthstoneAddonHandle);
       if (!variantId) {
         this.showModalError("We couldn't add your birthstones right now. Please refresh and try again, or contact us if this persists.");
+        this.submitting = false;
         return;
       }
       items.push({ id: variantId, quantity: stoneCount * qty, properties: { _bundle_id: bundleId, _bundle_role: 'birthstone' } });
@@ -550,6 +858,7 @@ class CoLabPicker extends HTMLElement {
       const variantId = await this.resolveVariantId(this.dataset.engravingAddonHandle);
       if (!variantId) {
         this.showModalError("We couldn't add your engraving right now. Please refresh and try again, or contact us if this persists.");
+        this.submitting = false;
         return;
       }
       items.push({ id: variantId, quantity: qty, properties: { _bundle_id: bundleId, _bundle_role: 'engraving' } });
@@ -708,3 +1017,14 @@ class CartAddError extends Error {
 }
 
 customElements.define('c-co-lab-picker', CoLabPicker);
+
+// Stays in place rather than moving to <body>, so its inputs remain inside the product form.
+customElements.whenDefined('x-drawer').then(() => {
+  if (customElements.get('co-lab-customise-drawer')) return;
+  const Drawer = customElements.get('x-drawer');
+  customElements.define('co-lab-customise-drawer', class extends Drawer {
+    get shouldAppendToBody() {
+      return false;
+    }
+  });
+});

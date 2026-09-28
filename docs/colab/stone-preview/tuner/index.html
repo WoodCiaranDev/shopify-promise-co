@@ -1,0 +1,423 @@
+<title>Heirloom Stone Tuner</title>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#EEEDEA; --panel:#F8F7F5; --ink:#1E1C1A; --muted:#6B6761; --line:#D8D5CF;
+  --accent:#9A7432; --accent-soft:#E9DFCB; --focus:#2F5D8A; --warn:#A23B2C;
+  --serif:"Instrument Serif", Georgia, "Times New Roman", serif;
+  --sans:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#1B1A19; --panel:#242321; --ink:#EDEBE7; --muted:#A39F98; --line:#3A3835;
+    --accent:#CFA75C; --accent-soft:#3A3223; --focus:#8DB4DB; --warn:#E07A68; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#1B1A19; --panel:#242321; --ink:#EDEBE7; --muted:#A39F98; --line:#3A3835;
+  --accent:#CFA75C; --accent-soft:#3A3223; --focus:#8DB4DB; --warn:#E07A68; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font:15px/1.5 var(--sans);padding-inline:16px;padding-block:20px 40px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;gap:20px}
+header{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px}
+h1{font:400 clamp(28px,4vw,38px)/1.1 var(--serif);margin:0;text-wrap:balance}
+.lede{margin:4px 0 0;color:var(--muted);max-width:62ch}
+.main{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:24px;align-items:start}
+@media (max-width:860px){.main{grid-template-columns:1fr}}
+.stage{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);display:grid;gap:10px}
+@media (max-width:860px){.stage{position:static}}
+.frame{background:#F2EDE5;border-radius:10px;overflow:hidden;border:1px solid var(--line);position:relative}
+canvas{display:block;width:100%;height:auto;max-width:100%}
+.loading[hidden]{display:none}
+.loading{position:absolute;inset:0;display:grid;place-items:center;color:#6B6761;font-size:13px;background:#F2EDE5}
+.stage-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:2px;background:var(--panel)}
+.seg button{border:0;background:transparent;color:var(--ink);font:500 13px var(--sans);padding:6px 14px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--panel)}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);font:500 13px var(--sans);padding:7px 14px;border-radius:999px;cursor:pointer}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+.btn.danger{color:var(--warn)}
+.btn:disabled{opacity:.45;cursor:default}
+.hint{font-size:12.5px;color:var(--muted);margin:0}
+.pairing{font:400 20px/1.2 var(--serif);margin:0}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:14px}
+.panel h2{font:600 12px var(--sans);letter-spacing:.08em;text-transform:uppercase;margin:0;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+.panel h2 span:last-child{letter-spacing:0;text-transform:none;font-weight:500;color:var(--ink)}
+.stones{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+@media (max-width:420px){.stones{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.stone{position:relative;display:grid;justify-items:center;gap:3px;padding:7px 2px 6px;border:1px solid transparent;border-radius:8px;background:transparent;color:var(--ink);cursor:pointer;font:500 11px var(--sans)}
+.stone:hover{background:var(--accent-soft)}
+.stone[aria-pressed="true"]{border-color:var(--ink);background:var(--ground)}
+.stone img{width:34px;height:34px;object-fit:contain}
+.stone .dot{position:absolute;top:5px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.sliders{display:grid;gap:10px}
+.row{display:grid;grid-template-columns:92px minmax(0,1fr) 58px;gap:10px;align-items:center}
+.row label{font-size:13px}
+.row output{font:500 12.5px var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.group-foot{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+select,textarea{font:13px var(--sans);color:var(--ink);background:var(--ground);border:1px solid var(--line);border-radius:8px;padding:6px 8px}
+textarea{width:100%;min-height:52px;resize:vertical}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.status{font-size:12.5px;color:var(--muted);min-height:1.2em}
+.confirm{display:inline-flex;gap:6px;align-items:center;font-size:12.5px}
+details{font-size:13px;color:var(--muted)}
+details pre{white-space:pre-wrap;word-break:break-all;font:12px/1.45 var(--mono);color:var(--ink);background:var(--ground);border:1px solid var(--line);border-radius:8px;padding:10px;max-height:240px;overflow:auto}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Heirloom Stone Tuner</h1>
+      <p class="lede">Adjust the halo stones for each birthstone until they look right. The centre stones are your real picker stones and stay as they are; choose one to see the halo beside it. When you're done, send the settings back with Download or Copy below. Your changes are kept in this browser as you go.</p>
+    </div>
+  </header>
+
+  <div class="main">
+    <section class="stage" aria-label="Ring preview">
+      <div class="frame">
+        <canvas id="view" width="700" height="557" aria-label="Ring preview"></canvas>
+        <div class="loading" id="loading">Loading ring…</div>
+      </div>
+      <div class="stage-bar">
+        <p class="pairing" id="pairing">Emerald centre, Diamond Simulant halo</p>
+        <div class="seg" role="group" aria-label="Metal">
+          <button type="button" id="metal-gold" aria-pressed="true">14k Gold</button>
+          <button type="button" id="metal-silver" aria-pressed="false">Silver</button>
+        </div>
+      </div>
+      <div class="stage-bar">
+        <button type="button" class="btn" id="compare">Hold to see original</button>
+        <p class="hint">Colours vary between screens. Check on your phone too.</p>
+      </div>
+    </section>
+
+    <div style="display:grid;gap:16px">
+      <section class="panel" aria-labelledby="c-title">
+        <h2 id="c-title"><span>Centre stone</span><span id="c-name">Emerald</span></h2>
+        <div class="stones" id="c-stones" role="group" aria-label="Centre stone"></div>
+        <p class="hint">Real stone from your picker. Choose one to see the halo beside it.</p>
+      </section>
+
+      <section class="panel" aria-labelledby="h-title">
+        <h2 id="h-title"><span>Halo stones</span><span id="h-name">Diamond Simulant</span></h2>
+        <div class="stones" id="h-stones" role="group" aria-label="Halo stones"></div>
+        <div class="sliders" id="h-sliders"></div>
+        <textarea id="h-notes" placeholder="Notes on these halo stones (optional)" aria-label="Notes on these halo stones"></textarea>
+        <div class="group-foot">
+          <button type="button" class="btn" id="h-reset">Reset halo</button>
+          <select id="h-copy" aria-label="Copy halo settings from another stone"><option value="">Copy settings from…</option></select>
+        </div>
+      </section>
+
+      <section class="panel" aria-label="Send your settings">
+        <h2><span>Send your settings</span><span id="changed-count">No changes yet</span></h2>
+        <div class="actions">
+          <button type="button" class="btn primary" id="download">Download JSON</button>
+          <button type="button" class="btn" id="copy">Copy JSON</button>
+          <button type="button" class="btn" id="undo" disabled>Undo</button>
+          <button type="button" class="btn" id="restore">Restore earlier save</button>
+          <span id="reset-wrap"><button type="button" class="btn danger" id="reset-all">Reset all</button></span>
+        </div>
+        <p class="status" id="status" role="status"></p>
+        <details><summary>Show settings</summary><pre id="json-out"></pre></details>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const STONES = [
+    ["january","Garnet"],["february","Amethyst"],["march","Aquamarine"],["april","Diamond Simulant"],
+    ["may","Emerald"],["june","Lavender"],["july","Ruby"],["august","Apple Green"],
+    ["september","Sapphire"],["october","Pink"],["november","Champagne"],["december","Tanzanite"]];
+  const NAME = Object.fromEntries(STONES);
+  const MONTH = k => k[0].toUpperCase() + k.slice(1);
+  const CONTROLS = [
+    {key:"hue", label:"Hue", min:-30, max:30, step:1, toUi:v=>v, fromUi:v=>v, fmt:v=>(v>0?"+":"")+v+"°"},
+    {key:"saturation", label:"Saturation", min:-50, max:50, step:1, toUi:v=>Math.round(v*100), fromUi:v=>v/100, fmt:v=>(v>0?"+":"")+v+"%"},
+    {key:"brightness", label:"Brightness", min:-20, max:20, step:1, toUi:v=>Math.round(v*100), fromUi:v=>v/100, fmt:v=>(v>0?"+":"")+v},
+    {key:"depth", label:"Depth", min:-40, max:40, step:1, toUi:v=>Math.round(v*100), fromUi:v=>v/100, fmt:v=>(v>0?"+":"")+v+"%"},
+  ];
+  // One permanent key: never change it, or saved work disappears. Older keys are read once
+  // and migrated so nothing saved earlier is lost.
+  const STORE_KEY = "heirloom-stone-tuner";
+  const OLD_KEYS = ["heirloom-stone-tuner-v2", "heirloom-stone-tuner-v1"];
+  const BACKUP_KEY = "heirloom-stone-tuner-backups";
+  const blankRegion = () => ({hue:0, saturation:0, brightness:0, depth:0, notes:""});
+  const blankState = hash => ({version:1, space:"OKLCH", baseImageHash:hash, updated:null,
+    stones:Object.fromEntries(STONES.map(([k]) => [k, {centre:blankRegion(), halo:blankRegion()}]))});
+
+  let base = null, state = null, sel = {metal:"gold", centre:"may", halo:"april"};
+  const history = [];
+  const $ = id => document.getElementById(id);
+  const canvas = $("view");
+  const ctx = canvas.getContext("2d", {colorSpace:"srgb", willReadFrequently:true});
+
+  // ---- OKLab (Björn Ottosson) — identical constants to the site's image pipeline ----
+  const toLin = c => c <= 0.04045 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4);
+  const toSrgb = c => { c = c < 0 ? 0 : c > 1 ? 1 : c; return c <= 0.0031308 ? 12.92*c : 1.055*Math.pow(c, 1/2.4) - 0.055; };
+  function rgbToOklab(r, g, b){
+    r = toLin(r); g = toLin(g); b = toLin(b);
+    const l = Math.cbrt(0.4122214708*r + 0.5363325363*g + 0.0514459929*b);
+    const m = Math.cbrt(0.2119034982*r + 0.6806995451*g + 0.1073969566*b);
+    const s = Math.cbrt(0.0883024619*r + 0.2817188376*g + 0.6299787005*b);
+    return [0.2104542553*l + 0.7936177850*m - 0.0040720468*s,
+            1.9779984951*l - 2.4285922050*m + 0.4505937099*s,
+            0.0259040371*l + 0.7827717662*m - 0.8086757660*s];
+  }
+  function oklabToRgb(L, a, b){
+    const l_ = L + 0.3963377774*a + 0.2158037573*b, m_ = L - 0.1055613458*a - 0.0638541728*b, s_ = L - 0.0894841775*a - 1.2914855480*b;
+    const l = l_*l_*l_, m = m_*m_*m_, s = s_*s_*s_;
+    return [toSrgb( 4.0767416621*l - 3.3077115913*m + 0.2309699292*s),
+            toSrgb(-1.2684380046*l + 2.6097574011*m - 0.3413193965*s),
+            toSrgb(-0.0041960863*l - 0.7034186147*m + 1.7076147010*s)];
+  }
+
+  // ---- asset loading ----
+  const imgCache = new Map(), maskCache = new Map();
+  async function pixels(url){
+    const blob = await (await fetch(url)).blob();
+    const bmp = await createImageBitmap(blob, {colorSpaceConversion:"none", premultiplyAlpha:"none"});
+    const c = document.createElement("canvas"); c.width = bmp.width; c.height = bmp.height;
+    const x = c.getContext("2d", {colorSpace:"srgb", willReadFrequently:true});
+    x.drawImage(bmp, 0, 0);
+    return x.getImageData(0, 0, bmp.width, bmp.height, {colorSpace:"srgb"}).data;
+  }
+  async function getImage(metal, k){
+    const key = metal + "-" + k;
+    if (!imgCache.has(key)) imgCache.set(key, pixels("img/" + key + ".webp?v=" + encodeURIComponent(base.baseImageHash)));
+    return imgCache.get(key);
+  }
+  async function getMasks(metal){
+    if (!maskCache.has(metal)) maskCache.set(metal, (async () => {
+      const [c, h, p] = await Promise.all(["centre","halo","pair"].map(n => pixels("masks/" + metal + "-" + n + ".png?v=" + encodeURIComponent(base.baseImageHash))));
+      const n = c.length / 4, wc = new Float32Array(n), wh = new Float32Array(n), wp = new Float32Array(n);
+      const ic = [], ih = [];
+      for (let i = 0; i < n; i++){ wc[i] = c[i*4]/255; wh[i] = h[i*4]/255; wp[i] = p[i*4]/255; if (wc[i] > 0) ic.push(i); if (wh[i] > 0) ih.push(i); }
+      return {wc, wh, wp, ic:Int32Array.from(ic), ih:Int32Array.from(ih)};
+    })());
+    return maskCache.get(metal);
+  }
+
+  // ---- rendering ----
+  let renderToken = 0, holding = false, frameQueued = false;
+  function queueRender(){ if (frameQueued) return; frameQueued = true; requestAnimationFrame(() => { frameQueued = false; render(); }); }
+  function isChanged(p){ return !!(p.hue || p.saturation || p.brightness || p.depth); }
+  function applyRegion(out, src, idx, w, p, lmed){
+    const hr = p.hue * Math.PI / 180, sat = 1 + p.saturation, dep = 1 + p.depth, br = p.brightness;
+    for (let j = 0; j < idx.length; j++){
+      const i = idx[j], o = i*4, wt = w[i];
+      const r = src[o]/255, g = src[o+1]/255, b = src[o+2]/255;
+      const [L, A, B] = rgbToOklab(r, g, b);
+      const C = Math.hypot(A, B) * sat, h = Math.atan2(B, A) + hr;
+      const [nr, ng, nb] = oklabToRgb((L - lmed)*dep + lmed + br, C*Math.cos(h), C*Math.sin(h));
+      // blend against the pixel already in `out` (the composite), matching the pipeline's layer blend
+      out[o]   = Math.round((out[o]/255*(1-wt) + nr*wt) * 255);
+      out[o+1] = Math.round((out[o+1]/255*(1-wt) + ng*wt) * 255);
+      out[o+2] = Math.round((out[o+2]/255*(1-wt) + nb*wt) * 255);
+    }
+  }
+  async function render(){
+    const token = ++renderToken;
+    const [cimg, himg, m] = await Promise.all([getImage(sel.metal, sel.centre), getImage(sel.metal, sel.halo), getMasks(sel.metal)]);
+    if (token !== renderToken) return;
+    const [w, h] = base.size;
+    const out = new ImageData(w, h, {colorSpace:"srgb"}), d = out.data;
+    for (let i = 0, n = w*h; i < n; i++){
+      const a = m.wp[i], o = i*4;
+      d[o]   = Math.round(cimg[o]  *(1-a) + himg[o]  *a);
+      d[o+1] = Math.round(cimg[o+1]*(1-a) + himg[o+1]*a);
+      d[o+2] = Math.round(cimg[o+2]*(1-a) + himg[o+2]*a);
+      d[o+3] = 255;
+    }
+    if (!holding){
+      const pc = state.stones[sel.centre].centre, ph = state.stones[sel.halo].halo;
+      if (isChanged(pc)){ const src = d.slice(); applyRegion(d, src, m.ic, m.wc, pc, base.metals[sel.metal][sel.centre].centre.lmed); }
+      if (isChanged(ph)){ const src = d.slice(); applyRegion(d, src, m.ih, m.wh, ph, base.metals[sel.metal][sel.halo].halo.lmed); }
+    }
+    ctx.putImageData(out, 0, 0);
+    $("loading").hidden = true;
+  }
+
+  // ---- state ----
+  function save(){
+    state.updated = new Date().toISOString();
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify(state));
+      // rolling backups: the last 20 distinct saves, so an accidental reset can be undone
+      const b = JSON.parse(localStorage.getItem(BACKUP_KEY) || "[]");
+      const snap = JSON.stringify(state.stones);
+      if (!b.length || b[b.length - 1].stones !== snap){ b.push({at: state.updated, stones: snap}); while (b.length > 20) b.shift(); localStorage.setItem(BACKUP_KEY, JSON.stringify(b)); }
+    } catch (e) {}
+    $("json-out").textContent = JSON.stringify(state, null, 2);
+    const n = STONES.reduce((t, [k]) => t + (isChanged(state.stones[k].centre) ? 1 : 0) + (isChanged(state.stones[k].halo) ? 1 : 0), 0);
+    $("changed-count").textContent = n ? n + (n === 1 ? " setting changed" : " settings changed") : "No changes yet";
+  }
+  function snapshot(){ history.push(JSON.stringify(state.stones)); if (history.length > 100) history.shift(); $("undo").disabled = false; }
+  function load(){
+    let s = null;
+    try {
+      s = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
+      if (!s) for (const k of OLD_KEYS){ const o = JSON.parse(localStorage.getItem(k) || "null"); if (o && o.stones){ s = o; break; } }
+    } catch (e) {}
+    state = blankState(base.baseImageHash);
+    if (s && s.stones){
+      for (const [k] of STONES) for (const r of ["centre","halo"]){
+        const v = s.stones[k] && s.stones[k][r]; if (!v) continue;
+        for (const c of CONTROLS) if (typeof v[c.key] === "number") state.stones[k][r][c.key] = Math.max(c.fromUi(c.min), Math.min(c.fromUi(c.max), v[c.key]));
+        if (typeof v.notes === "string") state.stones[k][r].notes = v.notes.slice(0, 1000);
+      }
+    }
+  }
+
+  // ---- UI ----
+  const regionKey = g => g === "c" ? "centre" : "halo";
+  const regionStone = g => g === "c" ? sel.centre : sel.halo;
+  function buildGroup(g){
+    const row = $(g + "-stones");
+    for (const [k, name] of STONES){
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "stone"; b.dataset.stone = k;
+      b.setAttribute("aria-label", name + ", " + MONTH(k));
+      b.innerHTML = '<img alt="" src="icons/' + k + '.png"><span>' + MONTH(k) + '</span>';
+      b.addEventListener("click", () => { if (g === "c") sel.centre = k; else sel.halo = k; syncUi(); queueRender(); });
+      row.appendChild(b);
+    }
+    const box = $(g + "-sliders");
+    if (!box) return;
+    for (const c of CONTROLS){
+      const id = g + "-" + c.key;
+      const r = document.createElement("div"); r.className = "row";
+      r.innerHTML = '<label for="' + id + '">' + c.label + '</label><input type="range" id="' + id + '" min="' + c.min + '" max="' + c.max + '" step="' + c.step + '" value="0"><output for="' + id + '" id="' + id + '-out">0</output>';
+      box.appendChild(r);
+      const input = r.querySelector("input");
+      let started = false;
+      input.addEventListener("input", () => {
+        if (!started){ snapshot(); started = true; }
+        state.stones[regionStone(g)][regionKey(g)][c.key] = c.fromUi(+input.value);
+        $(id + "-out").textContent = c.fmt(+input.value);
+        queueRender(); markDots();
+      });
+      input.addEventListener("change", () => { started = false; save(); });
+    }
+    const copy = $(g + "-copy");
+    for (const [k, name] of STONES){ const o = document.createElement("option"); o.value = k; o.textContent = name + " (" + MONTH(k) + ")"; copy.appendChild(o); }
+    copy.addEventListener("change", () => {
+      if (!copy.value) return;
+      snapshot();
+      const src = state.stones[copy.value][regionKey(g)], dst = state.stones[regionStone(g)][regionKey(g)];
+      for (const c of CONTROLS) dst[c.key] = src[c.key];
+      copy.value = ""; save(); syncUi(); queueRender();
+      status("Copied " + regionKey(g) + " settings.");
+    });
+    $(g + "-reset").addEventListener("click", () => {
+      snapshot();
+      const dst = state.stones[regionStone(g)][regionKey(g)];
+      for (const c of CONTROLS) dst[c.key] = 0;
+      save(); syncUi(); queueRender();
+    });
+    const notes = $(g + "-notes");
+    notes.addEventListener("input", () => { state.stones[regionStone(g)][regionKey(g)].notes = notes.value.slice(0, 1000); });
+    notes.addEventListener("change", save);
+  }
+  function markDots(){
+    for (const g of ["h"]) for (const b of $(g + "-stones").children){
+      const on = isChanged(state.stones[b.dataset.stone][regionKey(g)]);
+      let dot = b.querySelector(".dot");
+      if (on && !dot){ dot = document.createElement("span"); dot.className = "dot"; dot.setAttribute("aria-hidden","true"); b.appendChild(dot); }
+      if (!on && dot) dot.remove();
+    }
+  }
+  function syncUi(){
+    for (const g of ["c","h"]){
+      const k = regionStone(g), p = state.stones[k][regionKey(g)];
+      for (const b of $(g + "-stones").children) b.setAttribute("aria-pressed", String(b.dataset.stone === k));
+      if ($(g + "-sliders")){
+        for (const c of CONTROLS){ const v = c.toUi(p[c.key]); $(g + "-" + c.key).value = v; $(g + "-" + c.key + "-out").textContent = c.fmt(v); }
+        $(g + "-notes").value = p.notes || "";
+      }
+      $(g === "c" ? "c-name" : "h-name").textContent = NAME[k];
+    }
+    $("pairing").textContent = NAME[sel.centre] + " centre, " + NAME[sel.halo] + " halo";
+    for (const m of ["gold","silver"]) $("metal-" + m).setAttribute("aria-pressed", String(sel.metal === m));
+    markDots();
+  }
+  function status(t){ $("status").textContent = t; }
+
+  $("metal-gold").addEventListener("click", () => { sel.metal = "gold"; syncUi(); queueRender(); });
+  $("metal-silver").addEventListener("click", () => { sel.metal = "silver"; syncUi(); queueRender(); });
+  const cmp = $("compare");
+  const hold = on => { holding = on; cmp.textContent = on ? "Showing original" : "Hold to see original"; queueRender(); };
+  cmp.addEventListener("pointerdown", e => { e.preventDefault(); hold(true); });
+  for (const ev of ["pointerup","pointerleave","pointercancel"]) cmp.addEventListener(ev, () => holding && hold(false));
+  cmp.addEventListener("keydown", e => { if ((e.key === " " || e.key === "Enter") && !holding){ e.preventDefault(); hold(true); } });
+  cmp.addEventListener("keyup", e => { if (e.key === " " || e.key === "Enter") hold(false); });
+
+  $("restore").addEventListener("click", () => {
+    let b = [];
+    try { b = JSON.parse(localStorage.getItem(BACKUP_KEY) || "[]"); } catch (e) {}
+    const cur = JSON.stringify(state.stones);
+    const prev = [...b].reverse().find(x => x.stones !== cur);
+    if (!prev){ status("No earlier save in this browser."); return; }
+    snapshot(); state.stones = JSON.parse(prev.stones); save(); syncUi(); queueRender();
+    status("Restored the save from " + (prev.at ? new Date(prev.at).toLocaleString() : "earlier") + ". Undo reverses this.");
+  });
+  $("undo").addEventListener("click", () => {
+    const prev = history.pop(); if (!prev) return;
+    state.stones = JSON.parse(prev); $("undo").disabled = history.length === 0;
+    save(); syncUi(); queueRender(); status("Undone.");
+  });
+  function resetBtn(){ const b = document.createElement("button"); b.type = "button"; b.className = "btn danger"; b.id = "reset-all"; b.textContent = "Reset all"; b.addEventListener("click", onResetRequest); return b; }
+  function onResetRequest(){
+    const wrap = $("reset-wrap");
+    wrap.innerHTML = '<span class="confirm">Reset every stone? <button type="button" class="btn danger" id="reset-yes">Yes, reset</button><button type="button" class="btn" id="reset-no">Cancel</button></span>';
+    $("reset-no").addEventListener("click", () => { wrap.innerHTML = ""; wrap.appendChild(resetBtn()); });
+    $("reset-yes").addEventListener("click", () => {
+      snapshot(); state.stones = blankState(base.baseImageHash).stones;
+      save(); syncUi(); queueRender(); status("All stones reset.");
+      wrap.innerHTML = ""; wrap.appendChild(resetBtn());
+    });
+  }
+  // replace the static button with the managed one
+  $("reset-wrap").innerHTML = ""; $("reset-wrap").appendChild(resetBtn());
+
+  function exportJson(){ save(); return JSON.stringify(state, null, 2); }
+  $("copy").addEventListener("click", () => {
+    const text = exportJson();
+    const done = () => status("Copied. Paste it into an email or message to Ciaran.");
+    const fallback = () => { const d = document.querySelector("details"); d.open = true; const r = document.createRange(); r.selectNodeContents($("json-out")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); status("Select-all is highlighted below: copy it with Cmd+C or Ctrl+C."); };
+    try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+  });
+  let downloads = null;
+  $("download").addEventListener("click", async () => {
+    if (!downloads){ status("Downloading isn't available here. Use Copy JSON instead."); return; }
+    try {
+      await downloads.save({filename:"heirloom-stone-colours.json", data:exportJson()});
+      status("Saved. Send heirloom-stone-colours.json to Ciaran.");
+    } catch (e) {
+      if (e && e.code === "declined") status("Download cancelled.");
+      else if (e && e.code === "rate_limited") status("A save prompt is already open.");
+      else status("Downloading isn't available here. Use Copy JSON instead.");
+    }
+  });
+
+  (async () => {
+    base = await (await fetch("base.json?t=" + Date.now(), {cache:"no-store"})).json();
+    load(); buildGroup("c"); buildGroup("h"); syncUi(); save(); render();
+    try {
+      downloads = await (window.claude && window.claude.use ? window.claude.use("downloads") : null);
+    } catch (e) { downloads = null; }
+    if (!downloads) $("download").hidden = true;
+  })();
+})();
+</script>

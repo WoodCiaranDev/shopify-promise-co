@@ -38,3 +38,7 @@ Valid Shopify theme directories in this repo:
 - Always use UK spelling (e.g. "colour", "normalise", "centre", "behaviour")
 - Never stage `.env`, `.claude/`, or credentials
 - Never push to remote without asking first
+
+## Heirloom ring stone preview
+
+Working on the Co-Lab stone preview, the Customise drawer or the client's stone tuner? Read `docs/colab/stone-preview/HANDOVER.md` first. It has the current state, the one-command rebuild (`docs/colab/stone-preview/pipeline/rebuild.py`), the tuner link and the open items.
