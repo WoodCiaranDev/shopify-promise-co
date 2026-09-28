@@ -76,7 +76,6 @@ Inputs:
   endif
 -%}
 
-{%- comment -%} Customise slide-out: stones + engraving move into a right-hand drawer (heirloom ring only for now). {%- endcomment -%}
 {%- liquid
   assign use_drawer = false
   if product.handle == 'modern-heirloom-birthstone-ring'
@@ -176,19 +175,19 @@ Inputs:
         <h2 class="c-co-lab-picker__section-title">Customisation</h2>
 
         {%- if use_drawer -%}
-        {%- comment -%}
-          Heirloom ring: gemstones + engraving live in a right-hand slide-out. The page shows one
-          select-style button carrying a summary of the choices.
-        {%- endcomment -%}
         <button type="button" class="c-co-lab-picker__customise-select" aria-controls="{{ drawer_id }}" aria-expanded="false">
           <span class="c-co-lab-picker__customise-select-text" data-customise-summary aria-live="polite">Choose your gemstones &amp; engraving</span>
           {%- render 'icon' with 'dropdown-chevron' -%}
         </button>
 
-        <co-lab-customise-drawer id="{{ drawer_id }}" class="drawer color-scheme color-scheme--dialog c-co-lab-customise" initial-focus='[data-action="pick-stone"]'>
-          <span class="c-co-lab-customise__title" slot="header">Customise your ring</span>
+        <co-lab-customise-drawer id="{{ drawer_id }}" class="drawer color-scheme color-scheme--dialog c-co-lab-customise" initial-focus='[data-action="pick-stone"]' aria-labelledby="{{ drawer_id }}-title">
+          <span class="c-co-lab-customise__title" slot="header" id="{{ drawer_id }}-title">Customise your ring</span>
           <div class="c-co-lab-customise__body">
             {%- render 'co-lab-stone-preview', product: product, variant: 'compact' -%}
+
+            <p class="c-co-lab-picker__birthstone-help c-co-lab-customise__help">
+              <a href="#co-lab-help-{{ product.id }}">Personalisation Guide</a>
+            </p>
 
             {%- for slot in (1..slot_count) -%}
               {%- liquid
@@ -208,13 +207,12 @@ Inputs:
                 <p class="c-co-lab-customise__head">
                   <span class="c-co-lab-customise__label" id="{{ drawer_id }}-slot-{{ slot }}">
                     {{- slot_label -}}
-                    {%- if slot != 1 and hide_optional != true %} <span class="c-co-lab-picker__optional">(optional)</span>{% endif -%}
                     {%- if bs_charged %} <span class="c-co-lab-picker__optional">+ {{ bs_price | money_without_trailing_zeros }}</span>{% endif -%}
                   </span>
                   <span class="c-co-lab-customise__choice" data-stone-text="{{ slot }}">Select a stone</span>
                 </p>
                 <span data-stone-swatch="{{ slot }}" hidden></span>
-                <input type="hidden" name="properties[{{ slot_label }}]" data-stone-input="{{ slot }}" data-stone-label="{{ slot_label | escape }}" value="" disabled>
+                <input type="hidden" name="properties[{{ slot_label | escape }}]" data-stone-input="{{ slot }}" data-stone-label="{{ slot_label | escape }}" value="" disabled>
                 <ul class="c-co-lab-customise__grid" role="list">
                   {%- for stone in stones -%}
                     <li>
@@ -222,8 +220,8 @@ Inputs:
                               class="c-co-lab-customise__cell"
                               data-action="pick-stone"
                               data-slot="{{ slot }}"
-                              data-name="{{ stone.name }}"
-                              data-month="{{ stone.month }}"
+                              data-name="{{ stone.name | escape }}"
+                              data-month="{{ stone.month | escape }}"
                               data-icon="{% if stone.icon != blank %}{{ stone.icon | image_url: width: 120 }}{% endif %}"
                               aria-pressed="false"
                               aria-label="{{ stone.name | escape }}, {{ stone.month | escape }}">
@@ -269,8 +267,6 @@ Inputs:
           </div>
         </co-lab-customise-drawer>
         {%- else -%}
-        {%- comment -%} On mobile the gallery has scrolled away by the time stones are chosen,
-        so the preview is repeated here where the choosing actually happens. {%- endcomment -%}
         <p class="c-co-lab-picker__birthstone-help">
           <a href="#co-lab-help-{{ product.id }}" title="Personalisation Guide Here">Personalisation Guide Here</a>
         </p>
@@ -381,10 +377,14 @@ Inputs:
                 class="button button--add-to-cart c-co-lab-picker__atc"
                 data-action="submit"
                 form="{{ product_form_id }}"
+                {% if use_drawer %}disabled{% endif %}
                 {% if atc_style != blank %}style="{{ atc_style | strip }}"{% endif %}>
           Add to Cart
         </button>
       </div>
+      {%- if use_drawer -%}
+        <noscript><p class="c-co-lab-picker__error">Please enable JavaScript to choose your stones.</p></noscript>
+      {%- endif -%}
 
       {%- render 'co-lab-feature-list' -%}
 

@@ -18,28 +18,30 @@ Supported variables
 {%- if bundle_role == 'birthstone' or bundle_role == 'engraving' -%}
 {%- else -%}
 <line-item class="line-item">
-  {%- comment -%}
-    Heirloom ring: show the configured ring (metal + centre + halo) from the stone-preview images,
-    using the line item properties the Co-Lab picker adds. Falls back to the product image when a
-    stone wasn't chosen.
-  {%- endcomment -%}
   {%- liquid
     assign colab_ring_src = blank
     if line_item.product.handle == 'modern-heirloom-birthstone-ring'
+      assign colab_months = 'january,february,march,april,may,june,july,august,september,october,november,december' | split: ','
       assign colab_labels = line_item.product.metafields.custom.birthstone_labels.value
       assign colab_centre_label = colab_labels[0] | default: 'Birthstone One'
       assign colab_halo_label = colab_labels[1] | default: 'Birthstone Two'
       assign colab_centre = line_item.properties[colab_centre_label] | split: ' - ' | last | downcase | strip
       assign colab_halo = line_item.properties[colab_halo_label] | split: ' - ' | last | downcase | strip
-      assign colab_metal = 'gold'
-      if line_item.properties['Precious Metal'] contains 'Silver'
+      assign colab_metal_name = line_item.properties['Precious Metal']
+      assign colab_metal = blank
+      if colab_metal_name contains 'Silver'
         assign colab_metal = 'silver'
+      elsif colab_metal_name contains 'Gold'
+        assign colab_metal = 'gold'
       endif
-      if colab_centre != blank and colab_halo != blank
+      assign colab_version = 'colab-heirloom-version.txt' | asset_url | split: 'v=' | last
+      if colab_version contains '/'
+        assign colab_version = ''
+      endif
+      if colab_metal != blank and colab_months contains colab_centre and colab_months contains colab_halo
         capture colab_file
           echo 'colab-heirloom-' | append: colab_metal | append: '-' | append: colab_centre | append: '-' | append: colab_halo | append: '.jpg'
         endcapture
-        assign colab_version = 'colab-heirloom-version.txt' | asset_url | split: 'v=' | last
         assign colab_ring_src = colab_file | asset_url | split: '?' | first | append: '?v=' | append: colab_version
       endif
     endif

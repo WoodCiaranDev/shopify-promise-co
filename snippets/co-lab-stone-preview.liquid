@@ -1,18 +1,7 @@
 {%- comment -%}
-----------------------------------------------------------------------------------------------------------------------
-CO-LAB STONE PREVIEW
-
-Shows the customer's chosen birthstones as a normal product image.
-
-The gallery's lightbox builds its PhotoSwipe dataSource from `cell.querySelectorAll(":scope > img")`
-and indexes it with `imageCells.indexOf(selectedCell)`, so a cell that counts as an image must
-contain exactly one direct-child <img> or every later index is wrong. This renders that single
-image; JavaScript only ever swaps its src, which keeps the carousel, thumbnails and zoom native.
-
-Inputs:
-* product - the Co-Lab ring
-* variant - 'slide' (gallery), 'thumb' (gallery navigation) or 'compact' (in-picker, mobile)
-----------------------------------------------------------------------------------------------------------------------
+  The lightbox builds its PhotoSwipe items from each cell's direct-child <img> and indexes them by cell,
+  so the slide must stay a single direct-child <img>.
+  variant: 'slide' (gallery), 'thumb' (gallery navigation) or 'compact' (Customise drawer)
 {%- endcomment -%}
 
 {%- liquid
@@ -26,9 +15,10 @@ Inputs:
     echo 'colab-heirloom-' | append: default_metal | append: '-' | append: default_centre | append: '-' | append: default_halo | append: '.jpg'
   endcapture
   assign default_src = default_asset | asset_url | split: '?' | first
-  # Cache key for all 288 stone images: the version file is rewritten by pipeline/rebuild.py on
-  # every rebuild, so its ?v= changes whenever any image does (a single image's own ?v= may not).
   assign asset_version = 'colab-heirloom-version.txt' | asset_url | split: 'v=' | last
+  if asset_version contains '/'
+    assign asset_version = ''
+  endif
 -%}
 
 {%- case kind -%}
@@ -43,12 +33,11 @@ Inputs:
     <div class="co-lab-stone-preview co-lab-stone-preview--compact">
       <div class="co-lab-stone-preview__plate">
         <img src="{{ default_src }}?v={{ asset_version }}&width=1000"
-             srcset="{{ default_src }}?v={{ asset_version }}&width=700 700w, {{ default_src }}?v={{ asset_version }}&width=1000 1000w, {{ default_src }}?v={{ asset_version }}&width=1400 1400w"
+             srcset="{{ default_src }}?v={{ asset_version }}&width=400 400w, {{ default_src }}?v={{ asset_version }}&width=700 700w, {{ default_src }}?v={{ asset_version }}&width=1000 1000w, {{ default_src }}?v={{ asset_version }}&width=1600 1600w"
              sizes="(max-width: 699px) 122vw, 660px" width="1000" height="1000"
-             alt="{{ product.title | escape }}" fetchpriority="low" decoding="async"
+             alt="{{ product.title | escape }}" loading="lazy" decoding="async"
              data-colab-preview-img data-colab-role="compact">
       </div>
-      <p class="co-lab-stone-preview__caption" data-colab-preview-caption></p>
       <span class="co-lab-stone-preview__zoom circle-button circle-button--sm" aria-hidden="true">
         {%- render 'icon' with 'zoom' -%}
       </span>
@@ -72,7 +61,8 @@ Inputs:
           "metals": {
             {%- for metal in metals -%}
               {%- assign metal_name = metal | strip -%}
-              {%- if metal_name contains 'Silver' -%}{%- assign metal_key = 'silver' -%}{%- else -%}{%- assign metal_key = 'gold' -%}{%- endif -%}
+              {%- assign metal_key = 'none' -%}
+              {%- if metal_name contains 'Silver' -%}{%- assign metal_key = 'silver' -%}{%- elsif metal_name contains 'Gold' -%}{%- assign metal_key = 'gold' -%}{%- endif -%}
               {{ metal_name | json }}: {{ metal_key | json }}{%- unless forloop.last -%},{%- endunless -%}
             {%- endfor -%}
           },

@@ -91,6 +91,24 @@ silver metal tone.
 - **Checking Dev images:** fetch them with the page's own `?v=` tag. Any other query string can
   return a stale CDN copy.
 
+## Going live
+
+1. **Sync first.** Run `/sync` so main has the client's latest live edits, then merge this branch
+   into main.
+2. **Images before code.** Push the 288 `assets/colab-heirloom-*.jpg` files and
+   `assets/colab-heirloom-version.txt` to the auto-detected live theme first. Check one image
+   and the version file return 200. Then push the Liquid, JS and CSS. Code without the images
+   shows broken rings everywhere.
+3. **Test order.** Place one test order and check the confirmation email and admin order list
+   the metal, both stones and the engraving. Checkout, emails and admin show the stock product
+   image, because Shopify only allows a custom checkout image on Plus.
+4. **Handle dependency.** The drawer, gallery preview and cart image are keyed on the handle
+   `modern-heirloom-birthstone-ring` in `co-lab-picker.liquid`, `product-gallery.liquid` and
+   `line-item.liquid`. If the handle changes, all three quietly fall back to the standard picker.
+5. **Supported values.** Previews exist only for the 12 months and for gold or silver metals.
+   Any other stone month or metal hides the preview and uses the product image instead of
+   showing a wrong or broken one.
+
 ## Rebuild on any Mac
 
 ```bash

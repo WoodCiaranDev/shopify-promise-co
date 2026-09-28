@@ -1,20 +1,22 @@
 (() => {
-  const SIZES = { slide: [400, 700, 1000, 1600], thumb: [56, 112, 168], compact: [700, 1000, 1400] };
-  const DISPLAY = { slide: 1000, thumb: 168, compact: 1400 };
+  const WIDTHS = { slide: [400, 700, 1000, 1600], thumb: [56, 112, 168], compact: [400, 700, 1000, 1600] };
+  const DISPLAY = { slide: 1000, thumb: 168, compact: 1000 };
+  const MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+  const METALS = ['gold', 'silver'];
 
   class CoLabStonePreview extends HTMLElement {
     connectedCallback() {
       this.config = this.parse();
       if (!this.config) return;
       this.base = this.dataset.base;
-      // One version token for the whole set: all combinations are rebuilt and uploaded together,
-      // so this busts the browser/CDN cache whenever the images are replaced.
       this.q = this.dataset.version ? `?v=${this.dataset.version}&` : '?';
       this.state = {
         metal: this.dataset.metal || 'gold',
         centre: this.dataset.centre || 'october',
         halo: this.dataset.halo || 'june',
       };
+      this.shownKey = this.key();
+      this.supported = true;
       this.generation = 0;
       this.onChange = this.onChange.bind(this);
       document.addEventListener('colab:change', this.onChange);
@@ -34,64 +36,85 @@
 
     metalKey(name) {
       if (!name) return null;
-      return this.config.metals[name] || (/silver/i.test(name) ? 'silver' : 'gold');
+      const key = this.config.metals[name];
+      return METALS.includes(key) ? key : false;
     }
 
     stoneKey(name) {
       if (!name) return null;
-      if (this.config.stones[name]) return this.config.stones[name];
-      const hit = Object.keys(this.config.stones).find((k) => k.toLowerCase() === String(name).toLowerCase());
-      return hit ? this.config.stones[hit] : null;
+      let key = this.config.stones[name];
+      if (!key) {
+        const hit = Object.keys(this.config.stones).find((k) => k.toLowerCase() === String(name).toLowerCase());
+        key = hit && this.config.stones[hit];
+      }
+      return MONTHS.includes(key) ? key : false;
+    }
+
+    key() {
+      const { metal, centre, halo } = this.state;
+      return `${metal}-${centre}-${halo}`;
     }
 
     onChange(event) {
       const { metal, slots } = event.detail || {};
       const picked = Object.values(slots || {});
-      const metalKey = this.metalKey(metal);
-      const centre = this.stoneKey(picked[0]);
-      const halo = this.stoneKey(picked[1]);
-      if (metalKey) this.state.metal = metalKey;
-      if (centre) this.state.centre = centre;
-      if (halo) this.state.halo = halo;
+      const next = { metal: this.metalKey(metal), centre: this.stoneKey(picked[0]), halo: this.stoneKey(picked[1]) };
+      this.supported = !Object.values(next).includes(false);
+      if (!this.supported) return;
+      Object.entries(next).forEach(([k, v]) => { if (v) this.state[k] = v; });
+      if (this.key() === this.shownKey && !this.pending) return;
       this.render();
     }
 
     url(role) {
-      const { metal, centre, halo } = this.state;
-      return `${this.base}colab-heirloom-${metal}-${centre}-${halo}.jpg${this.q}width=${DISPLAY[role] || 1000}`;
+      return `${this.base}colab-heirloom-${this.key()}.jpg${this.q}width=${DISPLAY[role] || 1000}`;
     }
 
     srcset(role) {
-      const { metal, centre, halo } = this.state;
-      const file = `${this.base}colab-heirloom-${metal}-${centre}-${halo}.jpg`;
-      return (SIZES[role] || SIZES.slide).map((w) => `${file}${this.q}width=${w} ${w}w`).join(', ');
+      const file = `${this.base}colab-heirloom-${this.key()}.jpg`;
+      return (WIDTHS[role] || WIDTHS.slide).map((w) => `${file}${this.q}width=${w} ${w}w`).join(', ');
+    }
+
+    reviewImageSrc() {
+      if (!this.supported || this.failedKey === this.key()) return null;
+      return this.url('slide').replace(/width=\d+/, 'width=900');
+    }
+
+    setBusy(busy) {
+      document.querySelectorAll('.co-lab-stone-preview__plate').forEach((el) => {
+        el.classList.toggle('is-loading', busy);
+        el.setAttribute('aria-busy', busy ? 'true' : 'false');
+      });
     }
 
     async render() {
       const token = ++this.generation;
-      const targets = document.querySelectorAll('[data-colab-preview-img]');
+      const key = this.key();
+      const targets = [...document.querySelectorAll('[data-colab-preview-img]')];
       if (!targets.length) return;
 
-      // Decode the largest variant once, then apply everywhere. The previous frame
-      // stays on screen until it is ready, so a fast tap-through never flashes.
-      const probe = new Image();
-      probe.src = this.url('slide');
-      probe.srcset = this.srcset('slide');
-      probe.sizes = '1000px';
-      try { await probe.decode(); } catch { /* fall through and swap anyway */ }
+      this.pending = true;
+      this.setBusy(true);
+      const probes = targets.filter((img) => img.dataset.colabRole !== 'thumb').map((img) => {
+        const probe = new Image();
+        probe.sizes = img.sizes;
+        probe.srcset = this.srcset(img.dataset.colabRole || 'slide');
+        probe.src = this.url(img.dataset.colabRole || 'slide');
+        return probe.decode();
+      });
+      const loaded = await Promise.all(probes).then(() => true, () => false);
       if (token !== this.generation) return;
+      this.pending = false;
+      this.setBusy(false);
+      if (!loaded) { this.failedKey = key; return; }
 
       targets.forEach((img) => {
         const role = img.dataset.colabRole || 'slide';
         img.srcset = this.srcset(role);
         img.src = this.url(role);
+        if (role !== 'thumb') img.alt = this.captionText() || img.alt;
       });
-
-      const caption = this.captionText();
-      document.querySelectorAll('[data-colab-preview-caption]').forEach((el) => { el.textContent = caption; });
-      document.querySelectorAll('[data-colab-preview-img]').forEach((img) => {
-        if (img.dataset.colabRole !== 'thumb') img.alt = caption || img.alt;
-      });
+      this.shownKey = key;
     }
 
     captionText() {

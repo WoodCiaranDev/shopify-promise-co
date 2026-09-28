@@ -412,7 +412,6 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   margin-bottom: 1.5rem;
 }
 
-
 .c-co-lab-cart-bundle__eyebrow {
   margin: 0 0 0.25rem;
   font-family: var(--heading-font-family, serif);
@@ -891,18 +890,11 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   }
 }
 
-/* ------------------------------------------------------------------------------------------
-   Customise slide-out (heirloom ring). Gemstones + engraving live in a theme drawer that stays
-   inside the picker's form; see co-lab-customise-drawer in co-lab-picker.js.
-   ------------------------------------------------------------------------------------------ */
-
-/* On desktop .product-info is sticky with z-index 2, which would trap the drawer under the
-   sticky header. Lift it while the drawer is open, but stay below theme modals (999). */
+/* .product-info is a z-index 2 stacking context that would trap the fixed drawer; lift it below theme modals (999). */
 .product-info:has(co-lab-customise-drawer[open]) {
   z-index: 998;
 }
 
-/* Page trigger: styled exactly like the size select above it, chevron pointing right. */
 .c-co-lab-picker__customise-select {
   position: relative;
   display: block;
@@ -984,7 +976,6 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   text-align: end;
 }
 
-/* One full-width grid per slot, every colour visible at once (no scrolling strip). */
 .c-co-lab-customise__grid {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -1046,22 +1037,15 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   width: 100%;
 }
 
-/* Drawer sizing on phones. Size by edges, not height: inset:0 stretches the panel to whatever the
-   fixed layer's box is (which follows Safari's toolbar), and the bottom edge stops above any
-   fixed bottom bar - Shopify's theme-preview bar on Dev links (--colab-bottom-bar, measured in
-   co-lab-picker.js; 0 for customers). While the keyboard is open co-lab-picker.js also pins the
-   panel to the visual viewport so Confirm stays above it. */
 .c-co-lab-customise::part(base) {
   inset: 0 0 var(--colab-bottom-bar, 0px) 0;
   height: auto;
 }
 
-/* Keep the Confirm button clear of the home indicator if the viewport ever extends under it. */
 .c-co-lab-customise::part(footer) {
   padding-block-end: calc(var(--drawer-footer-padding-block) + env(safe-area-inset-bottom, 0px));
 }
 
-/* Review modal (all Co-Lab rings): condensed; the heirloom ring also shows its configured ring image on top. */
 .c-co-lab-cart-bundle--heirloom {
   padding: 1.25rem 1.5rem 1.25rem;
 }
@@ -1070,7 +1054,6 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   margin-bottom: 0.75rem;
 }
 
-/* Crop the square ring image to the ring itself (same window as the drawer preview). */
 .c-co-lab-cart-bundle__ring {
   width: min(100%, 420px);
   margin: 0 auto 0.25rem;
@@ -1094,7 +1077,6 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   padding-top: 0.6rem;
 }
 
-/* No ring image above it (Toi et Moi etc): no divider or gap before the first section. */
 .c-co-lab-cart-bundle--heirloom > .c-co-lab-cart-bundle__group:first-child {
   margin-top: 0;
   padding-top: 0;
@@ -1130,15 +1112,12 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   }
 }
 
-
-/* "Made Just For You" section title in title case (other group titles are uppercase). */
 .c-co-lab-cart-bundle--heirloom .c-co-lab-cart-bundle__group-title--made {
   text-transform: none;
   letter-spacing: 0.02em;
   font-size: 1.15rem;
 }
 
-/* Cart line for the heirloom ring: the configured ring, cropped to the ring (square thumbnail). */
 .c-co-lab-line-ring {
   display: block;
   aspect-ratio: 1 / 1;
@@ -1155,7 +1134,6 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   margin-top: -25.2%;
 }
 
-/* Required-stone prompt in the Customise drawer. */
 .c-co-lab-customise__error {
   margin: 0 0 0.75rem;
   font-size: 0.8125rem;
@@ -1171,4 +1149,8 @@ safe-sticky.product-info:has(c-co-lab-picker) {
   outline: 1px solid #d9a3a3;
   outline-offset: 4px;
   border-radius: 6px;
+}
+
+product-gallery:has([data-media-type="animation"].is-selected) .product-gallery__zoom-button {
+  display: none;
 }
