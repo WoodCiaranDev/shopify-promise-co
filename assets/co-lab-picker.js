@@ -701,7 +701,8 @@ class CoLabPicker extends HTMLElement {
       const value = this.stoneValue(slot);
       const input = this.querySelector(`[data-stone-input="${slot}"]`);
       const label = input?.dataset.stoneLabel || 'Birthstone';
-      customRows.push(this.reviewRow(label, value, this.stoneSwatchUrl(value), this.bsCharged ? `+ ${this.formatMoney(this.bsPrice)}` : 'Free'));
+      // Stones: show the uplift only when they're actually charged (no "Free" label).
+      customRows.push(this.reviewRow(label, value, this.stoneSwatchUrl(value), this.bsCharged ? `+ ${this.formatMoney(this.bsPrice)}` : ''));
     });
     if (this.hasEngraving()) {
       customRows.push(this.reviewRow('Engraving', this.engravingInput.value.trim(), '', this.engCharged ? `+ ${this.formatMoney(this.engPrice)}` : 'Free'));
@@ -750,7 +751,7 @@ class CoLabPicker extends HTMLElement {
     confirmCheck.addEventListener('change', () => {
       confirmBtn.disabled = !confirmCheck.checked;
       // Bring Add to cart into view once the selection is confirmed (it can sit below the fold).
-      if (confirmCheck.checked) requestAnimationFrame(() => confirmBtn.scrollIntoView({ behavior: 'smooth', block: 'center' }));
+      if (confirmCheck.checked) requestAnimationFrame(() => this.revealInModal(confirmBtn));
     });
 
     // Add to cart in the page's brand ATC colour (same pill shape).
@@ -770,6 +771,26 @@ class CoLabPicker extends HTMLElement {
     });
 
     container.appendChild(card);
+  }
+
+  // Scroll a modal's own scroll area so `el` sits fully in view. scrollIntoView is unreliable from
+  // slotted content into the theme modal's shadow-DOM scroller (notably iOS Safari), so find the
+  // scrolling ancestor across the shadow boundary and scroll it directly.
+  revealInModal(el) {
+    let node = el, scroller = null;
+    while (node) {
+      if (node instanceof Element) {
+        const cs = getComputedStyle(node);
+        if (/(auto|scroll)/.test(cs.overflowY) && node.scrollHeight > node.clientHeight + 1) { scroller = node; break; }
+      }
+      node = node.assignedSlot || node.parentNode || node.host || null;
+    }
+    const rect = el.getBoundingClientRect();
+    if (!scroller) { el.scrollIntoView({ block: 'end', behavior: 'smooth' }); return; }
+    const box = scroller.getBoundingClientRect();
+    const bottom = Math.min(box.bottom, window.visualViewport ? window.visualViewport.height : window.innerHeight);
+    const delta = rect.bottom - bottom + 24;
+    if (delta > 0) scroller.scrollTo({ top: scroller.scrollTop + delta, behavior: 'smooth' });
   }
 
   closeModal() {
