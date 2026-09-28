@@ -157,7 +157,7 @@ only way to do it on Shopify right now.
             assign has_stone_preview = false
             assign loop_eager = true
             assign extra_slides = 0
-            if product.handle == 'modern-heirloom-birthstone-ring'
+            if product.metafields.custom.customise_drawer.value == true
               assign has_stone_preview = true
               assign loop_eager = false
               assign extra_slides = extra_slides | plus: 1

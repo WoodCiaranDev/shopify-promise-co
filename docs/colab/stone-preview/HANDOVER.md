@@ -102,9 +102,10 @@ silver metal tone.
 3. **Test order.** Place one test order and check the confirmation email and admin order list
    the metal, both stones and the engraving. Checkout, emails and admin show the stock product
    image, because Shopify only allows a custom checkout image on Plus.
-4. **Handle dependency.** The drawer, gallery preview and cart image are keyed on the handle
-   `modern-heirloom-birthstone-ring` in `co-lab-picker.liquid`, `product-gallery.liquid` and
-   `line-item.liquid`. If the handle changes, all three quietly fall back to the standard picker.
+4. **Turning it on.** The drawer, gallery preview and cart image are switched on per product by
+   the pinned product field **Customise drawer & stone preview** (`custom.customise_drawer`,
+   true/false). It's ticked on `modern-heirloom-birthstone-ring` (set 28 Sep 2026). The preview
+   images are of the heirloom design, so only tick it on a product with that ring.
 5. **Supported values.** Previews exist only for the 12 months and for gold or silver metals.
    Any other stone month or metal hides the preview and uses the product image instead of
    showing a wrong or broken one.
