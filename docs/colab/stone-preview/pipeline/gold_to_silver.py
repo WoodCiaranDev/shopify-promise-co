@@ -92,8 +92,34 @@ def to_silver(gold_img, protect=None, detect_from=None, halo=None):
     src_q = np.percentile(lab[..., 0][gm], np.linspace(0, 100, 101))
     L2 = np.interp(lab[..., 0], src_q, qs)
     new = np.stack([L2, np.full_like(L2, ta), np.full_like(L2, tb)], -1)
-    out = oklab_to_rgb(lab * (1 - w[..., None]) + new * w[..., None])
+    out = lab * (1 - w[..., None]) + new * w[..., None]
+    if halo == "november":
+        out = _champagne_on_silver(out)
+    out = oklab_to_rgb(out)
     return Image.fromarray((np.clip(out, 0, 1) * 255).round().astype(np.uint8)), w
+
+def _halo_radius(metal="gold"):
+    """Distance from the nearest halo stone centre, in units of that stone's radius."""
+    sm = json.load(open("slots_matched.json"))[metal]
+    yy, xx = np.mgrid[0:1600, 0:1600]
+    d = np.full((1600, 1600), np.inf)
+    for x, y, r, a in sm: d = np.minimum(d, np.hypot(xx - x, yy - y) / r)
+    return d
+
+def _champagne_on_silver(lab, hue=62, keep=0.35):
+    """Champagne sits in the gold hue band, so on silver its yellow-green facets read as leftover gold
+    and its saturated edge stops dead against grey. Pull facet hues towards champagne, cool the brightest
+    sparkle, and shade a thin warm girdle where stone meets bezel."""
+    d = _halo_radius()
+    L, a, b = lab[..., 0], lab[..., 1], lab[..., 2]
+    C = np.hypot(a, b); h = np.degrees(np.arctan2(b, a))
+    h2 = np.where((h > 20) & (h < 140), hue + (h - hue) * keep, h)
+    C2 = C * (1 - 0.5 * np.clip((L - 0.88) / 0.08, 0, 1))
+    stone = (np.clip((0.90 - d) / 0.10, 0, 1) * np.clip((C - 0.01) / 0.02, 0, 1))[..., None]
+    lab = lab * (1 - stone) + np.stack([L, C2 * np.cos(np.radians(h2)), C2 * np.sin(np.radians(h2))], -1) * stone
+    g = gaussian_filter(np.clip(np.minimum((d - 0.80) / 0.08, (0.95 - d) / 0.07), 0, 1), 0.7)
+    tint = 0.035 * np.array([np.cos(np.radians(hue)), np.sin(np.radians(hue))])
+    return np.stack([lab[..., 0] * (1 - 0.14 * g), lab[..., 1] * (1 - g) + tint[0] * g, lab[..., 2] * (1 - g) + tint[1] * g], -1)
 
 # Recoloured halos are made from a donor birthstone's real stones (same pixel geometry), so the
 # donor's own transplant still shows the bezel lip in true gold. Detect gold there.

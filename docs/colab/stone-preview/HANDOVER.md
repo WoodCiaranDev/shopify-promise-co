@@ -91,6 +91,15 @@ silver metal tone.
 - **Checking Dev images:** fetch them with the page's own `?v=` tag. Any other query string can
   return a stale CDN copy.
 
+## Champagne on silver (29 Sep 2026)
+
+- **What was wrong.** Champagne sits in the gold hue band, so on silver its yellow-green facets read
+  as leftover gold, and its saturated edge stopped dead against grey. The stones looked olive and
+  too small for their settings.
+- **Fix.** `_champagne_on_silver()` in `gold_to_silver.py` runs for the November halo on silver.
+  It pulls facet hues towards champagne, cools the brightest sparkle, and shades a thin warm
+  girdle where stone meets bezel. Gold images are unchanged.
+
 ## Going live
 
 1. **Sync first.** Run `/sync` so main has the client's latest live edits, then merge this branch
