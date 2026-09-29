@@ -49,6 +49,7 @@
         <div class="promise-club__heading">{{ section.settings.heading }}</div>
       {%- endif -%}
 
+      <div class="promise-club__form-wrap" aria-live="polite">
       {%- form 'customer', id: form_id, class: 'promise-club__form form' -%}
         {%- if form.posted_successfully? -%}
           {%- assign success_message = 'general.newsletter.subscribed_successfully' | t -%}
@@ -86,9 +87,47 @@
         {%- endif -%}
       {%- endform -%}
       </div>
+      </div>
     </div>
   </div>
 </div>
+
+<script>
+  (() => {
+    // Shopify's hCaptcha keeps the form's submit function when it binds (on first focus) and calls it
+    // once it has a token, so defining it here posts the token in the background instead of reloading.
+    const send = async (form) => {
+      const button = form.querySelector('[type="submit"]');
+      if (button) {
+        button.disabled = true;
+        button.setAttribute('aria-busy', 'true');
+      }
+      try {
+        const response = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+        const page = new DOMParser().parseFromString(await response.text(), 'text/html');
+        const rendered = page.getElementById(form.id);
+        if (!response.ok || !rendered) throw new Error('fallback');
+        if (rendered.querySelector('input[name="contact[email]"]')) {
+          form.querySelector('.banner')?.remove();
+          const banner = rendered.querySelector('.banner');
+          if (banner) form.prepend(document.importNode(banner, true));
+        } else {
+          form.innerHTML = rendered.innerHTML;
+        }
+      } catch (error) {
+        HTMLFormElement.prototype.submit.call(form);
+      } finally {
+        if (button && button.isConnected) {
+          button.disabled = false;
+          button.removeAttribute('aria-busy');
+        }
+      }
+    };
+    document.querySelectorAll('.promise-club__form').forEach((form) => {
+      form.submit = () => send(form);
+    });
+  })();
+</script>
 
 {% stylesheet %}
   .promise-club {
@@ -255,6 +294,7 @@
     }
   }
 {% endstylesheet %}
+
 
 {% schema %}
 {
