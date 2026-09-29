@@ -1,0 +1,39 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+PROMISE PAYMENT ICONS
+----------------------------------------------------------------------------------------------------------------------
+
+Renders payment badges in an explicit order, rather than the order Shopify happens to return from
+`shop.enabled_payment_types`. Icons themselves still come from Shopify via `payment_type_svg_tag`,
+so they stay current and correctly licenced.
+
+********************************************
+Supported variables
+********************************************
+
+* types: comma-separated list of payment type handles, in the order they should appear (required)
+* amex_icon: optional image that replaces the American Express badge, for when the stock one is disliked
+{%- endcomment -%}
+
+{%- assign payment_types = types | remove: ' ' | split: ',' -%}
+
+{%- if payment_types.size > 0 -%}
+  <div class="promise-payment-icons">
+    {%- for type in payment_types -%}
+      {%- if type == 'american_express' and amex_icon != blank -%}
+        {{-
+          amex_icon
+          | image_url: width: 160
+          | image_tag:
+            widths: '40,60,80,120,160',
+            sizes: '38px',
+            loading: 'lazy',
+            alt: 'American Express',
+            class: 'promise-payment-icons__custom'
+        -}}
+      {%- else -%}
+        {{- type | payment_type_svg_tag -}}
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+{%- endif -%}
