@@ -74,6 +74,13 @@
       "settings": {
         "color_scheme": "scheme-2",
         "hide_product_information": false,
+        "show_intro_card": false,
+        "intro_card_position": "third",
+        "intro_card_white_bg": false,
+        "intro_card_heading": "",
+        "intro_card_text": "",
+        "intro_card_button_label": "",
+        "intro_card_button_link": "",
         "products_per_page": 48,
         "products_per_row_mobile": "2",
         "products_size_desktop": "large",
@@ -144,13 +151,267 @@
         "content": ""
       }
     },
+    "ss_feature_20_EdDeDN": {
+      "type": "ss-feature-20",
+      "blocks": {
+        "heading_QanYMU": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Over 10,000 promises, and <strong>every one</strong> means something different.</p>",
+            "heading_custom": false,
+            "heading_font": "josefin_sans_n4",
+            "heading_size": 33,
+            "heading_size_mobile": 24,
+            "heading_height": 150,
+            "heading_align": "left",
+            "heading_align_mobile": "left",
+            "heading_mt": 0,
+            "heading_mt_mobile": 52,
+            "heading_color": "#000000"
+          }
+        },
+        "feature_7d6TtB": {
+          "type": "feature",
+          "settings": {
+            "icon": "star",
+            "heading": "Promises to yourself",
+            "text": "A reminder of who you are, what you’ve achieved or what you’re working towards."
+          }
+        },
+        "feature_4cmc94": {
+          "type": "feature",
+          "settings": {
+            "icon": "love",
+            "heading": "Promises to love",
+            "text": "For partners, soulmates and the people you choose again and again."
+          }
+        },
+        "feature_4YazmX": {
+          "type": "feature",
+          "settings": {
+            "icon": "people",
+            "heading": "Promises to family",
+            "text": "Birthstones, initials and stories that keep the people you love close."
+          }
+        },
+        "feature_hCXTic": {
+          "type": "feature",
+          "settings": {
+            "icon": "heart",
+            "heading": "Promises to friends",
+            "text": "A modern take on the friendship ring  - made to mean something."
+          }
+        },
+        "button_R8fxxM": {
+          "type": "button",
+          "settings": {
+            "button": "Learn about Pinky Promise",
+            "button_url": "shopify://pages/pinky-promise",
+            "button_custom": false,
+            "button_font": "josefin_sans_n4",
+            "button_size": 14,
+            "button_size_mobile": 14,
+            "button_height": 100,
+            "button_mt": 80,
+            "button_mt_mobile": 40,
+            "button_padding_vertical": 16,
+            "button_padding_vertical_mobile": 16,
+            "button_padding_horizontal": 30,
+            "button_padding_horizontal_mobile": 30,
+            "button_radius": 4,
+            "button_border_thickness": 1,
+            "button_style": "outline_arrow",
+            "button_align": "left",
+            "button_align_mobile": "left",
+            "button_color": "#333333",
+            "button_hover_color": "#ffffff",
+            "button_bg_color": "",
+            "button_bg_hover_color": "#333333",
+            "button_border_color": "#333333",
+            "button_border_hover_color": "#333333"
+          }
+        },
+        "image_fwHgiP": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/15_61c098c9-539c-4125-a9e1-ff1d1de983e5.png",
+            "url": "",
+            "column": 1
+          }
+        },
+        "image_V4BhYC": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/7_9ee1a05c-0dd6-44f4-ac39-b452a0efbd50.png",
+            "url": "",
+            "column": 2
+          }
+        },
+        "image_WUBnLE": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/10_0ccf0d87-67e4-4ef5-be61-d15526476307.png",
+            "url": "",
+            "column": 3
+          }
+        },
+        "image_DnPiQN": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/4_368c042e-7b0b-44b9-a069-683aac6a0c62.png",
+            "url": "",
+            "column": 1
+          }
+        },
+        "image_NAk7t4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/11_bc5c0153-5339-4287-99ef-2633b4df365a.png",
+            "url": "",
+            "column": 2
+          }
+        },
+        "image_bn7npG": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/5_79d34243-32fa-4c8b-80c2-92eb1517b1dc.png",
+            "url": "",
+            "column": 3
+          }
+        },
+        "image_Nk8CUA": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/13_d689f9b9-c4a8-4d5e-997b-98cff8c7c501.png",
+            "url": "",
+            "column": 1
+          }
+        },
+        "image_Bz3H8a": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/12_63536726-942b-46ae-8138-dea794f3f86b.png",
+            "url": "",
+            "column": 2
+          }
+        },
+        "image_YTGjGQ": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/9_2b9aa4ea-ef71-461b-8deb-5c7947554054.png",
+            "url": "",
+            "column": 3
+          }
+        },
+        "image_i37Kmn": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/3_83edf193-2477-4170-b96b-ac773070dca8.png",
+            "url": "",
+            "column": 1
+          }
+        },
+        "image_QWxVGq": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/8_b8277d2e-1f30-469e-a087-0c527fa9bb07.png",
+            "url": "",
+            "column": 2
+          }
+        },
+        "image_gNLeWA": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/2_8ccb730e-45a9-4d05-b024-4072334b8831.png",
+            "url": "",
+            "column": 3
+          }
+        }
+      },
+      "block_order": [
+        "heading_QanYMU",
+        "feature_7d6TtB",
+        "feature_4cmc94",
+        "feature_4YazmX",
+        "feature_hCXTic",
+        "button_R8fxxM",
+        "image_fwHgiP",
+        "image_V4BhYC",
+        "image_WUBnLE",
+        "image_DnPiQN",
+        "image_NAk7t4",
+        "image_bn7npG",
+        "image_Nk8CUA",
+        "image_Bz3H8a",
+        "image_YTGjGQ",
+        "image_i37Kmn",
+        "image_QWxVGq",
+        "image_gNLeWA"
+      ],
+      "name": "SS - Feature #20",
+      "settings": {
+        "body_gap": 72,
+        "body_gap_mobile": 40,
+        "items_row": 2,
+        "items_row_mobile": 2,
+        "items_gap": 40,
+        "items_gap_mobile": 20,
+        "items_mt": 60,
+        "items_mt_mobile": 24,
+        "item_gap": 20,
+        "item_gap_mobile": 10,
+        "icon_size": 50,
+        "icon_size_mobile": 40,
+        "item_heading_custom": true,
+        "item_heading_font": "josefin_sans_n4",
+        "item_heading_size": 25,
+        "item_heading_size_mobile": 18,
+        "item_heading_height": 130,
+        "item_text_custom": true,
+        "item_text_font": "josefin_sans_n4",
+        "item_text_size": 13,
+        "item_text_size_mobile": 13,
+        "item_text_height": 150,
+        "images_height": 740,
+        "images_height_mobile": 300,
+        "images_gap": 20,
+        "images_gap_mobile": 16,
+        "images_animation": "back_forth",
+        "images_speed": 76,
+        "image_radius": 12,
+        "image_border_thickness": 0,
+        "image_ratio": "portrait",
+        "image_ratio_mobile": "portrait",
+        "image_shadow": false,
+        "icon_color": "#000000",
+        "item_heading_color": "#000000",
+        "item_text_color": "#000000",
+        "image_border_color": "#ffffff",
+        "background_color": "#f8f7f5",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 3,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_horizontal": 6,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": true,
+        "content_width": 160,
+        "border_thickness": 0,
+        "section_radius": 16,
+        "lazy": true
+      }
+    },
     "image_with_text_tcW7Hc": {
       "type": "image-with-text",
       "blocks": {
         "heading_LKCw3n": {
           "type": "heading",
           "settings": {
-            "text": "Pinky Promise Rings",
+            "text": "Pinky Promise™ Rings",
             "heading_tag": "h1"
           }
         },
@@ -169,8 +430,8 @@
       "settings": {
         "color_scheme": "",
         "separate_section_with_border": true,
-        "image": "shopify://shop_images/2_e34aa82e-6cd1-45ed-85d6-e589565b91a1.png",
-        "mobile_image": "shopify://shop_images/2_e34aa82e-6cd1-45ed-85d6-e589565b91a1.png",
+        "image": "shopify://shop_images/2_8ccb730e-45a9-4d05-b024-4072334b8831.png",
+        "mobile_image": "shopify://shop_images/1_f503b551-d80a-4720-a07d-26569bf72479.png",
         "reveal_on_scroll": true,
         "image_position": "start",
         "content_width": "sm",
@@ -196,7 +457,7 @@
         "richtext_3zFgxX": {
           "type": "richtext",
           "settings": {
-            "content": "<p>A pinky promise ring strengthens the meaning of the pinky promise itself. While the gesture represents trust and sincerity, the ring gives that promise a physical form that can be worn and remembered.<br/><br/>For many people, the pinky promise ring represents:<br/><br/>•⁠  ⁠A promise of loyalty between partners<br/>•⁠  ⁠A meaningful connection between close friends<br/>•⁠  ⁠A reminder of trust between two people<br/>•⁠  ⁠A personal symbol of commitment and sincerity<br/><br/>Because of this, pinky promise rings often feel more personal than traditional jewellery. The ring is not simply decorative, it carries the story of a promise made and kept.</p>"
+            "content": "<p>A pinky promise ring strengthens the meaning of the pinky promise itself. While the gesture represents trust and sincerity, the ring gives that promise a physical form that can be worn and remembered.<br/><br/>For many people, the pinky promise ring represents:<br/><br/>•⁠ &nbsp;⁠A promise of loyalty between partners<br/>•⁠ &nbsp;⁠A meaningful connection between close friends<br/>•⁠ &nbsp;⁠A reminder of trust between two people<br/>•⁠ &nbsp;⁠A personal symbol of commitment and sincerity<br/><br/>Because of this, pinky promise rings often feel more personal than traditional jewellery. The ring is not simply decorative, it carries the story of a promise made and kept.</p>"
           }
         }
       },
@@ -209,7 +470,8 @@
       "settings": {
         "color_scheme": "",
         "separate_section_with_border": true,
-        "image": "shopify://shop_images/Untitled_design-27.png",
+        "image": "shopify://shop_images/5_3fcf85bf-43d1-4056-bc38-993d1905bcca.png",
+        "mobile_image": "shopify://shop_images/2_abbd3433-a1d2-426d-824a-1d3215b32936.png",
         "reveal_on_scroll": true,
         "image_position": "end",
         "content_width": "sm",
@@ -222,6 +484,7 @@
     "collection-banner",
     "main",
     "multi_column_6rLKqy",
+    "ss_feature_20_EdDeDN",
     "image_with_text_tcW7Hc",
     "image_with_text_3WgM3p"
   ]

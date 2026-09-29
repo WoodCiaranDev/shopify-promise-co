@@ -1,0 +1,1145 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_image": true,
+        "enable_parallax": true,
+        "image_size": "medium",
+        "content_width": "xs",
+        "show_date": true,
+        "show_category": true,
+        "show_author": true,
+        "show_share_buttons": true,
+        "show_sticky_bar": true,
+        "toolbar_color_scheme": ""
+      }
+    },
+    "prev-next-blog-posts": {
+      "type": "prev-next-blog-posts",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "subheading": "",
+        "title": "Read more",
+        "show_category": true,
+        "show_excerpt": true,
+        "show_read_more": true
+      }
+    },
+    "rich_text_8BCpNn": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_TkxJAc": {
+          "type": "subheading",
+          "settings": {
+            "text": "the promise co."
+          }
+        },
+        "heading_pfNtTm": {
+          "type": "heading",
+          "settings": {
+            "text": "What Finger Does a Promise Ring Go On?",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_66Yzxy": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p><em>Meaning, Tradition & Modern Rules</em></p><p>There isn't one right answer - just the one that matches your promise. Here's everything you need to know to choose with confidence.</p>"
+          }
+        },
+        "button_4kk8pb": {
+          "type": "button",
+          "settings": {
+            "style": "solid",
+            "text": "Shop promise rings",
+            "url": "shopify://collections/promise-rings",
+            "background": "#ffffff",
+            "text_color": "#000000",
+            "custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_TkxJAc",
+        "heading_pfNtTm",
+        "richtext_66Yzxy",
+        "button_4kk8pb"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-b68b61c5-ba0e-4161-a0e3-3d59622e9bf4",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": true,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "rich_text_rLkyTp": {
+      "type": "rich-text",
+      "blocks": {
+        "richtext_kEMfkt": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Left vs. right hand, what each placement signals, and how to choose the right finger for your promise. A promise ring can be worn on any finger, but in the United States, the left ring finger and right ring finger are the most common choices.</p><p>If your promise ring represents a step toward a future engagement, wearing it on the left ring finger can feel the most natural. If you want the ring to symbolize romantic commitment without people assuming you are engaged, the right ring finger is often the clearest choice.</p><p>Middle and index fingers are also great options, particularly for <a href=\"https://thepromiseco.com/collections/friendship-rings\" target=\"_blank\" title=\"https://thepromiseco.com/collections/friendship-rings\">friendship rings</a>, self-promise rings, relationships without marriage plans, or anyone who simply prefers a more modern look.</p><p><em><strong>QUICK ANSWER  </strong></em>There is no official promise-ring finger. Choose the left ring finger for a stronger pre-engagement meaning, the right ring finger for commitment without the engagement signal, or another finger when it better reflects your promise, personal style, or daily life.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "richtext_kEMfkt"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "image_with_text_B6D4Yt": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_jLWbCG": {
+          "type": "subheading",
+          "settings": {
+            "text": "promise rings"
+          }
+        },
+        "heading_LiTEN6": {
+          "type": "heading",
+          "settings": {
+            "text": "What Finger Does a Promise Ring Go On?",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_hfT7Lx": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Unlike an engagement ring or wedding band, a promise ring does not come with a single established rule about where it has to be worn.</p><p>The Gemological Institute of America (GIA) recognizes several common placements, including the left ring finger, left middle finger, right middle finger, and right ring finger.</p><p>That flexibility reflects what a promise ring actually is. An engagement ring usually communicates one very specific message: we intend to get married. A promise ring can mean many different things.</p><p>•   A serious romantic relationship</p><p>•   Exclusivity between two partners</p><p>•  A future intention to become engaged</p><p>•  Long-term commitment without plans to marry</p><p>•  Staying connected during a long-distance relationship</p><p>•  Friendship</p><p>•  A promise made to yourself</p><p>Because the meaning varies, the best finger can vary too.</p>"
+          }
+        },
+        "button_wBjPfw": {
+          "type": "button",
+          "settings": {
+            "style": "solid",
+            "text": "Shop top 15 promise rings",
+            "url": "shopify://collections/top-15-promise-rings",
+            "background": "#75AEDC",
+            "text_color": "#FFFFFF"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_jLWbCG",
+        "heading_LiTEN6",
+        "richtext_hfT7Lx",
+        "button_wBjPfw"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/1_89617a09-b701-4574-a834-e5b70b18bbb3.png",
+        "mobile_image": "shopify://shop_images/bannerdesk1.heic",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "lg",
+        "remove_vertical_spacing": true
+      }
+    },
+    "rich_text_RGBhcB": {
+      "type": "rich-text",
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "text_with_icons_Pjxjm4": {
+      "type": "text-with-icons",
+      "blocks": {
+        "item_p8WDHX": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-jewelry",
+            "icon_width": 24,
+            "mobile_icon_width": 24,
+            "title": "Left ring  finger",
+            "content": "<p>We plan to get engaged eventually</p>"
+          }
+        },
+        "item_mPx3eX": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-love",
+            "icon_width": 24,
+            "mobile_icon_width": 24,
+            "title": "Right ring  finger",
+            "content": "<p>We're committed, but we're not engaged</p>"
+          }
+        },
+        "item_dLgM3c": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-star",
+            "icon_width": 24,
+            "mobile_icon_width": 24,
+            "title": "Middle finger",
+            "content": "<p>We're committed but marriage isn't our goal</p>"
+          }
+        },
+        "item_XQbGKX": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-award-gift",
+            "icon_width": 24,
+            "mobile_icon_width": 24,
+            "title": "Any Finger",
+            "content": "<p>A Promise to yourself</p>"
+          }
+        },
+        "item_Cx9ngh": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-happy-face",
+            "icon_width": 24,
+            "mobile_icon_width": 24,
+            "title": "index finger",
+            "content": "<p>Friendship</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_p8WDHX",
+        "item_mPx3eX",
+        "item_dLgM3c",
+        "item_XQbGKX",
+        "item_Cx9ngh"
+      ],
+      "name": "t:sections.text_with_icons.presets.text_with_icons.name",
+      "settings": {
+        "color_scheme": "scheme-b68b61c5-ba0e-4161-a0e3-3d59622e9bf4",
+        "separate_section_with_border": false,
+        "reduce_mobile_spacing": true,
+        "stack_on_mobile": true,
+        "icon_color": "",
+        "text_color": "",
+        "text_alignment": "center"
+      }
+    },
+    "rich_text_AHWmYY": {
+      "type": "rich-text",
+      "blocks": {
+        "richtext_Kt6Cwh": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>TIP: These are recommendations rather than rules. </p><p>The most important question is not simply which finger should a promise ring go on? It is: what do you want your promise ring to say?</p><p><em>“Your promise doesn't need a rulebook. There are traditions worth knowing, but the right finger is ultimately the one that fits what your ring means to you.”</em></p><p>- The Promise Co. Team</p>"
+          }
+        }
+      },
+      "block_order": [
+        "richtext_Kt6Cwh"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "image_with_text_TdcT6e": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_ENzxWq": {
+          "type": "subheading",
+          "settings": {
+            "text": "promise rings"
+          }
+        },
+        "heading_QfEdY6": {
+          "type": "heading",
+          "settings": {
+            "text": "Should a Promise Ring Go on Your Left or Right Hand?",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_CAEibM": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Both are completely acceptable. The difference is largely about how other people are likely to interpret the ring.</p><p>In mainstream US culture, the fourth finger of the left hand is strongly associated with engagement and marriage. That means wearing a promise ring there can make it look more like part of the traditional progression toward engagement. The right hand creates more separation.</p><p><em>TIP: There's no universal rule. Choose the finger that fits what the promise actually means.</em></p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_ENzxWq",
+        "heading_QfEdY6",
+        "richtext_CAEibM"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/bannerdesk2.heic",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "rich_text_9HgCnJ": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_G7xmRp": {
+          "type": "subheading",
+          "settings": {
+            "text": ""
+          }
+        },
+        "heading_A9x8Cb": {
+          "type": "heading",
+          "settings": {
+            "text": "Promise ring on the left hand",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_3N7JLc": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>The left ring finger is one of the most traditional places to wear a romantic promise ring. It works particularly well if the meaning behind the ring is:</p><p>For some couples, the promise ring effectively holds the place that an engagement ring may occupy later. Once an engagement happens, the promise ring might then be moved to the right hand, another finger, added to a ring stack, or even worn on a necklace.</p><p>The main downside is obvious: other people may assume you are already engaged. The more engagement-like the ring looks, the more likely that becomes. A diamond solitaire worn on the left ring finger, for example, may be interpreted very differently from a small engraved band worn in exactly the same place.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_G7xmRp",
+        "heading_A9x8Cb",
+        "richtext_3N7JLc"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "start",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "rich_text_G6NGN9": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_FVhy8A": {
+          "type": "heading",
+          "settings": {
+            "text": "Promise ring on the right hand",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_gNeqy9": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>For many couples, the right ring finger is the best all-around promise-ring placement. It still uses a finger naturally associated with meaningful rings while avoiding the finger Americans most strongly associate with engagement.</p><p>It can also make things simpler later. If you eventually receive an engagement ring, the promise ring can stay exactly where it is rather than needing a new home.</p><p>There are cultural exceptions. Some cultures and religious traditions use the right hand for wedding rings, meaning a right-hand ring is not universally non-marital. But for most<br/>mainstream US wearers, the right ring finger creates considerably less engagement<br/>confusion than the left.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_FVhy8A",
+        "richtext_gNeqy9"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "end",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "image_with_text_overlay_Rhtg7n": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_AXqWXG": {
+          "type": "heading",
+          "settings": {
+            "text": "So which is better?",
+            "heading_tag": "h4"
+          }
+        },
+        "richtext_VKik3h": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Choose the left ring finger if the promise is deliberately connected with a future engagement. Choose the right ring finger if the promise represents romantic commitment but you do not want it to look like an engagement ring. Neither choice makes the promise more or less meaningful.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_AXqWXG",
+        "richtext_VKik3h"
+      ],
+      "name": "t:sections.image_with_text_overlay.presets.image_with_text_overlay.name",
+      "settings": {
+        "color_scheme": "",
+        "image_size": "auto",
+        "image": "shopify://shop_images/Untitled_design-51.png",
+        "mobile_image": "shopify://shop_images/Untitled_design-51.png",
+        "allow_transparent_header": false,
+        "reveal_on_scroll": true,
+        "remove_vertical_spacing": true,
+        "content_width": "md",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30
+      }
+    },
+    "rich_text_Ma7Tp8": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_HG4JYW": {
+          "type": "heading",
+          "settings": {
+            "text": "What Does a Promise Ring Mean?",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_LYCDXD": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Before choosing the finger, it helps to define the promise. Despite the name, there is no single promise that  every promise ring represents.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_HG4JYW",
+        "richtext_LYCDXD"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-9748e626-bd08-461a-ae84-54d07f2a89b9",
+        "separate_section_with_border": false,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": true,
+        "use_ogg_font": true,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "multi_column_4FjN8P": {
+      "type": "multi-column",
+      "blocks": {
+        "image_with_text_8yXecB": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/2_a68eafb4-72c5-4ced-a4e5-a544a0b6dba9.png",
+            "title": "Dating and exclusivity",
+            "heading_tag": "h3",
+            "content": "<p>One of the most common meanings is simply: we're committed to each other. A couple may exchange a promise ring after deciding their relationship has become serious or exclusive. Marriage might happen eventually, but it is not necessarily part of the promise being made today.</p><p>For this situation, the right ring finger is a particularly strong option because it communicates romantic commitment without suggesting that a proposal has already happened.</p>",
+            "link_url": "shopify://products/marquise-engraved-band-ring",
+            "link_text": ""
+          }
+        },
+        "image_with_text_4MCgHk": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/02_41785a23-f91e-44ad-9881-3468dc5cbd97.jpg",
+            "title": "Pre-engagement promise",
+            "heading_tag": "h3",
+            "content": "<p>Some promise rings are explicitly pre-engagement rings. The message might be:</p><p>That might be because of age, finances, education, career plans, distance, or simply because the couple does not feel the timing for an engagement is right. In this situation, the left ring finger has the strongest symbolic connection. The ring becomes a visible step in the relationship's progression toward engagement.</p>",
+            "link_url": "shopify://products/promise-oval-ring",
+            "link_text": ""
+          }
+        },
+        "image_with_text_AjLFtj": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/OvalClustergold.png",
+            "title": "Commitment without marriage",
+            "heading_tag": "h3",
+            "content": "<p>A promise ring does not automatically mean that marriage is coming. Some couples are deeply committed to one another but do not want to marry, while others simply do not view marriage as an immediate goal. A promise ring can represent that commitment in its own right.</p><p>The right ring finger or middle finger can work particularly well here because they avoid making the ring appear like a temporary stand-in for an engagement ring.</p>",
+            "link_url": "shopify://products/oval-multi-stone-ring",
+            "link_text": ""
+          }
+        },
+        "image_with_text_wERBCT": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/6_56a01833-2f31-4ec1-ba86-4b181b1b88bf.png",
+            "title": "Long-distance relationships",
+            "heading_tag": "h3",
+            "content": "<p>Promise rings are also sometimes exchanged when couples expect to spend significant time apart. The promise is not necessarily 'we are going to get married.' It may simply mean that distance does not change the commitment. Either ring finger can work, although the right hand may be preferable if the relationship is serious but not explicitly pre-engagement.</p>",
+            "link_url": "shopify://products/dainty-promise-band",
+            "link_text": ""
+          }
+        },
+        "image_with_text_4trYUA": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/01_7db28539-6dfd-4bc3-9145-c39d8235390b.jpg",
+            "title": "Friendship promise rings",
+            "heading_tag": "h3",
+            "content": "<p>Promise rings do not have to be romantic. Friends may exchange rings to represent loyalty, a shared experience, a lifelong friendship, or a commitment to remain connected.</p><p>There is no established friendship promise-ring finger. The middle or index finger is often a useful choice because it clearly separates the ring from conventional engagement jewelry.</p>",
+            "link_url": "shopify://products/modern-heirloom-birthstone-ring",
+            "link_text": ""
+          }
+        },
+        "image_with_text_mMKVn4": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify://shop_images/03_91aef889-6c7e-49cb-81de-a5026ed51a05.jpg",
+            "title": "Self-promise rings",
+            "heading_tag": "h3",
+            "content": "<p>A self-promise ring represents a commitment you make to yourself. That could involve:</p><p>A personal goal, Self-respect, Independence or Personal growth.</p><p>A significant life change or Celebrating an achievement.</p><p>There is no standard finger for a self-promise ring. The middle or index finger is a good starting point because both are highly visible without carrying strong engagement<br/>associations. But this is perhaps the clearest example of a situation where the finger should be entirely your choice.</p>",
+            "link_url": "shopify://products/custom-curve-east-west-pear-ring",
+            "link_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_with_text_8yXecB",
+        "image_with_text_4MCgHk",
+        "image_with_text_AjLFtj",
+        "image_with_text_wERBCT",
+        "image_with_text_4trYUA",
+        "image_with_text_mMKVn4"
+      ],
+      "name": "t:sections.multi_column.presets.multi_column.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": true,
+        "columns_per_row": 3,
+        "stack_on_mobile": false,
+        "overlap_image": false,
+        "content_alignment": "center",
+        "text_alignment": "center",
+        "spacing": "lg",
+        "subheading": "",
+        "title": "",
+        "content": ""
+      }
+    },
+    "rich_text_UQmrXb": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_89gJCz": {
+          "type": "heading",
+          "settings": {
+            "text": "Which Finger Should You Wear a Promise Ring On?",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_8G6M8k": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Although ring fingers attract most of the attention, you have ten possible places to wear a promise ring. Here is how each works.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_89gJCz",
+        "richtext_8G6M8k"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": true,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "text_with_icons_cg7kX8": {
+      "type": "text-with-icons",
+      "blocks": {
+        "item_LKfcVe": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-jewelry",
+            "icon_width": 24,
+            "mobile_icon_width": 24,
+            "title": "pinky finger",
+            "content": "<p>Discreet, personalised or signet-inspired</p>"
+          }
+        },
+        "item_f3kgNF": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-jewelry",
+            "icon_width": 24,
+            "mobile_icon_width": 24,
+            "title": "Ring Finger",
+            "content": "<p>Romantic commitment, left for pre engagement</p>"
+          }
+        },
+        "item_EG3Tim": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-jewelry",
+            "icon_width": 24,
+            "mobile_icon_width": 24,
+            "title": "Middle finger",
+            "content": "<p>Contemporary and relationship-status neutral</p>"
+          }
+        },
+        "item_XnH9Bp": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-jewelry",
+            "icon_width": 24,
+            "mobile_icon_width": 24,
+            "title": "Index finger",
+            "content": "<p>Statement designs and modern promises</p>"
+          }
+        },
+        "item_MCgWyF": {
+          "type": "item",
+          "settings": {
+            "icon": "picto-jewelry",
+            "icon_width": 24,
+            "mobile_icon_width": 24,
+            "title": "Thumb",
+            "content": "<p>Highly personal or unconventional promises</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_LKfcVe",
+        "item_f3kgNF",
+        "item_EG3Tim",
+        "item_XnH9Bp",
+        "item_MCgWyF"
+      ],
+      "name": "t:sections.text_with_icons.presets.text_with_icons.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": false,
+        "reduce_mobile_spacing": false,
+        "stack_on_mobile": false,
+        "icon_color": "",
+        "text_color": "",
+        "text_alignment": "center"
+      }
+    },
+    "faq_6rXbCj": {
+      "type": "faq",
+      "blocks": {
+        "question_kCpKca": {
+          "type": "question",
+          "settings": {
+            "question": "Does the ring mean “we plan to get engaged”?",
+            "answer": "<p>If yes, the left ring finger is probably the strongest choice. It makes the promise feel connected to the traditional progression from dating to engagement to marriage.</p>"
+          }
+        },
+        "question_3NEHUa": {
+          "type": "question",
+          "settings": {
+            "question": "Do you want other people to recognize it as romantic?",
+            "answer": "<p>If yes, choose the right ring finger. It still reads naturally as important relationship jewelry without suggesting quite as strongly that you are engaged. If public interpretation<br/>does not matter, a middle or index finger works equally well.</p>"
+          }
+        },
+        "question_TbyEE3": {
+          "type": "question",
+          "settings": {
+            "question": "Are you expecting an engagement ring soon?",
+            "answer": "<p>Think about where you eventually want both rings to live. If you do not want to move the promise ring later, avoid the left ring finger now. The right ring finger or middle finger gives the promise ring a permanent home while leaving room for a future engagement ring.</p>"
+          }
+        },
+        "question_e7NCgr": {
+          "type": "question",
+          "settings": {
+            "question": "What does the ring actually look like?",
+            "answer": "<p>Placement and design work together. A small engraved band works almost anywhere. A large solitaire worn on the left ring finger may easily be mistaken for an engagement ring. A wide sculptural band may look better and feel more comfortable on a middle or index finger. A small personalized ring might suit the pinky perfectly.</p>"
+          }
+        },
+        "question_9cNJbj": {
+          "type": "question",
+          "settings": {
+            "question": "Which finger is most comfortable?",
+            "answer": "<p>Symbolism matters far less if you do not actually enjoy wearing your ring. Your hands are not perfectly symmetrical either. A ring that fits the ring finger on your right hand will not necessarily fit the corresponding finger on your left. Measure the exact finger and hand where you plan to wear the ring.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_kCpKca",
+        "question_3NEHUa",
+        "question_TbyEE3",
+        "question_e7NCgr",
+        "question_9cNJbj"
+      ],
+      "name": "t:sections.faq.presets.faq.name",
+      "settings": {
+        "color_scheme": "scheme-b68b61c5-ba0e-4161-a0e3-3d59622e9bf4",
+        "separate_section_with_border": true,
+        "anchor_id": "",
+        "show_categories": false,
+        "subheading": "if you're still unsure, work through these questions:",
+        "title": "How to Choose the Right Finger for Your Promise Ring",
+        "content": ""
+      }
+    },
+    "rich_text_9YCJBh": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_PzGbFx": {
+          "type": "heading",
+          "settings": {
+            "text": "Left ring finger",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_iWfw9G": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Best for: pre-engagement promises. The left ring finger carries the strongest relationship-status symbolism in American culture. It is traditionally where an engagement ring is worn, followed by or combined with a wedding band. That makes it particularly powerful for a promise ring when the promise is connected to eventual marriage.</p><p>Advantages include an immediately romantic feel, a clear signal that the relationship is serious, and a natural progression toward an engagement ring.The main consideration is potential confusion: people may see a ring on your left ring finger and assume you are engaged, particularly if the ring features a prominent center stone.</p>"
+          }
+        },
+        "heading_QW4iT6": {
+          "type": "heading",
+          "settings": {
+            "text": "Right ring finger",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_Vi9i4J": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Best for: serious romantic commitment without engagement. The right ring finger gives you much of the emotional symbolism of the left ring finger without occupying America's conventional engagement-ring position. For that reason, it is arguably the most versatile promise-ring finger.</p><p>It clearly feels like a meaningful ring, has a lower risk of being mistaken for an engagement ring, can remain in place if you later become engaged, and works well for both understated and more elaborate designs.</p>"
+          }
+        },
+        "heading_XpKCBt": {
+          "type": "heading",
+          "settings": {
+            "text": "Left middle finger",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_TLeHbN": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Best for: modern romantic promises or self-promise rings. The middle finger gives a promise ring plenty of visibility while keeping the traditional engagement finger available. GIA includes the left middle finger among popular promise-ring positions.</p><p>It is highly visible, clearly different from an engagement ring, and works particularly well with simple bands and contemporary designs. If you already wear rings on your ring or index fingers, however, a wider promise ring may make the hand feel crowded.</p>"
+          }
+        },
+        "heading_fkPjhg": {
+          "type": "heading",
+          "settings": {
+            "text": "Right middle finger",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_JLRTCi": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Best for: commitment with minimal relationship-status ambiguity. The right middle finger is one of the most neutral yet prominent options available. It works particularly well for couples who want their ring to be personally meaningful without expecting strangers to understand its relationship significance.</p><p>It is also one of the strongest choices for friendship and self-promise rings. The trade-off is that other people may simply see it as jewelry - which, for many wearers, is not a disadvantage at all.</p>"
+          }
+        },
+        "heading_z3cmdJ": {
+          "type": "heading",
+          "settings": {
+            "text": "Left index finger",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_ztBiWK": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Best for: statement designs and contemporary promise rings. An index-finger promise ring immediately looks less traditional. It can be an especially good position for sculptural, wide, signet-style, or distinctive rings.</p><p>It is very visible, creates minimal engagement confusion, and clearly separates the ring from bridal traditions. Its romantic meaning, however, may not be obvious to other people.</p>"
+          }
+        },
+        "heading_kfGWbn": {
+          "type": "heading",
+          "settings": {
+            "text": "Thumb",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_8TFnJA": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Best for: highly personal or unconventional promise rings. Neither thumb has a standardized promise-ring meaning in the United States. That makes  a thumb ring a very personal choice.</p><p>If you are wearing a ring to represent a promise to yourself or deliberately want to avoid traditional relationship symbolism, the thumb can be appealing. Try the ring during normal daily tasks before deciding it is comfortable enough for permanent wear, because the thumb is heavily involved in gripping and handling objects.</p>"
+          }
+        },
+        "heading_WYBkJd": {
+          "type": "heading",
+          "settings": {
+            "text": "Pinky finger",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_7PcL7y": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Best for: discreet, personalized, or signet-inspired designs. Promise rings can also be worn on either pinky. This placement is considerably less likely to be interpreted as romantic relationship jewelry.</p><p>That makes it suitable for friendship promises, self-promises, family commitments, signet-style rings, and small personalized bands. Larger gemstone designs may be less practical because the pinky provides less space and support than larger fingers.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_PzGbFx",
+        "richtext_iWfw9G",
+        "heading_QW4iT6",
+        "richtext_Vi9i4J",
+        "heading_XpKCBt",
+        "richtext_TLeHbN",
+        "heading_fkPjhg",
+        "richtext_JLRTCi",
+        "heading_z3cmdJ",
+        "richtext_ztBiWK",
+        "heading_kfGWbn",
+        "richtext_8TFnJA",
+        "heading_WYBkJd",
+        "richtext_7PcL7y"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "rich_text_3iUw7W": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_ApnTaG": {
+          "type": "heading",
+          "settings": {
+            "text": "Promise Ring Style and Finger Placement",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_KJUMta": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>The design of the promise ring can change the way its placement is interpreted.</p><p>A solitaire stone has particularly strong engagement-ring associations. Wear one on the left ring finger and many people are likely to assume it is an engagement ring. If that is not the message you want to send, the right hand or another finger makes the distinction much clearer.</p><p>Heart-shaped motifs naturally communicate affection without looking quite as bridal as a solitaire. They work especially well on either ring finger or the middle finger.</p><p>Infinity and knot designs are popular because their symbolism naturally relates to connection and continuity. They can work on virtually any finger and are particularly suitable when the promise represents lasting commitment rather than a future proposal.</p><p>Birthstones make the promise more personal and can help differentiate a ring from traditional engagement jewelry. They work especially well for romantic, friendship, family, and self-promise rings.</p><p>A simple metal band can be extremely meaningful while remaining understated. On the left ring finger, however, it can potentially resemble a wedding band. If avoiding marriage-related assumptions matters, the right hand or middle finger may be preferable.</p><p>Contemporary, chunky, or sculptural designs often look especially natural on the middle or index finger. The extra space can also improve comfort.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_ApnTaG",
+        "richtext_KJUMta"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "image_with_text_R9MHBN": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_nFJBe6": {
+          "type": "heading",
+          "settings": {
+            "text": "Do Men and Women Wear Promise Rings Differently?",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_YjQnzb": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>There is no separate promise-ring finger for men. A man can receive a promise ring, give one, or exchange matching or  complementary rings with his partner.</p><p>The same placement principles apply: the left ring finger creates a stronger pre engagement meaning, the right ring finger represents commitment without looking engaged, and the middle or index finger provides a contemporary alternative.</p><p>Men's promise rings may be wider or use materials and designs commonly associated with men's jewelry, but that affects fit and style, not the rules about which finger to use. Couples do not have to wear their rings on the same finger either. One partner might prefer the right ring finger while the other chooses the middle finger. The shared promise matters more than perfect symmetry.</p>"
+          }
+        },
+        "button_LgV8V8": {
+          "type": "button",
+          "settings": {
+            "style": "solid",
+            "text": "couples promise rings",
+            "url": "shopify://collections/couples-promise-rings",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_nFJBe6",
+        "richtext_YjQnzb",
+        "button_LgV8V8"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/1_0c57e604-0556-4575-9925-d40a77eb31c1.png",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "rich_text_gQCrHn": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_MFAzJ7": {
+          "type": "subheading",
+          "settings": {
+            "text": ""
+          }
+        },
+        "heading_wcbbM3": {
+          "type": "heading",
+          "settings": {
+            "text": "Traditional vs. Modern Promise Ring Practice",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_V7G3yd": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>The idea of using rings to symbolize promises is much older than the modern term “promise ring.” Historical predecessors include medieval posy rings, which were engraved with messages of affection, and Georgian and Victorian sentimental rings that sometimes used gemstones to encode words or personal meanings.</p><p>But that history does not create a direct rule saying today's promise ring must be worn on one particular finger. Modern promise-ring practice is considerably more flexible.</p><p>•   A path toward engagement</p><p>•   A committed relationship without marriage</p><p>•   Mutual commitment between two partners</p><p>•   Friendship</p><p>•   Personal promises</p><p>•   Long-distance relationships</p><p>•   Important milestones</p><p>That broader meaning is one reason modern finger placement is much less standardized than engagement and wedding-ring placement.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_MFAzJ7",
+        "heading_wcbbM3",
+        "richtext_V7G3yd"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "category_cards_wXGkpz": {
+      "type": "category-cards",
+      "blocks": {
+        "category_image_bFEFMD": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T093421.486.png",
+            "title": "Best Sellers",
+            "description": "<p>discover</p>",
+            "link": "shopify://collections/best-sellers"
+          }
+        },
+        "category_image_XUx9t3": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T093409.150.png",
+            "title": "Shop for Her",
+            "description": "<p>Promise Rings</p>",
+            "link": "shopify://collections/for-her"
+          }
+        },
+        "category_image_JFGaAH": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/custom-2.png",
+            "title": "Custom Jewelery",
+            "description": "<p>Shop</p>",
+            "link": "shopify://collections/custom-jewelry"
+          }
+        },
+        "category_image_9naCEw": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-07-30T111350.973.png",
+            "title": "Pinky Rings",
+            "description": "<p>trending</p>",
+            "link": "shopify://collections/pinky-promise-rings"
+          }
+        }
+      },
+      "block_order": [
+        "category_image_bFEFMD",
+        "category_image_XUx9t3",
+        "category_image_JFGaAH",
+        "category_image_9naCEw"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "background_color": "#ffffff",
+        "title_color": "#000000",
+        "subtitle_color": "#666666",
+        "section_padding_top": 64,
+        "section_padding_bottom": 64,
+        "mobile_single_column": false
+      }
+    },
+    "rich_text_D3Diwr": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_qmLVPJ": {
+          "type": "heading",
+          "settings": {
+            "text": "Are There Different Promise Ring Traditions Around the US?",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_QHg7JB": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>There does not appear to be an established promise-ring convention dividing the United States by region. There is not a recognized rule saying people in the South wear promise rings on one hand while people in the Northeast, Midwest, or West use another.</p><p>Individual families, communities, and cultural traditions can absolutely interpret rings  differently, but cultural heritage is much more relevant than US geography.</p>"
+          }
+        },
+        "heading_iGT76X": {
+          "type": "heading",
+          "settings": {
+            "text": "Claddagh rings",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_MQ9dkA": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>The Irish Claddagh ring is an excellent example of a ring that already has its own wearing traditions. Its heart, hands, and crown represent love, friendship, and loyalty. Traditional interpretations can vary based on which hand wears the ring and whether the heart faces inward or outward.</p><p>Someone wearing a Claddagh as a promise ring may therefore want to follow its own cultural conventions rather than generic promise-ring advice.</p>"
+          }
+        },
+        "heading_PHRefH": {
+          "type": "heading",
+          "settings": {
+            "text": "Jewish wedding traditions",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_YzJCkY": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Traditional Jewish wedding ceremonies can involve placing a wedding ring on the bride's right index finger during the ceremony. This is not a promise-ring rule. It simply demonstrates why ring symbolism is not identical across every cultural background in the United States.</p>"
+          }
+        },
+        "heading_TNn9kC": {
+          "type": "heading",
+          "settings": {
+            "text": "Orthodox Christian traditions",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_zXVYCW": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Wedding rings are traditionally worn on the right hand in several Orthodox Christian cultures. For someone from that background, the mainstream American idea that “right hand means not married” may not apply in quite the same way.</p>"
+          }
+        },
+        "heading_zjeLxi": {
+          "type": "heading",
+          "settings": {
+            "text": "Korean couple rings",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_T7nY8y": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>In South Korea, couples may exchange matching or coordinating “couple rings” to symbolize their relationship. They are sometimes associated with relationship milestones such as the 100-day anniversary. </p><p>For Korean-American couples familiar with that tradition, the symbolism of exchanging rings may differ from the conventional American idea of a promise ring as something that sits somewhere between dating and engagement.</p><p>If your culture, religion, family, or ring design already gives a particular hand or finger a meaning,<br/>that tradition can matter more than generic promise-ring etiquette.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_qmLVPJ",
+        "richtext_QHg7JB",
+        "heading_iGT76X",
+        "richtext_MQ9dkA",
+        "heading_PHRefH",
+        "richtext_YzJCkY",
+        "heading_TNn9kC",
+        "richtext_zXVYCW",
+        "heading_zjeLxi",
+        "richtext_T7nY8y"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "content_width": "sm",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": false,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "prev-next-blog-posts",
+    "rich_text_8BCpNn",
+    "rich_text_rLkyTp",
+    "image_with_text_B6D4Yt",
+    "rich_text_RGBhcB",
+    "text_with_icons_Pjxjm4",
+    "rich_text_AHWmYY",
+    "image_with_text_TdcT6e",
+    "rich_text_9HgCnJ",
+    "rich_text_G6NGN9",
+    "image_with_text_overlay_Rhtg7n",
+    "rich_text_Ma7Tp8",
+    "multi_column_4FjN8P",
+    "rich_text_UQmrXb",
+    "text_with_icons_cg7kX8",
+    "faq_6rXbCj",
+    "rich_text_9YCJBh",
+    "rich_text_3iUw7W",
+    "image_with_text_R9MHBN",
+    "rich_text_gQCrHn",
+    "category_cards_wXGkpz",
+    "rich_text_D3Diwr"
+  ]
+}

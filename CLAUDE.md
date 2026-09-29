@@ -29,9 +29,16 @@ Valid Shopify theme directories in this repo:
 | `/deploy` | Push only git-changed files to the live Shopify theme |
 | `/commit` | Assess the working tree, group changes into clean logical commits |
 | `/merge` | Merge a feature branch into a target using `--no-ff` merge commits |
+| `/update-dev` | Sync client changes into `main`, merge into `dev`, push to the Promise Co - Dev theme |
+| `/push-to-dev` | Merge the current feature branch into `dev` and push changed files to the Promise Co - Dev theme |
+| `/copy-dev-url` | Copy a client-shareable Dev theme preview URL to the clipboard, deep-linked to the relevant page |
 
 ## Conventions
 
 - Always use UK spelling (e.g. "colour", "normalise", "centre", "behaviour")
 - Never stage `.env`, `.claude/`, or credentials
 - Never push to remote without asking first
+
+## Heirloom ring stone preview
+
+Working on the Co-Lab stone preview, the Customise drawer or the client's stone tuner? Read `docs/colab/stone-preview/HANDOVER.md` first. It has the current state, the one-command rebuild (`docs/colab/stone-preview/pipeline/rebuild.py`), the tuner link and the open items.

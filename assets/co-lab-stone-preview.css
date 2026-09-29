@@ -1,0 +1,61 @@
+.co-lab-stone-preview--compact {
+  position: sticky;
+  top: calc(-1 * var(--drawer-body-padding-block, 1.25rem));
+  z-index: 2;
+  margin: calc(-1 * var(--drawer-body-padding-block, 1.25rem)) calc(-1 * var(--drawer-body-padding-inline, 1.25rem)) 0;
+  background: #f2ede5;
+  cursor: zoom-in;
+}
+
+co-lab-customise-drawer.is-keyboard-open .co-lab-stone-preview--compact {
+  position: relative;
+}
+
+@media screen and (max-height: 560px) {
+  .co-lab-stone-preview--compact {
+    position: relative;
+  }
+}
+
+.co-lab-stone-preview--compact:focus-visible {
+  outline: 2px solid rgb(var(--text-color));
+  outline-offset: -4px;
+}
+
+.co-lab-stone-preview--compact .co-lab-stone-preview__plate {
+  width: min(100%, 540px);
+  aspect-ratio: 1320 / 710;
+  margin-inline: auto;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  transition: opacity 0.2s;
+}
+
+.co-lab-stone-preview--compact .co-lab-stone-preview__plate.is-loading {
+  opacity: 0.6;
+}
+
+.co-lab-stone-preview--compact .co-lab-stone-preview__plate img {
+  display: block;
+  width: 121.212%;
+  max-width: none;
+  height: auto;
+  margin-left: -10.227%;
+  margin-top: -35.985%;
+}
+
+.co-lab-stone-preview__zoom {
+  position: absolute;
+  inset-block-end: 0.75rem;
+  inset-inline-end: 0.75rem;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 699px) {
+  .co-lab-stone-preview--compact .co-lab-stone-preview__plate {
+    width: 100%;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}

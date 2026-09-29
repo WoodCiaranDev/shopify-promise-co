@@ -215,7 +215,7 @@ Inputs:
 
       <p class="c-co-lab-picker__error" data-error role="alert" aria-live="polite" hidden></p>
 
-      {%- render 'delivery-countdown', static_message: 'Made to order: ', static_message_strong: 'Ships in 2-3 weeks.', info_target: '#co-lab-mto', info_label: 'Click for more info' -%}
+      {%- render 'delivery-countdown', static_message: 'Made to Order: ', static_message_strong: 'Ships in 10 - 15 Business Days', info_target: '#co-lab-mto', info_label: 'Click for more info' -%}
 
       <div class="c-co-lab-picker__buy">
         {% render 'quantity-selector', variant: first_variant, form: product_form_id %}
@@ -232,8 +232,8 @@ Inputs:
     {%- endform -%}
   </product-form>
 
-  <x-modal id="co-lab-necklace-review-{{ product.id }}" class="modal modal--lg color-scheme color-scheme--dialog" data-colab-review-modal>
-    <span class="h5" slot="header">Review your necklace</span>
+  <x-modal id="co-lab-necklace-review-{{ product.id }}" class="modal modal--lg color-scheme color-scheme--dialog" data-colab-review-modal aria-labelledby="co-lab-necklace-review-{{ product.id }}-title">
+    <span class="h5" slot="header" id="co-lab-necklace-review-{{ product.id }}-title">Review your necklace</span>
     <div data-colab-review-body></div>
   </x-modal>
 
