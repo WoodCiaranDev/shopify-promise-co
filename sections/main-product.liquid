@@ -55,6 +55,18 @@
     border: 0;
     background: #313030;
     color: #ffffff;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-out, opacity 0.2s, visibility 0.2s;
+  }
+
+  .product-sticky-bar.product-sticky-bar--flat.is-visible {
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .product-sticky-bar.product-sticky-bar--flat {
+      transform: none;
+    }
   }
 
   .product-sticky-bar__action {
@@ -235,8 +247,12 @@
 
       const anchor = () => {
         const colab = picker();
-        return colab ? colab.querySelector('.c-co-lab-picker__buy') || colab : buyButtons();
+        if (colab) return colab.querySelector('[data-action="submit"]') || colab;
+        return buyButtons()?.querySelector('[type="submit"]') || buyButtons();
       };
+
+      // The bar comes in as the main button nears the header, while it is still fully in view.
+      const LEAD = 24;
 
       const ready = () => {
         const colab = picker();
@@ -245,20 +261,16 @@
         return Boolean(colab.querySelector('[data-size-select]')?.value);
       };
 
-      // --sticky-area-height is a calc() expression, so measure it rather than parse it.
-      const stickyArea = Object.assign(document.createElement('div'), { ariaHidden: 'true' });
-      stickyArea.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;height:var(--sticky-area-height,0px)';
-      document.body.append(stickyArea);
-
       let frame = null;
       const update = () => {
         frame = null;
         const target = anchor();
         if (!target) return;
 
-        const headerHeight = stickyArea.offsetHeight;
+        const header = document.querySelector('.shopify-section--header');
+        const headerBottom = header ? Math.max(0, header.getBoundingClientRect().bottom) : 0;
         const footer = document.querySelector('.promise-club, .shopify-section--footer');
-        const visible = target.getBoundingClientRect().bottom < headerHeight
+        const visible = target.getBoundingClientRect().top < headerBottom + LEAD
           && (!footer || footer.getBoundingClientRect().top > window.innerHeight);
         bar.classList.toggle('is-visible', visible);
 
