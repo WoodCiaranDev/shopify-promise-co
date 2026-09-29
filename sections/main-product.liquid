@@ -73,6 +73,11 @@
 
   .product-sticky-bar.product-sticky-bar--flat.is-visible {
     transform: none;
+    box-shadow: 0 2px 0 #313030;
+  }
+
+  html.product-sticky-bar-shown {
+    background-color: #313030;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -265,6 +270,8 @@
         const visible = target.getBoundingClientRect().top < headerBottom + LEAD
           && (!footer || footer.getBoundingClientRect().top > window.innerHeight);
         bar.classList.toggle('is-visible', visible);
+        // iOS Safari tints its toolbar from this bar; the charcoal canvas and 2px overhang stop a pale seam showing between them.
+        document.documentElement.classList.toggle('product-sticky-bar-shown', visible);
 
         const isReady = ready();
         bar.dataset.ready = String(isReady);
