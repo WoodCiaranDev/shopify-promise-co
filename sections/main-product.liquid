@@ -36,66 +36,68 @@
     }
   }
 
-  /* Mobile sticky bar: title • price band with a button that returns you to the options */
-  .product-sticky-bar__mobile {
+  html.product-announcement-hidden {
+    --announcement-bar-is-sticky: 0;
+  }
+
+  html.product-announcement-hidden .shopify-section--announcement-bar {
+    position: relative !important;
+  }
+
+  .shopify-section--header {
+    transition: top 0.25s ease-in-out, transform 0.25s ease-in-out;
+  }
+
+  .product-sticky-bar.product-sticky-bar--flat {
+    display: block;
+    inset-block: auto 0;
+    padding: 0;
+    border: 0;
+    background: #313030;
+    color: #ffffff;
+  }
+
+  .product-sticky-bar__action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.125rem;
+    width: 100%;
+    min-height: 3.5rem;
+    padding: 0.625rem 1.25rem calc(0.625rem + env(safe-area-inset-bottom));
+    background: transparent;
+    color: inherit;
+    font-family: 'covik-sans', var(--text-font-family);
+    cursor: pointer;
+  }
+
+  .product-sticky-bar__action:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: -4px;
+  }
+
+  .product-sticky-bar__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .product-sticky-bar__note {
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    opacity: 0.8;
+  }
+
+  .product-sticky-bar__chevron {
     display: none;
   }
 
-  @media screen and (max-width: 699px) {
-    .product-sticky-bar {
-      background: rgb(var(--background));
-      border-block-start: 1px solid rgb(var(--text-color) / 0.12);
-      padding-block: 0.875rem;
-      padding-block-end: calc(0.875rem + env(safe-area-inset-bottom));
-    }
-
-    .product-sticky-bar__mobile {
-      display: block;
-    }
-
-    .product-sticky-bar .buy-buttons {
-      display: none;
-    }
-
-    .product-sticky-bar__meta {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-block-end: 0.75rem;
-      font-family: 'covik-sans', var(--text-font-family);
-      font-size: 0.9375rem;
-      line-height: 1.3;
-      text-align: center;
-    }
-
-    .product-sticky-bar__meta .price-list {
-      justify-content: center;
-    }
-
-    .product-sticky-bar__configure {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      width: 100%;
-      min-height: 3rem;
-      padding-inline: 2.75rem;
-      border: 1px solid rgb(var(--text-color));
-      background: transparent;
-      color: rgb(var(--text-color));
-      font-family: 'covik-sans', var(--text-font-family);
-      font-size: 0.8125rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      cursor: pointer;
-    }
-
-    .product-sticky-bar__chevron {
-      position: absolute;
-      inset-inline-end: 1rem;
-    }
+  .product-sticky-bar[data-ready="false"] .product-sticky-bar__chevron {
+    display: block;
   }
 </style>
 
@@ -177,136 +179,131 @@
   </div>
 </div>
 
+<script>
+  (() => {
+    const root = document.documentElement;
+    const sync = () => root.classList.toggle('product-announcement-hidden', window.scrollY > 10);
+    window.addEventListener('scroll', sync, { passive: true });
+    sync();
+  })();
+</script>
+
 {%- if section.settings.show_sticky_add_to_cart and product.available -%}
-  <product-rerender id="{{ product_form_id }}-sticky-bar" observe-form="{{ product_form_id }}">
-    {%- comment -%}
-      The `form` attribute is deliberately omitted so Prestige's own ProductStickyBar observer stays
-      inert: it observes document.forms[...], but the Shopify {% form %} wrapper is `display: contents`,
-      so its bounding rect is always zero and its `bottom < 0` visibility test can never pass. The
-      observer below anchors on the buy buttons element instead, which has real dimensions.
-    {%- endcomment -%}
-    <product-sticky-bar data-sticky-form="{{ product_form_id }}" class="product-sticky-bar">
-      <div class="product-sticky-bar__info sm-max:hidden">
-        <div class="h-stack gap-6">
-          {%- if product.media.size > 0 -%}
-            {%- assign default_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
-            {{- default_media | image_url: width: default_media.width | image_tag: loading: 'lazy', sizes: '60px', widths: '60,120,180' -}}
-          {%- endif -%}
-
-          <div class="v-stack">
-            <span class="h6">{{ product.title }}</span>
-
-            {%- if product.selected_or_first_available_variant != nil -%}
-              {%- render 'price-list', variant: product.selected_or_first_available_variant, hide_unit_price: true, context: 'card' -%}
-            {%- endif -%}
-          </div>
-        </div>
-      </div>
-
-      {%- comment -%} Mobile-only band: title • price, plus a button that scrolls back up to the options {%- endcomment -%}
-      <div class="product-sticky-bar__mobile">
-        <p class="product-sticky-bar__meta">
-          <span>{{ product.title }}</span>
-          {%- if product.selected_or_first_available_variant != nil -%}
-            <span aria-hidden="true">&bull;</span>
-            {%- render 'price-list', variant: product.selected_or_first_available_variant, hide_unit_price: true, context: 'card' -%}
-          {%- endif -%}
-        </p>
-
-        <button type="button" class="product-sticky-bar__configure" data-sticky-configure>
-          <span>{{ section.settings.sticky_bar_mobile_label | default: 'Configure' }}</span>
-          <svg class="product-sticky-bar__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
-            <path d="M3.5 10L8 5.5L12.5 10" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"/>
-          </svg>
-        </button>
-      </div>
-
-      <buy-buttons class="buy-buttons" template="{{ product.template_suffix | escape }}" form="{{ product_form_id }}">
-        {%- liquid
-          assign button_disabled = false
-          assign button_style = 'solid'
-
-          if product.selected_or_first_available_variant == nil
-            assign button_disabled = true
-            assign button_style = 'outline'
-            assign button_content = 'product.general.unavailable_button' | t
-          elsif product.selected_or_first_available_variant.available == false
-            assign button_disabled = true
-            assign button_style = 'outline'
-            assign button_content = 'product.general.sold_out_button' | t
-          else
-            if product.template_suffix contains 'pre-order'
-              assign button_content = 'product.general.pre_order_button' | t
-            else
-              assign button_content = 'product.general.add_to_cart_button' | t
-            endif
-          endif
-        -%}
-
-        {%- render 'button', content: button_content, style: button_style, type: 'submit', form: product_form_id, disabled: button_disabled -%}
-      </buy-buttons>
-    </product-sticky-bar>
-  </product-rerender>
+  {%- liquid
+    case localization.country.currency.iso_code
+      when 'USD'
+        assign sticky_threshold = settings.cart_free_shipping_threshold_usd
+      when 'GBP'
+        assign sticky_threshold = settings.cart_free_shipping_threshold_gbp
+      when 'AUD'
+        assign sticky_threshold = settings.cart_free_shipping_threshold_aud
+      when 'EUR'
+        assign sticky_threshold = settings.cart_free_shipping_threshold_eur
+      when 'CAD'
+        assign sticky_threshold = settings.cart_free_shipping_threshold_cad
+      else
+        assign sticky_threshold = blank
+    endcase
+    assign add_label = section.settings.sticky_bar_add_label | default: 'Add to cart'
+    assign configure_label = section.settings.sticky_bar_mobile_label | default: 'Configure'
+  -%}
+  <product-sticky-bar id="{{ product_form_id }}-sticky-bar" class="product-sticky-bar product-sticky-bar--flat" data-ready="false">
+    <button type="button" class="product-sticky-bar__action" data-sticky-action data-add-label="{{ add_label | escape }}" data-configure-label="{{ configure_label | escape }}">
+      <span class="product-sticky-bar__label">
+        <span data-sticky-label>{{ configure_label }}</span>
+        <svg class="product-sticky-bar__chevron" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+          <path d="M3.5 10L8 5.5L12.5 10" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"/>
+        </svg>
+      </span>
+      {%- if sticky_threshold != blank -%}
+        <span class="product-sticky-bar__note">Free express shipping over {{ sticky_threshold | times: 100 | money_without_trailing_zeros }}</span>
+      {%- endif -%}
+    </button>
+  </product-sticky-bar>
 
   <script>
     (() => {
-      // Everything is re-queried on each pass: product-rerender replaces both the sticky bar and the
-      // info column on variant change, so cached element references go stale.
-      const getBar = () => document.querySelector('#{{ product_form_id }}-sticky-bar product-sticky-bar');
+      const bar = document.getElementById('{{ product_form_id }}-sticky-bar');
+      const button = bar.querySelector('[data-sticky-action]');
+      const label = bar.querySelector('[data-sticky-label]');
+      const smooth = () => window.matchMedia('(prefers-reduced-motion: no-preference)').matches ? 'smooth' : 'auto';
+      const picker = () => document.querySelector('c-co-lab-picker, c-co-lab-necklace-picker');
+      const buyButtons = () => document.querySelector('[data-block-type="buy-buttons"] buy-buttons');
 
-      // The buy buttons in the info column, or the Co-Lab picker for made-to-order products.
-      const getAnchor = () => document.querySelector('[data-block-type="buy-buttons"] buy-buttons')
-        || document.querySelector('.co-lab-picker');
+      // Core products preselect the first size, so only a size the customer picked counts as chosen.
+      let optionChosen = {{ product.has_only_default_variant | json }} || /[?&]variant=/.test(location.search);
+
+      const anchor = () => {
+        const colab = picker();
+        return colab ? colab.querySelector('.c-co-lab-picker__buy') || colab : buyButtons();
+      };
+
+      const ready = () => {
+        const colab = picker();
+        if (!colab) return optionChosen;
+        if (typeof colab.selectionComplete === 'function') return colab.selectionComplete();
+        return Boolean(colab.querySelector('[data-size-select]')?.value);
+      };
+
+      // --sticky-area-height is a calc() expression, so measure it rather than parse it.
+      const stickyArea = Object.assign(document.createElement('div'), { ariaHidden: 'true' });
+      stickyArea.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;height:var(--sticky-area-height,0px)';
+      document.body.append(stickyArea);
 
       let frame = null;
-
       const update = () => {
         frame = null;
+        const target = anchor();
+        if (!target) return;
 
-        const bar = getBar();
-        const anchor = getAnchor();
-
-        if (!bar || !anchor) {
-          return;
-        }
-
-        const footer = document.querySelector('.shopify-section--footer');
-        const anchorPassed = anchor.getBoundingClientRect().bottom < 0;
-        const footerHidden = !footer || footer.getBoundingClientRect().top > window.innerHeight;
-
-        const visible = anchorPassed && footerHidden;
+        const headerHeight = stickyArea.offsetHeight;
+        const footer = document.querySelector('.promise-club, .shopify-section--footer');
+        const visible = target.getBoundingClientRect().bottom < headerHeight
+          && (!footer || footer.getBoundingClientRect().top > window.innerHeight);
         bar.classList.toggle('is-visible', visible);
+
+        const isReady = ready();
+        bar.dataset.ready = String(isReady);
+        label.textContent = isReady ? button.dataset.addLabel : button.dataset.configureLabel;
 
         // The app icon overlaps the sticky bar, so hide it while the bar is shown.
         const acpIcon = document.getElementById('acp-icon');
         if (acpIcon) {
-          if (visible) {
-            acpIcon.style.setProperty('display', 'none', 'important');
-          } else {
-            acpIcon.style.removeProperty('display');
-          }
+          if (visible) acpIcon.style.setProperty('display', 'none', 'important');
+          else acpIcon.style.removeProperty('display');
         }
       };
-
       const schedule = () => {
         frame ??= requestAnimationFrame(update);
       };
 
+      document.addEventListener('change', (event) => {
+        if (event.target.closest('variant-picker, [data-block-type="variant-picker"]')) optionChosen = true;
+        schedule();
+      });
       window.addEventListener('scroll', schedule, { passive: true });
       window.addEventListener('resize', schedule, { passive: true });
       document.addEventListener('variant:change', schedule);
+      document.addEventListener('colab:change', schedule);
       update();
 
-      // Delegated so it survives the product-rerender markup swap on variant change.
-      document.addEventListener('click', (event) => {
-        if (!event.target.closest('[data-sticky-configure]')) {
-          return;
+      button.addEventListener('click', () => {
+        const colab = picker();
+        if (ready()) {
+          const submit = colab
+            ? colab.querySelector('[data-action="submit"]')
+            : buyButtons()?.querySelector('[type="submit"]');
+          if (submit) {
+            submit.click();
+            return;
+          }
         }
 
-        getAnchor()?.scrollIntoView({
-          block: 'center',
-          behavior: window.matchMedia('(prefers-reduced-motion: no-preference)').matches ? 'smooth' : 'auto'
-        });
+        const options = colab
+          ? colab.querySelector('[data-size-select]') || colab
+          : document.querySelector('[data-block-type="variant-picker"]') || anchor();
+        options?.scrollIntoView({ block: 'center', behavior: smooth() });
+        if (options?.matches('select')) options.focus({ preventScroll: true });
       });
     })();
   </script>
@@ -402,9 +399,15 @@ quick buy information in a template, that will be extracted in JS, which ensures
     },
     {
       "type": "text",
+      "id": "sticky_bar_add_label",
+      "label": "Sticky bar label when ready",
+      "default": "Add to cart"
+    },
+    {
+      "type": "text",
       "id": "sticky_bar_mobile_label",
-      "label": "Mobile sticky bar button label",
-      "info": "Shown on the sticky bar on mobile. Tapping it scrolls back up to the product options.",
+      "label": "Sticky bar label before options are chosen",
+      "info": "Tapping it scrolls back up to the product options.",
       "default": "Configure"
     },
     {
