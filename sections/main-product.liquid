@@ -36,16 +36,23 @@
     }
   }
 
-  html.product-announcement-hidden {
+  html:root {
     --announcement-bar-is-sticky: 0;
   }
 
-  html.product-announcement-hidden .shopify-section--announcement-bar {
+  .shopify-section--announcement-bar {
     position: relative !important;
   }
 
-  .shopify-section--header {
-    transition: top 0.25s ease-in-out, transform 0.25s ease-in-out;
+  @media screen and (max-width: 699px) {
+    .shopify-section--main-product > .section-spacing {
+      padding-block-end: 1rem;
+    }
+
+    .shopify-section--main-product + .shopify-section--apps > .section-spacing {
+      padding-block-start: 1rem;
+      border-block-start-width: 0;
+    }
   }
 
   .product-sticky-bar.product-sticky-bar--flat {
@@ -104,13 +111,7 @@
     opacity: 0.8;
   }
 
-  .product-sticky-bar__chevron {
-    display: none;
-  }
 
-  .product-sticky-bar[data-ready="false"] .product-sticky-bar__chevron {
-    display: block;
-  }
 </style>
 
 {%- assign color_scheme_hash = section.settings.color_scheme.settings.background_gradient | default: section.settings.color_scheme.settings.background | md5 -%}
@@ -191,15 +192,6 @@
   </div>
 </div>
 
-<script>
-  (() => {
-    const root = document.documentElement;
-    const sync = () => root.classList.toggle('product-announcement-hidden', window.scrollY > 10);
-    window.addEventListener('scroll', sync, { passive: true });
-    sync();
-  })();
-</script>
-
 {%- if section.settings.show_sticky_add_to_cart and product.available -%}
   {%- liquid
     case localization.country.currency.iso_code
@@ -217,15 +209,11 @@
         assign sticky_threshold = blank
     endcase
     assign add_label = section.settings.sticky_bar_add_label | default: 'Add to cart'
-    assign configure_label = section.settings.sticky_bar_mobile_label | default: 'Configure'
   -%}
   <product-sticky-bar id="{{ product_form_id }}-sticky-bar" class="product-sticky-bar product-sticky-bar--flat" data-ready="false">
-    <button type="button" class="product-sticky-bar__action" data-sticky-action data-add-label="{{ add_label | escape }}" data-configure-label="{{ configure_label | escape }}">
+    <button type="button" class="product-sticky-bar__action" data-sticky-action>
       <span class="product-sticky-bar__label">
-        <span data-sticky-label>{{ configure_label }}</span>
-        <svg class="product-sticky-bar__chevron" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
-          <path d="M3.5 10L8 5.5L12.5 10" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"/>
-        </svg>
+        <span>{{ add_label }}</span>
       </span>
       {%- if sticky_threshold != blank -%}
         <span class="product-sticky-bar__note">Free express shipping over {{ sticky_threshold | times: 100 | money_without_trailing_zeros }}</span>
@@ -237,7 +225,6 @@
     (() => {
       const bar = document.getElementById('{{ product_form_id }}-sticky-bar');
       const button = bar.querySelector('[data-sticky-action]');
-      const label = bar.querySelector('[data-sticky-label]');
       const smooth = () => window.matchMedia('(prefers-reduced-motion: no-preference)').matches ? 'smooth' : 'auto';
       const picker = () => document.querySelector('c-co-lab-picker, c-co-lab-necklace-picker');
       const buyButtons = () => document.querySelector('[data-block-type="buy-buttons"] buy-buttons');
@@ -276,7 +263,6 @@
 
         const isReady = ready();
         bar.dataset.ready = String(isReady);
-        label.textContent = isReady ? button.dataset.addLabel : button.dataset.configureLabel;
 
         // The app icon overlaps the sticky bar, so hide it while the bar is shown.
         const acpIcon = document.getElementById('acp-icon');
@@ -414,13 +400,6 @@ quick buy information in a template, that will be extracted in JS, which ensures
       "id": "sticky_bar_add_label",
       "label": "Sticky bar label when ready",
       "default": "Add to cart"
-    },
-    {
-      "type": "text",
-      "id": "sticky_bar_mobile_label",
-      "label": "Sticky bar label before options are chosen",
-      "info": "Tapping it scrolls back up to the product options.",
-      "default": "Configure"
     },
     {
       "type": "checkbox",
