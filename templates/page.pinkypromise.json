@@ -1,0 +1,429 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "color_scheme": "scheme-4b89ab38-ef9e-4a8e-9dd4-1364903253e0",
+        "show_title": true,
+        "page_width": "xs"
+      }
+    },
+    "image_with_text_block_p9eFH4": {
+      "type": "image-with-text-block",
+      "blocks": {
+        "richtext_CEY6N8": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>We built The Promise Co. around one simple belief:</p><p><strong>A promise ring shouldn’t only mean one thing.</strong></p><p>Promises are what tie everything together.</p><p>A promise can be to your partner, your best friend, your family - or yourself.</p><p>And that idea became&nbsp;</p><p><strong>PINKY PROMISE</strong>™</p>"
+          }
+        }
+      },
+      "block_order": [
+        "richtext_CEY6N8"
+      ],
+      "name": "t:sections.image_with_text_block.presets.image_with_text_block.name",
+      "settings": {
+        "color_scheme": "scheme-4b89ab38-ef9e-4a8e-9dd4-1364903253e0",
+        "image_size": "lg",
+        "image": "shopify://shop_images/Untitled_2500_x_900_px_1.png",
+        "mobile_image": "shopify://shop_images/Untitled_design_-_2026-09-28T113420.034.png",
+        "content_width": "md",
+        "enable_parallax": false,
+        "remove_vertical_spacing": true
+      }
+    },
+    "ss_feature_20_V6DzYJ": {
+      "type": "ss-feature-20",
+      "blocks": {
+        "heading_3rPqhQ": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Over 10,000 promises, and <strong>every one</strong> means something different.</p>",
+            "heading_custom": false,
+            "heading_font": "josefin_sans_n4",
+            "heading_size": 33,
+            "heading_size_mobile": 24,
+            "heading_height": 150,
+            "heading_align": "left",
+            "heading_align_mobile": "left",
+            "heading_mt": 0,
+            "heading_mt_mobile": 52,
+            "heading_color": "#000000"
+          }
+        },
+        "feature_QD7wa3": {
+          "type": "feature",
+          "settings": {
+            "icon": "star",
+            "heading": "Promises to yourself",
+            "text": "A reminder of who you are, what you’ve achieved or what you’re working towards."
+          }
+        },
+        "feature_KAkQB8": {
+          "type": "feature",
+          "settings": {
+            "icon": "love",
+            "heading": "Promises to love",
+            "text": "For partners, soulmates and the people you choose again and again."
+          }
+        },
+        "feature_dPxExd": {
+          "type": "feature",
+          "settings": {
+            "icon": "people",
+            "heading": "Promises to family",
+            "text": "Birthstones, initials and stories that keep the people you love close."
+          }
+        },
+        "feature_jPxr7f": {
+          "type": "feature",
+          "settings": {
+            "icon": "heart",
+            "heading": "Promises to friends",
+            "text": "A modern take on the friendship ring  - made to mean something."
+          }
+        },
+        "button_LdfJ6w": {
+          "type": "button",
+          "settings": {
+            "button": "Shop Pinky Promises",
+            "button_url": "shopify://collections/pinky-promise-rings",
+            "button_custom": false,
+            "button_font": "josefin_sans_n4",
+            "button_size": 14,
+            "button_size_mobile": 14,
+            "button_height": 100,
+            "button_mt": 80,
+            "button_mt_mobile": 40,
+            "button_padding_vertical": 16,
+            "button_padding_vertical_mobile": 16,
+            "button_padding_horizontal": 30,
+            "button_padding_horizontal_mobile": 30,
+            "button_radius": 4,
+            "button_border_thickness": 1,
+            "button_style": "outline_arrow",
+            "button_align": "left",
+            "button_align_mobile": "left",
+            "button_color": "#333333",
+            "button_hover_color": "#FFFFFF",
+            "button_bg_color": "",
+            "button_bg_hover_color": "#333333",
+            "button_border_color": "#333333",
+            "button_border_hover_color": "#333333"
+          }
+        },
+        "image_UdyMcR": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/15_61c098c9-539c-4125-a9e1-ff1d1de983e5.png",
+            "url": "",
+            "column": 1
+          }
+        },
+        "image_3kVz6t": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/7_9ee1a05c-0dd6-44f4-ac39-b452a0efbd50.png",
+            "url": "",
+            "column": 2
+          }
+        },
+        "image_iQPq48": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/10_0ccf0d87-67e4-4ef5-be61-d15526476307.png",
+            "url": "",
+            "column": 3
+          }
+        },
+        "image_Xq7Jpt": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/4_368c042e-7b0b-44b9-a069-683aac6a0c62.png",
+            "url": "",
+            "column": 1
+          }
+        },
+        "image_c9U8TW": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/11_bc5c0153-5339-4287-99ef-2633b4df365a.png",
+            "url": "",
+            "column": 2
+          }
+        },
+        "image_B8mUhp": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/5_79d34243-32fa-4c8b-80c2-92eb1517b1dc.png",
+            "url": "",
+            "column": 3
+          }
+        },
+        "image_FM8if7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/13_d689f9b9-c4a8-4d5e-997b-98cff8c7c501.png",
+            "url": "",
+            "column": 1
+          }
+        },
+        "image_LHHpne": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/12_63536726-942b-46ae-8138-dea794f3f86b.png",
+            "url": "",
+            "column": 2
+          }
+        },
+        "image_8XtMME": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/9_2b9aa4ea-ef71-461b-8deb-5c7947554054.png",
+            "url": "",
+            "column": 3
+          }
+        },
+        "image_MVaPbq": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/3_83edf193-2477-4170-b96b-ac773070dca8.png",
+            "url": "",
+            "column": 1
+          }
+        },
+        "image_VDGraT": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/8_b8277d2e-1f30-469e-a087-0c527fa9bb07.png",
+            "url": "",
+            "column": 2
+          }
+        },
+        "image_tdpdqF": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/2_8ccb730e-45a9-4d05-b024-4072334b8831.png",
+            "url": "",
+            "column": 3
+          }
+        }
+      },
+      "block_order": [
+        "heading_3rPqhQ",
+        "feature_QD7wa3",
+        "feature_KAkQB8",
+        "feature_dPxExd",
+        "feature_jPxr7f",
+        "button_LdfJ6w",
+        "image_UdyMcR",
+        "image_3kVz6t",
+        "image_iQPq48",
+        "image_Xq7Jpt",
+        "image_c9U8TW",
+        "image_B8mUhp",
+        "image_FM8if7",
+        "image_LHHpne",
+        "image_8XtMME",
+        "image_MVaPbq",
+        "image_VDGraT",
+        "image_tdpdqF"
+      ],
+      "name": "SS - Feature #20",
+      "settings": {
+        "body_gap": 72,
+        "body_gap_mobile": 40,
+        "items_row": 2,
+        "items_row_mobile": 2,
+        "items_gap": 40,
+        "items_gap_mobile": 20,
+        "items_mt": 60,
+        "items_mt_mobile": 24,
+        "item_gap": 20,
+        "item_gap_mobile": 10,
+        "icon_size": 50,
+        "icon_size_mobile": 40,
+        "item_heading_custom": true,
+        "item_heading_font": "josefin_sans_n4",
+        "item_heading_size": 25,
+        "item_heading_size_mobile": 18,
+        "item_heading_height": 130,
+        "item_text_custom": true,
+        "item_text_font": "josefin_sans_n4",
+        "item_text_size": 13,
+        "item_text_size_mobile": 13,
+        "item_text_height": 150,
+        "images_height": 740,
+        "images_height_mobile": 300,
+        "images_gap": 20,
+        "images_gap_mobile": 16,
+        "images_animation": "back_forth",
+        "images_speed": 76,
+        "image_radius": 12,
+        "image_border_thickness": 0,
+        "image_ratio": "portrait",
+        "image_ratio_mobile": "portrait",
+        "image_shadow": false,
+        "icon_color": "#000000",
+        "item_heading_color": "#000000",
+        "item_text_color": "#000000",
+        "image_border_color": "#FFFFFF",
+        "background_color": "#F8F7F5",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 3,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_horizontal": 6,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": true,
+        "content_width": 160,
+        "border_thickness": 0,
+        "section_radius": 16,
+        "lazy": true
+      }
+    },
+    "timeline_JgHEJa": {
+      "type": "timeline",
+      "blocks": {
+        "item_WKdnhc": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/1_2b0e277e-9650-4f8e-8b7d-13b943a9c162.png",
+            "label": "history",
+            "subheading": "",
+            "title": "<strong>From power to Promise</strong>",
+            "content": "<p><strong>Because the pinky has always meant something.</strong></p><p><strong>For centuries, signet rings were worn as symbols of identity, family, status and power.</strong></p><p><strong>Kings, politicians and people of influence wore them on their little finger A tiny ring that said:</strong></p><p><strong>This is who I am.</strong></p><p><strong>We loved that.</strong></p><p><strong>But instead of wearing somebody else's history, we wanted to create jewellery that could hold your own.</strong></p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link",
+            "mobile_text_color": "#ffffff"
+          }
+        },
+        "item_PjAGM6": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/2_8ccb730e-45a9-4d05-b024-4072334b8831.png",
+            "label": "REINVENTED",
+            "subheading": "",
+            "title": "<strong>&nbsp;THE PROMISE RING, REINVENTED&nbsp;</strong>",
+            "content": "<p><strong>Promise rings have existed in different forms for hundreds of years.</strong></p><p><strong>But somewhere along the way, the promise ring became defined almost entirely by romantic relationships - often as the ring before </strong><em><strong>the</strong></em><strong> ring.</strong></p><p><em><strong>We wanted to change that.</strong></em></p><p><strong>When we created The Promise Co., we built a new world around what a promise could mean.</strong></p><p><strong>A promise to your partner, to your best friend, to your family.</strong></p><p><strong>And, perhaps most importantly, a promise to yourself.</strong></p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link",
+            "mobile_text_color": "#ffffff"
+          }
+        },
+        "item_qwAGtH": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/5_3fcf85bf-43d1-4056-bc38-993d1905bcca.png",
+            "label": "why pinky?",
+            "subheading": "",
+            "title": "<strong>todays modern promise</strong>",
+            "content": "<p><strong>The smallest finger has always carried more weight than you might expect.</strong></p><p><strong>Historically the home of the signet ring - a piece designed to represent exactly who its wearer was - the pinky feels like the natural home for a modern promise.</strong></p><p><strong>Not a placeholder for an engagement.</strong></p><p><strong>Not something defined by anybody else.</strong></p><p><strong>Something chosen by you, for whatever matters to you.</strong></p><p><strong>Your finger. Your story. Your promise.</strong></p>",
+            "link_text": "",
+            "link_url": "",
+            "link_style": "link",
+            "mobile_text_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "item_WKdnhc",
+        "item_PjAGM6",
+        "item_qwAGtH"
+      ],
+      "name": "t:sections.timeline.presets.timeline.name",
+      "settings": {
+        "color_scheme": "scheme-4b89ab38-ef9e-4a8e-9dd4-1364903253e0",
+        "item_color_scheme": "scheme-b68b61c5-ba0e-4161-a0e3-3d59622e9bf4",
+        "separate_section_with_border": true
+      }
+    },
+    "rich_text_tjfjgz": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_AcHhYz": {
+          "type": "heading",
+          "settings": {
+            "text": "Ready to make your Pinky Promise?",
+            "heading_tag": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_AcHhYz"
+      ],
+      "name": "t:sections.rich_text.presets.rich_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "content_width": "md",
+        "text_position": "center",
+        "remove_vertical_spacing": false,
+        "use_baka_too_font": true,
+        "use_ogg_font": false,
+        "use_compact_spacing": false,
+        "section_id": ""
+      }
+    },
+    "category_cards_g34Wry": {
+      "type": "category-cards",
+      "blocks": {
+        "category_image_c7tkKJ": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-07-30T111350.973.png",
+            "title": "Pinky Rings",
+            "description": "<p>trending</p>",
+            "link": "shopify://collections/pinky-promise-rings"
+          }
+        },
+        "category_image_Lpjhhk": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/custom-2.png",
+            "title": "Custom Jewelry",
+            "description": "<p>Shop</p>",
+            "link": "shopify://collections/custom-jewelry"
+          }
+        }
+      },
+      "block_order": [
+        "category_image_c7tkKJ",
+        "category_image_Lpjhhk"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "background_color": "#F2EEE7",
+        "title_color": "#000000",
+        "subtitle_color": "#666666",
+        "section_padding_top": 0,
+        "section_padding_bottom": 64,
+        "mobile_single_column": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_with_text_block_p9eFH4",
+    "ss_feature_20_V6DzYJ",
+    "timeline_JgHEJa",
+    "rich_text_tjfjgz",
+    "category_cards_g34Wry"
+  ]
+}

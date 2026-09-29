@@ -1,0 +1,389 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "lab_hero": {
+      "type": "lab-hero",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "content_width": "lg",
+        "remove_vertical_spacing": true,
+        "separate_section_with_border": false,
+        "no_bottom_spacing": false,
+        "background_color": "rgba(0,0,0,0)",
+        "anchor_id": "",
+        "content_alignment": "center",
+        "background_image": "shopify://shop_images/Untitled_design-52.png",
+        "background_image_mobile": "shopify://shop_images/Untitled_design-49.png",
+        "background_asset": "co-lab-collection-hero.png",
+        "scrim_opacity": 25,
+        "logo_asset": "",
+        "logo_max_width": 200,
+        "use_collection_content": true,
+        "eyebrow": "",
+        "heading": "",
+        "heading_tag": "h1",
+        "body": "",
+        "button_label": "",
+        "button_link": "#products",
+        "button_style": "outline",
+        "button_background": "#ffffff",
+        "button_text_color": "#1a1a1a",
+        "button2_label": "",
+        "button2_link": "#faqs",
+        "button2_style": "solid",
+        "button2_background": "#1a1a1a",
+        "button2_text_color": "#ffffff"
+      }
+    },
+    "wearable_stories": {
+      "type": "co-lab-steps",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "icon": "shopify://shop_images/step-1-choose-piece.png",
+            "step_label": "Step 1",
+            "title": "Choose a design to make your own"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "icon": "shopify://shop_images/Artboard_33_4x_a331b0fc-7364-4b91-8dfe-db9ecd4ec7cd.png",
+            "step_label": "Step 2",
+            "title": "Select precious metal & size"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "icon": "shopify://shop_images/step-3-customisations.png",
+            "step_label": "Step 3",
+            "title": "Choose your stones & engraving"
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "icon": "shopify://shop_images/step-4-dispatch.png",
+            "step_label": "Made For you",
+            "title": "Our master jewellers hand-set your piece"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "content_width": "md",
+        "subheading": "",
+        "heading": "",
+        "remove_vertical_spacing": false,
+        "separate_section_with_border": false
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "hide_product_information": false,
+        "show_intro_card": true,
+        "intro_card_position": "third",
+        "intro_card_white_bg": false,
+        "intro_card_image": "shopify://shop_images/TELL_YOUR_STORY-2.png",
+        "intro_card_heading": "",
+        "intro_card_text": "",
+        "intro_card_button_label": "",
+        "intro_card_button_link": "",
+        "products_per_page": 48,
+        "products_per_row_mobile": "2",
+        "products_size_desktop": "medium",
+        "show_grid_mode_selector": true,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "filter_layout": "sidebar",
+        "quick_links_menu": "",
+        "show_sort_by": true,
+        "show_filters": true,
+        "show_results_count": true,
+        "show_filter_group_name": false,
+        "show_filter_values_count": false,
+        "open_filters_by_default": false
+      }
+    },
+    "lab_hero_birthstones": {
+      "type": "lab-hero",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "content_width": "md",
+        "remove_vertical_spacing": false,
+        "separate_section_with_border": false,
+        "no_bottom_spacing": true,
+        "background_color": "#fcfbfa",
+        "anchor_id": "birthstones",
+        "content_alignment": "center",
+        "background_asset": "",
+        "scrim_opacity": 25,
+        "logo_asset": "",
+        "logo_max_width": 200,
+        "use_collection_content": false,
+        "eyebrow": "",
+        "heading": "Our BirthStones",
+        "heading_tag": "h2",
+        "body": "",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "outline",
+        "button_background": "#ffffff",
+        "button_text_color": "#1a1a1a",
+        "button2_label": "",
+        "button2_link": "#faqs",
+        "button2_style": "solid",
+        "button2_background": "#1a1a1a",
+        "button2_text_color": "#ffffff"
+      }
+    },
+    "lab_birthstones": {
+      "type": "lab-birthstones",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "content_width": "lg",
+        "remove_vertical_spacing": false,
+        "separate_section_with_border": false,
+        "no_top_spacing": true,
+        "background_color": "#fcfbfa",
+        "columns_desktop": 6,
+        "columns_mobile": 3,
+        "icon_max_width": 30,
+        "button_label": "",
+        "button_link": "",
+        "button_style": "solid",
+        "button_background": "#ffffff",
+        "button_text_color": "#1c1c1c"
+      }
+    },
+    "category_cards_6WFay4": {
+      "type": "category-cards",
+      "blocks": {
+        "category_image_NeDNHn": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T093421.486.png",
+            "title": "Best Sellers",
+            "description": "<p>discover</p>",
+            "link": "shopify://collections/best-sellers"
+          }
+        },
+        "category_image_PH73ph": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_-_2026-04-06T093409.150.png",
+            "title": "Shop for Her",
+            "description": "<p>Promise Rings</p>",
+            "link": "shopify://collections/for-her"
+          }
+        },
+        "category_image_Ajk8nD": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design-31.png",
+            "title": "Gold Promise Rings",
+            "description": "<p>Shop</p>",
+            "link": "shopify://collections/gold-promise-rings"
+          }
+        },
+        "category_image_TgeF8U": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/emerald_solitaire.png",
+            "title": "Silver Promise Rings",
+            "description": "<p>Explore</p>",
+            "link": "shopify://collections/silver-promise-rings"
+          }
+        }
+      },
+      "block_order": [
+        "category_image_NeDNHn",
+        "category_image_PH73ph",
+        "category_image_Ajk8nD",
+        "category_image_TgeF8U"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "background_color": "#ffffff",
+        "title_color": "#000000",
+        "subtitle_color": "#666666",
+        "section_padding_top": 64,
+        "section_padding_bottom": 64,
+        "mobile_single_column": false
+      }
+    },
+    "image_with_text_xTqgtQ": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_eWVawb": {
+          "type": "subheading",
+          "settings": {
+            "text": ""
+          }
+        },
+        "heading_nXzati": {
+          "type": "heading",
+          "settings": {
+            "text": "Birthstone Promise Rings With Personal Meaning",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_6XWwry": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>A birthstone promise ring tells more than one story. The ring represents the promise itself, while the stone connects it to a particular person, date or memory.<br/><br/>You might choose your partner’s birthstone, the month you first met or the stone associated with a child, best friend or family member. You may simply choose the color that feels most like the person receiving it.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_eWVawb",
+        "heading_nXzati",
+        "richtext_6XWwry"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/2_e91b2e95-1d12-44b0-a7ca-8f85eb66e8c8.png",
+        "reveal_on_scroll": true,
+        "image_position": "start",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "image_with_text_9DtyNQ": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_bieyrg": {
+          "type": "subheading",
+          "settings": {
+            "text": ""
+          }
+        },
+        "heading_DJByPG": {
+          "type": "heading",
+          "settings": {
+            "text": "Our Birthstones",
+            "heading_tag": "h1"
+          }
+        },
+        "richtext_bVjiyJ": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>Our birthstone colors have been selected to represent every month of the year.</p><p>January: Garnet, deep red</p><p>February: Amethyst, purple</p><p>March: Aquamarine, light blue</p><p>April: Diamond Simulant, clear</p><p>May: Emerald, rich green</p><p>June: Lavender, soft purple</p><p>July: Ruby, vivid red</p><p>August: Apple Green, bright green</p><p>September: Sapphire Blue, deep blue</p><p>October: Pink, soft pink</p><p>November: Champagne, warm golden tone</p><p>December: Tanzanite, blue-violet</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_bieyrg",
+        "heading_DJByPG",
+        "richtext_bVjiyJ"
+      ],
+      "name": "t:sections.image_with_text.presets.image_with_text.name",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": true,
+        "image": "shopify://shop_images/3_dda7e264-9420-42b2-a116-98e6e28cabd8.png",
+        "reveal_on_scroll": true,
+        "image_position": "end",
+        "content_width": "sm",
+        "remove_vertical_spacing": true
+      }
+    },
+    "faq_QJJp3F": {
+      "type": "faq",
+      "blocks": {
+        "question_Ln3MWX": {
+          "type": "question",
+          "settings": {
+            "question": "What is a birthstone promise ring?",
+            "answer": "<p>A birthstone promise ring features a stone color associated with a month of the year. It combines the meaning of a promise ring with a personal connection to a birthday, date, loved one or memory.</p>"
+          }
+        },
+        "question_XmWNA4": {
+          "type": "question",
+          "settings": {
+            "question": "Which birthstones are available?",
+            "answer": "<p>The available colors are January Garnet, February Amethyst, March Aquamarine, April Diamond Simulant, May Emerald, June Lavender, July Ruby, August Apple Green, September Sapphire Blue, October Pink, November Champagne and December Tanzanite.</p>"
+          }
+        },
+        "question_x8663n": {
+          "type": "question",
+          "settings": {
+            "question": "Do I have to choose the wearer’s birth month?",
+            "answer": "<p>No. You can choose a partner’s birthstone, a child’s birthstone, an anniversary month or simply a color that feels personal to the wearer.<br/></p>"
+          }
+        },
+        "question_gqnBQ4": {
+          "type": "question",
+          "settings": {
+            "question": "Can a birthstone promise ring feature more than one stone?",
+            "answer": "<p>Selected designs allow more than one birthstone. This can be used to represent a couple, children, family members or several meaningful months within one ring.<br/></p>"
+          }
+        },
+        "question_gdbHLn": {
+          "type": "question",
+          "settings": {
+            "question": "Are birthstone promise rings only for romantic relationships?",
+            "answer": "<p>No. They can represent romantic love, friendship, family, self-love or a personal milestone. The meaning depends on the person and promise behind the ring.</p>"
+          }
+        },
+        "question_G9KErz": {
+          "type": "question",
+          "settings": {
+            "question": "Do the personalization options vary by ring?",
+            "answer": "<p>Yes. The number, position and style of birthstones available depend on the design. Check the individual product page for the exact options before ordering.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_Ln3MWX",
+        "question_XmWNA4",
+        "question_x8663n",
+        "question_gqnBQ4",
+        "question_gdbHLn",
+        "question_G9KErz"
+      ],
+      "name": "t:sections.faq.presets.faq.name",
+      "settings": {
+        "color_scheme": "scheme-27cf44bf-c8a8-484b-bfb4-2b967cabc2a7",
+        "separate_section_with_border": true,
+        "anchor_id": "",
+        "show_categories": false,
+        "subheading": "Frequently Asked Questions",
+        "title": "Birthstone Promise Rings",
+        "content": ""
+      }
+    }
+  },
+  "order": [
+    "lab_hero",
+    "wearable_stories",
+    "main",
+    "lab_hero_birthstones",
+    "lab_birthstones",
+    "category_cards_6WFay4",
+    "image_with_text_xTqgtQ",
+    "image_with_text_9DtyNQ",
+    "faq_QJJp3F"
+  ]
+}

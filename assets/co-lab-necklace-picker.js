@@ -224,34 +224,26 @@ class CoLabNecklacePicker extends HTMLElement {
 
   renderReviewInto(container) {
     container.textContent = '';
-    const card = this.el('c-co-lab-cart-bundle', 'c-co-lab-cart-bundle');
-
-    card.appendChild(this.el('header', 'c-co-lab-cart-bundle__header', [
-      this.el('h2', 'c-co-lab-cart-bundle__title', this.productTitle),
-      this.el('p', 'c-co-lab-cart-bundle__base-price', this.basePriceDisplay()),
-    ]));
+    const shared = CoLabPicker.prototype;
+    const card = this.el('c-co-lab-cart-bundle', 'c-co-lab-cart-bundle c-co-lab-cart-bundle--heirloom');
 
     const qty = Math.max(1, parseInt(this.querySelector('input[name="quantity"]')?.value, 10) || 1);
-    const metalRows = [];
-    if (this.selectedMetal) metalRows.push(this.reviewRow('Precious Metal', this.selectedMetal));
-    if (this.selectedSize) metalRows.push(this.reviewRow('Chain length', this.selectedSize));
-    metalRows.push(this.reviewRow('Quantity', String(qty)));
+    const rows = [];
+    if (this.selectedMetal) rows.push(this.reviewRow('Precious Metal', this.selectedMetal));
+    if (this.selectedSize) rows.push(this.reviewRow('Chain length', this.selectedSize));
+    rows.push(this.reviewRow('Quantity', String(qty)));
+    this.optionInputs()
+      .filter((i) => i.value)
+      .forEach((i) => rows.push(this.reviewRow(i.dataset.optionLabel, i.value, i.dataset.icon || '')));
+
     card.appendChild(this.el('section', 'c-co-lab-cart-bundle__group', [
-      this.el('h3', 'c-co-lab-cart-bundle__group-title', 'Metal, Chain and Quantity'),
-      ...metalRows,
+      this.el('p', 'c-co-lab-cart-bundle__product', this.productTitle),
+      this.el('h3', 'c-co-lab-cart-bundle__group-title c-co-lab-cart-bundle__group-title--made', 'Made Just For You'),
+      ...rows,
     ]));
 
-    const customRows = this.optionInputs()
-      .filter((i) => i.value)
-      .map((i) => this.reviewRow(i.dataset.optionLabel, i.value, i.dataset.icon || ''));
-    if (customRows.length) {
-      card.appendChild(this.el('section', 'c-co-lab-cart-bundle__group', [
-        this.el('h3', 'c-co-lab-cart-bundle__group-title', 'Personalisation'),
-        ...customRows,
-      ]));
-    }
-
-    card.appendChild(this.el('p', 'c-co-lab-cart-bundle__total', this.basePriceDisplay()));
+    const total = qty === 1 ? this.basePriceDisplay() : shared.formatLikeBasePrice.call(this, this.basePrice * qty);
+    card.appendChild(shared.reviewTotal.call(this, total));
 
     const modalError = this.el('p', 'c-co-lab-picker__error');
     modalError.setAttribute('data-modal-error', '');
@@ -266,19 +258,36 @@ class CoLabNecklacePicker extends HTMLElement {
     confirmCheck.id = `${this.dataset.reviewModalId}-confirm`;
     const confirmLabel = this.el('label', 'c-co-lab-picker__confirm');
     confirmLabel.htmlFor = confirmCheck.id;
-    confirmLabel.appendChild(this.el('span', 'c-co-lab-picker__confirm-label', 'I confirm my selection is correct'));
+    const confirmText = this.el('span', 'c-co-lab-picker__confirm-label', 'Confirm selection:');
+    confirmText.id = `${confirmCheck.id}-label`;
+    confirmLabel.appendChild(confirmText);
     confirmLabel.appendChild(confirmCheck);
     card.appendChild(confirmLabel);
-    card.appendChild(this.el('p', 'c-co-lab-picker__confirm-note', 'Your piece will be crafted exactly as confirmed above - made just for you and dispatched in 2-3 weeks.'));
+    card.appendChild(this.el('p', 'c-co-lab-picker__confirm-note', 'Made just for you, exactly as confirmed above. Dispatches within 10 - 15 business days.'));
 
-    const backBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--secondary', '← Edit');
+    const backArrow = this.el('span', '', '← ');
+    backArrow.setAttribute('aria-hidden', 'true');
+    const backBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--secondary', [backArrow, document.createTextNode('Edit')]);
     backBtn.type = 'button';
     const confirmBtn = this.el('button', 'c-co-lab-cart-bundle__action c-co-lab-cart-bundle__action--primary', 'Add to cart');
     confirmBtn.type = 'button';
     confirmBtn.disabled = true;
+    confirmBtn.setAttribute('aria-describedby', confirmText.id);
     card.appendChild(this.el('div', 'c-co-lab-cart-bundle__actions', [backBtn, confirmBtn]));
 
-    confirmCheck.addEventListener('change', () => { confirmBtn.disabled = !confirmCheck.checked; });
+    const pageAtc = this.querySelector('.c-co-lab-picker__atc');
+    if (pageAtc) {
+      const cs = getComputedStyle(pageAtc);
+      const bg = cs.getPropertyValue('--button-background').trim();
+      const fg = cs.getPropertyValue('--button-text-color').trim();
+      if (bg) confirmBtn.style.background = `rgb(${bg})`;
+      if (fg) confirmBtn.style.color = `rgb(${fg})`;
+    }
+
+    confirmCheck.addEventListener('change', () => {
+      confirmBtn.disabled = !confirmCheck.checked;
+      if (confirmCheck.checked) requestAnimationFrame(() => shared.revealInModal.call(this, confirmBtn));
+    });
     confirmBtn.addEventListener('click', () => this.confirmAndAdd(confirmBtn));
     backBtn.addEventListener('click', () => this.closeModal());
 

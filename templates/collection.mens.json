@@ -53,7 +53,7 @@
     "collection-banner": {
       "type": "collection-banner",
       "settings": {
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-3",
         "image_size": "auto",
         "allow_transparent_header": true,
         "reveal": true,
@@ -74,6 +74,13 @@
       "settings": {
         "color_scheme": "scheme-2",
         "hide_product_information": false,
+        "show_intro_card": false,
+        "intro_card_position": "third",
+        "intro_card_white_bg": false,
+        "intro_card_heading": "",
+        "intro_card_text": "",
+        "intro_card_button_label": "",
+        "intro_card_button_link": "",
         "products_per_page": 48,
         "products_per_row_mobile": "2",
         "products_size_desktop": "large",
@@ -314,6 +321,7 @@
       "settings": {
         "color_scheme": "",
         "separate_section_with_border": true,
+        "anchor_id": "",
         "show_categories": false,
         "subheading": "Mens Promise Rings",
         "title": "Frequently Asked Questions",
