@@ -129,7 +129,6 @@
       "settings": {
         "color_scheme": "scheme-2",
         "separate_section_with_border": true,
-        "reduce_mobile_spacing": false,
         "stack_on_mobile": false,
         "icon_color": "",
         "text_color": "",
