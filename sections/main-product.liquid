@@ -35,6 +35,93 @@
       {%- endif -%}
     }
   }
+
+  html:root {
+    --announcement-bar-is-sticky: 0;
+  }
+
+  .shopify-section--announcement-bar {
+    position: relative !important;
+  }
+
+  @media screen and (max-width: 699px) {
+    .shopify-section--main-product > .section-spacing {
+      padding-block-end: 1.5rem;
+    }
+
+    .shopify-section--main-product + .shopify-section--apps > .section-spacing {
+      padding-block-start: 1.5rem;
+      border-block-start-width: 0;
+    }
+
+    .shopify-section--main-product + .shopify-section--apps .jm-review-widget {
+      margin-block-start: 0 !important;
+      padding-block-start: 0 !important;
+    }
+  }
+
+  .product-sticky-bar.product-sticky-bar--flat {
+    display: block;
+    inset-block: auto 0;
+    padding: 0;
+    border: 0;
+    background: #313030;
+    color: #ffffff;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-out, opacity 0.2s, visibility 0.2s;
+  }
+
+  .product-sticky-bar.product-sticky-bar--flat.is-visible {
+    transform: none;
+    box-shadow: 0 2px 0 #313030;
+  }
+
+  html.product-sticky-bar-shown {
+    background-color: #313030;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .product-sticky-bar.product-sticky-bar--flat {
+      transform: none;
+    }
+  }
+
+  .product-sticky-bar__action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.125rem;
+    width: 100%;
+    min-height: 3.5rem;
+    padding: 0.625rem 1.25rem calc(0.625rem + env(safe-area-inset-bottom));
+    background: transparent;
+    color: inherit;
+    font-family: 'covik-sans', var(--text-font-family);
+    cursor: pointer;
+  }
+
+  .product-sticky-bar__action:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: -4px;
+  }
+
+  .product-sticky-bar__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .product-sticky-bar__note {
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    opacity: 0.8;
+  }
+
+
 </style>
 
 {%- assign color_scheme_hash = section.settings.color_scheme.settings.background_gradient | default: section.settings.color_scheme.settings.background | md5 -%}
@@ -116,51 +203,120 @@
 </div>
 
 {%- if section.settings.show_sticky_add_to_cart and product.available -%}
-  <product-rerender id="{{ product_form_id }}-sticky-bar" observe-form="{{ product_form_id }}">
-    <product-sticky-bar form="{{ product_form_id }}" class="product-sticky-bar">
-      <div class="product-sticky-bar__info sm-max:hidden">
-        <div class="h-stack gap-6">
-          {%- if product.media.size > 0 -%}
-            {%- assign default_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
-            {{- default_media | image_url: width: default_media.width | image_tag: loading: 'lazy', sizes: '60px', widths: '60,120,180' -}}
-          {%- endif -%}
+  {%- liquid
+    case localization.country.currency.iso_code
+      when 'USD'
+        assign sticky_threshold = settings.cart_free_shipping_threshold_usd
+      when 'GBP'
+        assign sticky_threshold = settings.cart_free_shipping_threshold_gbp
+      when 'AUD'
+        assign sticky_threshold = settings.cart_free_shipping_threshold_aud
+      when 'EUR'
+        assign sticky_threshold = settings.cart_free_shipping_threshold_eur
+      when 'CAD'
+        assign sticky_threshold = settings.cart_free_shipping_threshold_cad
+      else
+        assign sticky_threshold = blank
+    endcase
+    assign add_label = section.settings.sticky_bar_add_label | default: 'Add to cart'
+  -%}
+  <product-sticky-bar id="{{ product_form_id }}-sticky-bar" class="product-sticky-bar product-sticky-bar--flat" data-ready="false">
+    <button type="button" class="product-sticky-bar__action" data-sticky-action>
+      <span class="product-sticky-bar__label">
+        <span>{{ add_label }}</span>
+      </span>
+      {%- if sticky_threshold != blank -%}
+        <span class="product-sticky-bar__note">Free express shipping over {{ sticky_threshold | times: 100 | money_without_trailing_zeros }}</span>
+      {%- endif -%}
+    </button>
+  </product-sticky-bar>
 
-          <div class="v-stack">
-            <span class="h6">{{ product.title }}</span>
+  <script>
+    (() => {
+      const bar = document.getElementById('{{ product_form_id }}-sticky-bar');
+      const button = bar.querySelector('[data-sticky-action]');
+      const smooth = () => window.matchMedia('(prefers-reduced-motion: no-preference)').matches ? 'smooth' : 'auto';
+      const picker = () => document.querySelector('c-co-lab-picker, c-co-lab-necklace-picker');
+      const buyButtons = () => document.querySelector('[data-block-type="buy-buttons"] buy-buttons');
 
-            {%- if product.selected_or_first_available_variant != nil -%}
-              {%- render 'price-list', variant: product.selected_or_first_available_variant, hide_unit_price: true, context: 'card' -%}
-            {%- endif -%}
-          </div>
-        </div>
-      </div>
+      // Core products preselect the first size, so only a size the customer picked counts as chosen.
+      let optionChosen = {{ product.has_only_default_variant | json }} || /[?&]variant=/.test(location.search);
 
-      <buy-buttons class="buy-buttons" template="{{ product.template_suffix | escape }}" form="{{ product_form_id }}">
-        {%- liquid
-          assign button_disabled = false
-          assign button_style = 'solid'
+      const anchor = () => {
+        const colab = picker();
+        if (colab) return colab.querySelector('[data-action="submit"]') || colab;
+        return buyButtons()?.querySelector('[type="submit"]') || buyButtons();
+      };
 
-          if product.selected_or_first_available_variant == nil
-            assign button_disabled = true
-            assign button_style = 'outline'
-            assign button_content = 'product.general.unavailable_button' | t
-          elsif product.selected_or_first_available_variant.available == false
-            assign button_disabled = true
-            assign button_style = 'outline'
-            assign button_content = 'product.general.sold_out_button' | t
-          else
-            if product.template_suffix contains 'pre-order'
-              assign button_content = 'product.general.pre_order_button' | t
-            else
-              assign button_content = 'product.general.add_to_cart_button' | t
-            endif
-          endif
-        -%}
+      // The bar comes in as the main button nears the header, while it is still fully in view.
+      const LEAD = 24;
 
-        {%- render 'button', content: button_content, style: button_style, type: 'submit', form: product_form_id, disabled: button_disabled -%}
-      </buy-buttons>
-    </product-sticky-bar>
-  </product-rerender>
+      const ready = () => {
+        const colab = picker();
+        if (!colab) return optionChosen;
+        if (typeof colab.selectionComplete === 'function') return colab.selectionComplete();
+        return Boolean(colab.querySelector('[data-size-select]')?.value);
+      };
+
+      let frame = null;
+      const update = () => {
+        frame = null;
+        const target = anchor();
+        if (!target) return;
+
+        const header = document.querySelector('.shopify-section--header');
+        const headerBottom = header ? Math.max(0, header.getBoundingClientRect().bottom) : 0;
+        const footer = document.querySelector('.promise-club, .shopify-section--footer');
+        const visible = target.getBoundingClientRect().top < headerBottom + LEAD
+          && (!footer || footer.getBoundingClientRect().top > window.innerHeight);
+        bar.classList.toggle('is-visible', visible);
+        // iOS Safari tints its toolbar from this bar; the charcoal canvas and 2px overhang stop a pale seam showing between them.
+        document.documentElement.classList.toggle('product-sticky-bar-shown', visible);
+
+        const isReady = ready();
+        bar.dataset.ready = String(isReady);
+
+        // The app icon overlaps the sticky bar, so hide it while the bar is shown.
+        const acpIcon = document.getElementById('acp-icon');
+        if (acpIcon) {
+          if (visible) acpIcon.style.setProperty('display', 'none', 'important');
+          else acpIcon.style.removeProperty('display');
+        }
+      };
+      const schedule = () => {
+        frame ??= requestAnimationFrame(update);
+      };
+
+      document.addEventListener('change', (event) => {
+        if (event.target.closest('variant-picker, [data-block-type="variant-picker"]')) optionChosen = true;
+        schedule();
+      });
+      window.addEventListener('scroll', schedule, { passive: true });
+      window.addEventListener('resize', schedule, { passive: true });
+      document.addEventListener('variant:change', schedule);
+      document.addEventListener('colab:change', schedule);
+      update();
+
+      button.addEventListener('click', () => {
+        const colab = picker();
+        if (ready()) {
+          const submit = colab
+            ? colab.querySelector('[data-action="submit"]')
+            : buyButtons()?.querySelector('[type="submit"]');
+          if (submit) {
+            submit.click();
+            return;
+          }
+        }
+
+        const options = colab
+          ? colab.querySelector('[data-size-select]') || colab
+          : document.querySelector('[data-block-type="variant-picker"]') || anchor();
+        options?.scrollIntoView({ block: 'center', behavior: smooth() });
+        if (options?.matches('select')) options.focus({ preventScroll: true });
+      });
+    })();
+  </script>
 {%- endif -%}
 
 {%- comment -%}
@@ -250,6 +406,12 @@ quick buy information in a template, that will be extracted in JS, which ensures
       "id": "show_sticky_add_to_cart",
       "label": "t:sections.main_product.show_sticky_add_to_cart",
       "default": true
+    },
+    {
+      "type": "text",
+      "id": "sticky_bar_add_label",
+      "label": "Sticky bar label when ready",
+      "default": "Add to cart"
     },
     {
       "type": "checkbox",
