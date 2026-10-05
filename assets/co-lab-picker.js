@@ -340,13 +340,21 @@ class CoLabPicker extends HTMLElement {
     return !!(this.engravingInput && this.engravingInput.value.trim());
   }
 
+  sizeLabel() {
+    return this.dataset.sizeLabel || 'Size';
+  }
+
   metalRequired() {
     return this.metalRadios.length > 0;
   }
 
+  sizeRequired() {
+    return !!this.sizeSelect;
+  }
+
   selectionComplete() {
     if (this.metalRequired() && !this.selectedMetal) return false;
-    return !!this.selectedSize;
+    return !this.sizeRequired() || !!this.selectedSize;
   }
 
   refresh() {
@@ -558,8 +566,8 @@ class CoLabPicker extends HTMLElement {
       this.showError('Please choose a metal before adding to cart.');
       return false;
     }
-    if (!this.selectedSize) {
-      this.showError('Please choose a size before adding to cart.');
+    if (this.sizeRequired() && !this.selectedSize) {
+      this.showError(`Please choose a ${this.sizeLabel().toLowerCase()} before adding to cart.`);
       return false;
     }
 
@@ -719,7 +727,7 @@ class CoLabPicker extends HTMLElement {
       : null;
     const metaRows = [];
     if (this.selectedMetal) metaRows.push(this.reviewRow('Precious Metal', this.selectedMetal));
-    if (this.selectedSize) metaRows.push(this.reviewRow('Size', this.selectedSize));
+    if (this.selectedSize) metaRows.push(this.reviewRow(this.sizeLabel(), this.selectedSize));
     metaRows.push(this.reviewRow('Quantity', String(qty)));
 
     card.appendChild(this.el('section', 'c-co-lab-cart-bundle__group', [
@@ -823,7 +831,7 @@ class CoLabPicker extends HTMLElement {
     if (this.submitting) return;
 
     if (!this.selectionComplete()) {
-      this.showModalError('Please choose a size before adding to cart.');
+      this.showModalError(`Please choose a ${this.sizeLabel().toLowerCase()} before adding to cart.`);
       return;
     }
     if (this.missingStoneSlot()) {
