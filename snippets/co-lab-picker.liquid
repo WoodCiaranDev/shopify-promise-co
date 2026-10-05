@@ -23,7 +23,6 @@ Inputs:
 {%- liquid
   assign mf = product.metafields.custom
   assign slot_count = mf.birthstone_slots.value | default: 2
-  assign hide_optional = mf.birthstone_hide_optional.value
   assign eng_max_chars = mf.engraving_max_chars.value | default: 8
 
   # Extra pricing in pence. 0 (or unset) = included in the base price; any positive
@@ -292,7 +291,7 @@ Inputs:
               -%}
               <div class="c-co-lab-picker__stone-row" data-slot="{{ slot }}">
                 <p class="c-co-lab-picker__stone-label">
-                  <span>{{ slot_label }}:{% if slot != 1 and hide_optional != true %} <span class="c-co-lab-picker__optional">(optional)</span>{% endif %}</span>
+                  <span>{{ slot_label }}:</span>
                   <span class="c-co-lab-picker__uplift">{% if bs_charged %}+ {{ bs_price | money_without_trailing_zeros }}{% else %}Free{% endif %}</span>
                 </p>
                 <button type="button" class="c-co-lab-picker__stone-select" data-action="open-grid" data-slot="{{ slot }}" aria-haspopup="dialog">
