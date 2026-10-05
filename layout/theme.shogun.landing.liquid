@@ -6,6 +6,8 @@ This file can be re-written at any time.
 {% include 'shogun-content-handler' %}
 <html lang="{{ request.locale.iso_code }}" dir="{% render 'direction' %}">
   <head>
+  {% comment %}Loads Shogun Analytics. Removing this will disrupt analytics data collection.{% endcomment %}
+  <script type="text/javascript" async src="https://na.shgcdn3.com/pixel-collector.js"></script>
 	{% render 'pandectes-rules' %}
 	<style>
 	  @media screen and (max-width: 699px) {
