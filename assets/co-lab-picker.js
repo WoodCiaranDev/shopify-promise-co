@@ -495,14 +495,19 @@ class CoLabPicker extends HTMLElement {
   }
 
   missingStoneSlot() {
-    if (!this.drawer) return null;
     return this.stoneSlots().find((slot) => !this.hasStone(slot)) || null;
   }
 
   showStoneRequired(slot) {
-    const section = this.drawer.querySelector(`.c-co-lab-customise__section[data-slot="${slot}"]`);
     const input = this.querySelector(`[data-stone-input="${slot}"]`);
     const label = (input?.dataset.stoneLabel || 'stone').toLowerCase();
+    if (!this.drawer) {
+      if (this.stonesEl?.hidden) this.toggleStones();
+      this.showError(`Please choose your ${label} before adding to cart.`);
+      this.querySelector(`.c-co-lab-picker__stone-row[data-slot="${slot}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    const section = this.drawer.querySelector(`.c-co-lab-customise__section[data-slot="${slot}"]`);
     let msg = this.drawer.querySelector('[data-customise-error]');
     if (!msg) {
       msg = document.createElement('p');
@@ -541,7 +546,8 @@ class CoLabPicker extends HTMLElement {
     this.clearError();
     const missingSlot = this.missingStoneSlot();
     if (missingSlot) {
-      this.drawer.show().then(() => this.showStoneRequired(missingSlot));
+      if (this.drawer) this.drawer.show().then(() => this.showStoneRequired(missingSlot));
+      else this.showStoneRequired(missingSlot);
       return false;
     }
     // Validate against the live controls, not just whatever the last change event set —
@@ -818,6 +824,10 @@ class CoLabPicker extends HTMLElement {
 
     if (!this.selectionComplete()) {
       this.showModalError('Please choose a size before adding to cart.');
+      return;
+    }
+    if (this.missingStoneSlot()) {
+      this.showModalError('Please choose your stones before adding to cart.');
       return;
     }
 
