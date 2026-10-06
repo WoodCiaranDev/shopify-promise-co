@@ -23,6 +23,20 @@ Supported variables
   assign checkbox_2_label = settings.gifting_checkbox_2_label
   assign checkbox_2_subtitle = settings.gifting_checkbox_2_subtitle
   assign checkbox_2_image = settings.gifting_checkbox_2_image
+
+  # Market spelling (Jewellery/Jewelry Pouch) - display only.
+  capture checkbox_1_label
+    render 'market-spelling', text: checkbox_1_label
+  endcapture
+  capture checkbox_1_subtitle
+    render 'market-spelling', text: checkbox_1_subtitle
+  endcapture
+  capture checkbox_2_label
+    render 'market-spelling', text: checkbox_2_label
+  endcapture
+  capture checkbox_2_subtitle
+    render 'market-spelling', text: checkbox_2_subtitle
+  endcapture
 -%}
 
 {%- if show_checkbox_1 or show_checkbox_2 -%}
