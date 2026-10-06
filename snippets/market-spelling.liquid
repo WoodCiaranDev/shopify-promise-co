@@ -1,0 +1,69 @@
+{%- comment -%}
+  Market spelling
+  Swaps UK and US spellings in a plain-text string for the current market.
+  US market gets US spelling; every other market (GB, Europe, ROW) gets UK.
+  Only use on plain text (labels, titles, headings) - never rich text or URLs.
+  Output is unescaped: capture it and add | escape where it goes in an attribute.
+
+  Accepts:
+  - text {String} - the text to convert
+  - to {String} - optional 'us' or 'uk' to force a direction
+
+  Extra pairs come from the "Extra UK = US spelling pairs" theme setting.
+
+  Usage:
+  {%- capture title_shown -%}{%- render 'market-spelling', text: link.title -%}{%- endcapture -%}
+{%- endcomment -%}
+
+{%- liquid
+  if to == 'us' or to == 'uk'
+    assign ms_to = to
+  else
+    assign ms_market = localization.market.handle | downcase
+    if ms_market == 'usa' or ms_market == 'us' or ms_market == 'united-states'
+      assign ms_to = 'us'
+    else
+      assign ms_to = 'uk'
+    endif
+  endif
+
+  # UK=US, longest first. No bare "Symbolis" stem - it would turn "Symbolism" into "Symbolizm".
+  assign ms_pairs = 'Jewellery=Jewelry|Jeweller=Jeweler|Personalis=Personaliz|Customis=Customiz|Symbolising=Symbolizing|Symbolise=Symbolize|Centred=Centered|Centring=Centering|Centre=Center|Colour=Color|Favourite=Favorite|Cancelled=Canceled|Fulfilment=Fulfillment'
+
+  if settings.spelling_pairs != blank
+    assign ms_lines = settings.spelling_pairs | newline_to_br | split: '<br />'
+    for ms_line in ms_lines
+      assign ms_line_parts = ms_line | split: '='
+      if ms_line_parts.size == 2
+        assign ms_line_uk = ms_line_parts[0] | strip
+        assign ms_line_us = ms_line_parts[1] | strip
+        if ms_line_uk != blank and ms_line_us != blank
+          assign ms_pairs = ms_pairs | append: '|' | append: ms_line_uk | append: '=' | append: ms_line_us
+        endif
+      endif
+    endfor
+  endif
+
+  assign ms_out = text | append: ''
+  assign ms_pairs = ms_pairs | split: '|'
+
+  for ms_pair in ms_pairs
+    assign ms_parts = ms_pair | split: '='
+    if ms_to == 'us'
+      assign ms_from = ms_parts[0]
+      assign ms_with = ms_parts[1]
+    else
+      assign ms_from = ms_parts[1]
+      assign ms_with = ms_parts[0]
+    endif
+    assign ms_out = ms_out | replace: ms_from, ms_with
+    assign ms_from_case = ms_from | downcase
+    assign ms_with_case = ms_with | downcase
+    assign ms_out = ms_out | replace: ms_from_case, ms_with_case
+    assign ms_from_case = ms_from | upcase
+    assign ms_with_case = ms_with | upcase
+    assign ms_out = ms_out | replace: ms_from_case, ms_with_case
+  endfor
+
+  echo ms_out
+-%}

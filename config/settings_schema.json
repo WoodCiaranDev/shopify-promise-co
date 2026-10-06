@@ -1365,5 +1365,20 @@
         "label": "Image"
       }
     ]
+  },
+  {
+    "name": "Market spelling",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Menus and interface labels show US spelling on the US market and UK spelling everywhere else. Common words (Jewellery, Centre, Colour, Personalise, Customise) are built in."
+      },
+      {
+        "type": "textarea",
+        "id": "spelling_pairs",
+        "label": "Extra UK = US spelling pairs",
+        "info": "One per line, UK first, for example Jewellery = Jewelry"
+      }
+    ]
   }
 ]
