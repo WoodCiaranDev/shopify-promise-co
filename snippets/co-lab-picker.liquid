@@ -69,12 +69,18 @@ Inputs:
     endif
   endcapture
   assign bs_heading = mf.birthstone_heading.value | default: bs_heading_default
+  capture bs_heading
+    render 'market-spelling', text: bs_heading
+  endcapture
   assign eng_label = 'Internal Engraving'
   if product.handle == 'name-engraved-slim-signet-ring'
     assign eng_label = 'External Engraving'
   endif
 
   assign size_label = mf.size_label.value | default: 'Size'
+  capture size_label
+    render 'market-spelling', text: size_label
+  endcapture
   assign metal_title = 'Metal'
   if size_list.size > 0
     if size_label == 'Size'
@@ -192,7 +198,7 @@ Inputs:
 
       <section class="c-co-lab-picker__card c-co-lab-picker__card--custom" data-customisation>
         <p class="c-co-lab-picker__step">Step 3</p>
-        <h2 class="c-co-lab-picker__section-title">Customisation</h2>
+        <h2 class="c-co-lab-picker__section-title">{%- render 'market-spelling', text: 'Customisation' -%}</h2>
 
         {%- if use_drawer -%}
         <button type="button" class="c-co-lab-picker__customise-select" aria-controls="{{ drawer_id }}" aria-expanded="false">
@@ -201,7 +207,7 @@ Inputs:
         </button>
 
         <co-lab-customise-drawer id="{{ drawer_id }}" class="drawer color-scheme color-scheme--dialog c-co-lab-customise" initial-focus='[data-action="pick-stone"]' aria-labelledby="{{ drawer_id }}-title">
-          <span class="c-co-lab-customise__title" slot="header" id="{{ drawer_id }}-title">Customise your {{ piece_noun }}</span>
+          <span class="c-co-lab-customise__title" slot="header" id="{{ drawer_id }}-title">{%- assign drawer_title = 'Customise your ' | append: piece_noun -%}{%- render 'market-spelling', text: drawer_title -%}</span>
           <div class="c-co-lab-customise__body">
             {%- render 'co-lab-stone-preview', product: product, variant: 'compact' -%}
 
@@ -218,17 +224,21 @@ Inputs:
                       assign slot_label = 'Birthstone ' | append: slot
                   endcase
                 endif
+                # Market spelling (Centre/Center Stone). Also the saved line item property key.
+                capture slot_label_shown
+                  render 'market-spelling', text: slot_label
+                endcapture
               -%}
               <div class="c-co-lab-customise__section" data-slot="{{ slot }}" role="group" aria-labelledby="{{ drawer_id }}-slot-{{ slot }}">
                 <p class="c-co-lab-customise__head">
                   <span class="c-co-lab-customise__label" id="{{ drawer_id }}-slot-{{ slot }}">
-                    {{- slot_label -}}
+                    {{- slot_label_shown -}}
                     {%- if bs_charged %} <span class="c-co-lab-picker__optional">+ {{ bs_price | money_without_trailing_zeros }}</span>{% endif -%}
                   </span>
                   <span class="c-co-lab-customise__choice" data-stone-text="{{ slot }}">Select a stone</span>
                 </p>
                 <span data-stone-swatch="{{ slot }}" hidden></span>
-                <input type="hidden" name="properties[{{ slot_label | escape }}]" data-stone-input="{{ slot }}" data-stone-label="{{ slot_label | escape }}" value="" disabled>
+                <input type="hidden" name="properties[{{ slot_label_shown | escape }}]" data-stone-input="{{ slot }}" data-stone-label="{{ slot_label_shown | escape }}" value="" disabled>
                 <ul class="c-co-lab-customise__grid" role="list">
                   {%- for stone in stones -%}
                     <li>
@@ -286,7 +296,8 @@ Inputs:
         </co-lab-customise-drawer>
         {%- else -%}
         <p class="c-co-lab-picker__birthstone-help">
-          <a href="#co-lab-help-{{ product.id }}" title="Personalisation Guide Here">Personalisation Guide Here</a>
+          {%- capture guide_label -%}{%- render 'market-spelling', text: 'Personalisation Guide Here' -%}{%- endcapture -%}
+          <a href="#co-lab-help-{{ product.id }}" title="{{ guide_label | escape }}">{{ guide_label }}</a>
         </p>
 
         {%- if slot_count > 0 -%}
@@ -311,10 +322,14 @@ Inputs:
                       assign slot_label = 'Birthstone ' | append: slot
                   endcase
                 endif
+                # Market spelling (Centre/Center Stone). Also the saved line item property key.
+                capture slot_label_shown
+                  render 'market-spelling', text: slot_label
+                endcapture
               -%}
               <div class="c-co-lab-picker__stone-row" data-slot="{{ slot }}">
                 <p class="c-co-lab-picker__stone-label">
-                  <span>{{ slot_label }}:</span>
+                  <span>{{ slot_label_shown }}:</span>
                   <span class="c-co-lab-picker__uplift">{% if bs_charged %}+ {{ bs_price | money_without_trailing_zeros }}{% else %}Free{% endif %}</span>
                 </p>
                 <button type="button" class="c-co-lab-picker__stone-select" data-action="open-grid" data-slot="{{ slot }}" aria-haspopup="dialog">
@@ -322,7 +337,7 @@ Inputs:
                   <span class="c-co-lab-picker__stone-text" data-stone-text="{{ slot }}">Select Stone</span>
                   <span class="c-co-lab-picker__chev" aria-hidden="true">→</span>
                 </button>
-                <input type="hidden" name="properties[{{ slot_label }}]" data-stone-input="{{ slot }}" data-stone-label="{{ slot_label | escape }}" value="" disabled>
+                <input type="hidden" name="properties[{{ slot_label_shown | escape }}]" data-stone-input="{{ slot }}" data-stone-label="{{ slot_label_shown | escape }}" value="" disabled>
               </div>
             {%- endfor -%}
           </div>

@@ -56,8 +56,10 @@
       data-base="{{ default_src | split: 'colab-heirloom-' | first }}"
       data-version="{{ asset_version }}"
       data-metal="{{ default_metal }}" data-centre="{{ default_centre }}" data-halo="{{ default_halo }}">
+      {%- capture centre_word -%}{%- render 'market-spelling', text: 'centre' -%}{%- endcapture -%}
       <script type="application/json" data-preview-config>
         {
+          "centreWord": {{ centre_word | json }},
           "metals": {
             {%- for metal in metals -%}
               {%- assign metal_name = metal | strip -%}
