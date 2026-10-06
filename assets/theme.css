@@ -5630,6 +5630,22 @@ product-rerender {
   }
 }
 
+@media screen and (min-width: 1000px) and (max-width: 1199.98px) {
+  .header {
+    column-gap: 1.5rem;
+    padding-inline-start: 2rem;
+    padding-inline-end: 2rem;
+  }
+
+  .header__primary-nav {
+    column-gap: .875rem;
+  }
+
+  .header__secondary-nav {
+    column-gap: .875rem;
+  }
+}
+
 .header__secondary-nav {
   flex-wrap: wrap;
   grid-area: secondary-nav;
