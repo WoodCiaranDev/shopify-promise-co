@@ -2319,6 +2319,7 @@ model-media model-viewer, model-media .shopify-model-viewer-ui {
 .co-lab-loop__frame--first {
   position: relative;
   opacity: 1;
+  animation: none;
 }
 
 .co-lab-loop__frame:not(.co-lab-loop__frame--first) {
