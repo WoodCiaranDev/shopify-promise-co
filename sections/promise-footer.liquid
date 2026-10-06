@@ -98,13 +98,14 @@
 
                       {%- if menu != blank and menu.links.size > 0 -%}
                         {%- if block.settings.title != blank -%}
-                          <p class="promise-footer__column-title">{{ block.settings.title | default: menu.title }}</p>
+                          {%- assign column_title = block.settings.title | default: menu.title -%}
+                          <p class="promise-footer__column-title">{%- render 'market-spelling', text: column_title -%}</p>
                         {%- endif -%}
 
                         <ul class="promise-footer__links unstyled-list" role="list">
                           {%- for link in menu.links -%}
                             <li>
-                              <a href="{{ link.url }}" class="promise-footer__link">{{ link.title }}</a>
+                              <a href="{{ link.url }}" class="promise-footer__link">{%- render 'market-spelling', text: link.title -%}</a>
                             </li>
                           {%- endfor -%}
                         </ul>
@@ -112,7 +113,7 @@
 
                     {%- when 'text' -%}
                       {%- if block.settings.title != blank -%}
-                        <p class="promise-footer__column-title">{{ block.settings.title }}</p>
+                        <p class="promise-footer__column-title">{%- render 'market-spelling', text: block.settings.title -%}</p>
                       {%- endif -%}
 
                       {%- if block.settings.content != blank -%}

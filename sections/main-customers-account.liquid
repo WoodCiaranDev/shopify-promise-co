@@ -1,3 +1,6 @@
+{%- assign fulfillment_status_text = 'customer.order.fulfillment_status' | t -%}
+{%- capture fulfillment_status_text -%}{%- render 'market-spelling', text: fulfillment_status_text -%}{%- endcapture -%}
+
 <div class="section-spacing section-spacing--tight">
   <div class="container container--lg">
     <div class="section-stack">
@@ -59,7 +62,7 @@
                                   </div>
 
                                   <div>
-                                    <p class="text-subdued">{{ 'customer.order.fulfillment_status' | t }}</p>
+                                    <p class="text-subdued">{{ fulfillment_status_text }}</p>
                                     <p>{{ order.fulfillment_status_label }}</p>
                                   </div>
 
@@ -88,7 +91,7 @@
                           <th>{{ 'customer.order.order' | t }}</th>
                           <th>{{ 'customer.order.date' | t }}</th>
                           <th>{{ 'customer.order.payment_status' | t }}</th>
-                          <th>{{ 'customer.order.fulfillment_status' | t }}</th>
+                          <th>{{ fulfillment_status_text }}</th>
                           <th class="text-end">{{ 'customer.order.total' | t }}</th>
                         </tr>
                         </thead>
