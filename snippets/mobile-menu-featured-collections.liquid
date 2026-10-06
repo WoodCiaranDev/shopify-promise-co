@@ -38,9 +38,9 @@ Variables:
               </div>
               <span class="o-mobile-menu__featured-collection-title">
                 {%- if featured_block.settings.featured_collection_1_title -%}
-                  {{ featured_block.settings.featured_collection_1_title }}
+                  {%- render 'market-spelling', text: featured_block.settings.featured_collection_1_title -%}
                 {%- else -%}
-                  {{ collection_1.title }}
+                  {%- render 'market-spelling', text: collection_1.title -%}
                 {%- endif -%}
               </span>
             </a>
@@ -76,9 +76,9 @@ Variables:
               </div>
               <span class="o-mobile-menu__featured-collection-title">
                 {%- if featured_block.settings.featured_collection_2_title -%}
-                  {{ featured_block.settings.featured_collection_2_title }}
+                  {%- render 'market-spelling', text: featured_block.settings.featured_collection_2_title -%}
                 {%- else -%}
-                  {{ collection_2.title }}
+                  {%- render 'market-spelling', text: collection_2.title -%}
                 {%- endif -%}
               </span>
             </a>

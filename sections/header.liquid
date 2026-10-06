@@ -122,16 +122,21 @@
                   endif
 
                 endfor
+
+                # Market spelling for display only - matching above stays on the raw link.title.
+                capture link_title_shown
+                  render 'market-spelling', text: link.title
+                endcapture
               %}
 
-              <li class="header__primary-nav-item" data-title="{{ link.title | escape }}">
+              <li class="header__primary-nav-item" data-title="{{ link_title_shown | escape }}">
                 {%- if link.levels == 0 and mega_menu_block == '' -%}
-                  <a href="{{ link.url }}" class="block h6" {% if link.current %}aria-current="page"{% endif %}>{{ link.title }}</a>
+                  <a href="{{ link.url }}" class="block h6" {% if link.current %}aria-current="page"{% endif %}>{{ link_title_shown }}</a>
                 {%- else -%}
                   {%- capture disclosure_content -%}
                     <details class="header__menu-disclosure"{% if mega_menu_block != '' and mega_menu_block.settings.debug_mode %} open{% endif %}>
                       <summary data-follow-link="{{ link.url }}" class="h6">
-                        {{- link.title -}}
+                        {{- link_title_shown -}}
                       </summary>
 
                       {%- if mega_menu_block != '' -%}
@@ -139,15 +144,16 @@
                       {%- else -%}
                         <ul class="header__dropdown-menu {% if link.levels <= 1 %}header__dropdown-menu--restrictable{% endif %} unstyled-list" role="list">
                           {%- for sub_link in link.links -%}
+                            {%- capture sub_link_title_shown -%}{%- render 'market-spelling', text: sub_link.title -%}{%- endcapture -%}
                             <li>
                               {%- if sub_link.levels == 0 -%}
-                                <a href="{{ sub_link.url }}" class="link-faded-reverse" {% if sub_link.current %}aria-current="page"{% endif %}>{{ sub_link.title }}</a>
+                                <a href="{{ sub_link.url }}" class="link-faded-reverse" {% if sub_link.current %}aria-current="page"{% endif %}>{{ sub_link_title_shown }}</a>
                               {%- else -%}
                                 <dropdown-menu-disclosure follow-summary-link trigger="{{ section.settings.menu_open_trigger }}" class="contents">
                                   <details class="header__menu-disclosure">
                                     <summary data-follow-link="{{ sub_link.url }}" class="link-faded-reverse">
                                       <div class="h-stack gap-4 justify-between">
-                                        {{- sub_link.title -}}
+                                        {{- sub_link_title_shown -}}
                                         {%- render 'icon' with 'arrow-right', width: 8, direction_aware: true -%}
                                       </div>
                                     </summary>
@@ -155,7 +161,7 @@
                                     <ul class="header__dropdown-menu unstyled-list" role="list">
                                       {%- for sub_sub_link in sub_link.links -%}
                                         <li>
-                                          <a href="{{ sub_sub_link.url }}" class="link-faded-reverse" {% if sub_sub_link.current %}aria-current="page"{% endif %}>{{ sub_sub_link.title }}</a>
+                                          <a href="{{ sub_sub_link.url }}" class="link-faded-reverse" {% if sub_sub_link.current %}aria-current="page"{% endif %}>{%- render 'market-spelling', text: sub_sub_link.title -%}</a>
                                         </li>
                                       {%- endfor -%}
                                     </ul>
