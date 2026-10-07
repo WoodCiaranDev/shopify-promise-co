@@ -25,8 +25,36 @@ Supported variables
       assign colab_labels = line_item.product.metafields.custom.birthstone_labels.value
       assign colab_centre_label = colab_labels[0] | default: 'Birthstone One'
       assign colab_halo_label = colab_labels[1] | default: 'Birthstone Two'
-      assign colab_centre = line_item.properties[colab_centre_label] | split: ' - ' | last | downcase | strip
-      assign colab_halo = line_item.properties[colab_halo_label] | split: ' - ' | last | downcase | strip
+      # The property key is saved in the market's spelling ("Center Stone" in the US), so try
+      # the label as stored, then US, then UK - a cart can be viewed in another market.
+      assign colab_centre = line_item.properties[colab_centre_label]
+      if colab_centre == blank
+        capture colab_label_alt
+          render 'market-spelling', text: colab_centre_label, to: 'us'
+        endcapture
+        assign colab_centre = line_item.properties[colab_label_alt]
+      endif
+      if colab_centre == blank
+        capture colab_label_alt
+          render 'market-spelling', text: colab_centre_label, to: 'uk'
+        endcapture
+        assign colab_centre = line_item.properties[colab_label_alt]
+      endif
+      assign colab_halo = line_item.properties[colab_halo_label]
+      if colab_halo == blank
+        capture colab_label_alt
+          render 'market-spelling', text: colab_halo_label, to: 'us'
+        endcapture
+        assign colab_halo = line_item.properties[colab_label_alt]
+      endif
+      if colab_halo == blank
+        capture colab_label_alt
+          render 'market-spelling', text: colab_halo_label, to: 'uk'
+        endcapture
+        assign colab_halo = line_item.properties[colab_label_alt]
+      endif
+      assign colab_centre = colab_centre | split: ' - ' | last | downcase | strip
+      assign colab_halo = colab_halo | split: ' - ' | last | downcase | strip
       assign colab_metal_name = line_item.properties['Precious Metal']
       assign colab_metal = blank
       if colab_metal_name contains 'Silver'

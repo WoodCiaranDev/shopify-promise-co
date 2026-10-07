@@ -102,7 +102,7 @@
                       data-panel="secondary-{{ forloop.index }}"
                       aria-expanded="false"
                     >
-                      <span>{{ link.title }}</span>
+                      <span>{%- render 'market-spelling', text: link.title -%}</span>
                     </button>
                   {%- else -%}
                     <a
@@ -112,7 +112,7 @@
                         aria-current="page"
                       {% endif %}
                     >
-                      <span>{{ link.title }}</span>
+                      <span>{%- render 'market-spelling', text: link.title -%}</span>
                     </a>
                   {%- endif -%}
                 </li>
@@ -210,7 +210,7 @@
                           data-panel="tertiary-{{ forloop.parentloop.index }}-{{ forloop.index }}"
                           aria-expanded="false"
                         >
-                          <span>{{ sub_link.title }}</span>
+                          <span>{%- render 'market-spelling', text: sub_link.title -%}</span>
                         </button>
                       {%- else -%}
                         <a
@@ -221,7 +221,7 @@
                           {% endif %}
                         >
                           {%- render 'diamond-shape-icon', shape: sub_link.title -%}
-                          <span>{{ sub_link.title }}</span>
+                          <span>{%- render 'market-spelling', text: sub_link.title -%}</span>
                         </a>
                       {%- endif -%}
                     </li>
@@ -277,7 +277,8 @@
               >
                 <button type="button" class="o-mobile-menu__back">
                   {%- render 'icon' with 'arrow-left', width: 12, direction_aware: true -%}
-                  BACK TO {{ link.title | upcase }}
+                  {%- capture back_title -%}{%- render 'market-spelling', text: link.title -%}{%- endcapture %}
+                  BACK TO {{ back_title | upcase }}
                 </button>
 
                 <div class="o-mobile-menu__scroller">
@@ -293,7 +294,7 @@
                             {% endif %}
                           >
                             {%- render 'diamond-shape-icon', shape: sub_sub_link.title -%}
-                            <span>{{ sub_sub_link.title }}</span>
+                            <span>{%- render 'market-spelling', text: sub_sub_link.title -%}</span>
                           </a>
                         </li>
                       {%- endfor -%}

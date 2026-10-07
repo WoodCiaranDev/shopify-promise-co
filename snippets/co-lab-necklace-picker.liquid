@@ -44,6 +44,15 @@ Inputs:
   assign initial_heading = mf.initial_heading.value | default: 'Choose Your Initial'
   assign shape_heading = mf.shape_heading.value | default: 'Choose Your Stone Shape'
   assign bs_heading = mf.birthstone_heading.value | default: 'Choose Your Birthstone'
+  capture initial_heading
+    render 'market-spelling', text: initial_heading
+  endcapture
+  capture shape_heading
+    render 'market-spelling', text: shape_heading
+  endcapture
+  capture bs_heading
+    render 'market-spelling', text: bs_heading
+  endcapture
 -%}
 
 <c-co-lab-necklace-picker
@@ -122,10 +131,11 @@ Inputs:
 
       <section class="c-co-lab-picker__card c-co-lab-picker__card--custom" data-customisation>
         <p class="c-co-lab-picker__step">Step 3</p>
-        <h2 class="c-co-lab-picker__section-title">Customisation</h2>
+        <h2 class="c-co-lab-picker__section-title">{%- render 'market-spelling', text: 'Customisation' -%}</h2>
 
         <p class="c-co-lab-picker__birthstone-help">
-          <a href="#co-lab-help-{{ product.id }}" title="Personalisation Guide Here">Personalisation Guide Here</a>
+          {%- capture guide_label -%}{%- render 'market-spelling', text: 'Personalisation Guide Here' -%}{%- endcapture -%}
+          <a href="#co-lab-help-{{ product.id }}" title="{{ guide_label | escape }}">{{ guide_label }}</a>
         </p>
 
         <div class="c-co-lab-picker__inner">

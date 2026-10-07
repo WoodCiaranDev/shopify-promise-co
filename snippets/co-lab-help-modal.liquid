@@ -19,7 +19,7 @@ Inputs:
 {%- assign help_text = product.metafields.custom.help_text.value -%}
 
 <x-modal id="co-lab-help-{{ product.id }}" class="modal modal--lg color-scheme color-scheme--dialog">
-  <span class="h5" slot="header">Personalisation Guide</span>
+  <span class="h5" slot="header">{%- render 'market-spelling', text: 'Personalisation Guide' -%}</span>
   <div class="c-co-lab-help prose">
     <div class="c-co-lab-help__body">
       {%- if help_image != blank -%}

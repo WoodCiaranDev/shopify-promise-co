@@ -114,7 +114,7 @@
             "button_align": "left",
             "button_align_mobile": "left",
             "button_color": "#333333",
-            "button_hover_color": "#FFFFFF",
+            "button_hover_color": "#ffffff",
             "button_bg_color": "",
             "button_bg_hover_color": "#333333",
             "button_border_color": "#333333",
@@ -276,8 +276,8 @@
         "icon_color": "#000000",
         "item_heading_color": "#000000",
         "item_text_color": "#000000",
-        "image_border_color": "#FFFFFF",
-        "background_color": "#F8F7F5",
+        "image_border_color": "#ffffff",
+        "background_color": "#f8f7f5",
         "background_gradient": "",
         "border_color": "#000000",
         "margin_top": 0,
@@ -383,12 +383,21 @@
     "category_cards_g34Wry": {
       "type": "category-cards",
       "blocks": {
+        "category_image_BHkEbk": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design-50.png",
+            "title": "Heirloom Pinky Ring",
+            "description": "<p>Bestselling</p>",
+            "link": "shopify://products/modern-heirloom-birthstone-ring"
+          }
+        },
         "category_image_c7tkKJ": {
           "type": "category_image",
           "settings": {
-            "image": "shopify://shop_images/Untitled_design_-_2026-07-30T111350.973.png",
+            "image": "shopify://shop_images/1_f503b551-d80a-4720-a07d-26569bf72479.png",
             "title": "Pinky Rings",
-            "description": "<p>trending</p>",
+            "description": "<p>shop all</p>",
             "link": "shopify://collections/pinky-promise-rings"
           }
         },
@@ -400,16 +409,27 @@
             "description": "<p>Shop</p>",
             "link": "shopify://collections/custom-jewelry"
           }
+        },
+        "category_image_GRhydQ": {
+          "type": "category_image",
+          "settings": {
+            "image": "shopify://shop_images/1_2b0e277e-9650-4f8e-8b7d-13b943a9c162.png",
+            "title": "Pave Pinky Ring",
+            "description": "<p>Extra sparkly</p>",
+            "link": ""
+          }
         }
       },
       "block_order": [
+        "category_image_BHkEbk",
         "category_image_c7tkKJ",
-        "category_image_Lpjhhk"
+        "category_image_Lpjhhk",
+        "category_image_GRhydQ"
       ],
       "settings": {
         "title": "",
         "subtitle": "",
-        "background_color": "#F2EEE7",
+        "background_color": "#f2eee7",
         "title_color": "#000000",
         "subtitle_color": "#666666",
         "section_padding_top": 0,

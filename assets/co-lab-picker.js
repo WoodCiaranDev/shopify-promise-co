@@ -340,13 +340,21 @@ class CoLabPicker extends HTMLElement {
     return !!(this.engravingInput && this.engravingInput.value.trim());
   }
 
+  sizeLabel() {
+    return this.dataset.sizeLabel || 'Size';
+  }
+
   metalRequired() {
     return this.metalRadios.length > 0;
   }
 
+  sizeRequired() {
+    return !!this.sizeSelect;
+  }
+
   selectionComplete() {
     if (this.metalRequired() && !this.selectedMetal) return false;
-    return !!this.selectedSize;
+    return !this.sizeRequired() || !!this.selectedSize;
   }
 
   refresh() {
@@ -495,14 +503,19 @@ class CoLabPicker extends HTMLElement {
   }
 
   missingStoneSlot() {
-    if (!this.drawer) return null;
     return this.stoneSlots().find((slot) => !this.hasStone(slot)) || null;
   }
 
   showStoneRequired(slot) {
-    const section = this.drawer.querySelector(`.c-co-lab-customise__section[data-slot="${slot}"]`);
     const input = this.querySelector(`[data-stone-input="${slot}"]`);
     const label = (input?.dataset.stoneLabel || 'stone').toLowerCase();
+    if (!this.drawer) {
+      if (this.stonesEl?.hidden) this.toggleStones();
+      this.showError(`Please choose your ${label} before adding to cart.`);
+      this.querySelector(`.c-co-lab-picker__stone-row[data-slot="${slot}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    const section = this.drawer.querySelector(`.c-co-lab-customise__section[data-slot="${slot}"]`);
     let msg = this.drawer.querySelector('[data-customise-error]');
     if (!msg) {
       msg = document.createElement('p');
@@ -541,7 +554,8 @@ class CoLabPicker extends HTMLElement {
     this.clearError();
     const missingSlot = this.missingStoneSlot();
     if (missingSlot) {
-      this.drawer.show().then(() => this.showStoneRequired(missingSlot));
+      if (this.drawer) this.drawer.show().then(() => this.showStoneRequired(missingSlot));
+      else this.showStoneRequired(missingSlot);
       return false;
     }
     // Validate against the live controls, not just whatever the last change event set —
@@ -552,8 +566,8 @@ class CoLabPicker extends HTMLElement {
       this.showError('Please choose a metal before adding to cart.');
       return false;
     }
-    if (!this.selectedSize) {
-      this.showError('Please choose a size before adding to cart.');
+    if (this.sizeRequired() && !this.selectedSize) {
+      this.showError(`Please choose a ${this.sizeLabel().toLowerCase()} before adding to cart.`);
       return false;
     }
 
@@ -713,7 +727,7 @@ class CoLabPicker extends HTMLElement {
       : null;
     const metaRows = [];
     if (this.selectedMetal) metaRows.push(this.reviewRow('Precious Metal', this.selectedMetal));
-    if (this.selectedSize) metaRows.push(this.reviewRow('Size', this.selectedSize));
+    if (this.selectedSize) metaRows.push(this.reviewRow(this.sizeLabel(), this.selectedSize));
     metaRows.push(this.reviewRow('Quantity', String(qty)));
 
     card.appendChild(this.el('section', 'c-co-lab-cart-bundle__group', [
@@ -817,7 +831,11 @@ class CoLabPicker extends HTMLElement {
     if (this.submitting) return;
 
     if (!this.selectionComplete()) {
-      this.showModalError('Please choose a size before adding to cart.');
+      this.showModalError(`Please choose a ${this.sizeLabel().toLowerCase()} before adding to cart.`);
+      return;
+    }
+    if (this.missingStoneSlot()) {
+      this.showModalError('Please choose your stones before adding to cart.');
       return;
     }
 

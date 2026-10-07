@@ -36,7 +36,7 @@ Supported variables
           <li class="v-stack justify-items-start gap-5">
             <a href="{{ sub_link.url }}" class="h6 mega-menu__link--with-icon">
               {%- render 'diamond-shape-icon', shape: sub_link.title -%}
-              <span>{{ sub_link.title }}</span>
+              <span>{%- render 'market-spelling', text: sub_link.title -%}</span>
             </a>
 
             <ul class="v-stack gap-2.5 unstyled-list">
@@ -44,7 +44,7 @@ Supported variables
                 <li>
                   <a href="{{ sub_sub_link.url }}" class="link-faded mega-menu__link--with-icon">
                     {%- render 'diamond-shape-icon', shape: sub_sub_link.title -%}
-                    <span>{{ sub_sub_link.title }}</span>
+                    <span>{%- render 'market-spelling', text: sub_sub_link.title -%}</span>
                   </a>
                 </li>
               {%- endfor -%}
@@ -55,7 +55,7 @@ Supported variables
             {{ standalone_links }}
             <a href="{{ sub_link.url }}" class="h6 mega-menu__link--with-icon">
               {%- render 'diamond-shape-icon', shape: sub_link.title -%}
-              <span>{{ sub_link.title }}</span>
+              <span>{%- render 'market-spelling', text: sub_link.title -%}</span>
             </a>
           {%- endcapture -%}
         {%- endif -%}

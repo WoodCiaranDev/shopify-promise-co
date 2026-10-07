@@ -120,7 +120,7 @@
     captionText() {
       const c = this.config.labels[this.state.centre];
       const h = this.config.labels[this.state.halo];
-      return c && h ? `${c} centre stone, ${h} halo` : '';
+      return c && h ? `${c} ${this.config.centreWord || 'centre'} stone, ${h} halo` : '';
     }
   }
 
