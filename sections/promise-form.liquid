@@ -100,7 +100,8 @@
             </div>
 
             {%- assign promise_label = 'promise_form.promise_content' | t | default: 'Your Promise' -%}
-            {%- render 'input', name: 'promise_content', label: promise_label, required: true, multiline: 4, placeholder: 'promise_form.promise_placeholder' -%}
+            {%- assign promise_placeholder = 'promise_form.promise_placeholder' | t -%}
+            {%- render 'input', name: 'promise_content', label: promise_label, required: true, multiline: 4, placeholder: promise_placeholder -%}
 
             {%- comment -%} Consent Checkbox {%- endcomment -%}
             <div class="fieldset-row">
@@ -413,15 +414,3 @@
   ]
 }
 {% endschema %}
-{% comment %}
-
-This file has been rewritten to preserve the original behavior.
-
----
-Changes:
-- from: "{%- render 'input', name: 'promise_content', label: promise_label, required:
-    true, multiline: 4, placeholder: 'promise_form.promise_placeholder' | t -%}"
-  to: "{%- render 'input', name: 'promise_content', label: promise_label, required:
-    true, multiline: 4, placeholder: 'promise_form.promise_placeholder' -%}"
-  position: 3423..3571
-{% endcomment %}
