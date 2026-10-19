@@ -100,7 +100,8 @@
             </div>
 
             {%- assign promise_label = 'promise_form.promise_content' | t | default: 'Your Promise' -%}
-            {%- render 'input', name: 'promise_content', label: promise_label, required: true, multiline: 4, placeholder: 'promise_form.promise_placeholder' | t -%}
+            {%- assign promise_placeholder = 'promise_form.promise_placeholder' | t -%}
+            {%- render 'input', name: 'promise_content', label: promise_label, required: true, multiline: 4, placeholder: promise_placeholder -%}
 
             {%- comment -%} Consent Checkbox {%- endcomment -%}
             <div class="fieldset-row">
