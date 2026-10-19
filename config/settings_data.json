@@ -278,7 +278,7 @@
       },
       "scheme-4b89ab38-ef9e-4a8e-9dd4-1364903253e0": {
         "settings": {
-          "background": "#F8F7F5",
+          "background": "#f8f7f5",
           "background_gradient": "",
           "text_color": "#1c1c1c",
           "primary_button_background": "#313030",
@@ -325,9 +325,9 @@
           "background": "#ddcbdd",
           "background_gradient": "",
           "text_color": "#313030",
-          "primary_button_background": "#ffffff",
+          "primary_button_background": "#000000",
           "primary_button_text_color": "#1c1c1c",
-          "circle_button_background": "#ffffff",
+          "circle_button_background": "#000000",
           "circle_button_icon": "#1c1c1c"
         }
       }
