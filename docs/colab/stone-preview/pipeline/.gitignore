@@ -1,3 +1,8 @@
 weight_*.npy
 __pycache__/
 .venv/
+rings/legacy/poc/
+rings/legacy/centres/*_compare.jpg
+rings/legacy/ai/gold_c-april_h-april_1.png
+rings/legacy/ai/gold_c-april_h-april_3.png
+rings/legacy/ai/gold_c-april_h-april_lanczos.png
