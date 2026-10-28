@@ -217,7 +217,10 @@ Supported variables
     {%- endif -%}
 
     {%- if show_add_to_cart_button and product.available -%}
-      {%- if product.variants.size == 1 and product.selling_plan_groups.size == 0 -%}
+      {%- if product.metafields.custom.product_type.value == 'co-lab' -%}
+        {%- capture customise_label -%}{%- render 'market-spelling', text: 'Customise' -%}{%- endcapture -%}
+        <span class="button button-sm w-full" aria-hidden="true">{{ customise_label }}</span>
+      {%- elsif product.variants.size == 1 and product.selling_plan_groups.size == 0 -%}
         <product-form>
           {%- form 'product', product -%}
             <input type="hidden" name="on_success" value="force_open_drawer">
