@@ -20,7 +20,10 @@ Supported variables
 <line-item class="line-item">
   {%- liquid
     assign colab_ring_src = blank
-    if line_item.product.metafields.custom.customise_drawer.value == true
+    capture colab_set
+      render 'co-lab-preview-set', product: line_item.product
+    endcapture
+    if colab_set != blank
       assign colab_months = 'january,february,march,april,may,june,july,august,september,october,november,december' | split: ','
       assign colab_labels = line_item.product.metafields.custom.birthstone_labels.value
       assign colab_centre_label = colab_labels[0] | default: 'Birthstone One'
@@ -62,13 +65,14 @@ Supported variables
       elsif colab_metal_name contains 'Gold'
         assign colab_metal = 'gold'
       endif
-      assign colab_version = 'colab-heirloom-version.txt' | asset_url | split: 'v=' | last
+      assign colab_prefix = 'colab-' | append: colab_set | append: '-'
+      assign colab_version = colab_prefix | append: 'version.txt' | asset_url | split: 'v=' | last
       if colab_version contains '/'
         assign colab_version = ''
       endif
       if colab_metal != blank and colab_months contains colab_centre and colab_months contains colab_halo
         capture colab_file
-          echo 'colab-heirloom-' | append: colab_metal | append: '-' | append: colab_centre | append: '-' | append: colab_halo | append: '.jpg'
+          echo colab_prefix | append: colab_metal | append: '-' | append: colab_centre | append: '-' | append: colab_halo | append: '.jpg'
         endcapture
         assign colab_ring_src = colab_file | asset_url | split: '?' | first | append: '?v=' | append: colab_version
       endif

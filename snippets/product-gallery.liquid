@@ -157,7 +157,10 @@ only way to do it on Shopify right now.
             assign has_stone_preview = false
             assign loop_eager = true
             assign extra_slides = 0
-            if product.metafields.custom.customise_drawer.value == true
+            capture preview_set
+              render 'co-lab-preview-set', product: product
+            endcapture
+            if preview_set != blank
               assign has_stone_preview = true
               assign loop_eager = false
               assign extra_slides = extra_slides | plus: 1
