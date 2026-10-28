@@ -149,9 +149,9 @@
         "show_country_flag": true,
         "show_locale_selector": false,
         "show_collection_countdown": false,
-        "countdown_date": "31-05-2026",
-        "countdown_image": "shopify://shop_images/Untitled_design_-_2026-05-01T090934.000.png",
-        "countdown_title": "ETHEREAL SUMMER COUNTDOWN",
+        "countdown_date": "06-11-2026",
+        "countdown_image": "shopify://shop_images/whimsy.png",
+        "countdown_title": "WHIMSY LAUNCH",
         "show_main_featured_collections": true,
         "transparent_header_text_color": "#ffffff"
       }

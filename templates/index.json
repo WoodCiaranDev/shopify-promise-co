@@ -66,6 +66,33 @@
             "gradient_overlay": ""
           }
         },
+        "image_jcrmjC": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/banners-5.png",
+            "mobile_image": "shopify://shop_images/Banner_UK-5.png",
+            "subheading": "NEW",
+            "title": "Whimsy Collection",
+            "mobile_text_position": "place-self-end-center text-center",
+            "desktop_text_position": "sm:place-self-end-center sm:text-center",
+            "content_max_width": 800,
+            "button_1_text": "Sign up now",
+            "button_1_link": "shopify://collections/whimsy",
+            "button_1_style": "link",
+            "button_1_background": "#f2eee7",
+            "button_1_text_color": "#000000",
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_style": "outline",
+            "button_2_background": "#ffffff",
+            "button_2_text_color": "#000000",
+            "background": "",
+            "background_opacity": 50,
+            "text_color": "#fcfcfc",
+            "border_color": "",
+            "gradient_overlay": ""
+          }
+        },
         "image_ba3teU": {
           "type": "image",
           "settings": {
@@ -89,34 +116,6 @@
             "background": "",
             "background_opacity": 50,
             "text_color": "#ffffff",
-            "border_color": "",
-            "gradient_overlay": ""
-          }
-        },
-        "image_jcrmjC": {
-          "type": "image",
-          "disabled": true,
-          "settings": {
-            "image": "shopify://shop_images/bannerdesk2.heic",
-            "mobile_image": "shopify://shop_images/bannermobile2.heic",
-            "subheading": "promises that shape you",
-            "title": "Mark <strong>your</strong> Moment",
-            "mobile_text_position": "place-self-start text-start",
-            "desktop_text_position": "sm:place-self-center sm:text-center",
-            "content_max_width": 800,
-            "button_1_text": "For her",
-            "button_1_link": "shopify://collections/for-her",
-            "button_1_style": "solid",
-            "button_1_background": "#f2eee7",
-            "button_1_text_color": "#000000",
-            "button_2_text": "",
-            "button_2_link": "",
-            "button_2_style": "outline",
-            "button_2_background": "#ffffff",
-            "button_2_text_color": "#000000",
-            "background": "",
-            "background_opacity": 50,
-            "text_color": "#fcfcfc",
             "border_color": "",
             "gradient_overlay": ""
           }
@@ -181,18 +180,113 @@
       "block_order": [
         "image_wpXLKm",
         "image_G3TLPH",
-        "image_ba3teU",
         "image_jcrmjC",
+        "image_ba3teU",
         "image_jjYcbD",
         "image_6DJTxh"
       ],
       "name": "t:sections.slideshow.presets.slideshow.name",
       "settings": {
         "allow_transparent_header": false,
-        "show_next_section_button": true,
+        "show_next_section_button": false,
         "media_size": "auto",
         "show_initial_transition": false,
         "autoplay": true,
+        "autoplay_pause_on_video": true,
+        "cycle_speed": 5,
+        "background": "#000000",
+        "controls_color": "#ffffff"
+      }
+    },
+    "slideshow_gzhpyV": {
+      "type": "slideshow",
+      "blocks": {
+        "image_jjbAxt": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/banners_5.png",
+            "mobile_image": "shopify://shop_images/banners_5.png",
+            "subheading": "Gift Guide",
+            "title": "For Her",
+            "mobile_text_position": "place-self-center text-center",
+            "desktop_text_position": "sm:place-self-center sm:text-center",
+            "content_max_width": 780,
+            "button_1_text": "",
+            "button_1_link": "",
+            "button_1_style": "solid",
+            "button_1_background": "#ffffff",
+            "button_1_text_color": "#000000",
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_style": "outline",
+            "button_2_background": "#ffffff",
+            "button_2_text_color": "#000000",
+            "background": "",
+            "background_opacity": 0,
+            "text_color": "#ffffff",
+            "border_color": "",
+            "gradient_overlay": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_jjbAxt"
+      ],
+      "disabled": true,
+      "name": "t:sections.slideshow.presets.slideshow.name",
+      "settings": {
+        "allow_transparent_header": true,
+        "show_next_section_button": false,
+        "media_size": "auto",
+        "show_initial_transition": false,
+        "autoplay": true,
+        "autoplay_pause_on_video": true,
+        "cycle_speed": 5,
+        "background": "#000000",
+        "controls_color": "#ffffff"
+      }
+    },
+    "slideshow_tnmGaA": {
+      "type": "slideshow",
+      "blocks": {
+        "image_44PiNA": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/banners_1.png",
+            "subheading": "Gift Guide",
+            "title": "For Him",
+            "mobile_text_position": "place-self-center text-center",
+            "desktop_text_position": "sm:place-self-center sm:text-center",
+            "content_max_width": 780,
+            "button_1_text": "",
+            "button_1_link": "",
+            "button_1_style": "solid",
+            "button_1_background": "#ffffff",
+            "button_1_text_color": "#000000",
+            "button_2_text": "",
+            "button_2_link": "",
+            "button_2_style": "outline",
+            "button_2_background": "#ffffff",
+            "button_2_text_color": "#000000",
+            "background": "",
+            "background_opacity": 50,
+            "text_color": "#ffffff",
+            "border_color": "",
+            "gradient_overlay": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_44PiNA"
+      ],
+      "disabled": true,
+      "name": "t:sections.slideshow.presets.slideshow.name",
+      "settings": {
+        "allow_transparent_header": true,
+        "show_next_section_button": false,
+        "media_size": "auto",
+        "show_initial_transition": false,
+        "autoplay": false,
         "autoplay_pause_on_video": true,
         "cycle_speed": 5,
         "background": "#000000",
@@ -1152,6 +1246,8 @@
   },
   "order": [
     "slideshow_ygKAJC",
+    "slideshow_gzhpyV",
+    "slideshow_tnmGaA",
     "category_cards",
     "scrolling_content_mXfTt6",
     "rich_text_8gkr8U",

@@ -129,6 +129,7 @@
       "settings": {
         "color_scheme": "scheme-2",
         "separate_section_with_border": true,
+        "reduce_mobile_spacing": false,
         "stack_on_mobile": false,
         "icon_color": "",
         "text_color": "",
@@ -161,7 +162,7 @@
       "settings": {
         "color_scheme": "scheme-1",
         "content_width": "lg",
-        "background_color": "#67b0da",
+        "background_color": "#75AEDC",
         "text_color": "#ffffff",
         "band_height": 265,
         "remove_vertical_spacing": true,
@@ -171,10 +172,10 @@
         "show_wordmark_mobile": false,
         "wordmark_height": 117,
         "subheading": "",
-        "heading": "<p>Join for exclusive offers,<br\/>access and launches<\/p>",
+        "heading": "<p>Join for exclusive offers,<br/>access and launches</p>",
         "email_label": "Email",
         "button_label": "Subscribe",
-        "consent_text": "<p>We will contact you by email and you can unsubscribe anytime – <a href=\"\/policies\/privacy-policy\">privacy policy<\/a><\/p>",
+        "consent_text": "<p>We will contact you by email and you can unsubscribe anytime – <a href=\"/policies/privacy-policy\">privacy policy</a></p>",
         "button_background": "#f1eee7",
         "button_text_color": "#47a1dc",
         "customer_tag": "promise-club"
@@ -186,7 +187,7 @@
         "help_support": {
           "type": "links",
           "settings": {
-            "menu": "help-support",
+            "menu": "",
             "title": "Help & Support"
           }
         },
@@ -217,7 +218,7 @@
         "text_color": "#1a1a1a",
         "remove_vertical_spacing": false,
         "separate_section_with_border": false,
-        "image": "shopify://shop_images/footer-image.png",
+        "image": "shopify://shop_images/Untitled_design-58.png",
         "image_link": "",
         "show_image_mobile": false,
         "media_width": 40,
