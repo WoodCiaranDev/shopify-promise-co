@@ -9,6 +9,7 @@
       this.config = this.parse();
       if (!this.config) return;
       this.base = this.dataset.base;
+      this.filePrefix = this.dataset.prefix || 'colab-heirloom-';
       this.q = this.dataset.version ? `?v=${this.dataset.version}&` : '?';
       this.state = {
         metal: this.dataset.metal || 'gold',
@@ -67,11 +68,11 @@
     }
 
     url(role) {
-      return `${this.base}colab-heirloom-${this.key()}.jpg${this.q}width=${DISPLAY[role] || 1000}`;
+      return `${this.base}${this.filePrefix}${this.key()}.jpg${this.q}width=${DISPLAY[role] || 1000}`;
     }
 
     srcset(role) {
-      const file = `${this.base}colab-heirloom-${this.key()}.jpg`;
+      const file = `${this.base}${this.filePrefix}${this.key()}.jpg`;
       return (WIDTHS[role] || WIDTHS.slide).map((w) => `${file}${this.q}width=${w} ${w}w`).join(', ');
     }
 

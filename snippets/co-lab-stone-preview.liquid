@@ -8,14 +8,18 @@
   assign stones = shop.metaobjects.birthstone.values | sort: 'position'
   assign metals = product.metafields.custom.metals.value | split: ','
   assign kind = variant | default: 'slide'
+  capture preview_set
+    render 'co-lab-preview-set', product: product
+  endcapture
+  assign prefix = 'colab-' | append: preview_set | append: '-'
   assign default_metal = 'gold'
   assign default_centre = 'october'
   assign default_halo = 'june'
   capture default_asset
-    echo 'colab-heirloom-' | append: default_metal | append: '-' | append: default_centre | append: '-' | append: default_halo | append: '.jpg'
+    echo prefix | append: default_metal | append: '-' | append: default_centre | append: '-' | append: default_halo | append: '.jpg'
   endcapture
   assign default_src = default_asset | asset_url | split: '?' | first
-  assign asset_version = 'colab-heirloom-version.txt' | asset_url | split: 'v=' | last
+  assign asset_version = prefix | append: 'version.txt' | asset_url | split: 'v=' | last
   if asset_version contains '/'
     assign asset_version = ''
   endif
@@ -30,7 +34,7 @@
       class="object-contain" data-colab-preview-img data-colab-role="thumb">
 
   {%- when 'compact' -%}
-    <div class="co-lab-stone-preview co-lab-stone-preview--compact">
+    <div class="co-lab-stone-preview co-lab-stone-preview--compact co-lab-stone-preview--{{ preview_set }}">
       <div class="co-lab-stone-preview__plate">
         <img src="{{ default_src }}?v={{ asset_version }}&width=1000"
              srcset="{{ default_src }}?v={{ asset_version }}&width=400 400w, {{ default_src }}?v={{ asset_version }}&width=700 700w, {{ default_src }}?v={{ asset_version }}&width=1000 1000w, {{ default_src }}?v={{ asset_version }}&width=1600 1600w"
@@ -53,7 +57,8 @@
       class="object-contain" data-colab-preview-img data-colab-role="slide">
 
     <co-lab-stone-preview hidden
-      data-base="{{ default_src | split: 'colab-heirloom-' | first }}"
+      data-base="{{ default_src | split: prefix | first }}"
+      data-prefix="{{ prefix }}"
       data-version="{{ asset_version }}"
       data-metal="{{ default_metal }}" data-centre="{{ default_centre }}" data-halo="{{ default_halo }}">
       {%- capture centre_word -%}{%- render 'market-spelling', text: 'centre' -%}{%- endcapture -%}

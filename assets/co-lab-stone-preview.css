@@ -45,6 +45,12 @@ co-lab-customise-drawer.is-keyboard-open .co-lab-stone-preview--compact {
   margin-top: -35.985%;
 }
 
+.co-lab-stone-preview--legacy .co-lab-stone-preview__plate img {
+  width: 110.727%;
+  margin-left: -5.398%;
+  margin-top: -29.412%;
+}
+
 .co-lab-stone-preview__zoom {
   position: absolute;
   inset-block-end: 0.75rem;

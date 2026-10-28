@@ -101,7 +101,10 @@ Inputs:
 
 {%- liquid
   assign use_drawer = false
-  if product.metafields.custom.customise_drawer.value == true
+  capture preview_set
+    render 'co-lab-preview-set', product: product
+  endcapture
+  if preview_set != blank
     assign use_drawer = true
   endif
   assign drawer_id = 'co-lab-customise-' | append: product.id

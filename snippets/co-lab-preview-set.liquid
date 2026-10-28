@@ -1,0 +1,8 @@
+{%- liquid
+  assign preview_set = product.metafields.custom.stone_preview_set.value | strip | downcase
+  if preview_set == 'legacy'
+    echo 'legacy'
+  elsif product.metafields.custom.customise_drawer.value == true
+    echo 'heirloom'
+  endif
+-%}

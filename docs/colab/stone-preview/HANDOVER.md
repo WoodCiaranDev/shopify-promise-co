@@ -100,6 +100,86 @@ silver metal tone.
   It pulls facet hues towards champagne, cools the brightest sparkle, and shades a thin warm
   girdle where stone meets bezel. Gold images are unchanged.
 
+## Legacy ring (19 Oct 2026)
+
+The **Promise Legacy Birthstone Ring** (`promise-legacy-birthstone-ring`) has its own preview set:
+`assets/colab-legacy-{metal}-{centre}-{halo}.jpg` and `assets/colab-legacy-version.txt`. It's built by
+`pipeline/rings/legacy/`, which imports the shared pipeline code. Heirloom's files are untouched.
+
+**How it's made:**
+- **No real photo exists.** The client's Legacy images are AI-generated 2x2 grids.
+  - `crop_grids.py` cuts each ring out as `renders/{metal}_c-{centre}_h-{halo}.png`.
+  - `ai_base.py` asks Gemini 3 Pro (OpenRouter) for one sharp 4K redraw of the April & April gold ring.
+  - Attempt 2 was chosen (`ai/gold_c-april_h-april_2.png`). It is the **only** geometry source. No image is AI-generated per combination.
+- **`prep_base.py`** places the base on the 1600px canvas, with the band matched to Heirloom's width (964px).
+  It flattens the AI background to plain white and keeps only the contact shadow.
+  - **Gold is yellowed:** the AI redraw's gold ran orange (hue 73.5 against the original render's 78.9, worse round the middle). `yellow_the_gold()` rotates gold hue by `HUE_SHIFT` (6.5 degrees) and eases chroma slightly. The targets were measured from Charlotte's own screenshot of the two rings (21 Oct). Re-measure with the same method if she says the gold is off again.
+
+- **`measure.py`** finds the centre opening and the 16 halo slots on the colourless base stones.
+  - Writes `geometry.json`, `slots_matched.json`, `photo/mask_centre_stone.npy` and `photo/overlay.png`.
+  - Check the overlay: the centre mask must stay inside the bezel lip, clear of the milgrain.
+- **`build_legacy.py`** places the centre and recolours the halo:
+  - **Centres** are the live picker's real stone images (`icons_solid/`), as on Heirloom. They're turned 90° to sit north-south and scaled to cover the opening, grown 3px (`CENTRE_GROW`) so no white base stone shows at the bezel.
+  - **Sharpened centres:** `ai_centres.py` has Gemini redraw each 200px picker stone once at 4K.
+    - The result is fitted back to the picker stone's bounds, cut out with its own outline, and its colours matched to the picker image. It keeps the approved cut and colour and only gains detail.
+    - Any redraw whose proportions are more than 2% off is rejected.
+    - The output is `centres/{k}.png`, and `build_legacy.py` uses it when present.
+    - Pale stones are sent on a dark canvas (`BACKGROUND`). On grey, June's edge merged with its shadow and failed the check.
+  - **Do not recolour the AI's colourless centre.** It was tried, and a white diamond's facets go milky and smeared when made a deep colour (May looked washed out).
+  - **Halos are Heirloom's real stones, seated in the AI ring's own settings.** Charlotte wants both rings to show *identical* stones, and (21 Oct) stones that sit *in* the ring, not over it.
+    - Each Legacy stone is cut from the approved Heirloom image (`assets/colab-heirloom-gold-april-{k}.jpg`, her tuner settings already applied).
+    - `stone_footprints()` models each stone in the base as a circle a touch wider than the white stone (`SEAT_GROW`). `set_stone()` fills that circle with the Heirloom stone everywhere the base is not gold metal, so the base's own bezel lip, milgrain and prongs stay **on top** of the stone.
+    - Only gold connected to the rim outside the circle counts as metal. Warm reflections inside the old white stone must not, or they leave gold specks in the new stone.
+    - The stone is eased darker at its edge (`SEAT_SHADOW`) as the bezel would shade it.
+    - Stones are paired one-to-one in order round the ring from the top stone, so none repeats beside itself and top stays top for the lighting.
+    - **April uses the base's own sparkly diamonds, not Heirloom's April stones** (Charlotte: Heirloom's looked flat beside them). On silver they get a desaturation (`APRIL_SILVER_DESATURATE`) to lose the peach cast they pick up from gold.
+  - **Do not use `clean_base()` or `transplant()` here.** They are right for Heirloom's flat packshot, but they flatten everything within 1.1x of a stone, wiping this ring's bezel lip and prongs, so the stones look stuck on top ("not set in the ring"). That was the second version.
+  - **Do not recolour the base's white stones.** That was the first version. A white diamond's facets, recoloured, come out flat and washed out next to Heirloom's vivid real stones (Charlotte spotted it on July and August). Real stones are the only way to match.
+  - Silver is the finished gold converted by `gold_to_silver.py`, run from the Legacy folder, with Heirloom's silver tone. The background and the AI's warm shadow are protected.
+  - Flags:
+    - `--poc` writes contact sheets to `poc/`.
+    - No flag builds the 288 images.
+    - `<colours.json>` applies the Legacy tuner settings.
+    - `--tuner` refreshes the tuner assets.
+- **Shared code changed:** only `centre_real`, which has an optional `rotate`. Heirloom's output is byte-identical, verified on a full 288-image rebuild against a baseline (that check was made before the later halo and centre work, none of which touches shared code).
+
+**Legacy Stone Tuner:** https://claude.ai/artifact/TpwchWGWtzghmp69YfR5X1
+- The page is in `rings/legacy/tuner/`, with `STORE_KEY = "legacy-stone-tuner"`.
+- Unlike Heirloom's, it adjusts **both centre and halo**.
+- Apply the client's JSON with `build_legacy.py <json>`.
+- To republish, copy the folder to a path under the working directory or scratchpad and publish with `url` set to the link above.
+
+**Theme switch:**
+- `snippets/co-lab-preview-set.liquid` returns:
+  - `legacy` when the product field **Stone preview set** (`custom.stone_preview_set`) is `legacy`
+  - `heirloom` when **Customise drawer** is ticked
+  - otherwise blank, meaning off
+- The drawer, the gallery preview, the cart image and the image prefix all read it.
+- The field is set on Legacy. The live theme ignores it until this code goes live, so Legacy's drawer switches on with the code push.
+- **Drawer crop:** the compact preview shows a fixed window of the 1600px image. Legacy is taller than Heirloom, so `co-lab-stone-preview--legacy` in `assets/co-lab-stone-preview.css` has its own window (y 425-1202), or the top of the halo is clipped on mobile. A new ring needs its window measured the same way.
+- **JS gotcha:** the component stores the prefix as `this.filePrefix`. `prefix` is a read-only DOM property and throws.
+
+**Rebuild (from `pipeline/rings/legacy/`):**
+
+```bash
+../../.venv/bin/python prep_base.py ai/gold_c-april_h-april_2.png
+../../.venv/bin/python measure.py
+../../.venv/bin/python build_legacy.py && ../../.venv/bin/python build_legacy.py --tuner
+```
+
+**Checking a build:** `rings/legacy/check_clean.py` measures every halo stone against Heirloom's own images: gold-hued pixels inside the stone (a bezel sliver), a pale ring left from the base's white stone, and gold on the silver metal. Read it alongside full-size crops (about 1000px per ring), not contact sheets, which hide edge faults.
+- **Last result (20 Oct 2026):** no gold inside any non-champagne stone (champagne scores 0.76 against Heirloom's 0.75, as expected). The pale ring is under 1%. On silver, every warm pixel is inside a stone, none on the metal.
+- **Normal variation:** a few stones look a touch paler or darker than their neighbours in every month. Each one tracks its paired Heirloom stone exactly (it's the same real stone), so it's not a Legacy fault.
+
+**Legacy open items:**
+1. **Centres:** all 12 months use the sharpened redraws.
+   - Heirloom gets them too: `pipeline/sharpen_heirloom_centres.py` places them onto the committed Heirloom images. Nothing outside the centre changes beyond JPEG re-encoding (mean difference under 0.1 level).
+   - It's **on the Dev theme and in this worktree's `assets/`, not live.** Going live with it changes live Heirloom images, so ship it as its own commit with the client's OK.
+   - **Note:** `rebuild.py` doesn't know about it. A full Heirloom rebuild brings back the soft centres unless this script is run afterwards.
+2. **November halo** (champagne) sits close to the gold, as it did on Heirloom.
+3. **Higher resolution:** if Charlotte finds larger originals of the AI renders, rerun `ai_base.py` on the April & April one.
+4. **The Dev theme carries the house-style versions** of the edited snippets. The Legacy edits were applied to those copies for Dev. The feature branch is based on `main`.
+
 ## Going live
 
 1. **Sync first.** Run `/sync` so main has the client's latest live edits, then merge this branch
