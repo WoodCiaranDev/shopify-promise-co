@@ -12,10 +12,10 @@ def centre_geometry(mask):
     ys, xs = np.where(mask)
     return xs.mean(), ys.mean(), np.ptp(xs) + 1, np.ptp(ys) + 1
 
-def place_centre(base, icon_path, mask, weight, cover=1.05, sharpen=True):
+def place_centre(base, icon_path, mask, weight, cover=1.05, sharpen=True, rotate=0):
     B = np.asarray(base).astype(np.float64)
     cx, cy, ow, oh = centre_geometry(mask)
-    icon = Image.open(icon_path).convert("RGBA")
+    icon = Image.open(icon_path).convert("RGBA").rotate(rotate, expand=True)
     a = np.asarray(icon)[..., 3] > 128
     ys, xs = np.where(a)
     icon = icon.crop((xs.min(), ys.min(), xs.max() + 1, ys.max() + 1))
@@ -35,11 +35,11 @@ def place_centre(base, icon_path, mask, weight, cover=1.05, sharpen=True):
     return Image.fromarray(np.clip(B * (1 - w) + layer * w, 0, 255).astype(np.uint8))
 
 
-def cover_scale(icon_path, mask, start=1.0, step=0.01, need=0.999):
+def cover_scale(icon_path, mask, start=1.0, step=0.01, need=0.999, rotate=0):
     """Smallest uniform enlargement (relative to width-fit) at which the stone covers the
     whole opening, so no original stone shows at the corners and the cut is never stretched."""
     cx, cy, ow, oh = centre_geometry(mask)
-    icon = Image.open(icon_path).convert("RGBA")
+    icon = Image.open(icon_path).convert("RGBA").rotate(rotate, expand=True)
     a = np.asarray(icon)[..., 3] > 128
     ys, xs = np.where(a)
     icon = icon.crop((xs.min(), ys.min(), xs.max() + 1, ys.max() + 1))
