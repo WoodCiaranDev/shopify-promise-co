@@ -9432,3 +9432,8 @@ span.ogg-font {
 .line-item__remove:hover {
   color: rgb(var(--text-color));
 }
+
+.cart-drawer .complementary-products .product-card__quick-add-button {
+  opacity: 1;
+  transform: none;
+}

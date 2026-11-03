@@ -24,30 +24,39 @@
       {%- endfor -%}
     </div>
 
-    {%- liquid
-      # Collect cross-sell products from cart items' metafields
-      assign cross_sell_product_ids = ''
+    {%- capture cross_sell_cards -%}
+      {%- assign rendered_count = 0 -%}
+      {%- if section.settings.cross_sell_collection != blank -%}
+        {%- for rec_product in section.settings.cross_sell_collection.products limit: 50 -%}
+          {%- if rendered_count >= 3 -%}{%- break -%}{%- endif -%}
+          {%- assign in_cart = cart.items | where: 'product_id', rec_product.id -%}
+          {%- if in_cart.size == 0 and rec_product.available -%}
+            {%- render 'product-card', product: rec_product, show_rating: false, show_badges: false, show_quick_buy: true, quick_buy_context: 'cart', hide_judgeme_badge: true, cross_sell: true -%}
+            {%- assign rendered_count = rendered_count | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- assign shown_ids = '' -%}
+        {%- for line_item in cart.items -%}
+          {%- if rendered_count >= 3 -%}{%- break -%}{%- endif -%}
+          {%- assign complementary = line_item.product.metafields['shopify--discovery--product_recommendation'].complementary_products.value -%}
+          {%- for rec_product in complementary -%}
+            {%- if rendered_count >= 3 -%}{%- break -%}{%- endif -%}
+            {%- assign in_cart = cart.items | where: 'product_id', rec_product.id -%}
+            {%- assign id_check = rec_product.id | append: ',' -%}
+            {%- if in_cart.size == 0 and rec_product.available -%}
+              {%- unless shown_ids contains id_check -%}
+                {%- assign shown_ids = shown_ids | append: id_check -%}
+                {%- render 'product-card', product: rec_product, show_rating: false, show_badges: false, show_quick_buy: true, quick_buy_context: 'cart', hide_judgeme_badge: true, cross_sell: true -%}
+                {%- assign rendered_count = rendered_count | plus: 1 -%}
+              {%- endunless -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endcapture -%}
 
-      for line_item in cart.items
-        assign complementary = line_item.product.metafields['shopify--discovery--product_recommendation'].complementary_products.value
-        if complementary and complementary.size > 0
-          for rec_product in complementary
-            # Check if product is already in cart
-            assign in_cart = cart.items | where: 'product_id', rec_product.id
-            # Check if we already added this product to cross-sells
-            assign id_string = rec_product.id | append: ','
-
-            unless cross_sell_product_ids contains id_string
-              if in_cart.size == 0 and rec_product.available
-                assign cross_sell_product_ids = cross_sell_product_ids | append: id_string
-              endif
-            endunless
-          endfor
-        endif
-      endfor
-    -%}
-
-    {%- if cross_sell_product_ids != '' -%}
+    {%- if cross_sell_cards != blank -%}
       <div class="cart-drawer__complementary-products complementary-products">
         {%- if section.settings.cross_sell_title != blank -%}
           <div class="complementary-products__header">
@@ -56,23 +65,7 @@
         {%- endif -%}
 
         <div class="complementary-products__product-list">
-          {%- assign rendered_count = 0 -%}
-          {%- for line_item in cart.items -%}
-            {%- if rendered_count >= 3 -%}{%- break -%}{%- endif -%}
-            {%- assign complementary = line_item.product.metafields['shopify--discovery--product_recommendation'].complementary_products.value -%}
-            {%- if complementary -%}
-              {%- for rec_product in complementary -%}
-                {%- if rendered_count >= 3 -%}{%- break -%}{%- endif -%}
-                {%- assign in_cart = cart.items | where: 'product_id', rec_product.id -%}
-                {%- assign id_check = rec_product.id | append: ',' -%}
-                {%- if in_cart.size == 0 and rec_product.available and cross_sell_product_ids contains id_check -%}
-                  {%- assign cross_sell_product_ids = cross_sell_product_ids | remove_first: id_check -%}
-                  {%- render 'product-card', product: rec_product, show_rating: true, show_quick_buy: false, hide_judgeme_badge: true, show_add_to_cart_button: true -%}
-                  {%- assign rendered_count = rendered_count | plus: 1 -%}
-                {%- endif -%}
-              {%- endfor -%}
-            {%- endif -%}
-          {%- endfor -%}
+          {{- cross_sell_cards -}}
         </div>
       </div>
     {%- endif -%}
@@ -170,6 +163,12 @@
     {
       "type": "header",
       "content": "t:sections.cart_drawer.cross_sell_category"
+    },
+    {
+      "type": "collection",
+      "id": "cross_sell_collection",
+      "label": "Complete the look collection",
+      "info": "Shown for every product. Products already in the cart or sold out are left out. Leave empty to use each product's own complementary products."
     },
     {
       "type": "product_list",
