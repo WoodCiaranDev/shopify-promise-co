@@ -1440,20 +1440,31 @@ onChangeLinkClicked_fn = function(event, target) {
   __privateMethod(this, _LineItemQuantity_instances, changeLineItemQuantity_fn).call(this, url.searchParams.get("id"), parseInt(url.searchParams.get("quantity")));
 };
 changeLineItemQuantity_fn = async function(lineKey, targetQuantity) {
+  const bundleChildren = JSON.parse(this.getAttribute("data-bundle-children") || "[]");
+  const updates = { [lineKey]: targetQuantity };
+  bundleChildren.forEach((child) => updates[child.key] = child.per * targetQuantity);
   if (window.themeVariables.settings.pageType === "cart") {
-    window.location.href = `${Shopify.routes.root}cart/change?id=${lineKey}&quantity=${targetQuantity}`;
+    if (bundleChildren.length > 0) {
+      await fetch(`${Shopify.routes.root}cart/update.js`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ updates }) });
+      window.location.reload();
+    } else {
+      window.location.href = `${Shopify.routes.root}cart/change?id=${lineKey}&quantity=${targetQuantity}`;
+    }
   } else {
     document.documentElement.dispatchEvent(new CustomEvent("theme:loading:start", { bubbles: true }));
     const lineItem = this.closest("line-item");
     lineItem?.dispatchEvent(new CustomEvent("line-item:will-change", { bubbles: true, detail: { targetQuantity } }));
     let sectionsToBundle = [];
     document.documentElement.dispatchEvent(new CustomEvent("cart:prepare-bundled-sections", { bubbles: true, detail: { sections: sectionsToBundle } }));
-    const cartContent = await (await fetch(`${Shopify.routes.root}cart/change.js`, {
+    const cartContent = await (await fetch(`${Shopify.routes.root}${bundleChildren.length > 0 ? "cart/update.js" : "cart/change.js"}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
+      body: JSON.stringify(bundleChildren.length > 0 ? {
+        updates,
+        sections: sectionsToBundle.join(",")
+      } : {
         id: lineKey,
         quantity: targetQuantity,
         sections: sectionsToBundle.join(",")

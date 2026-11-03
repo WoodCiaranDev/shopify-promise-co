@@ -150,9 +150,26 @@ Supported variables
       {%- endif -%}
 
       {%- if show_quantity_selector -%}
-        <line-item-quantity class="h-stack gap-4 {% if request.page_type == 'cart' %}sm:hidden{% endif %}">
-          {%- render 'quantity-selector', line_item: line_item, size: 'sm' -%}
-          <a href="{{ line_item.url_to_remove }}" class="link text-xs">{{ 'cart.order.remove' | t }}</a>
+        {%- liquid
+          assign bundle_children = ''
+          if bundle_role == 'parent' and line_item.properties._bundle_id != blank
+            for child in cart.items
+              if child.properties._bundle_id == line_item.properties._bundle_id and child.key != line_item.key
+                assign per_unit = child.quantity | divided_by: line_item.quantity | at_least: 1
+                capture child_json
+                  echo '{"key":"' | append: child.key | append: '","per":' | append: per_unit | append: '}'
+                endcapture
+                if bundle_children != ''
+                  assign bundle_children = bundle_children | append: ','
+                endif
+                assign bundle_children = bundle_children | append: child_json
+              endif
+            endfor
+          endif
+        -%}
+        <line-item-quantity class="line-item__quantity v-stack justify-items-start gap-2 {% if request.page_type == 'cart' %}sm:hidden{% endif %}"{% if bundle_children != '' %} data-bundle-children='[{{ bundle_children }}]'{% endif %}>
+          {%- render 'quantity-dropdown', line_item: line_item -%}
+          <a href="{{ line_item.url_to_remove }}" class="line-item__remove text-xs">{{ 'cart.order.remove' | t }}</a>
         </line-item-quantity>
       {%- else -%}
         <p class="text-subdued text-sm sm:hidden">{{ 'customer.order.quantity' | t }}: {{ line_item.quantity }}</p>
