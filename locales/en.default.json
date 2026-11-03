@@ -360,6 +360,7 @@
   "cart": {
     "general": {
       "title": "Cart - Items are not reserved until payment",
+      "title_with_count": "Cart ({{ count }})",
       "empty": "Your cart is empty",
       "continue_shopping": "Continue shopping",
       "weight": "Weight",

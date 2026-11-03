@@ -1,8 +1,23 @@
 <cart-drawer id="cart-drawer" class="cart-drawer drawer {% if cart.empty? %}drawer--center-body{% endif %} color-scheme color-scheme--scheme-2" initial-focus="false" handle-editor-events>
-  <p class="h4" slot="header">{{ 'cart.general.title' | t }}</p>
+  {%- liquid
+    assign visible_item_count = 0
+    for line_item in cart.items
+      assign bundle_role = line_item.properties._bundle_role
+      unless bundle_role == 'birthstone' or bundle_role == 'engraving'
+        assign visible_item_count = visible_item_count | plus: line_item.quantity
+      endunless
+    endfor
+  -%}
+  <p class="h4" slot="header">{{ 'cart.general.title_with_count' | t: count: visible_item_count }}</p>
   {%- if cart.empty? -%}
     <p class="h5 text-center">{{ 'cart.general.empty' | t }}</p>
   {%- else -%}
+    {%- if settings.cart_show_free_shipping_bar -%}
+      <div class="cart-drawer__shipping">
+        {%- render 'free-shipping-bar' -%}
+      </div>
+    {%- endif -%}
+
     <div class="cart-drawer__items">
       {%- for line_item in cart.items -%}
         {%- render 'line-item', line_item: line_item, show_quantity_selector: true -%}
@@ -77,10 +92,6 @@
         <span>{{ cart.total_price | money }}</span>
       </div>
 
-      {%- if settings.cart_show_free_shipping_bar -%}
-        {%- render 'free-shipping-bar' -%}
-      {%- endif -%}
-
       {% for discount_application in cart.cart_level_discount_applications %}
         <div class="h-stack justify-start gap-4">
           <span class="discount-badge text-xs">{%- render 'icon' with 'discount', width: 12 -%} {{- discount_application.title -}}</span>
@@ -95,8 +106,12 @@
         {%- endif -%}
 
         {%- if section.settings.show_checkout_button -%}
-          {%- render 'button', type: 'submit', content: 'Checkout', name: 'checkout', stretch: true -%}
+          {%- render 'button', type: 'submit', content: 'Secure Checkout', icon: 'lock', name: 'checkout', stretch: true -%}
         {%- endif -%}
+      </div>
+
+      <div class="cart-drawer__payment-icons">
+        {%- render 'promise-payment-icons', types: 'visa,apple_pay,google_pay,master,american_express,shopify_pay' -%}
       </div>
     </form>
   {%- endif -%}

@@ -82,11 +82,11 @@ Supported variables
     <span class="line-item__media c-co-lab-line-ring">
       <img src="{{ colab_ring_src }}&width=360"
            srcset="{{ colab_ring_src }}&width=240 240w, {{ colab_ring_src }}&width=360 360w, {{ colab_ring_src }}&width=520 520w"
-           sizes="(max-width: 699px) 100px, 170px"
+           sizes="(max-width: 699px) 104px, 144px"
            width="1000" height="1000" loading="lazy" alt="{{ line_item.product.title | escape }}">
     </span>
   {%- elsif line_item.image != blank -%}
-    {{- line_item.image | image_url: width: line_item.image.width | image_tag: loading: 'lazy', sizes: '(max-width: 699px) 70px, 120px', widths: '70,120,140,210,240,360', class: 'line-item__media' -}}
+    {{- line_item.image | image_url: width: line_item.image.width | image_tag: loading: 'lazy', sizes: '(max-width: 699px) 104px, 144px', widths: '70,120,140,210,240,360', class: 'line-item__media' -}}
   {%- endif -%}
 
   <div class="line-item-info">
