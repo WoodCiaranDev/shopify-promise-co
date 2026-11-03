@@ -9470,3 +9470,26 @@ span.ogg-font {
 .product-info .feature-badge-list .feature-badge p {
   margin: 0;
 }
+
+.promise-reviews {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.promise-reviews__stars {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.promise-reviews__stars svg path {
+  fill: var(--promise-star-colour);
+}
+
+.promise-reviews__divider {
+  width: 1px;
+  height: 1.25em;
+  background: currentColor;
+}

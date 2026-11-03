@@ -14,7 +14,8 @@
       "blocks": {
         "judge_me_reviews_all_reviews_text_B98kYP": {
           "type": "shopify://apps/judge-me-reviews/blocks/all_reviews_text/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
+          "settings": {},
+          "disabled": true
         },
         "title": {
           "type": "title",
@@ -230,9 +231,19 @@
         "share_buttons_cbEwqV": {
           "type": "share_buttons",
           "settings": {}
+        },
+        "promise_reviews": {
+          "type": "promise_reviews",
+          "settings": {
+            "rating_label": "Excellent",
+            "promises_text": "11,000+ Promises",
+            "star_colour": "#75aedc",
+            "fallback_rating": "4.9"
+          }
         }
       },
       "block_order": [
+        "promise_reviews",
         "judge_me_reviews_all_reviews_text_B98kYP",
         "title",
         "price",
