@@ -497,14 +497,11 @@ height-observer {
 
 a[href="#size-guide-popup"] {
   font-size: 12px;
-  text-decoration: none;
-  display: block;
-  text-align: right;
-  background: transparent !important;
-}
-
-a[href="#size-guide-popup"]:hover {
   text-decoration: underline;
+  text-underline-offset: 3px;
+  display: block;
+  text-align: start;
+  background: transparent !important;
 }
 
 .product-info__block-item:has(a[href="#size-guide-popup"]) {
@@ -3839,9 +3836,11 @@ tr[onclick]:hover {
 .product-info__block-group.qty-buy-group {
   --product-info-gap: 0;
   margin-block: 1rem;
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 0.75rem;
+  row-gap: 0.5rem;
+  align-items: stretch;
 }
 
 /* Unwrap nested containers except buy-buttons */
@@ -3852,12 +3851,13 @@ tr[onclick]:hover {
   display: contents;
 }
 
-/* Buy buttons stack vertically and fill remaining space */
 .qty-buy-group .buy-buttons {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  display: contents;
+}
+
+.qty-buy-group .quantity-dropdown__select {
+  height: 100%;
+  min-height: 2.7rem;
 }
 
 .qty-buy-group .buy-buttons > .button:first-child {
@@ -3865,6 +3865,7 @@ tr[onclick]:hover {
 }
 
 .qty-buy-group .shopify-payment-button {
+  grid-column: 1 / -1;
   width: 100%;
 }
 
@@ -9392,7 +9393,6 @@ span.ogg-font {
     padding-left: 20px;
   }
 }
-
 .quantity-dropdown {
   position: relative;
   display: inline-flex;
@@ -9436,4 +9436,37 @@ span.ogg-font {
 .cart-drawer .complementary-products .product-card__quick-add-button {
   opacity: 1;
   transform: none;
+}
+
+.product-info .feature-badge-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-block-start: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: #f2eee8;
+  border-radius: 1.25rem;
+}
+
+.product-info .feature-badge-list .feature-badge {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: start;
+  column-gap: 0.85rem;
+  padding: 0;
+  background: none;
+  height: auto;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.product-info .feature-badge-list .feature-badge :is(svg, img) {
+  width: 24px;
+  margin-bottom: 0;
+}
+
+.product-info .feature-badge-list .feature-badge p {
+  margin: 0;
 }

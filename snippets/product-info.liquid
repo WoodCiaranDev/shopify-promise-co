@@ -340,7 +340,7 @@ Supported variables
 
           {%- when 'quantity_selector' -%}
             {%- if product.available and is_co_lab == false -%}
-              {% render 'quantity-selector', variant: product.selected_or_first_available_variant, form: product_form_id %}
+              {%- render 'quantity-dropdown', variant: product.selected_or_first_available_variant, form: product_form_id -%}
             {%- endif -%}
 
           {%- when 'inventory' -%}

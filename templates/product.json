@@ -56,7 +56,7 @@
         "text_TzkTaX": {
           "type": "text",
           "settings": {
-            "text": "<p><a href=\"#size-guide-popup\" title=\"Ring Size Guide\">Unsure on sizing? - Size Guide Here</a></p>"
+            "text": "<p><a href=\"#size-guide-popup\" title=\"Ring Size Guide\">Size Guide Here</a></p>"
           }
         },
         "quantity_selector": {
@@ -151,7 +151,7 @@
         "feature_with_icon_FTccY4": {
           "type": "feature_with_icon",
           "settings": {
-            "text": "Hand Set Stones",
+            "text": "Hand-Set Promise Stones",
             "link": "",
             "click_action": "none",
             "popup_id": "shipping-popup",
@@ -164,7 +164,7 @@
         "feature_with_icon_XfGd6d": {
           "type": "feature_with_icon",
           "settings": {
-            "text": "Anti-Tarnish Coating",
+            "text": "Anti-Tarnish",
             "link": "",
             "click_action": "none",
             "popup_id": "shipping-popup",
@@ -177,7 +177,7 @@
         "feature_with_icon_tUrRgp": {
           "type": "feature_with_icon",
           "settings": {
-            "text": "Ready to Gift Packaging",
+            "text": "Gift-Ready Packaging",
             "link": "",
             "click_action": "popup",
             "popup_id": "packaging-popup",
@@ -198,7 +198,8 @@
             "custom_icon": "shopify://shop_images/Artboard_33_4x_a331b0fc-7364-4b91-8dfe-db9ecd4ec7cd.png",
             "icon_width": 28,
             "tooltip_text": ""
-          }
+          },
+          "disabled": true
         },
         "feature_with_icon_tTcWak": {
           "type": "feature_with_icon",
@@ -238,8 +239,8 @@
         "payment_terms",
         "separator",
         "variant_picker",
-        "delivery_countdown_GeGVy3",
         "text_TzkTaX",
+        "delivery_countdown_GeGVy3",
         "quantity_selector",
         "buy_buttons",
         "text_aUJmQk",
@@ -250,10 +251,10 @@
         "judge_me_reviews_review_snippet_widget_YnLLY8",
         "feature_with_icon_FTccY4",
         "feature_with_icon_XfGd6d",
-        "feature_with_icon_tUrRgp",
-        "feature_with_icon_TyH8jB",
         "feature_with_icon_tTcWak",
+        "feature_with_icon_tUrRgp",
         "feature_with_icon_badge6",
+        "feature_with_icon_TyH8jB",
         "share_buttons_cbEwqV"
       ],
       "settings": {
