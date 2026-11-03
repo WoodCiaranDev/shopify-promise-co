@@ -92,14 +92,9 @@ only way to do it on Shopify right now.
   endif
 %}
 
-<product-gallery class="product-gallery" form="{{ product_form_id }}" filtered-indexes="{{ filtered_indexes | json }}" {% if enable_media_autoplay %}autoplay-media{% endif %} {% if enable_image_zoom %}allow-zoom="{{ max_image_zoom_level }}"{% endif %}>
+<product-gallery class="product-gallery" form="{{ product_form_id }}" filtered-indexes="{{ filtered_indexes | json }}" {% if enable_media_autoplay %}autoplay-media{% endif %} {% if enable_image_zoom %}inline-zoom="{{ max_image_zoom_level | default: 3 }}"{% endif %}>
   {%- if enable_image_zoom -%}
-    <open-lightbox-button class="contents">
-      <button class="product-gallery__zoom-button circle-button circle-button--sm md:hidden">
-        <span class="sr-only">{{ 'product.gallery.zoom' | t }}</span>
-        {%- render 'icon' with 'zoom' -%}
-      </button>
-    </open-lightbox-button>
+    <script src="{{ 'gallery-zoom.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
 
   <div class="product-gallery__image-list">

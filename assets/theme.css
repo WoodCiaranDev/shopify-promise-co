@@ -9493,3 +9493,24 @@ span.ogg-font {
   height: 1.25em;
   background: currentColor;
 }
+
+.product-gallery[inline-zoom] .product-gallery__media[data-media-type="image"] {
+  overflow: hidden;
+}
+
+.product-gallery[inline-zoom] .product-gallery__media[data-media-type="image"] img {
+  touch-action: pan-x pan-y;
+  transition: transform 0.15s ease-out;
+  will-change: transform;
+}
+
+.product-gallery[inline-zoom] .product-gallery__media.is-zoomed img {
+  touch-action: none;
+  transition: none;
+}
+
+@media screen and (pointer: fine) {
+  .product-gallery[inline-zoom] .product-gallery__media[data-media-type="image"] {
+    cursor: zoom-in;
+  }
+}
