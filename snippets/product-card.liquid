@@ -22,6 +22,7 @@ Supported variables
 * hide_product_information: if set to true, all content (vendor, badge, title...) are not rendered, to create image-based grid
 * quick_buy_context: a unique text to dissociate quick buy if the same product is embedded multiple times
 * cross_sell: cart drawer recommendations. Hides tag badges, shows the first still instead of the Co-Lab image loop, keeps the + visible, opens quick shop in white and gives Co-Lab products a + that goes to the product page
+* cross_sell_image: optional image shown instead of the first still for Co-Lab products in the cart drawer
 {%- endcomment -%}
 
 {%- liquid
@@ -85,7 +86,9 @@ Supported variables
 
         {%- comment -%} Co-Lab products animate through their stills (custom.animation_images) instead of a static image. {%- endcomment -%}
         {%- assign colab_anim = product.metafields.custom.animation_images.value -%}
-        {%- if colab_anim and colab_anim.size > 1 and cross_sell -%}
+        {%- if colab_anim and colab_anim.size > 1 and cross_sell and cross_sell_image != blank -%}
+          {{- cross_sell_image | image_url: width: cross_sell_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '200,300,400,500,600,700,800,1000', class: main_image_classes -}}
+        {%- elsif colab_anim and colab_anim.size > 1 and cross_sell -%}
           {{- colab_anim.first | image_url: width: colab_anim.first.width | image_tag: loading: 'lazy', sizes: sizes, widths: '200,300,400,500,600,700,800,1000', class: main_image_classes -}}
         {%- elsif colab_anim and colab_anim.size > 1 -%}
           {%- assign loop_eager = false -%}

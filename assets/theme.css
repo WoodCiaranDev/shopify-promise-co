@@ -4869,19 +4869,17 @@ product-rerender {
 }
 
 .cart-drawer .complementary-products__product-list {
-  grid-template-columns: repeat(3, 1fr);
+  grid: auto / auto-flow calc(50% - 0.5rem);
   gap: 1rem;
+}
+
+.cart-drawer__cross-sell > product-card {
+  scroll-snap-align: start;
 }
 
 .cart-drawer .complementary-products__product-list .button {
   font-size: 12px;
   padding: 0.5rem 0.75rem;
-}
-
-@media (max-width: 500px) {
-  .cart-drawer .complementary-products__product-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 .cart-drawer__button-price {

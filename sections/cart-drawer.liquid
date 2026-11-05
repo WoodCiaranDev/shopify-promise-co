@@ -28,26 +28,26 @@
       {%- assign rendered_count = 0 -%}
       {%- if section.settings.cross_sell_collection != blank -%}
         {%- for rec_product in section.settings.cross_sell_collection.products limit: 50 -%}
-          {%- if rendered_count >= 3 -%}{%- break -%}{%- endif -%}
+          {%- if rendered_count >= 6 -%}{%- break -%}{%- endif -%}
           {%- assign in_cart = cart.items | where: 'product_id', rec_product.id -%}
           {%- if in_cart.size == 0 and rec_product.available -%}
-            {%- render 'product-card', product: rec_product, show_rating: false, show_badges: false, show_quick_buy: true, quick_buy_context: 'cart', hide_judgeme_badge: true, cross_sell: true -%}
+            {%- render 'product-card', product: rec_product, show_rating: false, show_badges: false, show_quick_buy: true, quick_buy_context: 'cart', hide_judgeme_badge: true, cross_sell: true, cross_sell_image: section.settings.cross_sell_custom_image -%}
             {%- assign rendered_count = rendered_count | plus: 1 -%}
           {%- endif -%}
         {%- endfor -%}
       {%- else -%}
         {%- assign shown_ids = '' -%}
         {%- for line_item in cart.items -%}
-          {%- if rendered_count >= 3 -%}{%- break -%}{%- endif -%}
+          {%- if rendered_count >= 6 -%}{%- break -%}{%- endif -%}
           {%- assign complementary = line_item.product.metafields['shopify--discovery--product_recommendation'].complementary_products.value -%}
           {%- for rec_product in complementary -%}
-            {%- if rendered_count >= 3 -%}{%- break -%}{%- endif -%}
+            {%- if rendered_count >= 6 -%}{%- break -%}{%- endif -%}
             {%- assign in_cart = cart.items | where: 'product_id', rec_product.id -%}
             {%- assign id_check = rec_product.id | append: ',' -%}
             {%- if in_cart.size == 0 and rec_product.available -%}
               {%- unless shown_ids contains id_check -%}
                 {%- assign shown_ids = shown_ids | append: id_check -%}
-                {%- render 'product-card', product: rec_product, show_rating: false, show_badges: false, show_quick_buy: true, quick_buy_context: 'cart', hide_judgeme_badge: true, cross_sell: true -%}
+                {%- render 'product-card', product: rec_product, show_rating: false, show_badges: false, show_quick_buy: true, quick_buy_context: 'cart', hide_judgeme_badge: true, cross_sell: true, cross_sell_image: section.settings.cross_sell_custom_image -%}
                 {%- assign rendered_count = rendered_count | plus: 1 -%}
               {%- endunless -%}
             {%- endif -%}
@@ -64,9 +64,19 @@
           </div>
         {%- endif -%}
 
-        <div class="complementary-products__product-list">
+        <scroll-carousel id="cart-drawer-cross-sell" cell-selector="product-card" allow-drag class="complementary-products__product-list cart-drawer__cross-sell scroll-area snap-x">
           {{- cross_sell_cards -}}
-        </div>
+        </scroll-carousel>
+
+        {%- if rendered_count > 2 -%}
+          <carousel-navigation aria-controls="cart-drawer-cross-sell" class="page-dots">
+            {%- for i in (2..rendered_count) -%}
+              <button class="tap-area" aria-current="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="{{ 'general.accessibility.go_to_item' | t: index: forloop.index | escape }}">
+                <span class="sr-only">{{- 'general.accessibility.go_to_item' | t: index: forloop.index -}}</span>
+              </button>
+            {%- endfor -%}
+          </carousel-navigation>
+        {%- endif -%}
       </div>
     {%- endif -%}
 
@@ -169,6 +179,12 @@
       "id": "cross_sell_collection",
       "label": "Complete the look collection",
       "info": "Shown for every product. Products already in the cart or sold out are left out. Leave empty to use each product's own complementary products."
+    },
+    {
+      "type": "image_picker",
+      "id": "cross_sell_custom_image",
+      "label": "Custom ring image",
+      "info": "Shown for every custom (Co-Lab) ring in Complete the look. Leave empty to use each ring's first image."
     },
     {
       "type": "product_list",
