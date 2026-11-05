@@ -4609,7 +4609,11 @@ product-rerender {
 }
 
 .cart-drawer {
-  --drawer-header-padding-block: 0.5rem;
+  --drawer-header-padding-block: 0.75rem;
+}
+
+.cart-drawer::part(header) {
+  min-height: 0;
 }
 
 @media screen and (max-width: 699px) {
@@ -4633,14 +4637,14 @@ product-rerender {
   top: 0;
   z-index: 1;
   background: rgb(var(--background));
-  padding-block: 0.75rem;
+  padding-block: 0.5rem 0.75rem;
   border-block-end: 1px solid rgb(var(--border-color));
 }
 
 .cart-drawer__payment-icons {
   display: flex;
   justify-content: center;
-  padding-block-start: 0.75rem;
+  margin-block-start: -0.5rem;
 }
 
 .cart-drawer__payment-icons .promise-payment-icons {
@@ -4675,6 +4679,7 @@ product-rerender {
 }
 
 .free-shipping-bar {
+  display: block;
   text-align: center;
   width: 100%;
   padding-inline: 1rem;
@@ -4722,6 +4727,10 @@ product-rerender {
   text-transform: none;
   letter-spacing: normal;
   font-size: 18px;
+}
+
+.cart-drawer__footer .button[name="checkout"] {
+  padding-block: 1rem;
 }
 
 .cart-drawer__subtotal {
