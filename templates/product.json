@@ -236,7 +236,7 @@
           "type": "promise_reviews",
           "settings": {
             "rating_label": "Excellent",
-            "promises_text": "11,000+ Promises",
+            "promises_text": "11,000+ Promises Made",
             "star_colour": "#75aedc",
             "fallback_rating": "4.9"
           }
