@@ -35,6 +35,14 @@ Supported variables
       <input type="hidden" {% if variant_picker_block != blank %}disabled{% endif %} name="id" value="{{ product.selected_or_first_available_variant.id }}">
 
       {% liquid
+        assign selected_variant = product.selected_or_first_available_variant
+        assign is_preorder = false
+        if selected_variant.inventory_management == 'shopify' and selected_variant.inventory_quantity <= 0
+          if selected_variant.inventory_policy == 'continue' or settings.preorder_preview
+            assign is_preorder = true
+          endif
+        endif
+
         assign button_disabled = false
 
         if product.selected_or_first_available_variant == nil
@@ -49,6 +57,12 @@ Supported variables
           else
             assign button_content = 'product.general.add_to_cart_button' | t
           endif
+        endif
+
+        if is_preorder
+          assign button_disabled = false
+          assign button_content = 'product.general.pre_order_button' | t
+          assign show_payment_button = false
         endif
       %}
 
@@ -79,7 +93,7 @@ Supported variables
           </gift-card-recipient>
         {%- endif -%}
 
-        <buy-buttons class="buy-buttons {% if show_payment_button %}buy-buttons--has-dynamic{% endif %} {% if product.selected_or_first_available_variant.inventory_quantity <= 0 and product.selected_or_first_available_variant.inventory_policy == "continue" %} atc-button-hide {% endif %}" form="{{ form_id }}">
+        <buy-buttons class="buy-buttons {% if show_payment_button %}buy-buttons--has-dynamic{% endif %}{% if is_preorder %} buy-buttons--preorder{% endif %}" form="{{ form_id }}">
           {%- if show_payment_button and atc_button_background == blank and atc_button_text_color == blank -%}
             {%- assign atc_button_style = 'outline' -%}
           {%- else -%}
@@ -87,6 +101,14 @@ Supported variables
           {%- endif -%}
 
           {%- render 'button', content: button_content, type: 'submit', disabled: button_disabled, style: atc_button_style, background: atc_button_background, text_color: atc_button_text_color, stretch: true, custom_class: 'button--add-to-cart' -%}
+
+          {%- if is_preorder -%}
+            <input type="hidden" name="properties[{{ 'product.preorder.property' | t }}]" value="{{ settings.preorder_message | escape }}" data-preorder="preorder-confirm-{{ form_id }}">
+            <p class="buy-buttons__preorder text-sm">
+              <strong>{{ 'product.general.pre_order_button' | t }}</strong>
+              <span>{{ settings.preorder_message }}</span>
+            </p>
+          {%- endif -%}
 
           {%- if show_payment_button -%}
             {{- form | payment_button -}}
@@ -111,6 +133,22 @@ Supported variables
       </div>
     {%- endform -%}
   </product-form>
+
+  {%- liquid
+    assign can_preorder = false
+    for variant in product.variants
+      if variant.inventory_management == 'shopify' and variant.inventory_quantity <= 0
+        if variant.inventory_policy == 'continue' or settings.preorder_preview
+          assign can_preorder = true
+          break
+        endif
+      endif
+    endfor
+  -%}
+
+  {%- if can_preorder -%}
+    {%- render 'preorder-confirm', form_id: form_id -%}
+  {%- endif -%}
 {%- else -%}
   <buy-buttons class="buy-buttons" template="{{ product.template_suffix | escape }}" form="{{ form_id }}">
     {%- assign button_content = 'product.general.add_to_cart_button' | t -%}

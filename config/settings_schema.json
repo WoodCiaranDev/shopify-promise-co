@@ -1380,5 +1380,27 @@
         "info": "One per line, UK first, for example Jewellery = Jewelry"
       }
     ]
+  },
+  {
+    "name": "Pre-orders",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "A size goes on pre-order when it is out of stock and \"Continue selling when out of stock\" is ticked on it in Products. The button changes to Pre-order, the message below shows under it and on the order, and customers confirm before it goes in the bag."
+      },
+      {
+        "type": "text",
+        "id": "preorder_message",
+        "label": "Pre-order message",
+        "default": "Dispatches in 4-6 weeks"
+      },
+      {
+        "type": "checkbox",
+        "id": "preorder_preview",
+        "label": "Preview on sold-out sizes",
+        "info": "Shows the pre-order look on every sold-out size so you can see it. Only for checking on a test theme: sold-out sizes still can't be bought unless Continue selling is ticked.",
+        "default": false
+      }
+    ]
   }
 ]

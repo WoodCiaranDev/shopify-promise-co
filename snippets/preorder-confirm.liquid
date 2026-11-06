@@ -1,0 +1,36 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+PRE-ORDER CONFIRM
+----------------------------------------------------------------------------------------------------------------------
+
+Asks the customer to confirm before a pre-order size goes in the bag. preorder.js opens it when the product form
+holds a [data-preorder] input, and submits the form once they confirm.
+
+********************************************
+Supported variables
+********************************************
+
+* form_id: the product form the modal confirms
+{%- endcomment -%}
+
+{%- assign modal_id = 'preorder-confirm-' | append: form_id -%}
+
+<x-modal id="{{ modal_id }}" class="modal color-scheme color-scheme--dialog" aria-labelledby="{{ modal_id }}-title">
+  <span class="h5" slot="header" id="{{ modal_id }}-title">{{ 'product.preorder.confirm_title' | t }}</span>
+
+  <div class="preorder-confirm" data-preorder-form="{{ form_id }}">
+    <p>{{ 'product.preorder.confirm_text' | t: message: settings.preorder_message }}</p>
+
+    <label class="preorder-confirm__agree">
+      <span>{{ 'product.preorder.agree' | t }}</span>
+      <input type="checkbox" class="checkbox" data-preorder-agree>
+    </label>
+
+    <div class="preorder-confirm__actions">
+      <button type="button" class="button button--outline" data-preorder-back>{{ 'product.preorder.back' | t }}</button>
+      <button type="button" class="button" data-preorder-accept disabled>{{ 'product.preorder.confirm' | t }}</button>
+    </div>
+  </div>
+</x-modal>
+
+<script src="{{ 'preorder.js' | asset_url }}" defer="defer"></script>

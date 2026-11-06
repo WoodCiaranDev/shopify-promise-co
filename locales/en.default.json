@@ -91,6 +91,14 @@
     }
   },
   "product": {
+    "preorder": {
+      "property": "Pre-order",
+      "confirm_title": "This is a pre-order",
+      "confirm_text": "This size has sold out, but you can still order it now. {{ message }}.",
+      "agree": "I understand this is a pre-order",
+      "back": "Back",
+      "confirm": "Pre-order"
+    },
     "general": {
       "description": "Description",
       "view_details": "View details",

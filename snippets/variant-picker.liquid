@@ -124,15 +124,27 @@ Supported variables
                     {%- endif -%}
                   {%- endfor -%}
                   <option value="" disabled {% unless has_selected_size %}selected{% endunless %}>{{ 'product.general.select_size' | t | default: 'Select your size' }}</option>
+                  {%- assign preorder_size_ids = '' -%}
                   {%- for option_value in option.values -%}
-                    {%- if hide_sold_out_variants == false or option_value.available or option_value.selected -%}
+                    {%- liquid
+                      assign size_variant = option_value.variant
+                      assign size_is_preorder = false
+                      if size_variant.inventory_management == 'shopify' and size_variant.inventory_quantity <= 0
+                        if size_variant.inventory_policy == 'continue' or settings.preorder_preview
+                          assign size_is_preorder = true
+                          assign preorder_size_ids = preorder_size_ids | append: option_value.id | append: ','
+                        endif
+                      endif
+                    -%}
+                    {%- if hide_sold_out_variants == false or option_value.available or option_value.selected or size_is_preorder -%}
                       <option
                         value="{{ option_value.id }}"
                         {% if option_value.selected %}selected{% endif %}
-                        {% if option_value.available == false %}disabled{% endif %}
+                        {% if option_value.available == false and size_is_preorder == false %}disabled{% endif %}
                         {% if option_value.product_url != blank %}data-product-url="{{ option_value.product_url | escape }}"{% endif %}
                       >
-                        {{- option_value -}}{% if option_value.available == false %} - {{ 'product.general.sold_out_badge' | t }}{% endif %}
+                        {{- option_value -}}
+                        {%- if size_is_preorder %} - {{ 'product.general.pre_order_button' | t }}{% elsif option_value.available == false %} - {{ 'product.general.sold_out_badge' | t }}{% endif -%}
                       </option>
                     {%- endif -%}
                   {%- endfor -%}
@@ -141,8 +153,11 @@ Supported variables
                 {%- comment -%}Hidden radio inputs for variant picker to detect changes{%- endcomment -%}
                 <div class="sr-only" data-size-radios>
                   {%- for option_value in option.values -%}
-                    {%- if hide_sold_out_variants == false or option_value.available or option_value.selected -%}
-                      <input type="radio" form="{{ form_id }}" name="{{ param_name }}" id="{{ param_name }}-{{ option_value.id }}" value="{{ option_value.id }}" data-option-position="{{ option.position }}" {% if option_value.selected %}checked{% endif %} {% if option_value.product_url != blank %}data-product-url="{{ option_value.product_url | escape }}"{% endif %} {% if option_value.available == false %}disabled{% endif %}>
+                    {%- assign option_value_key = option_value.id | append: ',' -%}
+                    {%- assign size_is_preorder = false -%}
+                    {%- if preorder_size_ids contains option_value_key -%}{%- assign size_is_preorder = true -%}{%- endif -%}
+                    {%- if hide_sold_out_variants == false or option_value.available or option_value.selected or size_is_preorder -%}
+                      <input type="radio" form="{{ form_id }}" name="{{ param_name }}" id="{{ param_name }}-{{ option_value.id }}" value="{{ option_value.id }}" data-option-position="{{ option.position }}" {% if option_value.selected %}checked{% endif %} {% if option_value.product_url != blank %}data-product-url="{{ option_value.product_url | escape }}"{% endif %} {% if option_value.available == false and size_is_preorder == false %}disabled{% endif %}>
                     {%- endif -%}
                   {%- endfor -%}
                 </div>
