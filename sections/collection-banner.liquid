@@ -79,12 +79,12 @@
       </div>
     </div>
 
-    {%- if section.settings.show_stone_type_slider -%}
-      {%- render 'stone-type-slider' -%}
-    {%- endif -%}
-
     {%- if section.settings.show_usp_tabs -%}
       {%- render 'icon-tab-grid' -%}
+    {%- endif -%}
+
+    {%- if section.settings.show_stone_type_slider -%}
+      {%- render 'stone-type-slider' -%}
     {%- endif -%}
 
     {%- if section.settings.show_stone_type_slider -%}
@@ -94,6 +94,7 @@
             slidesPerView: 4.3,
             spaceBetween: 10,
             grabCursor: true,
+            centerInsufficientSlides: true,
             breakpoints: {
               768: {
                 slidesPerView: 6.5,
@@ -120,12 +121,12 @@
         </div>
       </div>
 
-      {%- if section.settings.show_stone_type_slider -%}
-        {%- render 'stone-type-slider' -%}
-      {%- endif -%}
-
       {%- if section.settings.show_usp_tabs -%}
         {%- render 'icon-tab-grid' -%}
+      {%- endif -%}
+
+      {%- if section.settings.show_stone_type_slider -%}
+        {%- render 'stone-type-slider' -%}
       {%- endif -%}
 
       {%- if section.settings.show_stone_type_slider -%}
@@ -135,6 +136,7 @@
               slidesPerView: 4.3,
               spaceBetween: 10,
               grabCursor: true,
+            centerInsufficientSlides: true,
               breakpoints: {
                 768: {
                   slidesPerView: 6.5,

@@ -9367,6 +9367,12 @@ span.ogg-font {
   color: var(--text-color, #000);
 }
 
+@media screen and (min-width: 1000px) {
+  .stone-slider {
+    padding-right: max(48px, calc(50% - 680px));
+  }
+}
+
 @media screen and (max-width: 999px) {
   .stone-slider {
     padding-left: max(32px, calc(50% - 680px));
