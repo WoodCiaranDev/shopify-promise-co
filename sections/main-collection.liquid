@@ -17,11 +17,6 @@
     assign show_filters = false
   endif
 
-  # Custom Lab collection: never show the filter toolbar/button (curated grid, not faceted).
-  if template.suffix == 'co-lab'
-    assign show_filters = false
-  endif
-
   assign products_desktop_grid_mode = section.settings.products_size_desktop
 
   if section.settings.products_per_row_mobile == '1'
@@ -142,9 +137,10 @@ LIQUID
             <div class="collection-toolbar__button-list">
               {%- if show_facets_drawer -%}
                 <div class="collection-toolbar__button-container">
-                  <button type="button" aria-controls="facets-drawer" class="collection-toolbar__button collection-toolbar__facets-button w-full">
+                  <button type="button" aria-controls="facets-drawer" aria-label="{{ 'collection.faceting.filter_and_sort' | t | escape }}" class="collection-toolbar__button collection-toolbar__facets-button w-full">
                     <span class="text-with-icon">
-                      {{- 'collection.faceting.filter_and_sort' | t }}{% if active_values_count > 0 %} ({{ active_values_count }}){% endif -%}
+                      <span class="collection-toolbar__facets-label">{{ 'collection.faceting.filter_and_sort' | t }}</span>
+                      {%- if active_values_count > 0 -%}<span class="collection-toolbar__facets-count">({{ active_values_count }})</span>{%- endif -%}
                       {%- render 'icon' with 'filter-sliders' -%}
                     </span>
                   </button>
