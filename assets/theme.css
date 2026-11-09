@@ -9452,6 +9452,14 @@ span.ogg-font {
 .cart-drawer .complementary-products .product-card__quick-add-button {
   opacity: 1;
   transform: none;
+  padding: .3125rem;
+  inset-block-end: .25rem;
+  inset-inline-end: .25rem;
+}
+
+.cart-drawer .complementary-products .product-card__quick-add-button svg {
+  width: 10px;
+  height: 10px;
 }
 
 .product-info .feature-badge-list {
