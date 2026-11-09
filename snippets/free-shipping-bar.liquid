@@ -55,6 +55,11 @@ being eligible for free shipping.
 {%- if cart.requires_shipping and shipping_threshold != blank and shipping_threshold_amount <= 0 -%}
   <div class="free-shipping-bar free-shipping-bar--free">
     <div class="free-shipping-bar__message">{{ 'cart.free_shipping_bar.always_free_html' | t }}</div>
+    <div class="free-shipping-bar__labels">
+      <div class="free-shipping-bar__track">
+        <div class="free-shipping-bar__fill" style="width: 100%"></div>
+      </div>
+    </div>
   </div>
 {%- elsif cart.requires_shipping and shipping_threshold != blank -%}
   <free-shipping-bar class="free-shipping-bar" threshold="{{ shipping_threshold }}" total-price="{{ calculated_total_price }}" reached-message="{{ 'cart.free_shipping_bar.limit_reached_html' | t | escape }}" unreached-message="{{ 'cart.free_shipping_bar.limit_unreached_html' | t | escape }}">
