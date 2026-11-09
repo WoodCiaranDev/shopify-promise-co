@@ -4686,10 +4686,6 @@ product-rerender {
   height: 4px;
 }
 
-.free-shipping-bar--free .free-shipping-bar__message {
-  margin-block-end: 0;
-}
-
 .free-shipping-bar {
   display: block;
   text-align: center;
