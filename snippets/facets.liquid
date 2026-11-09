@@ -91,8 +91,14 @@ Supported variables
       {%- endif -%}
 
       {%- if show_filters -%}
+        {%- assign has_finish_field_filter = false -%}
+        {%- for filter in results.filters -%}
+          {%- if filter.param_name == 'filter.p.m.custom.finish' -%}{%- assign has_finish_field_filter = true -%}{%- endif -%}
+        {%- endfor -%}
+
         {%- for filter in results.filters -%}
           {%- if filter.param_name == 'filter.v.availability' -%}{%- continue -%}{%- endif -%}
+          {%- if has_finish_field_filter and filter.param_name == 'filter.v.option.precious metal' or has_finish_field_filter and filter.param_name == 'filter.v.option.finish' -%}{%- continue -%}{%- endif -%}
           {%- assign is_finish_filter = false -%}
           {%- capture filter_content -%}
             {%- if filter.type == 'boolean' or filter.param_name == 'filter.v.availability' -%}
@@ -123,7 +129,7 @@ Supported variables
               {%- endif -%}
             {%- else -%}
               {%- assign downcase_label = filter.label | downcase -%}
-              {%- if filter.param_name == 'filter.v.option.precious metal' or filter.param_name == 'filter.v.option.finish' -%}
+              {%- if filter.param_name == 'filter.p.m.custom.finish' or filter.param_name == 'filter.v.option.precious metal' or filter.param_name == 'filter.v.option.finish' -%}
                 {%- assign is_finish_filter = true -%}
               {%- endif -%}
 
