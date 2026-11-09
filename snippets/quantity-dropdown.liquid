@@ -3,7 +3,7 @@
 QUANTITY DROPDOWN
 ----------------------------------------------------------------------------------------------------------------------
 
-A compact 1 to 10 quantity select, used in place of the + / - stepper.
+A compact 1 to 9 quantity select, used in place of the + / - stepper.
 
 ********************************************
 Supported variables
@@ -22,9 +22,9 @@ Supported variables
     assign current_quantity = variant.quantity_rule.min | default: 1
   endif
 
-  assign max_quantity = 10
+  assign max_quantity = 9
   if variant.inventory_management != blank and variant.inventory_policy == 'deny' and variant.inventory_quantity > 0
-    assign max_quantity = variant.inventory_quantity | at_most: 10
+    assign max_quantity = variant.inventory_quantity | at_most: 9
   endif
   assign max_quantity = max_quantity | at_least: current_quantity
 -%}
