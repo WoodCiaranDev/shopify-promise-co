@@ -66,7 +66,7 @@
         "overlay_color": "#000000",
         "overlay_opacity": 0,
         "show_usp_tabs": true,
-        "show_stone_type_slider": false
+        "show_stone_type_slider": true
       }
     },
     "before_after_kXfYHy": {

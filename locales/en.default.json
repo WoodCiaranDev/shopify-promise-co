@@ -192,7 +192,19 @@
       "price_filter_from": "From price",
       "price_filter_to": "To price",
       "price_filter": "{{ min_price }} - {{ max_price }}",
-      "in_stock_only": "In stock only"
+      "in_stock_only": "In stock only",
+      "filter_and_sort": "Filter & Sort",
+      "sort": "Sort",
+      "sort_options": {
+        "best_selling": "Bestsellers",
+        "created_descending": "New",
+        "price_ascending": "Price Low to High",
+        "price_descending": "Price High to Low"
+      },
+      "personalise": "Personalise",
+      "finish": "Finish",
+      "price_min": "Min",
+      "price_max": "Max"
     }
   },
   "blog": {

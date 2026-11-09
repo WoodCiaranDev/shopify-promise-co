@@ -728,6 +728,14 @@ Supported variables
       <path fill="currentColor" d="M0 0h18v2H0zm0 4h18v2H0zm0 4h18v2H0zm0 4h18v2H0zm0 4h18v2H0z"/>
     </svg>
 
+  {%- when 'filter-sliders' -%}
+    <svg aria-hidden="true" focusable="false" fill="none" width="{{ width | default: 22 }}" class="icon icon-filter-sliders {{ class | strip }}" viewBox="0 0 22 18">
+      <path d="M1 4h20M1 9h20M1 14h20" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      <circle cx="15" cy="4" r="2.4" style="fill: rgb(var(--background))" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="7" cy="9" r="2.4" style="fill: rgb(var(--background))" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="13" cy="14" r="2.4" style="fill: rgb(var(--background))" stroke="currentColor" stroke-width="1.2"/>
+    </svg>
+
   {%- when 'slider' -%}
     <svg aria-hidden="true" focusable="false" width="{{ width | default: 20 }}" class="{{ class | strip }}" viewBox="0 0 15.739 15.716">
       <path d="M420.947,158.2a4.759,4.759,0,0,0,.548-2.069c.024-.512.025-2.023-.84-1.678a6.029,6.029,0,0,0-1.863,1.522,18.121,18.121,0,0,0-2.548,4.153.313.313,0,0,1-.463-.386,12.994,12.994,0,0,1,.86-1.661c.765-1.383,2.439-4.3,4.034-4.666,2.4-.552,1.881,4.046,1.319,5.3-.279.624-.893,1.339-1.647.941-.494-.26-.792-1.483-.852-2.023-.044-.395.081-.526.487-.624.659-.162.788.769.964,1.19" transform="translate(-414.833 -148.78)" fill="currentColor"/>
