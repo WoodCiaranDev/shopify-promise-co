@@ -408,7 +408,8 @@
     },
     "free_shipping_bar": {
       "limit_unreached_html": "Spend <strong>{{ remaining_amount }}</strong> more for <strong>Free Shipping</strong>",
-      "limit_reached_html": "You've earned <strong>Free Shipping!</strong>"
+      "limit_reached_html": "You've earned <strong>Free Shipping!</strong>",
+      "always_free_html": "<strong>Free Shipping</strong> on your order"
     },
     "shipping_estimator": {
       "estimate_shipping": "Estimate shipping",

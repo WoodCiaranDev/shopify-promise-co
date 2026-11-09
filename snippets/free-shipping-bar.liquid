@@ -42,9 +42,21 @@ being eligible for free shipping.
     else
       assign shipping_threshold = nil
   endcase
+
+  if localization.country.iso_code == 'GB' and settings.cart_free_shipping_threshold_uk != blank
+    assign shipping_threshold = settings.cart_free_shipping_threshold_uk
+  elsif localization.country.iso_code == 'US' and settings.cart_free_shipping_threshold_us != blank
+    assign shipping_threshold = settings.cart_free_shipping_threshold_us
+  endif
 -%}
 
-{%- if cart.requires_shipping and shipping_threshold != blank -%}
+{%- assign shipping_threshold_amount = shipping_threshold | plus: 0 -%}
+
+{%- if cart.requires_shipping and shipping_threshold != blank and shipping_threshold_amount <= 0 -%}
+  <div class="free-shipping-bar free-shipping-bar--free">
+    <div class="free-shipping-bar__message">{{ 'cart.free_shipping_bar.always_free_html' | t }}</div>
+  </div>
+{%- elsif cart.requires_shipping and shipping_threshold != blank -%}
   <free-shipping-bar class="free-shipping-bar" threshold="{{ shipping_threshold }}" total-price="{{ calculated_total_price }}" reached-message="{{ 'cart.free_shipping_bar.limit_reached_html' | t | escape }}" unreached-message="{{ 'cart.free_shipping_bar.limit_unreached_html' | t | escape }}">
     <div class="free-shipping-bar__message"></div>
     <div class="free-shipping-bar__labels">
