@@ -9283,6 +9283,10 @@ span.ogg-font {
   align-self: start;
 }
 
+.icon-tab:first-child:has(:is(.co-lab-steps__label, .c-steps__label)) .icon-tab__icon img {
+  transform: scale(1.5);
+}
+
 @media screen and (max-width: 599px) {
   .icon-tab-grid {
     padding: 0 12px;
@@ -9558,8 +9562,10 @@ span.ogg-font {
 
 .collection-toolbar--facets .collection-toolbar__facets-button {
   opacity: 1;
-  font-size: 0.9375rem;
-  letter-spacing: 0.02em;
+  font-size: 0.8125rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: rgb(var(--text-color) / 0.7);
 }
 
 .collection-toolbar--facets .collection-toolbar__facets-button .text-with-icon {

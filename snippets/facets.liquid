@@ -92,6 +92,7 @@ Supported variables
 
       {%- if show_filters -%}
         {%- for filter in results.filters -%}
+          {%- if filter.param_name == 'filter.v.availability' -%}{%- continue -%}{%- endif -%}
           {%- assign is_finish_filter = false -%}
           {%- capture filter_content -%}
             {%- if filter.type == 'boolean' or filter.param_name == 'filter.v.availability' -%}
