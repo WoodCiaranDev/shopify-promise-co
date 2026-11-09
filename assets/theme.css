@@ -9590,7 +9590,7 @@ span.ogg-font {
   .collection-toolbar--facets .collection-toolbar__facets-button .text-with-icon {
     justify-content: flex-end;
     gap: 0.375rem;
-    padding-inline-end: 0.5rem;
+    padding-inline-end: calc(var(--container-gutter) / 2);
   }
 
   .collection-toolbar--facets .collection-toolbar__facets-label {
