@@ -727,6 +727,18 @@
       },
       {
         "type": "text",
+        "id": "cart_free_shipping_threshold_uk",
+        "label": "Free shipping threshold (UK shoppers)",
+        "info": "In pounds, for shoppers in the United Kingdom only. Leave empty to use the GBP threshold. Set to 0 for free shipping on every order."
+      },
+      {
+        "type": "text",
+        "id": "cart_free_shipping_threshold_us",
+        "label": "Free shipping threshold (US shoppers)",
+        "info": "In dollars, for shoppers in the United States only. Leave empty to use the USD threshold. Set to 0 for free shipping on every order."
+      },
+      {
+        "type": "text",
         "id": "cart_free_shipping_threshold_usd",
         "label": "Free shipping threshold (USD)",
         "placeholder": "50",
