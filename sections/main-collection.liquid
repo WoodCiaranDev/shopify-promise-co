@@ -22,25 +22,35 @@
     assign show_filters = false
   endif
 
-  # First, we retrieve, based on the merchant settings, the user preferences and the available space the most appropriate size
-  assign products_mobile_grid_mode = cart.attributes.products_mobile_grid_mode
+  assign products_desktop_grid_mode = section.settings.products_size_desktop
 
-  if request.design_mode
-    # In the theme editor we do not use the choice selected manually, to reduce confusion when changing the theme editor values
-    assign products_desktop_grid_mode = section.settings.products_size_desktop
-  elsif section.settings.show_grid_mode_selector
-    assign products_desktop_grid_mode = cart.attributes.products_desktop_grid_mode | default: section.settings.products_size_desktop
+  if section.settings.products_per_row_mobile == '1'
+    assign products_mobile_grid_mode = 'large'
   else
-    assign products_desktop_grid_mode = section.settings.products_size_desktop
+    assign products_mobile_grid_mode = 'medium'
   endif
 
-  if products_mobile_grid_mode == blank or request.design_mode
-    if section.settings.products_per_row_mobile == '1'
-      assign products_mobile_grid_mode = 'large'
-    else
-      assign products_mobile_grid_mode = 'medium'
-    endif
+  assign show_filter_list = false
+  if show_filters and section.settings.show_filters
+    assign show_filter_list = true
   endif
+
+  if show_filters or section.settings.show_sort_by
+    assign show_facets_drawer = true
+  else
+    assign show_facets_drawer = false
+  endif
+
+  assign has_made_to_order = false
+  unless template.suffix contains 'co-lab'
+    for tag in collection.all_tags
+      assign tag_handle = tag | handle
+      if tag_handle == 'made-to-order'
+        assign has_made_to_order = true
+        break
+      endif
+    endfor
+  endunless
 -%}
 
 {%- comment -%}
@@ -127,41 +137,17 @@ LIQUID
           </div>
         </div>
       {%- else -%}
-        {%- if show_filters or section.settings.show_sort_by or section.settings.show_grid_mode_selector or section.settings.show_results_count -%}
-          <height-observer variable="collection-toolbar" class="collection-toolbar full-bleed">
+        {%- if show_facets_drawer or section.settings.show_results_count -%}
+          <height-observer variable="collection-toolbar" class="collection-toolbar collection-toolbar--facets full-bleed{% if section.settings.filter_layout == 'sidebar' and show_filters %} md:hidden{% endif %}">
             <div class="collection-toolbar__button-list">
-              {%- if show_filters -%}
-                <div class="collection-toolbar__button-container {% if section.settings.filter_layout == 'sidebar' %}md:hidden{% endif %}">
-                  <button type="button" aria-controls="facets-drawer" class="collection-toolbar__button heading text-xxs w-full">
-                    {{- 'collection.faceting.filter_button' | t }} {% if active_values_count > 0 %}({{ active_values_count }}){% endif -%}
-                  </button>
-                </div>
-              {%- endif -%}
-
-              {%- if section.settings.show_sort_by -%}
-                {%- assign selected_sort_by_value = collection.sort_by | default: collection.default_sort_by -%}
-
+              {%- if show_facets_drawer -%}
                 <div class="collection-toolbar__button-container">
-                  <button type="button" aria-controls="sort-by-popover" class="collection-toolbar__button heading text-xxs w-full">
-                    <span class="text-with-icon justify-center">
-                      {{- 'collection.faceting.sort_by' | t -}}
-                      {%- render 'icon' with 'chevron-down' -%}
+                  <button type="button" aria-controls="facets-drawer" class="collection-toolbar__button collection-toolbar__facets-button w-full">
+                    <span class="text-with-icon">
+                      {{- 'collection.faceting.filter_and_sort' | t }}{% if active_values_count > 0 %} ({{ active_values_count }}){% endif -%}
+                      {%- render 'icon' with 'filter-sliders' -%}
                     </span>
                   </button>
-
-                  <facets-sort-popover id="sort-by-popover" section-id="{{ section.id }}" class="popover popover--bottom-end color-scheme color-scheme--dialog" close-on-listbox-select>
-                    <p class="h4" slot="header">{{ 'collection.faceting.sort_by' | t }}</p>
-
-                    <x-listbox class="popover__value-list">
-                      {%- for sort_option in collection.sort_options -%}
-                        {%- if sort_option.name != blank -%}
-                          <button type="button" class="popover__value-option group" role="option" value="{{ sort_option.value }}" {% if sort_option.value == selected_sort_by_value %}aria-selected="true"{% endif %}>
-                            <span class="reversed-link">{{ sort_option.name }}</span>
-                          </button>
-                        {%- endif -%}
-                      {%- endfor -%}
-                    </x-listbox>
-                  </facets-sort-popover>
                 </div>
               {%- endif -%}
             </div>
@@ -171,42 +157,33 @@ LIQUID
                 {{ 'collection.products_count' | t: count: collection.products_count }}
               </p>
             {%- endif -%}
-
-            {%- if section.settings.show_grid_mode_selector -%}
-              <collection-layout-switch device="mobile" class="collection-toolbar__layout-switch-list sm:hidden" aria-controls="product-list-{{ section.id }}">
-                <button type="button" value="large" class="collection-toolbar__button {% if products_mobile_grid_mode == 'large' %}is-active{% endif %}" aria-label="Switch to larger product images">{%- render 'icon' with 'collection-layout-1' -%}</button>
-                <button type="button" value="medium" class="collection-toolbar__button {% if products_mobile_grid_mode == 'medium' %}is-active{% endif %}" aria-label="Switch to smaller product images">{%- render 'icon' with 'collection-layout-2' -%}</button>
-              </collection-layout-switch>
-
-              <collection-layout-switch device="desktop" class="collection-toolbar__layout-switch-list sm-max:hidden" aria-controls="product-list-{{ section.id }}">
-                <button type="button" value="large" class="collection-toolbar__button {% if products_desktop_grid_mode == 'large' %}is-active{% endif %}" aria-label="Switch to larger product images">{%- render 'icon' with 'collection-layout-2' -%}</button>
-                <button type="button" value="medium" class="collection-toolbar__button {% if products_desktop_grid_mode == 'medium' %}is-active{% endif %}" aria-label="Switch to smaller product images">{%- render 'icon' with 'collection-layout-3' -%}</button>
-                <button type="button" value="compact" class="collection-toolbar__button {% if products_desktop_grid_mode == 'compact' %}is-active{% endif %}" aria-label="Switch to compact product images">{%- render 'icon' with 'collection-layout-4' -%}</button>
-              </collection-layout-switch>
-            {%- endif -%}
           </height-observer>
         {%- endif -%}
 
         <div class="collection">
           {%- paginate collection.products by section.settings.products_per_page -%}
-            {%- if show_filters -%}
-              <facets-drawer id="facets-drawer" class="facets-drawer drawer drawer--sm color-scheme color-scheme--dialog {% if section.settings.filter_layout == 'sidebar' %}md:hidden{% endif %}">
-                <p class="h4" slot="header">{{ 'collection.faceting.filters' | t }}</p>
+            {%- if show_facets_drawer -%}
+              <facets-drawer id="facets-drawer" class="facets-drawer drawer drawer--sm color-scheme color-scheme--dialog{% if section.settings.filter_layout == 'sidebar' and show_filters %} md:hidden{% endif %}">
+                <p class="h4" slot="header">{{ 'collection.faceting.filter_and_sort' | t }}</p>
 
-                {%- render 'facets', results: collection, show_filters: section.settings.show_filters, open_filters_by_default: section.settings.open_filters_by_default, update_on_change: false, quick_links_menu: section.settings.quick_links_menu, context: 'drawer' -%}
+                {%- render 'facets', results: collection, show_filters: show_filter_list, show_sort: section.settings.show_sort_by, show_personalise: has_made_to_order, open_filters_by_default: section.settings.open_filters_by_default, update_on_change: false, quick_links_menu: section.settings.quick_links_menu, context: 'drawer' -%}
 
-                <div slot="footer">
+                <div slot="footer" class="facets-drawer__footer">
+                  <a href="{{ collection.url }}{% if collection.sort_by != blank %}?sort_by={{ collection.sort_by }}{% endif %}" class="button button--outline">{{ 'collection.faceting.clear_filters' | t }}</a>
+
                   {%- assign button_content = 'collection.faceting.apply_filters' | t -%}
 
                   <dialog-close-button class="contents">
-                    {%- render 'button', type: 'button', content: button_content, stretch: true -%}
+                    {%- render 'button', type: 'button', content: button_content -%}
                   </dialog-close-button>
                 </div>
               </facets-drawer>
+            {%- endif -%}
 
+            {%- if show_filters -%}
               {%- if section.settings.filter_layout == 'sidebar' -%}
                 <safe-sticky class="facets-sidebar md-max:hidden">
-                  {%- render 'facets', results: collection, show_filters: section.settings.show_filters, open_filters_by_default: section.settings.open_filters_by_default, update_on_change: true, quick_links_menu: section.settings.quick_links_menu, context: 'sidebar' -%}
+                  {%- render 'facets', results: collection, show_filters: show_filter_list, show_sort: section.settings.show_sort_by, show_personalise: has_made_to_order, open_filters_by_default: section.settings.open_filters_by_default, update_on_change: true, quick_links_menu: section.settings.quick_links_menu, context: 'sidebar' -%}
                 </safe-sticky>
               {%- endif -%}
             {%- endif -%}
@@ -525,13 +502,6 @@ LIQUID
         }
       ],
       "default": "medium"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_grid_mode_selector",
-      "label": "t:global.product_list.show_grid_mode_selector",
-      "info": "t:global.product_list.show_grid_mode_selector_info",
-      "default": true
     },
     {
       "type": "header",

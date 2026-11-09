@@ -16,6 +16,8 @@ Supported variables
 * update_on_change: if set to true the results will reload as soon as an option is changed
 * quick_links_menu: an optional menu that will show fixed links
 * context: an optional context to generate unique ID if facets are outputted several times
+* show_sort: if set to true, the sort options show as an always-open list above the filters
+* show_personalise: if set to true, a switch narrows the results to made-to-order products
 {%- endcomment -%}
 
 {%- assign color_label_list = 'general.label.color' | t | replace: ', ', ',' | downcase | split: ',' -%}
@@ -30,12 +32,49 @@ Supported variables
       <input type="hidden" name="q" value="{{ results.current_vendor | default: results.current_type | escape }}">
     {%- endif -%}
 
-    {%- if results.sort_by != blank -%}
+    {%- if results.sort_by != blank and show_sort != true -%}
       <input type="hidden" name="sort_by" value="{{ results.sort_by }}">
     {%- endif -%}
 
     {%- if request.page_type == 'search' -%}
       <input type="hidden" name="q" value="{{ results.terms | escape }}">
+    {%- endif -%}
+
+    {%- if show_sort -%}
+      {%- assign selected_sort_by_value = results.sort_by | default: results.default_sort_by -%}
+      {%- assign sort_values = 'best-selling,created-descending,price-ascending,price-descending' | split: ',' -%}
+
+      <fieldset class="facets__sort">
+        <legend class="facets__sort-title h6">{{ 'collection.faceting.sort' | t }}</legend>
+
+        <div class="v-stack gap-3">
+          {%- for sort_value in sort_values -%}
+            {%- capture sort_label_key -%}collection.faceting.sort_options.{{ sort_value | replace: '-', '_' }}{%- endcapture -%}
+
+            <div class="checkbox-control">
+              <input id="{{ id_prefix }}-sort-{{ sort_value }}" class="facets__radio" type="radio" name="sort_by" value="{{ sort_value }}" {% if sort_value == selected_sort_by_value %}checked{% endif %}>
+              <label for="{{ id_prefix }}-sort-{{ sort_value }}">{{ sort_label_key | t }}</label>
+            </div>
+          {%- endfor -%}
+        </div>
+      </fieldset>
+    {%- endif -%}
+
+    {%- if show_personalise -%}
+      {%- liquid
+        assign personalise_on = false
+        for tag in current_tags
+          assign tag_handle = tag | handle
+          if tag_handle == 'made-to-order'
+            assign personalise_on = true
+          endif
+        endfor
+      -%}
+
+      <div class="facets__personalise checkbox-control">
+        <input id="{{ id_prefix }}-personalise" class="switch" type="checkbox" role="switch" data-personalise-url="{{ results.url }}" data-personalise-tag-url="{{ results.url }}/made-to-order" {% if personalise_on %}checked{% endif %}>
+        <label for="{{ id_prefix }}-personalise">{{ 'collection.faceting.personalise' | t }}</label>
+      </div>
     {%- endif -%}
 
     <div class="accordion-list">
@@ -53,6 +92,8 @@ Supported variables
 
       {%- if show_filters -%}
         {%- for filter in results.filters -%}
+          {%- if filter.param_name == 'filter.v.availability' -%}{%- continue -%}{%- endif -%}
+          {%- assign is_finish_filter = false -%}
           {%- capture filter_content -%}
             {%- if filter.type == 'boolean' or filter.param_name == 'filter.v.availability' -%}
               {%- if filter.param_name == 'filter.v.availability' -%}
@@ -82,12 +123,17 @@ Supported variables
               {%- endif -%}
             {%- else -%}
               {%- assign downcase_label = filter.label | downcase -%}
+              {%- if filter.param_name == 'filter.v.option.precious metal' or filter.param_name == 'filter.v.option.finish' -%}
+                {%- assign is_finish_filter = true -%}
+              {%- endif -%}
 
               {%- case filter.type -%}
                 {%- when 'list' -%}
                   {%- liquid
                     if filter.presentation == 'image'
                       assign wrapper_class_list = 'v-stack gap-2'
+                    elsif is_finish_filter
+                      assign wrapper_class_list = 'v-stack gap-3'
                     elsif filter.presentation == 'swatch' or color_label_list contains downcase_label
                       assign wrapper_class_list = 'h-stack wrap gap-2'
                     else
@@ -102,6 +148,8 @@ Supported variables
 
                         if filter.presentation == 'image'
                           render 'option-value', type: 'image_filter', filter_value: filter_value, id_prefix: value_id_prefix
+                        elsif is_finish_filter
+                          render 'finish-filter-value', filter_value: filter_value, show_count: section.settings.show_filter_values_count, id_prefix: value_id_prefix
                         elsif filter.presentation == 'swatch' or color_label_list contains downcase_label
                           render 'option-value', type: 'swatch', filter_value: filter_value, show_tooltip: true, id_prefix: value_id_prefix
                         else
@@ -118,13 +166,20 @@ Supported variables
                   </div>
 
                 {%- when 'price_range' -%}
-                  {%- render 'price-range', filter: filter -%}
+                  {%- assign lowest_price = results.products | map: 'price_min' | sort | first -%}
+                  {%- render 'price-range', filter: filter, lowest_price: lowest_price -%}
               {%- endcase -%}
             {%- endif -%}
           {%- endcapture -%}
 
           {%- if filter_content != blank -%}
-            {%- render 'accordion', title: filter.label, content: filter_content, open: open_filters_by_default, show_arrow: true -%}
+            {%- if is_finish_filter -%}
+              {%- assign filter_title = 'collection.faceting.finish' | t -%}
+            {%- else -%}
+              {%- assign filter_title = filter.label -%}
+            {%- endif -%}
+
+            {%- render 'accordion', title: filter_title, content: filter_content, open: open_filters_by_default, show_arrow: true -%}
           {%- endif -%}
         {%- endfor -%}
       {%- endif -%}
@@ -136,3 +191,6 @@ Supported variables
     </noscript>
   </form>
 </facets-form>
+{%- if show_personalise -%}
+  <script src="{{ 'collection-facets.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}

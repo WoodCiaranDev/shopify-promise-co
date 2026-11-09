@@ -523,6 +523,37 @@ quick buy information in a template, that will be extracted in JS, which ensures
   ],
   "blocks": [
     {
+      "type": "promise_reviews",
+      "name": "Promise reviews line",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "rating_label",
+          "label": "Text after the rating",
+          "default": "Excellent"
+        },
+        {
+          "type": "text",
+          "id": "promises_text",
+          "label": "Text after the line",
+          "default": "11,000+ Promises Made"
+        },
+        {
+          "type": "color",
+          "id": "star_colour",
+          "label": "Star colour",
+          "default": "#75aedc"
+        },
+        {
+          "type": "text",
+          "id": "fallback_rating",
+          "label": "Rating if Judge.me has none",
+          "default": "4.9"
+        }
+      ]
+    },
+    {
       "type": "@app"
     },
     {

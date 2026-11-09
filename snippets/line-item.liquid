@@ -82,11 +82,11 @@ Supported variables
     <span class="line-item__media c-co-lab-line-ring">
       <img src="{{ colab_ring_src }}&width=360"
            srcset="{{ colab_ring_src }}&width=240 240w, {{ colab_ring_src }}&width=360 360w, {{ colab_ring_src }}&width=520 520w"
-           sizes="(max-width: 699px) 100px, 170px"
+           sizes="(max-width: 699px) 104px, 144px"
            width="1000" height="1000" loading="lazy" alt="{{ line_item.product.title | escape }}">
     </span>
   {%- elsif line_item.image != blank -%}
-    {{- line_item.image | image_url: width: line_item.image.width | image_tag: loading: 'lazy', sizes: '(max-width: 699px) 70px, 120px', widths: '70,120,140,210,240,360', class: 'line-item__media' -}}
+    {{- line_item.image | image_url: width: line_item.image.width | image_tag: loading: 'lazy', sizes: '(max-width: 699px) 104px, 144px', widths: '70,120,140,210,240,360', class: 'line-item__media' -}}
   {%- endif -%}
 
   <div class="line-item-info">
@@ -150,9 +150,26 @@ Supported variables
       {%- endif -%}
 
       {%- if show_quantity_selector -%}
-        <line-item-quantity class="h-stack gap-4 {% if request.page_type == 'cart' %}sm:hidden{% endif %}">
-          {%- render 'quantity-selector', line_item: line_item, size: 'sm' -%}
-          <a href="{{ line_item.url_to_remove }}" class="link text-xs">{{ 'cart.order.remove' | t }}</a>
+        {%- liquid
+          assign bundle_children = ''
+          if bundle_role == 'parent' and line_item.properties._bundle_id != blank
+            for child in cart.items
+              if child.properties._bundle_id == line_item.properties._bundle_id and child.key != line_item.key
+                assign per_unit = child.quantity | divided_by: line_item.quantity | at_least: 1
+                capture child_json
+                  echo '{"key":"' | append: child.key | append: '","per":' | append: per_unit | append: '}'
+                endcapture
+                if bundle_children != ''
+                  assign bundle_children = bundle_children | append: ','
+                endif
+                assign bundle_children = bundle_children | append: child_json
+              endif
+            endfor
+          endif
+        -%}
+        <line-item-quantity class="line-item__quantity v-stack justify-items-start gap-2 {% if request.page_type == 'cart' %}sm:hidden{% endif %}"{% if bundle_children != '' %} data-bundle-children='[{{ bundle_children }}]'{% endif %}>
+          {%- render 'quantity-dropdown', line_item: line_item -%}
+          <a href="{{ line_item.url_to_remove }}" class="line-item__remove text-xs">{{ 'cart.order.remove' | t }}</a>
         </line-item-quantity>
       {%- else -%}
         <p class="text-subdued text-sm sm:hidden">{{ 'customer.order.quantity' | t }}: {{ line_item.quantity }}</p>

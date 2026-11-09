@@ -79,29 +79,30 @@
       </div>
     </div>
 
-    {%- if section.settings.show_stone_type_slider -%}
-      {%- render 'stone-type-slider' -%}
-    {%- endif -%}
-
     {%- if section.settings.show_usp_tabs -%}
       {%- render 'icon-tab-grid' -%}
+    {%- endif -%}
+
+    {%- if section.settings.show_stone_type_slider -%}
+      {%- render 'stone-type-slider' -%}
     {%- endif -%}
 
     {%- if section.settings.show_stone_type_slider -%}
       <script>
         document.addEventListener('DOMContentLoaded', function() {
           new Swiper('#stone-slider-{{ section.id }}', {
-            slidesPerView: 2.2,
-            spaceBetween: 12,
+            slidesPerView: 4.3,
+            spaceBetween: 10,
             grabCursor: true,
+            centerInsufficientSlides: true,
             breakpoints: {
               768: {
-                slidesPerView: 3.5,
-                spaceBetween: 24
+                slidesPerView: 6.5,
+                spaceBetween: 16
               },
               1024: {
-                slidesPerView: 4.5,
-                spaceBetween: 30
+                slidesPerView: 8.5,
+                spaceBetween: 20
               }
             }
           });
@@ -120,29 +121,30 @@
         </div>
       </div>
 
-      {%- if section.settings.show_stone_type_slider -%}
-        {%- render 'stone-type-slider' -%}
-      {%- endif -%}
-
       {%- if section.settings.show_usp_tabs -%}
         {%- render 'icon-tab-grid' -%}
+      {%- endif -%}
+
+      {%- if section.settings.show_stone_type_slider -%}
+        {%- render 'stone-type-slider' -%}
       {%- endif -%}
 
       {%- if section.settings.show_stone_type_slider -%}
         <script>
           document.addEventListener('DOMContentLoaded', function() {
             new Swiper('#stone-slider-{{ section.id }}', {
-              slidesPerView: 2.2,
-              spaceBetween: 12,
+              slidesPerView: 4.3,
+              spaceBetween: 10,
               grabCursor: true,
+            centerInsufficientSlides: true,
               breakpoints: {
                 768: {
-                  slidesPerView: 3.5,
-                  spaceBetween: 24
+                  slidesPerView: 6.5,
+                  spaceBetween: 16
                 },
                 1024: {
-                  slidesPerView: 4.5,
-                  spaceBetween: 30
+                  slidesPerView: 8.5,
+                  spaceBetween: 20
                 }
               }
             });

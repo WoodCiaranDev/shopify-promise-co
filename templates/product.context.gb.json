@@ -20,7 +20,7 @@
       "blocks": {
         "judge_me_reviews_all_reviews_text_wfyBc": {
           "type": "shopify://apps/judge-me-reviews/blocks/all_reviews_text/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "disabled": false,
+          "disabled": true,
           "settings": {
             "paragraph-56f48bb8ec9dfa175cac0cbd1a0be946": null,
             "paragraph-5fafd31c746dcd165ea814c58de5f148": null
@@ -52,14 +52,15 @@
         }
       },
       "block_order": [
+        "promise_reviews",
         "judge_me_reviews_all_reviews_text_wfyBc",
         "title",
         "price",
         "payment_terms",
         "separator",
         "variant_picker",
-        "delivery_countdown_GeGVy3",
         "text_TzkTaX",
+        "delivery_countdown_GeGVy3",
         "quantity_selector",
         "buy_buttons",
         "text_aUJmQk",
@@ -69,10 +70,10 @@
         "accordion_6y38TJ",
         "feature_with_icon_FTccY4",
         "feature_with_icon_XfGd6d",
-        "feature_with_icon_tUrRgp",
-        "feature_with_icon_TyH8jB",
         "feature_with_icon_tTcWak",
+        "feature_with_icon_tUrRgp",
         "feature_with_icon_badge6",
+        "feature_with_icon_TyH8jB",
         "share_buttons_cbEwqV"
       ]
     }

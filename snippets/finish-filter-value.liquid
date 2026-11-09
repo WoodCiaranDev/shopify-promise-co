@@ -1,0 +1,45 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+FINISH FILTER VALUE
+----------------------------------------------------------------------------------------------------------------------
+
+A finish filter option: a colour dot taken from the theme's colour swatch settings, followed by its name.
+
+********************************************
+Supported variables
+********************************************
+
+* filter_value: the filter value to render [REQUIRED]
+* show_count: if set to true, the number of matching products follows the name
+* id_prefix: a prefix that keeps the input ID unique when the facets render more than once
+{%- endcomment -%}
+
+{%- liquid
+  assign downcase_label = filter_value.label | downcase | strip
+  assign swatch_background = 'var(--swatch-fallback)'
+
+  if filter_value.swatch.color != blank
+    assign swatch_background = filter_value.swatch.color
+  else
+    assign swatch_config = settings.color_swatch_config | newline_to_br | split: '<br />'
+
+    for swatch_item in swatch_config
+      assign swatch_name = swatch_item | split: ':' | first | downcase | strip
+
+      if swatch_name == downcase_label
+        assign swatch_background = swatch_item | split: ':' | last | strip
+        break
+      endif
+    endfor
+  endif
+
+  assign input_id = 'finish-' | append: id_prefix | append: '-' | append: filter_value.value | handle
+-%}
+
+<div class="checkbox-control finish-filter-value">
+  <input id="{{ input_id }}" class="finish-filter-value__input" type="checkbox" name="{{ filter_value.param_name }}" value="{{ filter_value.value | escape }}" {% if filter_value.active %}checked{% endif %}>
+  <label for="{{ input_id }}" class="finish-filter-value__label">
+    <span class="finish-filter-value__swatch" style="--finish-swatch: {{ swatch_background }}" aria-hidden="true"></span>
+    <span>{{ filter_value.label }}{% if show_count %} ({{ filter_value.count }}){% endif %}</span>
+  </label>
+</div>

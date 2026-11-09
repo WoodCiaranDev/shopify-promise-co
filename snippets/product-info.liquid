@@ -205,6 +205,17 @@ Supported variables
               {%- render 'product-rating', show_placeholder: true -%}
             {%- endif -%}
 
+          {%- when 'promise_reviews' -%}
+            {%- assign promise_rating = shop.metafields.judgeme.all_reviews_rating | default: block.settings.fallback_rating | round: 1 -%}
+            <div class="promise-reviews" style="--promise-star-colour: {{ block.settings.star_colour }}">
+              <span class="promise-reviews__stars" role="img" aria-label="{{ promise_rating }} out of 5">
+                {%- for i in (1..5) -%}{%- render 'icon' with 'star-rating', width: 18 -%}{%- endfor -%}
+              </span>
+              <span>{{ promise_rating }} {{ block.settings.rating_label }}</span>
+              <span class="promise-reviews__divider" aria-hidden="true"></span>
+              <span>{{ block.settings.promises_text }}</span>
+            </div>
+
           {%- when 'separator' -%}
             <hr>
 
@@ -340,7 +351,7 @@ Supported variables
 
           {%- when 'quantity_selector' -%}
             {%- if product.available and is_co_lab == false -%}
-              {% render 'quantity-selector', variant: product.selected_or_first_available_variant, form: product_form_id %}
+              {%- render 'quantity-dropdown', variant: product.selected_or_first_available_variant, form: product_form_id -%}
             {%- endif -%}
 
           {%- when 'inventory' -%}

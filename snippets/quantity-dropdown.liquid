@@ -1,0 +1,43 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+QUANTITY DROPDOWN
+----------------------------------------------------------------------------------------------------------------------
+
+A compact 1 to 10 quantity select, used in place of the + / - stepper.
+
+********************************************
+Supported variables
+********************************************
+
+* line_item: cart line to change (the select carries data-line-key for line-item-quantity)
+* variant: product page variant (the select submits as "quantity" with the product form)
+* form: the product form id, for the product page
+{%- endcomment -%}
+
+{%- liquid
+  if line_item != blank
+    assign current_quantity = line_item.quantity
+    assign variant = line_item.variant
+  else
+    assign current_quantity = variant.quantity_rule.min | default: 1
+  endif
+
+  assign max_quantity = 10
+  if variant.inventory_management != blank and variant.inventory_policy == 'deny' and variant.inventory_quantity > 0
+    assign max_quantity = variant.inventory_quantity | at_most: 10
+  endif
+  assign max_quantity = max_quantity | at_least: current_quantity
+-%}
+
+<div class="quantity-dropdown">
+  <select
+    class="quantity-dropdown__select"
+    aria-label="{{ 'cart.order.quantity' | t }}"
+    {% if line_item != blank %}data-line-key="{{ line_item.key }}"{% else %}name="quantity"{% if form %} form="{{ form }}"{% endif %}{% endif %}
+  >
+    {%- for i in (1..max_quantity) -%}
+      <option value="{{ i }}" {% if i == current_quantity %}selected{% endif %}>{{ i }}</option>
+    {%- endfor -%}
+  </select>
+  {%- render 'icon' with 'chevron-down', width: 10 -%}
+</div>
