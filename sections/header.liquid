@@ -114,6 +114,10 @@
                 assign mega_menu_block = ''
 
                 for block in section.blocks
+                  if block.type != 'mega_menu'
+                    continue
+                  endif
+
                   assign menu_item_downcase = block.settings.menu_item | strip | downcase
 
                   if menu_item_downcase == link_title_downcase
@@ -576,6 +580,72 @@
     }
   ],
   "blocks": [
+    {
+      "type": "mobile_menu_pictures",
+      "name": "Mobile menu pictures",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_item",
+          "label": "Menu item",
+          "info": "The mobile menu item these two pictures show under, e.g. Gift Guide"
+        },
+        {
+          "type": "header",
+          "content": "Picture 1"
+        },
+        {
+          "type": "collection",
+          "id": "featured_collection_1",
+          "label": "Collection"
+        },
+        {
+          "type": "url",
+          "id": "featured_collection_1_link",
+          "label": "Link",
+          "info": "Use instead of a collection, e.g. a page"
+        },
+        {
+          "type": "image_picker",
+          "id": "featured_collection_1_image",
+          "label": "Image",
+          "info": "Defaults to the collection image"
+        },
+        {
+          "type": "text",
+          "id": "featured_collection_1_title",
+          "label": "Title",
+          "info": "Defaults to the collection title"
+        },
+        {
+          "type": "header",
+          "content": "Picture 2"
+        },
+        {
+          "type": "collection",
+          "id": "featured_collection_2",
+          "label": "Collection"
+        },
+        {
+          "type": "url",
+          "id": "featured_collection_2_link",
+          "label": "Link",
+          "info": "Use instead of a collection, e.g. a page"
+        },
+        {
+          "type": "image_picker",
+          "id": "featured_collection_2_image",
+          "label": "Image",
+          "info": "Defaults to the collection image"
+        },
+        {
+          "type": "text",
+          "id": "featured_collection_2_title",
+          "label": "Title",
+          "info": "Defaults to the collection title"
+        }
+      ]
+    },
     {
       "type": "mega_menu",
       "name": "t:sections.header.blocks.mega_menu.name",

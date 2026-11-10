@@ -231,11 +231,11 @@
 
               {%- comment -%}Get Mega Menu Block for Featured Collections{%- endcomment -%}
               {%- liquid
-                assign link_title_downcase = link.title | strip | downcase
+                assign link_title_downcase = link.title | strip | downcase | replace: 'jewellery', 'jewelry'
                 assign mega_menu_block = ''
 
                 for block in section.blocks
-                  assign menu_item_downcase = block.settings.menu_item | strip | downcase
+                  assign menu_item_downcase = block.settings.menu_item | strip | downcase | replace: 'jewellery', 'jewelry'
 
                   if menu_item_downcase == link_title_downcase
                     assign mega_menu_block = block
