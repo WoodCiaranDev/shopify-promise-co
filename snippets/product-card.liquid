@@ -86,10 +86,12 @@ Supported variables
 
         {%- comment -%} Co-Lab products animate through their stills (custom.animation_images) instead of a static image. {%- endcomment -%}
         {%- assign colab_anim = product.metafields.custom.animation_images.value -%}
+        {%- assign colab_first_still = blank -%}
+        {%- for still in colab_anim limit: 1 -%}{%- assign colab_first_still = still -%}{%- endfor -%}
         {%- if colab_anim and colab_anim.size > 1 and cross_sell and cross_sell_image != blank -%}
           {{- cross_sell_image | image_url: width: cross_sell_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '200,300,400,500,600,700,800,1000', class: main_image_classes -}}
-        {%- elsif colab_anim and colab_anim.size > 1 and cross_sell -%}
-          {{- colab_anim.first | image_url: width: colab_anim.first.width | image_tag: loading: 'lazy', sizes: sizes, widths: '200,300,400,500,600,700,800,1000', class: main_image_classes -}}
+        {%- elsif colab_anim and colab_anim.size > 1 and cross_sell and colab_first_still != blank -%}
+          {{- colab_first_still | image_url: width: colab_first_still.width | image_tag: loading: 'lazy', sizes: sizes, widths: '200,300,400,500,600,700,800,1000', class: main_image_classes -}}
         {%- elsif colab_anim and colab_anim.size > 1 -%}
           {%- assign loop_eager = false -%}
           {%- if main_media_loading_strategy == 'eager' -%}{%- assign loop_eager = true -%}{%- endif -%}
