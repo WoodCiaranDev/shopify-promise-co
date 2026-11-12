@@ -14,30 +14,34 @@
   {%- assign color_scheme_hash = section.settings.background | default: settings.default_color_scheme.settings.background | md5 -%}
 
   <div class="section-spacing color-scheme color-scheme--bg-{{ color_scheme_hash }} {% if section.settings.background != blank and section.settings.background != 'rgba(0,0,0,0)' and section.settings.background != settings.default_color_scheme.settings.background %}section-spacing--padded{% endif %} {% if section.settings.separate_section_with_border %}bordered-section{% endif %}" style="{% render 'surface', background: section.settings.background %}">
-    <marquee-text speed="{{ section.settings.scrolling_speed }}" direction="{{ section.settings.scroll_direction }}" {% if section.settings.pause_on_hover %}pause-on-hover{% endif %} class="scrolling-content scrolling-images{% if section.settings.image_shape != 'natural' %} scrolling-images--fixed-shape{% endif %}">
-      <div class="scrolling-content__item">
-        {%- for block in section.blocks -%}
-          {%- if block.settings.image -%}
-            {%- capture image_tag -%}
-              {{- block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(max-width: 699px) 50vw, 25vw', widths: '200,300,400,600,800,1000,1200', class: 'scrolling-images__img' -}}
-            {%- endcapture -%}
+    <scrolling-images speed="{{ section.settings.scrolling_speed }}" direction="{{ section.settings.scroll_direction }}" {% if section.settings.pause_on_hover %}pause-on-hover{% endif %} class="scrolling-content scrolling-images{% if section.settings.image_shape != 'natural' %} scrolling-images--fixed-shape{% endif %}">
+      <div class="scrolling-images__track">
+        <div class="scrolling-content__item">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.image -%}
+              {%- capture image_tag -%}
+                {{- block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(max-width: 699px) 50vw, 25vw', widths: '200,300,400,600,800,1000,1200', class: 'scrolling-images__img' -}}
+              {%- endcapture -%}
 
-            <div class="scrolling-images__image" {{ block.shopify_attributes }}>
-              {%- if block.settings.link != blank -%}
-                <a href="{{ block.settings.link }}">{{ image_tag }}</a>
-              {%- else -%}
-                {{ image_tag }}
-              {%- endif -%}
-            </div>
-          {%- elsif request.design_mode -%}
-            <div class="scrolling-images__image scrolling-images__image--placeholder" {{ block.shopify_attributes }}>
-              {{- 'image' | placeholder_svg_tag: 'scrolling-images__img placeholder' -}}
-            </div>
-          {%- endif -%}
-        {%- endfor -%}
+              <div class="scrolling-images__image" {{ block.shopify_attributes }}>
+                {%- if block.settings.link != blank -%}
+                  <a href="{{ block.settings.link }}">{{ image_tag }}</a>
+                {%- else -%}
+                  {{ image_tag }}
+                {%- endif -%}
+              </div>
+            {%- elsif request.design_mode -%}
+              <div class="scrolling-images__image scrolling-images__image--placeholder" {{ block.shopify_attributes }}>
+                {{- 'image' | placeholder_svg_tag: 'scrolling-images__img placeholder' -}}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
       </div>
-    </marquee-text>
+    </scrolling-images>
   </div>
+
+  <script src="{{ 'scrolling-images.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
 {% schema %}
