@@ -50,6 +50,15 @@
       {%- endif -%}
 
       <div class="promise-club__form-wrap" aria-live="polite">
+      {%- if section.settings.klaviyo_form_id != blank -%}
+        <div class="promise-club__klaviyo">
+          <div class="klaviyo-form-{{ section.settings.klaviyo_form_id | strip | remove: 'klaviyo-form-' }}"></div>
+
+          {%- if section.settings.consent_text != blank -%}
+            <div class="promise-club__consent">{{ section.settings.consent_text }}</div>
+          {%- endif -%}
+        </div>
+      {%- else -%}
       {%- form 'customer', id: form_id, class: 'promise-club__form form' -%}
         {%- if form.posted_successfully? -%}
           {%- assign success_message = 'general.newsletter.subscribed_successfully' | t -%}
@@ -86,6 +95,7 @@
           </div>
         {%- endif -%}
       {%- endform -%}
+      {%- endif -%}
       </div>
       </div>
     </div>
@@ -284,12 +294,107 @@
     letter-spacing: 0.14em;
   }
 
+  .promise-club__klaviyo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 250px;
+    margin-block-start: 1.25rem;
+  }
+
+  .promise-club__klaviyo .klaviyo-form,
+  .promise-club__klaviyo .klaviyo-form > div,
+  .promise-club__klaviyo .klaviyo-form form > div,
+  .promise-club__klaviyo .klaviyo-form form > div > div {
+    display: contents !important;
+  }
+
+  .promise-club__klaviyo form > div > div > div {
+    flex: none !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .promise-club__klaviyo form > div > div > div:has(input) {
+    order: 1;
+  }
+
+  .promise-club__klaviyo .promise-club__consent {
+    order: 2;
+  }
+
+  .promise-club__klaviyo form > div > div > div:has(button) {
+    order: 3;
+    display: flex !important;
+    justify-content: center !important;
+    margin-block-start: 1rem !important;
+  }
+
+  .promise-club__klaviyo .klaviyo-emailinput {
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .promise-club__klaviyo input[type="email"] {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    height: 46px !important;
+    padding: 0.65rem 0.8rem !important;
+    background-color: var(--promise-club-field-bg, #f1eee7) !important;
+    border: 1px solid var(--promise-club-field-bg, #f1eee7) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    color: var(--promise-club-field-text, #47a1dc) !important;
+    font-family: var(--text-font-family) !important;
+    font-size: 0.875rem !important;
+    font-weight: 400 !important;
+    letter-spacing: normal !important;
+    text-align: start !important;
+  }
+
+  .promise-club__klaviyo input[type="email"]::placeholder {
+    color: var(--promise-club-field-text, #47a1dc) !important;
+    font-family: var(--text-font-family) !important;
+    font-size: 0.875rem !important;
+    opacity: 0.75 !important;
+  }
+
+  .promise-club__klaviyo button {
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 0.65rem 2rem !important;
+    background: var(--promise-club-field-bg, #f1eee7) !important;
+    border: none !important;
+    border-radius: 999px !important;
+    color: var(--promise-club-field-text, #47a1dc) !important;
+    font-family: var(--text-font-family) !important;
+    font-size: 0.8125rem !important;
+    font-weight: 400 !important;
+    line-height: 1.65 !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+  }
+
+  .promise-club__klaviyo :is(p, span, div) {
+    font-family: var(--text-font-family) !important;
+  }
+
+  @media screen and (min-width: 1000px) {
+    .promise-club__klaviyo form > div > div > div:has(button) {
+      justify-content: flex-start !important;
+    }
+  }
+
   @media screen and (max-width: 999px) {
     .promise-club__media--desktop {
       display: none;
     }
 
-    .promise-club__form {
+    .promise-club__form,
+    .promise-club__klaviyo {
       max-width: 100%;
     }
   }
@@ -457,6 +562,12 @@
       "label": "Customer tag",
       "info": "Applied to new subscribers so this sign-up source can be segmented in Klaviyo.",
       "default": "promise-club"
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_form_id",
+      "label": "Klaviyo form ID",
+      "info": "The 6 letters and numbers after klaviyo-form- in the Klaviyo embed code. When filled in, the Klaviyo form replaces the Shopify one, and its email field and button labels come from Klaviyo."
     }
   ],
   "presets": [
