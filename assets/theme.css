@@ -7131,6 +7131,25 @@ product-rerender {
   max-width: 1.5em;
 }
 
+scrolling-images {
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+scrolling-images.is-dragging {
+  cursor: grabbing;
+}
+
+.scrolling-images__track {
+  width: max-content;
+  will-change: transform;
+  display: flex;
+}
+
+.scrolling-images img {
+  -webkit-user-drag: none;
+}
+
 .scrolling-images__image {
   height: var(--scrolling-images-height);
   aspect-ratio: var(--scrolling-images-ratio, auto);
