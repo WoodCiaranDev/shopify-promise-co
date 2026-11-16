@@ -502,8 +502,14 @@ class CoLabPicker extends HTMLElement {
     return Promise.race([dialog.hide(), new Promise((r) => setTimeout(r, 700))]);
   }
 
+  minStones() {
+    const min = parseInt(this.dataset.minStones, 10);
+    return Number.isNaN(min) ? Infinity : min;
+  }
+
   missingStoneSlot() {
-    return this.stoneSlots().find((slot) => !this.hasStone(slot)) || null;
+    const min = this.minStones();
+    return this.stoneSlots().find((slot) => Number(slot) <= min && !this.hasStone(slot)) || null;
   }
 
   showStoneRequired(slot) {

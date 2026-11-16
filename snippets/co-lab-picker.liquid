@@ -23,6 +23,7 @@ Inputs:
 {%- liquid
   assign mf = product.metafields.custom
   assign slot_count = mf.birthstone_slots.value | default: 2
+  assign min_stones = mf.birthstone_min.value | default: slot_count
   assign eng_max_chars = mf.engraving_max_chars.value | default: 8
 
   # Extra pricing in pence. 0 (or unset) = included in the base price; any positive
@@ -120,6 +121,7 @@ Inputs:
   data-birthstone-charged="{{ bs_charged }}"
   data-engraving-charged="{{ eng_charged }}"
   data-slot-count="{{ slot_count }}"
+  data-min-stones="{{ min_stones }}"
   data-birthstone-addon-handle="birthstone-addon"
   data-engraving-addon-handle="engraving-addon"
   data-review-modal-id="co-lab-review-{{ product.id }}"
