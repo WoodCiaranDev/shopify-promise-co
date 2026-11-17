@@ -170,5 +170,9 @@
         }
       });
     </script>
+
+    {%- if template.name == 'collection' and collection.handle == 'black-friday' -%}
+      {%- render 'black-friday-lead-pixel' -%}
+    {%- endif -%}
   </body>
 </html>
