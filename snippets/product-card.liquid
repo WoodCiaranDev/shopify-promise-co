@@ -104,7 +104,7 @@ Supported variables
             {{- hover_image | image_url: width: hover_image.width | image_tag: class: 'product-card__image product-card__image--secondary', loading: 'lazy', fetchpriority: 'low', sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800' -}}
           {%- endif -%}
 
-          {%- if hover_image != blank -%}
+          {%- if hover_image != blank and cross_sell != true -%}
             <div class="swiper product-card__swiper">
               <div class="swiper-wrapper">
                 {%- capture swiper_image_class -%}product-card__swiper-image aspect-{{ settings.product_image_aspect_ratio | split: '_' | first }}{%- endcapture -%}
