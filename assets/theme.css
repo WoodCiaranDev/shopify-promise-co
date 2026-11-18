@@ -4891,6 +4891,10 @@ product-rerender {
   scroll-snap-align: start;
 }
 
+cross-sell-dots {
+  display: block;
+}
+
 .cart-drawer .complementary-products__product-list .button {
   font-size: 12px;
   padding: 0.5rem 0.75rem;
