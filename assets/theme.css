@@ -4623,7 +4623,7 @@ product-rerender {
 }
 
 .cart-drawer .line-item {
-  --line-item-media-width: 9rem;
+  --line-item-media-width: 9.75rem;
 }
 
 .cart-drawer__shipping {
