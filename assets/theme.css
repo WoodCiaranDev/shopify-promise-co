@@ -4623,13 +4623,7 @@ product-rerender {
 }
 
 .cart-drawer .line-item {
-  --line-item-media-width: 6.5rem;
-}
-
-@media screen and (min-width: 700px) {
-  .cart-drawer .line-item {
-    --line-item-media-width: 9rem;
-  }
+  --line-item-media-width: 9rem;
 }
 
 .cart-drawer__shipping {
@@ -4877,8 +4871,14 @@ product-rerender {
 }
 
 .cart-drawer .complementary-products__product-list {
-  grid: auto / auto-flow calc(50% - 0.5rem);
+  grid: auto / auto-flow 6.5rem;
   gap: 1rem;
+}
+
+@media screen and (min-width: 700px) {
+  .cart-drawer .complementary-products__product-list {
+    grid: auto / auto-flow 9rem;
+  }
 }
 
 .cart-drawer__cross-sell > product-card {
