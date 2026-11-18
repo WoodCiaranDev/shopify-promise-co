@@ -4877,14 +4877,8 @@ product-rerender {
 }
 
 .cart-drawer .complementary-products__product-list {
-  grid: auto / auto-flow 6.5rem;
+  grid: auto / auto-flow calc(50% - 0.5rem);
   gap: 1rem;
-}
-
-@media screen and (min-width: 700px) {
-  .cart-drawer .complementary-products__product-list {
-    grid: auto / auto-flow 9rem;
-  }
 }
 
 .cart-drawer__cross-sell > product-card {
