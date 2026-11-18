@@ -31,7 +31,7 @@
           {%- if rendered_count >= 6 -%}{%- break -%}{%- endif -%}
           {%- assign in_cart = cart.items | where: 'product_id', rec_product.id -%}
           {%- if in_cart.size == 0 and rec_product.available -%}
-            {%- render 'product-card', product: rec_product, show_rating: false, show_badges: false, show_quick_buy: true, quick_buy_context: 'cart', hide_judgeme_badge: true, cross_sell: true, cross_sell_image: section.settings.cross_sell_custom_image -%}
+            {%- render 'product-card', product: rec_product, show_rating: false, show_badges: false, show_quick_buy: true, show_swatches: false, quick_buy_context: 'cart', hide_judgeme_badge: true, cross_sell: true, cross_sell_image: section.settings.cross_sell_custom_image -%}
             {%- assign rendered_count = rendered_count | plus: 1 -%}
           {%- endif -%}
         {%- endfor -%}
@@ -47,7 +47,7 @@
             {%- if in_cart.size == 0 and rec_product.available -%}
               {%- unless shown_ids contains id_check -%}
                 {%- assign shown_ids = shown_ids | append: id_check -%}
-                {%- render 'product-card', product: rec_product, show_rating: false, show_badges: false, show_quick_buy: true, quick_buy_context: 'cart', hide_judgeme_badge: true, cross_sell: true, cross_sell_image: section.settings.cross_sell_custom_image -%}
+                {%- render 'product-card', product: rec_product, show_rating: false, show_badges: false, show_quick_buy: true, show_swatches: false, quick_buy_context: 'cart', hide_judgeme_badge: true, cross_sell: true, cross_sell_image: section.settings.cross_sell_custom_image -%}
                 {%- assign rendered_count = rendered_count | plus: 1 -%}
               {%- endunless -%}
             {%- endif -%}
@@ -68,14 +68,16 @@
           {{- cross_sell_cards -}}
         </scroll-carousel>
 
-        {%- if rendered_count > 2 -%}
-          <carousel-navigation aria-controls="cart-drawer-cross-sell" class="page-dots">
-            {%- for i in (2..rendered_count) -%}
-              <button class="tap-area" aria-current="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="{{ 'general.accessibility.go_to_item' | t: index: forloop.index | escape }}">
-                <span class="sr-only">{{- 'general.accessibility.go_to_item' | t: index: forloop.index -}}</span>
-              </button>
-            {%- endfor -%}
-          </carousel-navigation>
+        {%- if rendered_count > 1 -%}
+          <cross-sell-dots>
+            <carousel-navigation aria-controls="cart-drawer-cross-sell" class="page-dots">
+              {%- for i in (1..rendered_count) -%}
+                <button class="tap-area" aria-current="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="{{ 'general.accessibility.go_to_item' | t: index: forloop.index | escape }}">
+                  <span class="sr-only">{{- 'general.accessibility.go_to_item' | t: index: forloop.index -}}</span>
+                </button>
+              {%- endfor -%}
+            </carousel-navigation>
+          </cross-sell-dots>
         {%- endif -%}
       </div>
     {%- endif -%}
@@ -119,6 +121,32 @@
     </form>
   {%- endif -%}
 </cart-drawer>
+
+<script>
+  if (!window.customElements.get('cross-sell-dots')) {
+    window.customElements.define('cross-sell-dots', class extends HTMLElement {
+      connectedCallback() {
+        this.carousel = document.getElementById(this.querySelector('carousel-navigation').getAttribute('aria-controls'));
+        this.resizeObserver = new ResizeObserver(() => this.showReachableDots());
+        this.resizeObserver.observe(this.carousel);
+      }
+
+      disconnectedCallback() {
+        this.resizeObserver?.disconnect();
+      }
+
+      showReachableDots() {
+        const cards = Array.from(this.carousel.querySelectorAll('product-card'));
+        const maxScroll = this.carousel.scrollWidth - this.carousel.clientWidth;
+        const firstOffset = cards[0]?.offsetLeft || 0;
+        const reachable = cards.filter((card) => card.offsetLeft - firstOffset <= maxScroll + 1).length;
+
+        this.querySelectorAll('button').forEach((button, index) => button.toggleAttribute('hidden', index >= reachable));
+        this.hidden = reachable < 2;
+      }
+    });
+  }
+</script>
 
 {% schema %}
 {
