@@ -85,12 +85,12 @@
             "image_2_heading": "",
             "image_2_text": "",
             "image_2_link": "",
-            "featured_collection_1": "best-sellers",
-            "featured_collection_1_title": "Best Selling",
-            "featured_collection_1_image": "shopify://shop_images/2_a956eecb-07fc-4f61-a325-5edcf0e51b7c.png",
+            "featured_collection_1": "black-friday",
+            "featured_collection_1_title": "BLACK FRIDAY",
+            "featured_collection_1_image": "shopify://shop_images/Untitled_Design-87.png",
             "featured_collection_2": "pinky-promise-rings",
             "featured_collection_2_title": "Pinky Promise Rings",
-            "featured_collection_2_image": "shopify://shop_images/Untitled_design-45.png",
+            "featured_collection_2_image": "shopify://shop_images/best_sellers-2.png",
             "promo_block_text": "",
             "promo_block_link": "",
             "debug_mode": false
@@ -108,20 +108,66 @@
             "image_2_text": "",
             "image_2_link": "",
             "featured_collection_1": "custom-rings",
-            "featured_collection_1_title": "Personalized Promise Rings",
-            "featured_collection_1_image": "shopify://shop_images/2_388e755d-f2c9-4c1a-aeb5-5ade7b90f8d9.png",
-            "featured_collection_2": "for-her",
-            "featured_collection_2_title": "Gifts for Her",
-            "featured_collection_2_image": "shopify://shop_images/1_eb94fcd0-6f12-4da6-936a-b07cd41875d9.png",
+            "featured_collection_1_title": "Custom Promise Rings",
+            "featured_collection_1_image": "shopify://shop_images/best_sellers-4.png",
+            "featured_collection_2": "top-15-promise-rings",
+            "featured_collection_2_title": "Top 15 Promise Rings",
+            "featured_collection_2_image": "shopify://shop_images/Untitled_design_18_d8fa37a9-1436-47cb-b1ce-7d0d0e2f89bb.png",
             "promo_block_text": "",
             "promo_block_link": "",
             "debug_mode": false
+          }
+        },
+        "mobile_pictures_gift_guide": {
+          "type": "mobile_menu_pictures",
+          "settings": {
+            "menu_item": "Gift Guide",
+            "featured_collection_1": "for-her",
+            "featured_collection_1_link": "",
+            "featured_collection_1_image": "shopify://shop_images/Untitled_design_1_cc6fb265-eeb9-4357-9f35-f9e1a563da92.png",
+            "featured_collection_1_title": "Gifts for Her",
+            "featured_collection_2": "mens-promise-rings",
+            "featured_collection_2_link": "",
+            "featured_collection_2_image": "shopify://shop_images/Untitled_design_3.png",
+            "featured_collection_2_title": "Gifts for Him"
+          }
+        },
+        "mobile_pictures_custom": {
+          "type": "mobile_menu_pictures",
+          "settings": {
+            "menu_item": "Custom Jewelry",
+            "featured_collection_1": "custom-rings",
+            "featured_collection_1_link": "",
+            "featured_collection_1_image": "shopify://shop_images/best_sellers-4.png",
+            "featured_collection_1_title": "",
+            "featured_collection_2": "custom-necklaces",
+            "featured_collection_2_link": "",
+            "featured_collection_2_image": "shopify://shop_images/Untitled_design_2_c7e9d4f4-f0fc-4502-b522-50c07cede99c.png",
+            "featured_collection_2_title": ""
+          }
+        },
+        "mobile_pictures_promise_world": {
+          "type": "mobile_menu_pictures",
+          "disabled": true,
+          "settings": {
+            "menu_item": "Promise World",
+            "featured_collection_1": "",
+            "featured_collection_1_link": "/pages/about-us",
+            "featured_collection_1_image": "shopify://shop_images/1_9d1e70d0-f3f3-44cc-a481-2f22d07a9e71.png",
+            "featured_collection_1_title": "Our Story",
+            "featured_collection_2": "",
+            "featured_collection_2_link": "/pages/the-promise-world",
+            "featured_collection_2_image": "shopify://shop_images/3_3be53fc4-b537-4813-8789-7cb63a677756.png",
+            "featured_collection_2_title": "Your Promises"
           }
         }
       },
       "block_order": [
         "mega_menu_eccGwN",
-        "mega_menu_promise"
+        "mega_menu_promise",
+        "mobile_pictures_gift_guide",
+        "mobile_pictures_custom",
+        "mobile_pictures_promise_world"
       ],
       "settings": {
         "color_scheme": "",
@@ -140,7 +186,7 @@
         "sidebar_text_font": "heading",
         "sidebar_show_dividers": true,
         "sidebar_open_second_level_menus": false,
-        "sidebar_highlighted_menu_items": "Black Friday",
+        "sidebar_highlighted_menu_items": "BLACK FRIDAY",
         "sidebar_display_font_items": "Shop All\nAll Promise Rings",
         "layout": "logo_left_navigation_center",
         "show_icons": true,

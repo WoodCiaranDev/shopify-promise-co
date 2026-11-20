@@ -160,9 +160,10 @@
     "promise_club": {
       "type": "promise-club",
       "settings": {
+        "klaviyo_form_id": "YnLP7t",
         "color_scheme": "scheme-1",
         "content_width": "lg",
-        "background_color": "#75AEDC",
+        "background_color": "#75aedc",
         "text_color": "#ffffff",
         "band_height": 265,
         "remove_vertical_spacing": true,
@@ -172,7 +173,7 @@
         "show_wordmark_mobile": false,
         "wordmark_height": 117,
         "subheading": "",
-        "heading": "<p>Join for exclusive offers,<br/>access and launches</p>",
+        "heading": "<p>Sign up for Early Access to&nbsp;</p><p><strong>Black Friday</strong></p><p>23rd November</p>",
         "email_label": "Email",
         "button_label": "Subscribe",
         "consent_text": "<p>We will contact you by email and you can unsubscribe anytime – <a href=\"/policies/privacy-policy\">privacy policy</a></p>",

@@ -52,7 +52,6 @@
     },
     "collection-banner": {
       "type": "collection-banner",
-      "disabled": true,
       "settings": {
         "color_scheme": "scheme-1",
         "image_size": "auto",
@@ -117,7 +116,6 @@
     },
     "main": {
       "type": "main-collection",
-      "disabled": true,
       "settings": {
         "color_scheme": "scheme-2",
         "hide_product_information": false,
@@ -131,10 +129,9 @@
         "products_per_page": 48,
         "products_per_row_mobile": "2",
         "products_size_desktop": "large",
-        "show_grid_mode_selector": true,
         "horizontal_spacing_factor": 1,
         "vertical_spacing_factor": 1,
-        "filter_layout": "sidebar",
+        "filter_layout": "drawer",
         "quick_links_menu": "",
         "show_sort_by": true,
         "show_filters": true,
@@ -150,8 +147,8 @@
         "image_yX9E6M": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/november_6th-2.png",
-            "mobile_image": "shopify://shop_images/whimsy-3.png",
+            "image": "shopify://shop_images/banners-5.png",
+            "mobile_image": "shopify://shop_images/Banner_UK-5.png",
             "subheading": "",
             "title": "",
             "mobile_text_position": "place-self-center text-center",
@@ -197,7 +194,7 @@
         "subheading_AaG97p": {
           "type": "subheading",
           "settings": {
-            "text": "Sign up to hear first"
+            "text": ""
           }
         },
         "heading_WdbXXF": {
@@ -238,6 +235,7 @@
       "block_order": [
         "klaviyo_email_marketing_sms_form_embed_block_86qiwW"
       ],
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-2",
         "separate_section_with_border": false,
@@ -274,6 +272,7 @@
         "heading_wNe3wY",
         "richtext_QiUK3F"
       ],
+      "disabled": true,
       "name": "t:sections.rich_text.presets.rich_text.name",
       "settings": {
         "color_scheme": "scheme-2ca1c54f-75f1-4890-b6c9-acb7092f2a37",

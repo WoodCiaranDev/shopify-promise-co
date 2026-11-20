@@ -20,27 +20,28 @@
           "type": "message",
           "disabled": false,
           "settings": {
-            "text": "SHIPPING DIRECTLY FROM OUR USA WAREHOUSE"
+            "text": "FREE EXPRESS SHIPPING | SHIPS FROM THE USA"
+          }
+        },
+        "message_9JGdFV": {
+          "disabled": true,
+          "settings": {
+            "text": "&nbsp; DIRECTLY FROM OUR USA WAREHOUSE&nbsp;"
           }
         },
         "message_FYyP3": {
           "type": "message",
-          "disabled": false,
+          "disabled": true,
           "settings": {
             "text": "tariff-free"
-          }
-        },
-        "message_9JGdFV": {
-          "settings": {
-            "text": "Free Shipping over $220"
           }
         }
       },
       "block_order": [
         "message_C9rbR",
+        "message_9JGdFV",
         "message_FYyP3",
-        "message_PwLUb7",
-        "message_9JGdFV"
+        "message_PwLUb7"
       ]
     }
   }

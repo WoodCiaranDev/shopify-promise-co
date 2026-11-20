@@ -20,8 +20,16 @@
           "type": "message",
           "disabled": false,
           "settings": {
-            "text": "Free Express Shipping over £130"
+            "text": "Free next day delivery"
           }
+        },
+        "message_P4eVKB": {
+          "disabled": true,
+          "settings": {}
+        },
+        "message_PwLUb7": {
+          "disabled": false,
+          "settings": {}
         }
       },
       "block_order": [
