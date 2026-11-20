@@ -226,7 +226,9 @@
       <span class="product-sticky-bar__label">
         <span>{{ add_label }}</span>
       </span>
-      {%- if sticky_threshold != blank -%}
+      {%- if localization.country.iso_code == 'GB' or localization.country.iso_code == 'US' -%}
+        <span class="product-sticky-bar__note">Free Express Shipping Included</span>
+      {%- elsif sticky_threshold != blank -%}
         <span class="product-sticky-bar__note">Free express shipping over {{ sticky_threshold | times: 100 | money_without_trailing_zeros }}</span>
       {%- endif -%}
     </button>
