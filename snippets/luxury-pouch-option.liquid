@@ -19,10 +19,8 @@ Supported variables
   assign show_checkbox_2 = settings.gifting_show_checkbox_2
   assign checkbox_1_label = settings.gifting_checkbox_1_label
   assign checkbox_1_subtitle = settings.gifting_checkbox_1_subtitle
-  assign checkbox_1_image = settings.gifting_checkbox_1_image
   assign checkbox_2_label = settings.gifting_checkbox_2_label
   assign checkbox_2_subtitle = settings.gifting_checkbox_2_subtitle
-  assign checkbox_2_image = settings.gifting_checkbox_2_image
 
   # Market spelling (Jewellery/Jewelry Pouch) - display only.
   capture checkbox_1_label
@@ -60,11 +58,6 @@ Supported variables
               <p class="gifting-option__checkbox-subtitle text-subdued text-sm">{{ checkbox_1_subtitle }}</p>
             {%- endif -%}
           </div>
-          {%- if checkbox_1_image != blank -%}
-            <div class="gifting-option__checkbox-image">
-              {{ checkbox_1_image | image_url: width: 80 | image_tag: loading: 'lazy' }}
-            </div>
-          {%- endif -%}
         </div>
       {%- endif -%}
 
@@ -86,11 +79,6 @@ Supported variables
               <p class="gifting-option__checkbox-subtitle text-subdued text-sm">{{ checkbox_2_subtitle }}</p>
             {%- endif -%}
           </div>
-          {%- if checkbox_2_image != blank -%}
-            <div class="gifting-option__checkbox-image">
-              {{ checkbox_2_image | image_url: width: 80 | image_tag: loading: 'lazy' }}
-            </div>
-          {%- endif -%}
         </div>
       {%- endif -%}
     </div>

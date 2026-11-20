@@ -64,21 +64,12 @@
           </div>
         {%- endif -%}
 
-        <scroll-carousel id="cart-drawer-cross-sell" cell-selector="product-card" allow-drag class="complementary-products__product-list cart-drawer__cross-sell scroll-area snap-x">
-          {{- cross_sell_cards -}}
-        </scroll-carousel>
+        <cross-sell-fit>
+          <scroll-carousel id="cart-drawer-cross-sell" cell-selector="product-card" allow-drag class="complementary-products__product-list cart-drawer__cross-sell scroll-area snap-x">
+            {{- cross_sell_cards -}}
+          </scroll-carousel>
+        </cross-sell-fit>
 
-        {%- if rendered_count > 1 -%}
-          <cross-sell-dots>
-            <carousel-navigation aria-controls="cart-drawer-cross-sell" class="page-dots">
-              {%- for i in (1..rendered_count) -%}
-                <button class="tap-area" aria-current="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="{{ 'general.accessibility.go_to_item' | t: index: forloop.index | escape }}">
-                  <span class="sr-only">{{- 'general.accessibility.go_to_item' | t: index: forloop.index -}}</span>
-                </button>
-              {%- endfor -%}
-            </carousel-navigation>
-          </cross-sell-dots>
-        {%- endif -%}
       </div>
     {%- endif -%}
 
@@ -122,27 +113,71 @@
   {%- endif -%}
 </cart-drawer>
 
+<style>
+  .cart-drawer__cross-sell {
+    margin-inline: calc(-1 * var(--drawer-body-padding-inline));
+    padding-inline: var(--drawer-body-padding-inline);
+    scroll-padding-inline: var(--drawer-body-padding-inline);
+  }
+
+  .cart-drawer .cart-drawer__cross-sell[style*="--cross-sell-card-width"] {
+    grid: auto / auto-flow var(--cross-sell-card-width);
+  }
+
+  .cart-drawer__cross-sell.is-centred {
+    justify-content: center;
+  }
+
+  .cart-drawer__gifting-option {
+    padding-block-end: .5rem;
+  }
+
+  .cart-drawer__gifting-option .gifting-option__checkbox-subtitle {
+    margin-block-start: .125rem;
+  }
+</style>
+
 <script>
-  if (!window.customElements.get('cross-sell-dots')) {
-    window.customElements.define('cross-sell-dots', class extends HTMLElement {
+  if (!window.customElements.get('cross-sell-fit')) {
+    window.customElements.define('cross-sell-fit', class extends HTMLElement {
       connectedCallback() {
-        this.carousel = document.getElementById(this.querySelector('carousel-navigation').getAttribute('aria-controls'));
-        this.resizeObserver = new ResizeObserver(() => this.showReachableDots());
-        this.resizeObserver.observe(this.carousel);
+        this.list = this.querySelector('scroll-carousel');
+        this.resizeObserver = new ResizeObserver(() => this.fit());
+        this.resizeObserver.observe(this.list);
       }
 
       disconnectedCallback() {
         this.resizeObserver?.disconnect();
       }
 
-      showReachableDots() {
-        const cards = Array.from(this.carousel.querySelectorAll('product-card'));
-        const maxScroll = this.carousel.scrollWidth - this.carousel.clientWidth;
-        const firstOffset = cards[0]?.offsetLeft || 0;
-        const reachable = cards.filter((card) => card.offsetLeft - firstOffset <= maxScroll + 1).length;
+      fit() {
+        const list = this.list;
+        list.style.removeProperty('--cross-sell-card-width');
+        list.classList.remove('is-centred');
 
-        this.querySelectorAll('button').forEach((button, index) => button.toggleAttribute('hidden', index >= reachable));
-        this.hidden = reachable < 2;
+        const cards = list.querySelectorAll('product-card');
+        if (!cards.length) return;
+
+        const style = getComputedStyle(list);
+        const gap = parseFloat(style.columnGap) || 0;
+        const padding = parseFloat(style.paddingInlineStart) || 0;
+        const base = cards[0].getBoundingClientRect().width;
+        const inner = list.clientWidth - padding * 2;
+
+        if (cards.length * base + (cards.length - 1) * gap <= inner + 1) {
+          list.classList.add('is-centred');
+          return;
+        }
+
+        const visible = list.clientWidth - padding;
+        let shown = 1;
+        let width = (visible - shown * gap) / (shown + 0.35);
+        while (width > base && shown < cards.length) {
+          shown += 1;
+          width = (visible - shown * gap) / (shown + 0.35);
+        }
+
+        list.style.setProperty('--cross-sell-card-width', `${Math.floor(width)}px`);
       }
     });
   }
