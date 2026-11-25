@@ -131,7 +131,7 @@ Supported variables
                 {%- continue -%}
               {%- endif -%}
 
-              <li>
+              <li style="padding-inline-start: 0">
                 {%- if property.last contains '/uploads/' -%}
                   <a href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
                 {%- else -%}
