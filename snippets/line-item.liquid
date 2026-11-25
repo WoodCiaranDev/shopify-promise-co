@@ -169,7 +169,7 @@ Supported variables
         -%}
         <line-item-quantity class="line-item__quantity v-stack justify-items-start gap-2 {% if request.page_type == 'cart' %}sm:hidden{% endif %}"{% if bundle_children != '' %} data-bundle-children='[{{ bundle_children }}]'{% endif %}>
           {%- render 'quantity-dropdown', line_item: line_item -%}
-          <a href="{{ line_item.url_to_remove }}" class="line-item__remove text-xs">{{ 'cart.order.remove' | t }}</a>
+          <a href="{{ line_item.url_to_remove }}" class="line-item__remove" style="font-size: .625rem">{{ 'cart.order.remove' | t }}</a>
         </line-item-quantity>
       {%- else -%}
         <p class="text-subdued text-sm sm:hidden">{{ 'customer.order.quantity' | t }}: {{ line_item.quantity }}</p>
